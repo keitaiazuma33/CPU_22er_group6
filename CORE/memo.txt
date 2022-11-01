@@ -1,0 +1,35 @@
+cd ../../../../Desktop/cpuex
+xvlog --sv test.v alu.v decoder.v registerfile.v controlunit.v other_modules.v memory.v core.v uart_rx.sv uart_tx.sv uart.v
+xelab -debug typical test_uart -s test_uart.sim
+xsim -runall test_uart.sim
+
+
+
+SAに関して
+ https://msyksphinz-self.github.io/riscv-isadoc/html/index.html
+　https://progrunner.hatenablog.jp/entry/2017/12/03/221829　RISC-Vの命令一覧
+　https://travelingresearcher.com/entry/2018/02/27/172417　RISC-Vを使用している人の記事
+Github
+ https://github.com/cpuex2016D/computer　マルチコアの班、UART
+ https://github.com/cpuex2020-3/fib-core　UARTの参考
+ https://github.com/cpuex2019-7th/core/tree/master/src
+ https://github.com/cpu2015g6/core　バグの人
+ https://github.com/Adelie-project/CPU-Adelie　RISC-Vの人
+ https://github.com/cpuex-19-6/core　RISC-V使用、説明が豊富
+ https://github.com/CPUEX2019-GROUP4/core/tree/master/first_core　ソースコードのコメントが丁寧
+ https://github.com/cpuex2019-1/core　読みやすい、fibの参考になりそう
+ https://github.com/cpuex2018-5/eevee/tree/master/core
+ https://github.com/2016-cpuex-C/core/tree/master/sources_1/new　sigma様
+ https://github.com/mptommy/cpuex/tree/master/core　読みやすい～～～
+ https://github.com/sasakenUT/cpuex2020_core/tree/master/core　20er
+ https://github.com/keitaroskmt/cpuex2020_1/tree/main/fib/core/src　20erその２
+ https://github.com/occho/cpuex/tree/master/ocore　メモの人
+個人的メモ
+　https://yuchiki1000yen.hatenablog.com/entry/2015/12/04/185925　I/O辛い
+　https://umedaikiti.hatenablog.com/entry/2015/12/06/020103　バグについてのTipsが豊富
+
+
+
+
+
+
