@@ -285,14 +285,15 @@ int main(){
             rd = abs(rs1) * sgn(rs2);
         }else if(opcode == "fsgnjn.s"){
             rd = abs(rs1) * -sgn(rs2)
-        rd = rs1 * sgn(rs2)
-        rd = min(rs1, rs2)
-        rd = max(rs1, rs2)
-        rd = (float) rs1
-        rd = (float) rs1
-        rd = (int32_t) rs1
-        rd = (uint32_t) rs1
-        rd = *((int*) &rs1)
+        }
+//         rd = rs1 * sgn(rs2)
+//         rd = min(rs1, rs2)
+//         rd = max(rs1, rs2)
+//         rd = (float) rs1
+//         rd = (float) rs1
+//         rd = (int32_t) rs1
+//         rd = (uint32_t) rs1
+//         rd = *((int*) &rs1)
         cout << rd << endl;
         cout << "rs1 " << rs1 << endl;
     }
