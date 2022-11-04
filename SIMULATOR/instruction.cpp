@@ -60,7 +60,7 @@ string convert(string op){ //変数opから01文字列5桁？へ
             r = "0";
             return r;
         }
-        int n;
+        long n;
         char c_0 = op[0];
         // if(op[1]) n = atoi(op.c_str()); //intに
         // else n = atoi((const char *)op[0]);
@@ -136,7 +136,7 @@ string convert(string op){ //変数opから01文字列5桁？へ
 string bury_zero(string imm, int dig_num){
     // string imm = "1010";
     // cout<<"#"<<imm<<endl;
-    int value = stoi(imm);
+    long value = stoi(imm);
     // std::ios::fmtflags curret_flag = std::cout.flags();
     std::ostringstream ss;
     // dig_nim+1: imm[12]とか
@@ -226,6 +226,8 @@ int main(){
         // cout << "words[3]" << words.at(3) << endl;
         // その行がなかったらcontinue
         // if(words[0] == "") continue;
+        
+        cout << words[0] << " " << words[1] << " " << words[2] << " " << words[3] << endl;
         for(int i = 1; i <= 3; i++){
             int label_find = label.count(words[i]); //" "
             // cout << "label found" << label_find << endl;
@@ -250,8 +252,13 @@ int main(){
             }
         }
         string opcode, op1, op2, op3;
+        op2 = ""; op3 = "";
         opcode = words[0]; //ここまでok
-        op1 = words[1];  op2= words[2]; op3 = words[3];
+        op1 = words[1];  
+        // if(0 <= words[2].at(0) &&  words[2].at(0) <= 127) 
+        op2= words[2]; 
+        // if(0 <= words[3].at(0) &&  words[3].at(0) <= 127) 
+        op3 = words[3];
         // string S;
         // cin >> S; "add a0, a1, a2"
         // li, j, mvの処理
