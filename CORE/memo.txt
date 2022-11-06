@@ -1,7 +1,7 @@
 cd ../../../../Desktop/cpuex
 xvlog --sv test.v alu.v decoder.v registerfile.v controlunit.v other_modules.v memory.v core.v uart_rx.sv uart_tx.sv uart.v
-xelab -debug typical test_uart -s test_uart.sim
-xsim -runall test_uart.sim
+xelab -debug typical test_core -s test_core.sim
+xsim -runall test_core.sim
 
 
 
