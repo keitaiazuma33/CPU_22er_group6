@@ -176,7 +176,7 @@ int main(){
     pc = 0;
     vector<int> a(SIZE);
     //getline(file2, line))
-    while(pc <= pc_size) {// file; 第３引数に持ってくる or fstream型に
+    while(pc < pc_size) {// file; 第３引数に持ってくる or fstream型に
         // string S;
         // cin >> S; //"add a0, a1, a2"
         // 文字の読み込み方；　単語ずつ？
@@ -189,6 +189,7 @@ int main(){
         line += '\n';
         cout << "whileループ pc " << pc << endl;
         vector<string> words; //[0];
+        words.clear();
         string word = "";
         if(line.find(':') < 100){ //line.at(0) != ' '
             // 
@@ -236,7 +237,7 @@ int main(){
                 int diff = a_pc - pc; 
                 // cout << diff << endl; //offset
                 // pc += diff;
-                if(diff < 0) diff -= 4;
+                // if(diff < 0) diff -= 4;
                 words[i] = to_string(diff);
                 cout << "diff" << words[i] << endl; //ここまでok
             }
