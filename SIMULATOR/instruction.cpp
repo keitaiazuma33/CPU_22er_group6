@@ -52,7 +52,7 @@ struct Op {
 string convert(string op){ //変数opから01文字列5桁？へ
     // string to 01
     // t0-t7
-    string r;
+    string r = "";
     // cout << "op" << op << endl;
     if((op[0] >= '0') && (op[0] <= '9')){ //imm;数字だったら
         // cout << "before" <<endl;
@@ -60,7 +60,7 @@ string convert(string op){ //変数opから01文字列5桁？へ
             r = "0";
             return r;
         }
-        long n;
+        int64_t n = 0;
         char c_0 = op[0];
         // if(op[1]) n = atoi(op.c_str()); //intに
         // else n = atoi((const char *)op[0]);
@@ -136,7 +136,7 @@ string convert(string op){ //変数opから01文字列5桁？へ
 string bury_zero(string imm, int dig_num){
     // string imm = "1010";
     // cout<<"#"<<imm<<endl;
-    long value = stoi(imm);
+    int64_t value = stoi(imm);
     // std::ios::fmtflags curret_flag = std::cout.flags();
     std::ostringstream ss;
     // dig_nim+1: imm[12]とか
@@ -160,6 +160,7 @@ int main(){
     }
     int pc = 0;
     std::map<string, int> label;
+    map<int, string> con_line;
     while(getline(file, line)){
         // ラベルを見つけたらmap配列に格納
         //  map<string, int> score; 
@@ -168,25 +169,35 @@ int main(){
         if(line.find(':') < 100){ 
             line.erase(line.find(':')); //?
             label[line] = pc; 
-        }else pc += 4;
+        }else{
+            con_line[pc] = line;
+            pc += 4;
+        }
+        // pc += 4;
     }
     cout << "fileclose" << endl;
     file.close();
+    int pc_size = pc;
     // int line_num = 0;
-    ifstream file2(filename);
-    if (!file2.is_open()) {
-        cerr << "Could not open the file - '"
-             << filename << "'" << endl;
-        return EXIT_FAILURE;
-    }
+    // ifstream file2(filename);
+    // if (!file2.is_open()) {
+    //     cerr << "Could not open the file - '"
+    //          << filename << "'" << endl;
+    //     return EXIT_FAILURE;
+    // }
     pc = 0;
-    while(getline(file2, line)){
+    // while(getline(file2, line)){
+    while(pc < pc_size) {
+        line = con_line[pc];
         line += '\n';
-        // cout << "whileループ pc " << pc << endl;
-        vector<string> words; //[0];
+        cout << "whileループ pc " << pc << endl;
+        vector<string> words; // = {""}; //[0];
+        // words.push_back("");
+        // cout << words[2] << endl;
         // for(int i = 0; i <= 3; i++){
         //     words[i] = "";
         // }
+        words.clear();
         string word = "";
         // ラベルの処理:label[line] = pc; より
         if(line.find(':') < 100){ //line.at(0) != ' '
@@ -212,22 +223,25 @@ int main(){
                 // 次の文字が#,"\n", " ", "()"ならpush_back
                 if(line.at(i+1) == '#' || line.at(i+1) == '\n' || line.at(i+1) == ' ' || line.at(i+1) == ',' || (line.at(i+1) == '\t')){ // || line.at(i+1) == ' '){
                     words.push_back(word);
+                    cout << "word " << word << endl;
                     word = "";
                     // break;
                 }
                 
             }
-            // if(i == line.size()-1){
-            //     if(word != ""){
-            //         words.push_back(word);
-            //     }
-            // }
+            if(i == line.size()-1){
+                if(word != ""){
+                    words.push_back(word);
+                }
+            }
         } 
         // cout << "words[3]" << words.at(3) << endl;
         // その行がなかったらcontinue
         // if(words[0] == "") continue;
         
-        cout << words[0] << " " << words[1] << " " << words[2] << " " << words[3] << endl;
+        // cout << words[0] << "words[1] " << words[1] << "2 " << words[2] << endl;
+        // "3 " << words[3] << endl;
+        // printf("%c\n", words[3].at(0));
         for(int i = 1; i <= 3; i++){
             int label_find = label.count(words[i]); //" "
             // cout << "label found" << label_find << endl;
@@ -238,6 +252,7 @@ int main(){
                 int diff = a_pc - pc; 
                 // cout << diff << endl; //offset
                 // pc += diff;
+                if(diff < 0) diff -= 4;
                 words[i] = to_string(diff);
                 // cout << words[i] << endl; //ここまでok
             }
@@ -251,8 +266,13 @@ int main(){
             
             }
         }
+        // if(words[2] == "\n" || words[2] == "\t"){
+        //     words[2] = "";
+        // }
         string opcode, op1, op2, op3;
-        op2 = ""; op3 = "";
+        opcode = ""; op1 = "";
+        op2 = ""; 
+        op3 = "";
         opcode = words[0]; //ここまでok
         op1 = words[1];  
         // if(0 <= words[2].at(0) &&  words[2].at(0) <= 127) 
@@ -265,9 +285,9 @@ int main(){
         // li t3, 10 –> addi x28, x0, 10
         // j label3 –> jal x0, label3
         // mv t6, t4 –> addi x31, x29, 0
-        cout << opcode << " " << op1 << " " <<op2 << " " << op3 << endl;
+        // cout << opcode << " " << op1 << " " <<op2 << " " << op3 << endl;
         if(opcode == "li") {op3 = op2; op2 = "zero"; opcode = "addi";}
-        else if(opcode == "j") {opcode = "jal"; op2 = op1; op1 = "zero";}//L3?; ' '
+        else if(opcode == "j") {opcode = "jal"; op3 = ""; op2 = op1; op1 = "zero";}//L3?; ' '
         else if(opcode == "mv"){opcode = "addi"; op3 = "0";}
         cout << opcode << " " << op1 << " " <<op2 << " " << op3 << endl;
         // cout << op3[0] << endl;
@@ -387,7 +407,7 @@ int main(){
     }
     // fclose(file);
     cout << "fileclose" << endl;
-    file2.close();
+    // file2.close();
     return 0;
     
 }
