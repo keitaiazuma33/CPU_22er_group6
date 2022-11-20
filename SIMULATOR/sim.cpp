@@ -187,7 +187,7 @@ string bury_zero(int64_t imm, int dig_num){
 // }
 // numのi番目右シフト；j桁取り出す
 uint64_t sub_uint(uint64_t num, int i, int j){
-    num = (num >> i) & ((1 << (j-1))-1);
+    num = (num >> i) & ((1 << (j+1))-1);
     return num;
 }
 int main(){
@@ -199,7 +199,7 @@ int main(){
     //     printf("ファイルが開けません。¥n");            
     //     exit(1);                                    // 異常終了
     // }
-    string filename ("fib.txt"); //asm_3
+    string filename ("fib_2.txt"); //asm_3
     vector<string> lines;
     string line;
 
@@ -245,7 +245,9 @@ int main(){
     vector<uint64_t> L2_status(SIZE/10);
     vector<uint64_t> L1_tag(SIZE/10);
     vector<uint64_t> L2_tag(SIZE/10);
-    vector<vector<uint64_t> > L1_data(SIZE/10);
+    // map<uint64_t, vector<int> > 
+    // (3, vector<int>(4));
+    vector<vector<uint64_t> > L1_data (SIZE/10, vector<uint64_t>(100));
     vector<vector<uint64_t> > L2_data(SIZE/10);
     // map<bitset, bitset> PMT1;
     // map<string, string> PMT2; //L2に対応
@@ -492,22 +494,15 @@ int main(){
                 // offset = imm; //reg(a1);
                 rs1 = reg(a2);//a[reg(a2)]
                 num_i = 0;
-                // while(a[num_i]){
-                //     M[num_i] = a[num_i];
-                //     num_i++;
-                // }
+                
                 // string addr = bury_zero((int64_t)rs1+imm, 32);
                 // bitset<addr_dig> 
-                addr = rs1+imm; //convert((rs1+imm), addr_dig); //(rs1+imm);
-                // reverse(addr.begin(), addr.end()); //必要？
-                // bitset<tag_dig> 
+                addr = a[rs1]+imm;
                 // 一度intに変換；bitsetに直す
                 tag = addr >> (index_dig+offset_dig);
-                index = (addr >> offset_dig) & ((1 << (index_dig-1))-1);
-                offset = addr & 1111;
-                // string tag = addr.substr(21,11);//[21:31]
-                // string index = addr.substr(11,10);//[11:20]
-                // string offset = addr.substr(0,11); //[0:10]
+                index = (addr >> offset_dig) & ((1 << (index_dig))-1);
+                offset = addr & ((1<<4) - 1);//1111;
+                
                 // valid1,dirty1,accessed
                 // 一致していてかつvalid=1&&accessed=0なら
                 // 100ではないかも
@@ -567,7 +562,7 @@ int main(){
                 // rd =  a[reg(a0)]; 
                 // // offset = imm; //reg(a1);
                 // rs1 = a[reg(a2)];
-                // rs1 = rs2;//a[reg(a2)]
+                // rs1 = rs2;//a[reg(a2)]""
                 rs1 = reg(a2);
                 rs2 = a[reg(a0)];
                 cout << "rs1 rs2 " << rs1 << " " << rs2 << endl;
@@ -578,16 +573,17 @@ int main(){
                 // string addr = bury_zero((int64_t)rs1+imm, 32);
                 // reverse(addr.begin(), addr.end());
                 // uint64_t 
-                addr = rs1+imm;
+                addr = a[rs1]+imm; //レジスタの中身+即値
                 tag = addr >> (index_dig+offset_dig);
-                index = (addr >> offset_dig) & ((1 << (index_dig-1))-1);
-                offset = addr & 1111;
+                index = (addr >> offset_dig) & ((1 << (index_dig+1))-1);
+                offset = addr & (1<<5)-1;
+                cout << "addr,tag,index,offset " << addr << " " << tag << " " << index << " " << offset << endl;
                 // string data;
                 // valid1,dirty1,accessed
                 // データを保持していなかったら
                 if((L1_status[index]>>2 & 1) != 1) { //at(0)
                     // PMT1[index] = (1 << (offset_dig+tag_dig+64-1))-1; //bury_zero(0, 3+tag_dig+64); //85); //0>> 85;
-                    int data_num = int(offset);
+                    uint64_t data_num = uint64_t(offset);
                     if(opcode == "sb"){
                         // PMT1[index].substr(3+tag_dig+4*data_num, 4) 
                         L1_data[index][data_num]= rs2%128; //convert(rs2%128,32);
@@ -597,7 +593,7 @@ int main(){
                         L1_data[index][data_num]= rs2%65536;
                         M[rs1+imm] = rs2%65536;
                     }else if(opcode == "sw"){
-                        // PMT1[index].substr(3+tag_dig,data_num) = convert(rs2%4294967296, 32);
+                       
                         L1_data[index][data_num]= rs2%4294967296;
                         M[rs1+imm] = rs2%4294967296;
                     }
@@ -607,7 +603,8 @@ int main(){
                     L1_tag[index] = tag;
                 }
                 // if (PMT1[index].at(0) == 1 && PMT2[index].at(0) == 1){
-                if(L1_status[index]>>2 == 1 && L2_status[index]>>2 == 1){
+                    // L1,L2ともデータ保持
+                else if(L1_status[index]>>2 == 1 && L2_status[index]>>2 == 1){
                     // PMT1[index] = bury_zero(0, 3+tag_dig+64); //85); //0>> 85;
                     int data_num = int(offset);
                     if(opcode == "sb"){
@@ -625,7 +622,7 @@ int main(){
                     // PMT1[index].substr(0,3+tag_dig) = "101"+ tag;
                     L1_status[index] = 101;
                     L1_tag[index] = tag;
-                    
+                    //↓L2が空き 
                 }else if(L2_status[index]>>2 != 1){ //PMT2[index].at(0) != 1
                         // PMT2[index] = bury_zero(0,85); //0>> 85;
                         int data_num = int(offset);
@@ -683,7 +680,7 @@ int main(){
                 // if((a0[0.] >= '0') && (a0[0] <= '9')){} 
                 // else a[reg(a0)] = rd; 
                 cout << "# " << rd << " "<< rs1 <<" " << rs2 << endl;
-                num_i = 0;
+                // num_i = 0;
                 // while(M[num_i]){
                 //     a[num_i] = M[num_i];
                 //     num_i++;
