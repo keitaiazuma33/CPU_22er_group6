@@ -73,7 +73,7 @@ int64_t reg(string a0){ // asmの変数をc++の変数に
         // return -1;
         // cout << "before" << a0 << endl;
         num = atoi(a0.c_str());
-        cout << "atoi" << num << endl;
+        // cout << "atoi" << num << endl;
         // num = (２進数)に
 
     }
@@ -120,7 +120,7 @@ int64_t reg(string a0){ // asmの変数をc++の変数に
     // // cout << "after_2 " << num << endl;
     }
     return num; //(int)とすると51に
-    cout << num << endl;
+    // cout << num << endl;
     
 }
 
@@ -306,16 +306,16 @@ int main(){
         // cout << words[0] << " " << words[1] << " " << words[2] << " " << words[3] << endl;
         int words_i = 0;
         while(words_i < words.size()){
-            cout << words[words_i] << " ";
+            // cout << words[words_i] << " ";
             words_i++;
         }
-        cout << endl;
+        // cout << endl;
         string opcode, a0, a1, a2;
         
         // a3 = words[4];
         for(int i = 1; i <= 3 ; i++){ //words.size()
             int label_find = label.count(words[i]); //" "
-            cout << "label found" << label_find << endl;
+            // cout << "label found" << label_find << endl;
             if(label_find > 0){
                 // pc = label[i][0];
                 int a_pc = label[words[i]];
@@ -325,7 +325,7 @@ int main(){
                 // pc += diff;
                 // if(diff < 0) diff -= 4;
                 words[i] = to_string(diff);
-                cout << "diff" << words[i] << endl; //ここまでok
+                // cout << "diff" << words[i] << endl; //ここまでok
             }
         }
         int sign_imm = 0;
@@ -333,7 +333,7 @@ int main(){
             if(words[i].at(0) == '-'){
                 sign_imm = 1;
                 words[i] = words[i].substr(1, words[i].length() - 1);
-                cout << "-の処理 " << words[i] << endl;
+                // cout << "-の処理 " << words[i] << endl;
             
             }
         }
@@ -380,7 +380,7 @@ int main(){
         // bitset
         // 0になるまで割って；配列に入れて
         // vector<int> M(SIZE);
-        cout << "l138 " << opcode << " "<< a0 << " " << a1 << " "<< a2 << endl;
+        // cout << "l138 " << opcode << " "<< a0 << " " << a1 << " "<< a2 << endl;
         if((a0[0] >= '0') && (a0[0] <= '9')){
             // cout << a0 << endl; 
             imm = reg(a0);
@@ -396,7 +396,7 @@ int main(){
         // cout << "l241" << rd << rs1 << rs2 <<endl;
         // bitset<100> imm(imm_int);
         
-        cout << "imm " << imm << endl;
+        // cout << "imm " << imm << endl;
         // int pc;
         int num_i;
         int offset_dig, index_dig, tag_dig;
@@ -502,11 +502,14 @@ int main(){
                 tag = addr >> (index_dig+offset_dig);
                 index = (addr >> offset_dig) & ((1 << (index_dig))-1);
                 offset = addr & ((1<<4) - 1);//1111;
-                
+                cout << "addr,tag,index,offset " << addr << " " << tag << " " << index << " " << offset << endl;
                 // valid1,dirty1,accessed
                 // 一致していてかつvalid=1&&accessed=0なら
                 // 100ではないかも
-                if(L1_tag[index] == tag && ((L1_status[index]>>1) & 11) == 10){ //PMT1[index].at(0) == 1 && PMT1[index].at(1) == 0){
+                cout << L1_tag[index] << " tag " << tag << endl;
+                cout << "status " << L1_status[index] << endl;
+                cout << ((L1_status[index]>>1) & ((1<<2)-1)) << endl; //2
+                if(L1_tag[index] == tag && (((L1_status[index]>>1) & ((1<<2)-1)) == 0b10)){ //PMT1[index].at(0) == 1 && PMT1[index].at(1) == 0){
                     // 64byteのデータからoffsetの場所にあるものを引く
                     uint64_t data = L1_data[index][offset]; //sub_uint(PMT1[index], 0, 64); //PMT1[index].substr(14, 64);
                     // int data_num = int(offset);
@@ -536,7 +539,7 @@ int main(){
                 }
                 // if(opcode == "lb"){
                 //     // index = (a[rs1]+imm)/4
-                    rd = M[rs1+imm];//[0:7]; 
+                    // rd = M[rs1+imm];//[0:7]; 
                 //     pc += 4;   
                 // }else if(opcode == "lh"){
                 //     rd = M[rs1+imm];//[0:15];
@@ -698,10 +701,10 @@ int main(){
                     else pc += 4;
                 }//ここ抜け
                 else if(opcode == "blt" || opcode == "bgt"){
-                    cout << pc << " " << imm << endl;
+                    // cout << pc << " " << imm << endl;
                     if(rs1 < rs2) pc += imm;
                     else pc += 4;
-                    cout << "pc" << pc << endl;
+                    // cout << "pc" << pc << endl;
                 }else if(opcode == "bge"|| opcode == "ble"){
                     if(rs1 >= rs2) pc += imm;
                     else pc += 4;
