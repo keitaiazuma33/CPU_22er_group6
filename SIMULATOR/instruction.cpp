@@ -6,6 +6,7 @@
 #include <sstream>
 #include <iomanip>
 #include <vector>
+#include <time.h>
 #ifdef EXTENDED // EXTENDED: 1stシミュレータ拡張版(sim+)用のコード
 #include <transmission.hpp>
 #include <thread>
@@ -32,7 +33,7 @@ struct Op {
             _type = R;
         }else if((op == "addi") || (op == "xori")|| (op == "ori")|| (op == "andi")|| (op == "slli")|| (op == "srli")|| (op == "srai")|| (op == "slti")|| (op == "sltiu")){
             _type = I;
-        }else if((op == "lb") || (op == "lh")|| (op == "lw")|| (op == "lbu")|| (op == "lhu")){
+        }else if((op == "lb") || (op == "lh")|| (op == "lw")|| (op == "lbu")|| (op == "lhu") || (op == "jalr")){
             _type = I;
         }else if((op == "sb") || (op == "sh")|| (op == "sw")){
             _type = S;
@@ -147,7 +148,7 @@ string bury_zero(string imm, int dig_num){
 }
 int main(){
     // ファイルから読み込む   
-    string filename ("fib.txt");
+    string filename ("fib_2.txt");
     vector<string> lines;
     string line;
 
@@ -169,11 +170,10 @@ int main(){
         if(line.find(':') < 100){ 
             line.erase(line.find(':')); //?
             label[line] = pc; 
-        }else{
+        }else if (line.size() > 0){
             con_line[pc] = line;
             pc += 4;
-        }
-        // pc += 4;
+        }else{}
     }
     cout << "fileclose" << endl;
     file.close();
@@ -187,7 +187,12 @@ int main(){
     // }
     pc = 0;
     // while(getline(file2, line)){
+    string s;
+    s = "/Users/maimai/my-3A/cpu-simu/asm_result.txt";
+    ofstream ofs(s);
     while(pc < pc_size) {
+        // sの部分は”ファイルパス\\ファイル名.txt”のようにベタ打ちでも可
+        // ofs <<"testmessage\n" << endl;
         line = con_line[pc];
         line += '\n';
         cout << "whileループ pc " << pc << endl;
@@ -204,37 +209,35 @@ int main(){
             // 
             continue;
         }
-        // else {}      
         for(int i = 0; i < line.size(); i++){
-            if(line.at(i) == '#'|| line.at(i) == '\n'){
+            if(line.at(i) == '#'|| line.at(i) == '\n' || line.at(i) == ')'){
                 // cout << "# found break" << endl;
                 break;
             }
-            if((line.at(i) == ' ') || (line.at(i) == '\t') || (line.at(i) == ',')){
+            if(line.at(i) == '(' || line.at(i) == ' ' ||(line.at(i) == '\t') || (line.at(i) == ',')){
                 // if(word != ""){
                 //     words.push_back(word);
                 // }
                 // word = "";
-                // cout << "i+1" << line.at(i+1) << endl;
                 continue;
             }
             else{
                 word.push_back(line.at(i));
-                // 次の文字が#,"\n", " ", "()"ならpush_back
-                if(line.at(i+1) == '#' || line.at(i+1) == '\n' || line.at(i+1) == ' ' || line.at(i+1) == ',' || (line.at(i+1) == '\t')){ // || line.at(i+1) == ' '){
+                if(line.at(i+1) == '('|| line.at(i+1) == ')' || line.at(i+1) == '#' || line.at(i+1) == '\n' || line.at(i+1) == ' ' || line.at(i+1) == ',' || (line.at(i+1) == '\t')){ // || line.at(i+1) == ' '){
                     words.push_back(word);
-                    cout << "word " << word << endl;
+                    // cout << "word " << word << endl;
                     word = "";
                     // break;
                 }
-                
             }
+            // これいる？？
             if(i == line.size()-1){
                 if(word != ""){
                     words.push_back(word);
                 }
             }
-        } 
+        }
+        
         // cout << "words[3]" << words.at(3) << endl;
         // その行がなかったらcontinue
         // if(words[0] == "") continue;
@@ -244,7 +247,7 @@ int main(){
         // printf("%c\n", words[3].at(0));
         for(int i = 1; i <= 3; i++){
             int label_find = label.count(words[i]); //" "
-            // cout << "label found" << label_find << endl;
+            cout << "label found" << label_find << endl;
             if(label_find > 0){
                 // pc = label[i][0];
                 int a_pc = label[words[i]];
@@ -252,7 +255,7 @@ int main(){
                 int diff = a_pc - pc; 
                 // cout << diff << endl; //offset
                 // pc += diff;
-                if(diff < 0) diff -= 4;
+                // if(diff < 0) diff -= 4;
                 words[i] = to_string(diff);
                 // cout << words[i] << endl; //ここまでok
             }
@@ -288,8 +291,22 @@ int main(){
         // cout << opcode << " " << op1 << " " <<op2 << " " << op3 << endl;
         if(opcode == "li") {op3 = op2; op2 = "zero"; opcode = "addi";}
         else if(opcode == "j") {opcode = "jal"; op3 = ""; op2 = op1; op1 = "zero";}//L3?; ' '
-        else if(opcode == "mv"){opcode = "addi"; op3 = "0";}
-        cout << opcode << " " << op1 << " " <<op2 << " " << op3 << endl;
+        // else if(opcode == "mv"){opcode = "addi"; op3 = "0";}
+        // if(opcode == "li") {op3 = op2; op2 = "zero"; opcode = "addi";}
+        // else if(opcode == "j") {opcode = "jal"; op2 = op1; op1 = "zero";}//L3?; ' '
+        else if(opcode == "jal" && op2 == "") {op2 = op1; op1 = "ra";}//L3?; ' '
+        else if(opcode == "mv"){opcode = "addi", op3 = "0";}
+        else if(opcode == "bgt") {opcode = "blt"; swap(op1,op2);}
+        else if(opcode == "ble") {opcode = "bge"; swap(op1,op2);}
+        else if(opcode == "bgtu") {opcode = "bltu"; swap(op1,op2);}
+        else if(opcode == "bleu") {opcode = "bgeu"; swap(op1,op2);}
+        else if(opcode == "beqz") {opcode = "beq"; op3 = op2; op2 = "zero";}
+        else if(opcode == "bnez") {opcode = "bne"; op3 = op2; op2 = "zero";}
+        // retだけ処理
+        else if(opcode == "ret"){
+            opcode = "jalr"; op1 = "zero"; op2 = "ra"; op3 = "0";
+        }
+        ofs << opcode << " " << op1 << " " <<op2 << " " << op3 << endl;
         // cout << op3[0] << endl;
         // cout << op3 << endl;
         string imm;
@@ -314,48 +331,132 @@ int main(){
             case R:
                 if(opcode == "add"){
                     // rd = change(op1); 
-                    cout << "0000000"+rs2+rs1+"000"+rd +"0110011" << endl;
+                    ofs << "0000000"+rs2+rs1+"000"+rd +"0110011" << endl;
                     pc += 4;           
                 }else if(opcode == "sub"){
-                    cout << "0100000"+rs2+rs1+"000"+rd +"0110011" << endl;  
+                    ofs << "0100000"+rs2+rs1+"000"+rd +"0110011" << endl;  
                     pc += 4;              
                 }else if(opcode == "xor"){ //ここからchange
                     // rd = change(op1); 
-                    cout << "0000000"+rs2+rs1+"100"+rd +"0110011" << endl;   
+                    ofs << "0000000"+rs2+rs1+"100"+rd +"0110011" << endl;   
                     pc += 4;     
                 // ここから数字change!
                 }else if(opcode == "or"){
-                    cout << "0000000"+rs2+rs1+"110"+rd +"0110011" << endl; 
+                    ofs << "0000000"+rs2+rs1+"110"+rd +"0110011" << endl; 
                     pc += 4;              
                 }else if(opcode == "and"){
-                    cout << "0000000"+rs2+rs1+"111"+rd +"0110011" << endl;  
+                    ofs << "0000000"+rs2+rs1+"111"+rd +"0110011" << endl;  
                     pc += 4;             
                 }else if(opcode == "sll"){
-                    cout << "0000000"+rs2+rs1+"001"+rd +"0110011" << endl; 
+                    ofs << "0000000"+rs2+rs1+"001"+rd +"0110011" << endl; 
                     pc += 4;              
                 }else if(opcode == "srl"){
-                    cout << "0000000"+rs2+rs1+"101"+rd +"0110011" << endl;  
+                    ofs << "0000000"+rs2+rs1+"101"+rd +"0110011" << endl;  
                     pc += 4;             
                 }else if(opcode == "sra"){
-                    cout << "0100000"+rs2+rs1+"101"+rd +"0110011" << endl; 
+                    ofs << "0100000"+rs2+rs1+"101"+rd +"0110011" << endl; 
                     pc += 4;              
                 }else if(opcode == "slt"){
-                    cout << "0000000"+rs2+rs1+"010"+rd +"0110011" << endl;
+                    ofs << "0000000"+rs2+rs1+"010"+rd +"0110011" << endl;
                     pc += 4;               
                 }else if(opcode == "sltu"){
-                    cout << "0000000"+rs2+rs1+"011"+rd +"0110011" << endl;  
+                    ofs << "0000000"+rs2+rs1+"011"+rd +"0110011" << endl;  
                     pc += 4;   
                 }
+                // simから移した
+                //Multiply Extention
+                else if(opcode == "mul"){
+                    ofs << "0000001"+rs2+rs1+"000"+rd +"0110011" << endl;  
+                    pc += 4;
+                }else if(opcode == "div"){
+                    ofs << "0000001"+rs2+rs1+"100"+rd +"0110011" << endl; 
+                    pc += 4;
+                }
                 continue;
+            // ここまでok
             // フィボナッチ用のみ
             case I:
                 // addi rd,rs1,imm
-                    // imm = rs2; //op[3];
+                // if(imm == "") imm = rs2; //op[3];
                 imm = bury_zero(imm, 12);
                 if(opcode == "addi"){
-                    // cout << "imm" << imm << endl;
-                    cout << imm.substr(0, 12)+rs1+"000"+rd+"0010011"<<endl;
+                    // ofs << "imm" << imm << endl;
+                    ofs << imm.substr(0, 12)+rs1+"000"+rd+"0010011"<<endl;
                     pc += 4;    
+                }else if(opcode == "xori"){
+                    ofs << imm.substr(0, 12)+rs1+"100"+rd+"0010011"<<endl;
+                    pc += 4;
+                }else if(opcode == "ori"){
+                    ofs << imm.substr(0, 12)+rs1+"110"+rd+"0010011"<<endl;
+                    pc += 4;
+                }else if(opcode == "andi"){
+                    ofs << imm.substr(0, 12)+rs1+"111"+rd+"0010011"<<endl;
+                    pc += 4;
+                }else if(opcode == "slli"){
+                    // shamt = rs2
+                    ofs << "000000X"+rs2+rs1+"001"+rd+"0010011"<<endl;
+                    pc += 4;
+                }else if(opcode == "srli"){
+                    ofs << "000000X"+rs2+rs1+"101"+rd+"0010011"<<endl;
+                    pc += 4;
+                }else if(opcode == "srai"){
+                    ofs << "0100000X"+rs2+rs1+"101"+rd+"0010011"<<endl;
+                    pc += 4;
+                }else if(opcode == "slti"){
+                    ofs << imm.substr(0,12)+rs1+"010"+rd+"0010011"<<endl;
+                    pc += 4;
+                }else if(opcode == "sltiu"){
+                    ofs << imm.substr(0,12)+rs1+"011"+rd+"0010011"<<endl;
+                    pc += 4;
+                }else if(opcode == "lb"){
+                    rs1 = rs2;
+                    ofs << imm.substr(0,12)+rs1+"000"+rd+"0000011"<<endl;
+                    pc += 4;   
+                }else if(opcode == "lh"){
+                    rs1 = rs2;
+                    ofs << imm.substr(0,12)+rs1+"001"+rd+"0000011"<<endl;
+                    pc += 4;
+                }else if(opcode == "lw"){
+                    rs1 = rs2;
+                    ofs << imm.substr(0,12)+rs1+"010"+rd+"0000011"<<endl;
+                    pc += 4;
+                }else if(opcode == "lbu"){
+                    rs1 = rs2;
+                    ofs << imm.substr(0,12)+rs1+"100"+rd+"0000011"<<endl;
+                    pc += 4;
+                }else if(opcode == "lhu"){
+                    rs1 = rs2;
+                    ofs << imm.substr(0,12)+rs1+"101"+rd+"0000011"<<endl;
+                    pc += 4;
+                // }else if(opcode == "sb"){
+                //     ofs << imm.substr(5,7)+rs2+rs1+"000"+imm.substr(0,5)+"0100011"<<endl;
+                //     pc += 4;
+                // }else if(opcode == "sh"){
+                //     ofs << imm.substr(5,7)+rs2+rs1+"001"+imm.substr(0,5)+"0100011"<<endl;
+                //     pc += 4;
+                // }else if(opcode == "sw"){
+                //     ofs << imm.substr(5,7)+rs2+rs1+"010"+imm.substr(0,5)+"0100011"<<endl;
+                //     pc += 4;
+                }else if(opcode == "jalr"){
+                    ofs << imm.substr(0,12)+rs1+"000"+rd+"1100111"<<endl;
+                    pc += 4;
+                } 
+                continue;
+            case S:
+                imm = bury_zero(imm, 12);
+                rs1 = rs2; rs2 = rd;
+                if(opcode == "sb"){
+                    ofs << imm.substr(5,7)+rs2+rs1+"000"+imm.substr(0,5)+"0100011"<<endl;
+                    pc+=4;
+                    // ofs << imm.substr(5,7)+rs2+rs1+"000"+imm.substr(0,5)+"0100011"<<endl;
+                    // offset[11:5]+rs2+rs1+000+offset[4:0]+0100011
+                }else if(opcode == "sh"){
+                    ofs << imm.substr(5,7)+rs2+rs1+"001"+imm.substr(0,5)+"0100011"<<endl;
+                    pc+=4;
+                }else if(opcode == "sw"){
+                    cout << "sw" << imm << rs1 << rs2 << endl;
+                    ofs << imm.substr(5,7)+rs2+rs1+"010"+imm.substr(0,5)+"0100011"<<endl;
+                    pc+=4;
                 }
                 continue;
             case J: 
@@ -365,7 +466,7 @@ int main(){
                 if(sign_imm){ offset[20] = '1';}
                 if(opcode == "jal"){ // || opcode == "jal"){
                     // offset = rs1;
-                    cout << offset[20] + offset.substr(1,10) + offset[11] + offset.substr(12,8)+rd+"1101111"<<endl;
+                    ofs << offset[20] + offset.substr(1,10) + offset[11] + offset.substr(12,8)+rd+"1101111"<<endl;
                     // offset[20|10:1|11] + offset[19:12]
                     // pcの処理上でok?
                 }
@@ -378,25 +479,48 @@ int main(){
                 // cout << imm << " " << rs2 << " " << rs1 << endl;
                 reverse(imm.begin(), imm.end());
                 // cout << imm << endl;
-                if(opcode == "blt"){
-                    cout << imm[12]+imm.substr(5,6)+rs2+rs1+"100"+imm.substr(1,4)+imm[11]+"1100011"<<endl;
-                    // pcの処理上でok?
-                }else if(opcode == "bge"){ //ここからchange
-                    cout << imm[12]+imm.substr(5,6)+rs2+rs1+"101"+imm.substr(1,4)+imm[11]+"1100011" <<endl;//imm[11:0]
-                    // pcの処理上でok?
+                // if(opcode == "blt"){
+                //     cout << imm[12]+imm.substr(5,6)+rs2+rs1+"100"+imm.substr(1,4)+imm[11]+"1100011"<<endl;
+                //     // pcの処理上でok?
+                // }else if(opcode == "bge"){ //ここからchange
+                //     cout << imm[12]+imm.substr(5,6)+rs2+rs1+"101"+imm.substr(1,4)+imm[11]+"1100011" <<endl;//imm[11:0]
+                //     // pcの処理上でok?
+                // }
+                // pc += 4;
+                // case B:
+                // rs2 = rs1; rs1 = rd; 
+                // if(sign_imm == 1) imm = -imm;
+                // cout << "# "  << rs1 <<" " << rs2 << endl;
+                if(opcode == "beq"){
+                    ofs << imm[12]+imm.substr(5,6)+rs2+rs1+"000"+imm.substr(1,4)+imm[11]+"1100011"<<endl;
+                    // offset[12|10:5]rs2rs1+000+offset[4:1|11]+1100011
+                }else if(opcode == "bne"){
+                    ofs << imm[12]+imm.substr(5,6)+rs2+rs1+"001"+imm.substr(1,4)+imm[11]+"1100011"<<endl;
+                }else if(opcode == "blt"){
+                    ofs << imm[12]+imm.substr(5,6)+rs2+rs1+"100"+imm.substr(1,4)+imm[11]+"1100011"<<endl;
+                }else if(opcode == "bge"){
+                    ofs << imm[12]+imm.substr(5,6)+rs2+rs1+"101"+imm.substr(1,4)+imm[11]+"1100011"<<endl;
+                }else if(opcode == "bltu"){
+                    ofs << imm[12]+imm.substr(5,6)+rs2+rs1+"110"+imm.substr(1,4)+imm[11]+"1100011"<<endl;
+                }else if(opcode == "bgeu"){
+                    ofs << imm[12]+imm.substr(5,6)+rs2+rs1+"111"+imm.substr(1,4)+imm[11]+"1100011"<<endl;
+                }
+                pc += 4;
+                // jumpの処理？
+                continue;
+                // continue;
+            case U:
+                // imm = op[1];
+                imm = bury_zero(imm, 32);
+                if(opcode == "lui"){
+                    
+                    ofs << imm.substr(12,20) + rd + "0b0110111"; //imm[31:12]
+                }else if(opcode == "auipc"){
+                    // imm = op[1];
+                    ofs << imm.substr(12,20) + rd + "0b0010111";
                 }
                 pc += 4;
                 continue;
-            // case U:
-            // imm = op[1];
-            // if(opcode == "lui"){
-                
-            //     cout << imm[31:12] + rd + "0b0110111";
-            // }else if(opcode == "auipc"){
-            //     // imm = op[1];
-            //     cout << imm[31:12] + rd + "0b0010111";
-            // }
-            //     break;
             
             // add
             // switch  
