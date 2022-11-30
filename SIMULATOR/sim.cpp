@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-// #progma once
+// #pragma once
 #include <map>
 #include <iostream>
 #include <string.h>
@@ -11,28 +11,19 @@
 #include <algorithm>
 #include <stdio.h>
 #include <string>
+#include <time.h> 
+// #include "sim_cache_index.hpp"
+// #include "op_type.hpp"
+// #include "sub_func.hpp"
+// #include "reg.hpp"
+// #include "IO/reader.py"
+// #include "const.hpp"
 using namespace std;
 #define SIZE 1024
-/* グローバル変数 */
-// 内部処理関係
-// std::vector<Operation> op_list; // 命令のリスト(PC順)
-// Reg reg_int; // 整数レジスタ
-// Reg reg_fp; // 浮動小数点数レジスタ
-// Memory memory; // メモリ
-// Fpu fpu; // FPU
-// Cache cache; // キャッシュ
-// Gshare branch_predictor(gshare_width); // 分岐予測器
-// TransmissionQueue receive_buffer; // 外部通信での受信バッファ
-// TransmissionQueue send_buffer; // 外部通信での送信バッファ
+#define ull uint64_t
 
-// unsigned int pc = 0; // プログラムカウンタ
-// unsigned int code_size = 0; // コードサイズ
-// int mem_size = 100; // メモリサイズ
-// struct operation {
-
-// }
 enum Type {
-        R, I_1, I_2, S, B, U, J
+        R, I_1, I_2, S, B, U, J, F
 };
 struct Op {
   
@@ -55,8 +46,17 @@ struct Op {
             _type = I_1;
         }else if(op == "lui" || op == "auipc"){
             _type = U;
-        }else if(op == "mul" || op == "div"){
+        }else if(op == "mul" || op == "mulh" || op == "mulsu"
+        || op == "mulu" || op == "div" || op == "divu" || op == "rem" || op == "remu"){
             _type = R;
+        // }else if(op == "mul" || op == "div"){
+        //     _type = R;
+        }else if(op == "flw" || op == "fsw" || op == "fmadd.s" || op == "fmsub.s" || op == "fnmadd.s" || op == "fnmsub.s" || 
+        op == "fadd.s" || op == "fsub.s" || op == "fmul.s" || op == "fdiv.s" || op == "fsqrt.s" 
+        || op == "fsgnj.s" || op == "fsgnjn.s" || op == "fsgnjx.s" || op == "fmin.s" || op == "fmax.s"
+        || op == "fcvt.s.w" || op == "fcvt.s.wu" || op == "fcvt.w.s" || op == "fcvt.wu.s"
+        || op == "fmu.x.w" || op == "fmu.w.x" || op == "feq.s" || op == "flt.s" || op == "fle.s" || op == "fclass.s"){
+            _type = F;
         }
         // jalr以降書き忘れ
         // mul以降も；２ページ目
@@ -65,6 +65,11 @@ struct Op {
 
 };
 
+double sign(double A){
+    if(A>0) return 1;
+    else if(A<0) return -1;
+    else return 0;
+}
 int64_t reg(string a0){ // asmの変数をc++の変数に
     // 変換操作
     // a0;t8の8のみ取り出し配列のインデックスに
@@ -137,58 +142,177 @@ string bury_zero(int64_t imm, int dig_num){
     return s;
     // bitset<(size_t)dig_num> s;   
 }
-//intのnを01にして指定桁数0埋め
-// uint64_t convert(int64_t n, int dig_num){ 
-//     // string to 01
-//     // t0-t7
-
-//     // string r = "";
-//     uint64_t r;
-//     // if((op[0] >= '0') && (op[0] <= '9')){ //imm;数字だったら
-//     int j = 0;
-//     // ２進数に
-//     while(n){
-//         r *= 10;
-//         if(n %2 == 1) r += 1;
-//         // else r += 0 ;
-//         n = n / 2;
-//         j++;
-
-//     }
-    
-//     // ０埋め　
-//     bury_zero(r, dig_num)
-// }
-// get digits
-// https://daeudaeu.com/c-get-digits/
-
-// void store0(string opcode){
-//     string addr = bury_zero((int64_t)rs1+imm, 32);
-//     reverse(addr.begin(), addr.end());
-//     string tag = addr.substr(21,11);//[21:31]
-//     string index = addr.substr(11,10);//[11:20]
-//     string offset = addr.substr(0,11); //[0:10]
-//     string data;
-//     // valid1,dirty1,accessed
-//     // データを保持していなかったら
-//     if(PMT1[index].at(0) != 1){
-//         PMT1[index] = bury_zero(0,85); //0>> 85;
-//         int data_num = stoi(offset);
-//         if(opcode == "sb"){
-//             PMT1[index].substr(14,data_num) = convert(rs2%128, 32);
-//         }else if(opcode == "sh"){
-//             PMT1[index].substr(14,data_num) = rs2%65536;
-//         }else if(opcode == "sw"){
-//             PMT1[index].substr(14,data_num) = rs2%4294967296;
-//         }
-//         PMT1[index].substr(0,13) = "100"+ tag; //dataとは？
-//     }else{
-//     }
-// }
 // numのi番目右シフト；j桁取り出す
 uint64_t sub_uint(uint64_t num, int i, int j){
     num = (num >> i) & ((1 << (j+1))-1);
     return num;
+}
+
+#define SIZE 1024
+// #include <sim_cathe.hpp>
+vector<int> a(SIZE);
+vector<int> M(SIZE);
+vector<vector<int> > L1(SIZE/10);
+vector<vector<int> > L2(SIZE/10);
+map<uint64_t, uint64_t> PMT1; //L1に対応
+// map<int, uint64_t> 
+// vector<uint64_t> L1_status(SIZE/10);
+vector<vector <uint64_t> > L1_status(2, vector<uint64_t>(SIZE));
+vector<vector <uint64_t> > L2_status(2, vector<uint64_t>(SIZE));
+vector<vector <uint64_t> > L1_tag(2, vector<uint64_t>(SIZE));
+vector<vector <uint64_t> > L2_tag(2, vector<uint64_t>(SIZE));
+string s = "/Users/maimai/my-3A/cpu-simu/sim_result.txt";
+ofstream ofs(s);
+// vector<uint64_t> L2_tag(SIZE/10);
+// map<uint64_t, vector<int> > 
+// (3, vector<int>(4));
+// vector<vector<vector<uint64_t> > > L1_data (2, vector<vector<uint64_t>>(SIZE/10), vector<uint64_t> (100));
+// vector<vector<uint64_t> > L2_data(SIZE/10);
+// class Cache {
+//     vector<vector <uint64_t> > L_status(2, vector<uint64_t>(SIZE));
+// };
+// int main(){
+//     Cache.L_status L1_status;
+// }
+int rd, rs1, rs2, rs3;
+int64_t imm;
+uint64_t addr, tag, index_, offset;
+int offset_dig, index_dig, tag_dig;
+int hit_count, miss_count;
+// #include "const.hpp"
+// #pragma once
+// vector<vector<vector<uint64_t> > > L1_data (2, vector<vector<uint64_t>>(SIZE/10), vector<uint64_t> (100));
+
+void cache_load(){
+    addr = a[rs1]+imm;
+    // 一度intに変換；bitsetに直す
+    tag = addr >> (index_dig+offset_dig);
+    index_ = (addr >> offset_dig) & ((1 << (index_dig))-1);
+    offset = addr & ((1<<4) - 1);//1111;
+    cout << "addr,tag,index_,offset " << addr << " " << tag << " " << index_ << " " << offset << endl;
+    // valid1,dirty1,accessed
+    
+    // L1_way0; 一致していてかつvalid=1&&accessed=0なら
+    if(L1_tag[0][index_] == tag && (((L1_status[0][index_]>>1) & ((1<<2)-1)) == 0b10)){ //PMT1[index_].at(0) == 1 && PMT1[index_].at(1) == 0){
+        hit_count++;
+        // 64byteのデータからoffsetの場所にあるものを引く
+        // uint64_t data = L1_data[0][index_][offset]; //sub_uint(PMT1[index_], 0, 64); //PMT1[index_].substr(14, 64);
+        // rd = (int)data;
+    }else if(L1_tag[1][index_] == tag && (((L1_status[1][index_]>>1) & ((1<<2)-1)) == 0b10)){
+        hit_count++;
+    }
+    else{
+        //L1にはないためL2を見にいく；繰り返し
+        if(L2_tag[0][index_] == tag && L2_status[0][index_] == 100){ //PMT1[index_].at(0) == 1 && PMT1[index_].at(1) == 0){
+            hit_count++;
+            // 64byteのデータからoffsetの場所にあるものを引く
+            
+        }else if(L2_tag[1][index_] == tag && L2_status[1][index_] == 100){
+            hit_count++;
+        }else{
+            miss_count++;
+            
+        }
+    }
+    rd = M[rs1+imm];
+    ofs << "load" << " " << M[rs1+imm] << endl;
+}
+void cache_store(string opcode){
+    addr = a[rs1]+imm; //レジスタの中身+即値
+    tag = addr >> (index_dig+offset_dig);
+    index_ = (addr >> offset_dig) & ((1 << (index_dig+1))-1);
+    offset = addr & (1<<5)-1;
+    cout << "addr,tag,index_,offset " << addr << " " << tag << " " << index_ << " " << offset << endl;
+    
+    // valid1,dirty1,accessed
+    // L1_way0:データを保持していなかったら；　valid = 0
+    bool flag = 0;
+    for(int w=0; w < 2; w++){ //way0,way1
+    // int i = 0;
+        if((L1_status[w][index_]>>2 & 1) == 0) { //at(0)
+            flag = 1;
+            uint64_t data_num = uint64_t(offset);
+            if(opcode == "sb"){
+                // PMT1[index_].substr(3+tag_dig+4*data_num, 4) 
+                // L1_data[w][index_][data_num]= rs2%128; //convert(rs2%128,32);
+                L1_status[w][index_] = 110; //dirty
+                M[rs1+imm] = rs2%128;
+            }else if(opcode == "sh"){
+                // PMT1[index_].substr(3+tag_dig,data_num) = convert(rs2%65536, 32);
+                // L1_data[w][index_][data_num]= rs2%65536;
+                L1_status[w][index_] = 110;
+                M[rs1+imm] = rs2%65536;
+            }else if(opcode == "sw"){
+                // L1_data[w][index_][data_num]= rs2%4294967296;
+                L1_status[w][index_] = 110;
+                M[rs1+imm] = rs2%4294967296;
+            }
+            // if(PMT1[index_].at(0) != 1){
+                // PMT1[index_].substr(0,3+tag_dig) = "100"+ tag; //dataとは？
+            L1_status[w][index_] = 100;
+            L1_tag[w][index_] = tag;
+    
+            flag = 1;
+        }
+    }
+    //%2;
+    // if (PMT1[index_].at(0) == 1 && PMT2[index_].at(0) == 1){
+    
+    // valid,dirty,accessed
+    // L1,L2ともデータ保持;既にあり；validでok?
+    for(int w=0; w < 2; w++){
+        if(flag == 1) {cout << "次へ" << endl; break;}
+        if(L1_status[w][index_]>>2 == 1 && L2_status[w][index_]>>2 == 1){
+            flag = 1;
+            // PMT1[index_] = bury_zero(0, 3+tag_dig+64); //85); //0>> 85;
+            int data_num = int(offset);
+            if(opcode == "sb"){
+                // M[rs1+imm] = PMT1[index_].substr(3+tag_dig+4*data_num, 4); //rs2%128;
+                // PMT1[index_].substr(3+tag_dig+4*data_num, 4) = rs2%128;
+                // L1_data[w][index_][data_num]= rs2%128;
+                M[rs1+imm] = rs2%128;
+            }else if(opcode == "sh"){
+                // L1_data[w][index_][data_num]= rs2%65536;
+                M[rs1+imm] = rs2%65536;
+            }else if(opcode == "sw"){
+                // L1_data[w][index_][data_num]= rs2%4294967296;
+                M[rs1+imm] = rs2%4294967296;
+            }
+            // PMT1[index_].substr(0,3+tag_dig) = "101"+ tag;
+            L1_status[w][index_] = 101;
+            L1_tag[w][index_] = tag;
+        //↓L2が空き 
+        }
+    }
+    // else 
+    // L2のどちらかが空いている
+    for(int w=0; w < 2; w++){
+        if(flag == 1) {cout << "次へ" << endl; break;}
+        // valid,dirty,accessed
+        if(L2_status[w][index_]>>2 == 0){ //PMT2[index_].at(0) != 1
+            // PMT2[index_] = bury_zero(0,85); //0>> 85;
+            int data_num = int(offset);
+            // PMT2[index_].substr(14,data_num) = rs2%128;
+            if(opcode == "sb"){
+                // PMT2[index_].substr(14,data_num) = bury_zero(rs2%128, 4);
+                // L2_data[w][index_][data_num]= rs2%128;
+                M[rs1+imm] = rs2%128;
+            }else if(opcode == "sh"){
+                // L2_data[index_][data_num] = rs2%65536;
+                M[rs1+imm] = rs2%65536;
+            }else if(opcode == "sw"){
+                // L2_data[index_][data_num] = rs2%4294967296;
+                M[rs1+imm] = rs2%4294967296;
+            }
+            // PMT2[index_].substr(0,13) = "100"+ tag; //dataとは？
+            L2_status[w][index_] = 100;
+            L2_tag[w][index_] = tag;
+        }
+        flag = 1;
+    }
+    // cout << flag? "Ok":"Ng" << endl;
+    cout << "flag " << flag << endl;
+    ofs << "store" << " " << M[rs1+imm] << endl;
 }
 int main(){
     // ファイルから読み込む
@@ -208,6 +332,20 @@ int main(){
         cerr << "Could not open the file - '"
              << filename << "'" << endl;
         return EXIT_FAILURE;
+    }
+    vector<int> bin(SIZE);
+    if(filename.find(".dat") < 100){
+        // メモリにおく；並べていく
+        int bin_i = 0;
+        while(getline(file, line)){
+            int bin_j = 0;
+            while(line[bin_i]){
+                bin[bin_i] = line[bin_j];
+                bin_i++;
+                bin_j++;
+            }
+        }
+
     }
     int pc = 0;
     std::map<string, int> label;
@@ -235,25 +373,12 @@ int main(){
     //     return EXIT_FAILURE;
     // }
     pc = 0;
-    vector<int> a(SIZE);
-    vector<int> M(SIZE);
-    vector<vector<int> > L1(SIZE/10);
-    vector<vector<int> > L2(SIZE/10);
-    map<uint64_t, uint64_t> PMT1; //L1に対応
-    // map<int, uint64_t> 
-    vector<uint64_t> L1_status(SIZE/10);
-    vector<uint64_t> L2_status(SIZE/10);
-    vector<uint64_t> L1_tag(SIZE/10);
-    vector<uint64_t> L2_tag(SIZE/10);
-    // map<uint64_t, vector<int> > 
-    // (3, vector<int>(4));
-    vector<vector<uint64_t> > L1_data (SIZE/10, vector<uint64_t>(100));
-    vector<vector<uint64_t> > L2_data(SIZE/10);
-    // map<bitset, bitset> PMT1;
-    // map<string, string> PMT2; //L2に対応
-    map<uint64_t, uint64_t> PMT2; //L2に対応
-    uint64_t addr, tag, index, offset;
+    
+    
+    hit_count = 0;
+    miss_count = 0;
     //getline(file2, line))
+    clock_t start = clock();   
     while(pc < pc_size) {// file; 第３引数に持ってくる or fstream型に
         // string S;
         // cin >> S; //"add a0, a1, a2"
@@ -310,7 +435,7 @@ int main(){
             words_i++;
         }
         // cout << endl;
-        string opcode, a0, a1, a2;
+        string opcode, a0, a1, a2, a3;
         
         // a3 = words[4];
         for(int i = 1; i <= 3 ; i++){ //words.size()
@@ -338,14 +463,14 @@ int main(){
             }
         }
         opcode = words[0]; //ここまでok
-        a0 = words[1]; a1 = words[2]; a2 = words[3];
+        a0 = words[1]; a1 = words[2]; a2 = words[3], a3 = words[4];
         // substr(line.find(" ")); //?
         // opcode = op[0];
         // a0 = op;
         // 変数定義
         // vector<int> a(SIZE);//20でok?
-        int rd, rs1, rs2, rs3; //int?
-        int64_t imm = 0;//2で割ったあまり
+         //int?
+        imm = 0;//2で割ったあまり
         // 0で初期化？
         rd = 0; rs1 = 0; rs2 = 0; rs3 = 0;
         
@@ -357,7 +482,7 @@ int main(){
         if(opcode == "li") {a2 = a1; a1 = "zero"; opcode = "addi";}
         else if(opcode == "j") {opcode = "jal"; a1 = a0; a0 = "zero";}//L3?; ' '
         else if(opcode == "jal" && a1 == "") {a1 = a0; a0 = "ra";}//L3?; ' '
-        else if(opcode == "mv"){opcode = "addi", a2 = "zero";}
+        else if(opcode == "mv"){opcode = "addi", a2 = "0";}
         else if(opcode == "bgt") {opcode = "blt"; swap(a0,a1);}
         else if(opcode == "ble") {opcode = "bge"; swap(a0,a1);}
         else if(opcode == "bgtu") {opcode = "bltu"; swap(a0,a1);}
@@ -390,8 +515,8 @@ int main(){
         else rs1 = a[reg(a1)];
         if((a2[0] >= '0') && (a2[0] <= '9')) imm = reg(a2);
         else rs2 = a[reg(a2)]; //L1でセグフォ
-        // if((a3[0] >= 48) && (a3[0] <= 57)) imm = (int64_t)reg(a3);
-        // else if (a3) rs3 = a[reg(a3)];
+        if((a3[0] >= 48) && (a3[0] <= 57)) imm = (int64_t)reg(a3);
+        else rs3 = a[reg(a3)];
         // else {}
         // cout << "l241" << rd << rs1 << rs2 <<endl;
         // bitset<100> imm(imm_int);
@@ -399,7 +524,6 @@ int main(){
         // cout << "imm " << imm << endl;
         // int pc;
         int num_i;
-        int offset_dig, index_dig, tag_dig;
         // constexpr size_t 
         offset_dig = 4;
         // constexpr size_t 
@@ -441,12 +565,18 @@ int main(){
                 }else if(opcode == "sltu"){
                     rd = (rs1 < rs2)?1:0;
                     pc += 4;
-                } //Multiply Extention
-                else if(opcode == "mul"){
+                //Multiply Extention
+                }else if(opcode == "mul"){
                     rd = (rs1 * rs2)%((int)pow(2,32));//[31:0]
                     pc += 4;
-                }else if(opcode == "div"){
+                }else if(opcode == "mulh" || opcode == "mulsu" || opcode == "mulu"){
+                    rd = (rs1 * rs2)%((int)pow(2,64));//[63:32]
+                    pc += 4;
+                }else if(opcode == "div" || opcode == "divu"){
                     rd = rs1/rs2;
+                    pc += 4;
+                }else if(opcode == "rem" || opcode == "remu"){
+                    rd = rs1%rs2;
                     pc += 4;
                 }
                 if((a0[0] >= '0') && (a0[0] <= '9')){} 
@@ -490,53 +620,11 @@ int main(){
                 cout << "# " << rd << " "<< rs1 <<" " << rs2 << endl;
                 continue;
             case I_2:
-                // rd =  //a[reg(a0)]; 
-                // offset = imm; //reg(a1);
+        
                 rs1 = reg(a2);//a[reg(a2)]
                 num_i = 0;
                 
-                // string addr = bury_zero((int64_t)rs1+imm, 32);
-                // bitset<addr_dig> 
-                addr = a[rs1]+imm;
-                // 一度intに変換；bitsetに直す
-                tag = addr >> (index_dig+offset_dig);
-                index = (addr >> offset_dig) & ((1 << (index_dig))-1);
-                offset = addr & ((1<<4) - 1);//1111;
-                cout << "addr,tag,index,offset " << addr << " " << tag << " " << index << " " << offset << endl;
-                // valid1,dirty1,accessed
-                // 一致していてかつvalid=1&&accessed=0なら
-                // 100ではないかも
-                cout << L1_tag[index] << " tag " << tag << endl;
-                cout << "status " << L1_status[index] << endl;
-                cout << ((L1_status[index]>>1) & ((1<<2)-1)) << endl; //2
-                if(L1_tag[index] == tag && (((L1_status[index]>>1) & ((1<<2)-1)) == 0b10)){ //PMT1[index].at(0) == 1 && PMT1[index].at(1) == 0){
-                    // 64byteのデータからoffsetの場所にあるものを引く
-                    uint64_t data = L1_data[index][offset]; //sub_uint(PMT1[index], 0, 64); //PMT1[index].substr(14, 64);
-                    // int data_num = int(offset);
-                    // string L1_num = data.substr(data_num*4, 4);
-                    // rd = (int)sub_uint(data, ) //stoi(L1_num);
-                    rd = (int)data;
-                }else{
-                    //L1にはないためL2を見にいく；繰り返し
-                    if(L2_tag[index] == tag && L2_status[index] == 100){ //PMT1[index].at(0) == 1 && PMT1[index].at(1) == 0){
-                        // 64byteのデータからoffsetの場所にあるものを引く
-                        uint64_t data = L2_data[index][offset]; //sub_uint(PMT1[index], 0, 64); //PMT1[index].substr(14, 64);
-                        // int data_num = int(offset);
-                        // string L1_num = data.substr(data_num*4, 4);
-                        // rd = (int)sub_uint(data, ) //stoi(L1_num);
-                        rd = (int)data;
-                    }
-                    // if(PMT2[index].substr(3,11) == tag && PMT2[index].at(1) == 1 && PMT2[index].at(2) == 0){
-                    //     // 64byteのデータからoffsetの場所にあるものを引く
-                    //     string data = PMT2[index].substr(14, 64);
-                    //     int data_num = stoi(offset);
-                    //     string L2_num = data.substr(data_num*4, 4);
-                    //     rd = stoi(L2_num);
-                    // }
-                    else{
-                        rd = M[rs1+imm];
-                    }
-                }
+                cache_load();
                 // if(opcode == "lb"){
                 //     // index = (a[rs1]+imm)/4
                     // rd = M[rs1+imm];//[0:7]; 
@@ -562,127 +650,18 @@ int main(){
                 
                 continue;
             case S:
-                // rd =  a[reg(a0)]; 
-                // // offset = imm; //reg(a1);
-                // rs1 = a[reg(a2)];
-                // rs1 = rs2;//a[reg(a2)]""
+                
                 rs1 = reg(a2);
                 rs2 = a[reg(a0)];
                 cout << "rs1 rs2 " << rs1 << " " << rs2 << endl;
                 num_i = 0;
-                // int offset_dig, index_dig, tag_dig;
-                // offsezt_dig = 4;index_dig = 10; tag_dig = 13;
-                // int addr_dig = 27;
-                // string addr = bury_zero((int64_t)rs1+imm, 32);
-                // reverse(addr.begin(), addr.end());
-                // uint64_t 
-                addr = a[rs1]+imm; //レジスタの中身+即値
-                tag = addr >> (index_dig+offset_dig);
-                index = (addr >> offset_dig) & ((1 << (index_dig+1))-1);
-                offset = addr & (1<<5)-1;
-                cout << "addr,tag,index,offset " << addr << " " << tag << " " << index << " " << offset << endl;
-                // string data;
-                // valid1,dirty1,accessed
-                // データを保持していなかったら
-                if((L1_status[index]>>2 & 1) != 1) { //at(0)
-                    // PMT1[index] = (1 << (offset_dig+tag_dig+64-1))-1; //bury_zero(0, 3+tag_dig+64); //85); //0>> 85;
-                    uint64_t data_num = uint64_t(offset);
-                    if(opcode == "sb"){
-                        // PMT1[index].substr(3+tag_dig+4*data_num, 4) 
-                        L1_data[index][data_num]= rs2%128; //convert(rs2%128,32);
-                        M[rs1+imm] = rs2%128;
-                    }else if(opcode == "sh"){
-                        // PMT1[index].substr(3+tag_dig,data_num) = convert(rs2%65536, 32);
-                        L1_data[index][data_num]= rs2%65536;
-                        M[rs1+imm] = rs2%65536;
-                    }else if(opcode == "sw"){
-                       
-                        L1_data[index][data_num]= rs2%4294967296;
-                        M[rs1+imm] = rs2%4294967296;
-                    }
-                    // if(PMT1[index].at(0) != 1){
-                        // PMT1[index].substr(0,3+tag_dig) = "100"+ tag; //dataとは？
-                    L1_status[index] = 100;
-                    L1_tag[index] = tag;
-                }
-                // if (PMT1[index].at(0) == 1 && PMT2[index].at(0) == 1){
-                    // L1,L2ともデータ保持
-                else if(L1_status[index]>>2 == 1 && L2_status[index]>>2 == 1){
-                    // PMT1[index] = bury_zero(0, 3+tag_dig+64); //85); //0>> 85;
-                    int data_num = int(offset);
-                    if(opcode == "sb"){
-                        // M[rs1+imm] = PMT1[index].substr(3+tag_dig+4*data_num, 4); //rs2%128;
-                        // PMT1[index].substr(3+tag_dig+4*data_num, 4) = rs2%128;
-                        L1_data[index][data_num]= rs2%128;
-                        M[rs1+imm] = rs2%128;
-                    }else if(opcode == "sh"){
-                        L1_data[index][data_num]= rs2%65536;
-                        M[rs1+imm] = rs2%65536;
-                    }else if(opcode == "sw"){
-                        L1_data[index][data_num]= rs2%4294967296;
-                        M[rs1+imm] = rs2%4294967296;
-                    }
-                    // PMT1[index].substr(0,3+tag_dig) = "101"+ tag;
-                    L1_status[index] = 101;
-                    L1_tag[index] = tag;
-                    //↓L2が空き 
-                }else if(L2_status[index]>>2 != 1){ //PMT2[index].at(0) != 1
-                        // PMT2[index] = bury_zero(0,85); //0>> 85;
-                        int data_num = int(offset);
-                        // PMT2[index].substr(14,data_num) = rs2%128;
-                        if(opcode == "sb"){
-                            // PMT2[index].substr(14,data_num) = bury_zero(rs2%128, 4);
-                            L2_data[index][data_num]= rs2%128;
-                            M[rs1+imm] = rs2%128;
-                        }else if(opcode == "sh"){
-                            L2_data[index][data_num] = rs2%65536;
-                            M[rs1+imm] = rs2%65536;
-                        }else if(opcode == "sw"){
-                            L2_data[index][data_num] = rs2%4294967296;
-                            M[rs1+imm] = rs2%4294967296;
-                        }
-                        // PMT2[index].substr(0,13) = "100"+ tag; //dataとは？
-                        L1_status[index] = 100;
-                        L1_tag[index] = tag;
-                }
-                // else{
-                    //     if(opcode == "sb"){
-                    //         // M[rs1+imm][0:7] = rs2[0:7];
-                    //         // 元々の2^8=128で割ったあまり
-                    //         M[rs1+imm] = rs2%128;
-                    //     }else if(opcode == "sh"){
-                    //         // 2^16で割ったあまり
-                    //         // M[rs1+imm][0:15] = rs2[0:15];
-                    //         M[rs1+imm] = rs2%65536;
-                    //     }else if(opcode == "sw"){
-                    //         // M[rs1+imm][0:31] = rs2[0:31];
-                    //         cout << "M_index rs2 " <<rs1+imm << rs2 << endl;
-                    //         M[rs1+imm] = rs2%4294967296;
-                    //     }
-                    //     // valid1,dirty1,accessed
-                    //     PMT1[index].at(1) = 0;
-                    // }
-                // }
-                // if(opcode == "sb"){
-                //     // M[rs1+imm][0:7] = rs2[0:7];
-                //     // 元々の2^8=128で割ったあまり
-                //     M[rs1+imm] = rs2%128;
-                //     pc += 4;
-                // }else if(opcode == "sh"){
-                //     // 2^16で割ったあまり
-                //     // M[rs1+imm][0:15] = rs2[0:15];
-                //     M[rs1+imm] = rs2%65536;
-                //     pc += 4;
-                // }else if(opcode == "sw"){
-                //     // M[rs1+imm][0:31] = rs2[0:31];
-                //     cout << "M_index rs2 " <<rs1+imm << rs2 << endl;
-                //     M[rs1+imm] = rs2%4294967296;
-                //     pc += 4;
-                // }
+    
+                cache_store(opcode);
                 pc += 4;
                 // if((a0[0.] >= '0') && (a0[0] <= '9')){} 
                 // else a[reg(a0)] = rd; 
                 cout << "# " << rd << " "<< rs1 <<" " << rs2 << endl;
+                ofs << "rd " << rd << endl;
                 // num_i = 0;
                 // while(M[num_i]){
                 //     a[num_i] = M[num_i];
@@ -735,6 +714,68 @@ int main(){
                 }else if(opcode == "auipc"){
                     rd=pc+(imm<<12);
                 }
+                pc += 4;
+                if((a0[0] >= '0') && (a0[0] <= '9')){} 
+                else a[reg(a0)] = rd; 
+                cout << "# " << rd << " "<< rs1 <<" " << rs2 << endl;
+                continue;
+            case F:
+                // 事前設定？
+                if(opcode == "flw"){
+                    rd = M[rs1 + imm];
+                }else if(opcode == "fsw"){ //怪しい？
+                    M[rs1 + imm] = rs2;
+                }else if(opcode == "fmadd.s"){
+                    rd=rs1*rs2+rs3;
+                }else if(opcode == "fmsub.s"){
+                    rd=rs1*rs2-rs3;
+                }else if(opcode == "fnmadd.s"){
+                    rd=-rs1*rs2+rs3;
+                }else if(opcode == "fnmsub.s"){
+                    rd=-rs1*rs2-rs3;
+                }else if(opcode == "fadd.s"){
+                    rd=rs1+rs2;
+                }else if(opcode == "fsub.s"){
+                    rd=rs1-rs2;
+                }else if(opcode == "fmul.s"){
+                    rd=rs1*rs2;
+                }else if(opcode == "fdiv.s"){
+                    rd=rs1/rs2;
+                }else if(opcode == "fsqrt.s"){
+                    rd = sqrt(rs1);
+                }else if(opcode == "fsgnj.s"){
+                    rd = abs(rs1) * sign(rs2);
+                }else if(opcode == "fsgnjn.s"){
+                    rd = abs(rs1) * -sign(rs2);
+                }else if(opcode == "fsgnjx.s"){
+                    rd = rs1 * sign(rs2);
+                }else if(opcode == "fmin.s"){
+                    rd = min(rs1, rs2);
+                }else if(opcode == "fmax.s"){
+                    rd = max(rs1, rs2);
+                }else if(opcode == "fcvt.s.w"){
+                    rd = (float) rs1;
+                }else if(opcode == "fcvt.s.wu"){
+                    rd = (float) rs1;
+                }else if(opcode == "fcvt.w.s"){
+                    rd = (int32_t) rs1;
+                }else if(opcode == "fcvt.wu.s"){
+                    rd = (uint32_t) rs1;
+                }else if(opcode == "fmv.x.w"){
+                    rd = *((int*) &rs1);
+                }else if(opcode == "fmv.w.x"){
+                    rd = *((float*) &rs1);
+                }else if(opcode == "feq.s"){
+                    rd = (rs1 == rs2) ? 1 : 0;
+                }else if(opcode == "flt.s"){
+                    rd = (rs1 < rs2) ? 1 : 0;
+                }else if(opcode == "fle.s"){
+                    rd = (rs1 <= rs2) ? 1 : 0;
+                }
+                // else if(opcode == "fclass.s"){
+                //     rd = 0..9;
+                // }
+                pc += 4;
                 if((a0[0] >= '0') && (a0[0] <= '9')){} 
                 else a[reg(a0)] = rd; 
                 cout << "# " << rd << " "<< rs1 <<" " << rs2 << endl;
@@ -742,43 +783,11 @@ int main(){
             default:
                 continue;
         }
+        
         // Transfer control to OS 
         // Transfer control to debugger
-        // }else if(opcode == "flw"){
-        //     rd = M[rs1 + imm];
-        // }else if(opcode == "fsw"){ //怪しい？
-        //     M[rs1 + imm] = rs2;
-        // }else if(opcode == "fmadd.s"){
-        //     rd=rs1*rs2+rs3;
-        // }else if(opcode == "fmsub.s"){
-        //     rd=rs1*rs2-rs3;
-        // }else if(opcode == "fnmadd.s"){
-        //     rd=-rs1*rs2+rs3;
-        // }else if(opcode == "fnmsub.s"){
-        //     rd=-rs1*rs2-rs3;
-        // }else if(opcode == "fadd.s"){
-        //     rd=rs1+rs2;
-        // }else if(opcode == "fsub.s"){
-        //     rd=rs1-rs2;
-        // }else if(opcode == "fmul.s"){
-        //     rd=rs1*rs2;
-        // }else if(opcode == "fdiv.s"){
-        //     rd=rs1/rs2;
-        // }else if(opcode == "fsqrt.s"){
-        //     rd = sqrt(rs1);
-        // }else if(opcode == "fsgnj.s"){
-        //     rd = abs(rs1) * sgn(rs2);
-        // }else if(opcode == "fsgnjn.s"){
-        //     rd = abs(rs1) * -sgn(rs2)
-        // }
-        // rd = rs1 * sgn(rs2)
-        // rd = min(rs1, rs2)
-        // rd = max(rs1, rs2)
-        // rd = (float) rs1
-        // rd = (float) rs1
-        // rd = (int32_t) rs1
-        // rd = (uint32_t) rs1
-        // rd = *((int*) &rs1)
+        // case F:
+        
         // reg(a0)を何かでおくor ポインタ？
             
         // if((a0[0] >= '0') && (a0[0] <= '9')){} 
@@ -791,6 +800,9 @@ int main(){
         
         // cout << "rs1 " << rs1 << endl;
     }
+    cout << "hit miss " << hit_count << " " << miss_count << endl;
+    clock_t end = clock();     // 終了時間
+    std::cout << "duration = " << (double)(end - start) / CLOCKS_PER_SEC << "sec.\n";
     // cout << "fileclose" << endl;
     // file2.close();
     return 0;
