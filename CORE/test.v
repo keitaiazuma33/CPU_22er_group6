@@ -1,24 +1,21 @@
 `timescale 100ps/1ps
 `default_nettype none
 
-module test_uart #(CLK_PER_HALF_BIT = 5208) ();
+module test_io #(CLK_PER_HALF_BIT = 2604) ();
   reg clk;
   reg rstn_uart;
   reg rxd;
   wire txd;
+  wire [7:0] debug;
 
-  uart _uart(rxd, txd, clk, rstn_uart);
+  io_test _io_test(rxd, txd, debug, clk, rstn_uart);
   initial begin
     clk = 1'b0;
     rstn_uart = 1'b0;
     rxd <= 1'b1;
     # 20
       rstn_uart = 1'b1;
-    # 104160
-    rxd <= 1'b0;
-    # 104160
-    rxd <= 1'b1;
-    # 10000000
+    # 100000000
       $finish;
   end
 
