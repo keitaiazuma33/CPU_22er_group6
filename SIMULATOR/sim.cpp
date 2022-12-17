@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <string>
 #include <time.h> 
+#include <unistd.h>
 // #include "sim_cache_index.hpp"
 // #include "op_type.hpp"
 // #include "sub_func.hpp"
@@ -22,6 +23,70 @@ using namespace std;
 #define SIZE 1024
 #define ull uint64_t
 
+bool debug = false;
+bool print_mem = false; //false
+string debug_op;
+// int break_line;
+string break_label;
+string debugmode(int argc, char* argv[]){
+    
+    
+    int i, opt;
+
+    opterr = 0; //getopt()のエラーメッセージを無効にする。
+
+    while ((opt = getopt(argc, argv, "fgdh:")) != -1) {
+        //コマンドライン引数のオプションがなくなるまで繰り返す
+        switch (opt) {
+            case 'f':
+                printf("-fがオプションとして渡されました\n");
+                break;
+
+            case 'g':
+                printf("-gがオプションとして渡されました\n");
+                break;
+                
+
+            case 'd':
+                printf("-d：デバッグ\n");
+                debug = true;
+                break;
+            case 'h':
+                printf("-hがオプションとして渡されました\n");
+                printf("引数optarg = %s\n", optarg);
+                break;
+            default: /* '?' */
+                //指定していないオプションが渡された場合
+                printf("Usage: %s [-f] [-g] [-h argment] arg1 ...\n", argv[0]);
+                break;
+        }
+    }
+    string s;
+    //オプション以外の引数を出力する
+    for (i = optind; i < argc; i++) {
+        s += argv[i];      
+        printf("arg = %s\n", argv[i]);
+    }
+
+    cout << s << endl;
+    // debug_op = debugmode(argc, argv); 
+    if(debug == true){
+        // print mem[0:10]
+        string debug_op = s;
+        if(debug_op.find("printmem") != std::string::npos){
+            print_mem = true;
+            
+        }else if(debug_op.find("break") != std::string::npos){
+            debug_op.erase(0,5);
+            break_label = debug_op;
+            cout << "break_label " << break_label << endl;
+        }
+    }
+    // cout << ((print_mem == true) ? "Yes" : "No") << endl;
+
+
+    return s;
+}
 enum Type {
         R, I_1, I_2, S, B, U, J, F
 };
@@ -70,7 +135,8 @@ double sign(double A){
     else if(A<0) return -1;
     else return 0;
 }
-int64_t reg(string a0){ // asmの変数をc++の変数に
+bool special;
+int64_t reg_index(string a0){ // asmの変数をc++の変数に
     // 変換操作
     // a0;t8の8のみ取り出し配列のインデックスに
     int64_t num = 0;
@@ -81,8 +147,11 @@ int64_t reg(string a0){ // asmの変数をc++の変数に
         // cout << "atoi" << num << endl;
         // num = (２進数)に
 
-    }
-    else{
+    }else if(a0[0] == 'x'){
+        a0.erase(0, 1);
+        num = atoi(a0.c_str());
+        return num;
+    }else{
         // for(int i = 1; i < a0.size(); i++){
         //     int num0 = a0[i] - 48;
         //     num += pow(10, (i-1)) * num0; 
@@ -120,6 +189,11 @@ int64_t reg(string a0){ // asmの変数をc++の変数に
         else if(op == "t4") num = 29;
         else if(op == "t5") num = 30;
         else if(op == "t6") num = 31;
+        else{
+            // 特別なアドレス
+            special = 1;
+            num = 32; //出力用 or -1
+        }
     // }
     // // num = a0[1] - 48; //a0[1]でもない？
     // // cout << "after_2 " << num << endl;
@@ -147,10 +221,55 @@ uint64_t sub_uint(uint64_t num, int i, int j){
     num = (num >> i) & ((1 << (j+1))-1);
     return num;
 }
+// ppmファイル
+template<typename T>
+T read_binary_as(std::istream& is)
+{
+    T val;
+    is.read(reinterpret_cast<char*>(std::addressof(val)),
+            sizeof(T));
+    return val;
+}
 
+// const auto i = read_binary_as<std::int32_t>(ifs);
+queue<int32_t> que; //<auto>?
+string s = "/Users/maimai/my-3A/cpu-simu/sim_result.txt";
+ofstream ofs(s);
+void sld_to_ppm(){
+    string filename ("contest.dat"); //asm_3
+    vector<string> lines;
+    string line;
+    string s1 = "/Users/maimai/my-3A/cpu-simu/sim_contest.ppm";
+    ofstream ofs1(s1);
+    ifstream file(filename, ios::binary);
+    // ifstream file;
+    // file = ifstream(filename, ios::binary);
+    // std::int32_t i;
+    if (!file.is_open()) {
+        cerr << "Could not open the file - '"
+             << filename << "'" << endl;
+        // return EXIT_FAILURE;
+    }
+    // 第二引数で示された文字数だけ読み込み、第一引数で示された位置へその内容を書き込む
+    // 4byteだけ読み込み、アドレスiへ書き込み
+    // int i = 0;
+    // while(addressof(i)){
+    //     file.read(reinterpret_cast<char*>(std::addressof(i)),
+    //      sizeof(std::int32_t)/* or simply 4 */);
+        
+    //     i += sizeof(std::int32_t);
+    // }
+    while(!file.eof()){
+        // const auto 
+        int32_t i = read_binary_as<std::int32_t>(file);
+        ofs1 << i << endl;
+        que.push(i);
+
+    }
+}
 #define SIZE 1024
 // #include <sim_cathe.hpp>
-vector<int> a(SIZE);
+vector<int> reg_val(SIZE);
 vector<int> M(SIZE);
 vector<vector<int> > L1(SIZE/10);
 vector<vector<int> > L2(SIZE/10);
@@ -161,8 +280,8 @@ vector<vector <uint64_t> > L1_status(2, vector<uint64_t>(SIZE));
 vector<vector <uint64_t> > L2_status(2, vector<uint64_t>(SIZE));
 vector<vector <uint64_t> > L1_tag(2, vector<uint64_t>(SIZE));
 vector<vector <uint64_t> > L2_tag(2, vector<uint64_t>(SIZE));
-string s = "/Users/maimai/my-3A/cpu-simu/sim_result.txt";
-ofstream ofs(s);
+// string s = "/Users/maimai/my-3A/cpu-simu/sim_result.txt";
+// ofstream ofs(s);
 // vector<uint64_t> L2_tag(SIZE/10);
 // map<uint64_t, vector<int> > 
 // (3, vector<int>(4));
@@ -174,7 +293,7 @@ ofstream ofs(s);
 // int main(){
 //     Cache.L_status L1_status;
 // }
-int rd, rs1, rs2, rs3;
+int64_t rd, rs1, rs2, rs3;
 int64_t imm;
 uint64_t addr, tag, index_, offset;
 int offset_dig, index_dig, tag_dig;
@@ -182,9 +301,15 @@ int hit_count, miss_count;
 // #include "const.hpp"
 // #pragma once
 // vector<vector<vector<uint64_t> > > L1_data (2, vector<vector<uint64_t>>(SIZE/10), vector<uint64_t> (100));
-
-void cache_load(){
-    addr = a[rs1]+imm;
+// string op_hazard;
+map<int, string> op_load; // ロードハザード検知用
+// default_initialization
+// 0になるか未定義になるか
+void cache_load(int pc, int32_t q){ //qはsldファイル入力
+    // op_hazard = rd;
+    
+    cout << pc << op_load[pc] << endl; //ここで入っていない
+    addr = reg_val[rs1]+imm; //?
     // 一度intに変換；bitsetに直す
     tag = addr >> (index_dig+offset_dig);
     index_ = (addr >> offset_dig) & ((1 << (index_dig))-1);
@@ -214,11 +339,13 @@ void cache_load(){
             
         }
     }
-    rd = M[rs1+imm];
+    if(special == true) rd = q;
+    else rd = M[rs1+imm];
     ofs << "load" << " " << M[rs1+imm] << endl;
+    if(print_mem) printf("mem[%lld] %lld\n", rs1+imm, rd);
 }
 void cache_store(string opcode){
-    addr = a[rs1]+imm; //レジスタの中身+即値
+    addr = reg_val[rs1]+imm; //レジスタの中身+即値
     tag = addr >> (index_dig+offset_dig);
     index_ = (addr >> offset_dig) & ((1 << (index_dig+1))-1);
     offset = addr & (1<<5)-1;
@@ -236,7 +363,7 @@ void cache_store(string opcode){
                 // PMT1[index_].substr(3+tag_dig+4*data_num, 4) 
                 // L1_data[w][index_][data_num]= rs2%128; //convert(rs2%128,32);
                 L1_status[w][index_] = 110; //dirty
-                M[rs1+imm] = rs2%128;
+                M[rs1+imm] = rs2%128; //reg_val[rs1]?
             }else if(opcode == "sh"){
                 // PMT1[index_].substr(3+tag_dig,data_num) = convert(rs2%65536, 32);
                 // L1_data[w][index_][data_num]= rs2%65536;
@@ -254,6 +381,7 @@ void cache_store(string opcode){
     
             flag = 1;
         }
+        if(print_mem) printf("mem[%lld] %d\n", rs1+imm, M[rs1+imm]);
     }
     //%2;
     // if (PMT1[index_].at(0) == 1 && PMT2[index_].at(0) == 1){
@@ -283,6 +411,7 @@ void cache_store(string opcode){
             L1_tag[w][index_] = tag;
         //↓L2が空き 
         }
+        if(print_mem) printf("mem[%lld] %d\n", rs1+imm, M[rs1+imm]);
     }
     // else 
     // L2のどちらかが空いている
@@ -309,12 +438,16 @@ void cache_store(string opcode){
             L2_tag[w][index_] = tag;
         }
         flag = 1;
+        if(print_mem) printf("mem[%lld] %d\n", rs1+imm, M[rs1+imm]);
     }
     // cout << flag? "Ok":"Ng" << endl;
     cout << "flag " << flag << endl;
     ofs << "store" << " " << M[rs1+imm] << endl;
 }
-int main(){
+ // = false;
+// string debug_op;
+
+int main(int argc, char *argv[]){
     // ファイルから読み込む
     // FILE *file; 
 
@@ -323,7 +456,11 @@ int main(){
     //     printf("ファイルが開けません。¥n");            
     //     exit(1);                                    // 異常終了
     // }
-    string filename ("fib_2.txt"); //asm_3
+    debug_op = debugmode(argc, argv); //char *argv[]
+    bool break_symbol = false;
+
+    sld_to_ppm();
+    string filename ("asm_3.txt"); //asm_3
     vector<string> lines;
     string line;
 
@@ -333,23 +470,12 @@ int main(){
              << filename << "'" << endl;
         return EXIT_FAILURE;
     }
-    vector<int> bin(SIZE);
-    if(filename.find(".dat") < 100){
-        // メモリにおく；並べていく
-        int bin_i = 0;
-        while(getline(file, line)){
-            int bin_j = 0;
-            while(line[bin_i]){
-                bin[bin_i] = line[bin_j];
-                bin_i++;
-                bin_j++;
-            }
-        }
-
-    }
+    
+    
     int pc = 0;
     std::map<string, int> label;
     map<int, string> con_line;//pcと対応したlineの中身
+    map<int, string> con_label;
     while(getline(file, line)){
         // ラベルを見つけたらmap配列に格納
         //  map<string, int> score; 
@@ -358,6 +484,7 @@ int main(){
         if(line.find(':') < 100){ 
             line.erase(line.find(':')); //?
             label[line] = pc; 
+            con_label[pc] = line;
         }else if (line.size() > 0){
             con_line[pc] = line;
             pc += 4;
@@ -374,7 +501,7 @@ int main(){
     // }
     pc = 0;
     
-    
+    int instr_count = 0;
     hit_count = 0;
     miss_count = 0;
     //getline(file2, line))
@@ -388,23 +515,52 @@ int main(){
         //     // line = con_line[pc];
         //     continue;
         // }
+        if(con_label.count(pc)){
+            cout << '[' << con_label[pc] << ']' << endl;
+            // if((con_label[pc]).find(break_label) != std::string::npos){
+            //     // cout << "yes" << endl;
+            //     break;
+            // }
+        }
+        special = false;
+        // instr_count++; //?
         line = con_line[pc];
         cout << "line" << line << endl;
         line += '\n';
-        cout << "whileループ pc " << pc << endl;
+        cout << "   pc " << pc << endl;
         vector<string> words; //[0];
         words.clear();
         string word = "";
-        if(line.find(':') < 100){ //line.at(0) != ' '
-            // 
-            continue;
+        int32_t q;
+        // cout << "break_label " << break_label << endl;
+        
+        // if(line.find(':') != std::string::npos){ //line.at(0) != ' '
+        //     cout << "label" << line << endl;
+        //     // cout << "break_label " << break_label << endl;   
+        // }
+        string str_next;
+        if(break_symbol == true){ //line.at(0) != ' '
+                cout << "   *の行終了 " << "nextを入力" << endl;
+                cin >> str_next;
+                if(str_next != "next") break;
         }
+        break_symbol = false;
+        if(line.find('*') != std::string::npos){ //line.at(0) != ' '
+            cout << "   found * " << endl;
+            break_symbol = true;
+        }
+        // if(line.find("lw") < 100){ 
+        //     ofs << "lw" << endl;
+        //     // ofs << que.front() << endl;
+        //     q = que.front();
+        //     que.pop();
+        // }
         for(int i = 0; i < line.size(); i++){
             if(line.at(i) == '#'|| line.at(i) == '\n' || line.at(i) == ')'){
                 // cout << "# found break" << endl;
                 break;
             }
-            if(line.at(i) == '(' || line.at(i) == ' ' ||(line.at(i) == '\t') || (line.at(i) == ',')){
+            if(line.at(i) == '*' || line.at(i) == '(' || line.at(i) == ' ' ||(line.at(i) == '\t') || (line.at(i) == ',')){
                 // if(word != ""){
                 //     words.push_back(word);
                 // }
@@ -428,7 +584,7 @@ int main(){
             }
         }
         // if(words.size() == 0) {pc += 4;continue;}
-        // cout << words[0] << " " << words[1] << " " << words[2] << " " << words[3] << endl;
+        cout << "   " << words[0] << " " << words[1] << " " << words[2] << " " << words[3] << endl;
         int words_i = 0;
         while(words_i < words.size()){
             // cout << words[words_i] << " ";
@@ -437,8 +593,10 @@ int main(){
         // cout << endl;
         string opcode, a0, a1, a2, a3;
         
+        int sign_imm = 0;
         // a3 = words[4];
         for(int i = 1; i <= 3 ; i++){ //words.size()
+            // label(map)にwods[i]が合ったら
             int label_find = label.count(words[i]); //" "
             // cout << "label found" << label_find << endl;
             if(label_find > 0){
@@ -451,24 +609,28 @@ int main(){
                 // if(diff < 0) diff -= 4;
                 words[i] = to_string(diff);
                 // cout << "diff" << words[i] << endl; //ここまでok
+                if(words[i].at(0) == '-'){
+                    sign_imm = 1;
+                    words[i] = words[i].substr(1, words[i].length() - 1);
+                    // cout << "-の処理 " << words[i] << endl;
+                
+                }
             }
         }
-        int sign_imm = 0;
-        for(int i = 0; i < words.size();i++){
-            if(words[i].at(0) == '-'){
-                sign_imm = 1;
-                words[i] = words[i].substr(1, words[i].length() - 1);
-                // cout << "-の処理 " << words[i] << endl;
-            
-            }
-        }
+        
+        // for(int i = 0; i < words.size();i++){   
+        // }
+        // strcpy(a2, "\0");
+        opcode.clear();
+        a0.clear(); a1.clear(); a2.clear(); a3.clear();
         opcode = words[0]; //ここまでok
         a0 = words[1]; a1 = words[2]; a2 = words[3], a3 = words[4];
+        // cout << "clear?" << words[3] << a2 << endl;
         // substr(line.find(" ")); //?
         // opcode = op[0];
         // a0 = op;
         // 変数定義
-        // vector<int> a(SIZE);//20でok?
+        // vector<int> reg_val(SIZE);//20でok?
          //int?
         imm = 0;//2で割ったあまり
         // 0で初期化？
@@ -502,21 +664,48 @@ int main(){
         // }else if(opcode == "blez" || opcode == "bgtz"){// opcode == "beqz" ||opcode == "bnez" || opcode == "blez" ||opcode == "bgez" || opcode == "bltz" || opcode == "bgtz"){
         //     a2 = a1; a1 = a0;
         // }
+        string pre_rd = "";
+        if(op_load[pc-4] != ""){
+            // cout << "hazard pc " << pc << op_load[pc-4] << endl;
+            // cout << pc-4 << op_load[pc-4] << endl;
+            pre_rd = op_load[pc-4];
+        }
+        // if(op_load[pc-4] == a1 || op_load[pc-4] == a2 || op_load[pc-4] == a3){
+        // // if(line.find(pre_rd) < 100 && pre_rd != a0){
+        //     cout << "hazard" << pre_rd << endl;
+        //     // cout << 
+        //     instr_count++;
+        // }
         // bitset
         // 0になるまで割って；配列に入れて
         // vector<int> M(SIZE);
         // cout << "l138 " << opcode << " "<< a0 << " " << a1 << " "<< a2 << endl;
         if((a0[0] >= '0') && (a0[0] <= '9')){
             // cout << a0 << endl; 
-            imm = reg(a0);
+            imm = reg_index(a0);
         } 
-        else rd =  a[reg(a0)]; //, M[reg(a0)]); 
-        if((a1[0] >= 48) && (a1[0] <= 57)) imm = reg(a1);
-        else rs1 = a[reg(a1)];
-        if((a2[0] >= '0') && (a2[0] <= '9')) imm = reg(a2);
-        else rs2 = a[reg(a2)]; //L1でセグフォ
-        if((a3[0] >= 48) && (a3[0] <= 57)) imm = (int64_t)reg(a3);
-        else rs3 = a[reg(a3)];
+        else if(reg_index(a0) < 32) rd =  reg_val[reg_index(a0)]; //, M[reg_index(a0)]); 
+        else{ 
+            q = que.front();
+            que.pop();
+        }
+        bool imm_a1, imm_a2, imm_a3;
+        imm_a1 = false; imm_a2 = false; imm_a3 = false;
+        if((a1[0] >= '0') && (a1[0] <= '9')){
+            imm = reg_index(a1);
+            imm_a1 = true;
+        }else if((a2[0] >= '0') && (a2[0] <= '9')) {
+            imm = reg_index(a2);
+            imm_a2 = true;
+        }else if((a3[0] >= '0') && (a3[0] <= '9')){
+            imm = (int64_t)reg_index(a3);
+            imm_a3 = true;
+        }
+        if(!imm_a1) rs1 = reg_val[reg_index(a1)];
+        if(!imm_a2) rs2 = reg_val[reg_index(a2)]; //L1でセグフォ
+        if(!imm_a3) rs3 = reg_val[reg_index(a3)];
+
+        
         // else {}
         // cout << "l241" << rd << rs1 << rs2 <<endl;
         // bitset<100> imm(imm_int);
@@ -535,6 +724,13 @@ int main(){
         Op op; 
         switch(op.conv_type(opcode)){
             case R:
+                // opcode, a0, a1,a2
+                if(op_load[pc-4] == a1 || op_load[pc-4] == a2){
+                // if(line.find(pre_rd) < 100 && pre_rd != a0){
+                    // cout << "hazard" << op_load[pc-4] << endl;
+                    // cout << 
+                    instr_count++;
+                }
                 if(opcode == "add"){
                     rd=rs1+rs2;
                     pc += 4; //最後に
@@ -580,10 +776,19 @@ int main(){
                     pc += 4;
                 }
                 if((a0[0] >= '0') && (a0[0] <= '9')){} 
-                else a[reg(a0)] = rd; 
-                cout << "# " << rd << " "<< rs1 <<" " << rs2 << endl;
+                else reg_val[reg_index(a0)] = rd; 
+                cout << "   # " << rd << " "<< rs1 <<" " << rs2 << endl;
+                instr_count++; //?
                 continue;
             case I_1:
+                // なぜa0?a1では？
+                // opcode,a0,a1,a2,a3
+                if(op_load[pc-4] == a1){ //a0?
+                // if(line.find(pre_rd) < 100 && pre_rd != a0){
+                    // cout << "hazard" << op_load[pc-4] << endl;
+                    // cout << 
+                    instr_count++;
+                }
                 if(opcode == "addi"){
                     rd= rs1 +imm;
                     pc += 4;
@@ -616,17 +821,23 @@ int main(){
                 } 
                 // else 
                 if((a0[0] >= '0') && (a0[0] <= '9')){} 
-                else a[reg(a0)] = rd; 
-                cout << "# " << rd << " "<< rs1 <<" " << rs2 << endl;
+                else reg_val[reg_index(a0)] = rd; 
+                cout << "   # " << rd << " "<< rs1 <<" " << rs2 << endl;
+                instr_count++; //?
                 continue;
             case I_2:
-        
-                rs1 = reg(a2);//a[reg(a2)]
+                if(op_load[pc-4] == a2){
+                // if(line.find(pre_rd) < 100 && pre_rd != a0){
+                    // cout << "hazard" << op_load[pc-4] << endl;
+                    // cout << 
+                    instr_count++;
+                }
+                rs1 = reg_index(a2);//reg_val[reg_index(a2)]
                 num_i = 0;
-                
-                cache_load();
+                op_load[pc] = a0;
+                cache_load(pc, q);
                 // if(opcode == "lb"){
-                //     // index = (a[rs1]+imm)/4
+                //     // index = (reg_val[rs1]+imm)/4
                     // rd = M[rs1+imm];//[0:7]; 
                 //     pc += 4;   
                 // }else if(opcode == "lh"){
@@ -644,65 +855,85 @@ int main(){
                 // }
                 pc += 4;
                 if((a0[0] >= '0') && (a0[0] <= '9')){} 
-                else a[reg(a0)] = rd; 
-                cout << "# " << rd << " "<< rs1 <<" " << rs2 << endl;
+                else reg_val[reg_index(a0)] = rd; 
+                cout << "   # " << rd << " "<< rs1 <<" " << rs2 << endl;
                 num_i = 0;
-                
+                instr_count++; //?
                 continue;
             case S:
-                
-                rs1 = reg(a2);
-                rs2 = a[reg(a0)];
-                cout << "rs1 rs2 " << rs1 << " " << rs2 << endl;
+                if(op_load[pc-4] == a0){
+                // if(line.find(pre_rd) < 100 && pre_rd != a0){
+                    // cout << "hazard" << op_load[pc-4] << endl;
+                    // cout << 
+                    instr_count++;
+                }
+                rs1 = reg_index(a2);
+                rs2 = reg_val[reg_index(a0)];
+                // cout << "rs1 rs2 " << rs1 << " " << rs2 << endl;
                 num_i = 0;
     
                 cache_store(opcode);
                 pc += 4;
                 // if((a0[0.] >= '0') && (a0[0] <= '9')){} 
-                // else a[reg(a0)] = rd; 
+                // else reg_val[reg_index(a0)] = rd; 
                 cout << "# " << rd << " "<< rs1 <<" " << rs2 << endl;
                 ofs << "rd " << rd << endl;
                 // num_i = 0;
                 // while(M[num_i]){
-                //     a[num_i] = M[num_i];
+                //     reg_val[num_i] = M[num_i];
                 //     num_i++;
                 // }
+                instr_count++; //?
                 continue;
             case B:
+                // cout << pre_rd << op_load[pc-4] <<  a0 << a1 << endl;
+                if(op_load[pc-4] == a0 || op_load[pc-4] == a1){
+                // if(line.find(pre_rd) < 100 && pre_rd != a0){
+                    // cout << "hazard" << op_load[pc-4] << endl;
+                    // cout << 
+                    instr_count++;
+                }
+                
                 rs2 = rs1; rs1 = rd; 
                 if(sign_imm == 1) imm = -imm;
-                cout << "# "  << rs1 <<" " << rs2 << endl;
+                cout << "   # "  << rs1 <<" " << rs2 << endl;
+                // 分岐不成立と予測し、成立していたら一回ストール
                 if(opcode == "beq"|| opcode == "beqz"){
-                    if(rs1 == rs2) pc += imm; //PC?
+                    if(rs1 == rs2) {pc += imm; instr_count+= 2;}
                     else pc += 4;
                 }else if(opcode == "bne"|| opcode == "bnez"){
-                    if(rs1 != rs2) pc += imm;
+                    if(rs1 != rs2) {pc += imm; instr_count+= 2;}
                     else pc += 4;
                 }//ここ抜け
                 else if(opcode == "blt" || opcode == "bgt"){
                     // cout << pc << " " << imm << endl;
-                    if(rs1 < rs2) pc += imm;
+                    if(rs1 < rs2) {pc += imm; instr_count+= 2;}
                     else pc += 4;
                     // cout << "pc" << pc << endl;
                 }else if(opcode == "bge"|| opcode == "ble"){
-                    if(rs1 >= rs2) pc += imm;
+                    if(rs1 >= rs2) {pc += imm; instr_count+= 2;}
                     else pc += 4;
                 }else if(opcode == "bltu"||opcode == "bgtu"){
-                    if(rs1 < rs2) pc += imm;
+                    if(rs1 < rs2) {pc += imm; instr_count+= 2;}
                     else pc += 4;
                 }else if(opcode == "bgeu"||opcode == "bleu"){
-                    if(rs1 >= rs2) pc += imm;
+                    if(rs1 >= rs2) {pc += imm; instr_count+= 2;}
                     else pc += 4;
                 }
-                cout << "pc" << pc << endl;
+                // cout << "pc" << pc << endl;
                 // jumpの処理？
+                instr_count++; //?
                 continue;
             case J:
-                if(sign_imm == 1) imm = -imm;
+                if(sign_imm == 1){
+                    imm = -imm;
+                    // cout << "前にジャンプ" << imm << endl;
+                }
                 if(opcode == "jal"){
                     rd=pc+4;pc+=imm;
-                    cout << "jal pc " << pc << endl;
+                    cout << "   jal pc " << pc << endl;
                 }
+                instr_count++; //?
                 continue;
             // case I:
                 // if(opcode == "jalr"){
@@ -710,16 +941,23 @@ int main(){
             // }else 
             case U:
                 if(opcode == "lui"){
-                    rd=imm<<12;
+                    rd = imm << 12;
                 }else if(opcode == "auipc"){
                     rd=pc+(imm<<12);
                 }
                 pc += 4;
                 if((a0[0] >= '0') && (a0[0] <= '9')){} 
-                else a[reg(a0)] = rd; 
-                cout << "# " << rd << " "<< rs1 <<" " << rs2 << endl;
+                else reg_val[reg_index(a0)] = rd; 
+                cout << "   # " << rd << " "<< imm << endl;
+                instr_count++; //?
                 continue;
             case F:
+                if(op_load[pc-4] == a1 || op_load[pc-4] == a2 || op_load[pc-4] == a3){
+                // if(line.find(pre_rd) < 100 && pre_rd != a0){
+                    // cout << "hazard" << op_load[pc-4] << endl;
+                    // cout << 
+                    instr_count++;
+                }
                 // 事前設定？
                 if(opcode == "flw"){
                     rd = M[rs1 + imm];
@@ -777,30 +1015,43 @@ int main(){
                 // }
                 pc += 4;
                 if((a0[0] >= '0') && (a0[0] <= '9')){} 
-                else a[reg(a0)] = rd; 
-                cout << "# " << rd << " "<< rs1 <<" " << rs2 << endl;
+                else reg_val[reg_index(a0)] = rd; 
+                cout << "   # " << rd << " "<< rs1 <<" " << rs2 << endl;
+                instr_count++; //?
                 continue;
             default:
                 continue;
+            
         }
-        
+        if(break_symbol == true){ //line.at(0) != ' '
+            cout << "   found * " << endl;
+            break;
+        }
+        // if(debug == true){
+        // // print mem[0:10]
+        // if(debug_op.find("print mem") < 100){
+        //         print_mem = true;
+        //     }
+        // }
         // Transfer control to OS 
         // Transfer control to debugger
         // case F:
         
-        // reg(a0)を何かでおくor ポインタ？
+        // reg_index(a0)を何かでおくor ポインタ？
             
         // if((a0[0] >= '0') && (a0[0] <= '9')){} 
-        // else a[reg(a0)] = rd; 
+        // else reg_val[reg_index(a0)] = rd; 
         // cout << "# " << rd << " "<< rs1 <<" " << rs2 << endl;
-        // if((a1[0] >= 48) && (a1[0] <= 57)) {}//imm = (int64_t)reg(a1);
-        // else a[reg(a1)] = rs1;
-        // if((a2[0] >= 48) && (a2[0] <= 57)) {} //imm = (int64_t)reg(a2);
-        // else a[reg(a2)] = rs2; //L1でセグフォ
+        // if((a1[0] >= 48) && (a1[0] <= 57)) {}//imm = (int64_t)reg_index(a1);
+        // else reg_val[reg_index(a1)] = rs1;
+        // if((a2[0] >= 48) && (a2[0] <= 57)) {} //imm = (int64_t)reg_index(a2);
+        // else reg_val[reg_index(a2)] = rs2; //L1でセグフォ
         
         // cout << "rs1 " << rs1 << endl;
+        
     }
     cout << "hit miss " << hit_count << " " << miss_count << endl;
+    cout << "実行命令数 " << instr_count << endl;
     clock_t end = clock();     // 終了時間
     std::cout << "duration = " << (double)(end - start) / CLOCKS_PER_SEC << "sec.\n";
     // cout << "fileclose" << endl;
