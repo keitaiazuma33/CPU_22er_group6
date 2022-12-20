@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 2022/10/11 21:43:17
+// Create Date: 2022/11/21 15:07:38
 // Design Name: 
-// Module Name: fmul_tb
+// Module Name: fadd_tb
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,13 +20,12 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module fmul_tb ();
+module fadd_tb ();
     
     logic [31:0] x1;
     logic [31:0] x2;
     logic [31:0] y;
     logic ovf;
-    logic unf;
     
     logic CLK;
     
@@ -37,13 +36,12 @@ module fmul_tb ();
         #10;
     end
 
-    fmul fmul_i ( // メモリモジュールのインスタンスを作成
+    fadd fadd_i (
         .clk(CLK),
-        .stage1_x1(x1), // ポートA(一つ目のポート)への接続
-        .stage1_x2(x2),
+        .x1(x1),
+        .x2(x2),
         .y(y),
-        .ovf(ovf),
-        .unf(unf)
+        .ovf(ovf)
     );
     
     initial begin
@@ -62,9 +60,6 @@ module fmul_tb ();
         #20;
         x1 <= 32'h44688535;  //= 930.0813598632812
         x2 <= 32'h46abd424;  //= 21994.0703125
-        #20;
-        x1 <= 32'h4041eb85;  //= 3.0299999713897705
-        x2 <= 32'h40a9eb85;  //= 5.309999942779541
         #100;
         $finish;
     end;
