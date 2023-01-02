@@ -1,4 +1,4 @@
-#pragma once
+// #pragma once
 #include "fpu_common.hpp"
 
 Bit32 fsub(float x_1, float x_2){
@@ -36,17 +36,17 @@ Bit32 fsub(float x_1, float x_2){
     e2a  = (e2  == 0) ? 0b00000001 : e1 ;
     // 4,5
     Bit32 e2ai, te;
-    e2ai  = ~e2a ; //pow(2,8) - 1 - e2a ; //8bit
+    e2ai  = pow(2,8) - 1 - e2a ; //8bit
     te  = e1a  + e2ai ; //8bit?
     // 6
     Bit32 ce, tde_long, tde;
-    ce = ((te  & 1 << 8) == 1) ? 0 : 1;
+    ce = (at_uint(te,8) == 1) ? 0 : 1;
     // 何bit?
-    tde_long  = ((te  & 1 << 8) == 1) ? te  + 1: ~te ; //(pow(2,8) - 1 - te );
+    tde_long  = (at_uint(te,8) == 1) ? te  + 1: (pow(2,9) -1 - te ) ; //(pow(2,8) - 1 - te );
     tde  = tde_long  & ((1 << 8) - 1);
     // 7, 8
     Bit32 de, sel;
-    de  = (tde  > 31) ? 31 : tde ;
+    de  = (tde  > 31) ? 31 : sub_uint(tde,4,0) ;
     // m1aの方が大きければsel==0
     sel  = (de  == 0) ? ((m1a  > m2a ) ? 0 : 1) : ce ;
     // 9
@@ -58,8 +58,8 @@ Bit32 fsub(float x_1, float x_2){
     ss  = (sel  == 0)? s1  : s2 ;
 
     // 10,11
-    unsigned long mie, mia;
-    mie = mi  << 31;
+    Bit64 mie, mia;
+    mie = ((unsigned long long)mi  << 31);
     //mieをdeだけ右に論理シフト
     mia = mie >> de ;
     // 12
@@ -73,8 +73,9 @@ Bit32 fsub(float x_1, float x_2){
     }
     // 13
     Bit32 mye;
-    if(s1  == s2 ) mye = (ms  << 2) + sub_uint(mia, 55, 29);
-    else mye = (ms  << 2) - sub_uint(mia, 55,29);
+    mye = (s1  == s2 )? mye = (ms  << 2) + sub_uint(mia, 55, 29): (ms  << 2) - sub_uint(mia, 55,29);
+    // if(s1  == s2 ) mye = (ms  << 2) + sub_uint(mia, 55, 29);
+    // else mye = (ms  << 2) - sub_uint(mia, 55,29);
     //mia >> 28 && (1 << 26 - 1)
     // 14
     Bit32 esi;
@@ -82,8 +83,8 @@ Bit32 fsub(float x_1, float x_2){
     // 15
     Bit32 eyd, myd, stck, ovf_flag1;
     eyd = (at_uint(mye, 26) == 1) ? (esi  == 255 ? 255 : esi) : es;
-    myd = (at_uint(mye, 26) == 1) ? (esi  == 255 ? 1 << 25: mye  >> 1) : mye;
-    stck  = (at_uint(mye,26) == 1) ? (esi  == 255 ? 0 :tstck | at_uint(mye,0) ) : tstck ;
+    myd = (at_uint(mye, 26) == 1) ? (esi  == 255 ? (1 << 25): (mye  >> 1)) : mye;
+    stck  = (at_uint(mye,26) == 1) ? (esi  == 255 ? 0 :(tstck|| at_uint(mye,0) )) : tstck ;
     ovf_flag1 = (at_uint(mye, 26) == 1) ? (esi == 255 ? 1 : 0) : 0;
     // 16
     Bit32 se;
@@ -102,17 +103,18 @@ Bit32 fsub(float x_1, float x_2){
     eyf = eyd - se;
     // 18
     Bit32 eyr, myf;
-    myf = (eyf > 0 ) ? myd << se : myd << (sub_uint(eyd,4,0) - 1);
+    myf = (eyf > 0 ) ? (myd << se) : (myd << (sub_uint(eyd,4,0) - 1));
     eyr = (eyf > 0) ? sub_uint(eyf,7,0) :0 ;
     // 19, 20
     Bit32 myr, eyri;
-    myr = ((at_uint(myf,1) == 1 && at_uint(myf,0)== 0 && stck == 0 && at_uint(myf,2) == 1 ) || ( at_uint(myf,1) == 1 && at_uint(myf,0) == 0 && (s1 == s2) && stck == 1 ) || ( at_uint(myf,1) == 1 && at_uint(myf,0) == 1 ) ) ? sub_uint(myf,26,2) << 25 : sub_uint(myf,26,2);
+    myr = ((at_uint(myf,1) == 1 && at_uint(myf,0)== 0 && stck == 0 && at_uint(myf,2) == 1 ) || ( at_uint(myf,1) == 1 && at_uint(myf,0) == 0 && (s1 == s2) && stck == 1 ) || ( at_uint(myf,1) == 1 && at_uint(myf,0) == 1 ) ) ? (sub_uint(myf,26,2) + (1<<25)-1) : sub_uint(myf,26,2);
     // ここまでok
     eyri = eyr + (1 << 8) - 1;//>> 8;
     // 21
     Bit32 ey, my, ovf_flag2;
     ey = (at_uint(myr,24) == 1) ? eyri  : (sub_uint(myr,23,0) == 0 ? 0 : eyr);
     my = (at_uint(myr,24) == 1) ? 0 : (sub_uint(myr, 23, 0) == 0 ? 0 : sub_uint(myr,22,0));
+    ovf_flag2 = (at_uint(myr,24) == 1) ? (eyri == 255 ? 1:0) :0;
     //Procedure 22
     Bit32 sy;
     sy = (ey == 0 && my == 0) ? (s1 & s2) : ss;
@@ -147,7 +149,7 @@ int main(){
     Bit32 y = fsub(x_1, x_2);
     print_sub_bit(y);
     
-    Bit32 ans = f_to_bit(x_1 + x_2);
+    Bit32 ans = f_to_bit(x_1 - x_2);
     print_sub_bit(ans);
     
     return 0;
