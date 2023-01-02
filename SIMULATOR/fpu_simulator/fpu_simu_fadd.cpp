@@ -2,49 +2,20 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define Bit32 unsigned int
-// bitset mask(int N){
-//     // 0ビット目からN-1ビット目までがすべて1である値を生成します。 (N-1ビットまでのマスク生成
-//     return (1 << N) - 1;
-// }
-// float x_1, x_2;
-/* 文字列変換の際に指定対象となる型 */
-// enum class Stype{
-//     t_default, t_dec, t_bin, t_hex, t_float, t_op
-// };
-
-/* 内部表現を考慮したfloat */
-struct Float{
-    unsigned int m : 23;
-    unsigned int e : 8;
-    unsigned int s : 1;
-};
-
-// union Bit32{
-//     int i;
-//     unsigned int ui;
-//     float f;
-//     Float F;
-//     constexpr Bit32();
-//     constexpr Bit32(int i);
-//     constexpr Bit32(unsigned int ui);
-//     constexpr Bit32(float f);
-//     std::string to_string();
-//     std::string to_string(Stype t);
-// };
-unsigned long sub_uint (unsigned long i, int a, int b){ //i[a:b]
+#define Bit64 unsigned long long
+Bit64 sub_uint (Bit64 i, int a, int b){ //i[a:b]
     // e1  = x1  >> 22 & (1 << 8 - 1); x1[30:23];
     // cout << b << " " << (a-b+1) << endl;
-    unsigned long x = i >> b & ((1 << (a-b+1)) - 1);
+    Bit64 x = (i >> b) & ((1 << (a-b+1)) - 1);
     return x;
 }
-unsigned long at_uint (unsigned long i, int a){ //i[a:b]; i[a]
+Bit64 at_uint (Bit64 i, int a){ //i[a:b]; i[a]
     // e1  = x1  >> 22 & (1 << 8 - 1); x1[30:23];
     int b = a;
     // cout << b << " " << (a-b+1) << endl;
-    unsigned long x = i >> b & ((1 << (a-b+1)) - 1);
+    Bit64 x = i >> b & ((1 << (a-b+1)) - 1);
     return x;
 }
-
 unsigned int f_to_bit (float x){
     unsigned int x_;
     union { float f; int i; } a;
@@ -60,6 +31,8 @@ Bit32 fadd(float x_1, float x_2){
     Bit32 x2;
     x1 = f_to_bit(x_1); 
     x2 = f_to_bit(x_2);
+    // x1 = 0x44fa21b3;
+    // x2 = 0x44fa40f8;
     for(int i = 31; i >= 0; i-- ){
         printf("%d", (x1 >> i) & 1);
     }
@@ -80,25 +53,28 @@ Bit32 fadd(float x_1, float x_2){
     e2  = x2  >> 23 & ((1 << 8) - 1);
     s1  = (x1  >> 31) & 1; //30?
     s2  = (x2  >> 31) & 1;
+    // print_bit(s2, 1);
+    // print_bit(e2,8);
+    // print_bit(m2,23); //ここまでok
     // 2.
     m1a  = (e1  == 0) ? m1  : ((1 << 23) | m1 ); //23bit
     m2a  = (e2  == 0) ? m2  : ((1 << 23) | m2 );
     // 3.
     e1a  = (e1  == 0) ? 0b00000001 : e1 ; //8bit
-    e2a  = (e2  == 0) ? 0b00000001 : e1 ;
+    e2a  = (e2  == 0) ? 0b00000001 : e2 ;
     // 4,5
     Bit32 e2ai, te;
-    e2ai  = ~e2a ; //pow(2,8) - 1 - e2a ; //8bit
+    e2ai  = pow(2,8) - 1 - e2a ; //8bit; ~e2a
     te  = e1a  + e2ai ; //8bit?
     // 6
     Bit32 ce, tde_long, tde;
-    ce = ((te  & 1 << 8) == 1) ? 0 : 1;
+    ce = (at_uint(te,8) == 1) ? 0 : 1;
     // 何bit?
-    tde_long  = ((te  & 1 << 8) == 1) ? te  + 1: ~te ; //(pow(2,8) - 1 - te );
+    tde_long  = (at_uint(te,8) == 1) ? te+ 1: (pow(2,9) -1 - te ); //~te
     tde  = tde_long  & ((1 << 8) - 1);
     // 7, 8
     Bit32 de, sel;
-    de  = (tde  > 31) ? 31 : tde ;
+    de  = (tde  > 31) ? 31 : sub_uint(tde,4,0) ;
     // m1aの方が大きければsel==0
     sel  = (de  == 0) ? ((m1a  > m2a ) ? 0 : 1) : ce ;
     // 9
@@ -110,13 +86,14 @@ Bit32 fadd(float x_1, float x_2){
     ss  = (sel  == 0)? s1  : s2 ;
 
     // 10,11
-    unsigned long mie, mia;
-    mie = mi  << 31;
+    Bit64 mie, mia;
+    mie = ((unsigned long long)mi << 31);
+    // mie = (mi << 31);
     //mieをdeだけ右に論理シフト
     mia = mie >> de ;
     // 12
     // mia[28:0]のうち１つでも１なら
-    // unsigned long
+    // Bit64
     Bit32 tstck;
     // tstck = sub_uint(mia, 28, 0) | ((1 << 29) - 1);
     tstck = 0;
@@ -125,8 +102,8 @@ Bit32 fadd(float x_1, float x_2){
     }
     // 13
     Bit32 mye;
-    if(s1  == s2 ) mye = (ms  << 2) + sub_uint(mia, 55, 29);
-    else mye = (ms  << 2) - sub_uint(mia, 55,29);
+    // mye = (s1 == s2) ? {ms,2'b00} + mia[55:29] :  {ms,2'b00} - mia[55:29];
+    mye = (s1  == s2 )? mye = (ms  << 2) + sub_uint(mia, 55, 29): (ms  << 2) - sub_uint(mia, 55,29);
     //mia >> 28 && (1 << 26 - 1)
     // 14
     Bit32 esi;
@@ -134,8 +111,8 @@ Bit32 fadd(float x_1, float x_2){
     // 15
     Bit32 eyd, myd, stck, ovf_flag1;
     eyd = (at_uint(mye, 26) == 1) ? (esi  == 255 ? 255 : esi) : es;
-    myd = (at_uint(mye, 26) == 1) ? (esi  == 255 ? 1 << 25: mye  >> 1) : mye;
-    stck  = (at_uint(mye,26) == 1) ? (esi  == 255 ? 0 :tstck | at_uint(mye,0) ) : tstck ;
+    myd = (at_uint(mye, 26) == 1) ? (esi  == 255 ? (1 << 25): (mye  >> 1)) : mye;
+    stck  = (at_uint(mye,26) == 1) ? (esi  == 255 ? 0 : (tstck || at_uint(mye,0)) ) : tstck ;
     ovf_flag1 = (at_uint(mye, 26) == 1) ? (esi == 255 ? 1 : 0) : 0;
     // 16
     Bit32 se;
@@ -154,17 +131,18 @@ Bit32 fadd(float x_1, float x_2){
     eyf = eyd - se;
     // 18
     Bit32 eyr, myf;
-    myf = (eyf > 0 ) ? myd << se : myd << (sub_uint(eyd,4,0) - 1);
+    myf = (eyf > 0 ) ? (myd << se) : (myd << (sub_uint(eyd,4,0) - 1));
     eyr = (eyf > 0) ? sub_uint(eyf,7,0) :0 ;
     // 19, 20
     Bit32 myr, eyri;
-    myr = ((at_uint(myf,1) == 1 && at_uint(myf,0)== 0 && stck == 0 && at_uint(myf,2) == 1 ) || ( at_uint(myf,1) == 1 && at_uint(myf,0) == 0 && (s1 == s2) && stck == 1 ) || ( at_uint(myf,1) == 1 && at_uint(myf,0) == 1 ) ) ? sub_uint(myf,26,2) << 25 : sub_uint(myf,26,2);
+    myr = ((at_uint(myf,1) == 1 && at_uint(myf,0)== 0 && stck == 0 && at_uint(myf,2) == 1 ) || ( at_uint(myf,1) == 1 && at_uint(myf,0) == 0 && (s1 == s2) && stck == 1 ) || ( at_uint(myf,1) == 1 && at_uint(myf,0) == 1 ) ) ? (sub_uint(myf,26,2) + (1<<25)-1) : sub_uint(myf,26,2);
     // ここまでok
-    eyri = eyr + (1 << 8) - 1;//>> 8;
+    eyri = eyr + (1 << 8) - 1;//8'b1;
     // 21
     Bit32 ey, my, ovf_flag2;
     ey = (at_uint(myr,24) == 1) ? eyri  : (sub_uint(myr,23,0) == 0 ? 0 : eyr);
     my = (at_uint(myr,24) == 1) ? 0 : (sub_uint(myr, 23, 0) == 0 ? 0 : sub_uint(myr,22,0));
+    ovf_flag2 = (at_uint(myr,24) == 1) ? (eyri == 255 ? 1:0) :0;
     //Procedure 22
     Bit32 sy;
     sy = (ey == 0 && my == 0) ? (s1 & s2) : ss;
@@ -206,7 +184,7 @@ void print_sub_bit(Bit32 y){
 
 int main(){
     float x_1, x_2;
-    x_1 = 0.298; //0	100	0011	1	001	0101	0000	0000	0000	0000
+    x_1 = 0.829; //0	100	0011	1	001	0101	0000	0000	0000	0000
     x_2 = 0.476;
     Bit32 y = fadd(x_1, x_2);
     print_sub_bit(y);
