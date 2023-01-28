@@ -22,7 +22,7 @@ using namespace std;
 // #define U 4
 // #define J 5
 enum Type {
-        R, I, S, B, U, J
+        R, I, S, B, U, J, F
 };
 struct Op {
   
@@ -33,7 +33,7 @@ struct Op {
             _type = R;
         }else if((op == "addi") || (op == "xori")|| (op == "ori")|| (op == "andi")|| (op == "slli")|| (op == "srli")|| (op == "srai")|| (op == "slti")|| (op == "sltiu")){
             _type = I;
-        }else if((op == "lb") || (op == "lh")|| (op == "lw")|| (op == "lbu")|| (op == "lhu") || (op == "jalr")){
+        }else if((op == "lb") || (op == "lh")|| (op == "lw")|| (op == "lbu")|| (op == "lhu")){
             _type = I;
         }else if((op == "sb") || (op == "sh")|| (op == "sw")){
             _type = S;
@@ -41,6 +41,21 @@ struct Op {
             _type = B;
         }else if(op == "jal"){
             _type = J;
+        }else if(op == "jalr"){
+            _type = I;
+        }else if(op == "lui" || op == "auipc"){
+            _type = U;
+        }else if(op == "mul" || op == "mulh" || op == "mulsu"
+        || op == "mulu" || op == "div" || op == "divu" || op == "rem" || op == "remu"){
+            _type = R;
+        // }else if(op == "mul" || op == "div"){
+        //     _type = R;
+        }else if(op == "flw" || op == "fsw" || op == "fmadd.s" || op == "fmsub.s" || op == "fnmadd.s" || op == "fnmsub.s" || 
+        op == "fadd.s" || op == "fsub.s" || op == "fmul.s" || op == "fdiv.s" || op == "fsqrt.s" 
+        || op == "fsgnj.s" || op == "fsgnjn.s" || op == "fsgnjx.s" || op == "fmin.s" || op == "fmax.s"
+        || op == "fcvt.s.w" || op == "fcvt.s.wu" || op == "fcvt.w.s" || op == "fcvt.wu.s"
+        || op == "fmu.x.w" || op == "fmu.w.x" || op == "feq.s" || op == "flt.s" || op == "fle.s" || op == "fclass.s"){
+            _type = F;
         }
         // jalr以降書き忘れ
         // mul以降も；２ページ目
@@ -144,11 +159,11 @@ string convert(string op){ //変数opから01文字列5桁？へ
         // 0うめ
         // r = "0000";
         r = complement(op);
-        bury_zero(r,5);
-
-        if(r.size() > 5){
-            r.substr(r.size()-5, 5);
-        }
+        // bury_zero(r,5);
+        // cout << r.size()
+        // if(r.size() > 5){
+        r = r.substr(MAX_BIT-5, 5);
+        
         // cout << r << endl;    
         // int64_t num = atoi(a0.c_str());
         // return num;
@@ -315,6 +330,7 @@ int main(){
             }
         }
         
+        
         // cout << "words[3]" << words.at(3) << endl;
         // その行がなかったらcontinue
         // if(words[0] == "") continue;
@@ -353,12 +369,10 @@ int main(){
         opcode = ""; op1 = "";
         op2 = ""; 
         op3 = "";
-        opcode = words[0]; //ここまでok
-        op1 = words[1];  
-        // if(0 <= words[2].at(0) &&  words[2].at(0) <= 127) 
-        op2= words[2]; 
-        // if(0 <= words[3].at(0) &&  words[3].at(0) <= 127) 
-        op3 = words[3];
+        opcode = words.at(0); //ここまでok
+        if(words.size() > 1) op1 = words.at(1);  
+        if(words.size() > 2) op2= words.at(2); 
+        if(words.size() > 3) op3 = words.at(3);
         // string S;
         // cin >> S; "add a0, a1, a2"
         // li, j, mvの処理
@@ -385,7 +399,7 @@ int main(){
         }else if(opcode == "nop"){ //addi x0, x0, 0
             opcode = "addi"; op1 = "x0"; op2 = "x0"; op3 = "0";
         }
-        // ofs << opcode << " " << op1 << " " <<op2 << " " << op3 << endl;
+        ofs << opcode << " " << op1 << " " <<op2 << " " << op3 << endl;
         // cout << op3[0] << endl;
         // cout << op3 << endl;
         string imm;
@@ -399,12 +413,13 @@ int main(){
         if(((op3[0] >= '0') && (op3[0] <= '9')) || (op3[0] == '-')) imm = convert(op3); // cout << "imm?" << endl;}
         else rs2 = convert(op3); //ここまでも関数化？
         // cout << "imm" << imm << endl;
-        // cout << "$" << rd << rs1 << rs2 << endl;
+        // ofs << "$" << rd << rs1 << rs2 << endl;
         // immを埋める；32bit?
         // imm = bury_zero(imm, 32);
         string offset = imm;
         Op op;
         string ans;
+        // ofs << line << endl;
         // cout << op.conv_type(opcode) << endl;;
         switch (op.conv_type(opcode)){
             case R:
@@ -508,15 +523,6 @@ int main(){
                     rs1 = rs2;
                     ofs << imm.substr(0,12)+rs1+"101"+rd+"0000011"<<endl;
                     pc += 4;
-                // }else if(opcode == "sb"){
-                //     ofs << imm.substr(5,7)+rs2+rs1+"000"+imm.substr(0,5)+"0100011"<<endl;
-                //     pc += 4;
-                // }else if(opcode == "sh"){
-                //     ofs << imm.substr(5,7)+rs2+rs1+"001"+imm.substr(0,5)+"0100011"<<endl;
-                //     pc += 4;
-                // }else if(opcode == "sw"){
-                //     ofs << imm.substr(5,7)+rs2+rs1+"010"+imm.substr(0,5)+"0100011"<<endl;
-                //     pc += 4;
                 }else if(opcode == "jalr"){
                     ofs << imm.substr(0,12)+rs1+"000"+rd+"1100111"<<endl;
                     pc += 4;
@@ -528,7 +534,6 @@ int main(){
                 if(opcode == "sb"){
                     ofs << imm.substr(5,7)+rs2+rs1+"000"+imm.substr(0,5)+"0100011"<<endl;
                     pc+=4;
-                    // ofs << imm.substr(5,7)+rs2+rs1+"000"+imm.substr(0,5)+"0100011"<<endl;
                     // offset[11:5]+rs2+rs1+000+offset[4:0]+0100011
                 }else if(opcode == "sh"){
                     ofs << imm.substr(5,7)+rs2+rs1+"001"+imm.substr(0,5)+"0100011"<<endl;
@@ -559,15 +564,6 @@ int main(){
                 // cout << imm << " " << rs2 << " " << rs1 << endl;
                 reverse(imm.begin(), imm.end());
                 cout << imm << endl;
-                // if(opcode == "blt"){
-                //     cout << imm[12]+imm.substr(5,6)+rs2+rs1+"100"+imm.substr(1,4)+imm[11]+"1100011"<<endl;
-                //     // pcの処理上でok?
-                // }else if(opcode == "bge"){ //ここからchange
-                //     cout << imm[12]+imm.substr(5,6)+rs2+rs1+"101"+imm.substr(1,4)+imm[11]+"1100011" <<endl;//imm[11:0]
-                //     // pcの処理上でok?
-                // }
-                // pc += 4;
-                // case B:
                 // rs2 = rs1; rs1 = rd; 
                 // if(sign_imm == 1) imm = -imm;
                 // cout << "# "  << rs1 <<" " << rs2 << endl;
@@ -580,6 +576,7 @@ int main(){
                 }else if(opcode == "blt"){
                     ofs << imm[12]+sub_reverse(imm,5,6)+rs2+rs1+"100"+sub_reverse(imm,1,4)+imm[11]+"1100011"<<endl;
                 }else if(opcode == "bge"){
+                    ofs << imm[12]+sub_reverse(imm,5,6)<<"_"<<rs2<<"_"<<rs1<<"_"<<"101"<<"_"<<sub_reverse(imm,1,4)+imm[11]<<"_"<<"1100011"<<endl;
                     ofs << imm[12]+sub_reverse(imm,5,6)+rs2+rs1+"101"+sub_reverse(imm,1,4)+imm[11]+"1100011"<<endl;
                 }else if(opcode == "bltu"){
                     ofs << imm[12]+sub_reverse(imm,5,6)+rs2+rs1+"110"+sub_reverse(imm,1,4)+imm[11]+"1100011"<<endl;
@@ -602,7 +599,10 @@ int main(){
                 }
                 pc += 4;
                 continue;
-            
+            // case F:
+            //     if(opcode == "fadd"){
+            //         ofs << "0000000"+rs2+rs1+rm+rd+"1010011";
+            //     }
             // add
             // switch  
             default:
