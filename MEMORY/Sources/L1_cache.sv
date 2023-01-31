@@ -1,5 +1,3 @@
-//キャッシュ本体（コード）
-
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
@@ -86,8 +84,7 @@ typedef struct {
 
 // CACHE SYSTEM
 module L1_cache(
-    input  bit sys_clk,                        //キャッシュシステム
-    input  bit mem_clk,
+    input  bit CLK,                        //キャッシュシステム
     input  bit RST,
     input  cpu_req_type cpu_to_cache_request,   //addr[26:0],data[31:0],rw[0:0],valid[0:0]
     input  mem_data_type mem_data,              //memory response (memory->cache) data[CACHE_width:0], ready[0:0]
@@ -135,20 +132,12 @@ module L1_cache(
     
     logic L1_way0_hit;
     logic L1_way1_hit;
-    reg [0:0] LRU;
-    logic [0:0] LRU_logic;
-    assign LRU_logic = LRU;
-    
-    reg [17-(TAGMSB-TAGLSB+1)-1-1:0] accessed_save_way0;
-    reg [17-(TAGMSB-TAGLSB+1)-1-1:0] accessed_save_way1;
-    logic [17-(TAGMSB-TAGLSB+1)-1-1:0] accessed_save_way0_logic;
-    logic [17-(TAGMSB-TAGLSB+1)-1-1:0] accessed_save_way1_logic;
-    assign accessed_save_way0_logic = accessed_save_way0;
-    assign accessed_save_way1_logic = accessed_save_way1;
+    logic LRU;
+    assign LRU = 1'b1;   //LRU（注意：実装は後で考えろ）
     
     // L1 Cache (WAY0)
     blk_mem_gen_0 CACHE_L1_way0 (
-        .clka(mem_clk),
+        .clka(CLK),
         .ena(ena),     //常にアクティブ
         .wea(data_req_L1_way0.we),
         .addra(data_req_L1_way0.index),
@@ -157,7 +146,7 @@ module L1_cache(
     );
     // L1 Cache (WAY1)
     blk_mem_gen_1 CACHE_L1_way1 (
-        .clka(mem_clk),
+        .clka(CLK),
         .ena(ena),
         .wea(data_req_L1_way1.we),
         .addra(data_req_L1_way1.index),
@@ -167,7 +156,7 @@ module L1_cache(
     
     // L1 PMT (WAY0)
     blk_mem_gen_2 PMT_L1_way0 (
-        .clka(mem_clk),
+        .clka(CLK),
         .ena(ena),
         .wea(pmt_req_L1_way0.we),
         .addra(pmt_req_L1_way0.index),
@@ -176,7 +165,7 @@ module L1_cache(
     );
     // L1 PMT (WAY1)
     blk_mem_gen_3 PMT_L1_way1 (
-        .clka(mem_clk),
+        .clka(CLK),
         .ena(ena),
         .wea(pmt_req_L1_way1.we),
         .addra(pmt_req_L1_way1.index),
@@ -192,11 +181,6 @@ module L1_cache(
     
     assign mem_req = mem_req_L1_to_L2; //connect to output ports
     assign cpu_res = cpu_res_L1;
-    
-    logic [1:0] LRU_input;
-    
-    logic [1:0] more_accessed_max;
-    assign more_accessed_max = (accessed_save_way0_logic >= accessed_save_way1_logic) ? ((accessed_save_way0_logic == 3'b111) ? 2'b01 : 2'b00) : ((accessed_save_way1_logic == 3'b111) ? 2'b11 : 2'b10);
     
     always_comb begin
     
@@ -390,11 +374,6 @@ case(rstate)
         assign L1_way0_hit = (cpu_to_cache_request.addr[TAGMSB:TAGLSB] == pmt_L1_way0_dout.tag && pmt_L1_way0_dout.valid);
         assign L1_way1_hit = (cpu_to_cache_request.addr[TAGMSB:TAGLSB] == pmt_L1_way1_dout.tag && pmt_L1_way1_dout.valid);
         
-        assign LRU_input = (~(L1_way0_hit || L1_way1_hit)) ? ((more_accessed_max[1:1] == 1'b1) ? (pmt_L1_way1_dout.valid ? 1'b0 : 1'b1) : (pmt_L1_way0_dout.valid ? 1'b1 : 1'b0)) : ( (~L1_way0_hit) ? 1'b0 : ((~L1_way1_hit) ? 1'b1 : ((more_accessed_max[1:1] == 1'b1) ? 1'b0 : 1'b1)));
-        LRU <= LRU_input;
-        accessed_save_way0 <= pmt_L1_way0_dout.accessed;
-        accessed_save_way1 <= pmt_L1_way1_dout.accessed;
-        
         //L1_way0のタグ部がhitした
         if ( L1_way0_hit )
         begin
@@ -407,7 +386,7 @@ case(rstate)
                 pmt_req_L1_way0.we = '1;
                 data_req_L1_way0.we = 1'b1;
                 //キャッシュに書き込んだら、そのことをPMTの方に反映させておく（validとdirtyを立てるということ）
-                pmt_L1_way0_din.accessed = (more_accessed_max[1:1] == 1'b0) ? accessed_save_way0_logic + 1 : accessed_save_way1_logic + 1;
+                pmt_L1_way0_din.accessed = (pmt_L1_way0_dout.accessed = 3'b111) ? 3'b111 : pmt_L1_way0_dout.accessed + 1;
                 pmt_L1_way0_din.tag = pmt_L1_way0_dout.tag;
                 pmt_L1_way0_din.valid = 1'b1;
                 //書き込んだからdirtyになっている
@@ -431,7 +410,7 @@ case(rstate)
                 pmt_req_L1_way1.we = '1;
                 data_req_L1_way1.we = 1'b1;
                 //キャッシュに書き込んだら、そのことをPMTの方に反映させておく（validとdirtyを立てるということ）
-                pmt_L1_way1_din.accessed = (more_accessed_max[1:1] == 1'b0) ? accessed_save_way0_logic + 1 : accessed_save_way1_logic + 1;
+                pmt_L1_way1_din.accessed = (pmt_L1_way1_dout.accessed = 3'b111) ? 3'b111 : pmt_L1_way1_dout.accessed + 1;
                 pmt_L1_way1_din.tag = pmt_L1_way1_dout.tag; 
                 pmt_L1_way1_din.valid = 1'b1;
                 //書き込んだからdirtyになっている
@@ -444,7 +423,7 @@ case(rstate)
         
         //L1_way0 L1_way1 どちらもhitしなかった場合
         else
-        if (LRU_logic == 1'b0)   //LRUでどちらを追い出すか決めて、
+        if (LRU == 1'b0)   //LRUでどちらを追い出すか決めて、
         begin
             //PMTだけ更新しておく（データが来る前にアクセスされることはないから大丈夫）
             /*generate new tag*/
@@ -455,19 +434,8 @@ case(rstate)
             //書き込む場合のみdirtyにしておく
             pmt_L1_way0_din.dirty = cpu_to_cache_request.rw;
             //今持ってきたからaccessedは0にしておく
-            pmt_L1_way0_din.accessed = 
-                (more_accessed_max == 2'b00) ? accessed_save_way0_logic :
-                (more_accessed_max == 2'b01) ? 3'b000                   :
-                (more_accessed_max == 2'b10) ? accessed_save_way1_logic :
-                                               3'b000                   ;
-            
-            //更新しないほうもLRU(Accessed)がmaxに達していたらリセットする(Accessed以外は変えない)
-            pmt_req_L1_way1.we = 1'b1;
-            pmt_L1_way1_din.valid = pmt_L1_way1_dout.valid;
-            pmt_L1_way1_din.tag = pmt_L1_way1_dout.tag;
-            pmt_L1_way1_din.dirty = pmt_L1_way1_dout.dirty;
-            pmt_L1_way1_din.accessed = (more_accessed_max[0:0] == 1'b1) ? 3'b000 : pmt_L1_way1_dout.accessed;
-            
+            pmt_L1_way0_din.accessed = 3'b000;
+        
             //下位キャッシュへ向けてデータをくれという必要がある。
             mem_req_L1_to_L2.valid = 1'b1;
             /*compulsory miss or miss with clean block*/
@@ -487,7 +455,7 @@ case(rstate)
             end
         end
         else
-        if (LRU_logic == 1'b1)   //LRUでどちらを追い出すか決めて、
+        if (LRU == 1'b1)   //LRUでどちらを追い出すか決めて、
         begin
             //PMTだけ更新しておく（データが来る前にアクセスされることはないから大丈夫）
             /*generate new tag*/
@@ -498,17 +466,7 @@ case(rstate)
             //書き込む場合のみdirtyにしておく
             pmt_L1_way1_din.dirty = cpu_to_cache_request.rw;
             //今持ってきたからaccessedは0にしておく
-            pmt_L1_way1_din.accessed = 
-                (more_accessed_max == 2'b00) ? accessed_save_way0_logic :
-                (more_accessed_max == 2'b01) ? 3'b000                   :
-                (more_accessed_max == 2'b10) ? accessed_save_way1_logic :
-                                               3'b000                   ;
-            //更新しないほうもLRU(Accessed)がmaxに達していたらリセットする(Accessed以外は変えない)
-            pmt_req_L1_way0.we = 1'b1;
-            pmt_L1_way0_din.valid = pmt_L1_way0_dout.valid;
-            pmt_L1_way0_din.tag = pmt_L1_way0_dout.tag;
-            pmt_L1_way0_din.dirty = pmt_L1_way0_dout.dirty;
-            pmt_L1_way0_din.accessed = (more_accessed_max[0:0] == 1'b1) ? 3'b000 : pmt_L1_way0_dout.accessed;
+            pmt_L1_way1_din.accessed = 3'b000;
         
             //下位キャッシュへ向けてデータをくれという必要がある。
             mem_req_L1_to_L2.valid = 1'b1;
@@ -537,7 +495,7 @@ case(rstate)
         /*memory controller has responded*/
         if (mem_data.ready)
         begin
-            if (LRU_logic == 1'b0)
+            if (LRU == 1'b0)
             begin
                 //追い出すのがway0ならL0の書き込むべきインデックス行目にデータを格納する
                 /*update cache line data*/
@@ -545,7 +503,7 @@ case(rstate)
                 cache_L1_way0_din = mem_data.data;
             end
             else
-            if (LRU_logic == 1'b1)
+            if (LRU == 1'b1)
             begin
                 //追い出すのがway0ならL0の書き込むべきインデックス行目にデータを格納する
                 /*update cache line data*/
@@ -581,7 +539,7 @@ case(rstate)
 endcase
 end
 
-always_ff @(posedge(sys_clk))
+always_ff @(posedge(CLK))
 begin
     if (RST) 
     rstate <= idle; //reset to idle state

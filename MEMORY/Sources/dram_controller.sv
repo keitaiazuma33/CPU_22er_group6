@@ -1,5 +1,3 @@
-//migを生で触る（恐らくno-touch）
-
 module dram_controller (
     // DDR2
     output wire [12:0] ddr2_addr,
