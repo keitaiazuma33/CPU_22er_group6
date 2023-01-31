@@ -1,3 +1,5 @@
+//clockを生成していろいろな部品につなげる(clock以外はno-touch)
+
 module top (
     // DDR2
     output wire [12:0] ddr2_addr,
@@ -19,39 +21,38 @@ module top (
     output logic led
 );
     // clock
-    logic cpu_clk;
-    logic mig_clk;
+    logic sys_clk;
+    logic mem_clk;
     clk_wiz_0 clk_gen (
         .clk_in1(clk),
-        .clk_out1(cache_clk),
-        .clk_out2(mig_clk),
-        .clk_out3(cpu_clk)
+        .clk_out1(mem_clk),
+        .clk_out2(sys_clk)
     );
 
     // interfaces
     master_fifo master_fifo ();
     slave_fifo slave_fifo ();
 
-    // master
+    // master（CPU側のFIFO）
     dram_test dram_test (
         .fifo(master_fifo),
-        .clk(cpu_clk),
-        .cache_clk(cache_clk),
+        .sys_clk(sys_clk),
+        .mem_clk(mem_clk),
         .led(led)
     );
 
-    // fifo
+    // fifoを生成する
     dram_buf dram_buf (
         .master(master_fifo),
         .slave(slave_fifo)
     );
 
-    // slave
+    // slave（DRAM側のFIFO）
     dram_controller dram_controller (
         // DDR2
         .*,
         // others
-        .sys_clk(mig_clk),
+        .sys_clk(mem_clk),
         .fifo(slave_fifo)
     );
 endmodule

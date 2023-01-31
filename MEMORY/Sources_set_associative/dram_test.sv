@@ -1,37 +1,45 @@
+//実質テストベンチ
+
 module dram_test (
     master_fifo.master fifo,
-    input logic clk,
-    input logic cache_clk,
+    input logic sys_clk,
+    input logic mem_clk,
     output logic led
 );
-    assign fifo.clk = clk;
+    //fifoへの標準的な信号の接続
+    assign fifo.clk = sys_clk;
     assign fifo.rsp_rdy = 1'b1;
     
+    //キャッシュシステムにつなぐ配線
+    //詳細な構造体の記述は下位モジュール：L1_cache参照
     cpu_req_type cpu_to_cache_request;
     mem_data_type mem_data;
     L2_req_type mem_req;
     cpu_result_type cpu_res;
-    logic RST;
+    logic rst;
     logic [2:0] state;
     
     initial begin
-        RST <= 1'b1; #30;
-        RST <= 1'b0;
+        rst <= 1'b1; #30;
+        rst <= 1'b0;
     end
     
-    L1_cache cache_system_instance(
-    .CLK(clk),                        //キャッシュシステム
-    .cache_CLK(cache_clk),
-    .RST(RST),
-    .cpu_to_cache_request(cpu_to_cache_request),   //addr[26:0],data[31:0],rw[0:0],valid[0:0]
-    .mem_data(mem_data),              //memory response (memory->cache) data[CACHE_width:0], ready[0:0]
-    .mem_req(mem_req),                //memory request (cache->memory) addr[26:0],data[CACHE_width:0],rw[0:0],valid[0:0]
-    .cpu_res(cpu_res),                //cache result (cache->CPU) data[31:0], ready[0:0]
-    .state(state)
+    L1_cache cache_system_instance
+    (
+        //input
+        .sys_clk(sys_clk),                        //キャッシュシステム
+        .mem_clk(mem_clk),
+        .RST(rst),
+        .cpu_to_cache_request(cpu_to_cache_request),   //addr[26:0],data[31:0],rw[0:0],valid[0:0]
+        .mem_data(mem_data),              //memory response (memory->cache) data[CACHE_width:0], ready[0:0]
+        //output
+        .mem_req(mem_req),                //memory request (cache->memory) addr[26:0],data[CACHE_width:0],rw[0:0],valid[0:0]
+        .cpu_res(cpu_res),                //cache result (cache->CPU) data[31:0], ready[0:0]
+        .state(state)
     );
     
     logic [3:0] tb_state = 4'b0000;
-    always_ff @ (posedge clk) begin
+    always_ff @ (posedge sys_clk) begin
         case (tb_state)
             4'b0000: begin
                 /*
@@ -203,24 +211,26 @@ module dram_test (
         endcase
     end
     
-    assign fifo.req.cmd  =~mem_req.rw;
-    assign fifo.req.addr = mem_req.addr;
-    assign fifo.req.data = mem_req.data;
-    assign fifo.req_en   = mem_req.valid;
+    //キャッシュシステム -> master FIFO へリクエストをつなげる
+    assign fifo.req.cmd  = ~mem_req.rw;
+    assign fifo.req.addr =  mem_req.addr;
+    assign fifo.req.data =  mem_req.data;
+    assign fifo.req_en   =  mem_req.valid;
+    //master FIFOにDRAMから来たデータをキャッシュシステムに渡す
+    assign mem_data.data  = fifo.rsp.data;
+    assign mem_data.ready = fifo.rsp_en;
     
+    //テスト用
     logic first_data_identity = 1'b0;
     logic second_data_identity = 1'b0;
     assign led = first_data_identity && second_data_identity;
-    
-    assign mem_data.data  = fifo.rsp.data;
-    assign mem_data.ready = fifo.rsp_en;
 
     logic [1:0] rsp_state = '0;
-    always_ff @ (posedge clk) begin
+    always_ff @ (posedge sys_clk) begin
         case (rsp_state)
             2'b00: begin
                 if (cpu_res.ready) begin
-                    first_data_identity <= (cpu_res.data == 32'b00110011001100110011001100110011);
+                    first_data_identity  <= (cpu_res.data == 32'b00110011001100110011001100110011);
                     rsp_state <= 2'b01;
                 end
             end

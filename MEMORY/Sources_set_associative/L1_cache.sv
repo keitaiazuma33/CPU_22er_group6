@@ -1,3 +1,5 @@
+//キャッシュ本体（コード）
+
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
@@ -13,7 +15,7 @@
 // 
 // Dependencies: 
 // 
-// Revision:  12/15/22:27
+// Revision:
 // Revision 0.01 - File Created
 // Additional Comments:
 // 
@@ -84,8 +86,8 @@ typedef struct {
 
 // CACHE SYSTEM
 module L1_cache(
-    input  bit CLK,                        //キャッシュシステム
-    input  bit cache_CLK,
+    input  bit sys_clk,                        //キャッシュシステム
+    input  bit mem_clk,
     input  bit RST,
     input  cpu_req_type cpu_to_cache_request,   //addr[26:0],data[31:0],rw[0:0],valid[0:0]
     input  mem_data_type mem_data,              //memory response (memory->cache) data[CACHE_width:0], ready[0:0]
@@ -145,8 +147,8 @@ module L1_cache(
     assign accessed_save_way1_logic = accessed_save_way1;
     
     // L1 Cache (WAY0)
-    blk_mem_gen_0 CACHE_L1_way0 (
-        .clka(cache_CLK),
+    CACHE_L1_way0 CACHE_L1_way0 (
+        .clka(mem_clk),
         .ena(ena),     //常にアクティブ
         .wea(data_req_L1_way0.we),
         .addra(data_req_L1_way0.index),
@@ -154,8 +156,8 @@ module L1_cache(
         .douta(cache_L1_way0_dout)
     );
     // L1 Cache (WAY1)
-    blk_mem_gen_1 CACHE_L1_way1 (
-        .clka(cache_CLK),
+    CACHE_L1_way1 CACHE_L1_way1 (
+        .clka(mem_clk),
         .ena(ena),
         .wea(data_req_L1_way1.we),
         .addra(data_req_L1_way1.index),
@@ -164,8 +166,8 @@ module L1_cache(
     );
     
     // L1 PMT (WAY0)
-    blk_mem_gen_2 PMT_L1_way0 (
-        .clka(cache_CLK),
+    PMT_L1_way0 PMT_L1_way0 (
+        .clka(mem_clk),
         .ena(ena),
         .wea(pmt_req_L1_way0.we),
         .addra(pmt_req_L1_way0.index),
@@ -173,8 +175,8 @@ module L1_cache(
         .douta(pmt_L1_way0_dout)
     );
     // L1 PMT (WAY1)
-    blk_mem_gen_3 PMT_L1_way1 (
-        .clka(cache_CLK),
+    PMT_L1_way1 PMT_L1_way1 (
+        .clka(mem_clk),
         .ena(ena),
         .wea(pmt_req_L1_way1.we),
         .addra(pmt_req_L1_way1.index),
@@ -579,7 +581,7 @@ case(rstate)
 endcase
 end
 
-always_ff @(posedge(CLK))
+always_ff @(posedge(sys_clk))
 begin
     if (RST) 
     rstate <= idle; //reset to idle state
