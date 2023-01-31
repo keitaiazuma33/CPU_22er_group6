@@ -6,6 +6,9 @@ module programcounter
     input wire branchtrue,
     input wire [31:0] pc_ex,
     input wire pcwrite,
+    input wire core_start,
+    input wire data_ready_mem,
+    input wire core_end,
     output wire [31:0] pc_if
   );
   reg [31:0] pc;
@@ -16,9 +19,9 @@ module programcounter
   assign next_pc = branchtrue ? pc_branch : pc + 32'd4;
   assign pc_if = pc;
   always @(posedge clk) begin
-    if (~rstn) begin
+    if (~rstn || ~core_start || core_end) begin
       pc <= 32'b0;
-    end else if (pcwrite) begin
+    end else if (pcwrite || ~data_ready_mem) begin
       pc <= pc;
     end else begin
       pc <= next_pc;
@@ -51,26 +54,53 @@ module ifid
     input wire [31:0] instruction_if,
     input wire if_flush,
     input wire ifidwrite,
+    input wire data_ready_mem,
     output wire [31:0] pc_id,
     output wire [31:0] instruction_id
   );
-  reg [31:0] pc;
+  reg [31:0] pc_1;
+  reg [31:0] pc_2;
+  reg [31:0] pc_3;
   reg [31:0] instruction;
-  assign pc_id = pc;
+  reg [1:0] record_flush;
+  assign pc_id = pc_3;
   assign instruction_id = instruction;
   
   always @(posedge clk) begin
     if (~rstn) begin
-      pc <= 32'b0;
+      pc_1 <= 32'b0;
+      pc_2 <= 32'b0;
+      pc_3 <= 32'b0;
       instruction <= 32'b0;
-    end else if (ifidwrite) begin
-      pc <= pc;
+      record_flush <= 2'b0;
+    end else if (ifidwrite || ~data_ready_mem) begin
+      pc_1 <= pc_1;
+      pc_2 <= pc_2;
+      pc_3 <= pc_3;
       instruction <= instruction;
+      record_flush <= record_flush;
     end else if (if_flush) begin
-      pc <= pc_if;
+      pc_1 <= pc_if;
+      pc_2 <= pc_1;
+      pc_3 <= pc_2;
       instruction <= 32'b0;
+      record_flush <= 2'b10;
+    end else if (record_flush == 2'b10) begin
+      pc_1 <= pc_if;
+      pc_2 <= pc_1;
+      pc_3 <= pc_2;
+      instruction <= 32'b0;
+      record_flush <= 2'b01;
+    end else if (record_flush == 2'b01) begin
+      pc_1 <= pc_if;
+      pc_2 <= pc_1;
+      pc_3 <= pc_2;
+      instruction <= 32'b0;
+      record_flush <= 2'b0;
     end else begin
-      pc <= pc_if;
+      pc_1 <= pc_if;
+      pc_2 <= pc_1;
+      pc_3 <= pc_2;
       instruction <= instruction_if;
     end
   end
@@ -97,6 +127,9 @@ module idex
     input wire [2:0] funct3_id,
     input wire [6:0] funct7_id,
     input wire [4:0] rd_id,
+    input wire data_ready_mem,
+    input wire [6:0] opcode_id;
+    output wire [6:0] opcode_ex;
     output wire branch_ex,
     output wire memread_ex,
     output wire memtoreg_ex,
@@ -130,6 +163,7 @@ module idex
   reg [2:0] funct3;
   reg [6:0] funct7;
   reg [4:0] rd;
+  reg [6:0] opcode;
 
   assign branch_ex = branch;
   assign memread_ex = memread;
@@ -147,6 +181,7 @@ module idex
   assign funct3_ex = funct3;
   assign funct7_ex = funct7;
   assign rd_ex = rd;
+  assign opcode_ex = opcode;
 
   always @(posedge clk) begin
     if (~rstn) begin
@@ -166,7 +201,8 @@ module idex
       funct3 <= 3'b0;
       funct7 <= 7'b0;
       rd <= 5'b0;
-    end else begin
+      opcode <= 7'b0;
+    end else if (data_ready_mem) begin
       branch <= branch_id;
       memread <= memread_id;
       memtoreg <= memtoreg_id;
@@ -183,6 +219,7 @@ module idex
       funct3 <= funct3_id;
       funct7 <= funct7_id;
       rd <= rd_id;
+      opcode <= opcode_id;
     end
   end
 
@@ -200,6 +237,7 @@ module exmem
     input wire [31:0] alu_result_ex,
     input wire [31:0] write_data_memory_ex,
     input wire [4:0] rd_ex,
+    input wire data_ready_mem,
     output wire regwrite_mem,
     output wire memtoreg_mem,
     output wire memwrite_mem,
@@ -233,7 +271,7 @@ module exmem
       alu_result <= 32'b0;
       write_data_memory <= 32'b0;
       rd <= 5'b0;
-    end else begin
+    end else if (data_ready_mem) begin
       regwrite <= regwrite_ex;
       memtoreg <= memtoreg_ex;
       memwrite <= memwrite_ex;
@@ -256,6 +294,7 @@ module memwb
     input wire [31:0] data_from_memory_mem,
     input wire [31:0] alu_result_mem,
     input wire [4:0] rd_mem,
+    input wire data_ready_mem,
     output wire regwrite_wb,
     output wire memtoreg_wb,
     output wire [31:0] data_from_memory_wb,
@@ -281,7 +320,7 @@ module memwb
       data_from_memory <= 32'b0;
       alu_result <= 32'b0;
       rd <= 5'b0;
-    end else begin
+    end else if (data_ready_mem) begin
       regwrite <= regwrite_mem;
       memtoreg <= memtoreg_mem;
       data_from_memory <= data_from_memory_mem;

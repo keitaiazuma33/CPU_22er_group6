@@ -1,14 +1,16 @@
 module controlunit
   (
-    input wire [6:0] opcode,
+    input wire [6:0] opcode_id,
     output wire [7:0] controlunit_out
   );
   assign controlunit_out = 
-  (opcode == 7'b0010011) ? 8'b10100010 :
-  (opcode == 7'b0110011) ? 8'b00100010 :
-  (opcode == 7'b0000011) ? 8'b11110000 :
-  (opcode == 7'b0100011) ? 8'b10001000 :
-  (opcode == 7'b1100011) ? 8'b00000101 : 8'b0;
+  (opcode_id == 7'b0000000) ? 8'b00000000 : 
+  (opcode_id == 7'b0010011) ? 8'b10100010 :
+  (opcode_id == 7'b0110011) ? 8'b00100010 :
+  (opcode_id == 7'b0000011) ? 8'b11110000 :
+  (opcode_id == 7'b0100011) ? 8'b10001000 :
+  (opcode_id == 7'b1100011) ? 8'b00000101 : 
+  (opcode_id == 7'b1010011) ? 8'b00100011 : 8'b0;
   
 
 
