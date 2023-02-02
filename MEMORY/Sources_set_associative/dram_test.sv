@@ -4,9 +4,7 @@ module dram_test (
     master_fifo.master fifo,
     input logic sys_clk,
     input logic mem_clk,
-    input cpu_req_type cpu_to_cache_request,
-    output cpu_result_type cpu_res,
-    output logic led_memory
+    output logic led
 );
     //fifoへの標準的な信号の接続
     assign fifo.clk = sys_clk;
@@ -14,8 +12,10 @@ module dram_test (
     
     //キャッシュシステムにつなぐ配線
     //詳細な構造体の記述は下位モジュール：L1_cache参照
+    cpu_req_type cpu_to_cache_request;
     mem_data_type mem_data;
     L2_req_type mem_req;
+    cpu_result_type cpu_res;
     logic rst;
     logic [2:0] state;
     
@@ -38,7 +38,178 @@ module dram_test (
         .state(state)
     );
     
-    
+    logic [3:0] tb_state = 4'b0000;
+    always_ff @ (posedge sys_clk) begin
+        case (tb_state)
+            4'b0000: begin
+                /*
+                fifo.req.cmd  = 1'b0;
+                fifo.req.addr = 27'b110101010101010101010101000;
+                fifo.req.data = 128'b0;
+                fifo.req_en   = 1'b1;
+                */
+                tb_state <= 4'b0001;
+            end
+            4'b0001: begin
+                //
+                cpu_to_cache_request.addr = 27'b010101010101010101010101010;
+                cpu_to_cache_request.data = 32'b00110011001100110011001100110011;
+                cpu_to_cache_request.rw = 1'b1;
+                cpu_to_cache_request.valid = 1'b1;
+                /*
+                fifo.req.cmd  = 1'b1;
+                fifo.req.addr = 27'h2aaaaa8;
+                fifo.req.data = 128'b0;
+                fifo.req_en   = 1'b1;
+                */
+                if (/*fifo.rsp_en*/cpu_res.ready) begin
+                    tb_state <= 4'b0010;
+                end
+            end
+            4'b0010: begin
+                //
+                cpu_to_cache_request.addr = 27'b010101010101010101010101010;
+                cpu_to_cache_request.data = 32'b00001111000011110000111100001111;
+                cpu_to_cache_request.rw = 1'b0;
+                cpu_to_cache_request.valid = 1'b1;
+                /*
+                fifo.req.cmd  = 1'b0;
+                fifo.req.addr = 27'h2aaaaa8;
+                fifo.req.data = 128'h1c71c71c333333330000000000000000;
+                fifo.req_en   = 1'b1;
+                */
+                if (/*fifo.rsp_en*/cpu_res.ready) begin
+                    tb_state <= 4'b0011;
+                end
+            end
+            4'b0011: begin
+                //
+                cpu_to_cache_request.addr = 27'b010101010101010101010101011;
+                cpu_to_cache_request.data = 32'b00011100011100011100011100011100;
+                cpu_to_cache_request.rw = 1'b1;
+                cpu_to_cache_request.valid = 1'b1;
+                /*
+                fifo.req.cmd  = 1'b1;
+                fifo.req.addr = 27'h61827b8;
+                fifo.req.data = 128'b0;
+                fifo.req_en   = 1'b1;
+                */
+                if (/*fifo.rsp_en*/cpu_res.ready) begin
+                    tb_state <= 4'b0100;
+                end
+            end
+            //
+            4'b0100: begin
+                cpu_to_cache_request.addr = 27'b010101010101010101010101011;
+                cpu_to_cache_request.data = 32'b00001111000011110000111100001111;
+                cpu_to_cache_request.rw = 1'b0;
+                cpu_to_cache_request.valid = 1'b1;
+                if (cpu_res.ready) begin
+                    tb_state <= 4'b0101;
+                end
+            end
+            4'b0101: begin
+                cpu_to_cache_request.addr = 27'b001100010101010101010101010;
+                cpu_to_cache_request.data = 32'b00001111000011110000111100001111;
+                cpu_to_cache_request.rw = 1'b1;
+                cpu_to_cache_request.valid = 1'b1;
+                if (cpu_res.ready) begin
+                    tb_state <= 4'b0110;
+                end
+            end
+            4'b0110: begin
+                cpu_to_cache_request.addr = 27'b001100010101010101010101010;
+                cpu_to_cache_request.data = 32'b00011100011100011100011100011100;
+                cpu_to_cache_request.rw = 1'b0;
+                cpu_to_cache_request.valid = 1'b1;
+                if (cpu_res.ready) begin
+                    tb_state <= 4'b0111;
+                end
+            end
+            4'b0111: begin
+                cpu_to_cache_request.addr = 27'b001100010101010101010101011;
+                cpu_to_cache_request.data = 32'habcdef00;
+                cpu_to_cache_request.rw = 1'b1;
+                cpu_to_cache_request.valid = 1'b1;
+                if (cpu_res.ready) begin
+                    tb_state <= 4'b1000;
+                end
+            end
+            4'b1000: begin
+                cpu_to_cache_request.addr = 27'b001100010101010101010101011;
+                cpu_to_cache_request.data = 32'b00011100011100011100011100011100;
+                cpu_to_cache_request.rw = 1'b0;
+                cpu_to_cache_request.valid = 1'b1;
+                if (cpu_res.ready) begin
+                    tb_state <= 4'b1001;
+                end
+            end
+            4'b1001: begin
+                cpu_to_cache_request.addr = 27'b001100010101010101010101001;
+                cpu_to_cache_request.data = 32'habcdef11;
+                cpu_to_cache_request.rw = 1'b1;
+                cpu_to_cache_request.valid = 1'b1;
+                if (cpu_res.ready) begin
+                    tb_state <= 4'b1010;
+                end
+            end
+            4'b1010: begin
+                cpu_to_cache_request.addr = 27'b001100010101010101010101001;
+                cpu_to_cache_request.data = 32'b00011100011100011100011100011100;
+                cpu_to_cache_request.rw = 1'b0;
+                cpu_to_cache_request.valid = 1'b1;
+                if (cpu_res.ready) begin
+                    tb_state <= 4'b1011;
+                end
+            end
+            4'b1011: begin
+                cpu_to_cache_request.addr = 27'b001100010101010101010101000;
+                cpu_to_cache_request.data = 32'habcdef33;
+                cpu_to_cache_request.rw = 1'b1;
+                cpu_to_cache_request.valid = 1'b1;
+                if (cpu_res.ready) begin
+                    tb_state <= 4'b1100;
+                end
+            end
+            4'b1100: begin
+                cpu_to_cache_request.addr = 27'b001100010101010101010101000;
+                cpu_to_cache_request.data = 32'b00011100011100011100011100011100;
+                cpu_to_cache_request.rw = 1'b0;
+                cpu_to_cache_request.valid = 1'b1;
+                if (cpu_res.ready) begin
+                    tb_state <= 4'b1101;
+                end
+            end
+            4'b1101: begin
+                cpu_to_cache_request.addr = 27'b111111010101010101010101010;
+                cpu_to_cache_request.data = 32'haaaabbbb;
+                cpu_to_cache_request.rw = 1'b1;
+                cpu_to_cache_request.valid = 1'b1;
+                if (cpu_res.ready) begin
+                    tb_state <= 4'b1110;
+                end
+            end
+            4'b1110: begin
+                cpu_to_cache_request.addr = 27'b111111010101010101010101010;
+                cpu_to_cache_request.data = 32'haaaabbcc;
+                cpu_to_cache_request.rw = 1'b0;
+                cpu_to_cache_request.valid = 1'b1;
+                if (cpu_res.ready) begin
+                    tb_state <= 4'b1111;
+                end
+            end
+            4'b1111: begin
+                cpu_to_cache_request.addr = 27'b000000010101010101010101010;
+                cpu_to_cache_request.data = 32'haaaabbcc;
+                cpu_to_cache_request.rw = 1'b0;
+                cpu_to_cache_request.valid = 1'b1;
+                if (cpu_res.ready) begin
+                    tb_state <= 4'b1111;
+                end
+            end
+            //
+        endcase
+    end
     
     //キャッシュシステム -> master FIFO へリクエストをつなげる
     assign fifo.req.cmd  = ~mem_req.rw;
@@ -52,7 +223,7 @@ module dram_test (
     //テスト用
     logic first_data_identity = 1'b0;
     logic second_data_identity = 1'b0;
-    assign led_memory = first_data_identity && second_data_identity;
+    assign led = first_data_identity && second_data_identity;
 
     logic [1:0] rsp_state = '0;
     always_ff @ (posedge sys_clk) begin

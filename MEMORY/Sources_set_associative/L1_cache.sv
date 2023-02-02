@@ -53,7 +53,20 @@ typedef struct {
 //128-bit cache line data
 typedef bit [CACHE_width - 1:0] cache_data_type;
 
+// data structures for CPU<->Cache controller interface
+// CPU request (CPU->cache controller)
+typedef struct {
+    bit [26:0] addr; //32-bit request addr
+    bit [31:0] data; //32-bit request data (used when write)
+    bit [0:0]  rw;   //request type : 0 = read, 1 = write
+    bit [0:0]  valid; //request is valid
+}cpu_req_type;
 
+// Cache result (cache controller->cpu)
+typedef struct {
+    bit [31:0] data; //32-bit data
+    bit [0:0]  ready; //result is ready
+}cpu_result_type;
 
 //----------------------------------------------------------------------
 // data structures for cache controller<->memory interface
