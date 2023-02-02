@@ -2,7 +2,7 @@
 
 
 
-module io #(CLK_PER_HALF_BIT = 100) 
+module io #(CLK_PER_HALF_BIT = 217) 
   (
     input wire rxd,
     output wire txd,
@@ -78,7 +78,7 @@ module io #(CLK_PER_HALF_BIT = 100)
   assign pixels    = 32'd16384; 
   
   reg [31:0] output_io_reg;
-  assign output_io = input_program;
+  assign output_io = output_io_reg;
 
   assign program_words = {2'b00,program_bytes[31:2]};                      //How many words there are in the program
   assign addr_in_instr = {counter[29:0] - 30'd1,2'b00};                    //address of instruction memory
@@ -122,18 +122,22 @@ module io #(CLK_PER_HALF_BIT = 100)
       blue_10 <= 8'b0;
       blue_1 <= 8'b0;
     end else begin
-      if (status == 16'd0) begin  //send "99"                                                                                 
+      if (status == 16'd0) begin  //send "99"                    
+        output_io_reg <= 32'hffff8000;                                                             
         sdata <= 8'h99; status <= status + 16'd1;
       end else if (status[3:0] == 4'd1) begin  //start sending data
+        output_io_reg <= 32'hffff4000;
         tx_start <= 1'b1;
         status <= status + 16'd1;
       end else if (status[3:0] == 4'd2) begin  //check tx_busy
         if (tx_busy) begin
+          output_io_reg <= 32'hffff2000;
           status <= status + 16'd1;
           tx_start <= 1'b0;
         end
       end else if (status[3:0] == 4'd3) begin  //check that sending has completed
         if (~tx_busy) begin
+          output_io_reg <= 32'hffff1000;
           status <= status + 16'd13;
         end
       end else if (status[3:0] == 4'd4) begin  //check that recieving has completed
@@ -311,7 +315,7 @@ endmodule
 
 
 //module to simulate io
-module io_computer_side #(CLK_PER_HALF_BIT = 100) 
+module io_computer_side #(CLK_PER_HALF_BIT = 217) 
   (
     input wire rxd,
     output wire txd,
@@ -326,11 +330,10 @@ module io_computer_side #(CLK_PER_HALF_BIT = 100)
   wire tx_busy;
   wire ferr;
 
-  parameter WIDTH = 32, LOGWIDTH = 5;
   wire [31:0] program_bytes;
   assign program_bytes = 32'd128;
 
-  reg [31:0] ram [0:WIDTH - 1];
+  reg [31:0] ram [0:31/**/];
 
 
   reg [15:0] status;
@@ -345,43 +348,11 @@ module io_computer_side #(CLK_PER_HALF_BIT = 100)
   reg [31:0] program_buffer;
 
   initial begin
-    $readmemb("fib.mem", ram);
+    $readmemb("increment.mem", ram);
   end
 
   always @(posedge clk) begin
     if (~rstn) begin
-      //ram[0] <=  32'b0000100_00000_00000_000_01010_0010011;  //  00100093   93001000   addi x1,   zero, 1
-      //ram[1] <=  32'b0000000_01110_01101_010_00000_0100011;  //  00100113   13011000   addi x2,   zero, 1
-      //ram[2] <=  32'b0000000_00010_01110_000_01110_0010011;  //  00200213   13022000   addi x4,   zero, 2
-      //ram[3] <=  32'b0000000_00100_01101_000_01101_0010011;  //  00a00293   9302a000   addi x5,   zero, 10
-      //ram[4] <=  32'b0000000_00001_01011_000_01011_0010011;  //  00000393   93030000   addi x7,   zero, 0
-      //ram[5] <=  32'b0000000_01010_01011_000_01000_1100011;  //  0013a023   23a01300   sw   x1,   0(x7)
-      //ram[6] <=  32'b1111111_00000_00000_000_01101_1100011;  //  00438393   93834300   addi x7,   x7,   4
-      //ram[7] <=  32'b0000000_00000_00000_000_01011_0010011;  //  0023a023   23a02300   sw   x2,   0(x7)
-      //ram[8] <=  32'b0000000_00001_01100_000_01100_0010011;  //  00438393   93834300   addi x7,   x7,   4                LABEL2
-      //ram[9] <=  32'b0000000_01010_01100_000_01000_1100011;  //  002081b3   b3812000   add  x3,   x1,   x2
-      //ram[10] <= 32'b1111110_00000_00000_000_11101_1100011;  //  0033a023   23a03300   sw   x3,   0(x7)
-      //ram[11] <= 32'b0000000_00000_00000_000_00000_0000000;  //  00010093   93000100   addi x1,   x2,   0
-      //ram[12] <= 32'b0000000_00000_00000_000_00000_0000000;  //  00018113   13810100   addi x2,   x3,   0
-      //ram[13] <= 32'b0000000_00000_00000_000_00000_0000000;  //  00120213   13021200   addi x4,   x4,   1
-      //ram[14] <= 32'b0000000_00000_00000_000_00000_0000000;  //  00520463   63045200   beq  x4,   x5,   LABEL1 (= 64 (+ 8))
-      //ram[15] <= 32'b0000000_00000_00000_000_00000_0000000;  //  fe0002e3   e30200fe   beq  zero, zero, LABEL2 (= 32 (- 28))
-      //ram[16] <= 32'b1111111_11111_11111_111_11110_0000000;  //  0003a303   03a30300   lw   x6,   0(x7)                  LABEL1
-      //ram[17] <= 32'b0000000_00000_00000_000_00000_0000000;  //  00120213   13021200   addi x4,   x4,   1                LABEL3
-      //ram[18] <= 32'b0000000_00000_00000_000_00000_0000000;  //  fe000ee3   e30e00fe   beq  zero, zero, LABEL3 (= 68 (- 4))                    
-      //ram[19] <= 32'b0000000_00000_00000_000_00000_0000000;  //  00000000
-      //ram[20] <= 32'b0000000_00000_00000_000_00000_0000000;  //  00000000
-      //ram[21] <= 32'b0000000_00000_00000_000_00000_0000000;  //  00000000
-      //ram[22] <= 32'b0000000_00000_00000_000_00000_0000000;  //  00000000
-      //ram[23] <= 32'b0000000_00000_00000_000_00000_0000000;  //  00000000
-      //ram[24] <= 32'b0000000_00000_00000_000_00000_0000000;  //  00000000
-      //ram[25] <= 32'b0000000_00000_00000_000_00000_0000000;  //  00000000
-      //ram[26] <= 32'b0000000_00000_00000_000_00000_0000000;  //  00000000
-      //ram[27] <= 32'b0000000_00000_00000_000_00000_0000000;  //  00000000
-      //ram[28] <= 32'b0000000_00000_00000_000_00000_0000000;  //  00000000
-      //ram[29] <= 32'b0000000_00000_00000_000_00000_0000000;  //  00000000
-      //ram[30] <= 32'b0000000_00000_00000_000_00000_0000000;  //  00000000
-      //ram[31] <= 32'b0000000_00000_00000_000_00000_0000000;  //  00000000
       sdata <= 8'h00;
       tx_start <= 1'b0;
       status <= 16'd0;
@@ -418,14 +389,14 @@ module io_computer_side #(CLK_PER_HALF_BIT = 100)
       end else if (status == 16'd80) begin sdata <= program_bytes[31:24];           status <= status + 16'd1;
       end else if (status == 16'd96) begin status <= 16'd112;
       end else if (status == 16'd112) begin
-        program_buffer <= ram[counter[LOGWIDTH - 1:0]];
+        program_buffer <= ram[counter[4/**/:0]];
         status <= 16'd128;
       end else if (status == 16'd128) begin sdata <= program_buffer[7:0];           status <= status + 16'd1;
       end else if (status == 16'd144) begin sdata <= program_buffer[15:8];          status <= status + 16'd1;
       end else if (status == 16'd160) begin sdata <= program_buffer[23:16];         status <= status + 16'd1;
       end else if (status == 16'd176) begin sdata <= program_buffer[31:24];         status <= status + 16'd1;
       end else if (status == 16'd192) begin
-        if (counter[LOGWIDTH - 1:0] != WIDTH - 1) begin
+        if (counter[4/**/:0] != 31/**/) begin
           counter <= counter + 32'b1;
           status <= status - 16'd80;
         end else begin

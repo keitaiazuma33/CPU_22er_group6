@@ -9,6 +9,7 @@ module core(
 
 wire alusrc_id;
 wire alusrc_ex;
+wire branch_alu;
 wire branch_id;
 wire branch_ex;
 wire branchtrue;
@@ -38,7 +39,6 @@ wire regwrite_wb;
 wire pcwrite;
 wire port_en_1_instr;
 wire wr_en_instr;
-wire zero;
 
 wire [1:0] alu_op_id;
 wire [1:0] alu_op_ex;
@@ -96,12 +96,12 @@ wire [31:0] write_data_memory_ex;
 wire [31:0] write_data_memory_mem;
 wire [31:0] write_data_register_wb;
 
-assign outputs = {16'b0,output_register[15:0]};
+assign outputs = {16'b0,output_io[15:0]};
 assign port_en_1_instr = 1'b1;
 
 // multiplexers etc. out of module
 assign write_data_register_wb = (memtoreg_wb == 1'b1) ? data_from_memory_wb : alu_result_wb;
-assign branchtrue = branch_ex & zero;
+assign branchtrue = branch_ex & branch_alu;
 assign src_b = (alusrc_ex == 1'b1) ? imm_ex : write_data_memory_ex;
 assign write_data_memory_ex = (forward_b == 2'b00) ? read_data2_ex :
                               (forward_b == 2'b10) ? alu_result_mem : write_data_register_wb;
@@ -131,10 +131,12 @@ io _io
 
 alu _alu
   (
+    .clk(clk),
+    .rstn(rstn),
     .src_a(src_a),
     .src_b(src_b),
     .alu_control(alu_control),
-    .zero(zero),
+    .branch_alu(branch_alu),
     .alu_result_ex(alu_result_ex)
   );
 

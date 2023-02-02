@@ -74,10 +74,6 @@ module ifid
       instruction <= 32'b0;
       record_flush <= 2'b0;
     end else if (ifidwrite || ~data_ready_mem) begin
-      pc_1 <= pc_1;
-      pc_2 <= pc_2;
-      pc_3 <= pc_3;
-      instruction <= instruction;
       record_flush <= record_flush;
     end else if (if_flush) begin
       pc_1 <= pc_if;
@@ -128,8 +124,8 @@ module idex
     input wire [6:0] funct7_id,
     input wire [4:0] rd_id,
     input wire data_ready_mem,
-    input wire [6:0] opcode_id;
-    output wire [6:0] opcode_ex;
+    input wire [6:0] opcode_id,
+    output wire [6:0] opcode_ex,
     output wire branch_ex,
     output wire memread_ex,
     output wire memtoreg_ex,

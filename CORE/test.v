@@ -7,10 +7,10 @@ module test_all #(CLK_PER_HALF_BIT = 100) ();
   reg rstn2;
   wire core_to_comp;
   wire comp_to_core;
-  wire [31:0] output_register;
+  wire [15:0] led;
 
   io_computer_side _io_computer_side(core_to_comp,comp_to_core,clk,rstn1);
-  core _core(comp_to_core,clk,rstn2,core_to_comp,output_register);
+  core_wrapper _core_wrapper(clk,rstn2,comp_to_core,core_to_comp,led);
 
   initial begin
     clk = 1'b0;

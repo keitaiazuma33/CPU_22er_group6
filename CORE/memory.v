@@ -17,7 +17,7 @@ module instruction_ram
   assign clka = clk;
 
   wire ena;
-  assign ena = port_en_1_instr;
+  assign ena = 1'b1;
 
   wire wea;
   assign wea = wr_en_instr;

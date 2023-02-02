@@ -1,4 +1,4 @@
-//å®Ÿè³ªãƒ†ã‚¹ãƒˆãƒ™ãƒ³ãƒ
+//À¿ƒeƒXƒgƒxƒ“ƒ`
 
 module dram_test (
     master_fifo.master fifo,
@@ -6,14 +6,14 @@ module dram_test (
     input logic mem_clk,
     input cpu_req_type cpu_to_cache_request,
     output cpu_result_type cpu_res,
-    output logic led_memory
+    output logic led
 );
-    //fifoã¸ã®æ¨™æº–çš„ãªä¿¡å·ã®æ¥ç¶š
+    //fifo‚Ö‚Ì•W€“I‚ÈM†‚ÌÚ‘±
     assign fifo.clk = sys_clk;
     assign fifo.rsp_rdy = 1'b1;
     
-    //ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚·ã‚¹ãƒ†ãƒ ã«ã¤ãªãé…ç·š
-    //è©³ç´°ãªæ§‹é€ ä½“ã®è¨˜è¿°ã¯ä¸‹ä½ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ï¼šL1_cacheå‚ç…§
+    //ƒLƒƒƒbƒVƒ…ƒVƒXƒeƒ€‚É‚Â‚È‚®”zü
+    //Ú×‚È\‘¢‘Ì‚Ì‹Lq‚Í‰ºˆÊƒ‚ƒWƒ…[ƒ‹FL1_cacheQÆ
     mem_data_type mem_data;
     L2_req_type mem_req;
     logic rst;
@@ -27,7 +27,7 @@ module dram_test (
     L1_cache cache_system_instance
     (
         //input
-        .sys_clk(sys_clk),                        //ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚·ã‚¹ãƒ†ãƒ 
+        .sys_clk(sys_clk),                        //ƒLƒƒƒbƒVƒ…ƒVƒXƒeƒ€
         .mem_clk(mem_clk),
         .RST(rst),
         .cpu_to_cache_request(cpu_to_cache_request),   //addr[26:0],data[31:0],rw[0:0],valid[0:0]
@@ -40,19 +40,19 @@ module dram_test (
     
     
     
-    //ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚·ã‚¹ãƒ†ãƒ  -> master FIFO ã¸ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’ã¤ãªã’ã‚‹
+    //ƒLƒƒƒbƒVƒ…ƒVƒXƒeƒ€ -> master FIFO ‚ÖƒŠƒNƒGƒXƒg‚ğ‚Â‚È‚°‚é
     assign fifo.req.cmd  = ~mem_req.rw;
     assign fifo.req.addr =  mem_req.addr;
     assign fifo.req.data =  mem_req.data;
     assign fifo.req_en   =  mem_req.valid;
-    //master FIFOã«DRAMã‹ã‚‰æ¥ãŸãƒ‡ãƒ¼ã‚¿ã‚’ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚·ã‚¹ãƒ†ãƒ ã«æ¸¡ã™
+    //master FIFO‚ÉDRAM‚©‚ç—ˆ‚½ƒf[ƒ^‚ğƒLƒƒƒbƒVƒ…ƒVƒXƒeƒ€‚É“n‚·
     assign mem_data.data  = fifo.rsp.data;
     assign mem_data.ready = fifo.rsp_en;
     
-    //ãƒ†ã‚¹ãƒˆç”¨
+    //ƒeƒXƒg—p
     logic first_data_identity = 1'b0;
     logic second_data_identity = 1'b0;
-    assign led_memory = first_data_identity && second_data_identity;
+    assign led = first_data_identity && second_data_identity;
 
     logic [1:0] rsp_state = '0;
     always_ff @ (posedge sys_clk) begin

@@ -53,7 +53,20 @@ typedef struct {
 //128-bit cache line data
 typedef bit [CACHE_width - 1:0] cache_data_type;
 
+// data structures for CPU<->Cache controller interface
+// CPU request (CPU->cache controller)
+typedef struct {
+    bit [26:0] addr; //32-bit request addr
+    bit [31:0] data; //32-bit request data (used when write)
+    bit [0:0]  rw;   //request type : 0 = read, 1 = write
+    bit [0:0]  valid; //request is valid
+}cpu_req_type;
 
+// Cache result (cache controller->cpu)
+typedef struct {
+    bit [31:0] data; //32-bit data
+    bit [0:0]  ready; //result is ready
+}cpu_result_type;
 
 //----------------------------------------------------------------------
 // data structures for cache controller<->memory interface
@@ -134,7 +147,7 @@ module L1_cache(
     assign accessed_save_way1_logic = accessed_save_way1;
     
     // L1 Cache (WAY0)
-    CACHE_L1_way0 CACHE_L1_way0 (
+    blk_mem_gen_0 CACHE_L1_way0 (
         .clka(mem_clk),
         .ena(ena),     //常にアクティブ
         .wea(data_req_L1_way0.we),
@@ -143,7 +156,7 @@ module L1_cache(
         .douta(cache_L1_way0_dout)
     );
     // L1 Cache (WAY1)
-    CACHE_L1_way1 CACHE_L1_way1 (
+    blk_mem_gen_1 CACHE_L1_way1 (
         .clka(mem_clk),
         .ena(ena),
         .wea(data_req_L1_way1.we),
@@ -153,7 +166,7 @@ module L1_cache(
     );
     
     // L1 PMT (WAY0)
-    PMT_L1_way0 PMT_L1_way0 (
+    blk_mem_gen_2 PMT_L1_way0 (
         .clka(mem_clk),
         .ena(ena),
         .wea(pmt_req_L1_way0.we),
@@ -162,7 +175,7 @@ module L1_cache(
         .douta(pmt_L1_way0_dout)
     );
     // L1 PMT (WAY1)
-    PMT_L1_way1 PMT_L1_way1 (
+    blk_mem_gen_3 PMT_L1_way1 (
         .clka(mem_clk),
         .ena(ena),
         .wea(pmt_req_L1_way1.we),
