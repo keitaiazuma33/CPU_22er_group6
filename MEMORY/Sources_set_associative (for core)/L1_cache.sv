@@ -53,6 +53,21 @@ typedef struct {
 //128-bit cache line data
 typedef bit [CACHE_width - 1:0] cache_data_type;
 
+// data structures for CPU<->Cache controller interface
+// CPU request (CPU->cache controller)
+typedef struct {
+    bit [26:0] addr; //32-bit request addr
+    bit [31:0] data; //32-bit request data (used when write)
+    bit [0:0]  rw;   //request type : 0 = read, 1 = write
+    bit [0:0]  valid; //request is valid
+}cpu_req_type;
+
+// Cache result (cache controller->cpu)
+typedef struct {
+    bit [31:0] data; //32-bit data
+    bit [0:0]  ready; //result is ready
+}cpu_result_type;
+
 //----------------------------------------------------------------------
 // data structures for cache controller<->memory interface
 // memory request (cache controller->memory)
@@ -120,6 +135,9 @@ module L1_cache(
     
     logic L1_way0_hit;
     logic L1_way1_hit;
+    /*cache hit (tag match and cache entry is valid)*/
+    assign L1_way0_hit = (cpu_to_cache_request.addr[TAGMSB:TAGLSB] == pmt_L1_way0_dout.tag) ? pmt_L1_way0_dout.valid : 1'b0;
+    assign L1_way1_hit = (cpu_to_cache_request.addr[TAGMSB:TAGLSB] == pmt_L1_way1_dout.tag) ? pmt_L1_way1_dout.valid : 1'b0;
     reg [0:0] LRU;
     logic [0:0] LRU_logic;
     assign LRU_logic = LRU;
@@ -178,10 +196,11 @@ module L1_cache(
     assign mem_req = mem_req_L1_to_L2; //connect to output ports
     assign cpu_res = cpu_res_L1;
     
-    logic [1:0] LRU_input;
-    
     logic [1:0] more_accessed_max;
     assign more_accessed_max = (accessed_save_way0_logic >= accessed_save_way1_logic) ? ((accessed_save_way0_logic == 3'b111) ? 2'b01 : 2'b00) : ((accessed_save_way1_logic == 3'b111) ? 2'b11 : 2'b10);
+    
+    logic [1:0] LRU_input;
+    assign LRU_input = (~(L1_way0_hit || L1_way1_hit)) ? ((more_accessed_max[1:1] == 1'b1) ? (pmt_L1_way1_dout.valid ? 1'b0 : 1'b1) : (pmt_L1_way0_dout.valid ? 1'b1 : 1'b0)) : ( (~L1_way0_hit) ? 1'b0 : ((~L1_way1_hit) ? 1'b1 : ((more_accessed_max[1:1] == 1'b1) ? 1'b0 : 1'b1)));
     
     always_comb begin
     
@@ -371,11 +390,6 @@ case(rstate)
     /*compare_tag state*/ 
     compare_tag :
     begin
-        /*cache hit (tag match and cache entry is valid)*/
-        assign L1_way0_hit = (cpu_to_cache_request.addr[TAGMSB:TAGLSB] == pmt_L1_way0_dout.tag && pmt_L1_way0_dout.valid);
-        assign L1_way1_hit = (cpu_to_cache_request.addr[TAGMSB:TAGLSB] == pmt_L1_way1_dout.tag && pmt_L1_way1_dout.valid);
-        
-        assign LRU_input = (~(L1_way0_hit || L1_way1_hit)) ? ((more_accessed_max[1:1] == 1'b1) ? (pmt_L1_way1_dout.valid ? 1'b0 : 1'b1) : (pmt_L1_way0_dout.valid ? 1'b1 : 1'b0)) : ( (~L1_way0_hit) ? 1'b0 : ((~L1_way1_hit) ? 1'b1 : ((more_accessed_max[1:1] == 1'b1) ? 1'b0 : 1'b1)));
         LRU <= LRU_input;
         accessed_save_way0 <= pmt_L1_way0_dout.accessed;
         accessed_save_way1 <= pmt_L1_way1_dout.accessed;
