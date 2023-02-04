@@ -6,7 +6,7 @@ vector<Bit64> array0(1025);
 Bit64 sub_uint (Bit64 i, int a, int b){ //i[a:b]
     // e1  = x1  >> 22 & (1 << 8 - 1); x1[30:23];
     // cout << b << " " << (a-b+1) << endl;
-    Bit64 x = (i >> b) & ((1 << (a-b+1)) - 1);
+    Bit64 x = (i >> b) & ((1ULL << (a-b+1)) - 1);
     return x;
 }
 Bit64 at_uint (Bit64 i, int a){ //i[a:b]; i[a]
