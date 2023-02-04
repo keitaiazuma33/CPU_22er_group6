@@ -1,12 +1,16 @@
 # (1)コンパイラ
 CC  = g++
 # (2)コンパイルオプション
-CFLAGS    = -std=c++11 -g
+CFLAGS    = -std=c++11 
 # (3)実行ファイル名
 TARGET  = fpu_sim
 # (4)コンパイル対象のソースコード
-SRCS = simu_fmul.cpp
+# SRCS = simu_ftoi.cpp
+SRCS = simu_fsqrt2.cpp
+SRCS += simu_fmul.cpp
+SRCS += simu_fadd.cpp 
 SRCS += fpu_common.cpp 
+
 
 # (5)オブジェクトファイル名
 OBJS    = $(SRCS:.cpp=.o)

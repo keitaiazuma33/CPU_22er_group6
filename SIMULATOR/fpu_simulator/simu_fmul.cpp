@@ -102,20 +102,20 @@ Bit32 finv(Bit32 x){ //float x_){
     // vector<vector<int> > array0(1024, vector<int>(40));
     // vector<Bit32> array0(1024);
     // array0にtxtファイルの内容入れる
-    in_data(); 
+    string filename = "finv_data.coe";
+    in_data(filename);
     // for(int i = 0; i < 1024;i++){
     //     // cout << array0[i] << endl; //ok
     // }
     // Bit64?
     Bit64 data_from_a = array0[bram_addr]; //arrayから撮ってきたもの？
-    // puts("data_from_a");
-    // cout << "bram_addr" << bram_addr << endl;
-    // print_sub_bit(data_from_a); 
+    cout << "bram_addr" << bram_addr;
+    cout << "data_from_a" << data_from_a << endl; //ここok
     Bit32 addr_a;
     // while(){// if(RST != 1){
     addr_a = bram_addr;
     Bit32 gradient, delta, y_intersect;
-    gradient = (sub_uint(data_from_a, 35,35) == 0) ? ((0b101111110<<23) | (sub_uint(data_from_a,34,23) << 11)) : (0b101111101<<23 | (sub_uint(data_from_a,34,23)<<11));
+    gradient = (sub_uint(data_from_a, 35,35) == 0) ? ((0b101111110<<23) | (sub_uint(data_from_a,34,23) << 11)) : ((0b101111101<<23) | (sub_uint(data_from_a,34,23)<<11));
     delta = ((0b001111111<<23) | sub_uint(x,22,0));
     y_intersect = ((0b001111111<<23) | sub_uint(data_from_a,22,0));
     Bit32 fmul_ans, fadd_ans;
@@ -135,31 +135,36 @@ Bit32 fdiv(Bit32 x1, Bit32 x2){
     y = fmul(x1, finv_ans);
     return y;
 }
-int main(){
-    float x_1, x_2;
-    x_1 = 1.64; //0	100	0011	1	001	0101	0000	0000	0000	0000
-    x_2 = 0.82;
-    Bit32 x1, x2;
-    x1 = f_to_bit(x_1); x2 = f_to_bit(x_2);
-    Bit32 y = fmul(x1, x2);
-    puts("fmul");
-    print_sub_bit(y);
+// int main(){
+    // float x_1, x_2;
+    // x_1 = 1.64; //44fa21b3
+    // x_2 = 2.23; //44fa40f8
+    // Bit32 x1, x2;
+    // x1 = f_to_bit(x_1); x2 = f_to_bit(x_2);
+    // // x1 = stoul("1000101111011110110001000110101", nullptr, 2); //45ef6235
+    // // x2 = stoul("1000100001001100100010001010101", nullptr, 2); //44264455
+    // Bit32 y = fadd(x1, x2);
+    // puts("fadd");
+    // print_sub_bit(y);
+    // y = fmul(x1, x2);
+    // puts("fmul");
+    // print_sub_bit(y);
     
-    Bit32 ans = f_to_bit(x_1 * x_2);
-    puts("fmul_ans");
-    print_sub_bit(ans);
-    puts("finv");
-    y = finv(x1);
-    print_sub_bit(y);
+    // Bit32 ans = f_to_bit(x_1 * x_2);
+    // puts("fmul_ans");
+    // print_sub_bit(ans);
+    // puts("finv");
+    // y = finv(x1);
+    // print_sub_bit(y);
     
-    puts("finv_ans");
-    ans = f_to_bit(1/x_1);
-    print_sub_bit(ans);
-    puts("fdiv");
-    y = fdiv(x1, x2);
-    print_sub_bit(y);
-    puts("fdiv_ans");
-    ans = f_to_bit(x_1 / x_2);
-    print_sub_bit(ans);
-    return 0;
-}
+    // puts("finv_ans");
+    // ans = f_to_bit(1/x_1);
+    // print_sub_bit(ans);
+    // puts("fdiv");
+    // y = fdiv(x1, x2);
+    // print_sub_bit(y);
+    // puts("fdiv_ans");
+    // ans = f_to_bit(x_1 / x_2);
+    // print_sub_bit(ans);
+//     return 0;
+// }

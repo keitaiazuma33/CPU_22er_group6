@@ -9,4 +9,5 @@ Bit64 at_uint (Bit64 i, int a);
 unsigned int f_to_bit (float x);
 void print_bit(Bit32 x, int n);
 void print_sub_bit(Bit32 y);
-void in_data();
+Bit64 bit_to_ulong(string s);
+void in_data(string filename);

@@ -46,13 +46,14 @@ Bit64 bit_to_ulong(string s){
     // cout << s << endl;
     char *end;
     // cout << std::stoi("1000", nullptr, 2) << endl; //8
+    // cout << ""
     Bit64 i = std::stoull(s, nullptr, 2);
     // cout << i << endl;
     // cout << i << endl;
     return i;
 }
-void in_data(){
-    string filename ("finv_data.coe"); //asm_3
+void in_data(string filename){
+    // string filename ("finv_data.coe"); //asm_3
     vector<string> lines;
     string line;
 
