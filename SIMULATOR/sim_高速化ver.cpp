@@ -53,8 +53,23 @@ ofstream ofs(s);
 // vector<Op_words> op_pc;
 // #include <sim_cathe.hpp>
 vector<int64_t> reg_val(SIZE);
+vector<float> freg(32);
 // vector<int64_t> M(SIZE);
-map<int64_t, int64_t> M;
+union data {
+    int64_t i;
+    float f;
+};
+
+// map<int64_t, int64_t> M;
+// M = (union data*)malloc(sizeof(union data) * MEMORY_SIZE);
+// union data;
+// map<data, data> M;
+map<int64_t, union data> M;
+// map<float, float> FM;
+// union M{
+//     map<int64_t, int64_t> mi;
+//     map<float, float> mf; 
+// }
 vector<vector<int64_t> > L1(SIZE/10);
 // vector<vector<int> > L2(SIZE/10);
 
@@ -77,7 +92,7 @@ int tag_dig = 13;
         // offset_dig = 4;index_dig = 10; tag_dig = 13;
 int addr_dig = 27;
 bool hit; bool flag;
-
+bool float_sign = false;
 int32_t q;
 // #include "const.hpp"
 // string s = "/Users/maimai/my-3A/cpu-simu/sim_result.txt";
@@ -268,6 +283,7 @@ int64_t op_to_num(string op){
     else if (op == "div" || op == "divu") num =45;
     else if (op == "rem" || op == "remu") num =46;
     //     _type = I_1;
+    else if (op == "mv") num = 49;
     else if (op == "addi") num =50;
     else if (op == "xori") num =51;
     else if (op == "ori") num =52;
@@ -299,7 +315,31 @@ int64_t op_to_num(string op){
     else if(op == "jalr") num = 59; // _type = I_1;
     else if(op == "lui") num = 77;
     else if (op == "auipc") num = 78; //     _type = U;
+    else if (op == "flw") num = 81;
+    else if (op == "fsw") num = 82;
+    else if (op == "fmadd") num = 83;
+    else if (op == "fmsub") num = 84;
+    else if (op == "fnmadd") num = 85;
+    else if (op == "fnmsub") num = 85;
+    else if (op == "fadd") num = 87;
+    else if (op == "fsub") num = 88;
+    else if (op == "fmul") num = 89;
+    else if (op == "fdiv") num = 90;
+    else if (op == "fsqrt") num = 91;
+    else if (op == "fsgnj") num = 92;
+    else if (op == "fsgnjn") num = 93;
+    else if (op == "fsgnjx") num = 94;
+    else if (op == "fmin") num = 95;
+    else if (op == "fmax") num = 96;
+    // else if (op == "fcvt.") num = 97;
+    else if (op == "fmv") num = 1;
+    else if (op == "feq") num = 3;
+    else if (op == "flt") num = 4;
+    else if (op == "fle") num = 5;
     
+
+
+
     return num;
 }
 int64_t reg_index(string a0){ // asmの変数をc++の変数に
@@ -317,6 +357,11 @@ int64_t reg_index(string a0){ // asmの変数をc++の変数に
         // num = (２進数)に
 
     }else if(a0[0] == 'x'){
+        a0.erase(0, 1);
+        num = atoi(a0.c_str());
+        return num;
+    }else if(a0[0] == 'f'){
+        // float_sign = true;
         a0.erase(0, 1);
         num = atoi(a0.c_str());
         return num;
@@ -393,8 +438,8 @@ struct Op {
     enum Type _type;
     // int _type;
     int conv_type(int op){
-        if(op >= 30 && op < 50) _type = R;
-        else if(op >= 50 && op < 60) _type = I_1;
+        if(op >= 30 && op < 49) _type = R;
+        else if(op >= 49 && op < 60) _type = I_1;
         else if(op >= 60 && op < 65) _type = I_2;
         else if(op >= 65 && op < 70) _type = S;
         else if(op >= 70 && op <= 75) _type = B;
@@ -452,7 +497,7 @@ int main(int argc, char *argv[]){
     bool step_symbol = false;
     bool print_symbol = false;
     sld_to_ppm();
-    string filename ("fib.s"); //asm_3
+    string filename ("ack_ans2.s"); //asm_3
     vector<string> lines;
     string line;
 
@@ -469,13 +514,49 @@ int main(int argc, char *argv[]){
     std::map<string, int> label;
     map<int, string> con_line;//pcと対応したlineの中身
     map<int, string> con_label;
+    map<string,string> f_data;
+    map<float, string> fdata_num;
     // int sign_imm = 0;
     while(getline(file, line)){
         // ラベルを見つけたらmap配列に格納
         //  map<string, int> score; 
         // １回読み込んでvectorに変換しておく
         cout << "PC " << pc << endl;
-        if(line.find(':') < 100){ 
+        if(line.find("l.") < 100 && line.find(':') < 100){
+            vector<string> words; //[0];
+            words.clear();
+            string word = "";
+            for(int i = 0; i < line.size(); i++){
+                if(line.at(i) == '\n' ){
+                    // cout << "# found break" << endl;
+                    break;
+                }
+                if((line.at(i) == '!') || line.at(i) == ':' || line.at(i) == ' ' ||(line.at(i) == '\t') ){
+                    continue;
+                }
+                else{
+                    word.push_back(line.at(i));
+                    if(i == line.size()-1){
+                        if(word != ""){
+                            words.push_back(word);
+                        }
+                    }
+                    else if(line.at(i+1) == ':'|| line.at(i+1) == '\n'){
+                        words.push_back(word);
+                        // cout << "word " << word << endl;
+                        word = "";
+                        // break;
+                    }
+                }
+                // これいる？？
+                
+            }
+            cout << words.at(0) << " " << words.at(1) << endl;
+            f_data[words.at(0)] = words.at(1); //valueがfloatの値（string型）
+            // fdata_num[stof(words.at(1))] = words.at(0);
+
+        }else if(line.find(':') < 100){
+            
             line.erase(line.find(':')); //?
             if(line.find("min_caml_start") != std::string::npos){
                 pc_start = pc;
@@ -486,6 +567,7 @@ int main(int argc, char *argv[]){
             con_line[pc] = line;
             pc += 4;
         }else{}
+        
     }
     cout << "fileclose" << endl;
     file.close();
@@ -496,15 +578,19 @@ int main(int argc, char *argv[]){
     hit_count = 0;
     miss_count = 0;
     //getline(file2, line))
-    clock_t start = clock();  
+    clock_t start = clock(); 
+       
+ 
     struct Op_words{
         int64_t op_num;
         int64_t rd;
         int64_t rs1;
         int64_t rs2;
-        // int rs3;
-        int64_t imm;
+        int64_t rs3;
+        union data imm;
         bool break_sign;
+        bool float_sign;
+        // float f_imm;
     };
     vector<Op_words> op_pc(pc_size+4); 
     pc = 0;
@@ -581,8 +667,14 @@ int main(int argc, char *argv[]){
         for(int i = 1; i < words.size() ; i++){ //<=3
             // label(map)にwods[i]が合ったら
             int label_find = label.count(words[i]); //" "
+            int data_find = f_data.count(words[i]);
             // cout << "label found" << label_find << endl;
-            if(label_find > 0){
+            if(data_find > 0){
+                op_pc[pc].float_sign = true;
+                words[i] = f_data[words[i]];
+                op_pc[pc].imm.f = stof(words[i]);
+            }
+            else if(label_find > 0){
                 // pc = label[i][0];
                 int a_pc = label[words[i]];
                 // continue;
@@ -637,7 +729,7 @@ int main(int argc, char *argv[]){
         if(opcode == "li") {a2 = a1; a1 = "zero"; opcode = "addi";}
         else if(opcode == "j") {opcode = "jal"; a1 = a0; a0 = "zero";}//L3?; ' '
         else if(opcode == "jal" && a1 == "") {a1 = a0; a0 = "ra";}//L3?; ' '
-        else if(opcode == "mv"){opcode = "addi", a2 = "0";}
+        // else if(opcode == "mv"){opcode = "addi", a2 = "0";}
         else if(opcode == "bgt") {opcode = "blt"; swap(a0,a1);}
         else if(opcode == "ble") {opcode = "bge"; swap(a0,a1);}
         else if(opcode == "bgtu") {opcode = "bltu"; swap(a0,a1);}
@@ -687,31 +779,32 @@ int main(int argc, char *argv[]){
         // }
         // Op op0; 
         // switch
-        if(op_num >= 30 && op_num < 50){ //op0.conv_type(op_num_num) == R){
+        if(op_num >= 30 && op_num < 49){ //op0.conv_type(op_num_num) == R){
             // case R: //add rd,rs1,rs2
             op_pc[pc].rd =  reg_index(a0);
             op_pc[pc].rs1 = reg_index(a1);//reg_val.at(
             op_pc[pc].rs2 = reg_index(a2); 
-            op_pc[pc].imm = 0;
+            op_pc[pc].imm.i = 0;
             // continue;
-        }else if(op_num >= 50 && op_num < 60){//} _type = I_1; 
+        }else if(op_num >= 49 && op_num < 60){//} _type = I_1; 
             //addi rd,rs1,imm
             op_pc[pc].rd =  reg_index(a0);
             op_pc[pc].rs1 = reg_index(a1);
-            op_pc[pc].imm = reg_index(a2);
+            // if(op_pc[pc].float_sign) op_pc[pc].f_imm = stof()
+            if(!(op_pc[pc].float_sign)) op_pc[pc].imm.i = reg_index(a2);
             op_pc[pc].rs2 = 0;
             cout << "l440" << op_pc[pc].rd<< endl;
         }else if(op_num >= 60 && op_num < 65){//} _type = I_2;
             //lw rd,offset(rs1) 
             op_pc[pc].rd = reg_index(a0);
-            op_pc[pc].imm = reg_index(a1);
+            if(!(op_pc[pc].float_sign)) op_pc[pc].imm.i = reg_index(a1);
             op_pc[pc].rs1 = reg_index(a2);
             op_pc[pc].rs2 = 0;
             // continue;
         }else if(op_num >= 65 && op_num < 70){ //} _type = S;
             //sw rs2,offset(rs1)
             op_pc[pc].rs2 = reg_index(a0);
-            op_pc[pc].imm = reg_index(a1);
+            if(!(op_pc[pc].float_sign)) op_pc[pc].imm.i = reg_index(a1);
             op_pc[pc].rs1 = reg_index(a2);
             op_pc[pc].rd = 0;
             // continue;
@@ -719,22 +812,40 @@ int main(int argc, char *argv[]){
             //beq rs1,rs2,offset
             op_pc[pc].rs1=  reg_index(a0);
             op_pc[pc].rs2 = reg_index(a1);
-            op_pc[pc].imm = reg_index(a2);
+            if(!(op_pc[pc].float_sign)) op_pc[pc].imm.i = reg_index(a2);
             op_pc[pc].rd = 0;
             // continue;
         }else if(op_num == 76){
             // case J : //	jal rd,offset
             op_pc[pc].rd = reg_index(a0);
-            op_pc[pc].imm = reg_index(a1);
+            if(!(op_pc[pc].float_sign)) op_pc[pc].imm.i = reg_index(a1);
             op_pc[pc].rs1 = 0;
             op_pc[pc].rs2 = 0;
             // continue;
         }else if(op_num >= 77 && op_num < 80){ //} _type = U;
             // case U : //lui rd,imm
             op_pc[pc].rd = reg_index(a0);
-            op_pc[pc].imm = reg_index(a1);
+            if(!(op_pc[pc].float_sign)) op_pc[pc].imm.i = reg_index(a1);
             op_pc[pc].rs1 = 0;
             op_pc[pc].rs2 = 0;
+        }else if(op_num == 81){ //flw;
+            //lw rd,offset(rs1) 
+            op_pc[pc].rd = reg_index(a0);
+            if(!(op_pc[pc].float_sign)) op_pc[pc].imm.i = reg_index(a1);
+            op_pc[pc].rs1 = reg_index(a2);
+            op_pc[pc].rs2 = 0;
+        }else if(op_num == 82){ //}fsw; 
+            op_pc[pc].rs2 = reg_index(a0);
+            if(!(op_pc[pc].float_sign)) op_pc[pc].imm.i = reg_index(a1);
+            op_pc[pc].rs1 = reg_index(a2);
+            op_pc[pc].rd = 0;
+            // continue;
+        }else{ //} _type = F;
+            op_pc[pc].rd =  reg_index(a0);
+            op_pc[pc].rs1 = reg_index(a1);
+            op_pc[pc].imm.f = reg_index(a2);
+            op_pc[pc].rs2 = 0;
+            cout << "l440" << op_pc[pc].rd<< endl;
         }
         // op_pc[pc] = {op_num, rd, rs1, rs2};
         pc += 4;
@@ -744,26 +855,33 @@ int main(int argc, char *argv[]){
     pc = pc_start;
     while(pc < pc_size){
         reg_val.at(0) = 0;
+        freg.at(0) = 0;
         if(con_label.count(pc)){
-            cout << '[' << con_label[pc] << "] (" << pc << ')' <<endl;
+            // cout << '[' << con_label[pc] << "] (" << pc << ')' <<endl;
             // if((con_label[pc]).find(break_label) != std::string::npos){
             //     // cout << "yes" << endl;
             //     break;
             // }
         }
-        cout << "[" << pc << "]" << endl;
-        // for(int i = 0; i < 32; i++){
-        //     if(i == 0){cout << i << " " << reg_val.at(i) << endl;}
-        //     else if(reg_val[i]){
-        //         cout << i << " " << reg_val.at(i) << endl;
-        //     }
-        // }
+        // cout << "[" << pc << "]" << endl;
+        
         Op_words opline = op_pc.at(pc);
         int64_t rd, rs1, rs2, rs3;
         rd = 0; rs1 = 0; rs2 = 0; rs3 = 0; imm = 0;
         // Op_words opline;
         int op_num = opline.op_num;
+        int imm;
+        // if(op_pc[pc].float_sign) imm.f = opline.imm.f;
+        print_symbol = false;
         break_symbol = opline.break_sign;
+        if(break_symbol){
+            for(int i = 0; i < 32; i++){
+                if(i == 0){cout << i << " " << reg_val.at(i) << endl;}
+                else if(freg[i]){
+                    cout << i << " " << freg.at(i) << endl;
+                }
+            }
+        }
         string str_next;
         if(break_symbol == true){ //line.at(0) != ' '
             // cout << "line" << line << endl;
@@ -781,7 +899,7 @@ int main(int argc, char *argv[]){
                 auto begin = M.begin(), end = M.end();
                 for (auto iter = begin; iter != end; iter++) {
                     // first: key, second: value
-                    cout << "M[" << iter->first << "] " << iter->second << "\n";
+                    cout << "M[" << iter->first << "] " << iter->second.i << "\n";
                 }
                 cout << "   s or n" << endl; //step or next
                 cin >> str_next;
@@ -796,7 +914,7 @@ int main(int argc, char *argv[]){
 
         Op op; 
         switch(op.conv_type(op_num)){
-            case R: //33-49
+            case R: //33-46
                 // opcode, a0, a1,a2
                 // add rd,rs1,rs2
                 rd = 0;
@@ -855,16 +973,23 @@ int main(int argc, char *argv[]){
                 }
                 // if((a0[0] >= '0') && (a0[0] <= '9')){} 
                 reg_val.at(opline.rd) = rd; 
-                // if(break_symbol == true) 
-                cout << "   R " << rd << " "<< rs1 <<" " << rs2 << endl;
+                if(break_symbol == true) cout << "   R " << rd << " "<< rs1 <<" " << rs2 << endl;
                 instr_count++; //?
                 continue;
             case I_1:
                 // なぜa0?a1では？
                 // opcode,a0,a1,a2,a3
+                if(op_num == 49){ //mv
+                    if(opline.float_sign) freg.at(opline.rd) = opline.imm.f;
+                    else reg_val.at(opline.rd) = reg_val.at(opline.rs1);
+                    pc += 4;
+                    continue;
+                }
                 rd = 0; //0 = opline.rd;
+                // cout << opline.rs1 << endl;
                 rs1 = reg_val.at(opline.rs1);
-                imm = opline.imm;
+                // if(!opline.float_sign)
+                imm = opline.imm.i;
                 if(op_load[pc-4] == opline.rs1){ //a0?
                 // if(line.find(pre_rd) < 100 && pre_rd != a0){
                     // cout << "hazard" << op_load[pc-4] << endl;
@@ -872,6 +997,7 @@ int main(int argc, char *argv[]){
                     clock_count++;
                 }
                 if(op_num == 50){ //code == "addi"){
+                    
                     rd= rs1 +imm;
                     pc += 4;
                 }else if(op_num == 51){ //code == "xori"){
@@ -904,9 +1030,7 @@ int main(int argc, char *argv[]){
                 // else 
                 // if((a0[0] >= '0') && (a0[0] <= '9')){} 
                 reg_val.at(opline.rd) = rd; 
-                // if(break_symbol == true) 
-                cout << opline.rd << endl;
-                cout << "   #I_1 " << rd << " "<< rs1 <<" " << rs2 << endl;
+                if(break_symbol == true) cout << "   #I_1 " << rd << " "<< rs1 <<" " << rs2 << endl;
                 instr_count++; //?
                 continue;
             case I_2:
@@ -918,7 +1042,7 @@ int main(int argc, char *argv[]){
                     clock_count++;
                 }
                 rd = 0; //= opline.rd;
-                imm = opline.imm;
+                imm = opline.imm.i;
                 rs1 = reg_val.at(opline.rs1);//reg_index(a2)
                 // num_i = 0;
                 op_load[pc] = opline.rd;
@@ -958,7 +1082,7 @@ int main(int argc, char *argv[]){
                     // 他にやること？
                 } 
                 if(special == true) rd = q;
-                else rd = M.at(rs1+imm);
+                else rd = M.at(rs1+imm).i;
                 // ofs << "load" << " " << M.at(rs1+imm) << endl;
                 if(print_symbol) printf("mem[%lld] %lld\n", rs1+imm, rd);
 
@@ -966,8 +1090,7 @@ int main(int argc, char *argv[]){
                 pc += 4;
                 // if((a0[0] >= '0') && (a0[0] <= '9')){} 
                 reg_val.at(opline.rd) = rd; 
-                // if(break_symbol == true) 
-                cout << "   #I_2 " << rd << " "<< rs1 <<" " << rs2 << endl;
+                if(break_symbol == true) cout << "   #I_2 " << rd << " "<< rs1 <<" " << rs2 << endl;
                 // num_i = 0;
                 instr_count++; //?
                 continue;
@@ -978,7 +1101,7 @@ int main(int argc, char *argv[]){
                 }
                 rs1 = reg_val.at(opline.rs1);//reg_index(a2);
                 rs2 = reg_val.at(opline.rs2);
-                imm = opline.imm;
+                imm = opline.imm.i;
                 // cout << "rs1 rs2 " << rs1 << " " << rs2 << endl;
                 // num_i = 0;
                 
@@ -1001,14 +1124,14 @@ int main(int argc, char *argv[]){
                         if(op_num == 65){ //code == "sb"){
                             // PMT1[index_].substr(3+tag_dig+4*data_num, 4) 
                             // L1_data[w][index_][data_num]= rs2%128; //convert(rs2%128,32);
-                            M[rs1+imm] = rs2%128; //reg_val[rs1]?
+                            M[rs1+imm].i = rs2%128; //reg_val[rs1]?
                         }else if(op_num == 66){ //code == "sh"){
                             // PMT1[index_].substr(3+tag_dig,data_num) = convert(rs2%65536, 32);
                             // L1_data[w][index_][data_num]= rs2%65536;
-                            M[rs1+imm] = rs2%65536;
+                            M[rs1+imm].i  = rs2%65536;
                         }else if(op_num == 67){ //code == "sw"){
                             // cout << "sw1" << endl;
-                            M[rs1+imm] = rs2%4294967296;
+                            M[rs1+imm].i  = rs2%4294967296;
                         }
                         // L1_status[w][index_] = 100;
                         L_status.at(w).at(index_).valid = 1;
@@ -1019,7 +1142,7 @@ int main(int argc, char *argv[]){
                         flag = 1;
                         // cout << L_status.at(w)[index_].acc << endl;
                     }
-                    if(print_symbol) printf("mem[%lld] %lld\n", rs1+imm, M[rs1+imm]);
+                    // if(print_symbol) printf("mem[%lld] %lld\n", rs1+imm, M[rs1+imm]);
                 }
                 if(flag == 0){
                     // missしたためLRUで探す
@@ -1036,16 +1159,16 @@ int main(int argc, char *argv[]){
                     if(op_num == 65){ //"sb"){
                         // PMT1[index_].substr(3+tag_dig+4*data_num, 4) 
                         // L1_data.at(w)[index_][data_num]= rs2%128; //convert(rs2%128,32);
-                        M[rs1+imm] = rs2%128; //reg_val[rs1]?
+                        M[rs1+imm].i  = rs2%128; //reg_val[rs1]?
                     }else if(op_num == 66){ //code == "sh"){
                         // PMT1[index_].substr(3+tag_dig,data_num) = convert(rs2%65536, 32);
                         // L1_data[w][index_][data_num]= rs2%65536;
-                        M[rs1+imm] = rs2%65536;
+                        M[rs1+imm].i  = rs2%65536;
                     }else if(op_num == 67){ //code == "sw"){
                         // L1_data[w][index_][data_num]= rs2%4294967296;
                         // L1_status[w][index_] = 110;
                         // cout << "sw2" << endl;
-                        M[rs1+imm] = rs2%4294967296;
+                        M[rs1+imm].i  = rs2%4294967296;
                     }
                     (L_status[way_idx].at(index_)).valid = 1; 
                     L_status[way_idx].at(index_).dirty = 1;
@@ -1069,7 +1192,7 @@ int main(int argc, char *argv[]){
                 }
                 rs1 = reg_val.at(opline.rs1);//reg_index(a2);
                 rs2 = reg_val.at(opline.rs2);
-                imm = opline.imm;
+                imm = opline.imm.i;
                 // rs2 = rs1; rs1 = rd; 
                 // if(sign_imm == 1) imm = -imm;
                 // if(break_symbol == true) 
@@ -1099,12 +1222,13 @@ int main(int argc, char *argv[]){
                 }
                 // cout << "pc" << pc << endl;
                 // jumpの処理？
+                // cout << "  #B " << rd << " "<< rs1 <<" " << rs2 << endl;
                 instr_count++; //?
                 continue;
             case J:
-                imm = opline.imm;
-                cout << opline.rd << endl;
-                cout << "Imm" << imm << endl;
+                imm = opline.imm.i;
+                // cout << opline.rd << endl;
+                // cout << "Imm" << imm << endl;
                 // sign_imm = 0;
                 // if(imm < 0){
                 //     imm = -imm;
@@ -1114,13 +1238,13 @@ int main(int argc, char *argv[]){
                 rd = 0; //0 = opline.rd;
                 if(op_num == 76){ //opcode == "jal"){
                     rd=pc+4;pc+=imm;
-                    cout << "   jal pc " << pc << endl;
+                    // cout << "   jal pc " << pc << endl;
                 }
                 
                 // if((a0[0] >= '0') && (a0[0] <= '9')){} 
                 reg_val.at(opline.rd) = rd; 
                 // if(break_symbol == true) 
-                cout << "  #J " << rd << " "<< rs1 <<" " << rs2 << endl;
+                // cout << "  #J " << rd << " "<< rs1 <<" " << rs2 << endl;
                 // cout << "pc " << pc << "rd" << rd << endl;
                 instr_count++; //?
                 continue;
@@ -1129,7 +1253,7 @@ int main(int argc, char *argv[]){
                 //     rd=pc+4;pc=rs1+imm;
             // }else 
             case U:
-                imm = opline.imm;
+                imm = opline.imm.i;
                 if(op_num == 77){ //opcode == "lui"){
                     rd = imm << 12;
                 }else if(op_num == 78){ //opcode == "auipc"){
@@ -1138,78 +1262,189 @@ int main(int argc, char *argv[]){
                 pc += 4;
                 // if((a0[0] >= '0') && (a0[0] <= '9')){} 
                 reg_val.at(opline.rd) = rd; 
-                // if(break_symbol == true) 
-                cout << "   #U " << rd << " "<< imm << endl;
+                // if(break_symbol == true) cout << "   #U " << rd << " "<< imm << endl;
                 instr_count++; //?
                 continue;
             case F:
-        //         if(op_load[pc-4] == a1 || op_load[pc-4] == a2 || op_load[pc-4] == a3){
-        //         // if(line.find(pre_rd) < 100 && pre_rd != a0){
-        //             // cout << "hazard" << op_load[pc-4] << endl;
-        //             // cout << 
-        //             clock_count++;
-        //         }
-        //         // 事前設定？
-        //         if(opcode == "flw"){
-        //             rd = M.at(rs1 + imm);
-        //         }else if(opcode == "fsw"){ //怪しい？
-        //             M.at(rs1 + imm) = rs2;
-        //         // }else if(opcode == "fmadd.s"){
-        //         //     rd=rs1*rs2+rs3;
-        //         // }else if(opcode == "fmsub.s"){
-        //         //     rd=rs1*rs2-rs3;
-        //         // }else if(opcode == "fnmadd.s"){
-        //         //     rd=-rs1*rs2+rs3;
-        //         // }else if(opcode == "fnmsub.s"){
-        //         //     rd=-rs1*rs2-rs3;
-        //         }else if(opcode == "fadd.s"){
-        //             rd=rs1+rs2;
-        //         }else if(opcode == "fsub.s"){
-        //             rd=rs1-rs2;
-        //         }else if(opcode == "fmul.s"){
-        //             rd=rs1*rs2;
-        //         }else if(opcode == "fdiv.s"){
-        //             rd=rs1/rs2;
-        //         }else if(opcode == "fsqrt.s"){
-        //             rd = sqrt(rs1);
-        //         }else if(opcode == "fsgnj.s"){
-        //             rd = abs(rs1) * sign(rs2);
-        //         }else if(opcode == "fsgnjn.s"){
-        //             rd = abs(rs1) * -sign(rs2);
-        //         }else if(opcode == "fsgnjx.s"){
-        //             rd = rs1 * sign(rs2);
-        //         }else if(opcode == "fmin.s"){
-        //             rd = min(rs1, rs2);
-        //         }else if(opcode == "fmax.s"){
-        //             rd = max(rs1, rs2);
-        //         }else if(opcode == "fcvt.s.w"){
-        //             rd = (float) rs1;
-        //         }else if(opcode == "fcvt.s.wu"){
-        //             rd = (float) rs1;
-        //         }else if(opcode == "fcvt.w.s"){
-        //             rd = (int32_t) rs1;
-        //         }else if(opcode == "fcvt.wu.s"){
-        //             rd = (uint32_t) rs1;
-        //         }else if(opcode == "fmv.x.w"){
-        //             rd = *((int*) &rs1);
-        //         }else if(opcode == "fmv.w.x"){
-        //             rd = *((float*) &rs1);
-        //         }else if(opcode == "feq.s"){
-        //             rd = (rs1 == rs2) ? 1 : 0;
-        //         }else if(opcode == "flt.s"){
-        //             rd = (rs1 < rs2) ? 1 : 0;
-        //         }else if(opcode == "fle.s"){
-        //             rd = (rs1 <= rs2) ? 1 : 0;
-        //         }
-        //         // else if(opcode == "fclass.s"){
-        //         //     rd = 0..9;
-        //         // }
-        //         pc += 4;
-        //         if((a0[0] >= '0') && (a0[0] <= '9')){} 
-        //         else reg_val.at(reg_index(a0)) = rd; 
-        //         // if(break_symbol == true) 
-        //         // cout << "   # " << rd << " "<< rs1 <<" " << rs2 << endl;
-        //         instr_count++; //?
+                // flw	%f2, 0(%x5)
+                // flw rd, imm()
+                float frd, frs1, frs2, frs3, fimm;
+                // 事前設定？
+                if(op_num == 81){ //"flw"){
+                    if(op_load[pc-4] == opline.rs1){
+                        clock_count++;
+                    }
+                    frd = 0;
+                    frs1 = freg.at(opline.rs1);//reg_index(a2);
+                    if(opline.float_sign) fimm = opline.imm.f; //0や4
+                    else imm = opline.imm.i;
+                    op_load[pc] = opline.rd;
+                    addr = round(frs1 + fimm);//reg_val[rs1]+imm; //?
+                    if(addr < 0) addr = ~addr + 1;
+                    // 一度intに変換；bitsetに直す
+                    tag = addr >> (index_dig+offset_dig);
+                    
+                    index_ = (addr >> offset_dig) & ((1 << (index_dig))-1);
+                    offset = addr & ((1<<offset_dig) - 1);//1111;
+                    // cout << "addr,tag,index_,offset " << addr << " " << tag << " " << index_ << " " << offset << endl;
+                    if(index_ < 0 || index_ > SIZE){
+                        cout << index_ << endl;
+                        return -1;
+                    }
+                    // valid1,dirty1,accessed
+                    hit = false;
+                    for (int i = 0; i < way_num; i++) {
+                        // L1_way0; 一致していてかつvalid=1&&accessed=0なら
+                        if((L1_tag[i].at(index_) == tag) && (L_status[i].at(index_)).valid == 1){//>>acc_bit) & ((1<<2)-1)) == 0b10)){ //PMT1[index_].at(0) == 1 && PMT1[index_].at(1) == 0){
+                            hit_count++;
+                            hit = true;
+                            break;
+                        }
+                    }
+                    if(hit == false){
+                        miss_count++;
+    
+                        way_idx = LRU(L_status, index_);
+                        // way_idxがdirtyならdirty_miss; cleanならclean_miss
+                        if((L_status[way_idx].at(index_)).dirty == 1){
+                            dirty_miss++; //write backする前に判定
+                            (L_status[way_idx].at(index_)).dirty = 0; //write backにより一致
+                        }else{
+                            clean_miss++;
+                        }
+                        // 他にやること？
+                    } 
+                    if(special == true) frd = q;
+                    else frd = M.at(round(frs1+fimm)).f;
+                    // ofs << "load" << " " << M.at(rs1+imm) << endl;
+                    // if(print_symbol) printf("mem[%lld] %lld\n", rs1+imm, frd);
+                    // if((a0[0] >= '0') && (a0[0] <= '9')){} 
+                    freg.at(opline.rd) = frd; 
+                        // freg[frd] = M.at(rs1 + imm);
+                    pc += 4;
+                    continue;
+                }else if(op_num == 82){ //opcode == "fsw"){ //怪しい？
+                    if(op_load[pc-4] == opline.rs1 || op_load[pc-4] == opline.rs2){
+                        clock_count++;
+                    }
+                    frs1 = freg.at(opline.rs1);//reg_index(a2);
+                    frs2 = freg.at(opline.rs2);
+                    if(opline.float_sign) fimm = opline.imm.f;
+                    else imm = opline.imm.i;
+                    // M.at(rs1 + imm).f = rs2;
+                    addr = round(frs1 + fimm);//reg_val[rs1]+imm; //レジスタの中身+即値
+                    cout << frs1 + fimm << " " << addr << endl;
+                    if (addr < 0) addr = ~addr + 1;
+                    // cout << addr << endl;
+                    tag = addr >> (index_dig+offset_dig);
+                    index_ = (addr >> offset_dig) & ((1 << (index_dig))-1);
+                    offset = addr & (1<<offset_dig)-1;
+                    // cout << "addr,tag,index_,offset " << addr << " " << tag << " " << index_ << " " << offset << endl;
+                        
+                    // valid1,dirty1,accessed
+                    // L1_way0:データを保持していなかったら；　valid = 0
+                    flag = 0;
+                    for(int w=0; w < way_num; w++){ //way0,way1
+                        // cout << "w " << w << "index_ " << index_ << endl;
+                        // cout << "status" << L_status[w][index_].valid << endl;
+                        if(L_status.at(w).at(index_).valid == 0){ //at(0)
+                            uint64_t data_num = uint64_t(offset);
+                            M[round(frs1+fimm)].f  = rs2;
+                        }
+                        L_status.at(w).at(index_).valid = 1;
+                        // dirty;まだメモリには書いてないことに
+                        L_status.at(w).at(index_).dirty = 1;
+                        if(L_status.at(w).at(index_).acc < 8) L_status.at(w).at(index_).acc += 1;
+                        L1_tag.at(w).at(index_) = tag;
+                        flag = 1;
+                        // cout << L_status.at(w)[index_].acc << endl;
+                    }
+                    if(flag == 0){
+                        // missしたためLRUで探す
+                        miss_count++;
+                        // cout << "goto LRU" << endl;
+                        way_idx = LRU(L_status, index_);
+                        // way_idxを追い出してそこに入れる;
+                        // 追い出した時の処理必要
+                        flag = 1;
+                        uint64_t data_num = uint64_t(offset);
+                        int w = way_idx;
+                        M[round(frs1+fimm)].f = frs2;
+                        (L_status[way_idx].at(index_)).valid = 1; 
+                        L_status[way_idx].at(index_).dirty = 1;
+                        if(L_status.at(w).at(index_).acc < 8) L_status[way_idx].at(index_).acc += 1;  
+                        L1_tag.at(w).at(index_) = tag;
+
+                        flag = 1;
+                    }
+                    pc += 4;
+                    continue;
+                }
+                if(op_num >= 83){
+                    // float rd, rs1, rs2, rs3;
+                    if(op_load[pc-4] ==  opline.rs1|| op_load[pc-4] == opline.rs2 || op_load[pc-4] == opline.rs3){
+                        clock_count++;
+                    }
+                }else{
+                    pc += 4;
+                    continue;
+                }
+                if(op_num == 83){ //code == "fmadd.s"){
+                    frd=frs1*frs2+frs3;
+                }else if(op_num == 84){ //opcode == "fmsub.s"){
+                    frd=frs1*frs2-frs3;
+                }else if(op_num == 85){ //oopcode == "fnmadd.s"){
+                    frd=-frs1*frs2+frs3;
+                }else if(op_num == 86){ //oopcode == "fnmsub.s"){
+                    frd=-frs1*frs2-frs3;
+                }else if(op_num == 87){ //oopcode == "fadd.s"){
+                    frd=frs1+frs2;
+                }else if(op_num == 88){ //oopcode == "fsub.s"){
+                    frd=frs1-frs2;
+                }else if(op_num == 89){ //oopcode == "fmul.s"){
+                    frd=frs1*frs2;
+                }else if(op_num == 90){ //oopcode == "fdiv.s"){
+                    frd=frs1/frs2;
+                }else if(op_num == 91){ //oopcode == "fsqrt.s"){
+                    frd = sqrt(frs1);
+                }else if(op_num == 92){ //oopcode == "fsgnj.s"){
+                    frd = abs(frs1) * sign(frs2);
+                }else if(op_num == 93){ //oopcode == "fsgnjn.s"){
+                    frd = abs(frs1) * -sign(frs2);
+                }else if(op_num == 94){ //oopcode == "fsgnjx.s"){
+                    frd = frs1 * sign(frs2);
+                }else if(op_num == 95){ //oopcode == "fmin.s"){
+                    frd = min(frs1, frs2);
+                }else if(op_num == 96){ //oopcode == "fmax.s"){
+                    frd = max(frs1, frs2);
+                }else if(op_num == 97){ //oopcode == "fcvt.s.w"){
+                    frd = (float) frs1;
+                }else if(op_num == 98){ //oopcode == "fcvt.s.wu"){
+                    frd = (float) frs1;
+                }else if(op_num == 99){ //oopcode == "fcvt.w.s"){
+                    frd = (int32_t) frs1;
+                }else if(op_num == 0){ //oopcode == "fcvt.wu.s"){
+                    frd = (uint32_t) frs1;
+                }else if(op_num == 1){ //oopcode == "fmv.x.w"){
+                    frd = *((int*) &frs1);
+                }else if(op_num == 2){ //oopcode == "fmv.w.x"){
+                    frd = *((float*) &frs1);
+                }else if(op_num == 3){ //oopcode == "feq.s"){
+                    frd = (frs1 == frs2) ? 1 : 0;
+                }else if(op_num == 4){ //oopcode == "flt.s"){
+                    frd = (frs1 < frs2) ? 1 : 0;
+                }else if(op_num == 5){ //oopcode == "fle.s"){
+                    frd = (frs1 <= frs2) ? 1 : 0;
+                }
+                // else if(opcode == "fclass.s"){
+                //     rd = 0..9;
+                // }
+                pc += 4;
+                // if((a0[0] >= '0') && (a0[0] <= '9')){} 
+                freg.at(opline.rd) = frd; 
+                // if(break_symbol == true) 
+                // cout << "   # " << rd << " "<< rs1 <<" " << rs2 << endl;
+                instr_count++; //?
                 continue;
             default:
                 continue;
@@ -1257,7 +1492,7 @@ int main(int argc, char *argv[]){
     cout << "clean dirty " << clean_miss << " " << dirty_miss << endl;
     cout << "実行命令数 " << instr_count << endl;
     clock_count = instr_count + clock_count;
-    cout << "クロック数" << endl;
+    cout << "クロック数" << clock_count << endl;
     clock_t end = clock();     // 終了時間
     std::cout << "duration = " << (double)(end - start) / CLOCKS_PER_SEC << "sec.\n";
     // cout << "fileclose" << endl;
