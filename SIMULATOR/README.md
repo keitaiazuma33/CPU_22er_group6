@@ -1,9 +1,33 @@
 ###ファイル構成
 <アセンブリ>
-`instruction.cpp`に実装
+`assembler.cpp`に実装
 fibを0,1の機械語に変換
 <シミュレータ>
 fibのasmをc++で計算
+ストールなども含めた実行命令数を出力
+hit,miss率も出す
+
+`sim_0204.cpp`; １つにまとめたファイル
+makeでコンパイル可能
+-fをつけて実行するとfast_modeに
+レジスタの使い方
+````
+x0...常に0を格納
+x1...戻りアドレスを格納
+x2...スタックポインタ
+x3...ヒープポインタ
+x5-x23...汎用レジスタ
+x24...定数を一時的に格納するレジスタ
+````
+＜FPUのエミュレート＞
+TARGET  = fpu_sim
+# (4)コンパイル対象のソースコード
+SRCS = fsqrt_sim.cpp
+SRCS += simu_fmul.cpp
+SRCS += simu_fadd.cpp 
+SRCS += fpu_common.cpp 
+
+分割コンパイルについて
 メインファイル：
 `sim_cache_way2.cpp`
 
@@ -18,9 +42,21 @@ fibのasmをc++で計算
 
 ###RISC-V命令について
 疑似命令も一般的なものは処理できる
-Standard Extention(RV32M)についてはmul, divのみ実装
+
 ###次にやること
-`/Downloads/cpuex-v1.4/server/reader.py`
+fibのt4をメモリに格納；simulator?
+IOフォルダ
+
+**デバッグ機能**
+-d: デバッグモード　
+-dの後に
+print mem: メモリの中身をprint
+`*がついたアセンブリの行でbreak（一番最初の*)`
+**以下を実装したい**
+- `-r`: レイトレ専用モード(以下を内部的に実行するので、**課題プログラムを動かす際には必ずこれを指定してください**)
+  - 初期化段階でメモリのサイズを調整
+  - 初期化段階で受信バッファを`contest.bin`で初期化
+  - 実行終了時に`.ppm`ファイルを自動で出力 (`./simulator/out`ディレクトリに出力)
 <memo>
 コマンドラインから入力を受け取ってデバッグモード
 ````
@@ -42,6 +78,10 @@ argv[1]==-dなら　一命令ずつ実行
 | info            | 受信したデータを表示                                         |
 | out             | 受信したデータをファイルに出力 (オプションや使い方はシミュレータと同様) |
 
+###参考資料
+	https://github.com/jameslzhu/riscv-card/blob/master/riscv-card.pdf
+https://github.com/liewecmays/cpuex2021-4_simulator
+https://daeudaeu.com/c_oct_bin_nega/#i-17
 ###テスト結果
 ####assembler
 fib_2.txtから入力
