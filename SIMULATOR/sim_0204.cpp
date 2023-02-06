@@ -101,7 +101,7 @@ int32_t q;
 // #include "const.hpp"
 // string s = "/Users/maimai/my-3A/cpu-simu/sim_result.txt";
 // ofstream ofs(s);
-bool fast_mode = true;
+bool fast_mode = false;
 string debugmode(int argc, char* argv[]){
     
     
@@ -604,8 +604,8 @@ int main(int argc, char *argv[]){
         // float f_imm;
     };
     vector<Op_words> op_pc(pc_size+4); 
-    // vector<int64_t> op_load(pc_size+4);//
-    map<int, int64_t> op_load;
+    vector<int64_t> op_load(pc_size+4);//
+    // map<int, int64_t> op_load;
     pc = 0;
     
     while(pc < pc_size) {// file; 第３引数に持ってくる or fstream型に
