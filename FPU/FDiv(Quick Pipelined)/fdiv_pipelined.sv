@@ -85,27 +85,33 @@ module fdiv(
     //傾きは-0.25～-1にstrictに収まる
     assign gradient  = (data_from_a[35:35] == 1'b0) ? {1'b1, data_from_a[34:23], 12'b0} : {2'b01, data_from_a[34:23], 11'b0};
     //差分は 1 <= delta < 2 に収まる
-    assign delta_x     = {1'b1, x2[22:0]};
+    assign delta_x     = {1'b1, stage2_x2[22:0]};
     //切片は1～2にstrictに収まる
     assign stage2_y_intersect = {1'b1, data_from_a[22:0]};
     
-    logic [48:0] stage2_delta_y;
-    logic [48:0] stage3_delta_y;
-    reg   [48:0] stage23_delta_y;
-    assign stage2_delta_y = gradient * delta_x;
+    logic [48:0] stage2_delta_y_l;
+    logic [48:0] stage2_delta_y_h;
+    logic [48:0] stage3_delta_y_l;
+    logic [48:0] stage3_delta_y_h;
+    reg   [48:0] stage23_delta_y_l;
+    reg   [48:0] stage23_delta_y_h;
+    assign stage2_delta_y_l = (gradient[17:11] * delta_x) << 11;
+    assign stage2_delta_y_h = (gradient[24:18] * delta_x) << 18;
     
     //STAGE 3
-    logic flag;
-    assign flag = |stage3_delta_y[23:0];
-    logic [24:0] finv_ans;
-    assign finv_ans = {stage3_y_intersect, 1'b0} -  {stage3_delta_y[48:25], flag};
+    //logic flag;
+    logic [48:0] stage3_delta_y;
+    assign stage3_delta_y = stage3_delta_y_h + stage3_delta_y_l;
+    //assign flag = |stage3_delta_y[23:0];
+    logic [48:0] finv_ans;
+    assign finv_ans = $unsigned({stage3_y_intersect, 25'b0}) -  $unsigned({stage3_delta_y[48:25], stage3_delta_y[24:0]});
     logic [0:0]  finv_float_s;
     logic [7:0]  finv_float_e;
     logic [22:0]  finv_float_m;
     assign finv_float_s = stage3_x2[31:31];
-    assign finv_float_e = (stage3_x2[22:0] == 23'b0) ? 8'd254 - stage3_x2[30:23] : 8'd253 - stage3_x2[30:23];
-    assign finv_float_m = (finv_ans[24:24] == 1'b1) ? 23'b0:
-                          (finv_ans[23:23] == 1'b1) ? finv_ans[22:0]:
+    assign finv_float_e = (stage3_x2[22:0] == 23'b0) ? $unsigned(8'd253)  - $unsigned(stage3_x2[30:23]) : $unsigned(8'd253) - $unsigned(stage3_x2[30:23]);
+    assign finv_float_m = (finv_ans[48:48] == 1'b1) ? 23'b1:
+                          (finv_ans[47:47] == 1'b1) ? finv_ans[46:24]:
                                                       23'b0 ;
     
     logic [31:0] stage3_finv_float;
@@ -134,7 +140,8 @@ module fdiv(
     assign stage3_valid = stage23_valid;
     assign stage3_x1 = stage23_x1;
     assign stage3_x2 = stage23_x2;
-    assign stage3_delta_y = stage23_delta_y;
+    assign stage3_delta_y_l = stage23_delta_y_l;
+    assign stage3_delta_y_h = stage23_delta_y_h;
     assign stage3_y_intersect = stage23_y_intersect;
     
     assign stage4_valid = stage34_valid;
@@ -148,7 +155,8 @@ module fdiv(
 
       stage23_x1 <= stage2_x1;
       stage23_x2 <= stage2_x2;
-      stage23_delta_y <= stage2_delta_y;
+      stage23_delta_y_l <= stage2_delta_y_l;
+      stage23_delta_y_h <= stage2_delta_y_h;
       stage23_y_intersect <= stage2_y_intersect;
       stage23_valid <= stage2_valid;
       
