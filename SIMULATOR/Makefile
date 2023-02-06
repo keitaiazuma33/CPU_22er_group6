@@ -5,7 +5,7 @@ CFLAGS    = -std=c++11 -g -O3
 # (3)実行ファイル名
 TARGET  = sim
 # (4)コンパイル対象のソースコード
-SRCS = sim_高速化ver.cpp #実行したいファイル名をここに
+SRCS = sim_0204.cpp #実行したいファイル名をここに
 # SRCS += common_def.cpp 
 # SRCS += convension.cpp 
 # SRCS += sub_func.cpp 
