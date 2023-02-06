@@ -347,6 +347,7 @@ int64_t op_to_num(string op){
     else if (op == "fle") num = 5;
     else if (op == "ftoi") num = 6;
     else if (op == "itof") num = 7;
+    else if (op == "out") num = 10;
 
     return num;
 }
@@ -439,7 +440,7 @@ int64_t reg_index(string a0){ // asmの変数をc++の変数に
 // 4. convension1
 
 enum Type {
-        R, I_1, I_2, S, B, U, J, F
+        R, I_1, I_2, S, B, U, J, F, O
 };
 struct Op {
   
@@ -453,6 +454,7 @@ struct Op {
         else if(op >= 70 && op <= 75) _type = B;
         else if(op == 76) _type = J;
         else if(op >= 77 && op < 80) _type = U;
+        else if (op == 10) _type = O;
         else _type = F;
 
         // if ((op == "add") || (op == "sub")|| (op == "xor")|| (op == "or")|| (op == "and")|| (op == "sll")|| (op == "srl")|| (op == "sra")|| (op == "slt")|| (op == "sltu")){
@@ -505,7 +507,7 @@ int main(int argc, char *argv[]){
     bool step_symbol = false;
     bool print_symbol = false;
     sld_to_ppm();
-    string filename ("float_ans.s"); //asm_3
+    string filename ("float.s"); //asm_3
     vector<string> lines;
     string line;
 
@@ -531,7 +533,7 @@ int main(int argc, char *argv[]){
         //  map<string, int> score; 
         // １回読み込んでvectorに変換しておく
         cout << "PC " << pc << endl;
-        if(line.find("l.") < 100 && line.find(':') < 100){
+        if(line.find("l.") < 100 && line.find(':') < 100 && line.find('!') != std::string::npos){
             vector<string> words; //[0];
             words.clear();
             string word = "";
@@ -864,6 +866,10 @@ int main(int argc, char *argv[]){
             if(!(op_pc[pc].float_sign)) op_pc[pc].imm.i = reg_index(a1);
             op_pc[pc].rs1 = reg_index(a2);
             op_pc[pc].rd = 0;
+            // continue;
+        }else if(op_num == 10){ //}out
+            op_pc[pc].rd = reg_index(a0);
+            op_pc[pc].rs1 = 0;
             // continue;
         }else{ //} _type = F;
             op_pc[pc].rd =  reg_index(a0);
@@ -1354,6 +1360,9 @@ int main(int argc, char *argv[]){
                 if(debug) cout << "   #U " << rd << " "<< imm << endl;
                 instr_count++; //?
                 continue;
+            case O:
+                rd = reg_val.at(opline.rd);
+                ofs << (char)rd; // << endl; 
             case F:
                 // flw	%f2, 0(%x5)
                 // flw rd, imm()
@@ -1617,10 +1626,10 @@ int main(int argc, char *argv[]){
     for(int i = 0; i < 32; i++){
         // if(i == 0){cout << i << " " << reg_val.at(i) << endl;}
         if(freg.at(i)){
-            cout << i << " " << freg.at(i) << endl;
+            cout << "f" << i << " " << freg.at(i) << endl;
         }
         if(reg_val[i]){
-            cout << i << " " << reg_val.at(i) << endl;
+            cout << 'x' << i << " " << reg_val.at(i) << endl;
         }
         
     }
