@@ -13,6 +13,7 @@
 #include <stdio.h>
 #endif
 using namespace std;
+#define Bit64 unsigned long long
 // struct operation {
 
 // #define R 0
@@ -31,7 +32,7 @@ struct Op {
     int conv_type(string op){
         if ((op == "add") || (op == "sub")|| (op == "xor")|| (op == "or")|| (op == "and")|| (op == "sll")|| (op == "srl")|| (op == "sra")|| (op == "slt")|| (op == "sltu")){
             _type = R;
-        }else if((op == "addi") || (op == "xori")|| (op == "ori")|| (op == "andi")|| (op == "slli")|| (op == "srli")|| (op == "srai")|| (op == "slti")|| (op == "sltiu")){
+        }else if((op == "mv") || (op == "addi") || (op == "xori")|| (op == "ori")|| (op == "andi")|| (op == "slli")|| (op == "srli")|| (op == "srai")|| (op == "slti")|| (op == "sltiu")){
             _type = I;
         }else if((op == "lb") || (op == "lh")|| (op == "lw")|| (op == "lbu")|| (op == "lhu")){
             _type = I;
@@ -50,11 +51,11 @@ struct Op {
             _type = R;
         // }else if(op == "mul" || op == "div"){
         //     _type = R;
-        }else if(op == "flw" || op == "fsw" || op == "fmadd.s" || op == "fmsub.s" || op == "fnmadd.s" || op == "fnmsub.s" || 
-        op == "fadd.s" || op == "fsub.s" || op == "fmul.s" || op == "fdiv.s" || op == "fsqrt.s" 
-        || op == "fsgnj.s" || op == "fsgnjn.s" || op == "fsgnjx.s" || op == "fmin.s" || op == "fmax.s"
-        || op == "fcvt.s.w" || op == "fcvt.s.wu" || op == "fcvt.w.s" || op == "fcvt.wu.s"
-        || op == "fmu.x.w" || op == "fmu.w.x" || op == "feq.s" || op == "flt.s" || op == "fle.s" || op == "fclass.s"){
+        }else if(op == "flw" || op == "fsw" || op == "fmadd" || op == "fmsub" || op == "fnmadd" || op == "fnmsub" || 
+        op == "fadd" || op == "fsub" || op == "fmul" || op == "fdiv" || op == "fsqrt" 
+        || op == "fsgnj" || op == "fsgnjn" || op == "fsgnjx" || op == "fmin" || op == "fmax"
+        || op == "fcvt" || op == "fcvt.s.wu" || op == "fcvt.w.s" || op == "fcvt.wu.s"
+        || op == "fmu.x.w" || op == "fmu.w.x" || op == "feq" || op == "flt" || op == "fle" || op == "fclass"){
             _type = F;
         }
         // jalr以降書き忘れ
@@ -111,7 +112,7 @@ string bury_zero(string imm, int dig_num){
         // string imm = "1010";
         // cout<<"#"<<imm<<endl;
         // Bit64 i = std::stoull(s, nullptr, 2);
-        int64_t value = stoi(imm); //ull(imm); //stoi
+        Bit64 value = stoull(imm); //ull(imm); //stoi
         // std::ios::fmtflags curret_flag = std::cout.flags();
         std::ostringstream ss;
         // dig_nim+1: imm[12]とか
@@ -134,12 +135,12 @@ string convert(string op){ //変数opから01文字列5桁？へ
             r = "0";
             return r;
         }
-        int64_t n = 0;
+        Bit64 n = 0;
         char c_0 = op[0];
         // if(op[1]) n = atoi(op.c_str()); //intに
         // else n = atoi((const char *)op[0]);
         // if((op[1] >= '0') && (op[1] <= '9')) 
-        n = stoi(op);
+        n = stoull(op);
         // cout << "n" << n << endl;
         // else n = c_0 - '0';
         int j = 0;
@@ -154,7 +155,7 @@ string convert(string op){ //変数opから01文字列5桁？へ
         // "-"の処理；後ほど
         reverse(r.begin(), r.end());
     }
-    if(op[0] == 'x'){
+    if(op[0] == 'x' ||op[0] == 'f'){
         op.erase(0, 1);
         // 0うめ
         // r = "0000";
@@ -178,51 +179,52 @@ string convert(string op){ //変数opから01文字列5桁？へ
         r = "00001";
     }else if(op == "sp"){
         r = "00010";
-    }else if(op == "gp"){
-        r = "00011";
-    }else if(op == "tp"){
-        r = "00100";
-    }else if(op == "t0"){
-        r = "00101";
-    }else if(op == "t1"){
-        r = "00110";
-    }else if(op == "t2"){
-        r = "00111";
-    }else if(op == "s0" || op == "fp"){
-        r = "01000";
-    }else if(op == "s1"){
-        r = "01001";
-    // ここから怪しい
+    // }else if(op == "gp"){
+    //     r = "00011";
+    // }else if(op == "tp"){
+    //     r = "00100";
+    // }else if(op == "t0"){
+    //     r = "00101";
+    // }else if(op == "t1"){
+    //     r = "00110";
+    // }else if(op == "t2"){
+    //     r = "00111";
+    // }else if(op == "s0" || op == "fp"){
+    //     r = "01000";
+    // }else if(op == "s1"){
+    //     r = "01001";
+    // // ここから怪しい
     }else if(op == "a0"){
         r = "01010";
-    }else if(op == "a1"){
-        r = "01011";
-    }else if(op == "a2"){
-        r = "01100";
-    }else if(op == "a3"){
-        r = "01101";
-    }else if(op == "a4"){
-        r = "01110";
-    }else if(op == "a5"){
-        r = "01111";
-    }else if(op == "a6"){
-        r = "10000";
-    }else if(op == "a7"){
-        r = "10001";
-    }else if(op == "s2") r = "10010";
-    else if(op == "s3") r = "10011";
-    else if(op == "s4") r = "10100";
-    else if(op == "s5") r = "10101";
-    else if(op == "s6") r = "10110";
-    else if(op == "s7") r = "10111";
-    else if(op == "s8") r = "11000";
-    else if(op == "s9") r = "11001";
-    else if(op == "s10") r = "11010";
-    else if(op == "s11") r = "11011";
-    else if(op == "t3") r = "11100";
-    else if(op == "t4") r = "11101";
-    else if(op == "t5") r = "11110";
-    else if(op == "t6") r = "11111";
+    }
+    // }else if(op == "a1"){
+    //     r = "01011";
+    // }else if(op == "a2"){
+    //     r = "01100";
+    // }else if(op == "a3"){
+    //     r = "01101";
+    // }else if(op == "a4"){
+    //     r = "01110";
+    // }else if(op == "a5"){
+    //     r = "01111";
+    // }else if(op == "a6"){
+    //     r = "10000";
+    // }else if(op == "a7"){
+    //     r = "10001";
+    // }else if(op == "s2") r = "10010";
+    // else if(op == "s3") r = "10011";
+    // else if(op == "s4") r = "10100";
+    // else if(op == "s5") r = "10101";
+    // else if(op == "s6") r = "10110";
+    // else if(op == "s7") r = "10111";
+    // else if(op == "s8") r = "11000";
+    // else if(op == "s9") r = "11001";
+    // else if(op == "s10") r = "11010";
+    // else if(op == "s11") r = "11011";
+    // else if(op == "t3") r = "11100";
+    // else if(op == "t4") r = "11101";
+    // else if(op == "t5") r = "11110";
+    // else if(op == "t6") r = "11111";
     return r;
 }
 
@@ -238,14 +240,42 @@ string sub_reverse(string imm, int n, int m){
     
 
 }
+unsigned int f_to_bit (float x){
+    unsigned int x_;
+    union { float f; int i; } a;
+    int i;
+    a.f = x;
+    x_ = a.i;
+    return x_;
+    
+}
+string to_bit(unsigned int f_imm){
+            // imm = to_string(f_imm);
+            unsigned int n = f_imm;
+            string imm;
+            // cout << "n" << n << endl;
+            // else n = c_0 - '0';
+            int j = 0;
+            // ２進数に
+            while(n){
+                if(n %2 == 1) imm += '1';
+                else imm += '0';
+                n = n / 2;
+                j++;
+
+            }
+            // "-"の処理；後ほど
+            reverse(imm.begin(), imm.end());
+            return imm;
+}
 int main(){
     // ファイルから読み込む   
-    string filename ("fib.s");
+    string filename ("float.s");
     vector<string> lines;
     string line;
 
     ifstream file(filename);
-    
+
     if (!file.is_open()) {
         cerr << "Could not open the file - '"
              << filename << "'" << endl;
@@ -254,17 +284,56 @@ int main(){
     int pc = 0;
     std::map<string, int> label;
     map<int, string> con_line;
+    map<string,string> f_data;
     while(getline(file, line)){
         // ラベルを見つけたらmap配列に格納
         //  map<string, int> score; 
         
         cout << "PC " << pc << endl;
-        if(line.find(':') < 100){ 
+        if((line.find("l.") != std::string::npos) && (line.find(':') < 100) &&  (line.find('!') != std::string::npos)){
+            vector<string> words; //[0];
+            words.clear();
+            string word = "";
+            for(int i = 0; i < line.size(); i++){
+                if(line.at(i) == '\n' ){
+                    // cout << "# found break" << endl;
+                    break;
+                }
+                if((line.at(i) == '!') || line.at(i) == ':' || line.at(i) == ' ' ||(line.at(i) == '\t') ){
+                    continue;
+                }
+                else{
+                    word.push_back(line.at(i));
+                    if(i == line.size()-1){
+                        if(word != ""){
+                            words.push_back(word);
+                        }
+                    }
+                    else if(line.at(i+1) == ':'|| line.at(i+1) == '\n'){
+                        words.push_back(word);
+                        // cout << "word " << word << endl;
+                        word = "";
+                        // break;
+                    }
+                }
+                // これいる？？
+                
+            }
+            // words.at(0).erase(words.at(0).find("l."), 2);
+            cout << words.at(0) << " " << words.at(1) << endl;
+            f_data[words.at(0)] = words.at(1); //valueがfloatの値（string型）
+            // fdata_num[stof(words.at(1))] = words.at(0);
+            // int num = stoi(words.at(0));
+            // float_table.at(num) = stof(words.at(1)); 
+        }else if(line.find(':') < 100){ 
             line.erase(line.find(':')); //?
             label[line] = pc; 
         }else if (line.size() > 0){
-            con_line[pc] = line;
-            pc += 4;
+            if(line[1] == '#' || line.at(0) == '.'){}
+            else{
+                con_line[pc] = line;
+                pc += 4;
+            }
         }else{}
     }
     cout << "fileclose" << endl;
@@ -297,8 +366,13 @@ int main(){
         words.clear();
         string word = "";
         // ラベルの処理:label[line] = pc; より
+        
         if(line.find(':') < 100){ //line.at(0) != ' '
             // 
+            continue;
+        // }else if(line.find("l.") != std::string::npos){ //line.at(0) != ' '
+                 
+        }else if(line.at(1) == '#' || line.at(0) == '.'){ //line.at(0) != ' '
             continue;
         }
         for(int i = 0; i < line.size(); i++){
@@ -338,10 +412,27 @@ int main(){
         // cout << words[0] << "words[1] " << words[1] << "2 " << words[2] << endl;
         // "3 " << words[3] << endl;
         // printf("%c\n", words[3].at(0));
+        // bool is_float = false;
+        vector<bool> is_float(words.size());
+        for(int i = 0; i < words.size(); i++) {is_float[i] = false;}
+        unsigned int f_imm = 0;
+        bool sign_float = false;
         for(int i = 1; i < words.size(); i++){
             int label_find = label.count(words[i]); //" "
+            int data_find = f_data.count(words[i]);
             // cout << "label found" << label_find << endl;
-            if(label_find > 0){
+            if(data_find > 0){
+                is_float[i] = true;
+                sign_float = true;
+                words[i] = f_data[words[i]]; //floatのstringが入る
+                f_imm = f_to_bit(stof(words[i]));
+                words[i] = to_string(f_imm);
+                cout << "fimm " << words[i] << endl;
+                // num = stoi(words[i].erase(words[i].find("l."),2));
+                // words[i] = float_table.at(num)
+                // op_pc[pc].imm.f = stof(words[i]);
+            }
+            else if(label_find > 0){
                 // pc = label[i][0];
                 int a_pc = label[words[i]];
                 // continue;
@@ -378,15 +469,19 @@ int main(){
         // li, j, mvの処理
         // li t3, 10 –> addi x28, x0, 10
         // j label3 –> jal x0, label3
-        // mv t6, t4 –> addi x31, x29, 0
+        // mv t6, t4 –> addi x31, x29, 0 //addi x31, zero, x29
         // cout << opcode << " " << op1 << " " <<op2 << " " << op3 << endl;
+        if(!sign_float && opcode == "mv"){
+            opcode = "addi";
+             op3 = "0"; //op2; op2 = "0";} //op3 = "zero";}
+        }
         if(opcode == "li") {op3 = op2; op2 = "zero"; opcode = "addi";}
         else if(opcode == "j") {opcode = "jal"; op3 = ""; op2 = op1; op1 = "zero";}//L3?; ' '
         // else if(opcode == "mv"){opcode = "addi"; op3 = "0";}
         // if(opcode == "li") {op3 = op2; op2 = "zero"; opcode = "addi";}
         // else if(opcode == "j") {opcode = "jal"; op2 = op1; op1 = "zero";}//L3?; ' '
         else if(opcode == "jal" && op2 == "") {op2 = op1; op1 = "ra";}//L3?; ' '
-        else if(opcode == "mv"){opcode = "addi", op3 = "0";}
+        // else if(opcode == "mv"){opcode = "addi", op3 = "0"}; //op2; op2 = "0";} //op3 = "zero";}
         else if(opcode == "bgt") {opcode = "blt"; swap(op1,op2);}
         else if(opcode == "ble") {opcode = "bge"; swap(op1,op2);}
         else if(opcode == "bgtu") {opcode = "bltu"; swap(op1,op2);}
@@ -398,22 +493,28 @@ int main(){
             opcode = "jalr"; op1 = "zero"; op2 = "ra"; op3 = "0";
         }else if(opcode == "nop"){ //addi x0, x0, 0
             opcode = "addi"; op1 = "x0"; op2 = "x0"; op3 = "0";
+        }else if(opcode == "fabs"){
+            opcode = "fsgnjx"; op3 = op2;
         }
-        ofs << opcode << " " << op1 << " " <<op2 << " " << op3 << endl;
+        // ofs
+        cout << opcode << " " << op1 << " " <<op2 << " " << op3 << endl;
         // cout << op3[0] << endl;
         // cout << op3 << endl;
         string imm;
         // bitset<100> imm(imm_int);
         string rd, rs1, rs2; 
         
-        if(((op1[0] >= '0') && (op1[0] <= '9')) || (op1[0] == '-')) imm = convert(op1);
+        if(is_float[1]) imm = to_bit(f_imm);
+        else if(((op1[0] >= '0') && (op1[0] <= '9')) || (op1[0] == '-')) imm = convert(op1);
         else rd = convert(op1); //zeroなどから01列に
-        if(((op2[0] >= '0') && (op2[0] <= '9')) || (op2[0] == '-')) imm = convert(op2);
+        if(is_float[2]) imm = to_bit(f_imm);
+        else if(((op2[0] >= '0') && (op2[0] <= '9')) || (op2[0] == '-')) imm = convert(op2);
         else rs1 = convert(op2);
+        if(is_float[3]) imm = to_bit(f_imm);
         if(((op3[0] >= '0') && (op3[0] <= '9')) || (op3[0] == '-')) imm = convert(op3); // cout << "imm?" << endl;}
         else rs2 = convert(op3); //ここまでも関数化？
         // cout << "imm" << imm << endl;
-        // ofs << "$" << rd << rs1 << rs2 << endl;
+        // cout << "$" << rd << rs1 << rs2 << endl;
         // immを埋める；32bit?
         // imm = bury_zero(imm, 32);
         string offset = imm;
@@ -421,6 +522,7 @@ int main(){
         string ans;
         // ofs << line << endl;
         // cout << op.conv_type(opcode) << endl;;
+        string rm = "000";
         switch (op.conv_type(opcode)){
             case R:
                 if(opcode == "add"){
@@ -474,7 +576,12 @@ int main(){
                 // if(imm == "") imm = rs2; //op[3];
                 imm = bury_zero(imm, 12);
                 // cout << imm << endl;
-                if(opcode == "addi"){
+                if(opcode == "mv"){
+                    // ofs << "imm" << imm << endl;
+                    rs1 = "00000";
+                    ofs << imm.substr(0, 12)+rs1+"000"+rd+"0010011"<<endl;
+                    pc += 4;    
+                }else if(opcode == "addi"){
                     // ofs << "imm" << imm << endl;
                     ofs << imm.substr(0, 12)+rs1+"000"+rd+"0010011"<<endl;
                     pc += 4;    
@@ -592,17 +699,52 @@ int main(){
                 imm = bury_zero(imm, 32);
                 if(opcode == "lui"){
                     
-                    ofs << imm.substr(12,20) + rd + "0110111"; //imm[31:12]
+                    ofs << imm.substr(12,20) + rd + "0110111"<<endl; //imm[31:12]
                 }else if(opcode == "auipc"){
                     // imm = op[1];
-                    ofs << imm.substr(12,20) + rd + "0010111";
+                    ofs << imm.substr(12,20) + rd + "0010111"<<endl;
                 }
                 pc += 4;
                 continue;
-            // case F:
-            //     if(opcode == "fadd"){
-            //         ofs << "0000000"+rs2+rs1+rm+rd+"1010011";
-            //     }
+            case F:
+                // fadd
+                
+                if(opcode == "fadd"){
+                    ofs << "0000000"+rs2+rs1+rm+rd+"1010011"<<endl;
+                }else if(opcode == "fsub"){
+                    ofs << "0000100"+rs2+rs1+rm+rd+"1010011"<<endl;
+                }else if(opcode == "fmul"){
+                    ofs << "0001000"+rs2+rs1+rm+rd+"1010011"<<endl;
+                }else if(opcode == "fdiv"){
+                    ofs << "0001100"+rs2+rs1+rm+rd+"1010011"<<endl;
+                }else if(opcode == "fsqrt"){
+                    ofs << "010110000000"+rs1+rm+rd+"1010011"<<endl;
+                }else if(opcode == "fsgnj"){
+                    ofs << "0010000"+rs2+rs1+"000"+rd+"1010011"<<endl;
+                }else if(opcode == "fsgnjn"){
+                    ofs << "0010000"+rs2+rs1+"001"+rd+"1010011"<<endl;
+                }else if(opcode == "fsgnjx"){
+                    ofs << "0010000"+rs2+rs1+"010"+rd+"1010011"<<endl;
+                }else if(opcode == "fmin"){
+                    ofs << "0010100"+rs2+rs1+"000"+rd+"1010011"<< endl;
+                }else if(opcode == "fmax"){
+                    ofs << "0010100"+rs2+rs1+"001"+rd+"1010011"<< endl;
+                }else if(opcode == "feq"){
+                    ofs << "1010001"+rs2+rs1+"010"+rd+"1010011" << endl;
+                }else if(opcode == "flt"){
+                    ofs << "1010001"+rs2+rs1+"001"+rd+"1010011" << endl;
+                }else if(opcode == "fle"){
+                    ofs << "1010001"+rs2+rs1+"000"+rd+"1010011" << endl;
+                } 
+                else if(opcode == "flw"){
+                    imm = bury_zero(imm, 12);
+                    ofs << imm.substr(0,12)+rs1+"010"+rd+"0000111" << endl;
+                }else if(opcode == "fsw"){
+                    imm = bury_zero(imm, 12);
+                    ofs << imm.substr(5,7)+rs2+rs1+"010"+imm.substr(0,5)+"0100011" << endl;
+                }
+                pc += 4;
+                // 以下省略
             // add
             // switch  
             default:
