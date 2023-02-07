@@ -21,9 +21,8 @@
 
 
 module fpu_tb ();
-    logic [0:0]    sys_clk;
-    logic [0:0]    mem_clk;
-    logic [0:0]    rst;
+    logic [0:0]    clk;
+    logic [0:0]    rstn;
     logic [7:0]    opcode;
     logic [31:0]   x1;
     logic [31:0]   x2;
@@ -36,24 +35,25 @@ module fpu_tb ();
     //メモリのクロックは200MHzに設定する
     localparam mem_clk_FREQ = 200.0;
     always begin
-        sys_clk <= 1;
+        clk <= 1;
         #(((1/sys_clk_FREQ)/2)*1000);
-        sys_clk <= 0;
+        clk <= 0;
         #(((1/sys_clk_FREQ)/2)*1000);
     end
-    
+    /*
     always begin
         mem_clk <= 1;
         #(((1/mem_clk_FREQ)/2)*1000);
         mem_clk <= 0;
         #(((1/mem_clk_FREQ)/2)*1000);
     end
+    */
 
     top top_i (
         .opcode(opcode),
-        .rst(rst),
-        .sys_clk(sys_clk),
-        .mem_clk(mem_clk),
+        .rstn(rstn),
+        .clk(clk),
+        //.mem_clk(mem_clk),
         .x1(x1),
         .x2(x2),
         .y(y),
@@ -62,43 +62,84 @@ module fpu_tb ();
     );
     
     initial begin
-        rst <= 1'b1; #30;
-        rst <= 1'b0;
+        rstn <= 1'b0; #30;
+        rstn <= 1'b1;
     end
     
     initial begin
-    #101;
-        opcode <= 8'b00010000;
+    opcode <= 8'b00000000;
+    #501;
+        opcode <= 8'b00000001;
         x1 <= 32'h44fa21b3;
         x2 <= 32'h44fa40f8;
-        #10;
-        opcode <= 8'b00010000;
+        #10
+        opcode <= 8'b00000000;
+        #60;
+        opcode <= 8'b00000010;
         x1 <= 32'h43fa3146;
         x2 <= 32'h45fa4345;
-        #10;
-        opcode <= 8'b00010000;
+        #10
+        opcode <= 8'b00000000;
+        #60;
+        opcode <= 8'b00000100;
         x1 <= 32'h44fa2352;
         x2 <= 32'h43fa4734;
-        #10;
-        opcode <= 8'b00010000;
+        #10
+        opcode <= 8'b00000000;
+        #60;
+        opcode <= 8'b00001000;
         x1 <= 32'h45ef6235;
         x2 <= 32'h44264455;
-        #10;
+        #10
+        opcode <= 8'b00000000;
+        #60;
         opcode <= 8'b00010000;
         x1 <= 32'h44688535;
         x2 <= 32'h46abd424;
-        #10;
-        opcode <= 8'b00010000;
+        #10
+        opcode <= 8'b00000000;
+        #60;
+        opcode <= 8'b00100000;
         x1 <= 32'h3fd61587;
         x2 <= 32'hbf561e83;
-        #10;
-        opcode <= 8'b00010000;
+        #10
+        opcode <= 8'b00000000;
+        #60;
+        opcode <= 8'b01000000;
         x1 <= 32'h3fd61587;
         x2 <= 32'hbf561e83;
-        #10;
-        opcode <= 8'b00010000;
+        #10
+        opcode <= 8'b00000000;
+        #60;
+        opcode <= 8'b00000000;
         x1 <= 32'h3fd61587;
         x2 <= 32'hbf561e83;
+        #10
+        opcode <= 8'b00000000;
+        #60;
+        opcode <= 8'b00000000;
+        x1 <= 32'h3f800000;
+        x2 <= 32'h3f800000;
+        #10
+        opcode <= 8'b00000000;
+        #60;
+        opcode <= 8'b00000000;
+        x1 <= 32'h3f800000;
+        x2 <= 32'h40000000;
+        #10
+        opcode <= 8'b00000000;
+        #60;
+        opcode <= 8'b00000000;
+        x1 <= 32'h3f800000;
+        x2 <= 32'h40400000;
+        #10
+        opcode <= 8'b00000000;
+        #60;
+        opcode <= 8'b00000000;
+        x1 <= 32'h3f800000;
+        x2 <= 32'h40800000;
+        #10
+        opcode <= 8'b00000000;
         #100;
         $finish;
     end;
