@@ -1,0 +1,63 @@
+LET z
+	INT 4
+	LET REC f x 
+		SUB x z
+		LET a
+			LET Ti5
+				INT 8
+				APP f Ti5 
+			LET Tu4
+				EXTFUNAPP print_var a 
+				LET REC g x 
+					LET Ti14
+						INT 2
+						SUB x Ti14
+					LET a
+						LET Ti6
+							INT 6
+							APP g Ti6 
+						LET Tu3
+							EXTFUNAPP print_var2 a 
+							LET REC f x 
+								LET Ti13
+									INT 1
+									SUB x Ti13
+								LET a
+									VAR f
+									LET Tu2
+										EXTFUNAPP print_var3 a 
+										LET REC g h 
+											LET REC i x 
+												APP h x 
+												VAR i
+											LET a
+												VAR g
+												LET Tu1
+													EXTFUNAPP print_var4 a 
+													LET REC i x 
+														VAR x
+														LET z
+															INT 4
+															LET REC f x 
+																LET Ti12
+																	LET Ti11
+																		INT 5
+																		SUB z Ti11
+																	APP i Ti12 
+																LET Ti7
+																	INT 6
+																	IFLE Ti7 z
+																		LET a
+																			LET Ti8
+																				INT 8
+																				TUPLE
+																					f Ti8 
+																			EXTFUNAPP print_var5 a 
+																		LET a
+																			LET Ti10
+																				LET Ti9
+																					INT 7
+																					APP f Ti9 
+																				TUPLE
+																					i Ti10 
+																			EXTFUNAPP print_var5 a 

@@ -1,0 +1,345 @@
+""" その他メモ """
+・OCamlでは==はポインタ同士を比較する演算子である。
+
+""" Makefile """
+・OCamlMakefileを利用
+・SOURCES = ...という行にMinCamlで使うファイルを置いておく。
+・TESTS = ...という行にテストプログラムを置いておく。
+
+""" main.ml """
+・MinCamlのメインルーチン
+・末尾のlet () = ...という部分からコンパイラの実行が開始される。
+・OCamlの標準ライブラリArgを利用してオプションを処理している。
+・-inlineでインライン展開する関数のサイズを指定し、これは変数Inline.threshold
+の中に格納される。
+・-iterで最適化処理のループ回数を指定し、これは変数Main.limitに格納される。
+・変数Main.limitは最適化処理のループ回数を表す。
+・関数Main.iterは引数に最適化回数nと対象の式e(KNormal.t)を受け取り、
+β簡約(Beta.f)、ネストしたletの簡約(Assoc.f)、インライン展開(Inline.f)、
+定数畳み込み(ConstFold.f)、不要定義削除(Elim.f)を指定した回数を上限として
+結果が不変になるまで適用する。
+・関数Main.lexbufは、引数として受け取ったバッファに対し、順に字句解析(Lexer.token)、
+構文解析(Parser.exp)、型推論(Typing.f)、K正規化(KNormal.f)、α変換(Alpha.f)、
+共通部分式削除(Cse.f)、最適化(iter)、クロージャ変換(Closure.f)、
+仮想マシンコード生成(Virtual.f)、13bit即値最適化(Simm.f)、レジスタ割り当て(RegAlloc.f)、
+アセンブリ生成(Emit.f)を行う。
+
+""" id.ml """
+・MinCamlの変数に関わるファイル
+・Id.tは変数の名前を表すデータ型
+・Id.lはトップレベル関数やグローバル配列のラベルを表すデータ型
+・関数Id.pp_listは、引数にId.tのリストをとり、中身を全て連結させた
+文字列を返す。
+・変数Id.counterは、変数のナンバー付を暗に行うための変数。
+・関数Id.genidは、与えた文字列を一部に入れた名前の変数を生成する。
+・関数Id.id_of_typは、引数にType.tの型をとり、その型を表す文字列を
+返す。
+・関数Id.gentmpは、引数にType.tの型をとり、その型の情報を名前に入れた
+変数を生成する。
+
+""" Type.ml """
+・MinCamlの型に関わるファイル
+・Type.tはMinCamlの型を表現するデータ型
+・関数Type.gentypは、新しい型変数を作る。
+
+""" syntax.ml """
+・MinCamlの構文に関わるファイル
+・Syntax.tはMinCamlの構文を表現するデータ型
+・Letは変数定義
+・LetRecは再帰関数(普通の関数も含む)定義
+・Varは変数の読み出し
+・Appは関数の呼び出し
+・Tupleは組の生成
+・LetTupleは組の読み出し
+・Arrayは配列の生成
+・Getは配列の読み出し
+・Putは配列への書き込み
+・Syntax.fundefはMinCamlの関数定義を表現するデータ型
+
+""" lexer.mll """
+・字句解析を行うファイル
+・ocamllexを利用
+
+""" parser.mly """
+・構文解析を行うファイル
+・ocamlyaccを利用
+・関数Parser.addtypは、変数の名前を引数に受け取り、未定義の新しい型変数
+Var(ref None)と組にして返す。
+・変数の型が必要なところ(letなど)は、とりあえず未定義の新しい型変数で埋めている。
+この型はTyping.mlで決定される。
+
+""" typing.ml """
+・型推論を行うファイル
+・例外Typing.Unifyは、型推論が失敗したときに照合させようとしていた二つの型の
+情報を格納する。
+・例外Typing.Errorは、型推論が失敗したときに照合させようとしていた二つの型の
+情報と、失敗した箇所の元のコードにおける行番号の情報を格納する。
+・変数Typing.extenvは外部の型環境を表す。
+・関数Typing.string_typeは、Type.tの型の種類を文字列で返す関数。
+・関数Typing.deref_typは、Type.tを引数にとり、全ての型変数をその
+中身で置き換える。
+・関数Typing.deref_id_typは、Id.tとType.tの組を引数にとり、全ての
+型変数をその中身で置き換える。
+・関数Typing.deref_termは、Syntax.tを引数にとり、全ての型変数をその
+中身で置き換える。
+・関数Typing.occurは、occur checkを行う。
+・関数Typing.unifyは、与えられた二つの型が等しいかどうかを中まで調べていき、
+一方が未定義の型変数Type.var(ref None)だったら、他方と等しくなるように代入を
+行う。
+・関数Typing.gが型推論の本体。型環境envと式eとを受け取り、eの型を推論して返す。
+また、式の中に出てくる変数の型があっているかどうかも調べる。
+
+""" kNormal.ml """
+・K正規化を行うファイル
+・KNormal.tはK正規化後の式を表すデータ型
+・比較や条件分岐を比較と分岐が一体となった形IfEq, IfLEに直す。
+・外部変数の使用を外部関数の呼び出し(KNormal.ExtFunApp)か、外部配列の参照
+(KNormal.ExtArray)のどちらかに限る。
+・関数KNormal.fvは、KNormal.tを引数に取り、式に出現する自由変数のリスト
+を返す。
+・関数KNormal.insert_letは、式eを受け取り、新しい変数xを作って、let x = e in ...
+という式を返す。inの中を作るための関数kも引数として受け取り、kをxに適用した結果を
+...の部分として利用する。
+・関数KNormal.gがK正規化の本体。変数の型環境envとK正規化前の式を受け取り、
+K正規化後の式と、その型とを組にして返す。
+・型環境を受け取ったり、型を返したりするのは、letで変数を定義するときに
+型も付加する必要があるためで、あまりK正規化の本質とは関係がない。
+・KNormal.gでは、論理値true,falseを整数1,0に変換する処理もやっている。
+
+""" alpha.ml """
+・α変換を行うファイル
+・関数Alpha.findは、変数の名前xと、変換前の変数名から変換後の変数名への写像envを
+受け取り、envの中にxに対応する変数名があればそれを返し、なければxを返す。
+・関数Alpha.gが実装本体。変換前の変数名から変換後の変数名への写像envと、変換前の
+式eとを受け取り、変換後の式を返す。
+・外部変数の名前はα変換の対象にはならない。
+
+""" cse.ml """
+・共通部分式削除(CSE)を行うファイル
+
+""" beta.ml """
+・β簡約を行うファイル
+・Beta.gが実装本体。ある変数からそれに等しい変数への写像envと、式eとを
+受け取り、eをβ簡約した式を返す。
+
+""" assoc.ml """
+・ネストしたletの簡約を行うファイル
+・関数Assoc.fが実装本体。
+
+""" inline.ml """
+・インライン展開を行うファイル
+・変数Inline.thresholdは、インライン展開する関数の最大サイズを表す。
+・関数Inline.sizeは、KNormal.tを引数にとり、その式のサイズを返す。
+・関数Inline.gが実装本体。
+・インライン展開した式は関数の本体を複製した式であるから、変数が重複している
+かもしれないので、またα変換する必要がある。
+
+""" constFold.ml """
+・定数畳み込みを行うファイル
+・関数ConstFold.gが実装本体。変数の名前から値への写像envと、式eとを受け取り、
+定数畳み込みを行なって返す。
+
+""" elim.ml """
+・不要定義削除を行うファイル
+・関数Elim.effectは、与えた式に副作用があればtrueを、なければfalseを返す。
+・関数Elim.fが実装本体。
+
+""" closure.ml """
+・クロージャ変換を行うファイル
+・Closure.tはクロージャ変換後の式を表すデータ型
+・MakeClsはクロージャ生成を表す。
+・AppClsはクロージャによる関数呼び出しを表す。
+・AppDirはクロージャによらないトップレベル関数の呼び出しを表す。
+・Closure.closureはクロージャを表すデータ型。entryが関数のラベルを
+表、actual_fvが関数中の自由変数のリストを表す。
+・Closure.fundefは関数定義を表すデータ型。nameは関数のラベルをあらわし、
+argsは引数のリストを表し、formal_fvは関数中の自由変数のリストを表し、
+bodyは定義本体を表す。
+・Closure.progはクロージャ変換後のプログラムを表すデータ型。クロージャ変換
+後の式を表すClosure.tと、プログラム中に定義されている関数群を表すClosure.fundef list
+からなる。
+・関数Closure.pos_of_typeは、クロージャ変換後の式を引数にとり、式に含まれる
+元のコードにおける行番号の情報を返す。
+・関数Closure.fvは、Closure.tに含まれる自由変数のリストを返す。
+・変数Closure.toplevelは、定義されたトップレベル関数の集合を表す。
+・このファイルで、今後のために変数の名前のデータ型Id.tと、トップレベル関数
+の名前(ラベル)のデータ型Id.lを区別する。
+・AppClsは変数を、AppDirはラベルを使用している。クロージャはMakeClsで
+変数に束縛されるが、トップレベル関数はラベルで呼び出されるためである。
+・関数Closure.gが実装本体。型環境envと、「自由変数がないとわかっていて、
+普通に呼び出せる」関数の集合knownを引数として受け取り、与えられた式を
+クロージャ変換して返す。
+・関数定義に自由変数があるか、inの後に関数が変数として適用される場合には、
+クロージャが作られる。
+・外部関数の適用KNormal.ExtFunAppは、AppDirに変換される。
+
+""" asm.ml """
+(共通)
+・仮想アセンブリを定義したファイル
+・Asm.tは命令列を表すデータ型。関数の最後で値を返すAnsと、変数代入Let
+から成り立つ。
+・Asm.expは一つ一つの命令に対応する式を表すデータ型
+・Asm.fundefは関数定義をあらわすデータ型。関数のラベル、浮動小数でない引数、
+浮動小数の引数、定義の内容、返り値の型からなる。
+・Asm.progはプログラム全体を表すデータ型。浮動小数点数テーブル、トップレベル関数の集合、
+メインの式からなる。
+・Asm.fletdは、floatの変数の定義でLetを用いる場合の簡略形。
+・Asm.seqは、unitの変数の定義でLetを用いる場合の簡略形。
+・変数Asm.regsは浮動小数点でない使用可能なレジスタを表すArray
+・変数Asm.fregsは浮動小数点数用の使用可能なレジスタを表すArray
+・変数Asm.allregsは、regsをリストにしたもの
+・変数Asm.allfregsは、fregsをリストにしたもの
+・変数Asm.reg_clはクロージャのアドレスを表す。
+・変数Asm.reg_spはスタックのアドレスを記憶する(スタックポインタ)
+・変数Asm.reg_hpはヒープのアドレスを記憶する(ヒープポインタ)
+・変数Asm.reg_raは戻りアドレスを記憶する
+・関数Asm.is_regは、引数の文字列がレジスタであるかを判定する。
+・関数Asm.remove_and_uniqは、リストを引数に受け取り、そのリストの
+重複要素を削除して返す。
+・関数Asm.fv_id_or_immは、Asm.id_or_imm内の自由変数を返す。
+・関数Asm.fv_expは、Asm.exp内の自由変数を返す。
+・関数Asm.fvは、Asm.t内の自由変数を返す。
+・関数Asm.concatは、命令列e1, e2を合成する。
+・関数Asm.alignは、アドレスを引数に取り、アラインメントを調整する。
+
+(SPARC)
+・i0はスタックポインタ
+・i1はヒープポインタ
+・o7は戻り番地用レジスタ
+・o1-o4, l0-l7, i2-i5は一般レジスタとして使用
+
+(x86)
+・ebpはスタックポインタ
+・ヒープポインタや戻り番地を収納するものにはレジスタを使用しない。
+
+""" virtual.ml """
+・仮想マシンコード生成を行うファイル
+・メモリ操作はアセンブリ風、レジスタは無限個、関数呼び出しあり、if-then-elseあり
+・変数Virtual.dataは浮動小数点数の定数テーブルを表す。
+・関数Virtual.separateはId.tのリストを引数に取り、中身が浮動小数点数のものと
+それ以外のものに分割する。関数Virtual.classifyは下請け関数。
+・関数の引数を浮動小数点数とそれ以外に分離するのは、レジスタが異なることを
+想定している。
+・浮動小数点数の定数テーブルを作成しているのは、浮動小数点数を即値として
+扱えないことを想定している。
+・クロージャ変換の結果を仮想マシンコードに変換する関数はVirtual.f, Virtual.h,
+Virtual.gの三つである。
+・関数Virtual.fはプログラム全体(トップレベル関数のリストと、メインルーチンの式)を、
+関数Virtual.hは個々のトップレベル関数を、関数Virtual.gは式を変換する。
+・変換の主要な部分は、クロージャや組・配列の生成や読み出し・書き込みに
+伴うメモリアクセスを明示することである。
+・クロージャや組・配列などのデータ構造はヒープに確保する。
+・関数Virtual.gは、型環境envとClosure.tを引数に取り、式を変換して返す。
+・Closure.Unit -> Nop
+・Closure.Int -> Set
+・Closure.Float -> Let, SetL, LdDF
+・Closure.Neg -> Neg
+・Closure.Add -> Add
+・Closure.Sub -> Sub
+・Closure.FNeg -> FNegD
+・Closure.FAdd -> FAddD
+・Closure.FSub -> FSubD
+・Closure.FMul -> FMulD
+・Closure.FDiv -> FDivD
+・Closure.IfEq -> 比べる型によってIfEqとIfFEqに分割
+・Closure.IfLE -> 比べる型によってIfLEとIfFLEに分割
+・Closure.Var -> 変数の型によってNop, FMovD, Movに分割
+・Closure.MakeCls -> アラインメントに注意しつつ、関数本体のアドレス(ラベル)と
+自由変数の値をストアしていき、先頭のアドレスをクロージャそのものの値とする。
+・Closure.MakeCls -> St, StDF, SetL, Mov等
+・Closure.AppCls -> CallCls(引数を分離)
+・Closure.AppDir -> CallDir(引数を分離)
+・Closure.Tuple -> 浮動小数のアラインメントに注意しつつ、個々の要素を順番に
+ストアしていき、先頭のアドレスを組そのものの値とする。
+・Closure.Tuple -> St, StDF等
+・Closure.LetTuple -> Ld, LdDF等
+・Closure.Get -> 与えられたインデックスに、配列の要素が浮動小数なら3ビット
+、それ以外なら2ビット左シフトさせることで配列の要素にアクセスする。
+・Closure.Get -> Ld, LdDF(, SLL)
+・Closure.Put -> St, StDF(, SLL)
+・Closure.ExtArray -> SetL
+・関数Virtual.hは、トップレベル関数Closure.fundefを引数に取り、これを
+変換して返す。
+・Closure.fundef -> Asm.fundef
+・関数Virtual.fは、プログラム全体Closure.Progを変換する。(Asm.Prog)
+
+""" simm.ml """
+・即値最適化を行うファイル
+・SLLは論理左シフトを表す。
+・lslは第一オペランドを第二オペランドの値bitだけ左シフトする。
+
+""" regAlloc.ml """
+・レジスタ割り当てを行うファイル
+・Save(x)命令は変数xの値をスタックに退避する擬似命令
+・Restore(x)命令は変数xの値をスタックから復帰する擬似命令
+・演算子<>はnot equalのこと
+・関数RegAlloc.targetは、target coalescingを行う。無駄なmov命令
+をなるべく減らすよう、レジスタを割り当てる。
+・RegAlloc.alloc_resultは、関数RegAlloc.allocにおいてspillingが
+あったかどうかを表すデータ型。Allocは割り当てるレジスタ変数を保持し、
+Spillはレジスタ溢れを起こす変数を情報としてもつ。
+・関数RegAlloc.allocは、
+・tは型
+・xは変数の名前
+・regenvは現在のレジスタ割り当てを表す(変数からレジスタへの)写像
+・contは「これから後」にくる命令列。生きている変数の計算に用いる。
+・destは計算結果(関数の返り値)を格納するレジスタ(とその型)
+・例外RegAlloc.NoRegは、レジスタ割り当てできなかった変数の名前と、その
+型を情報として持つ。
+・関数RegAlloc.findは、変数の名前と(その型と)、現在のレジスタ割り当てを
+表す(変数からレジスタへの)写像regenvを受け取り、その変数に相当するレジスタ
+があればそのレジスタ名を返し、変数の名前がそもそもレジスタの名前ならそれ自身を
+返す。見つからなかった場合は、例外RegAlloc.NoRegを返す。
+・関数RegAlloc.addは、変数の名前x、レジスタの名前r、レジスタ割り当てを表す
+写像regenvを受け取り、xがレジスタの名前ならxとrが正しければregenvを返し、
+それ以外ならregenvにxとrのペアを加えて返す。
+・関数RegAlloc.gは、命令列(Asm.t)のレジスタ割り当てを行う関数。
+今のレジスタ割り当てを表す(変数からレジスタへの)写像regenvと、命令列とを受け取り、
+レジスタ割り当てを行なって返す。レジスタ割り当てを行なった後の命令列と、
+レジスタ割り当てした結果(regenv1)を返す。
+・関数RegAlloc.g''_and_restoreにより、メモリからレジスタへ変数を
+復帰する仮想命令Restoreが挿入される。
+・関数RegAlloc.g''は、各命令(Asm.exp)のレジスタ割り当てを行う関数。
+・関数RegAlloc.hは、関数(Asm.fundef)のレジスタ割り当てを行う関数。
+引数は番号の小さいレジスタから順に割り当てていくことにし、レジスタで
+渡しきれないほど数の多い引数はMinCamlコンパイラではサポートしない。
+また、返り値は第一レジスタにセットすることにする。
+・関数RegAlloc.fは、プログラム全体のレジスタ割り当てを行う関数。
+
+" emit.ml "
+・アセンブリ生成を行うファイル
+・変数stacksetは、すでにSaveされた変数の集合を表す。
+・変数stackmapは、Saveされた変数の、スタックにおける位置を表す。
+・Emit.destは、末尾かどうかを表すデータ型
+
+" 付け足す命令 "
+・lxor
+・lor
+・land
+・sqrt -> fsqrt
+・fabs
+・lsl
+・lsr
+・ftoi <- int_of_float
+・itof <- float_of_int
+
+" ライブラリ "
+・mul
+・div
+・fispos
+・fisneg
+・fiszero
+・fneg
+・fsqr
+・sin
+・cos
+・read_float
+・read_int
+・fless
+・fhalf
+・floor
+・atan
+・print_char
+・print_int
+・int_of_float -> なし
+・float_of_int -> なし

@@ -1,0 +1,33 @@
+Name : sum.7
+Args : x.8 
+
+FArgs : 
+Body :
+ANS
+	IFLE x.8 0
+		ANS
+			SET 0
+		LET
+			Ti5.13
+			SUB x.8 1
+			LET
+				Ti6.12
+				CALLDIR sum.7
+					Ti5.13 
+					
+				ANS
+					ADD Ti6.12 x.8
+
+
+LET
+	Ti1.10
+	SET 10000
+	LET
+		Ti2.9
+		CALLDIR sum.7
+			Ti1.10 
+			
+		ANS
+			CALLDIR min_caml_print_int
+				Ti2.9 
+				

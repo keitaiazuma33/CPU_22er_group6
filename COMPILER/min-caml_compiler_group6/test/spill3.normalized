@@ -1,0 +1,185 @@
+LET REC f x0 
+	LET x1
+		LET Ti3
+			INT 1
+			ADD x0 Ti3
+		LET x2
+			LET Ti4
+				INT 1
+				ADD x1 Ti4
+			LET x3
+				LET Ti5
+					INT 1
+					ADD x2 Ti5
+				LET x4
+					LET Ti6
+						INT 1
+						ADD x3 Ti6
+					LET x5
+						LET Ti7
+							INT 1
+							ADD x4 Ti7
+						LET x6
+							LET Ti8
+								INT 1
+								ADD x5 Ti8
+							LET x7
+								LET Ti9
+									INT 1
+									ADD x6 Ti9
+								LET x8
+									LET Ti10
+										INT 1
+										ADD x7 Ti10
+									LET x9
+										LET Ti11
+											INT 1
+											ADD x8 Ti11
+										LET x10
+											LET Ti12
+												INT 1
+												ADD x9 Ti12
+											LET x11
+												LET Ti13
+													INT 1
+													ADD x10 Ti13
+												LET x12
+													LET Ti14
+														INT 1
+														ADD x11 Ti14
+													LET x13
+														LET Ti15
+															INT 1
+															ADD x12 Ti15
+														LET x14
+															LET Ti16
+																INT 1
+																ADD x13 Ti16
+															LET x15
+																LET Ti17
+																	INT 1
+																	ADD x14 Ti17
+																LET x16
+																	LET Ti18
+																		INT 1
+																		ADD x15 Ti18
+																	LET x17
+																		LET Ti19
+																			INT 1
+																			ADD x16 Ti19
+																		LET x18
+																			LET Ti20
+																				INT 1
+																				ADD x17 Ti20
+																			LET x19
+																				ADD x18 x1
+																				LET x20
+																					ADD x19 x2
+																					LET x21
+																						ADD x20 x3
+																						LET x22
+																							ADD x21 x4
+																							LET x23
+																								ADD x22 x5
+																								LET x24
+																									ADD x23 x6
+																									LET x25
+																										ADD x24 x7
+																										LET x26
+																											ADD x25 x8
+																											LET x27
+																												ADD x26 x9
+																												LET x28
+																													ADD x27 x10
+																													LET x29
+																														ADD x28 x11
+																														LET x30
+																															ADD x29 x12
+																															LET x31
+																																ADD x30 x13
+																																LET x32
+																																	ADD x31 x14
+																																	LET x33
+																																		ADD x32 x15
+																																		LET x34
+																																			ADD x33 x16
+																																			LET x35
+																																				ADD x34 x17
+																																				LET x36
+																																					ADD x35 x0
+																																					LET Ti55
+																																						LET Ti54
+																																							LET Ti53
+																																								LET Ti52
+																																									LET Ti51
+																																										LET Ti50
+																																											LET Ti49
+																																												LET Ti48
+																																													LET Ti47
+																																														LET Ti46
+																																															LET Ti45
+																																																LET Ti44
+																																																	LET Ti43
+																																																		LET Ti42
+																																																			LET Ti41
+																																																				LET Ti40
+																																																					LET Ti39
+																																																						LET Ti38
+																																																							LET Ti37
+																																																								LET Ti36
+																																																									LET Ti35
+																																																										LET Ti34
+																																																											LET Ti33
+																																																												LET Ti32
+																																																													LET Ti31
+																																																														LET Ti30
+																																																															LET Ti29
+																																																																LET Ti28
+																																																																	LET Ti27
+																																																																		LET Ti26
+																																																																			LET Ti25
+																																																																				LET Ti24
+																																																																					LET Ti23
+																																																																						LET Ti22
+																																																																							LET Ti21
+																																																																								ADD x1 x2
+																																																																								ADD Ti21 x3
+																																																																							ADD Ti22 x4
+																																																																						ADD Ti23 x5
+																																																																					ADD Ti24 x6
+																																																																				ADD Ti25 x7
+																																																																			ADD Ti26 x8
+																																																																		ADD Ti27 x9
+																																																																	ADD Ti28 x10
+																																																																ADD Ti29 x11
+																																																															ADD Ti30 x12
+																																																														ADD Ti31 x13
+																																																													ADD Ti32 x14
+																																																												ADD Ti33 x15
+																																																											ADD Ti34 x16
+																																																										ADD Ti35 x17
+																																																									ADD Ti36 x18
+																																																								ADD Ti37 x19
+																																																							ADD Ti38 x20
+																																																						ADD Ti39 x21
+																																																					ADD Ti40 x22
+																																																				ADD Ti41 x23
+																																																			ADD Ti42 x24
+																																																		ADD Ti43 x25
+																																																	ADD Ti44 x26
+																																																ADD Ti45 x27
+																																															ADD Ti46 x28
+																																														ADD Ti47 x29
+																																													ADD Ti48 x30
+																																												ADD Ti49 x31
+																																											ADD Ti50 x32
+																																										ADD Ti51 x33
+																																									ADD Ti52 x34
+																																								ADD Ti53 x35
+																																							ADD Ti54 x36
+																																						ADD Ti55 x0
+	LET Ti2
+		LET Ti1
+			INT 0
+			APP f Ti1 
+		EXTFUNAPP print_int Ti2 

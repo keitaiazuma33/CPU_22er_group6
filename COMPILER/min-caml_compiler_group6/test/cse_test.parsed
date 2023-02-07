@@ -1,0 +1,20 @@
+LET a
+	INT 1
+	LET b
+		INT 2
+		LET c
+			ADD
+				VAR a
+				VAR b
+			LET d
+				ADD
+					VAR a
+					VAR b
+				LET e
+					ADD
+						VAR b
+						VAR a
+					APP VAR print_int
+						ADD
+							VAR d
+							VAR e

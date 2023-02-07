@@ -1,0 +1,60 @@
+Name : f.8
+Args : y.9 
+
+FArgs : 
+Body :
+LET
+	x.7
+	LD f.8 4
+	LET
+		Ti3.12
+		SET 0
+		ANS
+			IFEQ y.9 Ti3.12
+				ANS
+					SET 0
+				LET
+					Ti4.15
+					SET 1
+					LET
+						Ti5.14
+						SUB y.9 Ti4.15
+						LET
+							Ti6.13
+							CALLCLS f.8
+								Ti5.14 
+								
+							ANS
+								ADD x.7 Ti6.13
+
+
+LET
+	x.7
+	SET 10
+	LET
+		f.8
+		MOV %x3
+		LET
+			%x3
+			ADD %x3 8
+			LET
+				l.17
+				f.8
+				LET
+					Tu18
+					ST l.17 f.8 0
+					LET
+						Tu16
+						ST x.7 f.8 4
+						LET
+							Ti1.11
+							SET 123
+							LET
+								Ti2.10
+								CALLCLS f.8
+									Ti1.11 
+									
+								ANS
+									CALLDIR min_caml_print_int
+										Ti2.10 
+										

@@ -1,0 +1,159 @@
+LET REC f.43 a.44 b.45 c.46 d.47 
+	LET e.53
+		ADD a.44 b.45
+		LET f.54
+			ADD a.44 c.46
+			LET g.55
+				ADD a.44 d.47
+				LET h.56
+					ADD b.45 c.46
+					LET i.57
+						ADD b.45 d.47
+						LET j.58
+							ADD c.46 d.47
+							LET k.59
+								ADD e.53 f.54
+								LET l.60
+									ADD e.53 g.55
+									LET m.61
+										ADD e.53 h.56
+										LET n.62
+											ADD e.53 i.57
+											LET o.63
+												ADD e.53 j.58
+												LET p.64
+													ADD f.54 g.55
+													LET q.65
+														ADD f.54 h.56
+														LET r.66
+															ADD f.54 i.57
+															LET s.67
+																ADD f.54 j.58
+																LET t.68
+																	ADD g.55 h.56
+																	LET u.69
+																		ADD g.55 i.57
+																		LET v.70
+																			ADD g.55 j.58
+																			LET w.71
+																				ADD h.56 i.57
+																				LET x.72
+																					ADD h.56 j.58
+																					LET y.73
+																						ADD i.57 j.58
+																						LET aa.74
+																							ADD k.59 l.60
+																							LET ab.75
+																								ADD k.59 m.61
+																								LET ac.76
+																									ADD k.59 n.62
+																									LET ad.77
+																										ADD k.59 o.63
+																										LET ae.78
+																											ADD k.59 p.64
+																											LET af.79
+																												ADD k.59 q.65
+																												LET ag.80
+																													ADD k.59 r.66
+																													LET ah.81
+																														ADD k.59 s.67
+																														LET ai.82
+																															ADD k.59 t.68
+																															LET aj.83
+																																ADD k.59 u.69
+																																LET ak.84
+																																	ADD k.59 v.70
+																																	LET al.85
+																																		ADD k.59 w.71
+																																		LET am.86
+																																			ADD k.59 x.72
+																																			LET an.87
+																																				ADD k.59 y.73
+																																				LET z.88
+																																					LET Ti42.89
+																																						LET Ti41.90
+																																							LET Ti40.91
+																																								LET Ti39.92
+																																									LET Ti38.93
+																																										LET Ti37.94
+																																											LET Ti36.95
+																																												LET Ti35.96
+																																													LET Ti34.97
+																																														LET Ti33.98
+																																															LET Ti32.99
+																																																LET Ti31.100
+																																																	LET Ti30.101
+																																																		LET Ti29.102
+																																																			LET Ti28.103
+																																																				LET Ti27.104
+																																																					LET Ti26.105
+																																																						LET Ti25.106
+																																																							LET Ti24.107
+																																																								LET Ti23.108
+																																																									LET Ti22.109
+																																																										LET Ti21.110
+																																																											LET Ti20.111
+																																																												LET Ti19.112
+																																																													LET Ti18.113
+																																																														LET Ti17.114
+																																																															LET Ti16.115
+																																																																LET Ti15.116
+																																																																	LET Ti14.117
+																																																																		LET Ti13.118
+																																																																			LET Ti12.119
+																																																																				LET Ti11.120
+																																																																					LET Ti10.121
+																																																																						LET Ti9.122
+																																																																							LET Ti8.123
+																																																																								LET Ti7.124
+																																																																									LET Ti6.125
+																																																																										ADD a.44 b.45
+																																																																										ADD Ti6.125 c.46
+																																																																									ADD Ti7.124 d.47
+																																																																								ADD Ti8.123 e.53
+																																																																							ADD Ti9.122 f.54
+																																																																						ADD Ti10.121 g.55
+																																																																					ADD Ti11.120 h.56
+																																																																				ADD Ti12.119 i.57
+																																																																			ADD Ti13.118 j.58
+																																																																		ADD Ti14.117 k.59
+																																																																	ADD Ti15.116 l.60
+																																																																ADD Ti16.115 m.61
+																																																															ADD Ti17.114 n.62
+																																																														ADD Ti18.113 o.63
+																																																													ADD Ti19.112 p.64
+																																																												ADD Ti20.111 q.65
+																																																											ADD Ti21.110 r.66
+																																																										ADD Ti22.109 s.67
+																																																									ADD Ti23.108 t.68
+																																																								ADD Ti24.107 u.69
+																																																							ADD Ti25.106 v.70
+																																																						ADD Ti26.105 w.71
+																																																					ADD Ti27.104 x.72
+																																																				ADD Ti28.103 y.73
+																																																			ADD Ti29.102 aa.74
+																																																		ADD Ti30.101 ab.75
+																																																	ADD Ti31.100 ac.76
+																																																ADD Ti32.99 ad.77
+																																															ADD Ti33.98 ae.78
+																																														ADD Ti34.97 af.79
+																																													ADD Ti35.96 ag.80
+																																												ADD Ti36.95 ah.81
+																																											ADD Ti37.94 ai.82
+																																										ADD Ti38.93 aj.83
+																																									ADD Ti39.92 ak.84
+																																								ADD Ti40.91 al.85
+																																							ADD Ti41.90 am.86
+																																						ADD Ti42.89 an.87
+																																					NEG z.88
+	LET Ti5.48
+		LET Ti1.49
+			INT 1
+			LET Ti2.50
+				INT 2
+				LET Ti3.51
+					INT 3
+					LET Ti4.52
+						INT 4
+						APP f.43 Ti1.49 Ti2.50 Ti3.51 Ti4.52 
+		EXTFUNAPP print_int Ti5.48 

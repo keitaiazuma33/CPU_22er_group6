@@ -1,0 +1,19 @@
+LET REC sum acc x 
+	LET Ti4
+		INT 0
+		IFLE x Ti4
+			VAR acc
+			LET Ti5
+				ADD acc x
+				LET Ti7
+					LET Ti6
+						INT 1
+						SUB x Ti6
+					APP sum Ti5 Ti7 
+	LET Ti3
+		LET Ti1
+			INT 0
+			LET Ti2
+				INT 10000
+				APP sum Ti1 Ti2 
+		EXTFUNAPP print_int Ti3 

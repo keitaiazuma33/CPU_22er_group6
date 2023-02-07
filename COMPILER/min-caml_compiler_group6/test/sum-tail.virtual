@@ -1,0 +1,42 @@
+Name : sum.8
+Args : acc.9 x.10 
+
+FArgs : 
+Body :
+LET
+	Ti4.14
+	SET 0
+	ANS
+		IFLE x.10 Ti4.14
+			ANS
+				MOV acc.9
+			LET
+				Ti5.15
+				ADD acc.9 x.10
+				LET
+					Ti6.17
+					SET 1
+					LET
+						Ti7.16
+						SUB x.10 Ti6.17
+						ANS
+							CALLDIR sum.8
+								Ti5.15 Ti7.16 
+								
+
+
+LET
+	Ti1.12
+	SET 0
+	LET
+		Ti2.13
+		SET 10000
+		LET
+			Ti3.11
+			CALLDIR sum.8
+				Ti1.12 Ti2.13 
+				
+			ANS
+				CALLDIR min_caml_print_int
+					Ti3.11 
+					

@@ -1,0 +1,51 @@
+LET REC h p 
+	LETTUPLE v1 v2 v3 v4 v5 v6 v7 v8 v9 v10 
+		VAR p
+		LET REC g z 
+			LET r
+				ADD
+					ADD
+						ADD
+							ADD
+								ADD
+									ADD
+										ADD
+											ADD
+												ADD
+													VAR v1
+													VAR v2
+												VAR v3
+											VAR v4
+										VAR v5
+									VAR v6
+								VAR v7
+							VAR v8
+						VAR v9
+					VAR v10
+				IF
+					NOT
+						LE
+							VAR z
+							INT 0
+					VAR r
+					APP VAR g
+						NEG
+							VAR z
+			APP VAR g
+				INT 1
+	LET Tu1
+		APP VAR print_int
+			APP VAR h
+				TUPLE
+					INT 1
+					INT 2
+					INT 3
+					INT 4
+					INT 5
+					INT 6
+					INT 7
+					INT 8
+					INT 9
+					INT 10
+		APP VAR print_newline
+			UNIT

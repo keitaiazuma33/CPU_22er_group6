@@ -1,0 +1,73 @@
+Name : g.52
+Args : z.53 
+Formal_fv : v1.42 v10.51 v2.43 v3.44 v4.45 v5.46 v6.47 v7.48 v8.49 v9.50 
+Body :
+LET Ti16.65
+	ADD v1.42 v2.43
+	LET Ti17.64
+		ADD Ti16.65 v3.44
+		LET Ti18.63
+			ADD Ti17.64 v4.45
+			LET Ti19.62
+				ADD Ti18.63 v5.46
+				LET Ti20.61
+					ADD Ti19.62 v6.47
+					LET Ti21.60
+						ADD Ti20.61 v7.48
+						LET Ti22.59
+							ADD Ti21.60 v8.49
+							LET Ti23.58
+								ADD Ti22.59 v9.50
+								LET r.55
+									ADD Ti23.58 v10.51
+									LET Ti24.56
+										INT 0
+										IFLE z.53 Ti24.56
+											LET Ti25.57
+												NEG z.53
+												APPCLS g.52 : Ti25.57 
+											VAR r.55
+
+Name : h.26
+Args : p.27 
+Formal_fv : 
+Body :
+LETTUPLE v1.42 v2.43 v3.44 v4.45 v5.46 v6.47 v7.48 v8.49 v9.50 v10.51 
+	p.27
+	MAKECLS g.52
+		g.52 : v1.42 v10.51 v2.43 v3.44 v4.45 v5.46 v6.47 v7.48 v8.49 v9.50 
+		LET Ti15.54
+			INT 1
+			APPCLS g.52 : Ti15.54 
+
+
+LET Ti2.32
+	INT 1
+	LET Ti3.33
+		INT 2
+		LET Ti4.34
+			INT 3
+			LET Ti5.35
+				INT 4
+				LET Ti6.36
+					INT 5
+					LET Ti7.37
+						INT 6
+						LET Ti8.38
+							INT 7
+							LET Ti9.39
+								INT 8
+								LET Ti10.40
+									INT 9
+									LET Ti11.41
+										INT 10
+										LET Tt12.31
+											TUPLE
+												Ti2.32 Ti3.33 Ti4.34 Ti5.35 Ti6.36 Ti7.37 Ti8.38 Ti9.39 Ti10.40 Ti11.41 
+											LET Ti13.30
+												APPDIR h.26 : Tt12.31 
+												LET Tu1.28
+													APPDIR min_caml_print_int : Ti13.30 
+													LET Tu14.29
+														UNIT
+														APPDIR min_caml_print_newline : Tu14.29 

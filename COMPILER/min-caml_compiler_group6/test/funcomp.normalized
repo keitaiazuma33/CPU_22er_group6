@@ -1,0 +1,25 @@
+LET REC compose f g 
+	LET REC composed x 
+		LET Ti6
+			APP f x 
+			APP g Ti6 
+		VAR composed
+	LET REC dbl x 
+		ADD x x
+		LET REC inc x 
+			LET Ti5
+				INT 1
+				ADD x Ti5
+			LET REC dec x 
+				LET Ti4
+					INT 1
+					SUB x Ti4
+				LET h
+					LET Tf1
+						APP compose dbl dec 
+						APP compose inc Tf1 
+					LET Ti3
+						LET Ti2
+							INT 123
+							APP h Ti2 
+						EXTFUNAPP print_int Ti3 

@@ -1,0 +1,59 @@
+Name : ack.15
+Args : %x5 %x6 
+
+FArgs : 
+Body :
+ANS
+	IFLE %x5 0
+		ANS
+			ADD %x6 1
+		ANS
+			IFLE %x6 0
+				LET
+					%x5
+					SUB %x5 1
+					LET
+						%x6
+						SET 1
+						ANS
+							CALLDIR ack.15
+								%x5 %x6 
+								
+				LET
+					%x7
+					SUB %x5 1
+					LET
+						%x6
+						SUB %x6 1
+						LET
+							Tu32
+							SAVE %x7 Ti11.23
+							LET
+								%x6
+								CALLDIR ack.15
+									%x5 %x6 
+									
+								LET
+									%x5
+									RESTORE Ti11.23
+									ANS
+										CALLDIR ack.15
+											%x5 %x6 
+											
+
+
+LET
+	%x5
+	SET 3
+	LET
+		%x6
+		SET 10
+		LET
+			%x5
+			CALLDIR ack.15
+				%x5 %x6 
+				
+			ANS
+				CALLDIR min_caml_print_int
+					%x5 
+					

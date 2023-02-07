@@ -1,0 +1,26 @@
+Name : f.8
+Args : y.9 
+Formal_fv : x.7 
+Body :
+LET Ti3.12
+	INT 0
+	IFEQ y.9 Ti3.12
+		INT 0
+		LET Ti4.15
+			INT 1
+			LET Ti5.14
+				SUB y.9 Ti4.15
+				LET Ti6.13
+					APPCLS f.8 : Ti5.14 
+					ADD x.7 Ti6.13
+
+
+LET x.7
+	INT 10
+	MAKECLS f.8
+		f.8 : x.7 
+		LET Ti1.11
+			INT 123
+			LET Ti2.10
+				APPCLS f.8 : Ti1.11 
+				APPDIR min_caml_print_int : Ti2.10 

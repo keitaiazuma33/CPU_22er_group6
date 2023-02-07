@@ -1,0 +1,19 @@
+LET REC sum.8 acc.9 x.10 
+	LET Ti4.14
+		INT 0
+		IFLE x.10 Ti4.14
+			VAR acc.9
+			LET Ti5.15
+				ADD acc.9 x.10
+				LET Ti7.16
+					LET Ti6.17
+						INT 1
+						SUB x.10 Ti6.17
+					APP sum.8 Ti5.15 Ti7.16 
+	LET Ti3.11
+		LET Ti1.12
+			INT 0
+			LET Ti2.13
+				INT 10000
+				APP sum.8 Ti1.12 Ti2.13 
+		EXTFUNAPP print_int Ti3.11 

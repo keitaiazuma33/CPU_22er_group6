@@ -1,0 +1,3 @@
+LET Ti1.7
+	INT 6
+	EXTFUNAPP print_int Ti1.7 

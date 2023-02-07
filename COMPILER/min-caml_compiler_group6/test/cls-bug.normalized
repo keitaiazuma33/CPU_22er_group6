@@ -1,0 +1,15 @@
+LET REC f x 
+	LET Ti5
+		INT 123
+		ADD x Ti5
+	LET REC g y 
+		VAR f
+		LET Ti4
+			LET Tf2
+				LET Ti1
+					INT 456
+					APP g Ti1 
+				LET Ti3
+					INT 789
+					APP Tf2 Ti3 
+			EXTFUNAPP print_int Ti4 

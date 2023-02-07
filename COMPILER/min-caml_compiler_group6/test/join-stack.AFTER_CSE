@@ -1,0 +1,33 @@
+LET REC f.14 Tu1.15 
+	INT 123
+	LET REC g.16 Tu2.17 
+		INT 456
+		LET REC h.18 Tu3.19 
+			INT 789
+			LET x.20
+				LET Tu4.31
+					UNIT
+					APP f.14 Tu4.31 
+				LET y.21
+					LET Tu5.30
+						UNIT
+						APP g.16 Tu5.30 
+					LET Ti13.22
+						LET Ti12.23
+							LET Ti11.24
+								LET Ti7.25
+									LET Tu6.29
+										UNIT
+										APP h.18 Tu6.29 
+									LET Ti8.26
+										INT 0
+										IFEQ Ti7.25 Ti8.26
+											LET Ti9.28
+												INT 1
+												ADD x.20 Ti9.28
+											LET Ti10.27
+												INT 2
+												ADD y.21 Ti10.27
+								ADD Ti11.24 x.20
+							ADD Ti12.23 y.21
+						EXTFUNAPP print_int Ti13.22 

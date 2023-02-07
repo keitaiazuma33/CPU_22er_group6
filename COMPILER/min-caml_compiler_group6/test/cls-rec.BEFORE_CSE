@@ -1,0 +1,19 @@
+LET x.7
+	INT 10
+	LET REC f.8 y.9 
+		LET Ti3.12
+			INT 0
+			IFEQ y.9 Ti3.12
+				INT 0
+				LET Ti6.13
+					LET Ti5.14
+						LET Ti4.15
+							INT 1
+							SUB y.9 Ti4.15
+						APP f.8 Ti5.14 
+					ADD x.7 Ti6.13
+		LET Ti2.10
+			LET Ti1.11
+				INT 123
+				APP f.8 Ti1.11 
+			EXTFUNAPP print_int Ti2.10 

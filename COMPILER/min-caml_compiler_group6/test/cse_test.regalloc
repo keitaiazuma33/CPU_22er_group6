@@ -1,0 +1,8 @@
+
+LET
+	%x5
+	SET 6
+	ANS
+		CALLDIR min_caml_print_int
+			%x5 
+			

@@ -1,0 +1,85 @@
+Name : f.16
+Args : x.17 
+Formal_fv : z.15 
+Body :
+SUB x.17 z.15
+
+Name : g.20
+Args : x.21 
+Formal_fv : 
+Body :
+LET Ti14.49
+	INT 2
+	SUB x.21 Ti14.49
+
+Name : f.24
+Args : x.25 
+Formal_fv : 
+Body :
+LET Ti13.47
+	INT 1
+	SUB x.25 Ti13.47
+
+Name : i.45
+Args : x.46 
+Formal_fv : h.29 
+Body :
+APPCLS h.29 : x.46 
+
+Name : g.28
+Args : h.29 
+Formal_fv : 
+Body :
+MAKECLS i.45
+	i.45 : h.29 
+	VAR i.45
+
+Name : i.32
+Args : x.33 
+Formal_fv : 
+Body :
+VAR x.33
+
+Name : f.35
+Args : x.36 
+Formal_fv : 
+Body :
+LET Ti12.43
+	INT -1
+	APPDIR i.32 : Ti12.43 
+
+
+LET z.15
+	INT 4
+	MAKECLS f.16
+		f.16 : z.15 
+		LET Ti5.50
+			INT 8
+			LET a.18
+				APPCLS f.16 : Ti5.50 
+				LET Tu4.19
+					APPDIR min_caml_print_var : a.18 
+					LET Ti6.48
+						INT 6
+						LET a.22
+							APPDIR g.20 : Ti6.48 
+							LET Tu3.23
+								APPDIR min_caml_print_var2 : a.22 
+								MAKECLS f.24
+									f.24 : 
+									LET Tu2.27
+										APPDIR min_caml_print_var3 : f.24 
+										MAKECLS g.28
+											g.28 : 
+											LET Tu1.31
+												APPDIR min_caml_print_var4 : g.28 
+												MAKECLS i.32
+													i.32 : 
+													LET Ti9.40
+														INT 7
+														LET Ti10.39
+															APPDIR f.35 : Ti9.40 
+															LET a.38
+																TUPLE
+																	i.32 Ti10.39 
+																APPDIR min_caml_print_var5 : a.38 

@@ -1,0 +1,13 @@
+LET REC make_adder.5 x.6 
+	LET REC adder.11 y.12 
+		ADD x.6 y.12
+		VAR adder.11
+	LET Ti4.7
+		LET Tf2.8
+			LET Ti1.10
+				INT 3
+				APP make_adder.5 Ti1.10 
+			LET Ti3.9
+				INT 7
+				APP Tf2.8 Ti3.9 
+		EXTFUNAPP print_int Ti4.7 

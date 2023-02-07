@@ -1,0 +1,45 @@
+LET t.15
+	INT 123
+	LET f.16
+		INT 456
+		LET REC even.17 x.18 
+			LET REC odd.21 x.22 
+				LET Ti9.29
+					INT 0
+					IFLE x.22 Ti9.29
+						LET Ti10.32
+							INT 0
+							IFLE Ti10.32 x.22
+								VAR f.16
+								LET Ti12.33
+									LET Ti11.34
+										INT 1
+										ADD x.22 Ti11.34
+									APP even.17 Ti12.33 
+						LET Ti14.30
+							LET Ti13.31
+								INT 1
+								SUB x.22 Ti13.31
+							APP even.17 Ti14.30 
+				LET Ti3.23
+					INT 0
+					IFLE x.18 Ti3.23
+						LET Ti4.26
+							INT 0
+							IFLE Ti4.26 x.18
+								VAR t.15
+								LET Ti6.27
+									LET Ti5.28
+										INT 1
+										ADD x.18 Ti5.28
+									APP odd.21 Ti6.27 
+						LET Ti8.24
+							LET Ti7.25
+								INT 1
+								SUB x.18 Ti7.25
+							APP odd.21 Ti8.24 
+			LET Ti2.19
+				LET Ti1.20
+					INT 789
+					APP even.17 Ti1.20 
+				EXTFUNAPP print_int Ti2.19 

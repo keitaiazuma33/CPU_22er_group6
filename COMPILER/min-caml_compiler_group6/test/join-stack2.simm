@@ -1,0 +1,47 @@
+Name : f.9
+Args : 
+
+FArgs : 
+Body :
+ANS
+	SET 123
+
+Name : g.11
+Args : 
+
+FArgs : 
+Body :
+ANS
+	SET 456
+
+
+LET
+	Tu3.19
+	NOP
+	LET
+		x.13
+		CALLDIR f.9
+			
+			
+		LET
+			Ti7.15
+			IFLE x.13 0
+				LET
+					Tu5.18
+					NOP
+					LET
+						Ti6.17
+						CALLDIR g.11
+							
+							
+						ANS
+							ADD Ti6.17 x.13
+				ANS
+					MOV x.13
+			LET
+				Ti8.14
+				ADD Ti7.15 x.13
+				ANS
+					CALLDIR min_caml_print_int
+						Ti8.14 
+						

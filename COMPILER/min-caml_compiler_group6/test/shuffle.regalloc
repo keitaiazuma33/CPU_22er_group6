@@ -1,0 +1,98 @@
+Name : foo.12
+Args : %x5 %x6 %x7 %x9 %x10 %x11 
+
+FArgs : 
+Body :
+LET
+	Tu42
+	SAVE %x11 f.18
+	LET
+		Tu41
+		SAVE %x10 e.17
+		LET
+			Tu40
+			SAVE %x9 d.16
+			LET
+				Tu39
+				SAVE %x7 c.15
+				LET
+					Tu38
+					SAVE %x6 b.14
+					LET
+						%g0
+						CALLDIR min_caml_print_int
+							%x5 
+							
+						LET
+							%x5
+							RESTORE b.14
+							LET
+								%g0
+								CALLDIR min_caml_print_int
+									%x5 
+									
+								LET
+									%x5
+									RESTORE c.15
+									LET
+										%g0
+										CALLDIR min_caml_print_int
+											%x5 
+											
+										LET
+											%x5
+											RESTORE d.16
+											LET
+												%g0
+												CALLDIR min_caml_print_int
+													%x5 
+													
+												LET
+													%x5
+													RESTORE e.17
+													LET
+														%g0
+														CALLDIR min_caml_print_int
+															%x5 
+															
+														LET
+															%x5
+															RESTORE f.18
+															ANS
+																CALLDIR min_caml_print_int
+																	%x5 
+																	
+
+Name : bar.19
+Args : %x5 %x6 %x7 %x9 %x10 %x11 
+
+FArgs : 
+Body :
+ANS
+	CALLDIR foo.12
+		%x6 %x5 %x9 %x10 %x11 %x7 
+		
+
+
+LET
+	%x5
+	SET 1
+	LET
+		%x6
+		SET 2
+		LET
+			%x7
+			SET 3
+			LET
+				%x9
+				SET 4
+				LET
+					%x10
+					SET 5
+					LET
+						%x11
+						SET 6
+						ANS
+							CALLDIR bar.19
+								%x5 %x6 %x7 %x9 %x10 %x11 
+								

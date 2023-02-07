@@ -1,0 +1,1084 @@
+Name : mul_abs.324
+Args : %x5 %x6 %x7 %x9 
+
+FArgs : 
+Body :
+ANS
+	IFEQ %x7 -1
+		ANS
+			MOV %x9
+		LET
+			%x10
+			SET 1
+			LET
+				%x10
+				SLL %x10 %x7
+				LET
+					%x10
+					AND %x6 %x10
+					ANS
+						IFEQ %x10 0
+							LET
+								%x7
+								SUB %x7 1
+								ANS
+									CALLDIR mul_abs.324
+										%x5 %x6 %x7 %x9 
+										
+							LET
+								%x10
+								SUB %x7 1
+								LET
+									%x7
+									SLL %x5 %x7
+									LET
+										%x9
+										ADD %x9 %x7
+										ANS
+											CALLDIR mul_abs.324
+												%x5 %x6 %x10 %x9 
+												
+
+Name : mul.329
+Args : %x5 %x6 
+
+FArgs : 
+Body :
+LET
+	%x7
+	IFGE %x5 0
+		ANS
+			MOV %x5
+		ANS
+			NEG %x5
+	LET
+		%x9
+		IFGE %x6 0
+			ANS
+				MOV %x6
+			ANS
+				NEG %x6
+		LET
+			%x10
+			SET 30
+			LET
+				%x11
+				SET 0
+				LET
+					Tu820
+					SAVE %x6 b.331
+					LET
+						Tu819
+						SAVE %x5 a.330
+						LET
+							%x5
+							CALLDIR mul_abs.324
+								%x7 %x9 %x10 %x11 
+								
+							LET
+								%x6
+								RESTORE a.330
+								LET
+									%x6
+									SRL %x6 31
+									LET
+										%x7
+										RESTORE b.331
+										LET
+											%x7
+											SRL %x7 31
+											ANS
+												IFEQ %x6 %x7
+													ANS
+														MOV %x5
+													ANS
+														NEG %x5
+
+Name : div_abs.332
+Args : %x5 %x6 %x7 %x9 
+
+FArgs : 
+Body :
+ANS
+	IFEQ %x7 -1
+		ANS
+			MOV %x9
+		LET
+			%x10
+			SRL %x5 %x7
+			ANS
+				IFLE %x6 %x10
+					LET
+						%x10
+						SLL %x6 %x7
+						LET
+							%x5
+							SUB %x5 %x10
+							LET
+								%x10
+								SUB %x7 1
+								LET
+									%x11
+									SET 1
+									LET
+										%x7
+										SLL %x11 %x7
+										LET
+											%x9
+											ADD %x9 %x7
+											ANS
+												CALLDIR div_abs.332
+													%x5 %x6 %x10 %x9 
+													
+					LET
+						%x7
+						SUB %x7 1
+						ANS
+							CALLDIR div_abs.332
+								%x5 %x6 %x7 %x9 
+								
+
+Name : div.337
+Args : %x5 %x6 
+
+FArgs : 
+Body :
+LET
+	%x7
+	IFGE %x5 0
+		ANS
+			MOV %x5
+		ANS
+			NEG %x5
+	LET
+		%x9
+		IFGE %x6 0
+			ANS
+				MOV %x6
+			ANS
+				NEG %x6
+		LET
+			%x10
+			SET 30
+			LET
+				%x11
+				SET 0
+				LET
+					Tu822
+					SAVE %x6 b.339
+					LET
+						Tu821
+						SAVE %x5 a.338
+						LET
+							%x5
+							CALLDIR div_abs.332
+								%x7 %x9 %x10 %x11 
+								
+							LET
+								%x6
+								RESTORE a.338
+								LET
+									%x6
+									SRL %x6 31
+									LET
+										%x7
+										RESTORE b.339
+										LET
+											%x7
+											SRL %x7 31
+											ANS
+												IFEQ %x6 %x7
+													ANS
+														MOV %x5
+													ANS
+														NEG %x5
+
+Name : print_int.342
+Args : %x5 
+
+FArgs : 
+Body :
+ANS
+	IFGE %x5 0
+		ANS
+			IFGE %x5 10
+				LET
+					%x6
+					SET 10
+					LET
+						Tu824
+						SAVE %x5 a.343
+						LET
+							%x5
+							CALLDIR div.337
+								%x5 %x6 
+								
+							LET
+								Tu825
+								SAVE %x5 b.612
+								LET
+									%g0
+									CALLDIR print_int.342
+										%x5 
+										
+									LET
+										%x6
+										SET 10
+										LET
+											%x5
+											RESTORE b.612
+											LET
+												%x5
+												CALLDIR mul.329
+													%x5 %x6 
+													
+												LET
+													%x6
+													RESTORE a.343
+													LET
+														%x5
+														SUB %x6 %x5
+														LET
+															%x5
+															ADD %x5 48
+															ANS
+																OUT %x5
+				LET
+					%x5
+					ADD %x5 48
+					ANS
+						OUT %x5
+		LET
+			%x5
+			NEG %x5
+			ANS
+				CALLDIR print_int.342
+					%x5 
+					
+
+Name : assign_array.356
+Args : %x5 %x6 %x7 
+
+FArgs : 
+Body :
+ANS
+	IFEQ %x7 0
+		LET
+			%x7
+			SLL %x7 2
+			ANS
+				ST %x6 %x5 %x7
+		LET
+			%x9
+			SLL %x7 2
+			LET
+				%g0
+				ST %x6 %x5 %x9
+				LET
+					%x7
+					SUB %x7 1
+					ANS
+						CALLDIR assign_array.356
+							%x5 %x6 %x7 
+							
+
+Name : create_array.360
+Args : %x5 %x6 
+
+FArgs : 
+Body :
+LET
+	%g0
+	NOP
+	LET
+		%x7
+		GETHP
+		LET
+			%x7
+			MOV %x7
+			LET
+				Tu827
+				SAVE %x7 hp_array.545
+				LET
+					%g0
+					CALLDIR assign_array.356
+						%x7 %x6 %x5 
+						
+					LET
+						%x5
+						RESTORE hp_array.545
+						ANS
+							MOV %x5
+
+Name : assign_farray.363
+Args : %x5 %x6 
+
+FArgs : %f0 
+Body :
+ANS
+	IFEQ %x6 0
+		LET
+			%x6
+			SLL %x6 3
+			ANS
+				STDF %f0 %x5 %x6
+		LET
+			%x7
+			SLL %x6 3
+			LET
+				%g0
+				STDF %f0 %x5 %x7
+				LET
+					%x6
+					SUB %x6 1
+					ANS
+						CALLDIR assign_farray.363
+							%x5 %x6 
+							%f0 
+
+Name : create_float_array.367
+Args : %x5 
+
+FArgs : %f0 
+Body :
+LET
+	%g0
+	NOP
+	LET
+		%x6
+		GETHP
+		LET
+			%x6
+			MOV %x6
+			LET
+				Tu829
+				SAVE %x6 hp_array.533
+				LET
+					%g0
+					CALLDIR assign_farray.363
+						%x6 %x5 
+						%f0 
+					LET
+						%x5
+						RESTORE hp_array.533
+						ANS
+							MOV %x5
+
+Name : loop3.512
+Args : %x5 
+
+FArgs : 
+Body :
+LET
+	%x6
+	LD %x22 20
+	LET
+		%x7
+		LD %x22 16
+		LET
+			%x9
+			LD %x22 12
+			LET
+				%x10
+				LD %x22 8
+				LET
+					%x11
+					LD %x22 4
+					ANS
+						IFGE %x5 0
+							LET
+								%x12
+								SLL %x7 2
+								LET
+									%x12
+									LD %x9 %x12
+									LET
+										%x13
+										SLL %x7 2
+										LET
+											%x9
+											LD %x9 %x13
+											LET
+												%x13
+												SLL %x6 3
+												LET
+													%f0
+													LDDF %x9 %x13
+													LET
+														%x7
+														SLL %x7 2
+														LET
+															%x7
+															LD %x11 %x7
+															LET
+																%x9
+																SLL %x5 3
+																LET
+																	%f2
+																	LDDF %x7 %x9
+																	LET
+																		%x7
+																		SLL %x5 2
+																		LET
+																			%x7
+																			LD %x10 %x7
+																			LET
+																				%x9
+																				SLL %x6 3
+																				LET
+																					%f4
+																					LDDF %x7 %x9
+																					LET
+																						%f2
+																						FMULD %f2 %f4
+																						LET
+																							%f0
+																							FADDD %f0 %f2
+																							LET
+																								%x6
+																								SLL %x6 3
+																								LET
+																									%g0
+																									STDF %f0 %x12 %x6
+																									LET
+																										%x5
+																										SUB %x5 1
+																										ANS
+																											CALLCLS %x22
+																												%x5 
+																												
+							ANS
+								NOP
+
+Name : loop2.504
+Args : %x5 
+
+FArgs : 
+Body :
+LET
+	%x6
+	LD %x22 20
+	LET
+		%x7
+		LD %x22 16
+		LET
+			%x9
+			LD %x22 12
+			LET
+				%x10
+				LD %x22 8
+				LET
+					%x11
+					LD %x22 4
+					ANS
+						IFGE %x5 0
+							LET
+								%x12
+								MOV %x3
+								LET
+									%x3
+									ADD %x3 24
+									LET
+										%x13
+										loop3.512
+										LET
+											%g0
+											ST %x13 %x12 0
+											LET
+												%g0
+												ST %x5 %x12 20
+												LET
+													%g0
+													ST %x7 %x12 16
+													LET
+														%g0
+														ST %x9 %x12 12
+														LET
+															%g0
+															ST %x10 %x12 8
+															LET
+																%g0
+																ST %x11 %x12 4
+																LET
+																	%x6
+																	SUB %x6 1
+																	LET
+																		Tu833
+																		SAVE %x22 loop2.504
+																		LET
+																			Tu832
+																			SAVE %x5 j.505
+																			LET
+																				%g0
+																				CALLCLS %x12
+																					%x6 
+																					
+																				LET
+																					%x5
+																					RESTORE j.505
+																					LET
+																						%x5
+																						SUB %x5 1
+																						LET
+																							%x22
+																							RESTORE loop2.504
+																							ANS
+																								CALLCLS %x22
+																									%x5 
+																									
+							ANS
+								NOP
+
+Name : loop1.499
+Args : %x5 
+
+FArgs : 
+Body :
+LET
+	%x6
+	LD %x22 20
+	LET
+		%x7
+		LD %x22 16
+		LET
+			%x9
+			LD %x22 12
+			LET
+				%x10
+				LD %x22 8
+				LET
+					%x11
+					LD %x22 4
+					ANS
+						IFGE %x5 0
+							LET
+								%x12
+								MOV %x3
+								LET
+									%x3
+									ADD %x3 24
+									LET
+										%x13
+										loop2.504
+										LET
+											%g0
+											ST %x13 %x12 0
+											LET
+												%g0
+												ST %x7 %x12 20
+												LET
+													%g0
+													ST %x5 %x12 16
+													LET
+														%g0
+														ST %x9 %x12 12
+														LET
+															%g0
+															ST %x10 %x12 8
+															LET
+																%g0
+																ST %x11 %x12 4
+																LET
+																	%x6
+																	SUB %x6 1
+																	LET
+																		Tu836
+																		SAVE %x22 loop1.499
+																		LET
+																			Tu835
+																			SAVE %x5 i.500
+																			LET
+																				%g0
+																				CALLCLS %x12
+																					%x6 
+																					
+																				LET
+																					%x5
+																					RESTORE i.500
+																					LET
+																						%x5
+																						SUB %x5 1
+																						LET
+																							%x22
+																							RESTORE loop1.499
+																							ANS
+																								CALLCLS %x22
+																									%x5 
+																									
+							ANS
+								NOP
+
+Name : mul.370
+Args : %x5 %x6 %x7 %x9 %x10 %x11 
+
+FArgs : 
+Body :
+LET
+	%x22
+	MOV %x3
+	LET
+		%x3
+		ADD %x3 24
+		LET
+			%x12
+			loop1.499
+			LET
+				%g0
+				ST %x12 %x22 0
+				LET
+					%g0
+					ST %x7 %x22 20
+					LET
+						%g0
+						ST %x6 %x22 16
+						LET
+							%g0
+							ST %x11 %x22 12
+							LET
+								%g0
+								ST %x10 %x22 8
+								LET
+									%g0
+									ST %x9 %x22 4
+									LET
+										%x5
+										SUB %x5 1
+										ANS
+											CALLCLS %x22
+												%x5 
+												
+
+Name : init.486
+Args : %x5 
+
+FArgs : 
+Body :
+LET
+	%x6
+	LD %x22 8
+	LET
+		%x7
+		LD %x22 4
+		ANS
+			IFGE %x5 0
+				LET
+					%f0
+					l.752
+					LET
+						Tu841
+						SAVE %x22 init.486
+						LET
+							Tu840
+							SAVE %x7 mat.485
+							LET
+								Tu839
+								SAVE %x5 i.487
+								LET
+									%x5
+									CALLDIR create_float_array.367
+										%x6 
+										%f0 
+									LET
+										%x6
+										RESTORE i.487
+										LET
+											%x7
+											SLL %x6 2
+											LET
+												%x9
+												RESTORE mat.485
+												LET
+													%g0
+													ST %x5 %x9 %x7
+													LET
+														%x5
+														SUB %x6 1
+														LET
+															%x22
+															RESTORE init.486
+															ANS
+																CALLCLS %x22
+																	%x5 
+																	
+				ANS
+					NOP
+
+Name : make.378
+Args : %x5 %x6 
+
+FArgs : 
+Body :
+LET
+	%x7
+	LD %x22 4
+	LET
+		Tu843
+		SAVE %x5 m.379
+		LET
+			Tu842
+			SAVE %x6 n.380
+			LET
+				%x5
+				CALLDIR create_array.360
+					%x5 %x7 
+					
+				LET
+					%x22
+					MOV %x3
+					LET
+						%x3
+						ADD %x3 16
+						LET
+							%x6
+							init.486
+							LET
+								%g0
+								ST %x6 %x22 0
+								LET
+									%x6
+									RESTORE n.380
+									LET
+										%g0
+										ST %x6 %x22 8
+										LET
+											%g0
+											ST %x5 %x22 4
+											LET
+												%x6
+												RESTORE m.379
+												LET
+													%x6
+													SUB %x6 1
+													LET
+														Tu844
+														SAVE %x5 mat.485
+														LET
+															%g0
+															CALLCLS %x22
+																%x6 
+																
+															LET
+																%x5
+																RESTORE mat.485
+																ANS
+																	MOV %x5
+
+
+LET
+	%x5
+	SET 0
+	LET
+		%f0
+		l.752
+		LET
+			%x5
+			CALLDIR create_float_array.367
+				%x5 
+				%f0 
+			LET
+				%x22
+				MOV %x3
+				LET
+					%x3
+					ADD %x3 8
+					LET
+						%x6
+						make.378
+						LET
+							%g0
+							ST %x6 %x22 0
+							LET
+								%g0
+								ST %x5 %x22 4
+								LET
+									%x5
+									SET 2
+									LET
+										%x6
+										SET 3
+										LET
+											Tu846
+											SAVE %x22 make.378
+											LET
+												%x5
+												CALLCLS %x22
+													%x5 %x6 
+													
+												LET
+													%x6
+													SET 3
+													LET
+														%x7
+														SET 2
+														LET
+															%x22
+															RESTORE make.378
+															LET
+																Tu848
+																SAVE %x5 a.381
+																LET
+																	Tu847
+																	SAVE %x22 make.378
+																	LET
+																		%x5
+																		CALLCLS %x22
+																			%x6 %x7 
+																			
+																		LET
+																			%x6
+																			SET 2
+																			LET
+																				%x22
+																				RESTORE make.378
+																				LET
+																					Tu849
+																					SAVE %x5 b.382
+																					LET
+																						%x11
+																						CALLCLS %x22
+																							%x6 %x6 
+																							
+																						LET
+																							%x9
+																							RESTORE a.381
+																							LET
+																								%x5
+																								LD %x9 0
+																								LET
+																									%f0
+																									l.761
+																									LET
+																										%g0
+																										STDF %f0 %x5 0
+																										LET
+																											%x5
+																											LD %x9 0
+																											LET
+																												%f0
+																												l.765
+																												LET
+																													%g0
+																													STDF %f0 %x5 8
+																													LET
+																														%x5
+																														LD %x9 0
+																														LET
+																															%f0
+																															l.769
+																															LET
+																																%g0
+																																STDF %f0 %x5 16
+																																LET
+																																	%x5
+																																	LD %x9 4
+																																	LET
+																																		%f0
+																																		l.773
+																																		LET
+																																			%g0
+																																			STDF %f0 %x5 0
+																																			LET
+																																				%x5
+																																				LD %x9 4
+																																				LET
+																																					%f0
+																																					l.777
+																																					LET
+																																						%g0
+																																						STDF %f0 %x5 8
+																																						LET
+																																							%x5
+																																							LD %x9 4
+																																							LET
+																																								%f0
+																																								l.781
+																																								LET
+																																									%g0
+																																									STDF %f0 %x5 16
+																																									LET
+																																										%x10
+																																										RESTORE b.382
+																																										LET
+																																											%x5
+																																											LD %x10 0
+																																											LET
+																																												%f0
+																																												l.785
+																																												LET
+																																													%g0
+																																													STDF %f0 %x5 0
+																																													LET
+																																														%x5
+																																														LD %x10 0
+																																														LET
+																																															%f0
+																																															l.789
+																																															LET
+																																																%g0
+																																																STDF %f0 %x5 8
+																																																LET
+																																																	%x5
+																																																	LD %x10 4
+																																																	LET
+																																																		%f0
+																																																		l.793
+																																																		LET
+																																																			%g0
+																																																			STDF %f0 %x5 0
+																																																			LET
+																																																				%x5
+																																																				LD %x10 4
+																																																				LET
+																																																					%f0
+																																																					l.797
+																																																					LET
+																																																						%g0
+																																																						STDF %f0 %x5 8
+																																																						LET
+																																																							%x5
+																																																							LD %x10 8
+																																																							LET
+																																																								%f0
+																																																								l.801
+																																																								LET
+																																																									%g0
+																																																									STDF %f0 %x5 0
+																																																									LET
+																																																										%x5
+																																																										LD %x10 8
+																																																										LET
+																																																											%f0
+																																																											l.805
+																																																											LET
+																																																												%g0
+																																																												STDF %f0 %x5 8
+																																																												LET
+																																																													%x5
+																																																													SET 2
+																																																													LET
+																																																														%x6
+																																																														SET 3
+																																																														LET
+																																																															Tu850
+																																																															SAVE %x11 c.383
+																																																															LET
+																																																																%g0
+																																																																CALLDIR mul.370
+																																																																	%x5 %x6 %x5 %x9 %x10 %x11 
+																																																																	
+																																																																LET
+																																																																	%x5
+																																																																	RESTORE c.383
+																																																																	LET
+																																																																		%x6
+																																																																		LD %x5 0
+																																																																		LET
+																																																																			%f0
+																																																																			LDDF %x6 0
+																																																																			LET
+																																																																				Tu851
+																																																																				SAVE %x5 c.383
+																																																																				LET
+																																																																					%x5
+																																																																					CALLDIR min_caml_truncate
+																																																																						
+																																																																						%f0 
+																																																																					LET
+																																																																						%g0
+																																																																						CALLDIR print_int.342
+																																																																							%x5 
+																																																																							
+																																																																						LET
+																																																																							%g0
+																																																																							NOP
+																																																																							LET
+																																																																								%g0
+																																																																								CALLDIR min_caml_print_newline
+																																																																									
+																																																																									
+																																																																								LET
+																																																																									%x5
+																																																																									RESTORE c.383
+																																																																									LET
+																																																																										%x6
+																																																																										LD %x5 0
+																																																																										LET
+																																																																											%f0
+																																																																											LDDF %x6 8
+																																																																											LET
+																																																																												Tu852
+																																																																												SAVE %x5 c.383
+																																																																												LET
+																																																																													%x5
+																																																																													CALLDIR min_caml_truncate
+																																																																														
+																																																																														%f0 
+																																																																													LET
+																																																																														%g0
+																																																																														CALLDIR print_int.342
+																																																																															%x5 
+																																																																															
+																																																																														LET
+																																																																															%g0
+																																																																															NOP
+																																																																															LET
+																																																																																%g0
+																																																																																CALLDIR min_caml_print_newline
+																																																																																	
+																																																																																	
+																																																																																LET
+																																																																																	%x5
+																																																																																	RESTORE c.383
+																																																																																	LET
+																																																																																		%x6
+																																																																																		LD %x5 4
+																																																																																		LET
+																																																																																			%f0
+																																																																																			LDDF %x6 0
+																																																																																			LET
+																																																																																				Tu853
+																																																																																				SAVE %x5 c.383
+																																																																																				LET
+																																																																																					%x5
+																																																																																					CALLDIR min_caml_truncate
+																																																																																						
+																																																																																						%f0 
+																																																																																					LET
+																																																																																						%g0
+																																																																																						CALLDIR print_int.342
+																																																																																							%x5 
+																																																																																							
+																																																																																						LET
+																																																																																							%g0
+																																																																																							NOP
+																																																																																							LET
+																																																																																								%g0
+																																																																																								CALLDIR min_caml_print_newline
+																																																																																									
+																																																																																									
+																																																																																								LET
+																																																																																									%x5
+																																																																																									RESTORE c.383
+																																																																																									LET
+																																																																																										%x5
+																																																																																										LD %x5 4
+																																																																																										LET
+																																																																																											%f0
+																																																																																											LDDF %x5 8
+																																																																																											LET
+																																																																																												%x5
+																																																																																												CALLDIR min_caml_truncate
+																																																																																													
+																																																																																													%f0 
+																																																																																												LET
+																																																																																													%g0
+																																																																																													CALLDIR print_int.342
+																																																																																														%x5 
+																																																																																														
+																																																																																													LET
+																																																																																														%g0
+																																																																																														NOP
+																																																																																														ANS
+																																																																																															CALLDIR min_caml_print_newline
+																																																																																																
+																																																																																																

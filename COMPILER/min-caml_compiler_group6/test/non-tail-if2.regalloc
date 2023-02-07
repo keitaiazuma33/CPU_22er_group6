@@ -1,0 +1,375 @@
+Name : mul_abs.197
+Args : %x5 %x6 %x7 %x9 
+
+FArgs : 
+Body :
+ANS
+	IFEQ %x7 -1
+		ANS
+			MOV %x9
+		LET
+			%x10
+			SET 1
+			LET
+				%x10
+				SLL %x10 %x7
+				LET
+					%x10
+					AND %x6 %x10
+					ANS
+						IFEQ %x10 0
+							LET
+								%x7
+								SUB %x7 1
+								ANS
+									CALLDIR mul_abs.197
+										%x5 %x6 %x7 %x9 
+										
+							LET
+								%x10
+								SUB %x7 1
+								LET
+									%x7
+									SLL %x5 %x7
+									LET
+										%x9
+										ADD %x9 %x7
+										ANS
+											CALLDIR mul_abs.197
+												%x5 %x6 %x10 %x9 
+												
+
+Name : mul.202
+Args : %x5 %x6 
+
+FArgs : 
+Body :
+LET
+	%x7
+	IFGE %x5 0
+		ANS
+			MOV %x5
+		ANS
+			NEG %x5
+	LET
+		%x9
+		IFGE %x6 0
+			ANS
+				MOV %x6
+			ANS
+				NEG %x6
+		LET
+			%x10
+			SET 30
+			LET
+				%x11
+				SET 0
+				LET
+					Tu450
+					SAVE %x6 b.204
+					LET
+						Tu449
+						SAVE %x5 a.203
+						LET
+							%x5
+							CALLDIR mul_abs.197
+								%x7 %x9 %x10 %x11 
+								
+							LET
+								%x6
+								RESTORE a.203
+								LET
+									%x6
+									SRL %x6 31
+									LET
+										%x7
+										RESTORE b.204
+										LET
+											%x7
+											SRL %x7 31
+											ANS
+												IFEQ %x6 %x7
+													ANS
+														MOV %x5
+													ANS
+														NEG %x5
+
+Name : div_abs.205
+Args : %x5 %x6 %x7 %x9 
+
+FArgs : 
+Body :
+ANS
+	IFEQ %x7 -1
+		ANS
+			MOV %x9
+		LET
+			%x10
+			SRL %x5 %x7
+			ANS
+				IFLE %x6 %x10
+					LET
+						%x10
+						SLL %x6 %x7
+						LET
+							%x5
+							SUB %x5 %x10
+							LET
+								%x10
+								SUB %x7 1
+								LET
+									%x11
+									SET 1
+									LET
+										%x7
+										SLL %x11 %x7
+										LET
+											%x9
+											ADD %x9 %x7
+											ANS
+												CALLDIR div_abs.205
+													%x5 %x6 %x10 %x9 
+													
+					LET
+						%x7
+						SUB %x7 1
+						ANS
+							CALLDIR div_abs.205
+								%x5 %x6 %x7 %x9 
+								
+
+Name : div.210
+Args : %x5 %x6 
+
+FArgs : 
+Body :
+LET
+	%x7
+	IFGE %x5 0
+		ANS
+			MOV %x5
+		ANS
+			NEG %x5
+	LET
+		%x9
+		IFGE %x6 0
+			ANS
+				MOV %x6
+			ANS
+				NEG %x6
+		LET
+			%x10
+			SET 30
+			LET
+				%x11
+				SET 0
+				LET
+					Tu452
+					SAVE %x6 b.212
+					LET
+						Tu451
+						SAVE %x5 a.211
+						LET
+							%x5
+							CALLDIR div_abs.205
+								%x7 %x9 %x10 %x11 
+								
+							LET
+								%x6
+								RESTORE a.211
+								LET
+									%x6
+									SRL %x6 31
+									LET
+										%x7
+										RESTORE b.212
+										LET
+											%x7
+											SRL %x7 31
+											ANS
+												IFEQ %x6 %x7
+													ANS
+														MOV %x5
+													ANS
+														NEG %x5
+
+Name : print_int.215
+Args : %x5 
+
+FArgs : 
+Body :
+ANS
+	IFGE %x5 0
+		ANS
+			IFGE %x5 10
+				LET
+					%x6
+					SET 10
+					LET
+						Tu454
+						SAVE %x5 a.216
+						LET
+							%x5
+							CALLDIR div.210
+								%x5 %x6 
+								
+							LET
+								Tu455
+								SAVE %x5 b.338
+								LET
+									%g0
+									CALLDIR print_int.215
+										%x5 
+										
+									LET
+										%x6
+										SET 10
+										LET
+											%x5
+											RESTORE b.338
+											LET
+												%x5
+												CALLDIR mul.202
+													%x5 %x6 
+													
+												LET
+													%x6
+													RESTORE a.216
+													LET
+														%x5
+														SUB %x6 %x5
+														LET
+															%x5
+															ADD %x5 48
+															ANS
+																OUT %x5
+				LET
+					%x5
+					ADD %x5 48
+					ANS
+						OUT %x5
+		LET
+			%x5
+			NEG %x5
+			ANS
+				CALLDIR print_int.215
+					%x5 
+					
+
+Name : assign_array.229
+Args : %x5 %x6 %x7 
+
+FArgs : 
+Body :
+ANS
+	IFEQ %x7 0
+		LET
+			%x7
+			SLL %x7 2
+			ANS
+				ST %x6 %x5 %x7
+		LET
+			%x9
+			SLL %x7 2
+			LET
+				%g0
+				ST %x6 %x5 %x9
+				LET
+					%x7
+					SUB %x7 1
+					ANS
+						CALLDIR assign_array.229
+							%x5 %x6 %x7 
+							
+
+Name : create_array.233
+Args : %x5 %x6 
+
+FArgs : 
+Body :
+LET
+	%g0
+	NOP
+	LET
+		%x7
+		GETHP
+		LET
+			%x7
+			MOV %x7
+			LET
+				Tu457
+				SAVE %x7 hp_array.271
+				LET
+					%g0
+					CALLDIR assign_array.229
+						%x7 %x6 %x5 
+						
+					LET
+						%x5
+						RESTORE hp_array.271
+						ANS
+							MOV %x5
+
+Name : f.243
+Args : 
+
+FArgs : 
+Body :
+ANS
+	SET 12345
+
+
+LET
+	%x5
+	SET 10
+	LET
+		%x6
+		SET 3
+		LET
+			%x5
+			CALLDIR create_array.233
+				%x5 %x6 
+				
+			LET
+				%x6
+				SET 67890
+				LET
+					%x7
+					LD %x5 0
+					LET
+						%x5
+						IFEQ %x7 3
+							LET
+								%g0
+								NOP
+								LET
+									Tu460
+									SAVE %x6 x.246
+									LET
+										Tu459
+										SAVE %x5 y.245
+										LET
+											%x5
+											CALLDIR f.243
+												
+												
+											LET
+												%x6
+												RESTORE y.245
+												LET
+													%x6
+													LD %x6 4
+													LET
+														%x5
+														ADD %x5 %x6
+														LET
+															%x6
+															RESTORE x.246
+															ANS
+																ADD %x5 %x6
+							ANS
+								SET 7
+						ANS
+							CALLDIR print_int.215
+								%x5 
+								

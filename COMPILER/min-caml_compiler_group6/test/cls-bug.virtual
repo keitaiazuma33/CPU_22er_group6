@@ -1,0 +1,70 @@
+Name : f.6
+Args : x.7 
+
+FArgs : 
+Body :
+LET
+	Ti5.14
+	SET 123
+	ANS
+		ADD x.7 Ti5.14
+
+Name : g.8
+Args : y.9 
+
+FArgs : 
+Body :
+LET
+	f.6
+	LD g.8 4
+	ANS
+		MOV f.6
+
+
+LET
+	f.6
+	MOV %x3
+	LET
+		%x3
+		ADD %x3 8
+		LET
+			l.18
+			f.6
+			LET
+				Tu19
+				ST l.18 f.6 0
+				LET
+					g.8
+					MOV %x3
+					LET
+						%x3
+						ADD %x3 8
+						LET
+							l.16
+							g.8
+							LET
+								Tu17
+								ST l.16 g.8 0
+								LET
+									Tu15
+									ST f.6 g.8 4
+									LET
+										Ti1.13
+										SET 456
+										LET
+											Tf2.11
+											CALLCLS g.8
+												Ti1.13 
+												
+											LET
+												Ti3.12
+												SET 789
+												LET
+													Ti4.10
+													CALLCLS Tf2.11
+														Ti3.12 
+														
+													ANS
+														CALLDIR min_caml_print_int
+															Ti4.10 
+															

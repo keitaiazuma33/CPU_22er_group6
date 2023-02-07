@@ -1,0 +1,21 @@
+LET REC f Tu1 
+	INT 123
+	LET REC g Tu2 
+		INT 456
+		LET x
+			LET Tu3
+				UNIT
+				APP f Tu3 
+			LET Ti8
+				LET Ti7
+					LET Ti4
+						INT 0
+						IFLE x Ti4
+							LET Ti6
+								LET Tu5
+									UNIT
+									APP g Tu5 
+								ADD Ti6 x
+							VAR x
+					ADD Ti7 x
+				EXTFUNAPP print_int Ti8 

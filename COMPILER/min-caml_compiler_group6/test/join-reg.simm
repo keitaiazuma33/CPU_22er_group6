@@ -1,0 +1,66 @@
+Name : f.12
+Args : 
+
+FArgs : 
+Body :
+ANS
+	SET 123
+
+Name : g.14
+Args : 
+
+FArgs : 
+Body :
+ANS
+	SET 456
+
+Name : h.16
+Args : 
+
+FArgs : 
+Body :
+ANS
+	SET 789
+
+
+LET
+	Tu4.27
+	NOP
+	LET
+		x.18
+		CALLDIR f.12
+			
+			
+		LET
+			Tu5.26
+			NOP
+			LET
+				y.19
+				CALLDIR g.14
+					
+					
+				LET
+					Tu6.25
+					NOP
+					LET
+						Ti7.23
+						CALLDIR h.16
+							
+							
+						LET
+							Ti9.22
+							IFEQ Ti7.23 0
+								ANS
+									SUB x.18 y.19
+								ANS
+									SUB y.19 x.18
+							LET
+								Ti10.21
+								ADD Ti9.22 x.18
+								LET
+									Ti11.20
+									ADD Ti10.21 y.19
+									ANS
+										CALLDIR min_caml_print_int
+											Ti11.20 
+											

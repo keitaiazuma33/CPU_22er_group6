@@ -1,0 +1,42 @@
+Name : f.12
+Args : Tu1.13 
+Formal_fv : 
+Body :
+INT 123
+
+Name : g.14
+Args : Tu2.15 
+Formal_fv : 
+Body :
+INT 456
+
+Name : h.16
+Args : Tu3.17 
+Formal_fv : 
+Body :
+INT 789
+
+
+LET Tu4.27
+	UNIT
+	LET x.18
+		APPDIR f.12 : Tu4.27 
+		LET Tu5.26
+			UNIT
+			LET y.19
+				APPDIR g.14 : Tu5.26 
+				LET Tu6.25
+					UNIT
+					LET Ti7.23
+						APPDIR h.16 : Tu6.25 
+						LET Ti8.24
+							INT 0
+							LET Ti9.22
+								IFEQ Ti7.23 Ti8.24
+									SUB x.18 y.19
+									SUB y.19 x.18
+								LET Ti10.21
+									ADD Ti9.22 x.18
+									LET Ti11.20
+										ADD Ti10.21 y.19
+										APPDIR min_caml_print_int : Ti11.20 

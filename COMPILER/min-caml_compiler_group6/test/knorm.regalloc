@@ -1,0 +1,48 @@
+Name : x.8
+Args : %x5 
+
+FArgs : 
+Body :
+LET
+	%x6
+	NEG %x5
+	LET
+		%x5
+		SUB %x5 %x6
+		LET
+			%x6
+			NEG %x5
+			LET
+				%x7
+				NEG %x6
+				LET
+					%x6
+					SUB %x6 %x7
+					LET
+						%x5
+						SUB %x5 %x6
+						LET
+							%x6
+							NEG %x5
+							ANS
+								SUB %x5 %x6
+
+
+LET
+	%x5
+	SET 125
+	LET
+		%x5
+		CALLDIR x.8
+			%x5 
+			
+		LET
+			%x6
+			NEG %x5
+			LET
+				%x5
+				SUB %x5 %x6
+				ANS
+					CALLDIR min_caml_print_int
+						%x5 
+						

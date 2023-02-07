@@ -1,0 +1,136 @@
+Name : composed.22
+Args : x.23 
+
+FArgs : 
+Body :
+LET
+	g.9
+	LD composed.22 8
+	LET
+		f.8
+		LD composed.22 4
+		LET
+			Ti6.24
+			CALLCLS f.8
+				x.23 
+				
+			ANS
+				CALLCLS g.9
+					Ti6.24 
+					
+
+Name : compose.7
+Args : f.8 g.9 
+
+FArgs : 
+Body :
+LET
+	composed.22
+	MOV %x3
+	LET
+		%x3
+		ADD %x3 16
+		LET
+			l.27
+			composed.22
+			LET
+				Tu28
+				ST l.27 composed.22 0
+				LET
+					Tu26
+					ST g.9 composed.22 8
+					LET
+						Tu25
+						ST f.8 composed.22 4
+						ANS
+							MOV composed.22
+
+Name : dbl.10
+Args : x.11 
+
+FArgs : 
+Body :
+ANS
+	ADD x.11 x.11
+
+Name : inc.12
+Args : x.13 
+
+FArgs : 
+Body :
+LET
+	Ti5.21
+	SET 1
+	ANS
+		ADD x.13 Ti5.21
+
+Name : dec.14
+Args : x.15 
+
+FArgs : 
+Body :
+LET
+	Ti4.20
+	SET 1
+	ANS
+		SUB x.15 Ti4.20
+
+
+LET
+	dbl.10
+	MOV %x3
+	LET
+		%x3
+		ADD %x3 8
+		LET
+			l.33
+			dbl.10
+			LET
+				Tu34
+				ST l.33 dbl.10 0
+				LET
+					inc.12
+					MOV %x3
+					LET
+						%x3
+						ADD %x3 8
+						LET
+							l.31
+							inc.12
+							LET
+								Tu32
+								ST l.31 inc.12 0
+								LET
+									dec.14
+									MOV %x3
+									LET
+										%x3
+										ADD %x3 8
+										LET
+											l.29
+											dec.14
+											LET
+												Tu30
+												ST l.29 dec.14 0
+												LET
+													Tf1.19
+													CALLDIR compose.7
+														dbl.10 dec.14 
+														
+													LET
+														h.16
+														CALLDIR compose.7
+															inc.12 Tf1.19 
+															
+														LET
+															Ti2.18
+															SET 123
+															LET
+																Ti3.17
+																CALLCLS h.16
+																	Ti2.18 
+																	
+																ANS
+																	CALLDIR min_caml_print_int
+																		Ti3.17 
+																		

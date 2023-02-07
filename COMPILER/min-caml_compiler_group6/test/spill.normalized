@@ -1,0 +1,159 @@
+LET REC f a b c d 
+	LET e
+		ADD a b
+		LET f
+			ADD a c
+			LET g
+				ADD a d
+				LET h
+					ADD b c
+					LET i
+						ADD b d
+						LET j
+							ADD c d
+							LET k
+								ADD e f
+								LET l
+									ADD e g
+									LET m
+										ADD e h
+										LET n
+											ADD e i
+											LET o
+												ADD e j
+												LET p
+													ADD f g
+													LET q
+														ADD f h
+														LET r
+															ADD f i
+															LET s
+																ADD f j
+																LET t
+																	ADD g h
+																	LET u
+																		ADD g i
+																		LET v
+																			ADD g j
+																			LET w
+																				ADD h i
+																				LET x
+																					ADD h j
+																					LET y
+																						ADD i j
+																						LET aa
+																							ADD k l
+																							LET ab
+																								ADD k m
+																								LET ac
+																									ADD k n
+																									LET ad
+																										ADD k o
+																										LET ae
+																											ADD k p
+																											LET af
+																												ADD k q
+																												LET ag
+																													ADD k r
+																													LET ah
+																														ADD k s
+																														LET ai
+																															ADD k t
+																															LET aj
+																																ADD k u
+																																LET ak
+																																	ADD k v
+																																	LET al
+																																		ADD k w
+																																		LET am
+																																			ADD k x
+																																			LET an
+																																				ADD k y
+																																				LET z
+																																					LET Ti42
+																																						LET Ti41
+																																							LET Ti40
+																																								LET Ti39
+																																									LET Ti38
+																																										LET Ti37
+																																											LET Ti36
+																																												LET Ti35
+																																													LET Ti34
+																																														LET Ti33
+																																															LET Ti32
+																																																LET Ti31
+																																																	LET Ti30
+																																																		LET Ti29
+																																																			LET Ti28
+																																																				LET Ti27
+																																																					LET Ti26
+																																																						LET Ti25
+																																																							LET Ti24
+																																																								LET Ti23
+																																																									LET Ti22
+																																																										LET Ti21
+																																																											LET Ti20
+																																																												LET Ti19
+																																																													LET Ti18
+																																																														LET Ti17
+																																																															LET Ti16
+																																																																LET Ti15
+																																																																	LET Ti14
+																																																																		LET Ti13
+																																																																			LET Ti12
+																																																																				LET Ti11
+																																																																					LET Ti10
+																																																																						LET Ti9
+																																																																							LET Ti8
+																																																																								LET Ti7
+																																																																									LET Ti6
+																																																																										ADD a b
+																																																																										ADD Ti6 c
+																																																																									ADD Ti7 d
+																																																																								ADD Ti8 e
+																																																																							ADD Ti9 f
+																																																																						ADD Ti10 g
+																																																																					ADD Ti11 h
+																																																																				ADD Ti12 i
+																																																																			ADD Ti13 j
+																																																																		ADD Ti14 k
+																																																																	ADD Ti15 l
+																																																																ADD Ti16 m
+																																																															ADD Ti17 n
+																																																														ADD Ti18 o
+																																																													ADD Ti19 p
+																																																												ADD Ti20 q
+																																																											ADD Ti21 r
+																																																										ADD Ti22 s
+																																																									ADD Ti23 t
+																																																								ADD Ti24 u
+																																																							ADD Ti25 v
+																																																						ADD Ti26 w
+																																																					ADD Ti27 x
+																																																				ADD Ti28 y
+																																																			ADD Ti29 aa
+																																																		ADD Ti30 ab
+																																																	ADD Ti31 ac
+																																																ADD Ti32 ad
+																																															ADD Ti33 ae
+																																														ADD Ti34 af
+																																													ADD Ti35 ag
+																																												ADD Ti36 ah
+																																											ADD Ti37 ai
+																																										ADD Ti38 aj
+																																									ADD Ti39 ak
+																																								ADD Ti40 al
+																																							ADD Ti41 am
+																																						ADD Ti42 an
+																																					NEG z
+	LET Ti5
+		LET Ti1
+			INT 1
+			LET Ti2
+				INT 2
+				LET Ti3
+					INT 3
+					LET Ti4
+						INT 4
+						APP f Ti1 Ti2 Ti3 Ti4 
+		EXTFUNAPP print_int Ti5 

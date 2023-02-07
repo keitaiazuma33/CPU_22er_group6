@@ -1,0 +1,321 @@
+Name : mul_abs.197
+Args : a.198 b.199 i.200 acc.201 
+
+FArgs : 
+Body :
+ANS
+	IFEQ i.200 -1
+		ANS
+			MOV acc.201
+		LET
+			Ti118.390
+			SET 1
+			LET
+				Ti119.389
+				SLL Ti118.390 i.200
+				LET
+					Ti120.381
+					AND b.199 Ti119.389
+					ANS
+						IFEQ Ti120.381 0
+							LET
+								Ti123.387
+								SUB i.200 1
+								ANS
+									CALLDIR mul_abs.197
+										a.198 b.199 Ti123.387 acc.201 
+										
+							LET
+								Ti125.383
+								SUB i.200 1
+								LET
+									Ti126.385
+									SLL a.198 i.200
+									LET
+										Ti127.384
+										ADD acc.201 Ti126.385
+										ANS
+											CALLDIR mul_abs.197
+												a.198 b.199 Ti125.383 Ti127.384 
+												
+
+Name : mul.202
+Args : a.203 b.204 
+
+FArgs : 
+Body :
+LET
+	abs_a.369
+	IFGE a.203 0
+		ANS
+			MOV a.203
+		ANS
+			NEG a.203
+	LET
+		abs_b.370
+		IFGE b.204 0
+			ANS
+				MOV b.204
+			ANS
+				NEG b.204
+		LET
+			Ti110.376
+			SET 30
+			LET
+				Ti111.377
+				SET 0
+				LET
+					abs_mul.371
+					CALLDIR mul_abs.197
+						abs_a.369 abs_b.370 Ti110.376 Ti111.377 
+						
+					LET
+						Ti113.372
+						SRL a.203 31
+						LET
+							Ti115.373
+							SRL b.204 31
+							ANS
+								IFEQ Ti113.372 Ti115.373
+									ANS
+										MOV abs_mul.371
+									ANS
+										NEG abs_mul.371
+
+Name : div_abs.205
+Args : a.206 b.207 i.208 acc.209 
+
+FArgs : 
+Body :
+ANS
+	IFEQ i.208 -1
+		ANS
+			MOV acc.209
+		LET
+			Ti98.358
+			SRL a.206 i.208
+			ANS
+				IFLE b.207 Ti98.358
+					LET
+						Ti99.367
+						SLL b.207 i.208
+						LET
+							Ti100.361
+							SUB a.206 Ti99.367
+							LET
+								Ti102.362
+								SUB i.208 1
+								LET
+									Ti103.365
+									SET 1
+									LET
+										Ti104.364
+										SLL Ti103.365 i.208
+										LET
+											Ti105.363
+											ADD acc.209 Ti104.364
+											ANS
+												CALLDIR div_abs.205
+													Ti100.361 b.207 Ti102.362 Ti105.363 
+													
+					LET
+						Ti107.359
+						SUB i.208 1
+						ANS
+							CALLDIR div_abs.205
+								a.206 b.207 Ti107.359 acc.209 
+								
+
+Name : div.210
+Args : a.211 b.212 
+
+FArgs : 
+Body :
+LET
+	abs_a.346
+	IFGE a.211 0
+		ANS
+			MOV a.211
+		ANS
+			NEG a.211
+	LET
+		abs_b.347
+		IFGE b.212 0
+			ANS
+				MOV b.212
+			ANS
+				NEG b.212
+		LET
+			Ti90.353
+			SET 30
+			LET
+				Ti91.354
+				SET 0
+				LET
+					abs_div.348
+					CALLDIR div_abs.205
+						abs_a.346 abs_b.347 Ti90.353 Ti91.354 
+						
+					LET
+						Ti93.349
+						SRL a.211 31
+						LET
+							Ti95.350
+							SRL b.212 31
+							ANS
+								IFEQ Ti93.349 Ti95.350
+									ANS
+										MOV abs_div.348
+									ANS
+										NEG abs_div.348
+
+Name : print_int.215
+Args : a.216 
+
+FArgs : 
+Body :
+ANS
+	IFGE a.216 0
+		ANS
+			IFGE a.216 10
+				LET
+					Ti78.345
+					SET 10
+					LET
+						b.338
+						CALLDIR div.210
+							a.216 Ti78.345 
+							
+						LET
+							Tu2.339
+							CALLDIR print_int.215
+								b.338 
+								
+							LET
+								Ti79.344
+								SET 10
+								LET
+									Ti80.343
+									CALLDIR mul.202
+										b.338 Ti79.344 
+										
+									LET
+										Ti81.341
+										SUB a.216 Ti80.343
+										LET
+											Ti83.340
+											ADD Ti81.341 48
+											ANS
+												OUT Ti83.340
+				LET
+					Ti85.336
+					ADD a.216 48
+					ANS
+						OUT Ti85.336
+		LET
+			Ti87.333
+			NEG a.216
+			ANS
+				CALLDIR print_int.215
+					Ti87.333 
+					
+
+Name : assign_array.229
+Args : hp.230 a.231 n.232 
+
+FArgs : 
+Body :
+ANS
+	IFEQ n.232 0
+		LET
+			o.446
+			SLL n.232 2
+			ANS
+				ST a.231 hp.230 o.446
+		LET
+			o.445
+			SLL n.232 2
+			LET
+				Tu3.279
+				ST a.231 hp.230 o.445
+				LET
+					Ti34.280
+					SUB n.232 1
+					ANS
+						CALLDIR assign_array.229
+							hp.230 a.231 Ti34.280 
+							
+
+Name : create_array.233
+Args : n.234 a.235 
+
+FArgs : 
+Body :
+LET
+	Tu28.277
+	NOP
+	LET
+		hp.270
+		GETHP
+		LET
+			hp_array.271
+			MOV hp.270
+			LET
+				Tu4.273
+				CALLDIR assign_array.229
+					hp_array.271 a.235 n.234 
+					
+				ANS
+					MOV hp_array.271
+
+Name : f.243
+Args : 
+
+FArgs : 
+Body :
+ANS
+	SET 12345
+
+
+LET
+	Ti10.256
+	SET 10
+	LET
+		Ti11.257
+		SET 3
+		LET
+			y.245
+			CALLDIR create_array.233
+				Ti10.256 Ti11.257 
+				
+			LET
+				x.246
+				SET 67890
+				LET
+					Ti13.248
+					LD y.245 0
+					LET
+						Ti20.247
+						IFEQ Ti13.248 3
+							LET
+								Tu15.254
+								NOP
+								LET
+									Ti16.251
+									CALLDIR f.243
+										
+										
+									LET
+										Ti18.252
+										LD y.245 4
+										LET
+											Ti19.250
+											ADD Ti16.251 Ti18.252
+											ANS
+												ADD Ti19.250 x.246
+							ANS
+								SET 7
+						ANS
+							CALLDIR print_int.215
+								Ti20.247 
+								

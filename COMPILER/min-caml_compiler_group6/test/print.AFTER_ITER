@@ -1,0 +1,11 @@
+LET Ti3.16
+	INT 123
+	LET Tu2.9
+		EXTFUNAPP print_int Ti3.16 
+		LET Ti5.14
+			INT -456
+			LET Tu1.10
+				EXTFUNAPP print_int Ti5.14 
+				LET Ti8.11
+					INT 789
+					EXTFUNAPP print_int Ti8.11 

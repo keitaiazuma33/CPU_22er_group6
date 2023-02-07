@@ -1,0 +1,25 @@
+LET REC x x 
+	LET x
+		LET x
+			LET Ti4
+				NEG x
+				SUB x Ti4
+			LET Ti6
+				LET x
+					NEG x
+					LET Ti5
+						NEG x
+						SUB x Ti5
+				SUB x Ti6
+		LET Ti7
+			NEG x
+			SUB x Ti7
+	LET x
+		LET Ti1
+			INT 125
+			APP x Ti1 
+		LET Ti3
+			LET Ti2
+				NEG x
+				SUB x Ti2
+			EXTFUNAPP print_int Ti3 

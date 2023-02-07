@@ -1,0 +1,17 @@
+LET Tu2
+	LET Ti3
+		INT 123
+		EXTFUNAPP print_int Ti3 
+	LET Tu1
+		LET Ti5
+			LET Ti4
+				INT 456
+				NEG Ti4
+			EXTFUNAPP print_int Ti5 
+		LET Ti8
+			LET Ti6
+				INT 789
+				LET Ti7
+					INT 0
+					ADD Ti6 Ti7
+			EXTFUNAPP print_int Ti8 

@@ -1,0 +1,13 @@
+LET a
+	INT 1
+	LET b
+		INT 2
+		LET c
+			ADD a b
+			LET d
+				ADD a b
+				LET e
+					ADD b a
+					LET Ti1
+						ADD d e
+						EXTFUNAPP print_int Ti1 

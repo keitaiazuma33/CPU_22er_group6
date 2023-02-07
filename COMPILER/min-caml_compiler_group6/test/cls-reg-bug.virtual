@@ -1,0 +1,249 @@
+Name : g.52
+Args : z.53 
+
+FArgs : 
+Body :
+LET
+	v9.50
+	LD g.52 40
+	LET
+		v8.49
+		LD g.52 36
+		LET
+			v7.48
+			LD g.52 32
+			LET
+				v6.47
+				LD g.52 28
+				LET
+					v5.46
+					LD g.52 24
+					LET
+						v4.45
+						LD g.52 20
+						LET
+							v3.44
+							LD g.52 16
+							LET
+								v2.43
+								LD g.52 12
+								LET
+									v10.51
+									LD g.52 8
+									LET
+										v1.42
+										LD g.52 4
+										LET
+											Ti16.65
+											ADD v1.42 v2.43
+											LET
+												Ti17.64
+												ADD Ti16.65 v3.44
+												LET
+													Ti18.63
+													ADD Ti17.64 v4.45
+													LET
+														Ti19.62
+														ADD Ti18.63 v5.46
+														LET
+															Ti20.61
+															ADD Ti19.62 v6.47
+															LET
+																Ti21.60
+																ADD Ti20.61 v7.48
+																LET
+																	Ti22.59
+																	ADD Ti21.60 v8.49
+																	LET
+																		Ti23.58
+																		ADD Ti22.59 v9.50
+																		LET
+																			r.55
+																			ADD Ti23.58 v10.51
+																			LET
+																				Ti24.56
+																				SET 0
+																				ANS
+																					IFLE z.53 Ti24.56
+																						LET
+																							Ti25.57
+																							NEG z.53
+																							ANS
+																								CALLCLS g.52
+																									Ti25.57 
+																									
+																						ANS
+																							MOV r.55
+
+Name : h.26
+Args : p.27 
+
+FArgs : 
+Body :
+LET
+	v10.51
+	LD p.27 36
+	LET
+		v9.50
+		LD p.27 32
+		LET
+			v8.49
+			LD p.27 28
+			LET
+				v7.48
+				LD p.27 24
+				LET
+					v6.47
+					LD p.27 20
+					LET
+						v5.46
+						LD p.27 16
+						LET
+							v4.45
+							LD p.27 12
+							LET
+								v3.44
+								LD p.27 8
+								LET
+									v2.43
+									LD p.27 4
+									LET
+										v1.42
+										LD p.27 0
+										LET
+											g.52
+											MOV %x3
+											LET
+												%x3
+												ADD %x3 48
+												LET
+													l.76
+													g.52
+													LET
+														Tu77
+														ST l.76 g.52 0
+														LET
+															Tu75
+															ST v9.50 g.52 40
+															LET
+																Tu74
+																ST v8.49 g.52 36
+																LET
+																	Tu73
+																	ST v7.48 g.52 32
+																	LET
+																		Tu72
+																		ST v6.47 g.52 28
+																		LET
+																			Tu71
+																			ST v5.46 g.52 24
+																			LET
+																				Tu70
+																				ST v4.45 g.52 20
+																				LET
+																					Tu69
+																					ST v3.44 g.52 16
+																					LET
+																						Tu68
+																						ST v2.43 g.52 12
+																						LET
+																							Tu67
+																							ST v10.51 g.52 8
+																							LET
+																								Tu66
+																								ST v1.42 g.52 4
+																								LET
+																									Ti15.54
+																									SET 1
+																									ANS
+																										CALLCLS g.52
+																											Ti15.54 
+																											
+
+
+LET
+	Ti2.32
+	SET 1
+	LET
+		Ti3.33
+		SET 2
+		LET
+			Ti4.34
+			SET 3
+			LET
+				Ti5.35
+				SET 4
+				LET
+					Ti6.36
+					SET 5
+					LET
+						Ti7.37
+						SET 6
+						LET
+							Ti8.38
+							SET 7
+							LET
+								Ti9.39
+								SET 8
+								LET
+									Ti10.40
+									SET 9
+									LET
+										Ti11.41
+										SET 10
+										LET
+											t.78
+											MOV %x3
+											LET
+												%x3
+												ADD %x3 40
+												LET
+													Tu88
+													ST Ti11.41 t.78 36
+													LET
+														Tu87
+														ST Ti10.40 t.78 32
+														LET
+															Tu86
+															ST Ti9.39 t.78 28
+															LET
+																Tu85
+																ST Ti8.38 t.78 24
+																LET
+																	Tu84
+																	ST Ti7.37 t.78 20
+																	LET
+																		Tu83
+																		ST Ti6.36 t.78 16
+																		LET
+																			Tu82
+																			ST Ti5.35 t.78 12
+																			LET
+																				Tu81
+																				ST Ti4.34 t.78 8
+																				LET
+																					Tu80
+																					ST Ti3.33 t.78 4
+																					LET
+																						Tu79
+																						ST Ti2.32 t.78 0
+																						LET
+																							Tt12.31
+																							MOV t.78
+																							LET
+																								Ti13.30
+																								CALLDIR h.26
+																									Tt12.31 
+																									
+																								LET
+																									Tu1.28
+																									CALLDIR min_caml_print_int
+																										Ti13.30 
+																										
+																									LET
+																										Tu14.29
+																										NOP
+																										ANS
+																											CALLDIR min_caml_print_newline
+																												
+																												

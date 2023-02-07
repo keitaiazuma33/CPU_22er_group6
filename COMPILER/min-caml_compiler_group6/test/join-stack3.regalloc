@@ -1,0 +1,69 @@
+Name : f.10
+Args : 
+
+FArgs : 
+Body :
+ANS
+	SET 123
+
+Name : g.12
+Args : 
+
+FArgs : 
+Body :
+ANS
+	SET 456
+
+Name : h.14
+Args : 
+
+FArgs : 
+Body :
+ANS
+	SET 789
+
+
+LET
+	%g0
+	NOP
+	LET
+		%x5
+		CALLDIR f.10
+			
+			
+		LET
+			Tu26
+			SAVE %x5 x.16
+			LET
+				%x5
+				IFLE %x5 0
+					LET
+						%g0
+						NOP
+						LET
+							Tu24
+							SAVE %x5 x.16
+							ANS
+								CALLDIR g.12
+									
+									
+					LET
+						%g0
+						NOP
+						LET
+							Tu25
+							SAVE %x5 x.16
+							ANS
+								CALLDIR h.14
+									
+									
+				LET
+					%x6
+					RESTORE x.16
+					LET
+						%x5
+						ADD %x5 %x6
+						ANS
+							CALLDIR min_caml_print_int
+								%x5 
+								

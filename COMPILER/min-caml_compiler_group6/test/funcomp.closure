@@ -1,0 +1,54 @@
+Name : composed.22
+Args : x.23 
+Formal_fv : f.8 g.9 
+Body :
+LET Ti6.24
+	APPCLS f.8 : x.23 
+	APPCLS g.9 : Ti6.24 
+
+Name : compose.7
+Args : f.8 g.9 
+Formal_fv : 
+Body :
+MAKECLS composed.22
+	composed.22 : f.8 g.9 
+	VAR composed.22
+
+Name : dbl.10
+Args : x.11 
+Formal_fv : 
+Body :
+ADD x.11 x.11
+
+Name : inc.12
+Args : x.13 
+Formal_fv : 
+Body :
+LET Ti5.21
+	INT 1
+	ADD x.13 Ti5.21
+
+Name : dec.14
+Args : x.15 
+Formal_fv : 
+Body :
+LET Ti4.20
+	INT 1
+	SUB x.15 Ti4.20
+
+
+MAKECLS dbl.10
+	dbl.10 : 
+	MAKECLS inc.12
+		inc.12 : 
+		MAKECLS dec.14
+			dec.14 : 
+			LET Tf1.19
+				APPDIR compose.7 : dbl.10 dec.14 
+				LET h.16
+					APPDIR compose.7 : inc.12 Tf1.19 
+					LET Ti2.18
+						INT 123
+						LET Ti3.17
+							APPCLS h.16 : Ti2.18 
+							APPDIR min_caml_print_int : Ti3.17 

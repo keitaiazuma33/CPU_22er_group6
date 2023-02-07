@@ -1,0 +1,62 @@
+LET REC h p 
+	LETTUPLE v1 v2 v3 v4 v5 v6 v7 v8 v9 v10 
+		p
+		LET REC g z 
+			LET r
+				LET Ti23
+					LET Ti22
+						LET Ti21
+							LET Ti20
+								LET Ti19
+									LET Ti18
+										LET Ti17
+											LET Ti16
+												ADD v1 v2
+												ADD Ti16 v3
+											ADD Ti17 v4
+										ADD Ti18 v5
+									ADD Ti19 v6
+								ADD Ti20 v7
+							ADD Ti21 v8
+						ADD Ti22 v9
+					ADD Ti23 v10
+				LET Ti24
+					INT 0
+					IFLE z Ti24
+						LET Ti25
+							NEG z
+							APP g Ti25 
+						VAR r
+			LET Ti15
+				INT 1
+				APP g Ti15 
+	LET Tu1
+		LET Ti13
+			LET Tt12
+				LET Ti2
+					INT 1
+					LET Ti3
+						INT 2
+						LET Ti4
+							INT 3
+							LET Ti5
+								INT 4
+								LET Ti6
+									INT 5
+									LET Ti7
+										INT 6
+										LET Ti8
+											INT 7
+											LET Ti9
+												INT 8
+												LET Ti10
+													INT 9
+													LET Ti11
+														INT 10
+														TUPLE
+															Ti2 Ti3 Ti4 Ti5 Ti6 Ti7 Ti8 Ti9 Ti10 Ti11 
+				APP h Tt12 
+			EXTFUNAPP print_int Ti13 
+		LET Tu14
+			UNIT
+			EXTFUNAPP print_newline Tu14 

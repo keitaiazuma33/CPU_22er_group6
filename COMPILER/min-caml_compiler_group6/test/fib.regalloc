@@ -1,0 +1,311 @@
+Name : mul_abs.174
+Args : %x5 %x6 %x7 %x9 
+
+FArgs : 
+Body :
+ANS
+	IFEQ %x7 -1
+		ANS
+			MOV %x9
+		LET
+			%x10
+			SET 1
+			LET
+				%x10
+				SLL %x10 %x7
+				LET
+					%x10
+					AND %x6 %x10
+					ANS
+						IFEQ %x10 0
+							LET
+								%x7
+								SUB %x7 1
+								ANS
+									CALLDIR mul_abs.174
+										%x5 %x6 %x7 %x9 
+										
+							LET
+								%x10
+								SUB %x7 1
+								LET
+									%x7
+									SLL %x5 %x7
+									LET
+										%x9
+										ADD %x9 %x7
+										ANS
+											CALLDIR mul_abs.174
+												%x5 %x6 %x10 %x9 
+												
+
+Name : mul.179
+Args : %x5 %x6 
+
+FArgs : 
+Body :
+LET
+	%x7
+	IFGE %x5 0
+		ANS
+			MOV %x5
+		ANS
+			NEG %x5
+	LET
+		%x9
+		IFGE %x6 0
+			ANS
+				MOV %x6
+			ANS
+				NEG %x6
+		LET
+			%x10
+			SET 30
+			LET
+				%x11
+				SET 0
+				LET
+					Tu381
+					SAVE %x6 b.181
+					LET
+						Tu380
+						SAVE %x5 a.180
+						LET
+							%x5
+							CALLDIR mul_abs.174
+								%x7 %x9 %x10 %x11 
+								
+							LET
+								%x6
+								RESTORE a.180
+								LET
+									%x6
+									SRL %x6 31
+									LET
+										%x7
+										RESTORE b.181
+										LET
+											%x7
+											SRL %x7 31
+											ANS
+												IFEQ %x6 %x7
+													ANS
+														MOV %x5
+													ANS
+														NEG %x5
+
+Name : div_abs.182
+Args : %x5 %x6 %x7 %x9 
+
+FArgs : 
+Body :
+ANS
+	IFEQ %x7 -1
+		ANS
+			MOV %x9
+		LET
+			%x10
+			SRL %x5 %x7
+			ANS
+				IFLE %x6 %x10
+					LET
+						%x10
+						SLL %x6 %x7
+						LET
+							%x5
+							SUB %x5 %x10
+							LET
+								%x10
+								SUB %x7 1
+								LET
+									%x11
+									SET 1
+									LET
+										%x7
+										SLL %x11 %x7
+										LET
+											%x9
+											ADD %x9 %x7
+											ANS
+												CALLDIR div_abs.182
+													%x5 %x6 %x10 %x9 
+													
+					LET
+						%x7
+						SUB %x7 1
+						ANS
+							CALLDIR div_abs.182
+								%x5 %x6 %x7 %x9 
+								
+
+Name : div.187
+Args : %x5 %x6 
+
+FArgs : 
+Body :
+LET
+	%x7
+	IFGE %x5 0
+		ANS
+			MOV %x5
+		ANS
+			NEG %x5
+	LET
+		%x9
+		IFGE %x6 0
+			ANS
+				MOV %x6
+			ANS
+				NEG %x6
+		LET
+			%x10
+			SET 30
+			LET
+				%x11
+				SET 0
+				LET
+					Tu383
+					SAVE %x6 b.189
+					LET
+						Tu382
+						SAVE %x5 a.188
+						LET
+							%x5
+							CALLDIR div_abs.182
+								%x7 %x9 %x10 %x11 
+								
+							LET
+								%x6
+								RESTORE a.188
+								LET
+									%x6
+									SRL %x6 31
+									LET
+										%x7
+										RESTORE b.189
+										LET
+											%x7
+											SRL %x7 31
+											ANS
+												IFEQ %x6 %x7
+													ANS
+														MOV %x5
+													ANS
+														NEG %x5
+
+Name : print_int.192
+Args : %x5 
+
+FArgs : 
+Body :
+ANS
+	IFGE %x5 0
+		ANS
+			IFGE %x5 10
+				LET
+					%x6
+					SET 10
+					LET
+						Tu385
+						SAVE %x5 a.193
+						LET
+							%x5
+							CALLDIR div.187
+								%x5 %x6 
+								
+							LET
+								Tu386
+								SAVE %x5 b.273
+								LET
+									%g0
+									CALLDIR print_int.192
+										%x5 
+										
+									LET
+										%x6
+										SET 10
+										LET
+											%x5
+											RESTORE b.273
+											LET
+												%x5
+												CALLDIR mul.179
+													%x5 %x6 
+													
+												LET
+													%x6
+													RESTORE a.193
+													LET
+														%x5
+														SUB %x6 %x5
+														LET
+															%x5
+															ADD %x5 48
+															ANS
+																OUT %x5
+				LET
+					%x5
+					ADD %x5 48
+					ANS
+						OUT %x5
+		LET
+			%x5
+			NEG %x5
+			ANS
+				CALLDIR print_int.192
+					%x5 
+					
+
+Name : fib.206
+Args : %x5 
+
+FArgs : 
+Body :
+ANS
+	IFLE %x5 1
+		ANS
+			MOV %x5
+		LET
+			%x6
+			SUB %x5 1
+			LET
+				Tu387
+				SAVE %x5 n.207
+				LET
+					%x5
+					CALLDIR fib.206
+						%x6 
+						
+					LET
+						%x6
+						RESTORE n.207
+						LET
+							%x6
+							SUB %x6 2
+							LET
+								Tu388
+								SAVE %x5 Ti8.211
+								LET
+									%x5
+									CALLDIR fib.206
+										%x6 
+										
+									LET
+										%x6
+										RESTORE Ti8.211
+										ANS
+											ADD %x6 %x5
+
+
+LET
+	%x5
+	SET 30
+	LET
+		%x5
+		CALLDIR fib.206
+			%x5 
+			
+		ANS
+			CALLDIR print_int.192
+				%x5 
+				

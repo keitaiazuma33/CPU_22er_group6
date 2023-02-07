@@ -1,0 +1,77 @@
+
+LET
+	%f0
+	l.28
+	LET
+		%x5
+		CALLDIR min_caml_truncate
+			
+			%f0 
+		LET
+			%f0
+			l.30
+			LET
+				Tu35
+				SAVE %x5 x.13
+				LET
+					%x5
+					CALLDIR min_caml_truncate
+						
+						%f0 
+					LET
+						%f0
+						l.32
+						LET
+							Tu36
+							SAVE %x5 y.14
+							LET
+								%x5
+								CALLDIR min_caml_truncate
+									
+									%f0 
+								LET
+									%x6
+									IFGE %x5 0
+										LET
+											%x6
+											RESTORE x.13
+											ANS
+												MOV %x6
+										LET
+											%x6
+											RESTORE y.14
+											ANS
+												MOV %x6
+									LET
+										%x7
+										RESTORE x.13
+										LET
+											%x9
+											IFLE %x7 0
+												LET
+													%x9
+													RESTORE y.14
+													ANS
+														MOV %x9
+												ANS
+													MOV %x5
+											LET
+												%x6
+												ADD %x6 %x9
+												LET
+													%x9
+													RESTORE y.14
+													LET
+														%x5
+														IFGE %x9 0
+															ANS
+																MOV %x5
+															ANS
+																MOV %x7
+														LET
+															%x5
+															ADD %x6 %x5
+															ANS
+																CALLDIR min_caml_print_int
+																	%x5 
+																	

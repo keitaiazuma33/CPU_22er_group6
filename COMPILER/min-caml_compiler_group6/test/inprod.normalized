@@ -1,0 +1,61 @@
+LET REC getx v 
+	LETTUPLE x y z 
+		v
+		VAR x
+	LET REC gety v 
+		LETTUPLE x y z 
+			v
+			VAR y
+		LET REC getz v 
+			LETTUPLE x y z 
+				v
+				VAR z
+			LET REC inprod v1 v2 
+				LET Td19
+					LET Td15
+						LET Td13
+							APP getx v1 
+							LET Td14
+								APP getx v2 
+								FMUL Td13 Td14
+						LET Td18
+							LET Td16
+								APP gety v1 
+								LET Td17
+									APP gety v2 
+									FMUL Td16 Td17
+							FADD Td15 Td18
+					LET Td22
+						LET Td20
+							APP getz v1 
+							LET Td21
+								APP getz v2 
+								FMUL Td20 Td21
+						FADD Td19 Td22
+				LET Ti12
+					LET Td11
+						LET Td1
+							FLOAT 1000000.000000
+							LET Td10
+								LET Tt5
+									LET Td2
+										FLOAT 1.000000
+										LET Td3
+											FLOAT 2.000000
+											LET Td4
+												FLOAT 3.000000
+												TUPLE
+													Td2 Td3 Td4 
+									LET Tt9
+										LET Td6
+											FLOAT 4.000000
+											LET Td7
+												FLOAT 5.000000
+												LET Td8
+													FLOAT 6.000000
+													TUPLE
+														Td6 Td7 Td8 
+										APP inprod Tt5 Tt9 
+								FMUL Td1 Td10
+						EXTFUNAPP truncate Td11 
+					EXTFUNAPP print_int Ti12 

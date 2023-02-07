@@ -1,0 +1,19 @@
+LET REC gcd m n 
+	LET Ti4
+		INT 0
+		IFEQ m Ti4
+			VAR n
+			IFLE m n
+				LET Ti5
+					SUB n m
+					APP gcd m Ti5 
+				LET Ti6
+					SUB m n
+					APP gcd n Ti6 
+	LET Ti3
+		LET Ti1
+			INT 21600
+			LET Ti2
+				INT 337500
+				APP gcd Ti1 Ti2 
+		EXTFUNAPP print_int Ti3 

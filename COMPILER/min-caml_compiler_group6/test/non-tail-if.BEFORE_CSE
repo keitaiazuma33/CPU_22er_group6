@@ -1,0 +1,37 @@
+LET x.13
+	LET Td1.27
+		FLOAT 1.230000
+		EXTFUNAPP truncate Td1.27 
+	LET y.14
+		LET Td2.26
+			FLOAT 4.560000
+			EXTFUNAPP truncate Td2.26 
+		LET z.15
+			LET Td4.24
+				LET Td3.25
+					FLOAT 7.890000
+					FNEG Td3.25 
+				EXTFUNAPP truncate Td4.24 
+			LET Ti12.16
+				LET Ti9.17
+					LET Ti6.20
+						LET Ti5.23
+							INT 0
+							IFLE Ti5.23 z.15
+								VAR x.13
+								VAR y.14
+						LET Ti8.21
+							LET Ti7.22
+								INT 0
+								IFLE x.13 Ti7.22
+									VAR y.14
+									VAR z.15
+							ADD Ti6.20 Ti8.21
+					LET Ti11.18
+						LET Ti10.19
+							INT 0
+							IFLE Ti10.19 y.14
+								VAR z.15
+								VAR x.13
+						ADD Ti9.17 Ti11.18
+				EXTFUNAPP print_int Ti12.16 

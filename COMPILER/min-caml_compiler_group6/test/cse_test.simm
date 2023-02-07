@@ -1,0 +1,8 @@
+
+LET
+	Ti1.7
+	SET 6
+	ANS
+		CALLDIR min_caml_print_int
+			Ti1.7 
+			

@@ -1,0 +1,22 @@
+Name : sum.7
+Args : x.8 
+Formal_fv : 
+Body :
+LET Ti3.11
+	INT 0
+	IFLE x.8 Ti3.11
+		INT 0
+		LET Ti4.14
+			INT 1
+			LET Ti5.13
+				SUB x.8 Ti4.14
+				LET Ti6.12
+					APPDIR sum.7 : Ti5.13 
+					ADD Ti6.12 x.8
+
+
+LET Ti1.10
+	INT 10000
+	LET Ti2.9
+		APPDIR sum.7 : Ti1.10 
+		APPDIR min_caml_print_int : Ti2.9 

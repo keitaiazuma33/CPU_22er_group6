@@ -1,0 +1,28 @@
+LET REC x x 
+	LET x
+		LET x
+			SUB
+				VAR x
+				NEG
+					VAR x
+			SUB
+				VAR x
+				LET x
+					NEG
+						VAR x
+					SUB
+						VAR x
+						NEG
+							VAR x
+		SUB
+			VAR x
+			NEG
+				VAR x
+	LET x
+		APP VAR x
+			INT 125
+		APP VAR print_int
+			SUB
+				VAR x
+				NEG
+					VAR x

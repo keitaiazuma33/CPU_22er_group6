@@ -1,0 +1,55 @@
+Name : adder.11
+Args : y.12 
+
+FArgs : 
+Body :
+LET
+	x.6
+	LD adder.11 4
+	ANS
+		ADD x.6 y.12
+
+Name : make_adder.5
+Args : x.6 
+
+FArgs : 
+Body :
+LET
+	adder.11
+	MOV %x3
+	LET
+		%x3
+		ADD %x3 8
+		LET
+			l.14
+			adder.11
+			LET
+				Tu15
+				ST l.14 adder.11 0
+				LET
+					Tu13
+					ST x.6 adder.11 4
+					ANS
+						MOV adder.11
+
+
+LET
+	Ti1.10
+	SET 3
+	LET
+		Tf2.8
+		CALLDIR make_adder.5
+			Ti1.10 
+			
+		LET
+			Ti3.9
+			SET 7
+			LET
+				Ti4.7
+				CALLCLS Tf2.8
+					Ti3.9 
+					
+				ANS
+					CALLDIR min_caml_print_int
+						Ti4.7 
+						

@@ -1,0 +1,4 @@
+
+LET Ti1.7
+	INT 6
+	APPDIR min_caml_print_int : Ti1.7 

@@ -1,0 +1,61 @@
+LET REC getx.23 v.24 
+	LETTUPLE x.60 y.61 z.62 
+		v.24
+		VAR x.60
+	LET REC gety.25 v.26 
+		LETTUPLE x.57 y.58 z.59 
+			v.26
+			VAR y.58
+		LET REC getz.27 v.28 
+			LETTUPLE x.54 y.55 z.56 
+				v.28
+				VAR z.56
+			LET REC inprod.29 v1.30 v2.31 
+				LET Td13.52
+					APP getx.23 v1.30 
+					LET Td14.53
+						APP getx.23 v2.31 
+						LET Td15.48
+							FMUL Td13.52 Td14.53
+							LET Td16.50
+								APP gety.25 v1.30 
+								LET Td17.51
+									APP gety.25 v2.31 
+									LET Td18.49
+										FMUL Td16.50 Td17.51
+										LET Td19.44
+											FADD Td15.48 Td18.49
+											LET Td20.46
+												APP getz.27 v1.30 
+												LET Td21.47
+													APP getz.27 v2.31 
+													LET Td22.45
+														FMUL Td20.46 Td21.47
+														FADD Td19.44 Td22.45
+				LET Td1.34
+					FLOAT 1000000.000000
+					LET Td2.41
+						FLOAT 1.000000
+						LET Td3.42
+							FLOAT 2.000000
+							LET Td4.43
+								FLOAT 3.000000
+								LET Tt5.36
+									TUPLE
+										Td2.41 Td3.42 Td4.43 
+									LET Td6.38
+										FLOAT 4.000000
+										LET Td7.39
+											FLOAT 5.000000
+											LET Td8.40
+												FLOAT 6.000000
+												LET Tt9.37
+													TUPLE
+														Td6.38 Td7.39 Td8.40 
+													LET Td10.35
+														APP inprod.29 Tt5.36 Tt9.37 
+														LET Td11.33
+															FMUL Td1.34 Td10.35
+															LET Ti12.32
+																EXTFUNAPP truncate Td11.33 
+																EXTFUNAPP print_int Ti12.32 

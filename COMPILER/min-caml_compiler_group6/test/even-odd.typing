@@ -1,0 +1,47 @@
+LET t
+	INT 123
+	LET f
+		INT 456
+		LET REC even x 
+			LET REC odd x 
+				IF
+					NOT
+						LE
+							VAR x
+							INT 0
+					APP VAR even
+						SUB
+							VAR x
+							INT 1
+					IF
+						NOT
+							LE
+								INT 0
+								VAR x
+						APP VAR even
+							ADD
+								VAR x
+								INT 1
+						VAR f
+				IF
+					NOT
+						LE
+							VAR x
+							INT 0
+					APP VAR odd
+						SUB
+							VAR x
+							INT 1
+					IF
+						NOT
+							LE
+								INT 0
+								VAR x
+						APP VAR odd
+							ADD
+								VAR x
+								INT 1
+						VAR t
+			APP VAR print_int
+				APP VAR even
+					INT 789

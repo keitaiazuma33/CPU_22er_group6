@@ -1,0 +1,24 @@
+Name : adder.11
+Args : y.12 
+Formal_fv : x.6 
+Body :
+ADD x.6 y.12
+
+Name : make_adder.5
+Args : x.6 
+Formal_fv : 
+Body :
+MAKECLS adder.11
+	adder.11 : x.6 
+	VAR adder.11
+
+
+LET Ti1.10
+	INT 3
+	LET Tf2.8
+		APPDIR make_adder.5 : Ti1.10 
+		LET Ti3.9
+			INT 7
+			LET Ti4.7
+				APPCLS Tf2.8 : Ti3.9 
+				APPDIR min_caml_print_int : Ti4.7 

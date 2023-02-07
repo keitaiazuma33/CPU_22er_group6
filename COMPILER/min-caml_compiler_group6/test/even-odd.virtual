@@ -1,0 +1,89 @@
+Name : odd.21
+Args : x.22 
+
+FArgs : 
+Body :
+LET
+	Ti9.29
+	SET 0
+	ANS
+		IFLE x.22 Ti9.29
+			LET
+				Ti10.32
+				SET 0
+				ANS
+					IFLE Ti10.32 x.22
+						ANS
+							SET 456
+						LET
+							Ti11.34
+							SET 1
+							LET
+								Ti12.33
+								ADD x.22 Ti11.34
+								ANS
+									CALLDIR even.17
+										Ti12.33 
+										
+			LET
+				Ti13.31
+				SET 1
+				LET
+					Ti14.30
+					SUB x.22 Ti13.31
+					ANS
+						CALLDIR even.17
+							Ti14.30 
+							
+
+Name : even.17
+Args : x.18 
+
+FArgs : 
+Body :
+LET
+	Ti3.23
+	SET 0
+	ANS
+		IFLE x.18 Ti3.23
+			LET
+				Ti4.26
+				SET 0
+				ANS
+					IFLE Ti4.26 x.18
+						ANS
+							SET 123
+						LET
+							Ti5.28
+							SET 1
+							LET
+								Ti6.27
+								ADD x.18 Ti5.28
+								ANS
+									CALLDIR odd.21
+										Ti6.27 
+										
+			LET
+				Ti7.25
+				SET 1
+				LET
+					Ti8.24
+					SUB x.18 Ti7.25
+					ANS
+						CALLDIR odd.21
+							Ti8.24 
+							
+
+
+LET
+	Ti1.20
+	SET 789
+	LET
+		Ti2.19
+		CALLDIR even.17
+			Ti1.20 
+			
+		ANS
+			CALLDIR min_caml_print_int
+				Ti2.19 
+				

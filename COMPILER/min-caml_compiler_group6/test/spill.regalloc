@@ -1,0 +1,375 @@
+Name : f.43
+Args : %x5 %x6 %x7 %x9 
+
+FArgs : 
+Body :
+LET
+	%x10
+	ADD %x5 %x6
+	LET
+		%x11
+		ADD %x5 %x7
+		LET
+			%x12
+			ADD %x5 %x9
+			LET
+				%x13
+				ADD %x6 %x7
+				LET
+					%x14
+					ADD %x6 %x9
+					LET
+						%x15
+						ADD %x7 %x9
+						LET
+							%x16
+							ADD %x10 %x11
+							LET
+								%x17
+								ADD %x10 %x12
+								LET
+									%x18
+									ADD %x10 %x13
+									LET
+										%x19
+										ADD %x10 %x14
+										LET
+											%x20
+											ADD %x10 %x15
+											LET
+												%x21
+												ADD %x11 %x12
+												LET
+													%x22
+													ADD %x11 %x13
+													LET
+														%x23
+														ADD %x11 %x14
+														LET
+															Tu146
+															SAVE %x11 f.54
+															LET
+																%x11
+																ADD %x11 %x15
+																LET
+																	Tu145
+																	SAVE %x10 e.53
+																	LET
+																		%x10
+																		ADD %x12 %x13
+																		LET
+																			Tu144
+																			SAVE %x9 d.47
+																			LET
+																				%x9
+																				ADD %x12 %x14
+																				LET
+																					Tu143
+																					SAVE %x12 g.55
+																					LET
+																						%x12
+																						ADD %x12 %x15
+																						LET
+																							Tu142
+																							SAVE %x7 c.46
+																							LET
+																								%x7
+																								ADD %x13 %x14
+																								LET
+																									Tu141
+																									SAVE %x13 h.56
+																									LET
+																										%x13
+																										ADD %x13 %x15
+																										LET
+																											Tu140
+																											SAVE %x15 j.58
+																											LET
+																												%x15
+																												ADD %x14 %x15
+																												LET
+																													Tu139
+																													SAVE %x17 l.60
+																													LET
+																														%x17
+																														ADD %x16 %x17
+																														LET
+																															Tu138
+																															SAVE %x17 aa.74
+																															LET
+																																%x17
+																																ADD %x16 %x18
+																																LET
+																																	Tu137
+																																	SAVE %x17 ab.75
+																																	LET
+																																		%x17
+																																		ADD %x16 %x19
+																																		LET
+																																			Tu136
+																																			SAVE %x17 ac.76
+																																			LET
+																																				%x17
+																																				ADD %x16 %x20
+																																				LET
+																																					Tu135
+																																					SAVE %x17 ad.77
+																																					LET
+																																						%x17
+																																						ADD %x16 %x21
+																																						LET
+																																							Tu134
+																																							SAVE %x17 ae.78
+																																							LET
+																																								%x17
+																																								ADD %x16 %x22
+																																								LET
+																																									Tu133
+																																									SAVE %x17 af.79
+																																									LET
+																																										%x17
+																																										ADD %x16 %x23
+																																										LET
+																																											Tu132
+																																											SAVE %x17 ag.80
+																																											LET
+																																												%x17
+																																												ADD %x16 %x11
+																																												LET
+																																													Tu131
+																																													SAVE %x17 ah.81
+																																													LET
+																																														%x17
+																																														ADD %x16 %x10
+																																														LET
+																																															Tu130
+																																															SAVE %x17 ai.82
+																																															LET
+																																																%x17
+																																																ADD %x16 %x9
+																																																LET
+																																																	Tu129
+																																																	SAVE %x17 aj.83
+																																																	LET
+																																																		%x17
+																																																		ADD %x16 %x12
+																																																		LET
+																																																			Tu128
+																																																			SAVE %x17 ak.84
+																																																			LET
+																																																				%x17
+																																																				ADD %x16 %x7
+																																																				LET
+																																																					Tu127
+																																																					SAVE %x17 al.85
+																																																					LET
+																																																						%x17
+																																																						ADD %x16 %x13
+																																																						LET
+																																																							Tu126
+																																																							SAVE %x17 am.86
+																																																							LET
+																																																								%x17
+																																																								ADD %x16 %x15
+																																																								LET
+																																																									%x5
+																																																									ADD %x5 %x6
+																																																									LET
+																																																										%x6
+																																																										RESTORE c.46
+																																																										LET
+																																																											%x5
+																																																											ADD %x5 %x6
+																																																											LET
+																																																												%x6
+																																																												RESTORE d.47
+																																																												LET
+																																																													%x5
+																																																													ADD %x5 %x6
+																																																													LET
+																																																														%x6
+																																																														RESTORE e.53
+																																																														LET
+																																																															%x5
+																																																															ADD %x5 %x6
+																																																															LET
+																																																																%x6
+																																																																RESTORE f.54
+																																																																LET
+																																																																	%x5
+																																																																	ADD %x5 %x6
+																																																																	LET
+																																																																		%x6
+																																																																		RESTORE g.55
+																																																																		LET
+																																																																			%x5
+																																																																			ADD %x5 %x6
+																																																																			LET
+																																																																				%x6
+																																																																				RESTORE h.56
+																																																																				LET
+																																																																					%x5
+																																																																					ADD %x5 %x6
+																																																																					LET
+																																																																						%x5
+																																																																						ADD %x5 %x14
+																																																																						LET
+																																																																							%x6
+																																																																							RESTORE j.58
+																																																																							LET
+																																																																								%x5
+																																																																								ADD %x5 %x6
+																																																																								LET
+																																																																									%x5
+																																																																									ADD %x5 %x16
+																																																																									LET
+																																																																										%x6
+																																																																										RESTORE l.60
+																																																																										LET
+																																																																											%x5
+																																																																											ADD %x5 %x6
+																																																																											LET
+																																																																												%x5
+																																																																												ADD %x5 %x18
+																																																																												LET
+																																																																													%x5
+																																																																													ADD %x5 %x19
+																																																																													LET
+																																																																														%x5
+																																																																														ADD %x5 %x20
+																																																																														LET
+																																																																															%x5
+																																																																															ADD %x5 %x21
+																																																																															LET
+																																																																																%x5
+																																																																																ADD %x5 %x22
+																																																																																LET
+																																																																																	%x5
+																																																																																	ADD %x5 %x23
+																																																																																	LET
+																																																																																		%x5
+																																																																																		ADD %x5 %x11
+																																																																																		LET
+																																																																																			%x5
+																																																																																			ADD %x5 %x10
+																																																																																			LET
+																																																																																				%x5
+																																																																																				ADD %x5 %x9
+																																																																																				LET
+																																																																																					%x5
+																																																																																					ADD %x5 %x12
+																																																																																					LET
+																																																																																						%x5
+																																																																																						ADD %x5 %x7
+																																																																																						LET
+																																																																																							%x5
+																																																																																							ADD %x5 %x13
+																																																																																							LET
+																																																																																								%x5
+																																																																																								ADD %x5 %x15
+																																																																																								LET
+																																																																																									%x6
+																																																																																									RESTORE aa.74
+																																																																																									LET
+																																																																																										%x5
+																																																																																										ADD %x5 %x6
+																																																																																										LET
+																																																																																											%x6
+																																																																																											RESTORE ab.75
+																																																																																											LET
+																																																																																												%x5
+																																																																																												ADD %x5 %x6
+																																																																																												LET
+																																																																																													%x6
+																																																																																													RESTORE ac.76
+																																																																																													LET
+																																																																																														%x5
+																																																																																														ADD %x5 %x6
+																																																																																														LET
+																																																																																															%x6
+																																																																																															RESTORE ad.77
+																																																																																															LET
+																																																																																																%x5
+																																																																																																ADD %x5 %x6
+																																																																																																LET
+																																																																																																	%x6
+																																																																																																	RESTORE ae.78
+																																																																																																	LET
+																																																																																																		%x5
+																																																																																																		ADD %x5 %x6
+																																																																																																		LET
+																																																																																																			%x6
+																																																																																																			RESTORE af.79
+																																																																																																			LET
+																																																																																																				%x5
+																																																																																																				ADD %x5 %x6
+																																																																																																				LET
+																																																																																																					%x6
+																																																																																																					RESTORE ag.80
+																																																																																																					LET
+																																																																																																						%x5
+																																																																																																						ADD %x5 %x6
+																																																																																																						LET
+																																																																																																							%x6
+																																																																																																							RESTORE ah.81
+																																																																																																							LET
+																																																																																																								%x5
+																																																																																																								ADD %x5 %x6
+																																																																																																								LET
+																																																																																																									%x6
+																																																																																																									RESTORE ai.82
+																																																																																																									LET
+																																																																																																										%x5
+																																																																																																										ADD %x5 %x6
+																																																																																																										LET
+																																																																																																											%x6
+																																																																																																											RESTORE aj.83
+																																																																																																											LET
+																																																																																																												%x5
+																																																																																																												ADD %x5 %x6
+																																																																																																												LET
+																																																																																																													%x6
+																																																																																																													RESTORE ak.84
+																																																																																																													LET
+																																																																																																														%x5
+																																																																																																														ADD %x5 %x6
+																																																																																																														LET
+																																																																																																															%x6
+																																																																																																															RESTORE al.85
+																																																																																																															LET
+																																																																																																																%x5
+																																																																																																																ADD %x5 %x6
+																																																																																																																LET
+																																																																																																																	%x6
+																																																																																																																	RESTORE am.86
+																																																																																																																	LET
+																																																																																																																		%x5
+																																																																																																																		ADD %x5 %x6
+																																																																																																																		LET
+																																																																																																																			%x5
+																																																																																																																			ADD %x5 %x17
+																																																																																																																			ANS
+																																																																																																																				NEG %x5
+
+
+LET
+	%x5
+	SET 1
+	LET
+		%x6
+		SET 2
+		LET
+			%x7
+			SET 3
+			LET
+				%x9
+				SET 4
+				LET
+					%x5
+					CALLDIR f.43
+						%x5 %x6 %x7 %x9 
+						
+					ANS
+						CALLDIR min_caml_print_int
+							%x5 
+							

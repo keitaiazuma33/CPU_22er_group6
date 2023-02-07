@@ -1,0 +1,27 @@
+LET REC compose f g 
+	LET REC composed x 
+		APP VAR g
+			APP VAR f
+				VAR x
+		VAR composed
+	LET REC dbl x 
+		ADD
+			VAR x
+			VAR x
+		LET REC inc x 
+			ADD
+				VAR x
+				INT 1
+			LET REC dec x 
+				SUB
+					VAR x
+					INT 1
+				LET h
+					APP VAR compose
+						VAR inc
+						APP VAR compose
+							VAR dbl
+							VAR dec
+					APP VAR print_int
+						APP VAR h
+							INT 123

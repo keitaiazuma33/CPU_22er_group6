@@ -1,0 +1,42 @@
+Name : gcd.7
+Args : %x5 %x6 
+
+FArgs : 
+Body :
+ANS
+	IFEQ %x5 0
+		ANS
+			MOV %x6
+		ANS
+			IFLE %x5 %x6
+				LET
+					%x6
+					SUB %x6 %x5
+					ANS
+						CALLDIR gcd.7
+							%x5 %x6 
+							
+				LET
+					%x5
+					SUB %x5 %x6
+					ANS
+						CALLDIR gcd.7
+							%x6 %x5 
+							
+
+
+LET
+	%x5
+	SET 21600
+	LET
+		%x6
+		SET 337500
+		LET
+			%x5
+			CALLDIR gcd.7
+				%x5 %x6 
+				
+			ANS
+				CALLDIR min_caml_print_int
+					%x5 
+					

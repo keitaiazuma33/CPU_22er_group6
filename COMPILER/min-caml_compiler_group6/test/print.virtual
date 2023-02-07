@@ -1,0 +1,24 @@
+
+LET
+	Ti3.16
+	SET 123
+	LET
+		Tu2.9
+		CALLDIR min_caml_print_int
+			Ti3.16 
+			
+		LET
+			Ti5.14
+			SET -456
+			LET
+				Tu1.10
+				CALLDIR min_caml_print_int
+					Ti5.14 
+					
+				LET
+					Ti8.11
+					SET 789
+					ANS
+						CALLDIR min_caml_print_int
+							Ti8.11 
+							

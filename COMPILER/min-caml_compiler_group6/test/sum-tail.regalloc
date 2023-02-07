@@ -1,0 +1,36 @@
+Name : sum.8
+Args : %x5 %x6 
+
+FArgs : 
+Body :
+ANS
+	IFLE %x6 0
+		ANS
+			MOV %x5
+		LET
+			%x5
+			ADD %x5 %x6
+			LET
+				%x6
+				SUB %x6 1
+				ANS
+					CALLDIR sum.8
+						%x5 %x6 
+						
+
+
+LET
+	%x5
+	SET 0
+	LET
+		%x6
+		SET 10000
+		LET
+			%x5
+			CALLDIR sum.8
+				%x5 %x6 
+				
+			ANS
+				CALLDIR min_caml_print_int
+					%x5 
+					

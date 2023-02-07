@@ -1,0 +1,158 @@
+Name : getx.23
+Args : v.24 
+
+FArgs : 
+Body :
+LET
+	x.60
+	LDDF v.24 0
+	ANS
+		FMOVD x.60
+
+Name : gety.25
+Args : v.26 
+
+FArgs : 
+Body :
+LET
+	y.58
+	LDDF v.26 8
+	ANS
+		FMOVD y.58
+
+Name : getz.27
+Args : v.28 
+
+FArgs : 
+Body :
+LET
+	z.56
+	LDDF v.28 16
+	ANS
+		FMOVD z.56
+
+Name : inprod.29
+Args : v1.30 v2.31 
+
+FArgs : 
+Body :
+LET
+	Td13.52
+	CALLDIR getx.23
+		v1.30 
+		
+	LET
+		Td14.53
+		CALLDIR getx.23
+			v2.31 
+			
+		LET
+			Td15.48
+			FMULD Td13.52 Td14.53
+			LET
+				Td16.50
+				CALLDIR gety.25
+					v1.30 
+					
+				LET
+					Td17.51
+					CALLDIR gety.25
+						v2.31 
+						
+					LET
+						Td18.49
+						FMULD Td16.50 Td17.51
+						LET
+							Td19.44
+							FADDD Td15.48 Td18.49
+							LET
+								Td20.46
+								CALLDIR getz.27
+									v1.30 
+									
+								LET
+									Td21.47
+									CALLDIR getz.27
+										v2.31 
+										
+									LET
+										Td22.45
+										FMULD Td20.46 Td21.47
+										ANS
+											FADDD Td19.44 Td22.45
+
+
+LET
+	Td1.34
+	l.63
+	LET
+		Td2.41
+		l.65
+		LET
+			Td3.42
+			l.67
+			LET
+				Td4.43
+				l.69
+				LET
+					t.71
+					MOV %x3
+					LET
+						%x3
+						ADD %x3 24
+						LET
+							Tu74
+							STDF Td4.43 t.71 16
+							LET
+								Tu73
+								STDF Td3.42 t.71 8
+								LET
+									Tu72
+									STDF Td2.41 t.71 0
+									LET
+										Tt5.36
+										MOV t.71
+										LET
+											Td6.38
+											l.75
+											LET
+												Td7.39
+												l.77
+												LET
+													Td8.40
+													l.79
+													LET
+														t.81
+														MOV %x3
+														LET
+															%x3
+															ADD %x3 24
+															LET
+																Tu84
+																STDF Td8.40 t.81 16
+																LET
+																	Tu83
+																	STDF Td7.39 t.81 8
+																	LET
+																		Tu82
+																		STDF Td6.38 t.81 0
+																		LET
+																			Tt9.37
+																			MOV t.81
+																			LET
+																				Td10.35
+																				CALLDIR inprod.29
+																					Tt5.36 Tt9.37 
+																					
+																				LET
+																					Td11.33
+																					FMULD Td1.34 Td10.35
+																					LET
+																						Ti12.32
+																						CALLDIR min_caml_truncate
+																							
+																							Td11.33 
+																						ANS
+																							CALLDIR min_caml_print_int
+																								Ti12.32 
+																								

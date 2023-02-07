@@ -1,0 +1,202 @@
+Name : f.16
+Args : x.17 
+
+FArgs : 
+Body :
+LET
+	z.15
+	LD f.16 4
+	ANS
+		SUB x.17 z.15
+
+Name : g.20
+Args : x.21 
+
+FArgs : 
+Body :
+ANS
+	SUB x.21 2
+
+Name : f.24
+Args : x.25 
+
+FArgs : 
+Body :
+ANS
+	SUB x.25 1
+
+Name : i.45
+Args : x.46 
+
+FArgs : 
+Body :
+LET
+	h.29
+	LD i.45 4
+	ANS
+		CALLCLS h.29
+			x.46 
+			
+
+Name : g.28
+Args : h.29 
+
+FArgs : 
+Body :
+LET
+	i.45
+	MOV %x3
+	LET
+		%x3
+		ADD %x3 8
+		LET
+			l.52
+			i.45
+			LET
+				Tu53
+				ST l.52 i.45 0
+				LET
+					Tu51
+					ST h.29 i.45 4
+					ANS
+						MOV i.45
+
+Name : i.32
+Args : x.33 
+
+FArgs : 
+Body :
+ANS
+	MOV x.33
+
+Name : f.35
+Args : x.36 
+
+FArgs : 
+Body :
+LET
+	Ti12.43
+	SET -1
+	ANS
+		CALLDIR i.32
+			Ti12.43 
+			
+
+
+LET
+	z.15
+	SET 4
+	LET
+		f.16
+		MOV %x3
+		LET
+			%x3
+			ADD %x3 8
+			LET
+				l.64
+				f.16
+				LET
+					Tu65
+					ST l.64 f.16 0
+					LET
+						Tu63
+						ST z.15 f.16 4
+						LET
+							Ti5.50
+							SET 8
+							LET
+								a.18
+								CALLCLS f.16
+									Ti5.50 
+									
+								LET
+									Tu4.19
+									CALLDIR min_caml_print_var
+										a.18 
+										
+									LET
+										Ti6.48
+										SET 6
+										LET
+											a.22
+											CALLDIR g.20
+												Ti6.48 
+												
+											LET
+												Tu3.23
+												CALLDIR min_caml_print_var2
+													a.22 
+													
+												LET
+													f.24
+													MOV %x3
+													LET
+														%x3
+														ADD %x3 8
+														LET
+															l.61
+															f.24
+															LET
+																Tu62
+																ST l.61 f.24 0
+																LET
+																	Tu2.27
+																	CALLDIR min_caml_print_var3
+																		f.24 
+																		
+																	LET
+																		g.28
+																		MOV %x3
+																		LET
+																			%x3
+																			ADD %x3 8
+																			LET
+																				l.59
+																				g.28
+																				LET
+																					Tu60
+																					ST l.59 g.28 0
+																					LET
+																						Tu1.31
+																						CALLDIR min_caml_print_var4
+																							g.28 
+																							
+																						LET
+																							i.32
+																							MOV %x3
+																							LET
+																								%x3
+																								ADD %x3 8
+																								LET
+																									l.57
+																									i.32
+																									LET
+																										Tu58
+																										ST l.57 i.32 0
+																										LET
+																											Ti9.40
+																											SET 7
+																											LET
+																												Ti10.39
+																												CALLDIR f.35
+																													Ti9.40 
+																													
+																												LET
+																													t.54
+																													MOV %x3
+																													LET
+																														%x3
+																														ADD %x3 8
+																														LET
+																															Tu56
+																															ST Ti10.39 t.54 4
+																															LET
+																																Tu55
+																																ST i.32 t.54 0
+																																LET
+																																	a.38
+																																	MOV t.54
+																																	ANS
+																																		CALLDIR min_caml_print_var5
+																																			a.38 
+																																			

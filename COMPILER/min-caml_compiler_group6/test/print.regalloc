@@ -1,0 +1,24 @@
+
+LET
+	%x5
+	SET 123
+	LET
+		%g0
+		CALLDIR min_caml_print_int
+			%x5 
+			
+		LET
+			%x5
+			SET -456
+			LET
+				%g0
+				CALLDIR min_caml_print_int
+					%x5 
+					
+				LET
+					%x5
+					SET 789
+					ANS
+						CALLDIR min_caml_print_int
+							%x5 
+							

@@ -1,0 +1,53 @@
+Name : ack.15
+Args : x.16 y.17 
+
+FArgs : 
+Body :
+ANS
+	IFLE x.16 0
+		ANS
+			ADD y.17 1
+		ANS
+			IFLE y.17 0
+				LET
+					Ti8.28
+					SUB x.16 1
+					LET
+						Ti9.29
+						SET 1
+						ANS
+							CALLDIR ack.15
+								Ti8.28 Ti9.29 
+								
+				LET
+					Ti11.23
+					SUB x.16 1
+					LET
+						Ti13.25
+						SUB y.17 1
+						LET
+							Ti14.24
+							CALLDIR ack.15
+								x.16 Ti13.25 
+								
+							ANS
+								CALLDIR ack.15
+									Ti11.23 Ti14.24 
+									
+
+
+LET
+	Ti1.19
+	SET 3
+	LET
+		Ti2.20
+		SET 10
+		LET
+			Ti3.18
+			CALLDIR ack.15
+				Ti1.19 Ti2.20 
+				
+			ANS
+				CALLDIR min_caml_print_int
+					Ti3.18 
+					

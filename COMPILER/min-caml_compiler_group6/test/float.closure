@@ -1,0 +1,274 @@
+Name : sin.168
+Args : x.169 
+Formal_fv : 
+Body :
+LET x2.378
+	FMUL x.169 x.169
+	LET x3.379
+		FMUL x.169 x2.378
+		LET x5.380
+			FMUL x3.379 x2.378
+			LET x7.381
+				FMUL x5.380 x2.378
+				LET Td141.389
+					FLOAT 0.166667
+					LET Td142.388
+						FMUL Td141.389 x3.379
+						LET Td143.385
+							FSUB x.169 Td142.388
+							LET Td144.387
+								FLOAT 0.008333
+								LET Td145.386
+									FMUL Td144.387 x5.380
+									LET Td146.382
+										FADD Td143.385 Td145.386
+										LET Td147.384
+											FLOAT 0.000198
+											LET Td148.383
+												FMUL Td147.384 x7.381
+												FSUB Td146.382 Td148.383
+
+Name : cos.170
+Args : x.171 
+Formal_fv : 
+Body :
+LET x2.366
+	FMUL x.171 x.171
+	LET x4.367
+		FMUL x2.366 x2.366
+		LET x6.368
+			FMUL x4.367 x2.366
+			LET Td132.375
+				FLOAT 1.000000
+				LET Td133.377
+					FLOAT 0.500000
+					LET Td134.376
+						FMUL Td133.377 x2.366
+						LET Td135.372
+							FSUB Td132.375 Td134.376
+							LET Td136.374
+								FLOAT 0.041667
+								LET Td137.373
+									FMUL Td136.374 x4.367
+									LET Td138.369
+										FADD Td135.372 Td137.373
+										LET Td139.371
+											FLOAT 0.001389
+											LET Td140.370
+												FMUL Td139.371 x6.368
+												FSUB Td138.369 Td140.370
+
+Name : abs_float.176
+Args : x.177 
+Formal_fv : 
+Body :
+FABS x.177 
+
+Name : float_of_int.178
+Args : x.179 
+Formal_fv : 
+Body :
+ITOF x.179 
+
+Name : int_of_float.180
+Args : x.181 
+Formal_fv : 
+Body :
+FTOI x.181 
+
+Name : mul_abs.182
+Args : a.183 b.184 i.185 acc.186 
+Formal_fv : 
+Body :
+LET Ti102.329
+	INT -1
+	IFEQ i.185 Ti102.329
+		VAR acc.186
+		LET Ti103.339
+			INT 1
+			LET Ti104.338
+				SLL Ti103.339 i.185
+				LET Ti105.330
+					AND b.184 Ti104.338
+					LET Ti106.331
+						INT 0
+						IFEQ Ti105.330 Ti106.331
+							LET Ti107.337
+								INT 1
+								LET Ti108.336
+									SUB i.185 Ti107.337
+									APPDIR mul_abs.182 : a.183 b.184 Ti108.336 acc.186 
+							LET Ti109.335
+								INT 1
+								LET Ti110.332
+									SUB i.185 Ti109.335
+									LET Ti111.334
+										SLL a.183 i.185
+										LET Ti112.333
+											ADD acc.186 Ti111.334
+											APPDIR mul_abs.182 : a.183 b.184 Ti110.332 Ti112.333 
+
+Name : mul.187
+Args : a.188 b.189 
+Formal_fv : 
+Body :
+LET Ti93.328
+	INT 0
+	LET abs_a.318
+		IFLE Ti93.328 a.188
+			VAR a.188
+			NEG a.188
+		LET Ti94.327
+			INT 0
+			LET abs_b.319
+				IFLE Ti94.327 b.189
+					VAR b.189
+					NEG b.189
+				LET Ti95.325
+					INT 30
+					LET Ti96.326
+						INT 0
+						LET abs_mul.320
+							APPDIR mul_abs.182 : abs_a.318 abs_b.319 Ti95.325 Ti96.326 
+							LET Ti97.324
+								INT 31
+								LET Ti98.321
+									SRL a.188 Ti97.324
+									LET Ti99.323
+										INT 31
+										LET Ti100.322
+											SRL b.189 Ti99.323
+											IFEQ Ti98.321 Ti100.322
+												VAR abs_mul.320
+												NEG abs_mul.320
+
+Name : div_abs.190
+Args : a.191 b.192 i.193 acc.194 
+Formal_fv : 
+Body :
+LET Ti82.306
+	INT -1
+	IFEQ i.193 Ti82.306
+		VAR acc.194
+		LET Ti83.307
+			SRL a.191 i.193
+			IFLE b.192 Ti83.307
+				LET Ti84.316
+					SLL b.192 i.193
+					LET Ti85.310
+						SUB a.191 Ti84.316
+						LET Ti86.315
+							INT 1
+							LET Ti87.311
+								SUB i.193 Ti86.315
+								LET Ti88.314
+									INT 1
+									LET Ti89.313
+										SLL Ti88.314 i.193
+										LET Ti90.312
+											ADD acc.194 Ti89.313
+											APPDIR div_abs.190 : Ti85.310 b.192 Ti87.311 Ti90.312 
+				LET Ti91.309
+					INT 1
+					LET Ti92.308
+						SUB i.193 Ti91.309
+						APPDIR div_abs.190 : a.191 b.192 Ti92.308 acc.194 
+
+Name : div.195
+Args : a.196 b.197 
+Formal_fv : 
+Body :
+LET Ti73.305
+	INT 0
+	LET abs_a.295
+		IFLE Ti73.305 a.196
+			VAR a.196
+			NEG a.196
+		LET Ti74.304
+			INT 0
+			LET abs_b.296
+				IFLE Ti74.304 b.197
+					VAR b.197
+					NEG b.197
+				LET Ti75.302
+					INT 30
+					LET Ti76.303
+						INT 0
+						LET abs_div.297
+							APPDIR div_abs.190 : abs_a.295 abs_b.296 Ti75.302 Ti76.303 
+							LET Ti77.301
+								INT 31
+								LET Ti78.298
+									SRL a.196 Ti77.301
+									LET Ti79.300
+										INT 31
+										LET Ti80.299
+											SRL b.197 Ti79.300
+											IFEQ Ti78.298 Ti80.299
+												VAR abs_div.297
+												NEG abs_div.297
+
+Name : print_int.200
+Args : a.201 
+Formal_fv : 
+Body :
+LET Ti61.280
+	INT 0
+	IFLE Ti61.280 a.201
+		LET Ti62.284
+			INT 10
+			IFLE Ti62.284 a.201
+				LET Ti63.294
+					INT 10
+					LET b.287
+						APPDIR div.195 : a.201 Ti63.294 
+						LET Tu2.288
+							APPDIR print_int.200 : b.287 
+							LET Ti64.293
+								INT 10
+								LET Ti65.292
+									APPDIR mul.187 : b.287 Ti64.293 
+									LET Ti66.290
+										SUB a.201 Ti65.292
+										LET Ti67.291
+											INT 48
+											LET Ti68.289
+												ADD Ti66.290 Ti67.291
+												OUT Ti68.289
+				LET Ti69.286
+					INT 48
+					LET Ti70.285
+						ADD a.201 Ti69.286
+						OUT Ti70.285
+		LET Ti72.282
+			NEG a.201
+			APPDIR print_int.200 : Ti72.282 
+
+
+LET Td3.230
+	FLOAT -12.300000
+	LET Td4.229
+		APPDIR abs_float.176 : Td3.230 
+		LET Td5.228
+			SQRT Td4.229 
+			LET Td6.227
+				APPDIR cos.170 : Td5.228 
+				LET Td7.225
+					APPDIR sin.168 : Td6.227 
+					LET Td8.226
+						FLOAT 4.500000
+						LET Td9.219
+							FADD Td7.225 Td8.226
+							LET Td14.220
+								FLOAT 48.300300
+								LET Td15.216
+									FSUB Td9.219 Td14.220
+									LET Ti16.218
+										INT 1000000
+										LET Td17.217
+											APPDIR float_of_int.178 : Ti16.218 
+											LET Td18.215
+												FMUL Td15.216 Td17.217
+												LET Ti19.214
+													APPDIR int_of_float.180 : Td18.215 
+													APPDIR print_int.200 : Ti19.214 

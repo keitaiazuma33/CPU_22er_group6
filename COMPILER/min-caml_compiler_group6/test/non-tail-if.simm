@@ -1,0 +1,56 @@
+
+LET
+	Td1.27
+	l.28
+	LET
+		x.13
+		CALLDIR min_caml_truncate
+			
+			Td1.27 
+		LET
+			Td2.26
+			l.30
+			LET
+				y.14
+				CALLDIR min_caml_truncate
+					
+					Td2.26 
+				LET
+					Td4.24
+					l.32
+					LET
+						z.15
+						CALLDIR min_caml_truncate
+							
+							Td4.24 
+						LET
+							Ti6.20
+							IFGE z.15 0
+								ANS
+									MOV x.13
+								ANS
+									MOV y.14
+							LET
+								Ti8.21
+								IFLE x.13 0
+									ANS
+										MOV y.14
+									ANS
+										MOV z.15
+								LET
+									Ti9.17
+									ADD Ti6.20 Ti8.21
+									LET
+										Ti11.18
+										IFGE y.14 0
+											ANS
+												MOV z.15
+											ANS
+												MOV x.13
+										LET
+											Ti12.16
+											ADD Ti9.17 Ti11.18
+											ANS
+												CALLDIR min_caml_print_int
+													Ti12.16 
+													

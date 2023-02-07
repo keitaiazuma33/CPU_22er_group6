@@ -1,0 +1,45 @@
+LET t
+	INT 123
+	LET f
+		INT 456
+		LET REC even x 
+			LET REC odd x 
+				LET Ti9
+					INT 0
+					IFLE x Ti9
+						LET Ti10
+							INT 0
+							IFLE Ti10 x
+								VAR f
+								LET Ti12
+									LET Ti11
+										INT 1
+										ADD x Ti11
+									APP even Ti12 
+						LET Ti14
+							LET Ti13
+								INT 1
+								SUB x Ti13
+							APP even Ti14 
+				LET Ti3
+					INT 0
+					IFLE x Ti3
+						LET Ti4
+							INT 0
+							IFLE Ti4 x
+								VAR t
+								LET Ti6
+									LET Ti5
+										INT 1
+										ADD x Ti5
+									APP odd Ti6 
+						LET Ti8
+							LET Ti7
+								INT 1
+								SUB x Ti7
+							APP odd Ti8 
+			LET Ti2
+				LET Ti1
+					INT 789
+					APP even Ti1 
+				EXTFUNAPP print_int Ti2 

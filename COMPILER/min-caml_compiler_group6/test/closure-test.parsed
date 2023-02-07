@@ -1,0 +1,68 @@
+LET z
+	INT 4
+	LET REC f x 
+		SUB
+			VAR x
+			VAR z
+		LET a
+			APP VAR f
+				INT 8
+			LET Tu4
+				APP VAR print_var
+					VAR a
+				LET REC g x 
+					SUB
+						VAR x
+						INT 2
+					LET a
+						APP VAR g
+							INT 6
+						LET Tu3
+							APP VAR print_var2
+								VAR a
+							LET REC f x 
+								SUB
+									VAR x
+									INT 1
+								LET a
+									VAR f
+									LET Tu2
+										APP VAR print_var3
+											VAR a
+										LET REC g h 
+											LET REC i x 
+												APP VAR h
+													VAR x
+												VAR i
+											LET a
+												VAR g
+												LET Tu1
+													APP VAR print_var4
+														VAR a
+													LET REC i x 
+														VAR x
+														LET z
+															INT 4
+															LET REC f x 
+																APP VAR i
+																	SUB
+																		VAR z
+																		INT 5
+																IF
+																	NOT
+																		LE
+																			INT 6
+																			VAR z
+																	LET a
+																		TUPLE
+																			VAR i
+																			APP VAR f
+																				INT 7
+																		APP VAR print_var5
+																			VAR a
+																	LET a
+																		TUPLE
+																			VAR f
+																			INT 8
+																		APP VAR print_var5
+																			VAR a

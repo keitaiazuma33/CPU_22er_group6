@@ -1,0 +1,224 @@
+Name : getx.23
+Args : %x5 
+
+FArgs : 
+Body :
+LET
+	%f0
+	LDDF %x5 0
+	ANS
+		FMOVD %f0
+
+Name : gety.25
+Args : %x5 
+
+FArgs : 
+Body :
+LET
+	%f0
+	LDDF %x5 8
+	ANS
+		FMOVD %f0
+
+Name : getz.27
+Args : %x5 
+
+FArgs : 
+Body :
+LET
+	%f0
+	LDDF %x5 16
+	ANS
+		FMOVD %f0
+
+Name : inprod.29
+Args : %x5 %x6 
+
+FArgs : 
+Body :
+LET
+	Tu86
+	SAVE %x5 v1.30
+	LET
+		Tu85
+		SAVE %x6 v2.31
+		LET
+			%f0
+			CALLDIR getx.23
+				%x5 
+				
+			LET
+				%x5
+				RESTORE v2.31
+				LET
+					Tu88
+					SAVE %x5 v2.31
+					LET
+						Tu87
+						SAVE %f0 Td13.52
+						LET
+							%f0
+							CALLDIR getx.23
+								%x5 
+								
+							LET
+								%f2
+								RESTORE Td13.52
+								LET
+									%f0
+									FMULD %f2 %f0
+									LET
+										%x5
+										RESTORE v1.30
+										LET
+											Tu90
+											SAVE %x5 v1.30
+											LET
+												Tu89
+												SAVE %f0 Td15.48
+												LET
+													%f0
+													CALLDIR gety.25
+														%x5 
+														
+													LET
+														%x5
+														RESTORE v2.31
+														LET
+															Tu92
+															SAVE %x5 v2.31
+															LET
+																Tu91
+																SAVE %f0 Td16.50
+																LET
+																	%f0
+																	CALLDIR gety.25
+																		%x5 
+																		
+																	LET
+																		%f2
+																		RESTORE Td16.50
+																		LET
+																			%f0
+																			FMULD %f2 %f0
+																			LET
+																				%f2
+																				RESTORE Td15.48
+																				LET
+																					%f0
+																					FADDD %f2 %f0
+																					LET
+																						%x5
+																						RESTORE v1.30
+																						LET
+																							Tu93
+																							SAVE %f0 Td19.44
+																							LET
+																								%f0
+																								CALLDIR getz.27
+																									%x5 
+																									
+																								LET
+																									%x5
+																									RESTORE v2.31
+																									LET
+																										Tu94
+																										SAVE %f0 Td20.46
+																										LET
+																											%f0
+																											CALLDIR getz.27
+																												%x5 
+																												
+																											LET
+																												%f2
+																												RESTORE Td20.46
+																												LET
+																													%f0
+																													FMULD %f2 %f0
+																													LET
+																														%f2
+																														RESTORE Td19.44
+																														ANS
+																															FADDD %f2 %f0
+
+
+LET
+	%f0
+	l.63
+	LET
+		%f2
+		l.65
+		LET
+			%f4
+			l.67
+			LET
+				%f6
+				l.69
+				LET
+					%x5
+					MOV %x3
+					LET
+						%x3
+						ADD %x3 24
+						LET
+							%g0
+							STDF %f6 %x5 16
+							LET
+								%g0
+								STDF %f4 %x5 8
+								LET
+									%g0
+									STDF %f2 %x5 0
+									LET
+										%x5
+										MOV %x5
+										LET
+											%f2
+											l.75
+											LET
+												%f4
+												l.77
+												LET
+													%f6
+													l.79
+													LET
+														%x6
+														MOV %x3
+														LET
+															%x3
+															ADD %x3 24
+															LET
+																%g0
+																STDF %f6 %x6 16
+																LET
+																	%g0
+																	STDF %f4 %x6 8
+																	LET
+																		%g0
+																		STDF %f2 %x6 0
+																		LET
+																			%x6
+																			MOV %x6
+																			LET
+																				Tu96
+																				SAVE %f0 Td1.34
+																				LET
+																					%f0
+																					CALLDIR inprod.29
+																						%x5 %x6 
+																						
+																					LET
+																						%f2
+																						RESTORE Td1.34
+																						LET
+																							%f0
+																							FMULD %f2 %f0
+																							LET
+																								%x5
+																								CALLDIR min_caml_truncate
+																									
+																									%f0 
+																								ANS
+																									CALLDIR min_caml_print_int
+																										%x5 
+																										
