@@ -4,8 +4,10 @@
 // #include "simu_itof.hpp"
 // #include "simu_ftoi.hpp"
 // #include "fpu_common.hpp"
+// #include "simu_fadd.hpp"
+// #include "fsub_sim.hpp"
 // 0. common_def
-#include <bits/stdc++.h>
+
 // #pragma once
 #include <map>
 #include <iostream>
@@ -26,11 +28,13 @@
 // #include "reg.hpp"
 // #include "IO/reader.py"
 // #include "const.hpp"
+#include <bits/stdc++.h>
 using namespace std;
-#define SIZE 1024
-#define ull uint64_t
 #define Bit32 unsigned int
 #define Bit64 unsigned long long
+#define SIZE 1024
+#define ull uint64_t
+
 bool debug = true;
 bool print_mem = false; //false
 string debug_op;
@@ -40,7 +44,7 @@ int clock_count;
 
 // const auto i = read_binary_as<std::int32_t>(ifs);
 queue<int32_t> que; //<auto>?
-string s = "/Users/maimai/my-3A/cpu-simu/sim_result.txt";
+string s = "/Users/maimai/my-3A/cpu-simu/simulator/高速化ver/sim_result.ppm";
 ofstream ofs(s);
 
 #define SIZE 1024
@@ -104,7 +108,7 @@ int32_t q;
 // #include "const.hpp"
 // string s = "/Users/maimai/my-3A/cpu-simu/sim_result.txt";
 // ofstream ofs(s);
-bool fast_mode = true;
+bool fast_mode = false;
 string debugmode(int argc, char* argv[]){
     
     
@@ -195,10 +199,10 @@ T read_binary_as(std::istream& is)
     return val;
 }
 void sld_to_ppm(){
-    string filename ("contest.dat"); //asm_3
+    string filename ("base.dat"); //contest.dat"); //asm_3
     vector<string> lines;
     string line;
-    string s1 = "/Users/maimai/my-3A/cpu-simu/sim_contest.ppm";
+    string s1 = "/Users/maimai/my-3A/cpu-simu/simulator/高速化ver/sim_base.ppm";
     ofstream ofs1(s1);
     ifstream file(filename, ios::binary);
     // ifstream file;
@@ -348,6 +352,7 @@ int64_t op_to_num(string op){
     else if (op == "ftoi") num = 6;
     else if (op == "itof") num = 7;
     else if (op == "out") num = 10;
+    else if (op == "in") num = 11;
 
     return num;
 }
@@ -454,7 +459,7 @@ struct Op {
         else if(op >= 70 && op <= 75) _type = B;
         else if(op == 76) _type = J;
         else if(op >= 77 && op < 80) _type = U;
-        else if (op == 10) _type = O;
+        else if (op == 10 || op == 11) _type = O;
         else _type = F;
 
         // if ((op == "add") || (op == "sub")|| (op == "xor")|| (op == "or")|| (op == "and")|| (op == "sll")|| (op == "srl")|| (op == "sra")|| (op == "slt")|| (op == "sltu")){
@@ -867,7 +872,7 @@ int main(int argc, char *argv[]){
             op_pc[pc].rs1 = reg_index(a2);
             op_pc[pc].rd = 0;
             // continue;
-        }else if(op_num == 10){ //}out
+        }else if(op_num == 10 || op_num == 11){ //}out
             op_pc[pc].rd = reg_index(a0);
             op_pc[pc].rs1 = 0;
             // continue;
@@ -889,6 +894,10 @@ int main(int argc, char *argv[]){
     int pre_pc = pc_start+4;
     float frd, frs1, frs2, frs3, fimm;
     while(pc < pc_size){
+        // if(pc == 112){
+        //     cout << pc << " " << con_line[pc] << endl;
+        //     return -1;
+        // }
         reg_val.at(0) = 0;
         freg.at(30) = 0;
         
@@ -912,7 +921,7 @@ int main(int argc, char *argv[]){
         // if(op_pc[pc].float_sign) imm.f = opline.imm.f;
         print_symbol = false;
         break_symbol = opline.break_sign;
-        if(debug){ //break_symbol
+        if(break_symbol == true){ //break_symbol
             for(int i = 0; i < 32; i++){
                 // if(i == 0){cout << i << " " << reg_val.at(i) << endl;}
                 if(freg[i]){
@@ -925,7 +934,7 @@ int main(int argc, char *argv[]){
         }
         string str_next;
         if(break_symbol == true){ //line.at(0) != ' '
-            // cout << "line" << line << endl;
+            // cout << "line" << con_line[pc] << endl;
             cout << "   s or n or m" << endl; //step or next
             cin >> str_next;
             if(str_next == "m"){ //line.at(0) != ' '
@@ -1223,6 +1232,8 @@ int main(int argc, char *argv[]){
                             if(L_status.at(w).at(index_).acc < 8) L_status.at(w).at(index_).acc += 1;
                             L1_tag.at(w).at(index_) = tag;
                             flag = 1;
+                            hit_count++;
+                            break;
                             // cout << L_status.at(w)[index_].acc << endl;
                         }
                         // if(print_symbol) printf("mem[%lld] %lld\n", rs1+imm, M[rs1+imm]);
@@ -1360,9 +1371,18 @@ int main(int argc, char *argv[]){
                 if(debug) cout << "   #U " << rd << " "<< imm << endl;
                 instr_count++; //?
                 continue;
-            case O:
-                rd = reg_val.at(opline.rd);
-                ofs << (char)rd; // << endl; 
+            case O:     
+                if(op_num == 10){ 
+                    rd = reg_val.at(opline.rd);
+                    ofs << (char)rd; // << endl; // << endl; 
+                }else if(op_num == 11){
+                    q = que.front();
+                    que.pop();
+                    reg_val.at(opline.rd) = q;
+                }
+                pre_pc = pc;
+                pc += 4;
+                continue;               
             case F:
                 // flw	%f2, 0(%x5)
                 // flw rd, imm()
@@ -1467,6 +1487,8 @@ int main(int argc, char *argv[]){
                             if(L_status.at(w).at(index_).acc < 8) L_status.at(w).at(index_).acc += 1;
                             L1_tag.at(w).at(index_) = tag;
                             flag = 1;
+                            hit_count++;
+                            break;
                             // cout << L_status.at(w)[index_].acc << endl;
                         }
                         if(flag == 0){
@@ -1507,7 +1529,7 @@ int main(int argc, char *argv[]){
                 frs1 = freg.at(opline.rs1);//reg_index(a2);
                 frs2 = freg.at(opline.rs2);
                 frs3 = freg.at(opline.rs3);
-                Bit32 y, b_rs1;
+                Bit32 y, b_rs1, brd;
                 if(op_num == 83){ //code == "fmadd.s"){
                     frd=frs1*frs2+frs3;
                 }else if(op_num == 84){ //opcode == "fmsub.s"){
@@ -1517,9 +1539,15 @@ int main(int argc, char *argv[]){
                 }else if(op_num == 86){ //oopcode == "fnmsub.s"){
                     frd=-frs1*frs2-frs3;
                 }else if(op_num == 87){ //oopcode == "fadd.s"){
-                    frd=frs1+frs2;
+                    frd=frs1+frs2;                    
+                    // brd = fadd(f_to_bit(frs1), f_to_bit(frs2));
+                    // frd = bit_to_float(brd);
+                    // cout << "fadd " << frd << frs1 << frs2 << endl;
                 }else if(op_num == 88){ //oopcode == "fsub.s"){
                     frd=frs1-frs2;
+                    // brd = fsub(frs1, frs2); //fsub引数はfloatのままでok
+                    // frd = bit_to_float(brd);
+                    // cout << "fsub " << frd << frs1 << frs2 << endl;
                 }else if(op_num == 89){ //oopcode == "fmul.s"){
                     frd=frs1*frs2;
                 }else if(op_num == 90){ //oopcode == "fdiv.s"){
@@ -1557,6 +1585,7 @@ int main(int argc, char *argv[]){
                 }
                 if(op_num >= 83 || op_num <= 5){
                     freg.at(opline.rd) = frd; 
+                    cout << "   # " << frd << " "<< frs1 <<" " << frs2 << endl;
                 }
                 else if(op_num == 6){ //oopcode == "ftoi"){
                     // ftoi	%x5, %f0
@@ -1564,17 +1593,20 @@ int main(int argc, char *argv[]){
                     // b_rs1 = f_to_bit(frs1);
                     // y = ftoi(b_rs1);
                     // // cout << y << endl;
-                    // frd = bit_to_float(y);
-                    // cout << "ftoi"<< y << " "  << frd << endl;
+                    // // uintをintに
+                    // reg_val.at(opline.rd) = y; //bit_to_float(y);
+                    // cout << "ftoi " << reg_val.at(opline.rd) << " " << frs1 << endl;
                 }else if(op_num == 7){ //oopcode == "itof"){
                     // itof	%f0, %x5
                     freg.at(opline.rd) = round(reg_val.at(opline.rs1));
                     // b_rs1 = f_to_bit(frs1);
+                    // b_rs1 = reg_val.at(opline.rs1);
                     // y = itof(b_rs1);
-                    // frd = bit_to_float(y);  
-                    // cout << "itof"<< y << " "  << frd << endl;
+                    // freg.at(opline.rd) = bit_to_float(y);  
+                    cout << "itof"<< reg_val.at(opline.rs1) << " "  << freg.at(opline.rd)  << endl;
 
                 }
+                // freg.at(opline.rd) = frd; 
                 // else if(opcode == "fclass.s"){
                 //     rd = 0..9;
                 // }
@@ -1584,7 +1616,7 @@ int main(int argc, char *argv[]){
                 
                 // if(break_symbol == true) 
                 // cout << "[" << pre_pc << "] " << op_num << endl;
-                cout << "   # " << frd << " "<< frs1 <<" " << frs2 << endl;
+                
                 instr_count++; //?
                 continue;
             default:
