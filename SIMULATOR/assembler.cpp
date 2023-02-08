@@ -53,7 +53,7 @@ struct Op {
         //     _type = R;
         }else if(op == "flw" || op == "fsw" || op == "fmadd" || op == "fmsub" || op == "fnmadd" || op == "fnmsub" || 
         op == "fadd" || op == "fsub" || op == "fmul" || op == "fdiv" || op == "fsqrt" 
-        || op == "fsgnj" || op == "fsgnjn" || op == "fsgnjx" || op == "fmin" || op == "fmax"
+        || op == "fsgnj" || op == "fsgnjn" || op == "fabs"||op == "fsgnjx" || op == "fmin" || op == "fmax"
         || op == "fcvt" || op == "fcvt.s.wu" || op == "fcvt.w.s" || op == "fcvt.wu.s"
         || op == "fmu.x.w" || op == "fmu.w.x" || op == "feq" || op == "flt" || op == "fle" || op == "fclass"){
             _type = F;
@@ -493,9 +493,10 @@ int main(){
             opcode = "jalr"; op1 = "zero"; op2 = "ra"; op3 = "0";
         }else if(opcode == "nop"){ //addi x0, x0, 0
             opcode = "addi"; op1 = "x0"; op2 = "x0"; op3 = "0";
-        }else if(opcode == "fabs"){
-            opcode = "fsgnjx"; op3 = op2;
         }
+        // else if(opcode == "fabs"){
+        //     opcode = "fsgnjx"; op3 = op2;
+        // }
         // ofs
         cout << opcode << " " << op1 << " " <<op2 << " " << op3 << endl;
         // cout << op3[0] << endl;
@@ -725,6 +726,12 @@ int main(){
                     ofs << "0010000"+rs2+rs1+"001"+rd+"1010011"<<endl;
                 }else if(opcode == "fsgnjx"){
                     ofs << "0010000"+rs2+rs1+"010"+rd+"1010011"<<endl;
+                }else if(opcode == "fabs"){
+                    ofs << "001010000000"+rs1+"000"+rd+"1010011"<<endl;
+                }else if(opcode == "ftoi"){
+                    ofs << "001100000000"+rs1+"000"+rd+"1010011"<< endl;
+                }else if(opcode == "itof"){
+                    ofs << "001110000000"+rs1+"000"+rd+"1010011"<< endl;
                 }else if(opcode == "fmin"){
                     ofs << "0010100"+rs2+rs1+"000"+rd+"1010011"<< endl;
                 }else if(opcode == "fmax"){
@@ -735,8 +742,7 @@ int main(){
                     ofs << "1010001"+rs2+rs1+"001"+rd+"1010011" << endl;
                 }else if(opcode == "fle"){
                     ofs << "1010001"+rs2+rs1+"000"+rd+"1010011" << endl;
-                } 
-                else if(opcode == "flw"){
+                }else if(opcode == "flw"){
                     imm = bury_zero(imm, 12);
                     ofs << imm.substr(0,12)+rs1+"010"+rd+"0000111" << endl;
                 }else if(opcode == "fsw"){
