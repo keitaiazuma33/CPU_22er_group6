@@ -269,7 +269,7 @@ LET
 					MOV hp_array.316
 
 Name : f.256
-Args : 
+Args : Tu9.257 
 
 FArgs : 
 Body :
@@ -302,7 +302,7 @@ LET
 				LET
 					x.261
 					CALLDIR f.256
-						
+						Tu12.299 
 						
 					LET
 						y.262

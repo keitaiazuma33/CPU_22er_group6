@@ -235,6 +235,7 @@ min_caml_start:
 	nop
 	sw	%x6, 8(%x2)  #194
 	sw	%x5, 12(%x2)  #194
+	mv	%x5, %g0
 	sw	%x1, 20(%x2)  #194
 	addi	%x2, %x2, 24  #194
 	jal	%x1, f.243  #194

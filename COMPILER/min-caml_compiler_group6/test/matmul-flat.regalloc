@@ -874,7 +874,7 @@ LET
 																																																																		LET
 																																																																			%g0
 																																																																			CALLDIR min_caml_print_newline
-																																																																				
+																																																																				%g0 
 																																																																				
 																																																																			LET
 																																																																				%x5
@@ -904,7 +904,7 @@ LET
 																																																																										LET
 																																																																											%g0
 																																																																											CALLDIR min_caml_print_newline
-																																																																												
+																																																																												%g0 
 																																																																												
 																																																																											LET
 																																																																												%x5
@@ -934,7 +934,7 @@ LET
 																																																																																		LET
 																																																																																			%g0
 																																																																																			CALLDIR min_caml_print_newline
-																																																																																				
+																																																																																				%g0 
 																																																																																				
 																																																																																			LET
 																																																																																				%x5
@@ -960,5 +960,5 @@ LET
 																																																																																									NOP
 																																																																																									ANS
 																																																																																										CALLDIR min_caml_print_newline
-																																																																																											
+																																																																																											%g0 
 																																																																																											

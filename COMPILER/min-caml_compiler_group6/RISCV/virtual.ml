@@ -10,7 +10,7 @@ let classify xts ini addf addi =
   List.fold_left
     (fun acc (x, t) ->
       match t with
-      | Type.Unit -> acc
+      (*| Type.Unit -> acc*)
       | Type.Float -> addf acc x
       | _ -> addi acc x t)
     ini

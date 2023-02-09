@@ -16,18 +16,21 @@ h.18:
 .global	min_caml_start
 min_caml_start:
 	addi	%x2, %x2, -112
+	mv	%x5, %g0
 	sw	%x1, 12(%x2)  #5
 	addi	%x2, %x2, 16  #5
 	jal	%x1, f.14  #5
 	addi	%x2, %x2, -16  #5
 	lw	%x1, 12(%x2) #5
 	sw	%x5, 8(%x2)  #6
+	mv	%x5, %g0
 	sw	%x1, 12(%x2)  #6
 	addi	%x2, %x2, 16  #6
 	jal	%x1, g.16  #6
 	addi	%x2, %x2, -16  #6
 	lw	%x1, 12(%x2) #6
 	sw	%x5, 12(%x2)  #7
+	mv	%x5, %g0
 	sw	%x1, 20(%x2)  #7
 	addi	%x2, %x2, 24  #7
 	jal	%x1, h.18  #7

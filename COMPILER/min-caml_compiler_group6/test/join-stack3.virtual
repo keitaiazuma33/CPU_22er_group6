@@ -1,5 +1,5 @@
 Name : f.10
-Args : 
+Args : Tu1.11 
 
 FArgs : 
 Body :
@@ -7,7 +7,7 @@ ANS
 	SET 123
 
 Name : g.12
-Args : 
+Args : Tu2.13 
 
 FArgs : 
 Body :
@@ -15,7 +15,7 @@ ANS
 	SET 456
 
 Name : h.14
-Args : 
+Args : Tu3.15 
 
 FArgs : 
 Body :
@@ -29,7 +29,7 @@ LET
 	LET
 		x.16
 		CALLDIR f.10
-			
+			Tu4.22 
 			
 		LET
 			Ti5.19
@@ -42,14 +42,14 @@ LET
 						NOP
 						ANS
 							CALLDIR g.12
-								
+								Tu6.21 
 								
 					LET
 						Tu7.20
 						NOP
 						ANS
 							CALLDIR h.14
-								
+								Tu7.20 
 								
 				LET
 					Ti9.17

@@ -311,7 +311,7 @@ LET
 							MOV %x5
 
 Name : f.243
-Args : 
+Args : %x5 
 
 FArgs : 
 Body :
@@ -351,7 +351,7 @@ LET
 										LET
 											%x5
 											CALLDIR f.243
-												
+												%g0 
 												
 											LET
 												%x6

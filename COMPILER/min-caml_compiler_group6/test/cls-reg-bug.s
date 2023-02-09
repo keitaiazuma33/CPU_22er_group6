@@ -45,7 +45,8 @@ h.26:
 	lw	%x5, 0(%x5)  #3
 	mv	%x22, %x3  #4
 	addi	%x3, %x3, 48  #4
-	mv	%x16, g.52  #4
+	addi	%x24, %x0, 16  #4 g.52
+	mv	%x16, %x24  #4
 	sw	%x16, 0(%x22)  #4
 	sw	%x7, 40(%x22)  #4
 	sw	%x9, 36(%x22)  #4
@@ -97,6 +98,7 @@ min_caml_start:
 	jal	%x1, min_caml_print_int  #8
 	addi	%x2, %x2, -16  #8
 	lw	%x1, 12(%x2) #8
+	mv	%x5, %g0
 	sw	%x1, 12(%x2)  #9
 	addi	%x2, %x2, 16  #9
 	jal	%x1, min_caml_print_newline  #9

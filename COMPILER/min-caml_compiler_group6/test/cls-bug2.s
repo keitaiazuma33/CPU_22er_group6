@@ -245,7 +245,8 @@ min_caml_start:
 	addi	%x2, %x2, -112
 	mv	%x22, %x3  #193
 	addi	%x3, %x3, 8  #193
-	mv	%x5, f.239  #193
+	addi	%x24, %x0, 852  #193 f.239
+	mv	%x5, %x24  #193
 	sw	%x5, 0(%x22)  #193
 	addi	%x5, %x0, 9  #0
 	sw	%x1, 12(%x2)  #198

@@ -655,7 +655,7 @@ LET
 									MOV %x7
 
 Name : read_int.2580
-Args : 
+Args : %x5 
 
 FArgs : 
 Body :
@@ -795,7 +795,7 @@ LET
 					FMOVD %f0
 
 Name : read_float.2587
-Args : 
+Args : %x5 
 
 FArgs : 
 Body :
@@ -1834,7 +1834,7 @@ LET
 		FMULD %f0 %f2
 
 Name : read_screen_settings.2755
-Args : 
+Args : %x5 
 
 FArgs : 
 Body :
@@ -1874,7 +1874,7 @@ LET
 											LET
 												%f0
 												CALLDIR read_float.2587
-													
+													%g0 
 													
 												LET
 													%x5
@@ -1891,7 +1891,7 @@ LET
 																LET
 																	%f0
 																	CALLDIR read_float.2587
-																		
+																		%g0 
 																		
 																	LET
 																		%x5
@@ -1908,7 +1908,7 @@ LET
 																					LET
 																						%f0
 																						CALLDIR read_float.2587
-																							
+																							%g0 
 																							
 																						LET
 																							%x5
@@ -1925,7 +1925,7 @@ LET
 																										LET
 																											%f0
 																											CALLDIR read_float.2587
-																												
+																												%g0 
 																												
 																											LET
 																												%f0
@@ -1960,7 +1960,7 @@ LET
 																																			LET
 																																				%f0
 																																				CALLDIR read_float.2587
-																																					
+																																					%g0 
 																																					
 																																				LET
 																																					%f0
@@ -2181,7 +2181,7 @@ LET
 																																																																																																								STDF %f0 %x7 16
 
 Name : read_light.2757
-Args : 
+Args : %x5 
 
 FArgs : 
 Body :
@@ -2203,7 +2203,7 @@ LET
 					LET
 						%x5
 						CALLDIR read_int.2580
-							
+							%g0 
 							
 						LET
 							%g0
@@ -2211,7 +2211,7 @@ LET
 							LET
 								%f0
 								CALLDIR read_float.2587
-									
+									%g0 
 									
 								LET
 									%f0
@@ -2246,7 +2246,7 @@ LET
 																LET
 																	%f0
 																	CALLDIR read_float.2587
-																		
+																		%g0 
 																		
 																	LET
 																		%f0
@@ -2322,7 +2322,7 @@ LET
 																																						LET
 																																							%f0
 																																							CALLDIR read_float.2587
-																																								
+																																								%g0 
 																																								
 																																							LET
 																																								%x5
@@ -2993,7 +2993,7 @@ LET
 				LET
 					%x5
 					CALLDIR read_int.2580
-						
+						%g0 
 						
 					ANS
 						IFEQ %x5 -1
@@ -3008,7 +3008,7 @@ LET
 									LET
 										%x5
 										CALLDIR read_int.2580
-											
+											%g0 
 											
 										LET
 											%g0
@@ -3019,7 +3019,7 @@ LET
 												LET
 													%x5
 													CALLDIR read_int.2580
-														
+														%g0 
 														
 													LET
 														%g0
@@ -3030,7 +3030,7 @@ LET
 															LET
 																%x5
 																CALLDIR read_int.2580
-																	
+																	%g0 
 																	
 																LET
 																	%x6
@@ -3055,7 +3055,7 @@ LET
 																						LET
 																							%f0
 																							CALLDIR read_float.2587
-																								
+																								%g0 
 																								
 																							LET
 																								%x5
@@ -3072,7 +3072,7 @@ LET
 																											LET
 																												%f0
 																												CALLDIR read_float.2587
-																													
+																													%g0 
 																													
 																												LET
 																													%x5
@@ -3089,7 +3089,7 @@ LET
 																																LET
 																																	%f0
 																																	CALLDIR read_float.2587
-																																		
+																																		%g0 
 																																		
 																																	LET
 																																		%x5
@@ -3120,7 +3120,7 @@ LET
 																																									LET
 																																										%f0
 																																										CALLDIR read_float.2587
-																																											
+																																											%g0 
 																																											
 																																										LET
 																																											%x5
@@ -3137,7 +3137,7 @@ LET
 																																														LET
 																																															%f0
 																																															CALLDIR read_float.2587
-																																																
+																																																%g0 
 																																																
 																																															LET
 																																																%x5
@@ -3154,7 +3154,7 @@ LET
 																																																			LET
 																																																				%f0
 																																																				CALLDIR read_float.2587
-																																																					
+																																																					%g0 
 																																																					
 																																																				LET
 																																																					%x5
@@ -3171,7 +3171,7 @@ LET
 																																																								LET
 																																																									%f0
 																																																									CALLDIR read_float.2587
-																																																										
+																																																										%g0 
 																																																										
 																																																									LET
 																																																										%x5
@@ -3201,7 +3201,7 @@ LET
 																																																																LET
 																																																																	%f0
 																																																																	CALLDIR read_float.2587
-																																																																		
+																																																																		%g0 
 																																																																		
 																																																																	LET
 																																																																		%x5
@@ -3218,7 +3218,7 @@ LET
 																																																																					LET
 																																																																						%f0
 																																																																						CALLDIR read_float.2587
-																																																																							
+																																																																							%g0 
 																																																																							
 																																																																						LET
 																																																																							%x5
@@ -3249,7 +3249,7 @@ LET
 																																																																														LET
 																																																																															%f0
 																																																																															CALLDIR read_float.2587
-																																																																																
+																																																																																%g0 
 																																																																																
 																																																																															LET
 																																																																																%x5
@@ -3266,7 +3266,7 @@ LET
 																																																																																			LET
 																																																																																				%f0
 																																																																																				CALLDIR read_float.2587
-																																																																																					
+																																																																																					%g0 
 																																																																																					
 																																																																																				LET
 																																																																																					%x5
@@ -3283,7 +3283,7 @@ LET
 																																																																																								LET
 																																																																																									%f0
 																																																																																									CALLDIR read_float.2587
-																																																																																										
+																																																																																										%g0 
 																																																																																										
 																																																																																									LET
 																																																																																										%x5
@@ -3328,7 +3328,7 @@ LET
 																																																																																																						LET
 																																																																																																							%f0
 																																																																																																							CALLDIR read_float.2587
-																																																																																																								
+																																																																																																								%g0 
 																																																																																																								
 																																																																																																							LET
 																																																																																																								%f0
@@ -3350,7 +3350,7 @@ LET
 																																																																																																												LET
 																																																																																																													%f0
 																																																																																																													CALLDIR read_float.2587
-																																																																																																														
+																																																																																																														%g0 
 																																																																																																														
 																																																																																																													LET
 																																																																																																														%f0
@@ -3372,7 +3372,7 @@ LET
 																																																																																																																		LET
 																																																																																																																			%f0
 																																																																																																																			CALLDIR read_float.2587
-																																																																																																																				
+																																																																																																																				%g0 
 																																																																																																																				
 																																																																																																																			LET
 																																																																																																																				%f0
@@ -3785,7 +3785,7 @@ LET
 															
 
 Name : read_all_object.2766
-Args : 
+Args : %x5 
 
 FArgs : 
 Body :
@@ -3814,7 +3814,7 @@ LET
 		LET
 			%x5
 			CALLDIR read_int.2580
-				
+				%g0 
 				
 			ANS
 				IFEQ %x5 -1
@@ -3982,7 +3982,7 @@ LET
 																	
 
 Name : read_parameter.2774
-Args : 
+Args : %x5 
 
 FArgs : 
 Body :
@@ -4019,7 +4019,7 @@ LET
 										LET
 											%g0
 											CALLCLS %x5
-												
+												%g0 
 												
 											LET
 												%g0
@@ -4030,7 +4030,7 @@ LET
 													LET
 														%g0
 														CALLCLS %x22
-															
+															%g0 
 															
 														LET
 															%g0
@@ -4041,7 +4041,7 @@ LET
 																LET
 																	%g0
 																	CALLCLS %x22
-																		
+																		%g0 
 																		
 																	LET
 																		%x5
@@ -16718,7 +16718,7 @@ LET
 																																												
 
 Name : create_float5x3array.3053
-Args : 
+Args : %x5 
 
 FArgs : 
 Body :
@@ -16825,7 +16825,7 @@ LET
 																														MOV %x6
 
 Name : create_pixel.3055
-Args : 
+Args : %x5 
 
 FArgs : 
 Body :
@@ -16849,7 +16849,7 @@ LET
 					LET
 						%x5
 						CALLDIR create_float5x3array.3053
-							
+							%g0 
 							
 						LET
 							%x6
@@ -16888,7 +16888,7 @@ LET
 																LET
 																	%x5
 																	CALLDIR create_float5x3array.3053
-																		
+																		%g0 
 																		
 																	LET
 																		%g0
@@ -16899,7 +16899,7 @@ LET
 																			LET
 																				%x5
 																				CALLDIR create_float5x3array.3053
-																					
+																					%g0 
 																					
 																				LET
 																					%x6
@@ -16924,7 +16924,7 @@ LET
 																										LET
 																											%x5
 																											CALLDIR create_float5x3array.3053
-																												
+																												%g0 
 																												
 																											LET
 																												%x6
@@ -16999,7 +16999,7 @@ ANS
 					LET
 						%x5
 						CALLDIR create_pixel.3055
-							
+							%g0 
 							
 						LET
 							%x6
@@ -17024,7 +17024,7 @@ ANS
 			MOV %x5
 
 Name : create_pixelline.3060
-Args : 
+Args : %x5 
 
 FArgs : 
 Body :
@@ -17046,7 +17046,7 @@ LET
 					LET
 						%x6
 						CALLDIR create_pixel.3055
-							
+							%g0 
 							
 						LET
 							%x5
@@ -17980,7 +17980,7 @@ LET
 				NOP
 
 Name : create_dirvec.3084
-Args : 
+Args : %x5 
 
 FArgs : 
 Body :
@@ -18058,7 +18058,7 @@ LET
 							LET
 								%x5
 								CALLCLS %x7
-									
+									%g0 
 									
 								LET
 									%x6
@@ -18125,7 +18125,7 @@ LET
 												LET
 													%x6
 													CALLCLS %x9
-														
+														%g0 
 														
 													LET
 														%x5
@@ -18282,7 +18282,7 @@ LET
 					NOP
 
 Name : init_dirvecs.3096
-Args : 
+Args : %x5 
 
 FArgs : 
 Body :
@@ -18381,7 +18381,7 @@ LET
 												LET
 													%x5
 													CALLCLS %x22
-														
+														%g0 
 														
 													LET
 														Tu9035
@@ -19286,7 +19286,7 @@ LET
 																																																					LET
 																																																						%x5
 																																																						CALLCLS %x22
-																																																							
+																																																							%g0 
 																																																							
 																																																						LET
 																																																							%g0
@@ -19303,7 +19303,7 @@ LET
 																																																										LET
 																																																											%x5
 																																																											CALLCLS %x22
-																																																												
+																																																												%g0 
 																																																												
 																																																											LET
 																																																												%g0
@@ -19317,7 +19317,7 @@ LET
 																																																														LET
 																																																															%x5
 																																																															CALLCLS %x22
-																																																																
+																																																																%g0 
 																																																																
 																																																															LET
 																																																																%g0
@@ -19331,7 +19331,7 @@ LET
 																																																																		LET
 																																																																			%g0
 																																																																			CALLCLS %x22
-																																																																				
+																																																																				%g0 
 																																																																				
 																																																																			LET
 																																																																				%x5
@@ -19356,7 +19356,7 @@ LET
 																																																																									LET
 																																																																										%g0
 																																																																										CALLCLS %x22
-																																																																											
+																																																																											%g0 
 																																																																											
 																																																																										LET
 																																																																											%x5

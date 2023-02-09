@@ -9,7 +9,8 @@ adder.11:
 make_adder.5:
 	mv	%x6, %x3  #2
 	addi	%x3, %x3, 8  #2
-	mv	%x7, adder.11  #2
+	addi	%x24, %x0, 16  #2 adder.11
+	mv	%x7, %x24  #2
 	sw	%x7, 0(%x6)  #2
 	sw	%x5, 4(%x6)  #2
 	mv	%x5, %x6  #3

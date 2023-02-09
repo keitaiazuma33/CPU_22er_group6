@@ -18,7 +18,8 @@ composed.22:
 compose.7:
 	mv	%x7, %x3  #2
 	addi	%x3, %x3, 16  #2
-	mv	%x9, composed.22  #2
+	addi	%x24, %x0, 16  #2 composed.22
+	mv	%x9, %x24  #2
 	sw	%x9, 0(%x7)  #2
 	sw	%x6, 8(%x7)  #2
 	sw	%x5, 4(%x7)  #2
@@ -42,15 +43,18 @@ min_caml_start:
 	addi	%x2, %x2, -112
 	mv	%x5, %x3  #4
 	addi	%x3, %x3, 8  #4
-	mv	%x6, dbl.10  #4
+	addi	%x24, %x0, 116  #4 dbl.10
+	mv	%x6, %x24  #4
 	sw	%x6, 0(%x5)  #4
 	mv	%x6, %x3  #5
 	addi	%x3, %x3, 8  #5
-	mv	%x7, inc.12  #5
+	addi	%x24, %x0, 132  #5 inc.12
+	mv	%x7, %x24  #5
 	sw	%x7, 0(%x6)  #5
 	mv	%x7, %x3  #6
 	addi	%x3, %x3, 8  #6
-	mv	%x9, dec.14  #6
+	addi	%x24, %x0, 148  #6 dec.14
+	mv	%x9, %x24  #6
 	sw	%x9, 0(%x7)  #6
 	sw	%x6, 8(%x2)  #7
 	mv	%x6, %x7

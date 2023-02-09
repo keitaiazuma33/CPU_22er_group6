@@ -299,7 +299,8 @@ loop2.504:
 	nop
 	mv	%x12, %x3  #196
 	addi	%x3, %x3, 24  #196
-	mv	%x13, loop3.512  #196
+	addi	%x24, %x0, 1016  #196 loop3.512
+	mv	%x13, %x24  #196
 	sw	%x13, 0(%x12)  #196
 	sw	%x5, 20(%x12)  #196
 	sw	%x7, 16(%x12)  #196
@@ -337,7 +338,8 @@ loop1.499:
 	nop
 	mv	%x12, %x3  #194
 	addi	%x3, %x3, 24  #194
-	mv	%x13, loop2.504  #194
+	addi	%x24, %x0, 1152  #194 loop2.504
+	mv	%x13, %x24  #194
 	sw	%x13, 0(%x12)  #194
 	sw	%x7, 20(%x12)  #194
 	sw	%x5, 16(%x12)  #194
@@ -367,7 +369,8 @@ bge_else.880:
 mul.370:
 	mv	%x22, %x3  #192
 	addi	%x3, %x3, 24  #192
-	mv	%x12, loop1.499  #192
+	addi	%x24, %x0, 1308  #192 loop1.499
+	mv	%x12, %x24  #192
 	sw	%x12, 0(%x22)  #192
 	sw	%x7, 20(%x22)  #192
 	sw	%x6, 16(%x22)  #192
@@ -418,7 +421,8 @@ make.378:
 	lw	%x1, 12(%x2) #207
 	mv	%x22, %x3  #208
 	addi	%x3, %x3, 16  #208
-	mv	%x6, init.486  #208
+	addi	%x24, %x0, 1524  #208 init.486
+	mv	%x6, %x24  #208
 	sw	%x6, 0(%x22)  #208
 	lw	%x6, 4(%x2)  #208
 	sw	%x6, 8(%x22)  #208
@@ -448,7 +452,8 @@ min_caml_start:
 	lw	%x1, 12(%x2) #205
 	mv	%x22, %x3  #206
 	addi	%x3, %x3, 8  #206
-	mv	%x6, make.378  #206
+	addi	%x24, %x0, 1636  #206 make.378
+	mv	%x6, %x24  #206
 	sw	%x6, 0(%x22)  #206
 	sw	%x5, 4(%x22)  #206
 	addi	%x5, %x0, 2  #0
@@ -543,6 +548,7 @@ min_caml_start:
 	jal	%x1, print_int.342  #223
 	addi	%x2, %x2, -32  #223
 	lw	%x1, 28(%x2) #223
+	mv	%x5, %g0
 	sw	%x1, 28(%x2)  #224
 	addi	%x2, %x2, 32  #224
 	jal	%x1, min_caml_print_newline  #224
@@ -561,6 +567,7 @@ min_caml_start:
 	jal	%x1, print_int.342  #225
 	addi	%x2, %x2, -32  #225
 	lw	%x1, 28(%x2) #225
+	mv	%x5, %g0
 	sw	%x1, 28(%x2)  #226
 	addi	%x2, %x2, 32  #226
 	jal	%x1, min_caml_print_newline  #226
@@ -579,6 +586,7 @@ min_caml_start:
 	jal	%x1, print_int.342  #227
 	addi	%x2, %x2, -32  #227
 	lw	%x1, 28(%x2) #227
+	mv	%x5, %g0
 	sw	%x1, 28(%x2)  #228
 	addi	%x2, %x2, 32  #228
 	jal	%x1, min_caml_print_newline  #228
@@ -597,6 +605,7 @@ min_caml_start:
 	jal	%x1, print_int.342  #229
 	addi	%x2, %x2, -32  #229
 	lw	%x1, 28(%x2) #229
+	mv	%x5, %g0
 	sw	%x1, 28(%x2)  #230
 	addi	%x2, %x2, 32  #230
 	jal	%x1, min_caml_print_newline  #230

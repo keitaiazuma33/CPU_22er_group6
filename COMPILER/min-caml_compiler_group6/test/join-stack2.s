@@ -12,6 +12,7 @@ g.11:
 .global	min_caml_start
 min_caml_start:
 	addi	%x2, %x2, -112
+	mv	%x5, %g0
 	sw	%x1, 12(%x2)  #4
 	addi	%x2, %x2, 16  #4
 	jal	%x1, f.9  #4
@@ -21,6 +22,7 @@ min_caml_start:
 	bge	%x0, %x5, 12  #5
 	j	ble_else.23
 	nop
+	mv	%x5, %g0
 	sw	%x1, 12(%x2)  #5
 	addi	%x2, %x2, 16  #5
 	jal	%x1, g.11  #5

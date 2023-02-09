@@ -22,7 +22,8 @@ i.45:
 g.28:
 	mv	%x6, %x3  #12
 	addi	%x3, %x3, 8  #12
-	mv	%x7, i.45  #12
+	addi	%x24, %x0, 68  #12 i.45
+	mv	%x7, %x24  #12
 	sw	%x7, 0(%x6)  #12
 	sw	%x5, 4(%x6)  #12
 	mv	%x5, %x6  #13
@@ -41,7 +42,8 @@ min_caml_start:
 	addi	%x5, %x0, 4  #0
 	mv	%x22, %x3  #2
 	addi	%x3, %x3, 8  #2
-	mv	%x6, f.16  #2
+	addi	%x24, %x0, 16  #2 f.16
+	mv	%x6, %x24  #2
 	sw	%x6, 0(%x22)  #2
 	sw	%x5, 4(%x22)  #2
 	addi	%x5, %x0, 8  #0
@@ -69,7 +71,8 @@ min_caml_start:
 	lw	%x1, 12(%x2) #7
 	mv	%x5, %x3  #8
 	addi	%x3, %x3, 8  #8
-	mv	%x6, f.24  #8
+	addi	%x24, %x0, 52  #8 f.24
+	mv	%x6, %x24  #8
 	sw	%x6, 0(%x5)  #8
 	sw	%x1, 12(%x2)  #10
 	addi	%x2, %x2, 16  #10
@@ -78,7 +81,8 @@ min_caml_start:
 	lw	%x1, 12(%x2) #10
 	mv	%x5, %x3  #11
 	addi	%x3, %x3, 8  #11
-	mv	%x6, g.28  #11
+	addi	%x24, %x0, 88  #11 g.28
+	mv	%x6, %x24  #11
 	sw	%x6, 0(%x5)  #11
 	sw	%x1, 12(%x2)  #15
 	addi	%x2, %x2, 16  #15
@@ -87,7 +91,8 @@ min_caml_start:
 	lw	%x1, 12(%x2) #15
 	mv	%x5, %x3  #16
 	addi	%x3, %x3, 8  #16
-	mv	%x6, i.32  #16
+	addi	%x24, %x0, 128  #16 i.32
+	mv	%x6, %x24  #16
 	sw	%x6, 0(%x5)  #16
 	addi	%x6, %x0, 7  #0
 	sw	%x5, 8(%x2)  #20

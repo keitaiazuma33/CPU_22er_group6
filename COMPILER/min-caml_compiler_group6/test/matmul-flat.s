@@ -493,6 +493,7 @@ min_caml_start:
 	jal	%x1, print_int.342  #223
 	addi	%x2, %x2, -32  #223
 	lw	%x1, 28(%x2) #223
+	mv	%x5, %g0
 	sw	%x1, 28(%x2)  #224
 	addi	%x2, %x2, 32  #224
 	jal	%x1, min_caml_print_newline  #224
@@ -511,6 +512,7 @@ min_caml_start:
 	jal	%x1, print_int.342  #225
 	addi	%x2, %x2, -32  #225
 	lw	%x1, 28(%x2) #225
+	mv	%x5, %g0
 	sw	%x1, 28(%x2)  #226
 	addi	%x2, %x2, 32  #226
 	jal	%x1, min_caml_print_newline  #226
@@ -529,6 +531,7 @@ min_caml_start:
 	jal	%x1, print_int.342  #227
 	addi	%x2, %x2, -32  #227
 	lw	%x1, 28(%x2) #227
+	mv	%x5, %g0
 	sw	%x1, 28(%x2)  #228
 	addi	%x2, %x2, 32  #228
 	jal	%x1, min_caml_print_newline  #228
@@ -547,6 +550,7 @@ min_caml_start:
 	jal	%x1, print_int.342  #229
 	addi	%x2, %x2, -32  #229
 	lw	%x1, 28(%x2) #229
+	mv	%x5, %g0
 	sw	%x1, 28(%x2)  #230
 	addi	%x2, %x2, 32  #230
 	jal	%x1, min_caml_print_newline  #230

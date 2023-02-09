@@ -607,7 +607,7 @@ LET
 									MOV t.6324
 
 Name : read_int.2580
-Args : 
+Args : a.2581 
 
 FArgs : 
 Body :
@@ -735,7 +735,7 @@ LET
 					FMOVD acc.2586
 
 Name : read_float.2587
-Args : 
+Args : a.2588 
 
 FArgs : 
 Body :
@@ -1711,7 +1711,7 @@ LET
 		FMULD x.2754 Td2207.5502
 
 Name : read_screen_settings.2755
-Args : 
+Args : Tu25.2756 
 
 FArgs : 
 Body :
@@ -1736,7 +1736,7 @@ LET
 						LET
 							Td2154.5500
 							CALLDIR read_float.2587
-								
+								Tu2153.5501 
 								
 							LET
 								Tu39.5427
@@ -1747,7 +1747,7 @@ LET
 									LET
 										Td2157.5497
 										CALLDIR read_float.2587
-											
+											Tu2156.5498 
 											
 										LET
 											Tu38.5428
@@ -1758,7 +1758,7 @@ LET
 												LET
 													Td2160.5494
 													CALLDIR read_float.2587
-														
+														Tu2159.5495 
 														
 													LET
 														Tu37.5429
@@ -1769,7 +1769,7 @@ LET
 															LET
 																Td2162.5491
 																CALLDIR read_float.2587
-																	
+																	Tu2161.5492 
 																	
 																LET
 																	v1.5430
@@ -1792,7 +1792,7 @@ LET
 																				LET
 																					Td2164.5489
 																					CALLDIR read_float.2587
-																						
+																						Tu2163.5490 
 																						
 																					LET
 																						v2.5433
@@ -1926,7 +1926,7 @@ LET
 																																																												STDF Td2206.5448 viewpoint.2606 16
 
 Name : read_light.2757
-Args : 
+Args : Tu40.2758 
 
 FArgs : 
 Body :
@@ -1942,7 +1942,7 @@ LET
 			LET
 				Tu41.5403
 				CALLDIR read_int.2580
-					
+					Tu2138.5426 
 					
 				LET
 					Tu2139.5425
@@ -1950,7 +1950,7 @@ LET
 					LET
 						Td2140.5424
 						CALLDIR read_float.2587
-							
+							Tu2139.5425 
 							
 						LET
 							l1.5404
@@ -1976,7 +1976,7 @@ LET
 											LET
 												Td2144.5420
 												CALLDIR read_float.2587
-													
+													Tu2143.5421 
 													
 												LET
 													l2.5407
@@ -2016,7 +2016,7 @@ LET
 																					LET
 																						Td2151.5414
 																						CALLDIR read_float.2587
-																							
+																							Tu2150.5415 
 																							
 																						ANS
 																							STDF Td2151.5414 beam.2608 0
@@ -2360,7 +2360,7 @@ LET
 		LET
 			texture.5165
 			CALLDIR read_int.2580
-				
+				Tu1958.5292 
 				
 			ANS
 				IFEQ texture.5165 -1
@@ -2372,7 +2372,7 @@ LET
 						LET
 							form.5167
 							CALLDIR read_int.2580
-								
+								Tu1961.5290 
 								
 							LET
 								Tu1962.5289
@@ -2380,7 +2380,7 @@ LET
 								LET
 									refltype.5168
 									CALLDIR read_int.2580
-										
+										Tu1962.5289 
 										
 									LET
 										Tu1963.5288
@@ -2388,7 +2388,7 @@ LET
 										LET
 											isrot_p.5169
 											CALLDIR read_int.2580
-												
+												Tu1963.5288 
 												
 											LET
 												Ti1964.5286
@@ -2407,7 +2407,7 @@ LET
 															LET
 																Td1968.5284
 																CALLDIR read_float.2587
-																	
+																	Tu1967.5285 
 																	
 																LET
 																	Tu68.5171
@@ -2418,7 +2418,7 @@ LET
 																		LET
 																			Td1971.5281
 																			CALLDIR read_float.2587
-																				
+																				Tu1970.5282 
 																				
 																			LET
 																				Tu67.5172
@@ -2429,7 +2429,7 @@ LET
 																					LET
 																						Td1974.5278
 																						CALLDIR read_float.2587
-																							
+																							Tu1973.5279 
 																							
 																						LET
 																							Tu66.5173
@@ -2451,7 +2451,7 @@ LET
 																											LET
 																												Td1979.5273
 																												CALLDIR read_float.2587
-																													
+																													Tu1978.5274 
 																													
 																												LET
 																													Tu65.5175
@@ -2462,7 +2462,7 @@ LET
 																														LET
 																															Td1982.5270
 																															CALLDIR read_float.2587
-																																
+																																Tu1981.5271 
 																																
 																															LET
 																																Tu64.5176
@@ -2473,7 +2473,7 @@ LET
 																																	LET
 																																		Td1985.5267
 																																		CALLDIR read_float.2587
-																																			
+																																			Tu1984.5268 
 																																			
 																																		LET
 																																			Tu63.5177
@@ -2484,7 +2484,7 @@ LET
 																																				LET
 																																					Td1987.5264
 																																					CALLDIR read_float.2587
-																																						
+																																						Tu1986.5265 
 																																						
 																																					LET
 																																						m_invert.5178
@@ -2508,7 +2508,7 @@ LET
 																																										LET
 																																											Td1992.5260
 																																											CALLDIR read_float.2587
-																																												
+																																												Tu1991.5261 
 																																												
 																																											LET
 																																												Tu62.5180
@@ -2519,7 +2519,7 @@ LET
 																																													LET
 																																														Td1995.5257
 																																														CALLDIR read_float.2587
-																																															
+																																															Tu1994.5258 
 																																															
 																																														LET
 																																															Tu61.5181
@@ -2541,7 +2541,7 @@ LET
 																																																			LET
 																																																				Td2000.5252
 																																																				CALLDIR read_float.2587
-																																																					
+																																																					Tu1999.5253 
 																																																					
 																																																				LET
 																																																					Tu60.5183
@@ -2552,7 +2552,7 @@ LET
 																																																						LET
 																																																							Td2003.5249
 																																																							CALLDIR read_float.2587
-																																																								
+																																																								Tu2002.5250 
 																																																								
 																																																							LET
 																																																								Tu59.5184
@@ -2563,7 +2563,7 @@ LET
 																																																									LET
 																																																										Td2006.5246
 																																																										CALLDIR read_float.2587
-																																																											
+																																																											Tu2005.5247 
 																																																											
 																																																										LET
 																																																											Tu58.5185
@@ -2590,7 +2590,7 @@ LET
 																																																																	LET
 																																																																		Td2012.5241
 																																																																		CALLDIR read_float.2587
-																																																																			
+																																																																			Tu2011.5242 
 																																																																			
 																																																																		LET
 																																																																			Td2013.5240
@@ -2606,7 +2606,7 @@ LET
 																																																																					LET
 																																																																						Td2016.5237
 																																																																						CALLDIR read_float.2587
-																																																																							
+																																																																							Tu2015.5238 
 																																																																							
 																																																																						LET
 																																																																							Td2017.5236
@@ -2622,7 +2622,7 @@ LET
 																																																																									LET
 																																																																										Td2020.5233
 																																																																										CALLDIR read_float.2587
-																																																																											
+																																																																											Tu2019.5234 
 																																																																											
 																																																																										LET
 																																																																											Td2021.5232
@@ -2843,7 +2843,7 @@ LET
 										
 
 Name : read_all_object.2766
-Args : 
+Args : Tu69.2767 
 
 FArgs : 
 Body :
@@ -2869,7 +2869,7 @@ LET
 	LET
 		item.5146
 		CALLDIR read_int.2580
-			
+			Tu1942.5157 
 			
 		ANS
 			IFEQ item.5146 -1
@@ -2980,7 +2980,7 @@ LET
 											
 
 Name : read_parameter.2774
-Args : 
+Args : Tu73.2775 
 
 FArgs : 
 Body :
@@ -3005,7 +3005,7 @@ LET
 						LET
 							Tu77.5114
 							CALLCLS read_screen_settings.2755
-								
+								Tu1919.5124 
 								
 							LET
 								Tu1920.5123
@@ -3013,7 +3013,7 @@ LET
 								LET
 									Tu76.5115
 									CALLCLS read_light.2757
-										
+										Tu1920.5123 
 										
 									LET
 										Tu1921.5122
@@ -3021,7 +3021,7 @@ LET
 										LET
 											Tu75.5116
 											CALLCLS read_all_object.2766
-												
+												Tu1921.5122 
 												
 											LET
 												Ti1922.5121
@@ -9545,7 +9545,7 @@ LET
 																
 
 Name : create_float5x3array.3053
-Args : 
+Args : Tu211.3054 
 
 FArgs : 
 Body :
@@ -9628,7 +9628,7 @@ LET
 																						MOV array.3432
 
 Name : create_pixel.3055
-Args : 
+Args : Tu216.3056 
 
 FArgs : 
 Body :
@@ -9649,7 +9649,7 @@ LET
 				LET
 					m_isect_ps.3412
 					CALLDIR create_float5x3array.3053
-						
+						Tu569.3428 
 						
 					LET
 						Ti570.3426
@@ -9679,7 +9679,7 @@ LET
 												LET
 													m_engy.3415
 													CALLDIR create_float5x3array.3053
-														
+														Tu574.3423 
 														
 													LET
 														Tu575.3422
@@ -9687,7 +9687,7 @@ LET
 														LET
 															m_r20p.3416
 															CALLDIR create_float5x3array.3053
-																
+																Tu575.3422 
 																
 															LET
 																Ti576.3420
@@ -9706,7 +9706,7 @@ LET
 																			LET
 																				m_nvectors.3418
 																				CALLDIR create_float5x3array.3053
-																					
+																					Tu578.3419 
 																					
 																				LET
 																					t.6980
@@ -9754,7 +9754,7 @@ ANS
 			LET
 				Tt564.3409
 				CALLDIR create_pixel.3055
-					
+					Tu563.3410 
 					
 				LET
 					o.6989
@@ -9773,7 +9773,7 @@ ANS
 			MOV line.3058
 
 Name : create_pixelline.3060
-Args : 
+Args : Tu218.3061 
 
 FArgs : 
 Body :
@@ -9789,7 +9789,7 @@ LET
 			LET
 				Tt557.3402
 				CALLDIR create_pixel.3055
-					
+					Tu556.3403 
 					
 				LET
 					line.3396
@@ -10237,7 +10237,7 @@ LET
 				NOP
 
 Name : create_dirvec.3084
-Args : 
+Args : Tu227.3085 
 
 FArgs : 
 Body :
@@ -10294,7 +10294,7 @@ LET
 				LET
 					Tt466.3286
 					CALLCLS create_dirvec.3084
-						
+						Tu465.3287 
 						
 					LET
 						o.7019
@@ -10337,7 +10337,7 @@ LET
 							LET
 								Tt458.3280
 								CALLCLS create_dirvec.3084
-									
+									Tu457.3281 
 									
 								LET
 									Ta459.3278
@@ -10443,7 +10443,7 @@ LET
 					NOP
 
 Name : init_dirvecs.3096
-Args : 
+Args : Tu233.3097 
 
 FArgs : 
 Body :
@@ -10506,7 +10506,7 @@ LET
 				LET
 					dvec.3247
 					CALLCLS create_dirvec.3084
-						
+						Tu438.3252 
 						
 					LET
 						Ta439.3251
@@ -10937,7 +10937,7 @@ LET
 																											LET
 																												prev.3126
 																												CALLCLS create_pixelline.3060
-																													
+																													Tu355.3149 
 																													
 																												LET
 																													Tu356.3148
@@ -10945,7 +10945,7 @@ LET
 																													LET
 																														cur.3127
 																														CALLCLS create_pixelline.3060
-																															
+																															Tu356.3148 
 																															
 																														LET
 																															Tu357.3147
@@ -10953,7 +10953,7 @@ LET
 																															LET
 																																next.3128
 																																CALLCLS create_pixelline.3060
-																																	
+																																	Tu357.3147 
 																																	
 																																LET
 																																	Tu358.3146
@@ -10961,7 +10961,7 @@ LET
 																																	LET
 																																		Tu248.3129
 																																		CALLCLS read_parameter.2774
-																																			
+																																			Tu358.3146 
 																																			
 																																		LET
 																																			Tu247.3130
@@ -10974,7 +10974,7 @@ LET
 																																				LET
 																																					Tu246.3131
 																																					CALLCLS init_dirvecs.3096
-																																						
+																																						Tu359.3145 
 																																						
 																																					LET
 																																						Ta360.3144

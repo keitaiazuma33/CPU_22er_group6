@@ -242,5 +242,5 @@ LET
 																										NOP
 																										ANS
 																											CALLDIR min_caml_print_newline
-																												
+																												%g0 
 																												
