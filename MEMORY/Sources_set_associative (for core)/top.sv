@@ -17,29 +17,39 @@ module top (
     output wire [1:0] ddr2_dm,
     output wire [0:0] ddr2_odt,
     // others
-    input logic clk,
-    input cpu_req_type cpu_to_cache_request,
-    output cpu_result_type cpu_res,
+    input logic sys_clk,
+    input logic mem_clk,
+    input logic rst,
+    input logic [26:0] cpu_req_addr,
+    input logic [31:0] cpu_req_data,
+    input logic [ 0:0] cpu_req_rw,
+    input logic [ 0:0] cpu_req_valid,
+    output logic [31:0] cpu_res_data,
+    output logic [ 0:0] cpu_res_ready,
     output logic led
 );
-    // clock
-    logic sys_clk;
-    logic mem_clk;
-    clk_wiz_0 clk_gen (
-        .clk_in1(clk),
-        .clk_out1(mem_clk),
-        .clk_out2(sys_clk)
-    );
 
     // interfaces
     master_fifo master_fifo ();
     slave_fifo slave_fifo ();
+    
+    cpu_req_type cpu_to_cache_request;
+    cpu_result_type cpu_res;
+    
+    assign cpu_to_cache_request.addr = cpu_req_addr;
+    assign cpu_to_cache_request.data = cpu_req_data;
+    assign cpu_to_cache_request.rw = cpu_req_rw;
+    assign cpu_to_cache_request.valid = cpu_req_valid;
+    
+    assign cpu_res_data = cpu_res.data;
+    assign cpu_res_ready = cpu_res.ready;
 
     // master（CPU側のFIFO）
     dram_test dram_test (
         .fifo(master_fifo),
         .sys_clk(sys_clk),
         .mem_clk(mem_clk),
+        .rst(rst),
         .cpu_to_cache_request(cpu_to_cache_request),
         .cpu_res(cpu_res),
         .led(led)
@@ -54,7 +64,20 @@ module top (
     // slave（DRAM側のFIFO）
     dram_controller dram_controller (
         // DDR2
-        .*,
+        .ddr2_addr(ddr2_addr),
+        .ddr2_ba(ddr2_ba),
+        .ddr2_cas_n(ddr2_cas_n),
+        .ddr2_ck_n(ddr2_ck_n),
+        .ddr2_ck_p(ddr2_ck_p),
+        .ddr2_cke(ddr2_cke),
+        .ddr2_ras_n(ddr2_ras_n),
+        .ddr2_we_n(ddr2_we_n),
+        .ddr2_dq(ddr2_dq),
+        .ddr2_dqs_n(ddr2_dqs_n),
+        .ddr2_dqs_p(ddr2_dqs_p),
+        .ddr2_cs_n(ddr2_cs_n),
+        .ddr2_dm(ddr2_dm),
+        .ddr2_odt(ddr2_odt),
         // others
         .sys_clk(mem_clk),
         .fifo(slave_fifo)

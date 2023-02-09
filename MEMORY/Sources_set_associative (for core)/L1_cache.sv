@@ -88,7 +88,7 @@ typedef struct {
 module L1_cache(
     input  bit sys_clk,                        //キャッシュシステム
     input  bit mem_clk,
-    input  bit RST,
+    input  bit rst,
     input  cpu_req_type cpu_to_cache_request,   //addr[26:0],data[31:0],rw[0:0],valid[0:0]
     input  mem_data_type mem_data,              //memory response (memory->cache) data[CACHE_width:0], ready[0:0]
     output L2_req_type mem_req,                 //memory request (cache->memory) addr[26:0],data[CACHE_width:0],rw[0:0],valid[0:0]
@@ -122,8 +122,13 @@ module L1_cache(
     // Cacheに書き込む場合のデータを格納する
     cache_data_type cache_L1_way0_dout; //cache line read data
     cache_data_type cache_L1_way1_dout; //cache line read data
+    cache_data_type cache_L1_way0_dout_ordered; //cache line read data
+    cache_data_type cache_L1_way1_dout_ordered; //cache line read data
     cache_data_type cache_L1_way0_din;  //cache line write data
     cache_data_type cache_L1_way1_din;  //cache line write data
+    
+    assign cache_L1_way0_dout_ordered = {cache_L1_way0_dout[95:64], cache_L1_way0_dout[127:96], cache_L1_way0_dout[31:0], cache_L1_way0_dout[63:32]};
+    assign cache_L1_way1_dout_ordered = {cache_L1_way1_dout[95:64], cache_L1_way1_dout[127:96], cache_L1_way1_dout[31:0], cache_L1_way1_dout[63:32]};
     
     //それぞれのL1キャッシュwayから出てきたデータを格納する
     cpu_result_type cpu_res_L1_way0;
@@ -480,7 +485,7 @@ case(rstate)
                 /*write back address*/
                 mem_req_L1_to_L2.addr = {pmt_L1_way0_dout.tag, cpu_to_cache_request.addr[TAGLSB-1:0]};
                 mem_req_L1_to_L2.rw = 1'b1;
-                mem_req_L1_to_L2.data = cache_L1_way0_dout;
+                mem_req_L1_to_L2.data = cache_L1_way0_dout_ordered;
                 /*wait till write is completed*/
                 vstate = write_back;
             end
@@ -522,7 +527,7 @@ case(rstate)
                 /*write back address*/
                 mem_req_L1_to_L2.addr = {pmt_L1_way1_dout.tag, cpu_to_cache_request.addr[TAGLSB-1:3], 3'b0};
                 mem_req_L1_to_L2.rw = 1'b1;
-                mem_req_L1_to_L2.data = cache_L1_way1_dout;
+                mem_req_L1_to_L2.data = cache_L1_way1_dout_ordered;
                 /*wait till write is completed*/
                 vstate = wait_before_write_back;
             end
@@ -582,7 +587,7 @@ end
 
 always_ff @(posedge(sys_clk))
 begin
-    if (RST) 
+    if (~rst) 
     rstate <= idle; //reset to idle state
     else 
     rstate <= vstate;

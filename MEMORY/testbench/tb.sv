@@ -1,14 +1,27 @@
 module tb;
-    timeunit 1ns;
+    timeunit 100ps;
     timeprecision 1ps;
 
     // clock: 100MHz
-    logic clk;
+    logic sys_clk;
+    logic mem_clk;
+    logic rst;
     always begin
-        clk = 1'b0;
-        #5;
-        clk = 1'b1;
-        #5;
+        sys_clk = 1'b0;
+        #50;
+        sys_clk = 1'b1;
+        #50;
+    end
+    always begin
+        mem_clk = 1'b1;
+        #25;
+        mem_clk = 1'b0;
+        #25;
+    end
+    initial begin
+        rst = 1'b0;
+        #300;
+        rst = 1'b1;
     end
 
     // DDR2 wires
@@ -45,12 +58,63 @@ module tb;
         .rdqs_n(),
         .odt(ddr2_odt)
     );
-
+    
+    logic [26:0] cpu_req_addr;
+    logic [31:0] cpu_req_data;
+    logic [ 0:0] cpu_req_rw;
+    logic [ 0:0] cpu_req_valid;
+    logic [31:0] cpu_res_data;
+    logic [ 0:0] cpu_res_ready;
+    
+    logic [3:0] tb_state = 4'b0000;
+    
+    assign cpu_req_addr =
+        (tb_state == 4'b0001) ? 27'b010101010101010101010101010 :
+        (tb_state == 4'b0010) ? 27'b010101010101010101010101010 : 27'b0;
+    assign cpu_req_data =
+        (tb_state == 4'b0001) ? 32'b00110011001100110011001100110011 :
+        (tb_state == 4'b0010) ? 32'b00001111000011110000111100001111 : 32'b0;
+    assign cpu_req_rw =
+        (tb_state == 4'b0001) ? 1'b1 :
+        (tb_state == 4'b0010) ? 1'b0 : 1'b0;
+    assign cpu_req_valid =
+        (tb_state == 4'b0001) ? 1'b1 :
+        (tb_state == 4'b0010) ? 1'b0 : 1'b0;
+    
+    always_ff @ (posedge sys_clk) begin
+        case (tb_state)
+            4'b0000: begin
+                tb_state <= 4'b0001;
+            end
+            4'b0001: begin
+                //
+                //cpu_to_cache_request.addr = 27'b010101010101010101010101010;
+                //cpu_to_cache_request.data = 32'b00110011001100110011001100110011;
+                //cpu_to_cache_request.rw = 1'b1;
+                //cpu_to_cache_request.valid = 1'b1;
+                if (cpu_res_ready) begin
+                    tb_state <= 4'b0010;
+                end
+            end
+            4'b0010: begin
+                //
+                //cpu_to_cache_request.addr = 27'b010101010101010101010101010;
+                //cpu_to_cache_request.data = 32'b00001111000011110000111100001111;
+                //cpu_to_cache_request.rw = 1'b0;
+                //cpu_to_cache_request.valid = 1'b0;
+                if (cpu_res_ready) begin
+                    tb_state <= 4'b0010;
+                end
+            end
+        endcase
+    end
+    
     // DUT
     logic led;
     top dut (
         .*,
-        .clk(clk),
+        .sys_clk(sys_clk),
+        .mem_clk(mem_clk),
         .led(led)
     );
 endmodule
