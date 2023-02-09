@@ -3,7 +3,7 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 2023/01/10 19:02:42
+// Create Date: 2023/01/29 18:49:16
 // Design Name: 
 // Module Name: itof
 // Project Name: 
@@ -19,14 +19,14 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-
 module itof
 (
-   input bit clk,
+   input bit sys_clk,
+   input logic rst,
    input logic [0:0]  stage1_valid,
    input wire [31:0]  x,
    output wire [31:0] y,
-   output logic [0:0] valid
+   output logic [0:0] out_valid
 );
              
    wire        stage1_s;
@@ -107,9 +107,9 @@ module itof
    assign stage2_shamt = stage12_shamt;
    assign y = stage23_y;
    assign stage2_valid = stage12_valid;
-   assign valid = stage23_valid;
+   assign out_valid = stage23_valid;
    
-   always_ff @ (posedge clk) begin
+   always_ff @ (posedge sys_clk) begin
         stage12_s     = stage1_s;
         stage12_x_abs = stage1_x_abs;
         stage12_shamt = stage1_shamt;

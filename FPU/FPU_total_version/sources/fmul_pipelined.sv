@@ -3,7 +3,7 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 2022/10/11 21:35:02
+// Create Date: 2023/01/29 18:47:08
 // Design Name: 
 // Module Name: fmul
 // Project Name: 
@@ -19,17 +19,17 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-
 module fmul
 (
-   input bit clk,
+   input bit sys_clk,
+   input logic rst,
    input logic [0:0]  stage1_valid,
    input wire [31:0]  x1,
    input wire [31:0]  x2,
    output wire [31:0] y,
    output wire        ovf,
    output wire        unf,
-   output logic [0:0] valid
+   output logic [0:0] out_valid
 );
    logic [0:0] stage2_valid;
    logic [0:0] stage3_valid;
@@ -178,9 +178,9 @@ module fmul
    assign y = stage34_y;
    assign unf = stage34_unf;
    assign ovf = stage34_ovf;
-   assign valid = stage34_valid;
+   assign out_valid = stage34_valid;
    
-   always_ff @ (posedge clk) begin
+   always_ff @ (posedge sys_clk) begin
       stage12_hh <= stage1_hh;
       stage12_hl <= stage1_hl;
       stage12_lh <= stage1_lh;

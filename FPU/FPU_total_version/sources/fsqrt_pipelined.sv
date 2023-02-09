@@ -81,13 +81,19 @@ module fsqrt(
     //切片は 0.5～1.0 にstrictに収まる→指数部まで固定　
     assign stage2_y_intersect = {1'b1, data_from_a[22:0]};
     
-    logic [48:0]  stage2_delta_y; //                                  *2^-48して考えて
-    logic [48:0]  stage3_delta_y; //                                  *2^-48して考えて
-    reg  [48:0]  stage23_delta_y;
-    assign stage2_delta_y = gradient * delta_x;   //context-determined expression
+    logic [48:0] stage2_delta_y_l;
+    logic [48:0] stage2_delta_y_h;
+    logic [48:0] stage3_delta_y_l;
+    logic [48:0] stage3_delta_y_h;
+    reg   [48:0] stage23_delta_y_l;
+    reg   [48:0] stage23_delta_y_h;
+    assign stage2_delta_y_l = (gradient[16:10] * delta_x) << 10;
+    assign stage2_delta_y_h = (gradient[23:17] * delta_x) << 17;
     
     //STAGE 3
     logic [25:0] fsqrt_ans;
+    logic [48:0] stage3_delta_y;
+    assign stage3_delta_y = stage3_delta_y_h + stage3_delta_y_l;
     assign fsqrt_ans = {2'b00, stage3_y_intersect} + {1'b0, stage3_delta_y[48:24]};
     logic [31:0]  fsqrt_float;
     assign fsqrt_float = (fsqrt_ans[25:25] == 1'b1) ? {1'b0, 8'b01111111, 23'b1} :
@@ -108,7 +114,8 @@ module fsqrt(
     
     assign stage3_valid = stage23_valid;
     assign stage3_x = stage23_x;
-    assign stage3_delta_y = stage23_delta_y;
+    assign stage3_delta_y_l = stage23_delta_y_l;
+    assign stage3_delta_y_h = stage23_delta_y_h;
     assign stage3_y_intersect = stage23_y_intersect;
     
     assign y = stage34_y;
@@ -119,7 +126,8 @@ module fsqrt(
       stage12_valid <= stage1_valid;
 
       stage23_x <= stage2_x;
-      stage23_delta_y <= stage2_delta_y;
+      stage23_delta_y_l <= stage2_delta_y_l;
+      stage23_delta_y_h <= stage2_delta_y_h;
       stage23_y_intersect <= stage2_y_intersect;
       stage23_valid <= stage2_valid;
       

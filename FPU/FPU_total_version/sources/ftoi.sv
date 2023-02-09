@@ -3,7 +3,7 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 2023/01/10 17:49:17
+// Create Date: 2023/01/29 18:48:33
 // Design Name: 
 // Module Name: ftoi
 // Project Name: 
@@ -19,14 +19,14 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-
 module ftoi
 (
-   input bit clk,
+   input bit sys_clk,
+   input logic rst,
    input logic [0:0]  stage1_valid,
    input wire [31:0]  x,
    output wire [31:0] y,
-   output logic [0:0] valid
+   output logic [0:0] out_valid
 );
              
    wire [32:0] m;
@@ -55,9 +55,9 @@ module ftoi
    assign stage1_y = (s == 1'b0) ? adjusted : -adjusted;
    
    assign y = stage12_y;
-   assign valid = stage12_valid;
+   assign out_valid = stage12_valid;
    
-   always_ff @ (posedge clk) begin
+   always_ff @ (posedge sys_clk) begin
         stage12_y = stage1_y;
         stage12_valid = stage1_valid;
    end
