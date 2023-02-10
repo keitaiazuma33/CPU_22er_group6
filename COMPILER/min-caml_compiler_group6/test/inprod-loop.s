@@ -194,87 +194,91 @@ assign_farray.241:  #pc 652
 	j	be_else.501 #pc 660
 	nop #pc 664
 	slli	%x6, %x6, 3  #177 pc 668
-	fsw	%f0, %x6(%x5) #177 pc 672
-	ret #pc 676
-	nop #pc 680
-be_else.501: #pc 680
-	slli	%x7, %x6, 3  #179 pc 684
-	fsw	%f0, %x7(%x5) #179 pc 688
-	addi	%x6, %x6, -1  #180 pc 692
-	j	assign_farray.241  #180 pc 696
-	nop #pc 700
-create_float_array.245:  #pc 700
-	mv	%x6, %x3  #184 pc 704
-	sw	%x6, 0(%x2)  #187 pc 708
-	mv	%x23, %x6 #pc 712
-	mv	%x6, %x5 #pc 716
-	mv	%x5, %x23 #pc 720
-	sw	%x1, 4(%x2)  #187 pc 724
-	addi	%x2, %x2, 8  #187 pc 728
-	jal	%x1, assign_farray.241  #187 pc 732
-	addi	%x2, %x2, -8  #187 pc 736
-	lw	%x1, 4(%x2) #187 pc 740
-	lw	%x5, 0(%x2)  #188 pc 744
-	ret #pc 748
-	nop #pc 752
-inprod.248:  #pc 752
-	bge	%x7, %x0, 12  #192 pc 756
-	j	bge_else.503 #pc 760
-	nop #pc 764
-	slli	%x9, %x7, 3  #193 pc 768
-	flw	%f2, %x9(%x5)  #193 pc 772
+	add	%x24, %x6, %x5  #177 pc 672
+	fsw	%f0, 0(%x24) #177 pc 676
+	ret #pc 680
+	nop #pc 684
+be_else.501: #pc 684
+	slli	%x7, %x6, 3  #179 pc 688
+	add	%x24, %x7, %x5  #179 pc 692
+	fsw	%f0, 0(%x24) #179 pc 696
+	addi	%x6, %x6, -1  #180 pc 700
+	j	assign_farray.241  #180 pc 704
+	nop #pc 708
+create_float_array.245:  #pc 708
+	mv	%x6, %x3  #184 pc 712
+	sw	%x6, 0(%x2)  #187 pc 716
+	mv	%x23, %x6 #pc 720
+	mv	%x6, %x5 #pc 724
+	mv	%x5, %x23 #pc 728
+	sw	%x1, 4(%x2)  #187 pc 732
+	addi	%x2, %x2, 8  #187 pc 736
+	jal	%x1, assign_farray.241  #187 pc 740
+	addi	%x2, %x2, -8  #187 pc 744
+	lw	%x1, 4(%x2) #187 pc 748
+	lw	%x5, 0(%x2)  #188 pc 752
+	ret #pc 756
+	nop #pc 760
+inprod.248:  #pc 760
+	bge	%x7, %x0, 12  #192 pc 764
+	j	bge_else.503 #pc 768
+	nop #pc 772
 	slli	%x9, %x7, 3  #193 pc 776
-	flw	%f4, %x9(%x6)  #193 pc 780
-	fmul	%f2, %f2, %f4  #193 pc 784
-	fadd	%f0, %f0, %f2  #193 pc 788
-	addi	%x7, %x7, -1  #193 pc 792
-	j	inprod.248  #193 pc 796
-	nop #pc 800
-bge_else.503: #pc 800
-	ret #pc 804
-	nop #pc 808
+	add	%x24, %x9, %x5  #193 pc 780
+	flw	%f2, 0(%x24)  #193 pc 784
+	slli	%x9, %x7, 3  #193 pc 788
+	add	%x24, %x9, %x6  #193 pc 792
+	flw	%f4, 0(%x24)  #193 pc 796
+	fmul	%f2, %f2, %f4  #193 pc 800
+	fadd	%f0, %f0, %f2  #193 pc 804
+	addi	%x7, %x7, -1  #193 pc 808
+	j	inprod.248  #193 pc 812
+	nop #pc 816
+bge_else.503: #pc 816
+	ret #pc 820
+	nop #pc 824
 .global	min_caml_start
 min_caml_start:
 	addi	%x2, %x2, -112
-	addi	%x5, %x0, 3  #0 pc 812
-	mv	%f0, l.463  #0 pc 816
-	sw	%x1, 12(%x2)  #194 pc 820
-	addi	%x2, %x2, 16  #194 pc 824
-	jal	%x1, create_float_array.245  #194 pc 828
-	addi	%x2, %x2, -16  #194 pc 832
-	lw	%x1, 12(%x2) #194 pc 836
-	addi	%x6, %x0, 3  #0 pc 840
-	mv	%f0, l.465  #0 pc 844
-	sw	%x5, 8(%x2)  #195 pc 848
-	mv	%x5, %x6 #pc 852
-	sw	%x1, 12(%x2)  #195 pc 856
-	addi	%x2, %x2, 16  #195 pc 860
-	jal	%x1, create_float_array.245  #195 pc 864
-	addi	%x2, %x2, -16  #195 pc 868
-	lw	%x1, 12(%x2) #195 pc 872
-	mv	%x6, %x5  #195 pc 876
-	mv	%f0, l.467  #0 pc 880
-	mv	%f2, l.469  #0 pc 884
-	addi	%x7, %x0, 2  #0 pc 888
-	lw	%x5, 8(%x2)  #196 pc 892
-	fsw	%f0, 16(%x2)  #196 pc 896
-	mv	%f0, %f2 #pc 900
-	mv	%f1, %f3 #pc 904
-	sw	%x1, 28(%x2)  #196 pc 908
-	addi	%x2, %x2, 32  #196 pc 912
-	jal	%x1, inprod.248  #196 pc 916
-	addi	%x2, %x2, -32  #196 pc 920
-	lw	%x1, 28(%x2) #196 pc 924
-	flw	%f2, 16(%x2)  #196 pc 928
-	fmul	%f0, %f2, %f0  #196 pc 932
-	sw	%x1, 28(%x2)  #196 pc 936
-	addi	%x2, %x2, 32  #196 pc 940
-	jal	%x1, min_caml_truncate  #196 pc 944
-	addi	%x2, %x2, -32  #196 pc 948
-	lw	%x1, 28(%x2) #196 pc 952
-	sw	%x1, 28(%x2)  #196 pc 956
-	addi	%x2, %x2, 32  #196 pc 960
-	jal	%x1, print_int.220  #196 pc 964
-	addi	%x2, %x2, -32  #196 pc 968
-	lw	%x1, 28(%x2) #196 pc 972
+	addi	%x5, %x0, 3  #0 pc 828
+	mv	%f0, l.463  #0 pc 832
+	sw	%x1, 12(%x2)  #194 pc 836
+	addi	%x2, %x2, 16  #194 pc 840
+	jal	%x1, create_float_array.245  #194 pc 844
+	addi	%x2, %x2, -16  #194 pc 848
+	lw	%x1, 12(%x2) #194 pc 852
+	addi	%x6, %x0, 3  #0 pc 856
+	mv	%f0, l.465  #0 pc 860
+	sw	%x5, 8(%x2)  #195 pc 864
+	mv	%x5, %x6 #pc 868
+	sw	%x1, 12(%x2)  #195 pc 872
+	addi	%x2, %x2, 16  #195 pc 876
+	jal	%x1, create_float_array.245  #195 pc 880
+	addi	%x2, %x2, -16  #195 pc 884
+	lw	%x1, 12(%x2) #195 pc 888
+	mv	%x6, %x5  #195 pc 892
+	mv	%f0, l.467  #0 pc 896
+	mv	%f2, l.469  #0 pc 900
+	addi	%x7, %x0, 2  #0 pc 904
+	lw	%x5, 8(%x2)  #196 pc 908
+	fsw	%f0, 16(%x2)  #196 pc 912
+	mv	%f0, %f2 #pc 916
+	mv	%f1, %f3 #pc 920
+	sw	%x1, 28(%x2)  #196 pc 924
+	addi	%x2, %x2, 32  #196 pc 928
+	jal	%x1, inprod.248  #196 pc 932
+	addi	%x2, %x2, -32  #196 pc 936
+	lw	%x1, 28(%x2) #196 pc 940
+	flw	%f2, 16(%x2)  #196 pc 944
+	fmul	%f0, %f2, %f0  #196 pc 948
+	sw	%x1, 28(%x2)  #196 pc 952
+	addi	%x2, %x2, 32  #196 pc 956
+	jal	%x1, min_caml_truncate  #196 pc 960
+	addi	%x2, %x2, -32  #196 pc 964
+	lw	%x1, 28(%x2) #196 pc 968
+	sw	%x1, 28(%x2)  #196 pc 972
+	addi	%x2, %x2, 32  #196 pc 976
+	jal	%x1, print_int.220  #196 pc 980
+	addi	%x2, %x2, -32  #196 pc 984
+	lw	%x1, 28(%x2) #196 pc 988
 	addi	%x2, %x2, 112
