@@ -1,7 +1,7 @@
 .section	".rodata"
 .align	8
 .section	".text"
-sum.7:
+sum.7:  #16
 	bge	%x0, %x5, 12  #2
 	j	ble_else.17
 	nop

@@ -161,12 +161,20 @@ let rec g env e = (* �������롼���� (caml2html: typing_g) 
         (try (unify Type.Int (g env e1);
         Type.Unit)
         with Unify(t1,t2) -> raise (Error(deref_term e, deref_typ t1, deref_typ t2, n)))
-    | Add(e1, e2, n) | Sub(e1, e2, n) | Mul(e1, e2, n) | Div(e1, e2, n) | Xor(e1, e2, n)
-    | Or(e1, e2, n) | And(e1, e2, n) | SLL(e1, e2, n) | SRL(e1, e2, n) -> (* ­�����ʤȰ������ˤη����� (caml2html: typing_add) *)
+    | Mul(e1, e2, n) | Div(e1, e2, n) | Xor(e1, e2, n)
+    | Or(e1, e2, n) | And(e1, e2, n) | SLL(e1, e2, n) | SRL(e1, e2, n) ->
         (try (unify Type.Int (g env e1);
         unify Type.Int (g env e2);
         Type.Int)
-        with Unify(t1,t2) -> raise (Error(deref_term e, deref_typ t1, deref_typ t2,n)))
+    with Unify(t1,t2) -> raise (Error(deref_term e, deref_typ t1, deref_typ t2,n)))
+    | Add(e1, e2, n) | Sub(e1, e2, n) -> (* ­�����ʤȰ������ˤη����� (caml2html: typing_add) *)
+        (try (unify Type.Int (g env e1);
+        unify Type.Int (g env e2);
+        Type.Int)
+        with Unify(_,_) -> (try (unify Type.Float (g env e1);
+                                unify Type.Float (g env e2);
+                                Type.Float)
+                            with Unify(t1,t2) -> raise (Error(deref_term e, deref_typ t1, deref_typ t2,n))))
     | FNeg(e1, n) | Sqrt(e1, n) | FAbs(e1, n) ->
         (try (unify Type.Float (g env e1);
         Type.Float)

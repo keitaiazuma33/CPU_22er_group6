@@ -33,7 +33,7 @@ adder funcomp closure-test cls-rec cls-bug cls-bug2 cls-reg-bug cse_test \
 shuffle spill spill2 spill3 join-stack join-stack2 join-stack3 \
 join-reg join-reg2 knorm non-tail-if non-tail-if2 \
 inprod inprod-rec inprod-loop matmul matmul-flat float minrt \
-manyargs
+manyargs overload
 
 #do_test: $(TESTS:%=test/%.cmp)
 do_test: $(TESTS:%=test/%.s)

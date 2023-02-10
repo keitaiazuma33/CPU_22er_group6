@@ -1,7 +1,7 @@
 .section	".rodata"
 .align	8
 .section	".text"
-g.52:
+g.52:  #16
 	lw	%x6, 40(%x22)  #0
 	lw	%x7, 36(%x22)  #0
 	lw	%x9, 32(%x22)  #0
@@ -26,13 +26,13 @@ g.52:
 	nop
 	sub	%x5, %x0, %x5  #6
 	lw	0(%x23), %x22  #6
-	j	%x23  #6
+	jalr	%x0, %x23  #6
 	nop
 ble_else.90:
 	mv	%x5, %x6  #6
 	ret
 	nop
-h.26:
+h.26:  #140
 	lw	%x6, 36(%x5)  #3
 	lw	%x7, 32(%x5)  #3
 	lw	%x9, 28(%x5)  #3
@@ -60,7 +60,7 @@ h.26:
 	sw	%x5, 4(%x22)  #4
 	addi	%x5, %x0, 1  #0
 	lw	0(%x23), %x22  #7
-	j	%x23  #7
+	jalr	%x0, %x23  #7
 	nop
 .global	min_caml_start
 min_caml_start:

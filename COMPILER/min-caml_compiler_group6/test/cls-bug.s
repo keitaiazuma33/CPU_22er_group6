@@ -1,11 +1,11 @@
 .section	".rodata"
 .align	8
 .section	".text"
-f.6:
+f.6:  #16
 	addi	%x5, %x5, 123  #3
 	ret
 	nop
-g.8:
+g.8:  #32
 	lw	%x5, 4(%x22)  #4
 	ret
 	nop
@@ -27,7 +27,7 @@ min_caml_start:
 	sw	%x1, 12(%x2)  #5
 	lw	%x23, 0(%x22)  #5
 	addi	%x2, %x2, 16  #5
-	jal	%x1, %x23  #5
+	jalr	%x1, %x23  #5
 	addi	%x2, %x2, -16  #5
 	lw	%x1, 12(%x2)  #5
 	mv	%x22, %x5  #5
@@ -35,7 +35,7 @@ min_caml_start:
 	sw	%x1, 12(%x2)  #5
 	lw	%x23, 0(%x22)  #5
 	addi	%x2, %x2, 16  #5
-	jal	%x1, %x23  #5
+	jalr	%x1, %x23  #5
 	addi	%x2, %x2, -16  #5
 	lw	%x1, 12(%x2)  #5
 	sw	%x1, 12(%x2)  #5

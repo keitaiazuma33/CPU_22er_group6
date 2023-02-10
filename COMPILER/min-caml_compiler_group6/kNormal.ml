@@ -77,14 +77,24 @@ let rec g env = function (* K�������롼�������� (c
   | Syntax.Neg(e,n) ->
       insert_let (g env e)
         (fun x -> Neg(x,n), Type.Int)
-  | Syntax.Add(e1, e2, n) -> (* ­������K������ (caml2html: knormal_add) *)
-      insert_let (g env e1)
+  | Syntax.Add(e1, e2, n) ->
+    (try 
+      (Typing.unify Type.Int (Typing.g env e1);
+      (insert_let (g env e1)
         (fun x -> insert_let (g env e2)
-            (fun y -> Add(x, y, n), Type.Int))
+            (fun y -> Add(x, y, n), Type.Int))))
+    with Typing.Unify(_,_) -> (insert_let (g env e1)
+    (fun x -> insert_let (g env e2)
+        (fun y -> FAdd(x, y, n), Type.Float))))
   | Syntax.Sub(e1, e2, n) ->
-      insert_let (g env e1)
+    (try 
+      (Typing.unify Type.Int (Typing.g env e1);
+      (insert_let (g env e1)
         (fun x -> insert_let (g env e2)
-            (fun y -> Sub(x, y, n), Type.Int))
+            (fun y -> Sub(x, y, n), Type.Int))))
+    with Typing.Unify(_,_) -> (insert_let (g env e1)
+    (fun x -> insert_let (g env e2)
+        (fun y -> FSub(x, y, n), Type.Float))))
   | Syntax.Mul(e1, e2, n) ->
       insert_let (g env e1)
         (fun x -> insert_let (g env e2)

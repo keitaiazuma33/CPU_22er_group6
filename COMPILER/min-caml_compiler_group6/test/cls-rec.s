@@ -1,7 +1,7 @@
 .section	".rodata"
 .align	8
 .section	".text"
-f.8:
+f.8:  #16
 	lw	%x6, 4(%x22)  #0
 	beq	%x5, %x0, 12  #4
 	j	be_else.21
@@ -15,7 +15,7 @@ be_else.21:
 	sw	%x1, 4(%x2)  #5
 	lw	%x23, 0(%x22)  #5
 	addi	%x2, %x2, 8  #5
-	jal	%x1, %x23  #5
+	jalr	%x1, %x23  #5
 	addi	%x2, %x2, -8  #5
 	lw	%x1, 4(%x2)  #5
 	lw	%x6, 0(%x2)  #5
@@ -36,7 +36,7 @@ min_caml_start:
 	sw	%x1, 12(%x2)  #6
 	lw	%x23, 0(%x22)  #6
 	addi	%x2, %x2, 16  #6
-	jal	%x1, %x23  #6
+	jalr	%x1, %x23  #6
 	addi	%x2, %x2, -16  #6
 	lw	%x1, 12(%x2)  #6
 	sw	%x1, 12(%x2)  #6

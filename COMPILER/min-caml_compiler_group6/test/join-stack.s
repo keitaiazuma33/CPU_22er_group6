@@ -1,15 +1,15 @@
 .section	".rodata"
 .align	8
 .section	".text"
-f.14:
+f.14:  #16
 	addi	%x5, %x0, 123  #0
 	ret
 	nop
-g.16:
+g.16:  #32
 	addi	%x5, %x0, 456  #0
 	ret
 	nop
-h.18:
+h.18:  #48
 	addi	%x5, %x0, 789  #0
 	ret
 	nop

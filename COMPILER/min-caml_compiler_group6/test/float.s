@@ -11,7 +11,7 @@ l.398:	! 0.000198
 l.396:	! 0.008333
 l.394:	! 0.166667
 .section	".text"
-sin.168:
+sin.168:  #56
 	fmul	%f2, %f0, %f0  #16
 	fmul	%f4, %f0, %f2  #17
 	fmul	%f6, %f4, %f2  #18
@@ -27,7 +27,7 @@ sin.168:
 	fsub	%f0, %f0, %f2  #20
 	ret
 	nop
-cos.170:
+cos.170:  #120
 	fmul	%f0, %f0, %f0  #24
 	fmul	%f2, %f0, %f0  #25
 	fmul	%f4, %f2, %f0  #26
@@ -43,19 +43,19 @@ cos.170:
 	fsub	%f0, %f0, %f2  #27
 	ret
 	nop
-abs_float.176:
+abs_float.176:  #184
 	fabs	%f0, %f0  #47
 	ret
 	nop
-float_of_int.178:
+float_of_int.178:  #200
 	itof	%f0, %x5  #50
 	ret
 	nop
-int_of_float.180:
+int_of_float.180:  #216
 	ftoi	%x5, %f0  #53
 	ret
 	nop
-mul_abs.182:
+mul_abs.182:  #232
 	addi	%x24, %x0, -1
 	beq	%x7, %x24, 12  #57
 	j	be_else.423
@@ -80,7 +80,7 @@ be_else.424:
 	mv	%x7, %x10
 	j	mul_abs.182  #63
 	nop
-mul.187:
+mul.187:  #328
 	bge	%x5, %x0, 12  #67
 	j	bge_else.425
 	nop
@@ -125,7 +125,7 @@ be_else.429:
 	sub	%x5, %x0, %x5  #73
 	ret
 	nop
-div_abs.190:
+div_abs.190:  #508
 	addi	%x24, %x0, -1
 	beq	%x7, %x24, 12  #77
 	j	be_else.430
@@ -151,7 +151,7 @@ ble_else.431:
 	addi	%x7, %x7, -1  #83
 	j	div_abs.190  #83
 	nop
-div.195:
+div.195:  #608
 	bge	%x5, %x0, 12  #87
 	j	bge_else.432
 	nop
@@ -196,7 +196,7 @@ be_else.436:
 	sub	%x5, %x0, %x5  #93
 	ret
 	nop
-print_int.200:
+print_int.200:  #788
 	bge	%x5, %x0, 12  #100
 	j	bge_else.437
 	nop

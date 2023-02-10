@@ -1,12 +1,12 @@
 .section	".rodata"
 .align	8
 .section	".text"
-adder.11:
+adder.11:  #16
 	lw	%x6, 4(%x22)  #2
 	add	%x5, %x6, %x5  #2
 	ret
 	nop
-make_adder.5:
+make_adder.5:  #36
 	mv	%x6, %x3  #2
 	addi	%x3, %x3, 8  #2
 	addi	%x24, %x0, 16  #2 adder.11
@@ -30,7 +30,7 @@ min_caml_start:
 	sw	%x1, 12(%x2)  #4
 	lw	%x23, 0(%x22)  #4
 	addi	%x2, %x2, 16  #4
-	jal	%x1, %x23  #4
+	jalr	%x1, %x23  #4
 	addi	%x2, %x2, -16  #4
 	lw	%x1, 12(%x2)  #4
 	sw	%x1, 12(%x2)  #4

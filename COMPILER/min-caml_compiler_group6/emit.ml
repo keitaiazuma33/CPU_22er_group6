@@ -193,7 +193,7 @@ and g' oc = function (* ��̿��Υ�����֥����� (caml2h
   | Tail, CallCls(x, ys, zs), n -> (* �����ƤӽФ� (caml2html: emit_tailcall) *)
       g'_args oc [(x, reg_cl)] ys zs;
       incr_pc ();Printf.fprintf oc "\tlw\t0(%s), %s  #%d\n" reg_sw reg_cl n;
-      incr_pc ();Printf.fprintf oc "\tj\t%s  #%d\n" reg_sw n;
+      incr_pc ();Printf.fprintf oc "\tjalr\t%s, %s  #%d\n" reg_zero reg_sw n;
       incr_pc ();Printf.fprintf oc "\tnop\n"
   | Tail, CallDir(Id.L(x), ys, zs), n -> (* �����ƤӽФ� *)
       g'_args oc [] ys zs;
@@ -205,7 +205,7 @@ and g' oc = function (* ��̿��Υ�����֥����� (caml2h
       incr_pc ();Printf.fprintf oc "\tsw\t%s, %d(%s)  #%d\n" reg_ra (ss - 4) reg_sp n;
       incr_pc ();Printf.fprintf oc "\tlw\t%s, 0(%s)  #%d\n" reg_sw reg_cl n;
       incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, %d  #%d\n" reg_sp reg_sp ss n;
-      incr_pc ();Printf.fprintf oc "\tjal\t%s, %s  #%d\n" reg_ra reg_sw n;
+      incr_pc ();Printf.fprintf oc "\tjalr\t%s, %s  #%d\n" reg_ra reg_sw n;
       (* Printf.fprintf oc "\taddi\t%s, %s, %d\t# delay slot  %d\n" reg_sp reg_sp ss n; *)
       incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, %d  #%d\n" reg_sp reg_sp (-ss) n;
       incr_pc ();Printf.fprintf oc "\tlw\t%s, %d(%s)  #%d\n" reg_ra (ss - 4) reg_sp n;
@@ -274,7 +274,7 @@ and g'_args oc x_reg_cl ys zs =
     (shuffle reg_fsw zfrs)
 
 let h oc { name = Id.L(x); args = _; fargs = _; body = e; ret = _ } =
-  incr_pc ();Printf.fprintf oc "%s:\n" x;
+  incr_pc ();Printf.fprintf oc "%s:  #%d\n" x (!pc);
   add_pc_env x (!pc);
   stackset := S.empty;
   stackmap := [];
