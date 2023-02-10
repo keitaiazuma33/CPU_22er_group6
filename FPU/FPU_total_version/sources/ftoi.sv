@@ -22,7 +22,7 @@
 module ftoi
 (
    input bit sys_clk,
-   input logic rst,
+   input logic rstn,
    input logic [0:0]  stage1_valid,
    input wire [31:0]  x,
    output wire [31:0] y,
@@ -58,8 +58,13 @@ module ftoi
    assign out_valid = stage12_valid;
    
    always_ff @ (posedge sys_clk) begin
-        stage12_y = stage1_y;
-        stage12_valid = stage1_valid;
+       if (~rstn) begin
+           stage12_valid <= 1'b0; //reset to idle state
+       end
+       else begin 
+          stage12_y = stage1_y;
+          stage12_valid = stage1_valid;
+       end
    end
    
 endmodule

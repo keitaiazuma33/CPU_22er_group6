@@ -23,7 +23,7 @@
 module fadd
 (
    input bit sys_clk,
-   input logic rst,
+   input logic rstn,
    input logic [0:0]  stage1_valid,
    input wire [31:0]  x1,
    input wire [31:0]  x2,
@@ -325,39 +325,46 @@ module fadd
    assign out_valid = stage34_valid;
    
    always_ff @ (posedge sys_clk) begin
-      stage12_m1 <= stage1_m1;
-      stage12_e1 <= stage1_e1;
-      stage12_s1 <= stage1_s1;
-      stage12_e1a <= stage1_e1a;
-      stage12_m2 <= stage1_m2;
-      stage12_e2 <= stage1_e2;
-      stage12_s2 <= stage1_s2;
-      stage12_e2a <= stage1_e2a;
-      stage12_ms <= stage1_ms;
-      stage12_es <= stage1_es;
-      stage12_ss <= stage1_ss;
-      stage12_mia <= stage1_mia;
-      stage12_tstck <= stage1_tstck;
-      stage12_mye <= stage1_mye;
-      stage12_valid <= stage1_valid;
-
-      stage23_m1 <= stage2_m1;
-      stage23_e1 <= stage2_e1;
-      stage23_s1 <= stage2_s1;
-      stage23_e1a <= stage2_e1a;
-      stage23_m2 <= stage2_m2;
-      stage23_e2 <= stage2_e2;
-      stage23_s2 <= stage2_s2;
-      stage23_e2a <= stage2_e2a;
-      stage23_ss <= stage2_ss;
-      stage23_eyf <= stage2_eyf;
-      stage23_myf <= stage2_myf;
-      stage23_stck <= stage2_stck;
-      stage23_se <= stage2_se;
-      stage23_valid <= stage2_valid;
-      
-      stage34_y <= stage3_y;
-      stage34_valid <= stage3_valid;
+      if (~rstn) begin
+          stage12_valid <= 1'b0; //reset to idle state
+          stage23_valid <= 1'b0; //reset to idle state
+          stage34_valid <= 1'b0; //reset to idle state
+      end
+      else begin 
+          stage12_m1 <= stage1_m1;
+          stage12_e1 <= stage1_e1;
+          stage12_s1 <= stage1_s1;
+          stage12_e1a <= stage1_e1a;
+          stage12_m2 <= stage1_m2;
+          stage12_e2 <= stage1_e2;
+          stage12_s2 <= stage1_s2;
+          stage12_e2a <= stage1_e2a;
+          stage12_ms <= stage1_ms;
+          stage12_es <= stage1_es;
+          stage12_ss <= stage1_ss;
+          stage12_mia <= stage1_mia;
+          stage12_tstck <= stage1_tstck;
+          stage12_mye <= stage1_mye;
+          stage12_valid <= stage1_valid;
+    
+          stage23_m1 <= stage2_m1;
+          stage23_e1 <= stage2_e1;
+          stage23_s1 <= stage2_s1;
+          stage23_e1a <= stage2_e1a;
+          stage23_m2 <= stage2_m2;
+          stage23_e2 <= stage2_e2;
+          stage23_s2 <= stage2_s2;
+          stage23_e2a <= stage2_e2a;
+          stage23_ss <= stage2_ss;
+          stage23_eyf <= stage2_eyf;
+          stage23_myf <= stage2_myf;
+          stage23_stck <= stage2_stck;
+          stage23_se <= stage2_se;
+          stage23_valid <= stage2_valid;
+          
+          stage34_y <= stage3_y;
+          stage34_valid <= stage3_valid;
+      end
    end
 endmodule
 

@@ -22,8 +22,7 @@
 
 module top
 (
-    input  bit           clk,
-    //input  bit           mem_clk,
+    input  bit           sys_clk,
     input  bit           rstn,
     input  logic [7:0]   opcode,
     input  logic [31:0]  x1,
@@ -33,29 +32,8 @@ module top
     output logic         unf,
     output logic [0:0]   out_valid
 );
-    bit sys_clk;
-    bit mem_clk;
-    clk_wiz_0 clk_gen (
-        .clk_in1(clk),
-        .clk_out1(mem_clk),
-        .clk_out2(sys_clk)
-    );
     
-    //mem_clkを基準としてsys_clk(2)を生成
-    bit sys_clk2;
-    reg [0:0] sys_clk2_reg;
-    assign sys_clk2 = sys_clk2_reg;
-    
-    logic [0:0] zero;
-    assign zero = 1'b1;
-    always_ff @ (posedge mem_clk) begin
-        if (~rstn) begin
-            sys_clk2_reg <= zero;
-        end
-        else begin
-            sys_clk2_reg <= ~sys_clk2_reg;
-        end
-    end
+    logic [0:0] fpu_rst;
 
     //各モジュールからの返り値を受けとるwireを宣言
     logic [31:0]  fadd_y;
@@ -84,7 +62,7 @@ module top
     fadd fadd_instance // fmulモジュールのインスタンスを作成
     (
         .sys_clk(sys_clk),
-        .rst(rst),
+        .rstn(rstn),
         .stage1_valid(opcode[0:0]),
         .x1(x1),
         .x2(x2),
@@ -95,7 +73,7 @@ module top
     fsub fsub_instance // fmulモジュールのインスタンスを作成
     (
         .sys_clk(sys_clk),
-        .rst(rst),
+        .rstn(rstn),
         .stage1_valid(opcode[1:1]),
         .x1(x1),
         .x2(x2),
@@ -106,7 +84,7 @@ module top
     fmul fmul_instance // fmulモジュールのインスタンスを作成
     (
         .sys_clk(sys_clk),
-        .rst(rst),
+        .rstn(rstn),
         .stage1_valid(opcode[2:2]),
         .x1(x1),
         .x2(x2),
@@ -119,8 +97,7 @@ module top
     fdiv fdiv_instance // fmulモジュールのインスタンスを作成
     (
         .sys_clk(sys_clk),
-        .mem_clk(mem_clk),
-        .rst(rst),
+        .rstn(rstn),
         .stage1_valid(opcode[3:3]),
         .x1(x1),
         .x2(x2),
@@ -134,8 +111,7 @@ module top
     fsqrt fsqrt_instance
     (
         .sys_clk(sys_clk),
-        .mem_clk(mem_clk),
-        .rst(rst),
+        .rstn(rstn),
         .stage1_valid(opcode[4:4]),
         .x(x1),
         .y(fsqrt_y),
@@ -146,7 +122,7 @@ module top
     ftoi ftoi_i
     (
         .sys_clk(sys_clk),
-        .rst(rst),
+        .rstn(rstn),
         .stage1_valid(opcode[5:5]),
         .x(x1),
         .y(ftoi_y),
@@ -157,7 +133,7 @@ module top
     itof itof_i
     (
         .sys_clk(sys_clk),
-        .rst(rst),
+        .rstn(rstn),
         .stage1_valid(opcode[6:6]),
         .x(x1),
         .y(itof_y),
@@ -168,59 +144,121 @@ module top
     fabs fabs_i
     (
         .sys_clk(sys_clk),
-        .rst(rst),
+        .rstn(rstn),
         .stage1_valid(opcode[7:7]),
         .x(x1),
         .y(fabs_y),
         .out_valid(fabs_valid)
     );
     
-    logic [7:0] opcode_ref1;
-    logic [7:0] opcode_ref2;
-    logic [7:0] opcode_ref3;
-    logic [7:0] opcode_ref4;
-    logic [7:0] opcode_ref5;
-    logic [7:0] opcode_ref6;
-    reg [7:0] opcode_01;
-    reg [7:0] opcode_12;
-    reg [7:0] opcode_23;
-    reg [7:0] opcode_34;
-    reg [7:0] opcode_45;
-    reg [7:0] opcode_56;
+    logic [3:0] state;
+    typedef enum {idle, fadd, fsub, fmul, fdiv, fsqrt, ftoi, itof, fabs} FPU_state_type;   //オートマトンの状態：左から順に0,1,2,3
+    // 有限状態の現在の状態と次の状態を保持する
+    FPU_state_type  current_state, next_state;
+    assign state = current_state;
     
-    assign y = (opcode_ref3[0:0] == 1'b1) ? fadd_y:
-               (opcode_ref3[1:1] == 1'b1) ? fsub_y:
-               (opcode_ref3[2:2] == 1'b1) ? fmul_y:
-               (opcode_ref6[3:3] == 1'b1) ? fdiv_y:
-               (opcode_ref3[4:4] == 1'b1) ? fsqrt_y:
-               (opcode_ref1[5:5] == 1'b1) ? ftoi_y:
-               (opcode_ref2[6:6] == 1'b1) ? itof_y:
-               (opcode_ref1[6:6] == 1'b1) ? fabs_y:
-                                       32'b0 ;
-    assign ovf = |{(opcode[2:2] && fmul_ovf), (opcode[3:3] && fdiv_ovf)};
-    assign unf = |{(opcode[2:2] && fmul_unf), (opcode[3:3] && fdiv_unf)};
-    assign out_valid = (opcode_ref3[0:0] == 1'b1) ? fadd_valid:
-                       (opcode_ref3[1:1] == 1'b1) ? fsub_valid:
-                       (opcode_ref3[2:2] == 1'b1) ? fmul_valid:
-                       (opcode_ref6[3:3] == 1'b1) ? fdiv_valid:
-                       (opcode_ref3[4:4] == 1'b1) ? fsqrt_valid:
-                       (opcode_ref1[5:5] == 1'b1) ? ftoi_valid:
-                       (opcode_ref2[6:6] == 1'b1) ? itof_valid:
-                       (opcode_ref1[6:6] == 1'b1) ? fabs_valid:
-                                               32'b0 ;
-                                               
-    assign opcode_ref1 = opcode_01;
-    assign opcode_ref2 = opcode_12;
-    assign opcode_ref3 = opcode_23;
-    assign opcode_ref4 = opcode_34;
-    assign opcode_ref5 = opcode_45;
-    assign opcode_ref6 = opcode_56;
-    always_ff @ (posedge sys_clk) begin
-      opcode_01 <= opcode;
-      opcode_12 <= opcode_ref1;
-      opcode_23 <= opcode_ref2;
-      opcode_34 <= opcode_ref3;
-      opcode_45 <= opcode_ref4;
-      opcode_56 <= opcode_ref5;
-   end
+    always_comb begin
+        case(current_state)
+            idle : begin
+                if (opcode[0:0])
+                begin
+                    next_state = fadd;
+                end
+                if (opcode[1:1])
+                begin
+                    next_state = fsub;
+                end
+                if (opcode[2:2])
+                begin
+                    next_state = fmul;
+                end
+                if (opcode[3:3])
+                begin
+                    next_state = fdiv;
+                end
+                if (opcode[4:4])
+                begin
+                    next_state = fsqrt;
+                end
+                if (opcode[5:5])
+                begin
+                    next_state = ftoi;
+                end
+                if (opcode[6:6])
+                begin
+                    next_state = itof;
+                end
+                if (opcode[7:7])
+                begin
+                    next_state = fabs;
+                end
+            end
+            fadd : begin
+                if (fadd_valid)
+                begin
+                    next_state = idle;
+                end
+            end
+            fsub : begin
+                if (fsub_valid)
+                begin
+                    next_state = idle;
+                end
+            end
+            fmul : begin
+                if (fmul_valid)
+                begin
+                    next_state = idle;
+                end
+            end
+            fdiv : begin
+                if (fdiv_valid)
+                begin
+                    next_state = idle;
+                end
+            end
+            fsqrt : begin
+                if (fsqrt_valid)
+                begin
+                    next_state = idle;
+                end
+            end
+            ftoi : begin
+                if (ftoi_valid)
+                begin
+                    next_state = idle;
+                end
+            end
+            itof : begin
+                if (itof_valid)
+                begin
+                    next_state = idle;
+                end
+            end
+            fabs : begin
+                if (fabs_valid)
+                begin
+                    next_state = idle;
+                end
+            end
+        endcase
+    end
+    
+    assign {y, out_valid, ovf, unf} = (state == fadd)   ? {fadd_y, fadd_valid, 1'b0, 1'b0}:
+                                      (state == fsub)   ? {fsub_y, fsub_valid, 1'b0, 1'b0}:
+                                      (state == fmul)   ? {fmul_y, fmul_valid, fmul_ovf, fmul_unf}:
+                                      (state == fdiv)   ? {fdiv_y, fdiv_valid, fdiv_ovf, fdiv_unf}:
+                                      (state == fsqrt)  ? {fsqrt_y, fsqrt_valid, 1'b0, 1'b0}:
+                                      (state == ftoi)  ? {ftoi_y, ftoi_valid, 1'b0, 1'b0}:
+                                      (state == itof)  ? {itof_y, itof_valid, 1'b0, 1'b0}:
+                                      (state == fabs)  ? {fabs_y, fabs_valid, 1'b0, 1'b0}:
+                                                         {32'b0 , 1'b0, 1'b0, 1'b0};
+    
+    always_ff @(posedge(sys_clk))
+    begin
+        if (~rstn) 
+        current_state <= idle; //reset to idle state
+        else 
+        current_state <= next_state;
+    end
 endmodule

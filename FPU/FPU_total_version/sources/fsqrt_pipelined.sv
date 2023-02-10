@@ -23,7 +23,7 @@
 module fsqrt(
     input logic sys_clk,
     input logic mem_clk,
-    input logic rst,
+    input logic rstn,
     input logic stage1_valid,
     input  logic [31:0] x,
     output logic [31:0] y,
@@ -122,16 +122,23 @@ module fsqrt(
     assign out_valid = stage34_valid;
     
     always_ff @ (posedge sys_clk) begin
-      stage12_x <= x;
-      stage12_valid <= stage1_valid;
-
-      stage23_x <= stage2_x;
-      stage23_delta_y_l <= stage2_delta_y_l;
-      stage23_delta_y_h <= stage2_delta_y_h;
-      stage23_y_intersect <= stage2_y_intersect;
-      stage23_valid <= stage2_valid;
-      
-      stage34_y <= stage3_y;
-      stage34_valid <= stage3_valid;
+      if (~rstn) begin
+          stage12_valid <= 1'b0; //reset to idle state
+          stage23_valid <= 1'b0; //reset to idle state
+          stage34_valid <= 1'b0; //reset to idle state
+      end
+      else begin 
+          stage12_x <= x;
+          stage12_valid <= stage1_valid;
+    
+          stage23_x <= stage2_x;
+          stage23_delta_y_l <= stage2_delta_y_l;
+          stage23_delta_y_h <= stage2_delta_y_h;
+          stage23_y_intersect <= stage2_y_intersect;
+          stage23_valid <= stage2_valid;
+          
+          stage34_y <= stage3_y;
+          stage34_valid <= stage3_valid;
+      end
    end
 endmodule

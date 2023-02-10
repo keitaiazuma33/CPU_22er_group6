@@ -23,7 +23,7 @@
 module fdiv(
     input logic sys_clk,
     input logic mem_clk,
-    input logic rst,
+    input logic rstn,
     input logic stage1_valid,
     input  logic [31:0] x1,
     input  logic [31:0] x2,
@@ -53,13 +53,14 @@ module fdiv(
     
     //ここからfinv
     //STAGE 1 第2引数の逆数をとる
-    logic        ena;
-    logic [0:0]  wea;
-    logic [9:0] addra;
-    logic [7:0]  dina;
-    logic [35:0]  douta;
-    logic [35:0] data_from_a;
-
+    //logic        ena;
+    //logic [0:0]  wea;
+    logic [9:0] addr;
+    //logic [7:0]  dina;
+    reg [35:0]  dout;
+    logic [35:0] data_from_coe;
+    
+    /*
     blk_mem_finv blk_mem_finv_i ( // メモリモジュールのインスタンスを作成
         .clka(mem_clk), // ポートA(一つ目のポート)への接続
         .ena(ena),
@@ -68,12 +69,24 @@ module fdiv(
         .dina(dina),
         .douta(douta)
     );
+    */
+    
+    (* ram_style = "block" *)
+    reg [35:0] finv_coe [0:1023];
+
+    initial begin
+        $readmemb("C:\Users\admin\Desktop\UTokyo\3A\CPU_ex\FPU\FPU_total_version\coefficient files\finv_data_binary.txt", finv_coe);
+    end
+
+    always_ff @(posedge sys_clk) begin
+        dout <= finv_coe[10'b1];
+    end
     
     // ポートAで所望のデータ（傾き13bit + y切片23bit）を読みだす
-    assign ena  = 1'b1;
-    assign wea  = 1'b0; // read-only
-    assign dina = 8'h0;
-    assign data_from_a = douta;
+    //assign ena  = 1'b1;
+    //assign wea  = 1'b0; // read-only
+    //assign dina = 8'h0;
+    assign data_from_coe = dout;
     assign addra = x2[22:13];
     
     //STAGE 2 delta_yの掛け算を行う
@@ -83,11 +96,11 @@ module fdiv(
     logic [23:0] stage3_y_intersect;   //*2^0して考えて
     reg   [23:0] stage23_y_intersect;   //*2^0して考えて
     //傾きは-0.25～-1にstrictに収まる
-    assign gradient  = (data_from_a[35:35] == 1'b0) ? {1'b1, data_from_a[34:23], 12'b0} : {2'b01, data_from_a[34:23], 11'b0};
+    assign gradient  = (data_from_coe[35:35] == 1'b0) ? {1'b1, data_from_coe[34:23], 12'b0} : {2'b01, data_from_coe[34:23], 11'b0};
     //差分は 1 <= delta < 2 に収まる
     assign delta_x     = {1'b1, stage2_x2[22:0]};
     //切片は1～2にstrictに収まる
-    assign stage2_y_intersect = {1'b1, data_from_a[22:0]};
+    assign stage2_y_intersect = {1'b1, data_from_coe[22:0]};
     
     logic [48:0] stage2_delta_y_l;
     logic [48:0] stage2_delta_y_h;
@@ -122,7 +135,7 @@ module fdiv(
     //STAGE 4
     fmul fmul_instance(
         .sys_clk(sys_clk),
-        .rst(rst),
+        .rstn(rstn),
         .stage1_valid(stage4_valid),
         .x1(stage4_x1),
         .x2(stage4_finv_float),
@@ -149,20 +162,27 @@ module fdiv(
     assign stage4_finv_float = stage34_finv_float;
     
     always_ff @ (posedge sys_clk) begin
-      stage12_x1 <= x1;
-      stage12_x2 <= x2;
-      stage12_valid <= stage1_valid;
-
-      stage23_x1 <= stage2_x1;
-      stage23_x2 <= stage2_x2;
-      stage23_delta_y_l <= stage2_delta_y_l;
-      stage23_delta_y_h <= stage2_delta_y_h;
-      stage23_y_intersect <= stage2_y_intersect;
-      stage23_valid <= stage2_valid;
-      
-      stage34_x1 <= stage3_x1;
-      stage34_finv_float <= stage3_finv_float;
-      stage34_valid <= stage3_valid;
+      if (~rstn) begin
+          stage12_valid <= 1'b0; //reset to idle state
+          stage23_valid <= 1'b0; //reset to idle state
+          stage34_valid <= 1'b0; //reset to idle state
+      end
+      else begin 
+          stage12_x1 <= x1;
+          stage12_x2 <= x2;
+          stage12_valid <= stage1_valid;
+    
+          stage23_x1 <= stage2_x1;
+          stage23_x2 <= stage2_x2;
+          stage23_delta_y_l <= stage2_delta_y_l;
+          stage23_delta_y_h <= stage2_delta_y_h;
+          stage23_y_intersect <= stage2_y_intersect;
+          stage23_valid <= stage2_valid;
+          
+          stage34_x1 <= stage3_x1;
+          stage34_finv_float <= stage3_finv_float;
+          stage34_valid <= stage3_valid;
+      end
    end
 
 endmodule

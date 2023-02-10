@@ -22,7 +22,7 @@
 module fmul
 (
    input bit sys_clk,
-   input logic rst,
+   input logic rstn,
    input logic [0:0]  stage1_valid,
    input wire [31:0]  x1,
    input wire [31:0]  x2,
@@ -181,30 +181,37 @@ module fmul
    assign out_valid = stage34_valid;
    
    always_ff @ (posedge sys_clk) begin
-      stage12_hh <= stage1_hh;
-      stage12_hl <= stage1_hl;
-      stage12_lh <= stage1_lh;
-      stage12_ans_e_pre <= stage1_ans_e_pre;
-      stage12_ans_s <= stage1_ans_s;
-      stage12_x1 <= x1;
-      stage12_x2 <= x2;
-      stage12_valid <= stage1_valid;
-
-      stage23_ans_e_pre <= stage2_ans_e_pre;
-      stage23_ans_s <= stage2_ans_s;
-      stage23_ans_m_long <= stage2_ans_m_long;
-      stage23_ans_e_pre_plus_one <= stage2_ans_e_pre_plus_one;
-      stage23_eplus <= stage2_eplus;
-      stage23_unf <= stage2_unf;
-      stage23_ovf <= stage2_ovf;
-      stage23_x1 <= stage2_x1;
-      stage23_x2 <= stage2_x2;
-      stage23_valid <= stage2_valid;
-      
-      stage34_y <= stage3_y;
-      stage34_ovf <= stage3_ovf;
-      stage34_unf <= stage3_unf;
-      stage34_valid <= stage3_valid;
+      if (~rstn) begin
+          stage12_valid <= 1'b0; //reset to idle state
+          stage23_valid <= 1'b0; //reset to idle state
+          stage34_valid <= 1'b0; //reset to idle state
+      end
+      else begin 
+          stage12_hh <= stage1_hh;
+          stage12_hl <= stage1_hl;
+          stage12_lh <= stage1_lh;
+          stage12_ans_e_pre <= stage1_ans_e_pre;
+          stage12_ans_s <= stage1_ans_s;
+          stage12_x1 <= x1;
+          stage12_x2 <= x2;
+          stage12_valid <= stage1_valid;
+    
+          stage23_ans_e_pre <= stage2_ans_e_pre;
+          stage23_ans_s <= stage2_ans_s;
+          stage23_ans_m_long <= stage2_ans_m_long;
+          stage23_ans_e_pre_plus_one <= stage2_ans_e_pre_plus_one;
+          stage23_eplus <= stage2_eplus;
+          stage23_unf <= stage2_unf;
+          stage23_ovf <= stage2_ovf;
+          stage23_x1 <= stage2_x1;
+          stage23_x2 <= stage2_x2;
+          stage23_valid <= stage2_valid;
+          
+          stage34_y <= stage3_y;
+          stage34_ovf <= stage3_ovf;
+          stage34_unf <= stage3_unf;
+          stage34_valid <= stage3_valid;
+      end
    end
 endmodule
 

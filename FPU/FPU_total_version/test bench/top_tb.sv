@@ -21,7 +21,7 @@
 
 
 module fpu_tb ();
-    logic [0:0]    clk;
+    logic [0:0]    sys_clk;
     logic [0:0]    rstn;
     logic [7:0]    opcode;
     logic [31:0]   x1;
@@ -32,27 +32,17 @@ module fpu_tb ();
     
     //システムのクロックは100MHzに設定する
     localparam sys_clk_FREQ = 100.0;
-    //メモリのクロックは200MHzに設定する
-    localparam mem_clk_FREQ = 200.0;
     always begin
-        clk <= 1;
+        sys_clk <= 1;
         #(((1/sys_clk_FREQ)/2)*1000);
-        clk <= 0;
+        sys_clk <= 0;
         #(((1/sys_clk_FREQ)/2)*1000);
     end
-    /*
-    always begin
-        mem_clk <= 1;
-        #(((1/mem_clk_FREQ)/2)*1000);
-        mem_clk <= 0;
-        #(((1/mem_clk_FREQ)/2)*1000);
-    end
-    */
 
     top top_i (
         .opcode(opcode),
         .rstn(rstn),
-        .clk(clk),
+        .sys_clk(sys_clk),
         //.mem_clk(mem_clk),
         .x1(x1),
         .x2(x2),
@@ -117,25 +107,25 @@ module fpu_tb ();
         #10
         opcode <= 8'b00000000;
         #60;
-        opcode <= 8'b00000000;
+        opcode <= 8'b10000000;
         x1 <= 32'h3f800000;
         x2 <= 32'h3f800000;
         #10
         opcode <= 8'b00000000;
         #60;
-        opcode <= 8'b00000000;
+        opcode <= 8'b10000000;
         x1 <= 32'h3f800000;
         x2 <= 32'h40000000;
         #10
         opcode <= 8'b00000000;
         #60;
-        opcode <= 8'b00000000;
+        opcode <= 8'b10000000;
         x1 <= 32'h3f800000;
         x2 <= 32'h40400000;
         #10
         opcode <= 8'b00000000;
         #60;
-        opcode <= 8'b00000000;
+        opcode <= 8'b10000000;
         x1 <= 32'h3f800000;
         x2 <= 32'h40800000;
         #10
