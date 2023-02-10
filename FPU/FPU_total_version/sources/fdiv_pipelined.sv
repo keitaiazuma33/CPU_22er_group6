@@ -22,7 +22,6 @@
 
 module fdiv(
     input logic sys_clk,
-    input logic mem_clk,
     input logic rstn,
     input logic stage1_valid,
     input  logic [31:0] x1,
@@ -53,41 +52,24 @@ module fdiv(
     
     //ここからfinv
     //STAGE 1 第2引数の逆数をとる
-    //logic        ena;
-    //logic [0:0]  wea;
     logic [9:0] addr;
-    //logic [7:0]  dina;
     reg [35:0]  dout;
     logic [35:0] data_from_coe;
     
-    /*
-    blk_mem_finv blk_mem_finv_i ( // メモリモジュールのインスタンスを作成
-        .clka(mem_clk), // ポートA(一つ目のポート)への接続
-        .ena(ena),
-        .wea(wea),
-        .addra(addra),
-        .dina(dina),
-        .douta(douta)
-    );
-    */
-    
-    (* ram_style = "block" *)
-    reg [35:0] finv_coe [0:1023];
+    (* ram_style = "block" *) 
+    reg [35:0] finv_coe [1023:0];
 
     initial begin
-        $readmemb("C:\Users\admin\Desktop\UTokyo\3A\CPU_ex\FPU\FPU_total_version\coefficient files\finv_data_binary.txt", finv_coe);
+        $readmemb("C:/Users/admin/Desktop/UTokyo/3A/CPU_ex/FPU/FPU_total_version/coefficient files/finv_data_binary_ascii.txt", finv_coe);
     end
 
     always_ff @(posedge sys_clk) begin
-        dout <= finv_coe[10'b1];
+        dout <= finv_coe[addr];
     end
     
-    // ポートAで所望のデータ（傾き13bit + y切片23bit）を読みだす
-    //assign ena  = 1'b1;
-    //assign wea  = 1'b0; // read-only
-    //assign dina = 8'h0;
+    // coeから所望のデータ（傾き13bit + y切片23bit）を読みだす
     assign data_from_coe = dout;
-    assign addra = x2[22:13];
+    assign addr = x2[22:13];
     
     //STAGE 2 delta_yの掛け算を行う
     logic [24:0] gradient;      //*2^-25して考えて
@@ -112,10 +94,8 @@ module fdiv(
     assign stage2_delta_y_h = (gradient[24:18] * delta_x) << 18;
     
     //STAGE 3
-    //logic flag;
     logic [48:0] stage3_delta_y;
     assign stage3_delta_y = stage3_delta_y_h + stage3_delta_y_l;
-    //assign flag = |stage3_delta_y[23:0];
     logic [48:0] finv_ans;
     assign finv_ans = $unsigned({stage3_y_intersect, 25'b0}) -  $unsigned({stage3_delta_y[48:25], stage3_delta_y[24:0]});
     logic [0:0]  finv_float_s;

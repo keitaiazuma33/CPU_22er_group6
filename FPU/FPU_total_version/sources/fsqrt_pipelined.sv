@@ -22,7 +22,6 @@
 
 module fsqrt(
     input logic sys_clk,
-    input logic mem_clk,
     input logic rstn,
     input logic stage1_valid,
     input  logic [31:0] x,
@@ -44,28 +43,24 @@ module fsqrt(
     logic [31:0] stage3_y;
     reg [31:0] stage34_y;
 
-    logic        ena;
-    logic [0:0]  wea;
-    logic [9:0]  addra;
-    logic [7:0]  dina;
-    logic [35:0] douta;
-    logic [35:0] data_from_a;
+    logic [9:0]  addr;
+    logic [35:0] dout;
+    logic [35:0] data_from_coe;
 
-    blk_mem_fsqrt blk_mem_fsqrt_i ( // メモリモジュールのインスタンスを作成
-        .clka(mem_clk), // ポートA(一つ目のポート)への接続
-        .ena(ena),
-        .wea(wea),
-        .addra(addra),
-        .dina(dina),
-        .douta(douta)
-    );
+    (* ram_style = "block" *) 
+    reg [35:0] fsqrt_coe [1023:0];
 
+    initial begin
+        $readmemb("C:/Users/admin/Desktop/UTokyo/3A/CPU_ex/FPU/FPU_total_version/coefficient files/fsqrt_data_binary_ascii.txt", fsqrt_coe);
+    end
+
+    always_ff @(posedge sys_clk) begin
+        dout <= fsqrt_coe[addr];
+    end
+    
     // ポートAで所望のデータ（傾き13bit + y切片23bit）を読みだす
-    assign ena  = 1'b1;
-    assign wea  = 1'b0; // read-only
-    assign dina = 8'h0;
-    assign data_from_a = douta;
-    assign addra = (x[23:23] == 1'b0) ? {1'b1, x[22:14]} : {1'b0, x[22:14]};
+    assign data_from_coe = dout;
+    assign addr = (x[23:23] == 1'b0) ? {1'b1, x[22:14]} : {1'b0, x[22:14]};
     
     //STAGE 2
     logic [23:0] gradient; //0.25～0.5の２進数表現を表現（単精度部分）  *2^-25して考えて
@@ -75,11 +70,11 @@ module fsqrt(
     reg  [23:0] stage23_y_intersect;
 
     //傾きは 0.25～0.5 にstrictに収まる→指数部まで固定
-    assign gradient  = {1'b1, data_from_a[35:23], 10'b0};
+    assign gradient  = {1'b1, data_from_coe[35:23], 10'b0};
     //指数部のLSBが1のものが前半、0のものが後半になる（例：1 = 0 01111111 000000000000000000000000, 2 = 0 10000000 000000000000000000000000）
     assign delta_x     = (stage2_x[23:23] == 1'b0) ? {1'b1, stage2_x[22:0], 1'b0} : {2'b01, stage2_x[22:0]};
     //切片は 0.5～1.0 にstrictに収まる→指数部まで固定　
-    assign stage2_y_intersect = {1'b1, data_from_a[22:0]};
+    assign stage2_y_intersect = {1'b1, data_from_coe[22:0]};
     
     logic [48:0] stage2_delta_y_l;
     logic [48:0] stage2_delta_y_h;
