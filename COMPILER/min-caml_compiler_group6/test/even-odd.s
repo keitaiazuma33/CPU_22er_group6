@@ -19,7 +19,7 @@ ble_else.36:
 	addi	%x5, %x5, -1  #5
 	j	even.17  #5
 	nop
-even.17:  #68
+even.17:  #60
 	bge	%x0, %x5, 12  #8
 	j	ble_else.38
 	nop

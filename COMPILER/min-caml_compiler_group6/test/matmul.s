@@ -39,7 +39,7 @@ be_else.855:
 	mv	%x7, %x10
 	j	mul_abs.324  #63
 	nop
-mul.329:  #92
+mul.329:  #84
 	bge	%x5, %x0, 12  #67
 	j	bge_else.856
 	nop
@@ -84,7 +84,7 @@ be_else.860:
 	sub	%x5, %x0, %x5  #73
 	ret
 	nop
-div_abs.332:  #268
+div_abs.332:  #240
 	addi	%x24, %x0, -1
 	beq	%x7, %x24, 12  #77
 	j	be_else.861
@@ -110,7 +110,7 @@ ble_else.862:
 	addi	%x7, %x7, -1  #83
 	j	div_abs.332  #83
 	nop
-div.337:  #364
+div.337:  #328
 	bge	%x5, %x0, 12  #87
 	j	bge_else.863
 	nop
@@ -155,7 +155,7 @@ be_else.867:
 	sub	%x5, %x0, %x5  #93
 	ret
 	nop
-print_int.342:  #540
+print_int.342:  #484
 	bge	%x5, %x0, 12  #100
 	j	bge_else.868
 	nop
@@ -198,7 +198,7 @@ bge_else.868:
 	sub	%x5, %x0, %x5  #102
 	j	print_int.342  #102
 	nop
-assign_array.356:  #704
+assign_array.356:  #640
 	beq	%x7, %x0, 12  #160
 	j	be_else.872
 	nop
@@ -212,7 +212,7 @@ be_else.872:
 	addi	%x7, %x7, -1  #164
 	j	assign_array.356  #164
 	nop
-create_array.360:  #756
+create_array.360:  #688
 	mv	%x7, %x3  #168
 	sw	%x7, 0(%x2)  #171
 	mv	%x23, %x7
@@ -226,7 +226,7 @@ create_array.360:  #756
 	lw	%x5, 0(%x2)  #172
 	ret
 	nop
-assign_farray.363:  #808
+assign_farray.363:  #740
 	beq	%x6, %x0, 12  #176
 	j	be_else.874
 	nop
@@ -240,7 +240,7 @@ be_else.874:
 	addi	%x6, %x6, -1  #180
 	j	assign_farray.363  #180
 	nop
-create_float_array.367:  #860
+create_float_array.367:  #788
 	mv	%x6, %x3  #184
 	sw	%x6, 0(%x2)  #187
 	mv	%x23, %x6
@@ -254,7 +254,7 @@ create_float_array.367:  #860
 	lw	%x5, 0(%x2)  #188
 	ret
 	nop
-loop3.512:  #912
+loop3.512:  #840
 	lw	%x6, 20(%x22)  #0
 	lw	%x7, 16(%x22)  #0
 	lw	%x9, 12(%x22)  #0
@@ -288,7 +288,7 @@ loop3.512:  #912
 bge_else.876:
 	ret
 	nop
-loop2.504:  #1044
+loop2.504:  #968
 	lw	%x6, 20(%x22)  #0
 	lw	%x7, 16(%x22)  #0
 	lw	%x9, 12(%x22)  #0
@@ -299,7 +299,7 @@ loop2.504:  #1044
 	nop
 	mv	%x12, %x3  #196
 	addi	%x3, %x3, 24  #196
-	addi	%x24, %x0, 912  #196 loop3.512
+	addi	%x24, %x0, 840  #196 loop3.512
 	mv	%x13, %x24  #196
 	sw	%x13, 0(%x12)  #196
 	sw	%x5, 20(%x12)  #196
@@ -327,7 +327,7 @@ loop2.504:  #1044
 bge_else.878:
 	ret
 	nop
-loop1.499:  #1196
+loop1.499:  #1116
 	lw	%x6, 20(%x22)  #0
 	lw	%x7, 16(%x22)  #0
 	lw	%x9, 12(%x22)  #0
@@ -338,7 +338,7 @@ loop1.499:  #1196
 	nop
 	mv	%x12, %x3  #194
 	addi	%x3, %x3, 24  #194
-	addi	%x24, %x0, 1044  #194 loop2.504
+	addi	%x24, %x0, 968  #194 loop2.504
 	mv	%x13, %x24  #194
 	sw	%x13, 0(%x12)  #194
 	sw	%x7, 20(%x12)  #194
@@ -366,10 +366,10 @@ loop1.499:  #1196
 bge_else.880:
 	ret
 	nop
-mul.370:  #1348
+mul.370:  #1264
 	mv	%x22, %x3  #192
 	addi	%x3, %x3, 24  #192
-	addi	%x24, %x0, 1196  #192 loop1.499
+	addi	%x24, %x0, 1116  #192 loop1.499
 	mv	%x12, %x24  #192
 	sw	%x12, 0(%x22)  #192
 	sw	%x7, 20(%x22)  #192
@@ -381,7 +381,7 @@ mul.370:  #1348
 	lw	0(%x23), %x22  #204
 	jalr	%x0, %x23, 0  #204
 	nop
-init.486:  #1404
+init.486:  #1320
 	lw	%x6, 8(%x22)  #0
 	lw	%x7, 4(%x22)  #0
 	bge	%x5, %x0, 12  #209
@@ -409,7 +409,7 @@ init.486:  #1404
 bge_else.882:
 	ret
 	nop
-make.378:  #1512
+make.378:  #1424
 	lw	%x7, 4(%x22)  #207
 	sw	%x5, 0(%x2)  #207
 	sw	%x6, 4(%x2)  #207
@@ -421,7 +421,7 @@ make.378:  #1512
 	lw	%x1, 12(%x2) #207
 	mv	%x22, %x3  #208
 	addi	%x3, %x3, 16  #208
-	addi	%x24, %x0, 1404  #208 init.486
+	addi	%x24, %x0, 1320  #208 init.486
 	mv	%x6, %x24  #208
 	sw	%x6, 0(%x22)  #208
 	lw	%x6, 4(%x2)  #208
@@ -452,7 +452,7 @@ min_caml_start:
 	lw	%x1, 12(%x2) #205
 	mv	%x22, %x3  #206
 	addi	%x3, %x3, 8  #206
-	addi	%x24, %x0, 1512  #206 make.378
+	addi	%x24, %x0, 1424  #206 make.378
 	mv	%x6, %x24  #206
 	sw	%x6, 0(%x22)  #206
 	sw	%x5, 4(%x22)  #206

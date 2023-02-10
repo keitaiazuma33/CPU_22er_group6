@@ -55,7 +55,7 @@ fbe_else.9177:
 	addi	%x5, %x0, 0  #0
 	ret
 	nop
-fispos.2530:  #48
+fispos.2530:  #44
 	mv	%f2, l.6293  #0
 	fle	%f31, %f0, %f2  #3
 	bge	%f30, %f31, 12  #3
@@ -68,7 +68,7 @@ fble_else.9178:
 	addi	%x5, %x0, 1  #0
 	ret
 	nop
-fisneg.2532:  #96
+fisneg.2532:  #88
 	mv	%f2, l.6293  #0
 	fle	%f31, %f2, %f0  #5
 	bge	%f30, %f31, 12  #5
@@ -81,20 +81,20 @@ fble_else.9179:
 	addi	%x5, %x0, 1  #0
 	ret
 	nop
-fneg.2534:  #144
+fneg.2534:  #132
 	fsub	%f0, %f30, %f0  #7
 	ret
 	nop
-fsqr.2536:  #156
+fsqr.2536:  #144
 	fmul	%f0, %f0, %f0  #9
 	ret
 	nop
-fhalf.2538:  #168
+fhalf.2538:  #156
 	mv	%f2, l.6297  #0
 	fmul	%f0, %f2, %f0  #11
 	ret
 	nop
-fless.2540:  #184
+fless.2540:  #172
 	fle	%f31, %f2, %f0  #13
 	bge	%f30, %f31, 12  #13
 	j	fble_else.9180
@@ -106,7 +106,7 @@ fble_else.9180:
 	addi	%x5, %x0, 1  #0
 	ret
 	nop
-sin.2543:  #228
+sin.2543:  #212
 	fmul	%f2, %f0, %f0  #16
 	fmul	%f4, %f0, %f2  #17
 	fmul	%f6, %f4, %f2  #18
@@ -122,7 +122,7 @@ sin.2543:  #228
 	fsub	%f0, %f0, %f2  #20
 	ret
 	nop
-cos.2545:  #288
+cos.2545:  #272
 	fmul	%f0, %f0, %f0  #24
 	fmul	%f2, %f0, %f0  #25
 	fmul	%f4, %f2, %f0  #26
@@ -138,7 +138,7 @@ cos.2545:  #288
 	fsub	%f0, %f0, %f2  #27
 	ret
 	nop
-atan.2547:  #348
+atan.2547:  #332
 	fmul	%f2, %f0, %f0  #31
 	fmul	%f4, %f0, %f2  #32
 	fmul	%f6, %f4, %f2  #33
@@ -162,7 +162,7 @@ atan.2547:  #348
 	fsub	%f0, %f0, %f2  #37
 	ret
 	nop
-floor.2549:  #440
+floor.2549:  #424
 	mv	%f2, l.6293  #0
 	fle	%f31, %f2, %f0  #41
 	bge	%f30, %f31, 12  #41
@@ -179,15 +179,15 @@ fble_else.9181:
 	itof	%f0, %x5  #44
 	ret
 	nop
-float_of_int.2553:  #504
+float_of_int.2553:  #484
 	itof	%f0, %x5  #50
 	ret
 	nop
-int_of_float.2555:  #516
+int_of_float.2555:  #496
 	ftoi	%x5, %f0  #53
 	ret
 	nop
-mul_abs.2557:  #528
+mul_abs.2557:  #508
 	addi	%x24, %x0, -1
 	beq	%x7, %x24, 12  #57
 	j	be_else.9182
@@ -212,7 +212,7 @@ be_else.9183:
 	mv	%x7, %x10
 	j	mul_abs.2557  #63
 	nop
-mul.2562:  #620
+mul.2562:  #592
 	bge	%x5, %x0, 12  #67
 	j	bge_else.9184
 	nop
@@ -257,7 +257,7 @@ be_else.9188:
 	sub	%x5, %x0, %x5  #73
 	ret
 	nop
-div_abs.2565:  #796
+div_abs.2565:  #748
 	addi	%x24, %x0, -1
 	beq	%x7, %x24, 12  #77
 	j	be_else.9189
@@ -283,7 +283,7 @@ ble_else.9190:
 	addi	%x7, %x7, -1  #83
 	j	div_abs.2565  #83
 	nop
-div.2570:  #892
+div.2570:  #836
 	bge	%x5, %x0, 12  #87
 	j	bge_else.9191
 	nop
@@ -328,11 +328,11 @@ be_else.9195:
 	sub	%x5, %x0, %x5  #93
 	ret
 	nop
-print_char.2573:  #1068
+print_char.2573:  #992
 	out	%x5  #96
 	ret
 	nop
-print_int.2575:  #1080
+print_int.2575:  #1004
 	bge	%x5, %x0, 12  #100
 	j	bge_else.9197
 	nop
@@ -375,7 +375,7 @@ bge_else.9197:
 	sub	%x5, %x0, %x5  #102
 	j	print_int.2575  #102
 	nop
-read_int_sub.2577:  #1244
+read_int_sub.2577:  #1160
 	in	%x7  #113
 	addi	%x24, %x0, 48
 	bge	%x7, %x24, 12  #114
@@ -437,7 +437,7 @@ bge_else.9201:
 	mv	%x5, %x7  #123
 	ret
 	nop
-read_int.2580:  #1476
+read_int.2580:  #1380
 	addi	%x5, %x0, 0  #0
 	addi	%x6, %x0, 0  #0
 	sw	%x1, 4(%x2)  #127
@@ -448,7 +448,7 @@ read_int.2580:  #1476
 	lw	%x5, 0(%x5)  #127
 	ret
 	nop
-pow.2582:  #1516
+pow.2582:  #1420
 	bge	%x0, %x5, 12  #132
 	j	ble_else.9204
 	nop
@@ -460,7 +460,7 @@ ble_else.9204:
 	addi	%x5, %x5, -1  #135
 	j	pow.2582  #135
 	nop
-read_float_sub.2585:  #1560
+read_float_sub.2585:  #1460
 	in	%x5  #139
 	addi	%x24, %x0, 48
 	bge	%x5, %x24, 12  #140
@@ -528,11 +528,11 @@ be_else.9208:
 bge_else.9205:
 	ret
 	nop
-read_float.2587:  #1812
+read_float.2587:  #1696
 	mv	%f0, l.6293  #0
 	j	read_float_sub.2585  #156
 	nop
-assign_array.2589:  #1824
+assign_array.2589:  #1708
 	beq	%x7, %x0, 12  #160
 	j	be_else.9209
 	nop
@@ -546,7 +546,7 @@ be_else.9209:
 	addi	%x7, %x7, -1  #164
 	j	assign_array.2589  #164
 	nop
-create_array.2593:  #1876
+create_array.2593:  #1756
 	mv	%x7, %x3  #168
 	sw	%x7, 0(%x2)  #171
 	mv	%x23, %x7
@@ -560,7 +560,7 @@ create_array.2593:  #1876
 	lw	%x5, 0(%x2)  #172
 	ret
 	nop
-assign_farray.2596:  #1928
+assign_farray.2596:  #1808
 	beq	%x6, %x0, 12  #176
 	j	be_else.9211
 	nop
@@ -574,7 +574,7 @@ be_else.9211:
 	addi	%x6, %x6, -1  #180
 	j	assign_farray.2596  #180
 	nop
-create_float_array.2600:  #1980
+create_float_array.2600:  #1856
 	mv	%x6, %x3  #184
 	sw	%x6, 0(%x2)  #187
 	mv	%x23, %x6
@@ -588,7 +588,7 @@ create_float_array.2600:  #1980
 	lw	%x5, 0(%x2)  #188
 	ret
 	nop
-xor.2633:  #2032
+xor.2633:  #1908
 	beq	%x5, %x0, 12  #326
 	j	be_else.9213
 	nop
@@ -606,7 +606,7 @@ be_else.9214:
 	addi	%x5, %x0, 0  #0
 	ret
 	nop
-sgn.2636:  #2100
+sgn.2636:  #1968
 	fsw	%f0, 0(%x2)  #334
 	sw	%x1, 12(%x2)  #334
 	addi	%x2, %x2, 16  #334
@@ -636,7 +636,7 @@ be_else.9215:
 	mv	%x5, l.6293  #0
 	ret
 	nop
-fneg_cond.2638:  #2216
+fneg_cond.2638:  #2076
 	beq	%x5, %x0, 12  #341
 	j	be_else.9217
 	nop
@@ -645,7 +645,7 @@ fneg_cond.2638:  #2216
 be_else.9217:
 	ret
 	nop
-add_mod5.2641:  #2248
+add_mod5.2641:  #2104
 	add	%x5, %x5, %x6  #346
 	addi	%x24, %x0, 5
 	bge	%x5, %x24, 12  #347
@@ -657,23 +657,23 @@ add_mod5.2641:  #2248
 bge_else.9218:
 	ret
 	nop
-vecset.2644:  #2288
+vecset.2644:  #2140
 	fsw	%f0, 0(%x5) #362
 	fsw	%f2, 8(%x5) #363
 	fsw	%f4, 16(%x5) #364
 	ret
 	nop
-vecfill.2649:  #2308
+vecfill.2649:  #2160
 	fsw	%f0, 0(%x5) #369
 	fsw	%f0, 8(%x5) #370
 	fsw	%f0, 16(%x5) #371
 	ret
 	nop
-vecbzero.2652:  #2328
+vecbzero.2652:  #2180
 	mv	%f0, l.6293  #0
 	j	vecfill.2649  #376
 	nop
-veccpy.2654:  #2340
+veccpy.2654:  #2192
 	flw	%f0, 0(%x6)  #381
 	fsw	%f0, 0(%x5) #381
 	flw	%f0, 8(%x6)  #382
@@ -682,7 +682,7 @@ veccpy.2654:  #2340
 	fsw	%f0, 16(%x5) #383
 	ret
 	nop
-vecunit_sgn.2657:  #2372
+vecunit_sgn.2657:  #2224
 	flw	%f0, 0(%x5)  #405
 	sw	%x6, 0(%x2)  #405
 	sw	%x5, 4(%x2)  #405
@@ -756,7 +756,7 @@ be_cont.9223:
 	fsw	%f0, 16(%x5) #409
 	ret
 	nop
-veciprod.2660:  #2664
+veciprod.2660:  #2500
 	flw	%f0, 0(%x5)  #414
 	flw	%f2, 0(%x6)  #414
 	fmul	%f0, %f0, %f2  #414
@@ -770,7 +770,7 @@ veciprod.2660:  #2664
 	fadd	%f0, %f0, %f2  #414
 	ret
 	nop
-veciprod2.2663:  #2716
+veciprod2.2663:  #2552
 	flw	%f6, 0(%x5)  #419
 	fmul	%f0, %f6, %f0  #419
 	flw	%f6, 8(%x5)  #419
@@ -781,7 +781,7 @@ veciprod2.2663:  #2716
 	fadd	%f0, %f0, %f2  #419
 	ret
 	nop
-vecaccum.2668:  #2756
+vecaccum.2668:  #2592
 	flw	%f2, 0(%x5)  #424
 	flw	%f4, 0(%x6)  #424
 	fmul	%f4, %f0, %f4  #424
@@ -799,7 +799,7 @@ vecaccum.2668:  #2756
 	fsw	%f0, 16(%x5) #426
 	ret
 	nop
-vecadd.2672:  #2824
+vecadd.2672:  #2660
 	flw	%f0, 0(%x5)  #431
 	flw	%f2, 0(%x6)  #431
 	fadd	%f0, %f0, %f2  #431
@@ -814,7 +814,7 @@ vecadd.2672:  #2824
 	fsw	%f0, 16(%x5) #433
 	ret
 	nop
-vecscale.2675:  #2880
+vecscale.2675:  #2716
 	flw	%f2, 0(%x5)  #447
 	fmul	%f2, %f2, %f0  #447
 	fsw	%f2, 0(%x5) #447
@@ -826,7 +826,7 @@ vecscale.2675:  #2880
 	fsw	%f0, 16(%x5) #449
 	ret
 	nop
-vecaccumv.2678:  #2924
+vecaccumv.2678:  #2760
 	flw	%f0, 0(%x5)  #454
 	flw	%f2, 0(%x6)  #454
 	flw	%f4, 0(%x7)  #454
@@ -847,168 +847,168 @@ vecaccumv.2678:  #2924
 	fsw	%f0, 16(%x5) #456
 	ret
 	nop
-o_texturetype.2682:  #3004
+o_texturetype.2682:  #2840
 	lw	%x5, 0(%x5)  #465
 	ret
 	nop
-o_form.2684:  #3016
+o_form.2684:  #2852
 	lw	%x5, 4(%x5)  #475
 	ret
 	nop
-o_reflectiontype.2686:  #3028
+o_reflectiontype.2686:  #2864
 	lw	%x5, 8(%x5)  #485
 	ret
 	nop
-o_isinvert.2688:  #3040
+o_isinvert.2688:  #2876
 	lw	%x5, 24(%x5)  #495
 	ret
 	nop
-o_isrot.2690:  #3052
+o_isrot.2690:  #2888
 	lw	%x5, 12(%x5)  #504
 	ret
 	nop
-o_param_a.2692:  #3064
+o_param_a.2692:  #2900
 	lw	%x5, 16(%x5)  #513
 	flw	%f0, 0(%x5)  #518
 	ret
 	nop
-o_param_b.2694:  #3080
+o_param_b.2694:  #2916
 	lw	%x5, 16(%x5)  #523
 	flw	%f0, 8(%x5)  #528
 	ret
 	nop
-o_param_c.2696:  #3096
+o_param_c.2696:  #2932
 	lw	%x5, 16(%x5)  #533
 	flw	%f0, 16(%x5)  #538
 	ret
 	nop
-o_param_abc.2698:  #3112
+o_param_abc.2698:  #2948
 	lw	%x5, 16(%x5)  #543
 	ret
 	nop
-o_param_x.2700:  #3124
+o_param_x.2700:  #2960
 	lw	%x5, 20(%x5)  #553
 	flw	%f0, 0(%x5)  #558
 	ret
 	nop
-o_param_y.2702:  #3140
+o_param_y.2702:  #2976
 	lw	%x5, 20(%x5)  #563
 	flw	%f0, 8(%x5)  #568
 	ret
 	nop
-o_param_z.2704:  #3156
+o_param_z.2704:  #2992
 	lw	%x5, 20(%x5)  #573
 	flw	%f0, 16(%x5)  #578
 	ret
 	nop
-o_diffuse.2706:  #3172
+o_diffuse.2706:  #3008
 	lw	%x5, 28(%x5)  #583
 	flw	%f0, 0(%x5)  #588
 	ret
 	nop
-o_hilight.2708:  #3188
+o_hilight.2708:  #3024
 	lw	%x5, 28(%x5)  #593
 	flw	%f0, 8(%x5)  #598
 	ret
 	nop
-o_color_red.2710:  #3204
+o_color_red.2710:  #3040
 	lw	%x5, 32(%x5)  #603
 	flw	%f0, 0(%x5)  #608
 	ret
 	nop
-o_color_green.2712:  #3220
+o_color_green.2712:  #3056
 	lw	%x5, 32(%x5)  #613
 	flw	%f0, 8(%x5)  #618
 	ret
 	nop
-o_color_blue.2714:  #3236
+o_color_blue.2714:  #3072
 	lw	%x5, 32(%x5)  #623
 	flw	%f0, 16(%x5)  #628
 	ret
 	nop
-o_param_r1.2716:  #3252
+o_param_r1.2716:  #3088
 	lw	%x5, 36(%x5)  #633
 	flw	%f0, 0(%x5)  #638
 	ret
 	nop
-o_param_r2.2718:  #3268
+o_param_r2.2718:  #3104
 	lw	%x5, 36(%x5)  #643
 	flw	%f0, 8(%x5)  #648
 	ret
 	nop
-o_param_r3.2720:  #3284
+o_param_r3.2720:  #3120
 	lw	%x5, 36(%x5)  #653
 	flw	%f0, 16(%x5)  #658
 	ret
 	nop
-o_param_ctbl.2722:  #3300
+o_param_ctbl.2722:  #3136
 	lw	%x5, 40(%x5)  #670
 	ret
 	nop
-p_rgb.2724:  #3312
+p_rgb.2724:  #3148
 	lw	%x5, 0(%x5)  #684
 	ret
 	nop
-p_intersection_points.2726:  #3324
+p_intersection_points.2726:  #3160
 	lw	%x5, 4(%x5)  #691
 	ret
 	nop
-p_surface_ids.2728:  #3336
+p_surface_ids.2728:  #3172
 	lw	%x5, 8(%x5)  #699
 	ret
 	nop
-p_calc_diffuse.2730:  #3348
+p_calc_diffuse.2730:  #3184
 	lw	%x5, 12(%x5)  #706
 	ret
 	nop
-p_energy.2732:  #3360
+p_energy.2732:  #3196
 	lw	%x5, 16(%x5)  #713
 	ret
 	nop
-p_received_ray_20percent.2734:  #3372
+p_received_ray_20percent.2734:  #3208
 	lw	%x5, 20(%x5)  #720
 	ret
 	nop
-p_group_id.2736:  #3384
+p_group_id.2736:  #3220
 	lw	%x5, 24(%x5)  #736
 	lw	%x5, 0(%x5)  #738
 	ret
 	nop
-p_set_group_id.2738:  #3400
+p_set_group_id.2738:  #3236
 	lw	%x5, 24(%x5)  #743
 	sw	%x6, 0(%x5)  #745
 	ret
 	nop
-p_nvectors.2741:  #3416
+p_nvectors.2741:  #3252
 	lw	%x5, 28(%x5)  #750
 	ret
 	nop
-d_vec.2743:  #3428
+d_vec.2743:  #3264
 	lw	%x5, 0(%x5)  #761
 	ret
 	nop
-d_const.2745:  #3440
+d_const.2745:  #3276
 	lw	%x5, 4(%x5)  #767
 	ret
 	nop
-r_surface_id.2747:  #3452
+r_surface_id.2747:  #3288
 	lw	%x5, 0(%x5)  #777
 	ret
 	nop
-r_dvec.2749:  #3464
+r_dvec.2749:  #3300
 	lw	%x5, 4(%x5)  #783
 	ret
 	nop
-r_bright.2751:  #3476
+r_bright.2751:  #3312
 	flw	%f0, 8(%x5)  #789
 	ret
 	nop
-rad.2753:  #3488
+rad.2753:  #3324
 	mv	%f2, l.6431  #0
 	fmul	%f0, %f0, %f2  #799
 	ret
 	nop
-read_screen_settings.2755:  #3504
+read_screen_settings.2755:  #3340
 	lw	%x5, 20(%x22)  #0
 	lw	%x6, 16(%x22)  #0
 	lw	%x7, 12(%x22)  #0
@@ -1168,7 +1168,7 @@ read_screen_settings.2755:  #3504
 	fsw	%f0, 16(%x7) #831
 	ret
 	nop
-read_light.2757:  #4140
+read_light.2757:  #3976
 	lw	%x5, 8(%x22)  #0
 	lw	%x6, 4(%x22)  #0
 	sw	%x6, 0(%x2)  #838
@@ -1256,7 +1256,7 @@ read_light.2757:  #4140
 	fsw	%f0, 0(%x5) #850
 	ret
 	nop
-rotate_quadratic_matrix.2759:  #4488
+rotate_quadratic_matrix.2759:  #4324
 	flw	%f0, 0(%x6)  #860
 	sw	%x5, 0(%x2)  #860
 	sw	%x6, 4(%x2)  #860
@@ -1523,7 +1523,7 @@ rotate_quadratic_matrix.2759:  #4488
 	fsw	%f0, 16(%x5) #894
 	ret
 	nop
-read_nth_object.2762:  #5552
+read_nth_object.2762:  #5388
 	lw	%x6, 4(%x22)  #0
 	sw	%x6, 0(%x2)  #901
 	sw	%x5, 4(%x2)  #901
@@ -1955,7 +1955,7 @@ be_cont.9255:
 	addi	%x5, %x0, 1  #0
 	ret
 	nop
-read_object.2764:  #7260
+read_object.2764:  #7020
 	lw	%x6, 8(%x22)  #0
 	lw	%x7, 4(%x22)  #0
 	addi	%x24, %x0, 60
@@ -1990,13 +1990,13 @@ be_else.9258:
 	lw	0(%x23), %x22  #985
 	jalr	%x0, %x23, 0  #985
 	nop
-read_all_object.2766:  #7392
+read_all_object.2766:  #7144
 	lw	%x22, 4(%x22)  #0
 	addi	%x5, %x0, 0  #0
 	lw	0(%x23), %x22  #992
 	jalr	%x0, %x23, 0  #992
 	nop
-read_net_item.2768:  #7412
+read_net_item.2768:  #7164
 	sw	%x5, 0(%x2)  #999
 	mv	%x5, %g0
 	sw	%x1, 4(%x2)  #999
@@ -2029,7 +2029,7 @@ be_else.9260:
 	sw	%x7, %x6(%x5)  #1003
 	ret
 	nop
-read_or_network.2770:  #7536
+read_or_network.2770:  #7284
 	addi	%x6, %x0, 0  #0
 	sw	%x5, 0(%x2)  #1007
 	mv	%x5, %x6
@@ -2064,7 +2064,7 @@ be_else.9261:
 	sw	%x7, %x6(%x5)  #1012
 	ret
 	nop
-read_and_network.2772:  #7668
+read_and_network.2772:  #7412
 	lw	%x6, 4(%x22)  #0
 	addi	%x7, %x0, 0  #0
 	sw	%x22, 0(%x2)  #1016
@@ -2093,7 +2093,7 @@ be_else.9262:
 	lw	0(%x23), %x22  #1020
 	jalr	%x0, %x23, 0  #1020
 	nop
-read_parameter.2774:  #7776
+read_parameter.2774:  #7516
 	lw	%x5, 20(%x22)  #0
 	lw	%x6, 16(%x22)  #0
 	lw	%x7, 12(%x22)  #0
@@ -2145,7 +2145,7 @@ read_parameter.2774:  #7776
 	sw	%x5, 0(%x6)  #1030
 	ret
 	nop
-solver_rect_surface.2776:  #7980
+solver_rect_surface.2776:  #7720
 	lw	%x11, 4(%x22)  #0
 	slli	%x12, %x7, 3  #1050
 	flw	%f6, %x12(%x6)  #1050
@@ -2278,7 +2278,7 @@ be_else.9268:
 	addi	%x5, %x0, 0  #0
 	ret
 	nop
-solver_rect.2785:  #8508
+solver_rect.2785:  #8236
 	lw	%x22, 4(%x22)  #0
 	addi	%x7, %x0, 0  #0
 	addi	%x9, %x0, 1  #0
@@ -2349,7 +2349,7 @@ be_else.9272:
 	addi	%x5, %x0, 1  #0
 	ret
 	nop
-solver_surface.2791:  #8788
+solver_surface.2791:  #8504
 	lw	%x7, 4(%x22)  #1076
 	sw	%x7, 0(%x2)  #1076
 	fsw	%f4, 8(%x2)  #1076
@@ -2403,7 +2403,7 @@ be_else.9276:
 	addi	%x5, %x0, 1  #0
 	ret
 	nop
-quadratic.2797:  #9000
+quadratic.2797:  #8712
 	fsw	%f0, 0(%x2)  #1089
 	fsw	%f4, 8(%x2)  #1089
 	fsw	%f2, 16(%x2)  #1089
@@ -2522,7 +2522,7 @@ be_else.9278:
 	fadd	%f0, %f2, %f0  #1094
 	ret
 	nop
-bilinear.2802:  #9472
+bilinear.2802:  #9180
 	fmul	%f12, %f0, %f6  #1103
 	fsw	%f6, 0(%x2)  #1103
 	fsw	%f0, 8(%x2)  #1103
@@ -2646,7 +2646,7 @@ be_else.9280:
 	fadd	%f0, %f2, %f0  #1110
 	ret
 	nop
-solver_second.2810:  #9964
+solver_second.2810:  #9668
 	lw	%x7, 4(%x22)  #0
 	flw	%f6, 0(%x6)  #1128
 	flw	%f8, 8(%x6)  #1128
@@ -2787,7 +2787,7 @@ be_else.9282:
 	addi	%x5, %x0, 0  #0
 	ret
 	nop
-solver.2816:  #10520
+solver.2816:  #10200
 	lw	%x9, 16(%x22)  #1154
 	lw	%x10, 12(%x22)  #1154
 	lw	%x11, 8(%x22)  #1154
@@ -2878,7 +2878,7 @@ be_else.9289:
 	lw	0(%x23), %x22  #1163
 	jalr	%x0, %x23, 0  #1163
 	nop
-solver_rect_fast.2820:  #10872
+solver_rect_fast.2820:  #10544
 	lw	%x9, 4(%x22)  #0
 	flw	%f6, 0(%x7)  #1186
 	fsub	%f6, %f6, %f0  #1186
@@ -3165,7 +3165,7 @@ be_else.9298:
 	addi	%x5, %x0, 1  #0
 	ret
 	nop
-solver_surface_fast.2827:  #12016
+solver_surface_fast.2827:  #11604
 	lw	%x5, 4(%x22)  #0
 	flw	%f6, 0(%x6)  #1219
 	sw	%x5, 0(%x2)  #1219
@@ -3204,7 +3204,7 @@ be_else.9314:
 	addi	%x5, %x0, 1  #0
 	ret
 	nop
-solver_second_fast.2833:  #12168
+solver_second_fast.2833:  #11752
 	lw	%x7, 4(%x22)  #0
 	flw	%f6, 0(%x6)  #1229
 	sw	%x7, 0(%x2)  #1230
@@ -3333,7 +3333,7 @@ be_else.9317:
 	addi	%x5, %x0, 0  #0
 	ret
 	nop
-solver_fast.2839:  #12676
+solver_fast.2839:  #12236
 	lw	%x9, 16(%x22)  #1248
 	lw	%x10, 12(%x22)  #1248
 	lw	%x11, 8(%x22)  #1248
@@ -3444,7 +3444,7 @@ be_else.9326:
 	lw	0(%x23), %x22  #1260
 	jalr	%x0, %x23, 0  #1260
 	nop
-solver_surface_fast2.2843:  #13108
+solver_surface_fast2.2843:  #12660
 	lw	%x5, 4(%x22)  #0
 	flw	%f0, 0(%x6)  #1268
 	sw	%x5, 0(%x2)  #1268
@@ -3472,7 +3472,7 @@ be_else.9327:
 	addi	%x5, %x0, 1  #0
 	ret
 	nop
-solver_second_fast2.2850:  #13216
+solver_second_fast2.2850:  #12764
 	lw	%x9, 4(%x22)  #0
 	flw	%f6, 0(%x6)  #1277
 	sw	%x9, 0(%x2)  #1278
@@ -3569,7 +3569,7 @@ be_else.9329:
 	addi	%x5, %x0, 0  #0
 	ret
 	nop
-solver_fast2.2857:  #13600
+solver_fast2.2857:  #13132
 	lw	%x7, 16(%x22)  #1295
 	lw	%x9, 12(%x22)  #1295
 	lw	%x10, 8(%x22)  #1295
@@ -3659,7 +3659,7 @@ be_else.9336:
 	lw	0(%x23), %x22  #1308
 	jalr	%x0, %x23, 0  #1308
 	nop
-setup_rect_table.2860:  #13948
+setup_rect_table.2860:  #13472
 	addi	%x7, %x0, 6  #0
 	mv	%f0, l.6293  #0
 	sw	%x6, 0(%x2)  #1317
@@ -3850,7 +3850,7 @@ be_else.9341:
 be_cont.9342:
 	ret
 	nop
-setup_surface_table.2863:  #14708
+setup_surface_table.2863:  #14208
 	addi	%x7, %x0, 4  #0
 	mv	%f0, l.6293  #0
 	sw	%x6, 0(%x2)  #1344
@@ -3974,7 +3974,7 @@ be_else.9344:
 be_cont.9345:
 	ret
 	nop
-setup_second_table.2866:  #15200
+setup_second_table.2866:  #14692
 	addi	%x7, %x0, 5  #0
 	mv	%f0, l.6293  #0
 	sw	%x6, 0(%x2)  #1363
@@ -4204,7 +4204,7 @@ be_cont.9350:
 	lw	%x5, 8(%x2)  #1386
 	ret
 	nop
-iter_setup_dirvec_constants.2869:  #16116
+iter_setup_dirvec_constants.2869:  #15592
 	lw	%x7, 4(%x22)  #0
 	bge	%x6, %x0, 12  #1392
 	j	bge_else.9351
@@ -4294,7 +4294,7 @@ be_cont.9353:
 bge_else.9351:
 	ret
 	nop
-setup_dirvec_constants.2872:  #16464
+setup_dirvec_constants.2872:  #15920
 	lw	%x6, 8(%x22)  #0
 	lw	%x22, 4(%x22)  #0
 	lw	%x6, 0(%x6)  #1409
@@ -4302,7 +4302,7 @@ setup_dirvec_constants.2872:  #16464
 	lw	0(%x23), %x22  #1409
 	jalr	%x0, %x23, 0  #1409
 	nop
-setup_startp_constants.2874:  #16492
+setup_startp_constants.2874:  #15948
 	lw	%x7, 4(%x22)  #0
 	bge	%x6, %x0, 12  #1417
 	j	bge_else.9357
@@ -4438,7 +4438,7 @@ be_cont.9359:
 bge_else.9357:
 	ret
 	nop
-setup_startp.2877:  #17020
+setup_startp.2877:  #16448
 	lw	%x6, 12(%x22)  #1436
 	lw	%x7, 8(%x22)  #1436
 	lw	%x9, 4(%x22)  #1436
@@ -4461,7 +4461,7 @@ setup_startp.2877:  #17020
 	lw	0(%x23), %x22  #1437
 	jalr	%x0, %x23, 0  #1437
 	nop
-is_rect_outside.2879:  #17108
+is_rect_outside.2879:  #16536
 	fabs	%f0, %f0  #1449
 	fsw	%f4, 0(%x2)  #1449
 	sw	%x5, 8(%x2)  #1449
@@ -4553,7 +4553,7 @@ be_else.9370:
 	lw	%x5, 8(%x2)  #1454
 	j	o_isinvert.2688  #1454
 	nop
-is_plane_outside.2884:  #17472
+is_plane_outside.2884:  #16876
 	sw	%x5, 0(%x2)  #1459
 	fsw	%f4, 8(%x2)  #1459
 	fsw	%f2, 16(%x2)  #1459
@@ -4602,7 +4602,7 @@ be_else.9373:
 	addi	%x5, %x0, 0  #0
 	ret
 	nop
-is_second_outside.2889:  #17664
+is_second_outside.2889:  #17064
 	sw	%x5, 0(%x2)  #1465
 	sw	%x1, 4(%x2)  #1465
 	addi	%x2, %x2, 8  #1465
@@ -4659,7 +4659,7 @@ be_else.9377:
 	addi	%x5, %x0, 0  #0
 	ret
 	nop
-is_outside.2894:  #17884
+is_outside.2894:  #17272
 	fsw	%f4, 0(%x2)  #1472
 	fsw	%f2, 8(%x2)  #1472
 	sw	%x5, 16(%x2)  #1472
@@ -4724,7 +4724,7 @@ be_else.9380:
 	lw	%x5, 16(%x2)  #1481
 	j	is_second_outside.2889  #1481
 	nop
-check_all_inside.2899:  #18132
+check_all_inside.2899:  #17512
 	lw	%x7, 4(%x22)  #1486
 	slli	%x9, %x5, 2  #1486
 	lw	%x9, %x9(%x6)  #1486
@@ -4767,7 +4767,7 @@ be_else.9382:
 	addi	%x5, %x0, 0  #0
 	ret
 	nop
-shadow_check_and_group.2905:  #18296
+shadow_check_and_group.2905:  #17668
 	lw	%x7, 28(%x22)  #0
 	lw	%x9, 24(%x22)  #0
 	lw	%x10, 20(%x22)  #0
@@ -4898,7 +4898,7 @@ be_else.9389:
 	addi	%x5, %x0, 1  #0
 	ret
 	nop
-shadow_check_one_or_group.2908:  #18812
+shadow_check_one_or_group.2908:  #18160
 	lw	%x7, 8(%x22)  #1536
 	lw	%x9, 4(%x22)  #1536
 	slli	%x10, %x5, 2  #1536
@@ -4940,7 +4940,7 @@ be_else.9391:
 	addi	%x5, %x0, 1  #0
 	ret
 	nop
-shadow_check_one_or_matrix.2911:  #18972
+shadow_check_one_or_matrix.2911:  #18312
 	lw	%x7, 20(%x22)  #1551
 	lw	%x9, 16(%x22)  #1551
 	lw	%x10, 12(%x22)  #1551
@@ -5058,7 +5058,7 @@ be_else.9402:
 	addi	%x5, %x0, 1  #0
 	ret
 	nop
-solve_each_element.2914:  #19432
+solve_each_element.2914:  #18728
 	lw	%x9, 36(%x22)  #1587
 	lw	%x10, 32(%x22)  #1587
 	lw	%x11, 28(%x22)  #1587
@@ -5230,7 +5230,7 @@ be_cont.9409:
 	lw	0(%x23), %x22  #1615
 	jalr	%x0, %x23, 0  #1615
 	nop
-solve_one_or_network.2918:  #20112
+solve_one_or_network.2918:  #19372
 	lw	%x9, 8(%x22)  #1628
 	lw	%x10, 4(%x22)  #1628
 	slli	%x11, %x5, 2  #1628
@@ -5266,7 +5266,7 @@ be_else.9414:
 	lw	0(%x23), %x22  #1632
 	jalr	%x0, %x23, 0  #1632
 	nop
-trace_or_matrix.2922:  #20248
+trace_or_matrix.2922:  #19504
 	lw	%x9, 20(%x22)  #1638
 	lw	%x10, 16(%x22)  #1638
 	lw	%x11, 12(%x22)  #1638
@@ -5359,7 +5359,7 @@ be_cont.9419:
 	lw	0(%x23), %x22  #1656
 	jalr	%x0, %x23, 0  #1656
 	nop
-judge_intersection.2926:  #20608
+judge_intersection.2926:  #19836
 	lw	%x6, 12(%x22)  #0
 	lw	%x7, 8(%x22)  #0
 	lw	%x9, 4(%x22)  #0
@@ -5398,7 +5398,7 @@ be_else.9425:
 	flw	%f0, 8(%x2)  #1670
 	j	fless.2540  #1670
 	nop
-solve_each_element_fast.2928:  #20760
+solve_each_element_fast.2928:  #19984
 	lw	%x9, 36(%x22)  #1680
 	lw	%x10, 32(%x22)  #1680
 	lw	%x11, 28(%x22)  #1680
@@ -5578,7 +5578,7 @@ be_cont.9432:
 	lw	0(%x23), %x22  #1709
 	jalr	%x0, %x23, 0  #1709
 	nop
-solve_one_or_network_fast.2932:  #21472
+solve_one_or_network_fast.2932:  #20660
 	lw	%x9, 8(%x22)  #1721
 	lw	%x10, 4(%x22)  #1721
 	slli	%x11, %x5, 2  #1721
@@ -5614,7 +5614,7 @@ be_else.9437:
 	lw	0(%x23), %x22  #1725
 	jalr	%x0, %x23, 0  #1725
 	nop
-trace_or_matrix_fast.2936:  #21608
+trace_or_matrix_fast.2936:  #20792
 	lw	%x9, 16(%x22)  #1731
 	lw	%x10, 12(%x22)  #1731
 	lw	%x11, 8(%x22)  #1731
@@ -5705,7 +5705,7 @@ be_cont.9442:
 	lw	0(%x23), %x22  #1749
 	jalr	%x0, %x23, 0  #1749
 	nop
-judge_intersection_fast.2940:  #21960
+judge_intersection_fast.2940:  #21116
 	lw	%x6, 12(%x22)  #0
 	lw	%x7, 8(%x22)  #0
 	lw	%x9, 4(%x22)  #0
@@ -5744,7 +5744,7 @@ be_else.9448:
 	flw	%f0, 8(%x2)  #1761
 	j	fless.2540  #1761
 	nop
-get_nvector_rect.2942:  #22112
+get_nvector_rect.2942:  #21264
 	lw	%x6, 8(%x22)  #0
 	lw	%x7, 4(%x22)  #0
 	lw	%x7, 0(%x7)  #1776
@@ -5780,7 +5780,7 @@ get_nvector_rect.2942:  #22112
 	fsw	%f0, %x5(%x6) #1779
 	ret
 	nop
-get_nvector_plane.2944:  #22252
+get_nvector_plane.2944:  #21404
 	lw	%x6, 4(%x22)  #0
 	sw	%x5, 0(%x2)  #1785
 	sw	%x6, 4(%x2)  #1785
@@ -5826,7 +5826,7 @@ get_nvector_plane.2944:  #22252
 	fsw	%f0, 16(%x5) #1787
 	ret
 	nop
-get_nvector_second.2946:  #22432
+get_nvector_second.2946:  #21584
 	lw	%x6, 8(%x22)  #0
 	lw	%x7, 4(%x22)  #0
 	flw	%f0, 0(%x7)  #1792
@@ -6011,7 +6011,7 @@ be_cont.9453:
 	lw	%x5, 0(%x2)  #1809
 	j	vecunit_sgn.2657  #1809
 	nop
-get_nvector.2948:  #23168
+get_nvector.2948:  #22312
 	lw	%x7, 12(%x22)  #1814
 	lw	%x9, 8(%x22)  #1814
 	lw	%x10, 4(%x22)  #1814
@@ -6050,7 +6050,7 @@ be_else.9455:
 	lw	0(%x23), %x22  #1820
 	jalr	%x0, %x23, 0  #1820
 	nop
-utexture.2951:  #23312
+utexture.2951:  #22448
 	lw	%x7, 4(%x22)  #1830
 	sw	%x6, 0(%x2)  #1830
 	sw	%x7, 4(%x2)  #1830
@@ -6531,7 +6531,7 @@ be_cont.9475:
 be_else.9469:
 	ret
 	nop
-add_light.2954:  #25216
+add_light.2954:  #24288
 	lw	%x5, 8(%x22)  #0
 	lw	%x6, 4(%x22)  #0
 	fsw	%f4, 0(%x2)  #1910
@@ -6596,7 +6596,7 @@ be_else.9480:
 	fsw	%f0, 16(%x5) #1919
 	ret
 	nop
-trace_reflections.2958:  #25472
+trace_reflections.2958:  #24532
 	lw	%x7, 32(%x22)  #0
 	lw	%x9, 28(%x22)  #0
 	lw	%x10, 24(%x22)  #0
@@ -6750,7 +6750,7 @@ be_cont.9485:
 bge_else.9483:
 	ret
 	nop
-trace_ray.2963:  #26084
+trace_ray.2963:  #25116
 	lw	%x9, 80(%x22)  #0
 	lw	%x10, 76(%x22)  #0
 	lw	%x11, 72(%x22)  #0
@@ -7210,7 +7210,7 @@ be_else.9509:
 ble_else.9492:
 	ret
 	nop
-trace_diffuse_ray.2969:  #27908
+trace_diffuse_ray.2969:  #26892
 	lw	%x6, 48(%x22)  #0
 	lw	%x7, 44(%x22)  #0
 	lw	%x9, 40(%x22)  #0
@@ -7338,7 +7338,7 @@ be_cont.9517:
 be_else.9514:
 	ret
 	nop
-iter_trace_diffuse_rays.2972:  #28416
+iter_trace_diffuse_rays.2972:  #27384
 	lw	%x10, 4(%x22)  #0
 	bge	%x9, %x0, 12  #2066
 	j	bge_else.9519
@@ -7419,7 +7419,7 @@ be_cont.9521:
 bge_else.9519:
 	ret
 	nop
-trace_diffuse_rays.2977:  #28736
+trace_diffuse_rays.2977:  #27692
 	lw	%x9, 8(%x22)  #2082
 	lw	%x10, 4(%x22)  #2082
 	sw	%x7, 0(%x2)  #2082
@@ -7442,7 +7442,7 @@ trace_diffuse_rays.2977:  #28736
 	lw	0(%x23), %x22  #2086
 	jalr	%x0, %x23, 0  #2086
 	nop
-trace_diffuse_ray_80percent.2981:  #28824
+trace_diffuse_ray_80percent.2981:  #27780
 	lw	%x9, 8(%x22)  #0
 	lw	%x10, 4(%x22)  #0
 	sw	%x7, 0(%x2)  #2093
@@ -7551,7 +7551,7 @@ be_else.9531:
 	lw	0(%x23), %x22  #2110
 	jalr	%x0, %x23, 0  #2110
 	nop
-calc_diffuse_using_1point.2985:  #29240
+calc_diffuse_using_1point.2985:  #28160
 	lw	%x7, 12(%x22)  #2119
 	lw	%x9, 8(%x22)  #2119
 	lw	%x10, 4(%x22)  #2119
@@ -7632,7 +7632,7 @@ calc_diffuse_using_1point.2985:  #29240
 	lw	%x7, 8(%x2)  #2129
 	j	vecaccumv.2678  #2129
 	nop
-calc_diffuse_using_5points.2988:  #29560
+calc_diffuse_using_5points.2988:  #28480
 	lw	%x11, 8(%x22)  #0
 	lw	%x12, 4(%x22)  #0
 	slli	%x13, %x5, 2  #2138
@@ -7768,7 +7768,7 @@ calc_diffuse_using_5points.2988:  #29560
 	lw	%x7, 4(%x2)  #2151
 	j	vecaccumv.2678  #2151
 	nop
-do_without_neighbors.2994:  #30100
+do_without_neighbors.2994:  #29020
 	lw	%x7, 4(%x22)  #0
 	addi	%x24, %x0, 4
 	bge	%x24, %x6, 12  #2157
@@ -7826,7 +7826,7 @@ bge_else.9534:
 ble_else.9533:
 	ret
 	nop
-neighbors_exist.2997:  #30324
+neighbors_exist.2997:  #29228
 	lw	%x7, 4(%x22)  #0
 	lw	%x9, 4(%x7)  #2172
 	addi	%x10, %x6, 1  #2172
@@ -7863,7 +7863,7 @@ ble_else.9542:
 	addi	%x5, %x0, 1  #0
 	ret
 	nop
-get_surface_id.3001:  #30468
+get_surface_id.3001:  #29356
 	sw	%x6, 0(%x2)  #2184
 	sw	%x1, 4(%x2)  #2184
 	addi	%x2, %x2, 8  #2184
@@ -7875,7 +7875,7 @@ get_surface_id.3001:  #30468
 	lw	%x5, %x6(%x5)  #2185
 	ret
 	nop
-neighbors_are_available.3004:  #30512
+neighbors_are_available.3004:  #29400
 	slli	%x11, %x5, 2  #2191
 	lw	%x11, %x11(%x7)  #2191
 	sw	%x7, 0(%x2)  #2191
@@ -7975,7 +7975,7 @@ be_else.9543:
 	addi	%x5, %x0, 0  #0
 	ret
 	nop
-try_exploit_neighbors.3010:  #30908
+try_exploit_neighbors.3010:  #29780
 	lw	%x12, 8(%x22)  #2209
 	lw	%x13, 4(%x22)  #2209
 	slli	%x14, %x5, 2  #2209
@@ -8071,7 +8071,7 @@ bge_else.9548:
 ble_else.9547:
 	ret
 	nop
-write_ppm_header.3017:  #31284
+write_ppm_header.3017:  #30136
 	lw	%x6, 4(%x22)  #0
 	addi	%x7, %x0, 80  #0
 	sw	%x6, 0(%x2)  #2237
@@ -8131,7 +8131,7 @@ write_ppm_header.3017:  #31284
 	addi	%x5, %x0, 10  #0
 	j	print_char.2573  #2245
 	nop
-write_rgb_element_int.3019:  #31520
+write_rgb_element_int.3019:  #30372
 	sw	%x1, 4(%x2)  #2250
 	addi	%x2, %x2, 8  #2250
 	jal	%x1, int_of_float.2555  #2250
@@ -8156,7 +8156,7 @@ ble_else.9554:
 ble_cont.9555:
 	j	print_int.2575  #2252
 	nop
-write_rgb_element_char.3021:  #31612
+write_rgb_element_char.3021:  #30448
 	sw	%x1, 4(%x2)  #2256
 	addi	%x2, %x2, 8  #2256
 	jal	%x1, int_of_float.2555  #2256
@@ -8181,7 +8181,7 @@ ble_else.9558:
 ble_cont.9559:
 	j	print_char.2573  #2258
 	nop
-write_rgb.3023:  #31704
+write_rgb.3023:  #30524
 	lw	%x6, 4(%x22)  #0
 	addi	%x24, %x0, 3
 	beq	%x5, %x24, 12  #2262
@@ -8242,7 +8242,7 @@ be_else.9562:
 	flw	%f0, 16(%x5)  #2272
 	j	write_rgb_element_char.3021  #2272
 	nop
-pretrace_diffuse_rays.3025:  #31940
+pretrace_diffuse_rays.3025:  #30756
 	lw	%x7, 12(%x22)  #0
 	lw	%x9, 8(%x22)  #0
 	lw	%x10, 4(%x22)  #0
@@ -8357,7 +8357,7 @@ bge_else.9564:
 ble_else.9563:
 	ret
 	nop
-pretrace_pixels.3028:  #32392
+pretrace_pixels.3028:  #31192
 	lw	%x9, 36(%x22)  #0
 	lw	%x10, 32(%x22)  #0
 	lw	%x11, 28(%x22)  #0
@@ -8517,7 +8517,7 @@ pretrace_pixels.3028:  #32392
 bge_else.9569:
 	ret
 	nop
-pretrace_line.3035:  #33028
+pretrace_line.3035:  #31824
 	lw	%x9, 24(%x22)  #0
 	lw	%x10, 20(%x22)  #0
 	lw	%x11, 16(%x22)  #0
@@ -8573,7 +8573,7 @@ pretrace_line.3035:  #33028
 	lw	0(%x23), %x22  #2346
 	jalr	%x0, %x23, 0  #2346
 	nop
-scan_pixel.3039:  #33248
+scan_pixel.3039:  #32044
 	lw	%x12, 24(%x22)  #0
 	lw	%x13, 20(%x22)  #0
 	lw	%x14, 16(%x22)  #0
@@ -8677,7 +8677,7 @@ be_cont.9577:
 	lw	0(%x23), %x22  #2370
 	jalr	%x0, %x23, 0  #2370
 	nop
-scan_line.3046:  #33660
+scan_line.3046:  #32444
 	lw	%x12, 12(%x22)  #0
 	lw	%x13, 8(%x22)  #0
 	lw	%x14, 4(%x22)  #0
@@ -8750,7 +8750,7 @@ ble_cont.9581:
 	lw	0(%x23), %x22  #2383
 	jalr	%x0, %x23, 0  #2383
 	nop
-create_float5x3array.3053:  #33948
+create_float5x3array.3053:  #32720
 	addi	%x5, %x0, 3  #0
 	mv	%f0, l.6293  #0
 	sw	%x1, 4(%x2)  #2394
@@ -8806,7 +8806,7 @@ create_float5x3array.3053:  #33948
 	mv	%x5, %x6  #2400
 	ret
 	nop
-create_pixel.3055:  #34168
+create_pixel.3055:  #32940
 	addi	%x5, %x0, 3  #0
 	mv	%f0, l.6293  #0
 	sw	%x1, 4(%x2)  #2406
@@ -8892,7 +8892,7 @@ create_pixel.3055:  #34168
 	mv	%x5, %x6  #2414
 	ret
 	nop
-init_line_elements.3057:  #34508
+init_line_elements.3057:  #33280
 	bge	%x6, %x0, 12  #2419
 	j	bge_else.9582
 	nop
@@ -8915,7 +8915,7 @@ init_line_elements.3057:  #34508
 bge_else.9582:
 	ret
 	nop
-create_pixelline.3060:  #34596
+create_pixelline.3060:  #33364
 	lw	%x5, 4(%x22)  #0
 	lw	%x6, 0(%x5)  #2428
 	sw	%x5, 0(%x2)  #2428
@@ -8938,7 +8938,7 @@ create_pixelline.3060:  #34596
 	addi	%x6, %x6, -2  #2429
 	j	init_line_elements.3057  #2429
 	nop
-tan.3062:  #34684
+tan.3062:  #33452
 	fsw	%f0, 0(%x2)  #2442
 	sw	%x1, 12(%x2)  #2442
 	addi	%x2, %x2, 16  #2442
@@ -8958,7 +8958,7 @@ tan.3062:  #34684
 	fdiv	%f0, %f2, %f0  #2442
 	ret
 	nop
-adjust_position.3064:  #34760
+adjust_position.3064:  #33528
 	fmul	%f0, %f0, %f0  #2447
 	mv	%f4, l.6871  #0
 	fadd	%f0, %f0, %f4  #2447
@@ -8985,7 +8985,7 @@ adjust_position.3064:  #34760
 	fmul	%f0, %f0, %f2  #2451
 	ret
 	nop
-calc_dirvec.3067:  #34864
+calc_dirvec.3067:  #33632
 	lw	%x9, 4(%x22)  #0
 	addi	%x24, %x0, 5
 	bge	%x5, %x24, 12  #2456
@@ -9254,7 +9254,7 @@ bge_else.9583:
 	lw	0(%x23), %x22  #2472
 	jalr	%x0, %x23, 0  #2472
 	nop
-calc_dirvecs.3075:  #35932
+calc_dirvecs.3075:  #34696
 	lw	%x9, 4(%x22)  #0
 	bge	%x5, %x0, 12  #2477
 	j	bge_else.9591
@@ -9334,7 +9334,7 @@ calc_dirvecs.3075:  #35932
 bge_else.9591:
 	ret
 	nop
-calc_dirvec_rows.3080:  #36248
+calc_dirvec_rows.3080:  #35008
 	lw	%x9, 4(%x22)  #0
 	bge	%x5, %x0, 12  #2491
 	j	bge_else.9593
@@ -9385,7 +9385,7 @@ calc_dirvec_rows.3080:  #36248
 bge_else.9593:
 	ret
 	nop
-create_dirvec.3084:  #36448
+create_dirvec.3084:  #35204
 	lw	%x5, 4(%x22)  #0
 	addi	%x6, %x0, 3  #0
 	mv	%f0, l.6293  #0
@@ -9413,7 +9413,7 @@ create_dirvec.3084:  #36448
 	mv	%x5, %x6  #2506
 	ret
 	nop
-create_dirvec_elements.3086:  #36556
+create_dirvec_elements.3086:  #35312
 	lw	%x7, 4(%x22)  #0
 	bge	%x6, %x0, 12  #2510
 	j	bge_else.9595
@@ -9442,7 +9442,7 @@ create_dirvec_elements.3086:  #36556
 bge_else.9595:
 	ret
 	nop
-create_dirvecs.3089:  #36668
+create_dirvecs.3089:  #35420
 	lw	%x6, 12(%x22)  #0
 	lw	%x7, 8(%x22)  #0
 	lw	%x9, 4(%x22)  #0
@@ -9494,7 +9494,7 @@ create_dirvecs.3089:  #36668
 bge_else.9597:
 	ret
 	nop
-init_dirvec_constants.3091:  #36872
+init_dirvec_constants.3091:  #35620
 	lw	%x7, 4(%x22)  #0
 	bge	%x6, %x0, 12  #2529
 	j	bge_else.9599
@@ -9522,7 +9522,7 @@ init_dirvec_constants.3091:  #36872
 bge_else.9599:
 	ret
 	nop
-init_vecset_constants.3094:  #36980
+init_vecset_constants.3094:  #35724
 	lw	%x6, 8(%x22)  #0
 	lw	%x7, 4(%x22)  #0
 	bge	%x5, %x0, 12  #2536
@@ -9551,7 +9551,7 @@ init_vecset_constants.3094:  #36980
 bge_else.9601:
 	ret
 	nop
-init_dirvecs.3096:  #37092
+init_dirvecs.3096:  #35832
 	lw	%x5, 12(%x22)  #0
 	lw	%x6, 8(%x22)  #0
 	lw	%x7, 4(%x22)  #0
@@ -9581,7 +9581,7 @@ init_dirvecs.3096:  #37092
 	lw	0(%x23), %x22  #2545
 	jalr	%x0, %x23, 0  #2545
 	nop
-add_reflection.3098:  #37208
+add_reflection.3098:  #35948
 	lw	%x7, 12(%x22)  #0
 	lw	%x9, 8(%x22)  #0
 	lw	%x22, 4(%x22)  #0
@@ -9636,7 +9636,7 @@ add_reflection.3098:  #37208
 	sw	%x5, %x6(%x7)  #2558
 	ret
 	nop
-setup_rect_reflection.3105:  #37424
+setup_rect_reflection.3105:  #36164
 	lw	%x7, 12(%x22)  #0
 	lw	%x9, 8(%x22)  #0
 	lw	%x10, 4(%x22)  #0
@@ -9756,7 +9756,7 @@ setup_rect_reflection.3105:  #37424
 	sw	%x5, 0(%x6)  #2572
 	ret
 	nop
-setup_surface_reflection.3108:  #37900
+setup_surface_reflection.3108:  #36640
 	lw	%x7, 12(%x22)  #0
 	lw	%x9, 8(%x22)  #0
 	lw	%x10, 4(%x22)  #0
@@ -9869,7 +9869,7 @@ setup_surface_reflection.3108:  #37900
 	sw	%x5, 0(%x6)  #2586
 	ret
 	nop
-setup_reflections.3111:  #38348
+setup_reflections.3111:  #37088
 	lw	%x6, 12(%x22)  #0
 	lw	%x7, 8(%x22)  #0
 	lw	%x9, 4(%x22)  #0
@@ -9946,7 +9946,7 @@ be_else.9609:
 bge_else.9608:
 	ret
 	nop
-rt.3113:  #38640
+rt.3113:  #37360
 	lw	%x9, 56(%x22)  #0
 	lw	%x10, 52(%x22)  #0
 	lw	%x11, 48(%x22)  #0
@@ -10519,7 +10519,7 @@ min_caml_start:
 	lw	%x1, 148(%x2) #320
 	mv	%x6, %x3  #803
 	addi	%x3, %x3, 24  #803
-	addi	%x24, %x0, 3504  #803 read_screen_settings.2755
+	addi	%x24, %x0, 3340  #803 read_screen_settings.2755
 	mv	%x7, %x24  #803
 	sw	%x7, 0(%x6)  #803
 	lw	%x7, 20(%x2)  #803
@@ -10534,7 +10534,7 @@ min_caml_start:
 	sw	%x12, 4(%x6)  #803
 	mv	%x12, %x3  #836
 	addi	%x3, %x3, 16  #836
-	addi	%x24, %x0, 4140  #836 read_light.2757
+	addi	%x24, %x0, 3976  #836 read_light.2757
 	mv	%x13, %x24  #836
 	sw	%x13, 0(%x12)  #836
 	lw	%x13, 24(%x2)  #836
@@ -10543,14 +10543,14 @@ min_caml_start:
 	sw	%x14, 4(%x12)  #836
 	mv	%x15, %x3  #899
 	addi	%x3, %x3, 8  #899
-	addi	%x24, %x0, 5552  #899 read_nth_object.2762
+	addi	%x24, %x0, 5388  #899 read_nth_object.2762
 	mv	%x16, %x24  #899
 	sw	%x16, 0(%x15)  #899
 	lw	%x16, 12(%x2)  #899
 	sw	%x16, 4(%x15)  #899
 	mv	%x17, %x3  #982
 	addi	%x3, %x3, 16  #982
-	addi	%x24, %x0, 7260  #982 read_object.2764
+	addi	%x24, %x0, 7020  #982 read_object.2764
 	mv	%x18, %x24  #982
 	sw	%x18, 0(%x17)  #982
 	sw	%x15, 8(%x17)  #982
@@ -10558,20 +10558,20 @@ min_caml_start:
 	sw	%x15, 4(%x17)  #982
 	mv	%x18, %x3  #991
 	addi	%x3, %x3, 8  #991
-	addi	%x24, %x0, 7392  #991 read_all_object.2766
+	addi	%x24, %x0, 7144  #991 read_all_object.2766
 	mv	%x19, %x24  #991
 	sw	%x19, 0(%x18)  #991
 	sw	%x17, 4(%x18)  #991
 	mv	%x17, %x3  #1015
 	addi	%x3, %x3, 8  #1015
-	addi	%x24, %x0, 7668  #1015 read_and_network.2772
+	addi	%x24, %x0, 7412  #1015 read_and_network.2772
 	mv	%x19, %x24  #1015
 	sw	%x19, 0(%x17)  #1015
 	lw	%x19, 36(%x2)  #1015
 	sw	%x19, 4(%x17)  #1015
 	mv	%x20, %x3  #1024
 	addi	%x3, %x3, 24  #1024
-	addi	%x24, %x0, 7776  #1024 read_parameter.2774
+	addi	%x24, %x0, 7516  #1024 read_parameter.2774
 	mv	%x21, %x24  #1024
 	sw	%x21, 0(%x20)  #1024
 	sw	%x6, 20(%x20)  #1024
@@ -10582,32 +10582,32 @@ min_caml_start:
 	sw	%x6, 4(%x20)  #1024
 	mv	%x12, %x3  #1049
 	addi	%x3, %x3, 8  #1049
-	addi	%x24, %x0, 7980  #1049 solver_rect_surface.2776
+	addi	%x24, %x0, 7720  #1049 solver_rect_surface.2776
 	mv	%x17, %x24  #1049
 	sw	%x17, 0(%x12)  #1049
 	lw	%x17, 48(%x2)  #1049
 	sw	%x17, 4(%x12)  #1049
 	mv	%x18, %x3  #1064
 	addi	%x3, %x3, 8  #1064
-	addi	%x24, %x0, 8508  #1064 solver_rect.2785
+	addi	%x24, %x0, 8236  #1064 solver_rect.2785
 	mv	%x21, %x24  #1064
 	sw	%x21, 0(%x18)  #1064
 	sw	%x12, 4(%x18)  #1064
 	mv	%x12, %x3  #1073
 	addi	%x3, %x3, 8  #1073
-	addi	%x24, %x0, 8788  #1073 solver_surface.2791
+	addi	%x24, %x0, 8504  #1073 solver_surface.2791
 	mv	%x21, %x24  #1073
 	sw	%x21, 0(%x12)  #1073
 	sw	%x17, 4(%x12)  #1073
 	mv	%x21, %x3  #1124
 	addi	%x3, %x3, 8  #1124
-	addi	%x24, %x0, 9964  #1124 solver_second.2810
+	addi	%x24, %x0, 9668  #1124 solver_second.2810
 	mv	%x22, %x24  #1124
 	sw	%x22, 0(%x21)  #1124
 	sw	%x17, 4(%x21)  #1124
 	mv	%x22, %x3  #1153
 	addi	%x3, %x3, 24  #1153
-	addi	%x24, %x0, 10520  #1153 solver.2816
+	addi	%x24, %x0, 10200  #1153 solver.2816
 	mv	%x23, %x24  #1153
 	sw	%x23, 0(%x22)  #1153
 	sw	%x12, 16(%x22)  #1153
@@ -10616,26 +10616,26 @@ min_caml_start:
 	sw	%x16, 4(%x22)  #1153
 	mv	%x12, %x3  #1185
 	addi	%x3, %x3, 8  #1185
-	addi	%x24, %x0, 10872  #1185 solver_rect_fast.2820
+	addi	%x24, %x0, 10544  #1185 solver_rect_fast.2820
 	mv	%x18, %x24  #1185
 	sw	%x18, 0(%x12)  #1185
 	sw	%x17, 4(%x12)  #1185
 	mv	%x18, %x3  #1218
 	addi	%x3, %x3, 8  #1218
-	addi	%x24, %x0, 12016  #1218 solver_surface_fast.2827
+	addi	%x24, %x0, 11604  #1218 solver_surface_fast.2827
 	mv	%x21, %x24  #1218
 	sw	%x21, 0(%x18)  #1218
 	sw	%x17, 4(%x18)  #1218
 	mv	%x21, %x3  #1227
 	addi	%x3, %x3, 8  #1227
-	addi	%x24, %x0, 12168  #1227 solver_second_fast.2833
+	addi	%x24, %x0, 11752  #1227 solver_second_fast.2833
 	mv	%x23, %x24  #1227
 	sw	%x23, 0(%x21)  #1227
 	sw	%x17, 4(%x21)  #1227
 	mv	%x23, %x3  #1247
 	addi	%x3, %x3, 24  #1247
 	sw	%x20, 148(%x2)  #1247
-	addi	%x24, %x0, 12676  #1247 solver_fast.2839
+	addi	%x24, %x0, 12236  #1247 solver_fast.2839
 	mv	%x20, %x24  #1247
 	sw	%x20, 0(%x23)  #1247
 	sw	%x18, 16(%x23)  #1247
@@ -10644,19 +10644,19 @@ min_caml_start:
 	sw	%x16, 4(%x23)  #1247
 	mv	%x18, %x3  #1267
 	addi	%x3, %x3, 8  #1267
-	addi	%x24, %x0, 13108  #1267 solver_surface_fast2.2843
+	addi	%x24, %x0, 12660  #1267 solver_surface_fast2.2843
 	mv	%x20, %x24  #1267
 	sw	%x20, 0(%x18)  #1267
 	sw	%x17, 4(%x18)  #1267
 	mv	%x20, %x3  #1275
 	addi	%x3, %x3, 8  #1275
-	addi	%x24, %x0, 13216  #1275 solver_second_fast2.2850
+	addi	%x24, %x0, 12764  #1275 solver_second_fast2.2850
 	mv	%x21, %x24  #1275
 	sw	%x21, 0(%x20)  #1275
 	sw	%x17, 4(%x20)  #1275
 	mv	%x21, %x3  #1294
 	addi	%x3, %x3, 24  #1294
-	addi	%x24, %x0, 13600  #1294 solver_fast2.2857
+	addi	%x24, %x0, 13132  #1294 solver_fast2.2857
 	mv	%x10, %x24  #1294
 	sw	%x10, 0(%x21)  #1294
 	sw	%x18, 16(%x21)  #1294
@@ -10665,26 +10665,26 @@ min_caml_start:
 	sw	%x16, 4(%x21)  #1294
 	mv	%x10, %x3  #1391
 	addi	%x3, %x3, 8  #1391
-	addi	%x24, %x0, 16116  #1391 iter_setup_dirvec_constants.2869
+	addi	%x24, %x0, 15592  #1391 iter_setup_dirvec_constants.2869
 	mv	%x12, %x24  #1391
 	sw	%x12, 0(%x10)  #1391
 	sw	%x16, 4(%x10)  #1391
 	mv	%x12, %x3  #1408
 	addi	%x3, %x3, 16  #1408
-	addi	%x24, %x0, 16464  #1408 setup_dirvec_constants.2872
+	addi	%x24, %x0, 15920  #1408 setup_dirvec_constants.2872
 	mv	%x18, %x24  #1408
 	sw	%x18, 0(%x12)  #1408
 	sw	%x15, 8(%x12)  #1408
 	sw	%x10, 4(%x12)  #1408
 	mv	%x10, %x3  #1416
 	addi	%x3, %x3, 8  #1416
-	addi	%x24, %x0, 16492  #1416 setup_startp_constants.2874
+	addi	%x24, %x0, 15948  #1416 setup_startp_constants.2874
 	mv	%x18, %x24  #1416
 	sw	%x18, 0(%x10)  #1416
 	sw	%x16, 4(%x10)  #1416
 	mv	%x18, %x3  #1435
 	addi	%x3, %x3, 16  #1435
-	addi	%x24, %x0, 17020  #1435 setup_startp.2877
+	addi	%x24, %x0, 16448  #1435 setup_startp.2877
 	mv	%x20, %x24  #1435
 	sw	%x20, 0(%x18)  #1435
 	lw	%x20, 100(%x2)  #1435
@@ -10694,13 +10694,13 @@ min_caml_start:
 	mv	%x10, %x3  #1485
 	addi	%x3, %x3, 8  #1485
 	sw	%x12, 152(%x2)  #1485
-	addi	%x24, %x0, 18132  #1485 check_all_inside.2899
+	addi	%x24, %x0, 17512  #1485 check_all_inside.2899
 	mv	%x12, %x24  #1485
 	sw	%x12, 0(%x10)  #1485
 	sw	%x16, 4(%x10)  #1485
 	mv	%x12, %x3  #1505
 	addi	%x3, %x3, 32  #1505
-	addi	%x24, %x0, 18296  #1505 shadow_check_and_group.2905
+	addi	%x24, %x0, 17668  #1505 shadow_check_and_group.2905
 	mv	%x15, %x24  #1505
 	sw	%x15, 0(%x12)  #1505
 	sw	%x23, 28(%x12)  #1505
@@ -10714,14 +10714,14 @@ min_caml_start:
 	sw	%x10, 4(%x12)  #1505
 	mv	%x11, %x3  #1535
 	addi	%x3, %x3, 16  #1535
-	addi	%x24, %x0, 18812  #1535 shadow_check_one_or_group.2908
+	addi	%x24, %x0, 18160  #1535 shadow_check_one_or_group.2908
 	mv	%x7, %x24  #1535
 	sw	%x7, 0(%x11)  #1535
 	sw	%x12, 8(%x11)  #1535
 	sw	%x19, 4(%x11)  #1535
 	mv	%x7, %x3  #1550
 	addi	%x3, %x3, 24  #1550
-	addi	%x24, %x0, 18972  #1550 shadow_check_one_or_matrix.2911
+	addi	%x24, %x0, 18312  #1550 shadow_check_one_or_matrix.2911
 	mv	%x12, %x24  #1550
 	sw	%x12, 0(%x7)  #1550
 	sw	%x23, 20(%x7)  #1550
@@ -10731,7 +10731,7 @@ min_caml_start:
 	sw	%x9, 4(%x7)  #1550
 	mv	%x11, %x3  #1586
 	addi	%x3, %x3, 40  #1586
-	addi	%x24, %x0, 19432  #1586 solve_each_element.2914
+	addi	%x24, %x0, 18728  #1586 solve_each_element.2914
 	mv	%x12, %x24  #1586
 	sw	%x12, 0(%x11)  #1586
 	lw	%x12, 56(%x2)  #1586
@@ -10750,14 +10750,14 @@ min_caml_start:
 	mv	%x13, %x3  #1627
 	addi	%x3, %x3, 16  #1627
 	sw	%x5, 156(%x2)  #1627
-	addi	%x24, %x0, 20112  #1627 solve_one_or_network.2918
+	addi	%x24, %x0, 19372  #1627 solve_one_or_network.2918
 	mv	%x5, %x24  #1627
 	sw	%x5, 0(%x13)  #1627
 	sw	%x11, 8(%x13)  #1627
 	sw	%x19, 4(%x13)  #1627
 	mv	%x5, %x3  #1637
 	addi	%x3, %x3, 24  #1637
-	addi	%x24, %x0, 20248  #1637 trace_or_matrix.2922
+	addi	%x24, %x0, 19504  #1637 trace_or_matrix.2922
 	mv	%x11, %x24  #1637
 	sw	%x11, 0(%x5)  #1637
 	sw	%x12, 20(%x5)  #1637
@@ -10767,7 +10767,7 @@ min_caml_start:
 	sw	%x13, 4(%x5)  #1637
 	mv	%x11, %x3  #1664
 	addi	%x3, %x3, 16  #1664
-	addi	%x24, %x0, 20608  #1664 judge_intersection.2926
+	addi	%x24, %x0, 19836  #1664 judge_intersection.2926
 	mv	%x13, %x24  #1664
 	sw	%x13, 0(%x11)  #1664
 	sw	%x5, 12(%x11)  #1664
@@ -10775,7 +10775,7 @@ min_caml_start:
 	sw	%x6, 4(%x11)  #1664
 	mv	%x5, %x3  #1679
 	addi	%x3, %x3, 40  #1679
-	addi	%x24, %x0, 20760  #1679 solve_each_element_fast.2928
+	addi	%x24, %x0, 19984  #1679 solve_each_element_fast.2928
 	mv	%x13, %x24  #1679
 	sw	%x13, 0(%x5)  #1679
 	sw	%x12, 36(%x5)  #1679
@@ -10789,14 +10789,14 @@ min_caml_start:
 	sw	%x10, 4(%x5)  #1679
 	mv	%x10, %x3  #1720
 	addi	%x3, %x3, 16  #1720
-	addi	%x24, %x0, 21472  #1720 solve_one_or_network_fast.2932
+	addi	%x24, %x0, 20660  #1720 solve_one_or_network_fast.2932
 	mv	%x13, %x24  #1720
 	sw	%x13, 0(%x10)  #1720
 	sw	%x5, 8(%x10)  #1720
 	sw	%x19, 4(%x10)  #1720
 	mv	%x5, %x3  #1730
 	addi	%x3, %x3, 24  #1730
-	addi	%x24, %x0, 21608  #1730 trace_or_matrix_fast.2936
+	addi	%x24, %x0, 20792  #1730 trace_or_matrix_fast.2936
 	mv	%x13, %x24  #1730
 	sw	%x13, 0(%x5)  #1730
 	sw	%x12, 16(%x5)  #1730
@@ -10805,7 +10805,7 @@ min_caml_start:
 	sw	%x10, 4(%x5)  #1730
 	mv	%x10, %x3  #1754
 	addi	%x3, %x3, 16  #1754
-	addi	%x24, %x0, 21960  #1754 judge_intersection_fast.2940
+	addi	%x24, %x0, 21116  #1754 judge_intersection_fast.2940
 	mv	%x13, %x24  #1754
 	sw	%x13, 0(%x10)  #1754
 	sw	%x5, 12(%x10)  #1754
@@ -10813,7 +10813,7 @@ min_caml_start:
 	sw	%x6, 4(%x10)  #1754
 	mv	%x5, %x3  #1775
 	addi	%x3, %x3, 16  #1775
-	addi	%x24, %x0, 22112  #1775 get_nvector_rect.2942
+	addi	%x24, %x0, 21264  #1775 get_nvector_rect.2942
 	mv	%x13, %x24  #1775
 	sw	%x13, 0(%x5)  #1775
 	lw	%x13, 68(%x2)  #1775
@@ -10821,20 +10821,20 @@ min_caml_start:
 	sw	%x15, 4(%x5)  #1775
 	mv	%x17, %x3  #1783
 	addi	%x3, %x3, 8  #1783
-	addi	%x24, %x0, 22252  #1783 get_nvector_plane.2944
+	addi	%x24, %x0, 21404  #1783 get_nvector_plane.2944
 	mv	%x19, %x24  #1783
 	sw	%x19, 0(%x17)  #1783
 	sw	%x13, 4(%x17)  #1783
 	mv	%x19, %x3  #1791
 	addi	%x3, %x3, 16  #1791
-	addi	%x24, %x0, 22432  #1791 get_nvector_second.2946
+	addi	%x24, %x0, 21584  #1791 get_nvector_second.2946
 	mv	%x20, %x24  #1791
 	sw	%x20, 0(%x19)  #1791
 	sw	%x13, 8(%x19)  #1791
 	sw	%x9, 4(%x19)  #1791
 	mv	%x20, %x3  #1813
 	addi	%x3, %x3, 16  #1813
-	addi	%x24, %x0, 23168  #1813 get_nvector.2948
+	addi	%x24, %x0, 22312  #1813 get_nvector.2948
 	mv	%x21, %x24  #1813
 	sw	%x21, 0(%x20)  #1813
 	sw	%x19, 12(%x20)  #1813
@@ -10842,14 +10842,14 @@ min_caml_start:
 	sw	%x17, 4(%x20)  #1813
 	mv	%x5, %x3  #1829
 	addi	%x3, %x3, 8  #1829
-	addi	%x24, %x0, 23312  #1829 utexture.2951
+	addi	%x24, %x0, 22448  #1829 utexture.2951
 	mv	%x17, %x24  #1829
 	sw	%x17, 0(%x5)  #1829
 	lw	%x17, 72(%x2)  #1829
 	sw	%x17, 4(%x5)  #1829
 	mv	%x19, %x3  #1907
 	addi	%x3, %x3, 16  #1907
-	addi	%x24, %x0, 25216  #1907 add_light.2954
+	addi	%x24, %x0, 24288  #1907 add_light.2954
 	mv	%x21, %x24  #1907
 	sw	%x21, 0(%x19)  #1907
 	sw	%x17, 8(%x19)  #1907
@@ -10858,7 +10858,7 @@ min_caml_start:
 	mv	%x22, %x3  #1924
 	addi	%x3, %x3, 40  #1924
 	sw	%x20, 160(%x2)  #1924
-	addi	%x24, %x0, 25472  #1924 trace_reflections.2958
+	addi	%x24, %x0, 24532  #1924 trace_reflections.2958
 	mv	%x20, %x24  #1924
 	sw	%x20, 0(%x22)  #1924
 	sw	%x7, 32(%x22)  #1924
@@ -10873,7 +10873,7 @@ min_caml_start:
 	mv	%x20, %x3  #1953
 	addi	%x3, %x3, 88  #1953
 	sw	%x10, 164(%x2)  #1953
-	addi	%x24, %x0, 26084  #1953 trace_ray.2963
+	addi	%x24, %x0, 25116  #1953 trace_ray.2963
 	mv	%x10, %x24  #1953
 	sw	%x10, 0(%x20)  #1953
 	sw	%x5, 80(%x20)  #1953
@@ -10902,7 +10902,7 @@ min_caml_start:
 	sw	%x19, 4(%x20)  #1953
 	mv	%x15, %x3  #2046
 	addi	%x3, %x3, 56  #2046
-	addi	%x24, %x0, 27908  #2046 trace_diffuse_ray.2969
+	addi	%x24, %x0, 26892  #2046 trace_diffuse_ray.2969
 	mv	%x19, %x24  #2046
 	sw	%x19, 0(%x15)  #2046
 	sw	%x5, 48(%x15)  #2046
@@ -10921,20 +10921,20 @@ min_caml_start:
 	sw	%x5, 4(%x15)  #2046
 	mv	%x6, %x3  #2065
 	addi	%x3, %x3, 8  #2065
-	addi	%x24, %x0, 28416  #2065 iter_trace_diffuse_rays.2972
+	addi	%x24, %x0, 27384  #2065 iter_trace_diffuse_rays.2972
 	mv	%x7, %x24  #2065
 	sw	%x7, 0(%x6)  #2065
 	sw	%x15, 4(%x6)  #2065
 	mv	%x7, %x3  #2081
 	addi	%x3, %x3, 16  #2081
-	addi	%x24, %x0, 28736  #2081 trace_diffuse_rays.2977
+	addi	%x24, %x0, 27692  #2081 trace_diffuse_rays.2977
 	mv	%x9, %x24  #2081
 	sw	%x9, 0(%x7)  #2081
 	sw	%x18, 8(%x7)  #2081
 	sw	%x6, 4(%x7)  #2081
 	mv	%x6, %x3  #2091
 	addi	%x3, %x3, 16  #2091
-	addi	%x24, %x0, 28824  #2091 trace_diffuse_ray_80percent.2981
+	addi	%x24, %x0, 27780  #2091 trace_diffuse_ray_80percent.2981
 	mv	%x9, %x24  #2091
 	sw	%x9, 0(%x6)  #2091
 	sw	%x7, 8(%x6)  #2091
@@ -10942,7 +10942,7 @@ min_caml_start:
 	sw	%x9, 4(%x6)  #2091
 	mv	%x11, %x3  #2117
 	addi	%x3, %x3, 16  #2117
-	addi	%x24, %x0, 29240  #2117 calc_diffuse_using_1point.2985
+	addi	%x24, %x0, 28160  #2117 calc_diffuse_using_1point.2985
 	mv	%x13, %x24  #2117
 	sw	%x13, 0(%x11)  #2117
 	sw	%x6, 12(%x11)  #2117
@@ -10950,46 +10950,46 @@ min_caml_start:
 	sw	%x5, 4(%x11)  #2117
 	mv	%x6, %x3  #2136
 	addi	%x3, %x3, 16  #2136
-	addi	%x24, %x0, 29560  #2136 calc_diffuse_using_5points.2988
+	addi	%x24, %x0, 28480  #2136 calc_diffuse_using_5points.2988
 	mv	%x13, %x24  #2136
 	sw	%x13, 0(%x6)  #2136
 	sw	%x21, 8(%x6)  #2136
 	sw	%x5, 4(%x6)  #2136
 	mv	%x13, %x3  #2156
 	addi	%x3, %x3, 8  #2156
-	addi	%x24, %x0, 30100  #2156 do_without_neighbors.2994
+	addi	%x24, %x0, 29020  #2156 do_without_neighbors.2994
 	mv	%x14, %x24  #2156
 	sw	%x14, 0(%x13)  #2156
 	sw	%x11, 4(%x13)  #2156
 	mv	%x11, %x3  #2171
 	addi	%x3, %x3, 8  #2171
-	addi	%x24, %x0, 30324  #2171 neighbors_exist.2997
+	addi	%x24, %x0, 29228  #2171 neighbors_exist.2997
 	mv	%x14, %x24  #2171
 	sw	%x14, 0(%x11)  #2171
 	lw	%x14, 84(%x2)  #2171
 	sw	%x14, 4(%x11)  #2171
 	mv	%x15, %x3  #2208
 	addi	%x3, %x3, 16  #2208
-	addi	%x24, %x0, 30908  #2208 try_exploit_neighbors.3010
+	addi	%x24, %x0, 29780  #2208 try_exploit_neighbors.3010
 	mv	%x17, %x24  #2208
 	sw	%x17, 0(%x15)  #2208
 	sw	%x13, 8(%x15)  #2208
 	sw	%x6, 4(%x15)  #2208
 	mv	%x6, %x3  #2235
 	addi	%x3, %x3, 8  #2235
-	addi	%x24, %x0, 31284  #2235 write_ppm_header.3017
+	addi	%x24, %x0, 30136  #2235 write_ppm_header.3017
 	mv	%x17, %x24  #2235
 	sw	%x17, 0(%x6)  #2235
 	sw	%x14, 4(%x6)  #2235
 	mv	%x17, %x3  #2261
 	addi	%x3, %x3, 8  #2261
-	addi	%x24, %x0, 31704  #2261 write_rgb.3023
+	addi	%x24, %x0, 30524  #2261 write_rgb.3023
 	mv	%x18, %x24  #2261
 	sw	%x18, 0(%x17)  #2261
 	sw	%x21, 4(%x17)  #2261
 	mv	%x18, %x3  #2284
 	addi	%x3, %x3, 16  #2284
-	addi	%x24, %x0, 31940  #2284 pretrace_diffuse_rays.3025
+	addi	%x24, %x0, 30756  #2284 pretrace_diffuse_rays.3025
 	mv	%x19, %x24  #2284
 	sw	%x19, 0(%x18)  #2284
 	sw	%x7, 12(%x18)  #2284
@@ -10997,7 +10997,7 @@ min_caml_start:
 	sw	%x5, 4(%x18)  #2284
 	mv	%x5, %x3  #2314
 	addi	%x3, %x3, 40  #2314
-	addi	%x24, %x0, 32392  #2314 pretrace_pixels.3028
+	addi	%x24, %x0, 31192  #2314 pretrace_pixels.3028
 	mv	%x7, %x24  #2314
 	sw	%x7, 0(%x5)  #2314
 	lw	%x7, 20(%x2)  #2314
@@ -11016,7 +11016,7 @@ min_caml_start:
 	sw	%x18, 4(%x5)  #2314
 	mv	%x19, %x3  #2339
 	addi	%x3, %x3, 32  #2339
-	addi	%x24, %x0, 33028  #2339 pretrace_line.3035
+	addi	%x24, %x0, 31824  #2339 pretrace_line.3035
 	mv	%x20, %x24  #2339
 	sw	%x20, 0(%x19)  #2339
 	lw	%x20, 112(%x2)  #2339
@@ -11029,7 +11029,7 @@ min_caml_start:
 	sw	%x18, 4(%x19)  #2339
 	mv	%x5, %x3  #2355
 	addi	%x3, %x3, 32  #2355
-	addi	%x24, %x0, 33248  #2355 scan_pixel.3039
+	addi	%x24, %x0, 32044  #2355 scan_pixel.3039
 	mv	%x20, %x24  #2355
 	sw	%x20, 0(%x5)  #2355
 	sw	%x17, 24(%x5)  #2355
@@ -11040,7 +11040,7 @@ min_caml_start:
 	sw	%x13, 4(%x5)  #2355
 	mv	%x11, %x3  #2375
 	addi	%x3, %x3, 16  #2375
-	addi	%x24, %x0, 33660  #2375 scan_line.3046
+	addi	%x24, %x0, 32444  #2375 scan_line.3046
 	mv	%x13, %x24  #2375
 	sw	%x13, 0(%x11)  #2375
 	sw	%x5, 12(%x11)  #2375
@@ -11048,44 +11048,44 @@ min_caml_start:
 	sw	%x14, 4(%x11)  #2375
 	mv	%x5, %x3  #2427
 	addi	%x3, %x3, 8  #2427
-	addi	%x24, %x0, 34596  #2427 create_pixelline.3060
+	addi	%x24, %x0, 33364  #2427 create_pixelline.3060
 	mv	%x13, %x24  #2427
 	sw	%x13, 0(%x5)  #2427
 	sw	%x14, 4(%x5)  #2427
 	mv	%x13, %x3  #2455
 	addi	%x3, %x3, 8  #2455
-	addi	%x24, %x0, 34864  #2455 calc_dirvec.3067
+	addi	%x24, %x0, 33632  #2455 calc_dirvec.3067
 	mv	%x15, %x24  #2455
 	sw	%x15, 0(%x13)  #2455
 	sw	%x9, 4(%x13)  #2455
 	mv	%x15, %x3  #2476
 	addi	%x3, %x3, 8  #2476
-	addi	%x24, %x0, 35932  #2476 calc_dirvecs.3075
+	addi	%x24, %x0, 34696  #2476 calc_dirvecs.3075
 	mv	%x17, %x24  #2476
 	sw	%x17, 0(%x15)  #2476
 	sw	%x13, 4(%x15)  #2476
 	mv	%x13, %x3  #2490
 	addi	%x3, %x3, 8  #2490
-	addi	%x24, %x0, 36248  #2490 calc_dirvec_rows.3080
+	addi	%x24, %x0, 35008  #2490 calc_dirvec_rows.3080
 	mv	%x17, %x24  #2490
 	sw	%x17, 0(%x13)  #2490
 	sw	%x15, 4(%x13)  #2490
 	mv	%x15, %x3  #2503
 	addi	%x3, %x3, 8  #2503
-	addi	%x24, %x0, 36448  #2503 create_dirvec.3084
+	addi	%x24, %x0, 35204  #2503 create_dirvec.3084
 	mv	%x17, %x24  #2503
 	sw	%x17, 0(%x15)  #2503
 	lw	%x17, 8(%x2)  #2503
 	sw	%x17, 4(%x15)  #2503
 	mv	%x20, %x3  #2509
 	addi	%x3, %x3, 8  #2509
-	addi	%x24, %x0, 36556  #2509 create_dirvec_elements.3086
+	addi	%x24, %x0, 35312  #2509 create_dirvec_elements.3086
 	mv	%x21, %x24  #2509
 	sw	%x21, 0(%x20)  #2509
 	sw	%x15, 4(%x20)  #2509
 	mv	%x21, %x3  #2516
 	addi	%x3, %x3, 16  #2516
-	addi	%x24, %x0, 36668  #2516 create_dirvecs.3089
+	addi	%x24, %x0, 35420  #2516 create_dirvecs.3089
 	mv	%x22, %x24  #2516
 	sw	%x22, 0(%x21)  #2516
 	sw	%x9, 12(%x21)  #2516
@@ -11093,7 +11093,7 @@ min_caml_start:
 	sw	%x15, 4(%x21)  #2516
 	mv	%x20, %x3  #2528
 	addi	%x3, %x3, 8  #2528
-	addi	%x24, %x0, 36872  #2528 init_dirvec_constants.3091
+	addi	%x24, %x0, 35620  #2528 init_dirvec_constants.3091
 	mv	%x22, %x24  #2528
 	sw	%x22, 0(%x20)  #2528
 	lw	%x22, 152(%x2)  #2528
@@ -11101,14 +11101,14 @@ min_caml_start:
 	mv	%x23, %x3  #2535
 	addi	%x3, %x3, 16  #2535
 	sw	%x5, 168(%x2)  #2535
-	addi	%x24, %x0, 36980  #2535 init_vecset_constants.3094
+	addi	%x24, %x0, 35724  #2535 init_vecset_constants.3094
 	mv	%x5, %x24  #2535
 	sw	%x5, 0(%x23)  #2535
 	sw	%x20, 8(%x23)  #2535
 	sw	%x9, 4(%x23)  #2535
 	mv	%x5, %x3  #2542
 	addi	%x3, %x3, 16  #2542
-	addi	%x24, %x0, 37092  #2542 init_dirvecs.3096
+	addi	%x24, %x0, 35832  #2542 init_dirvecs.3096
 	mv	%x9, %x24  #2542
 	sw	%x9, 0(%x5)  #2542
 	sw	%x23, 12(%x5)  #2542
@@ -11116,7 +11116,7 @@ min_caml_start:
 	sw	%x13, 4(%x5)  #2542
 	mv	%x9, %x3  #2553
 	addi	%x3, %x3, 16  #2553
-	addi	%x24, %x0, 37208  #2553 add_reflection.3098
+	addi	%x24, %x0, 35948  #2553 add_reflection.3098
 	mv	%x13, %x24  #2553
 	sw	%x13, 0(%x9)  #2553
 	sw	%x22, 12(%x9)  #2553
@@ -11125,7 +11125,7 @@ min_caml_start:
 	sw	%x15, 4(%x9)  #2553
 	mv	%x13, %x3  #2562
 	addi	%x3, %x3, 16  #2562
-	addi	%x24, %x0, 37424  #2562 setup_rect_reflection.3105
+	addi	%x24, %x0, 36164  #2562 setup_rect_reflection.3105
 	mv	%x15, %x24  #2562
 	sw	%x15, 0(%x13)  #2562
 	sw	%x10, 12(%x13)  #2562
@@ -11133,7 +11133,7 @@ min_caml_start:
 	sw	%x9, 4(%x13)  #2562
 	mv	%x15, %x3  #2576
 	addi	%x3, %x3, 16  #2576
-	addi	%x24, %x0, 37900  #2576 setup_surface_reflection.3108
+	addi	%x24, %x0, 36640  #2576 setup_surface_reflection.3108
 	mv	%x20, %x24  #2576
 	sw	%x20, 0(%x15)  #2576
 	sw	%x10, 12(%x15)  #2576
@@ -11141,7 +11141,7 @@ min_caml_start:
 	sw	%x9, 4(%x15)  #2576
 	mv	%x9, %x3  #2591
 	addi	%x3, %x3, 16  #2591
-	addi	%x24, %x0, 38348  #2591 setup_reflections.3111
+	addi	%x24, %x0, 37088  #2591 setup_reflections.3111
 	mv	%x10, %x24  #2591
 	sw	%x10, 0(%x9)  #2591
 	sw	%x15, 12(%x9)  #2591
@@ -11149,7 +11149,7 @@ min_caml_start:
 	sw	%x16, 4(%x9)  #2591
 	mv	%x10, %x3  #2613
 	addi	%x3, %x3, 64  #2613
-	addi	%x24, %x0, 38640  #2613 rt.3113
+	addi	%x24, %x0, 37360  #2613 rt.3113
 	mv	%x13, %x24  #2613
 	sw	%x13, 0(%x10)  #2613
 	sw	%x6, 56(%x10)  #2613

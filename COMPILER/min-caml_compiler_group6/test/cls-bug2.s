@@ -26,7 +26,7 @@ be_else.456:
 	mv	%x7, %x10
 	j	mul_abs.193  #63
 	nop
-mul.198:  #92
+mul.198:  #84
 	bge	%x5, %x0, 12  #67
 	j	bge_else.457
 	nop
@@ -71,7 +71,7 @@ be_else.461:
 	sub	%x5, %x0, %x5  #73
 	ret
 	nop
-div_abs.201:  #268
+div_abs.201:  #240
 	addi	%x24, %x0, -1
 	beq	%x7, %x24, 12  #77
 	j	be_else.462
@@ -97,7 +97,7 @@ ble_else.463:
 	addi	%x7, %x7, -1  #83
 	j	div_abs.201  #83
 	nop
-div.206:  #364
+div.206:  #328
 	bge	%x5, %x0, 12  #87
 	j	bge_else.464
 	nop
@@ -142,7 +142,7 @@ be_else.468:
 	sub	%x5, %x0, %x5  #93
 	ret
 	nop
-print_int.211:  #540
+print_int.211:  #484
 	bge	%x5, %x0, 12  #100
 	j	bge_else.469
 	nop
@@ -185,7 +185,7 @@ bge_else.469:
 	sub	%x5, %x0, %x5  #102
 	j	print_int.211  #102
 	nop
-assign_array.225:  #704
+assign_array.225:  #640
 	beq	%x7, %x0, 12  #160
 	j	be_else.473
 	nop
@@ -199,7 +199,7 @@ be_else.473:
 	addi	%x7, %x7, -1  #164
 	j	assign_array.225  #164
 	nop
-create_array.229:  #756
+create_array.229:  #688
 	mv	%x7, %x3  #168
 	sw	%x7, 0(%x2)  #171
 	mv	%x23, %x7
@@ -213,7 +213,7 @@ create_array.229:  #756
 	lw	%x5, 0(%x2)  #172
 	ret
 	nop
-f.239:  #808
+f.239:  #740
 	bge	%x5, %x0, 12  #194
 	j	bge_else.475
 	nop
@@ -245,7 +245,7 @@ min_caml_start:
 	addi	%x2, %x2, -112
 	mv	%x22, %x3  #193
 	addi	%x3, %x3, 8  #193
-	addi	%x24, %x0, 808  #193 f.239
+	addi	%x24, %x0, 740  #193 f.239
 	mv	%x5, %x24  #193
 	sw	%x5, 0(%x22)  #193
 	addi	%x5, %x0, 9  #0

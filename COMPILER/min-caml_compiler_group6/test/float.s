@@ -80,7 +80,7 @@ be_else.424:
 	mv	%x7, %x10
 	j	mul_abs.182  #63
 	nop
-mul.187:  #248
+mul.187:  #240
 	bge	%x5, %x0, 12  #67
 	j	bge_else.425
 	nop
@@ -125,7 +125,7 @@ be_else.429:
 	sub	%x5, %x0, %x5  #73
 	ret
 	nop
-div_abs.190:  #424
+div_abs.190:  #396
 	addi	%x24, %x0, -1
 	beq	%x7, %x24, 12  #77
 	j	be_else.430
@@ -151,7 +151,7 @@ ble_else.431:
 	addi	%x7, %x7, -1  #83
 	j	div_abs.190  #83
 	nop
-div.195:  #520
+div.195:  #484
 	bge	%x5, %x0, 12  #87
 	j	bge_else.432
 	nop
@@ -196,7 +196,7 @@ be_else.436:
 	sub	%x5, %x0, %x5  #93
 	ret
 	nop
-print_int.200:  #696
+print_int.200:  #640
 	bge	%x5, %x0, 12  #100
 	j	bge_else.437
 	nop
