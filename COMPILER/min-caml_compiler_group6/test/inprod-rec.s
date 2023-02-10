@@ -5,7 +5,7 @@ l.464:	! 4.560000
 l.462:	! 1.230000
 l.458:	! 0.000000
 .section	".text"
-mul_abs.201:  #32
+mul_abs.201:  #0
 	addi	%x24, %x0, -1
 	beq	%x7, %x24, 12  #57
 	j	be_else.481
@@ -30,7 +30,7 @@ be_else.482:
 	mv	%x7, %x10
 	j	mul_abs.201  #63
 	nop
-mul.206:  #128
+mul.206:  #92
 	bge	%x5, %x0, 12  #67
 	j	bge_else.483
 	nop
@@ -75,7 +75,7 @@ be_else.487:
 	sub	%x5, %x0, %x5  #73
 	ret
 	nop
-div_abs.209:  #308
+div_abs.209:  #268
 	addi	%x24, %x0, -1
 	beq	%x7, %x24, 12  #77
 	j	be_else.488
@@ -101,7 +101,7 @@ ble_else.489:
 	addi	%x7, %x7, -1  #83
 	j	div_abs.209  #83
 	nop
-div.214:  #408
+div.214:  #364
 	bge	%x5, %x0, 12  #87
 	j	bge_else.490
 	nop
@@ -146,7 +146,7 @@ be_else.494:
 	sub	%x5, %x0, %x5  #93
 	ret
 	nop
-print_int.219:  #588
+print_int.219:  #540
 	bge	%x5, %x0, 12  #100
 	j	bge_else.495
 	nop
@@ -189,7 +189,7 @@ bge_else.495:
 	sub	%x5, %x0, %x5  #102
 	j	print_int.219  #102
 	nop
-assign_farray.240:  #756
+assign_farray.240:  #704
 	beq	%x6, %x0, 12  #176
 	j	be_else.499
 	nop
@@ -203,7 +203,7 @@ be_else.499:
 	addi	%x6, %x6, -1  #180
 	j	assign_farray.240  #180
 	nop
-create_float_array.244:  #812
+create_float_array.244:  #756
 	mv	%x6, %x3  #184
 	sw	%x6, 0(%x2)  #187
 	mv	%x23, %x6
@@ -217,7 +217,7 @@ create_float_array.244:  #812
 	lw	%x5, 0(%x2)  #188
 	ret
 	nop
-inprod.247:  #868
+inprod.247:  #808
 	bge	%x7, %x0, 12  #192
 	j	bge_else.501
 	nop

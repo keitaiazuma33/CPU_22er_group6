@@ -1,7 +1,7 @@
 .section	".rodata"
 .align	8
 .section	".text"
-gcd.7:  #16
+gcd.7:  #0
 	beq	%x5, %x0, 12  #2
 	j	be_else.17
 	nop

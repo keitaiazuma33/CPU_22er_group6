@@ -1,7 +1,7 @@
 .section	".rodata"
 .align	8
 .section	".text"
-f.56:  #16
+f.56:  #0
 	addi	%x6, %x5, 1  #3
 	addi	%x7, %x6, 1  #4
 	addi	%x9, %x7, 1  #5

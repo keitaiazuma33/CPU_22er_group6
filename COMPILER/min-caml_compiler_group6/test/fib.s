@@ -1,7 +1,7 @@
 .section	".rodata"
 .align	8
 .section	".text"
-mul_abs.174:  #16
+mul_abs.174:  #0
 	addi	%x24, %x0, -1
 	beq	%x7, %x24, 12  #57
 	j	be_else.390
@@ -26,7 +26,7 @@ be_else.391:
 	mv	%x7, %x10
 	j	mul_abs.174  #63
 	nop
-mul.179:  #112
+mul.179:  #92
 	bge	%x5, %x0, 12  #67
 	j	bge_else.392
 	nop
@@ -71,7 +71,7 @@ be_else.396:
 	sub	%x5, %x0, %x5  #73
 	ret
 	nop
-div_abs.182:  #292
+div_abs.182:  #268
 	addi	%x24, %x0, -1
 	beq	%x7, %x24, 12  #77
 	j	be_else.397
@@ -97,7 +97,7 @@ ble_else.398:
 	addi	%x7, %x7, -1  #83
 	j	div_abs.182  #83
 	nop
-div.187:  #392
+div.187:  #364
 	bge	%x5, %x0, 12  #87
 	j	bge_else.399
 	nop
@@ -142,7 +142,7 @@ be_else.403:
 	sub	%x5, %x0, %x5  #93
 	ret
 	nop
-print_int.192:  #572
+print_int.192:  #540
 	bge	%x5, %x0, 12  #100
 	j	bge_else.404
 	nop
@@ -185,7 +185,7 @@ bge_else.404:
 	sub	%x5, %x0, %x5  #102
 	j	print_int.192  #102
 	nop
-fib.206:  #740
+fib.206:  #704
 	addi	%x24, %x0, 1
 	bge	%x24, %x5, 12  #161
 	j	ble_else.408

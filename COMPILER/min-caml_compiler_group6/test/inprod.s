@@ -8,19 +8,19 @@ l.67:	! 2.000000
 l.65:	! 1.000000
 l.63:	! 1000000.000000
 .section	".text"
-getx.23:  #44
+getx.23:  #0
 	flw	%f0, 0(%x5)  #1
 	ret
 	nop
-gety.25:  #60
+gety.25:  #12
 	flw	%f0, 8(%x5)  #2
 	ret
 	nop
-getz.27:  #76
+getz.27:  #24
 	flw	%f0, 16(%x5)  #3
 	ret
 	nop
-inprod.29:  #92
+inprod.29:  #36
 	sw	%x5, 0(%x2)  #5
 	sw	%x6, 4(%x2)  #5
 	sw	%x1, 12(%x2)  #5

@@ -1,7 +1,7 @@
 .section	".rodata"
 .align	8
 .section	".text"
-mul_abs.197:  #16
+mul_abs.197:  #0
 	addi	%x24, %x0, -1
 	beq	%x7, %x24, 12  #57
 	j	be_else.461
@@ -26,7 +26,7 @@ be_else.462:
 	mv	%x7, %x10
 	j	mul_abs.197  #63
 	nop
-mul.202:  #112
+mul.202:  #92
 	bge	%x5, %x0, 12  #67
 	j	bge_else.463
 	nop
@@ -71,7 +71,7 @@ be_else.467:
 	sub	%x5, %x0, %x5  #73
 	ret
 	nop
-div_abs.205:  #292
+div_abs.205:  #268
 	addi	%x24, %x0, -1
 	beq	%x7, %x24, 12  #77
 	j	be_else.468
@@ -97,7 +97,7 @@ ble_else.469:
 	addi	%x7, %x7, -1  #83
 	j	div_abs.205  #83
 	nop
-div.210:  #392
+div.210:  #364
 	bge	%x5, %x0, 12  #87
 	j	bge_else.470
 	nop
@@ -142,7 +142,7 @@ be_else.474:
 	sub	%x5, %x0, %x5  #93
 	ret
 	nop
-print_int.215:  #572
+print_int.215:  #540
 	bge	%x5, %x0, 12  #100
 	j	bge_else.475
 	nop
@@ -185,7 +185,7 @@ bge_else.475:
 	sub	%x5, %x0, %x5  #102
 	j	print_int.215  #102
 	nop
-assign_array.229:  #740
+assign_array.229:  #704
 	beq	%x7, %x0, 12  #160
 	j	be_else.479
 	nop
@@ -199,7 +199,7 @@ be_else.479:
 	addi	%x7, %x7, -1  #164
 	j	assign_array.229  #164
 	nop
-create_array.233:  #796
+create_array.233:  #756
 	mv	%x7, %x3  #168
 	sw	%x7, 0(%x2)  #171
 	mv	%x23, %x7
@@ -213,7 +213,7 @@ create_array.233:  #796
 	lw	%x5, 0(%x2)  #172
 	ret
 	nop
-f.243:  #852
+f.243:  #808
 	addi	%x5, %x0, 12345  #0
 	ret
 	nop

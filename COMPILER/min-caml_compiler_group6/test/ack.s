@@ -1,7 +1,7 @@
 .section	".rodata"
 .align	8
 .section	".text"
-ack.15:  #16
+ack.15:  #0
 	bge	%x0, %x5, 12  #2
 	j	ble_else.34
 	nop

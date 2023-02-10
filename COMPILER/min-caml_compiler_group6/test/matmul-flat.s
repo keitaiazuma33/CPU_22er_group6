@@ -14,7 +14,7 @@ l.758:	! 2.000000
 l.754:	! 1.000000
 l.749:	! 0.000000
 .section	".text"
-mul_abs.324:  #68
+mul_abs.324:  #0
 	addi	%x24, %x0, -1
 	beq	%x7, %x24, 12  #57
 	j	be_else.852
@@ -39,7 +39,7 @@ be_else.853:
 	mv	%x7, %x10
 	j	mul_abs.324  #63
 	nop
-mul.329:  #164
+mul.329:  #92
 	bge	%x5, %x0, 12  #67
 	j	bge_else.854
 	nop
@@ -84,7 +84,7 @@ be_else.858:
 	sub	%x5, %x0, %x5  #73
 	ret
 	nop
-div_abs.332:  #344
+div_abs.332:  #268
 	addi	%x24, %x0, -1
 	beq	%x7, %x24, 12  #77
 	j	be_else.859
@@ -110,7 +110,7 @@ ble_else.860:
 	addi	%x7, %x7, -1  #83
 	j	div_abs.332  #83
 	nop
-div.337:  #444
+div.337:  #364
 	bge	%x5, %x0, 12  #87
 	j	bge_else.861
 	nop
@@ -155,7 +155,7 @@ be_else.865:
 	sub	%x5, %x0, %x5  #93
 	ret
 	nop
-print_int.342:  #624
+print_int.342:  #540
 	bge	%x5, %x0, 12  #100
 	j	bge_else.866
 	nop
@@ -198,7 +198,7 @@ bge_else.866:
 	sub	%x5, %x0, %x5  #102
 	j	print_int.342  #102
 	nop
-assign_array.356:  #792
+assign_array.356:  #704
 	beq	%x7, %x0, 12  #160
 	j	be_else.870
 	nop
@@ -212,7 +212,7 @@ be_else.870:
 	addi	%x7, %x7, -1  #164
 	j	assign_array.356  #164
 	nop
-create_array.360:  #848
+create_array.360:  #756
 	mv	%x7, %x3  #168
 	sw	%x7, 0(%x2)  #171
 	mv	%x23, %x7
@@ -226,7 +226,7 @@ create_array.360:  #848
 	lw	%x5, 0(%x2)  #172
 	ret
 	nop
-assign_farray.363:  #904
+assign_farray.363:  #808
 	beq	%x6, %x0, 12  #176
 	j	be_else.872
 	nop
@@ -240,7 +240,7 @@ be_else.872:
 	addi	%x6, %x6, -1  #180
 	j	assign_farray.363  #180
 	nop
-create_float_array.367:  #960
+create_float_array.367:  #860
 	mv	%x6, %x3  #184
 	sw	%x6, 0(%x2)  #187
 	mv	%x23, %x6
@@ -254,7 +254,7 @@ create_float_array.367:  #960
 	lw	%x5, 0(%x2)  #188
 	ret
 	nop
-loop3.370:  #1016
+loop3.370:  #912
 	bge	%x6, %x0, 12  #192
 	j	bge_else.874
 	nop
@@ -282,7 +282,7 @@ loop3.370:  #1016
 bge_else.874:
 	ret
 	nop
-loop2.377:  #1128
+loop2.377:  #1020
 	bge	%x7, %x0, 12  #196
 	j	bge_else.876
 	nop
@@ -311,7 +311,7 @@ loop2.377:  #1128
 bge_else.876:
 	ret
 	nop
-loop1.384:  #1244
+loop1.384:  #1132
 	bge	%x5, %x0, 12  #200
 	j	bge_else.878
 	nop
@@ -340,11 +340,11 @@ loop1.384:  #1244
 bge_else.878:
 	ret
 	nop
-mul.391:  #1360
+mul.391:  #1244
 	addi	%x5, %x5, -1  #204
 	j	loop1.384  #204
 	nop
-init.399:  #1376
+init.399:  #1256
 	bge	%x5, %x0, 12  #207
 	j	bge_else.880
 	nop
@@ -370,7 +370,7 @@ init.399:  #1376
 bge_else.880:
 	ret
 	nop
-make.403:  #1480
+make.403:  #1356
 	sw	%x6, 0(%x2)  #211
 	sw	%x5, 4(%x2)  #211
 	mv	%x6, %x7

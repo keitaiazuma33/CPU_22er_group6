@@ -193,7 +193,7 @@ and g' oc = function (* ��̿��Υ�����֥����� (caml2h
   | Tail, CallCls(x, ys, zs), n -> (* �����ƤӽФ� (caml2html: emit_tailcall) *)
       g'_args oc [(x, reg_cl)] ys zs;
       incr_pc ();Printf.fprintf oc "\tlw\t0(%s), %s  #%d\n" reg_sw reg_cl n;
-      incr_pc ();Printf.fprintf oc "\tjalr\t%s, %s  #%d\n" reg_zero reg_sw n;
+      incr_pc ();Printf.fprintf oc "\tjalr\t%s, %s, %d  #%d\n" reg_zero reg_sw 0 n;
       incr_pc ();Printf.fprintf oc "\tnop\n"
   | Tail, CallDir(Id.L(x), ys, zs), n -> (* �����ƤӽФ� *)
       g'_args oc [] ys zs;
@@ -205,7 +205,7 @@ and g' oc = function (* ��̿��Υ�����֥����� (caml2h
       incr_pc ();Printf.fprintf oc "\tsw\t%s, %d(%s)  #%d\n" reg_ra (ss - 4) reg_sp n;
       incr_pc ();Printf.fprintf oc "\tlw\t%s, 0(%s)  #%d\n" reg_sw reg_cl n;
       incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, %d  #%d\n" reg_sp reg_sp ss n;
-      incr_pc ();Printf.fprintf oc "\tjalr\t%s, %s  #%d\n" reg_ra reg_sw n;
+      incr_pc ();Printf.fprintf oc "\tjalr\t%s, %s, %d  #%d\n" reg_ra reg_sw 0 n;
       (* Printf.fprintf oc "\taddi\t%s, %s, %d\t# delay slot  %d\n" reg_sp reg_sp ss n; *)
       incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, %d  #%d\n" reg_sp reg_sp (-ss) n;
       incr_pc ();Printf.fprintf oc "\tlw\t%s, %d(%s)  #%d\n" reg_ra (ss - 4) reg_sp n;
@@ -274,7 +274,7 @@ and g'_args oc x_reg_cl ys zs =
     (shuffle reg_fsw zfrs)
 
 let h oc { name = Id.L(x); args = _; fargs = _; body = e; ret = _ } =
-  incr_pc ();Printf.fprintf oc "%s:  #%d\n" x (!pc);
+  Printf.fprintf oc "%s:  #%d\n" x (!pc);
   add_pc_env x (!pc);
   stackset := S.empty;
   stackmap := [];
@@ -284,23 +284,23 @@ let f oc (Prog(data, fundefs, e)) =
   pc := 0;
   pc_env := M.empty;
   Format.eprintf "generating assembly...@.";
-  incr_pc ();Printf.fprintf oc ".section\t\".rodata\"\n";
-  incr_pc ();Printf.fprintf oc ".align\t8\n";
+  Printf.fprintf oc ".section\t\".rodata\"\n";
+  Printf.fprintf oc ".align\t8\n";
   List.iter
     (fun (Id.L(x), d) ->
-      incr_pc ();Printf.fprintf oc "%s:\t! %f\n" x d;
+      Printf.fprintf oc "%s:\t! %f\n" x d;
       (*Printf.fprintf oc "\t.long\t0x%lx\n" (gethi d);
       Printf.fprintf oc "\t.long\t0x%lx\n" (getlo d)*))
     data;
-  incr_pc ();Printf.fprintf oc ".section\t\".text\"\n";
+  Printf.fprintf oc ".section\t\".text\"\n";
   List.iter (fun fundef -> h oc fundef) fundefs;
-  incr_pc ();Printf.fprintf oc ".global\tmin_caml_start\n";
-  incr_pc ();Printf.fprintf oc "min_caml_start:\n";
+  Printf.fprintf oc ".global\tmin_caml_start\n";
+  Printf.fprintf oc "min_caml_start:\n";
   (*Printf.fprintf oc "\tsave\t%%sp, -112, %%sp\n";  from gcc; why 112? *)
-  incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, -112\n" reg_sp reg_sp;
+  Printf.fprintf oc "\taddi\t%s, %s, -112\n" reg_sp reg_sp;
   stackset := S.empty;
   stackmap := ["mul"; "div"];
   g oc (NonTail("%g0"), e);
   (* Printf.fprintf oc "\tret\n"; *)
   (* Printf.fprintf oc "\trestore\n" *)
-  incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 112\n" reg_sp reg_sp;
+  Printf.fprintf oc "\taddi\t%s, %s, 112\n" reg_sp reg_sp;

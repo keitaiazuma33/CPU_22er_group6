@@ -14,7 +14,7 @@ l.765:	! 2.000000
 l.761:	! 1.000000
 l.752:	! 0.000000
 .section	".text"
-mul_abs.324:  #68
+mul_abs.324:  #0
 	addi	%x24, %x0, -1
 	beq	%x7, %x24, 12  #57
 	j	be_else.854
@@ -39,7 +39,7 @@ be_else.855:
 	mv	%x7, %x10
 	j	mul_abs.324  #63
 	nop
-mul.329:  #164
+mul.329:  #92
 	bge	%x5, %x0, 12  #67
 	j	bge_else.856
 	nop
@@ -84,7 +84,7 @@ be_else.860:
 	sub	%x5, %x0, %x5  #73
 	ret
 	nop
-div_abs.332:  #344
+div_abs.332:  #268
 	addi	%x24, %x0, -1
 	beq	%x7, %x24, 12  #77
 	j	be_else.861
@@ -110,7 +110,7 @@ ble_else.862:
 	addi	%x7, %x7, -1  #83
 	j	div_abs.332  #83
 	nop
-div.337:  #444
+div.337:  #364
 	bge	%x5, %x0, 12  #87
 	j	bge_else.863
 	nop
@@ -155,7 +155,7 @@ be_else.867:
 	sub	%x5, %x0, %x5  #93
 	ret
 	nop
-print_int.342:  #624
+print_int.342:  #540
 	bge	%x5, %x0, 12  #100
 	j	bge_else.868
 	nop
@@ -198,7 +198,7 @@ bge_else.868:
 	sub	%x5, %x0, %x5  #102
 	j	print_int.342  #102
 	nop
-assign_array.356:  #792
+assign_array.356:  #704
 	beq	%x7, %x0, 12  #160
 	j	be_else.872
 	nop
@@ -212,7 +212,7 @@ be_else.872:
 	addi	%x7, %x7, -1  #164
 	j	assign_array.356  #164
 	nop
-create_array.360:  #848
+create_array.360:  #756
 	mv	%x7, %x3  #168
 	sw	%x7, 0(%x2)  #171
 	mv	%x23, %x7
@@ -226,7 +226,7 @@ create_array.360:  #848
 	lw	%x5, 0(%x2)  #172
 	ret
 	nop
-assign_farray.363:  #904
+assign_farray.363:  #808
 	beq	%x6, %x0, 12  #176
 	j	be_else.874
 	nop
@@ -240,7 +240,7 @@ be_else.874:
 	addi	%x6, %x6, -1  #180
 	j	assign_farray.363  #180
 	nop
-create_float_array.367:  #960
+create_float_array.367:  #860
 	mv	%x6, %x3  #184
 	sw	%x6, 0(%x2)  #187
 	mv	%x23, %x6
@@ -254,7 +254,7 @@ create_float_array.367:  #960
 	lw	%x5, 0(%x2)  #188
 	ret
 	nop
-loop3.512:  #1016
+loop3.512:  #912
 	lw	%x6, 20(%x22)  #0
 	lw	%x7, 16(%x22)  #0
 	lw	%x9, 12(%x22)  #0
@@ -283,12 +283,12 @@ loop3.512:  #1016
 	fsw	%f0, %x6(%x12) #198
 	addi	%x5, %x5, -1  #199
 	lw	0(%x23), %x22  #199
-	jalr	%x0, %x23  #199
+	jalr	%x0, %x23, 0  #199
 	nop
 bge_else.876:
 	ret
 	nop
-loop2.504:  #1152
+loop2.504:  #1044
 	lw	%x6, 20(%x22)  #0
 	lw	%x7, 16(%x22)  #0
 	lw	%x9, 12(%x22)  #0
@@ -299,7 +299,7 @@ loop2.504:  #1152
 	nop
 	mv	%x12, %x3  #196
 	addi	%x3, %x3, 24  #196
-	addi	%x24, %x0, 1016  #196 loop3.512
+	addi	%x24, %x0, 912  #196 loop3.512
 	mv	%x13, %x24  #196
 	sw	%x13, 0(%x12)  #196
 	sw	%x5, 20(%x12)  #196
@@ -315,19 +315,19 @@ loop2.504:  #1152
 	sw	%x1, 12(%x2)  #200
 	lw	%x23, 0(%x22)  #200
 	addi	%x2, %x2, 16  #200
-	jalr	%x1, %x23  #200
+	jalr	%x1, %x23, 0  #200
 	addi	%x2, %x2, -16  #200
 	lw	%x1, 12(%x2)  #200
 	lw	%x5, 4(%x2)  #201
 	addi	%x5, %x5, -1  #201
 	lw	%x22, 0(%x2)  #201
 	lw	0(%x23), %x22  #201
-	jalr	%x0, %x23  #201
+	jalr	%x0, %x23, 0  #201
 	nop
 bge_else.878:
 	ret
 	nop
-loop1.499:  #1308
+loop1.499:  #1196
 	lw	%x6, 20(%x22)  #0
 	lw	%x7, 16(%x22)  #0
 	lw	%x9, 12(%x22)  #0
@@ -338,7 +338,7 @@ loop1.499:  #1308
 	nop
 	mv	%x12, %x3  #194
 	addi	%x3, %x3, 24  #194
-	addi	%x24, %x0, 1152  #194 loop2.504
+	addi	%x24, %x0, 1044  #194 loop2.504
 	mv	%x13, %x24  #194
 	sw	%x13, 0(%x12)  #194
 	sw	%x7, 20(%x12)  #194
@@ -354,22 +354,22 @@ loop1.499:  #1308
 	sw	%x1, 12(%x2)  #202
 	lw	%x23, 0(%x22)  #202
 	addi	%x2, %x2, 16  #202
-	jalr	%x1, %x23  #202
+	jalr	%x1, %x23, 0  #202
 	addi	%x2, %x2, -16  #202
 	lw	%x1, 12(%x2)  #202
 	lw	%x5, 4(%x2)  #203
 	addi	%x5, %x5, -1  #203
 	lw	%x22, 0(%x2)  #203
 	lw	0(%x23), %x22  #203
-	jalr	%x0, %x23  #203
+	jalr	%x0, %x23, 0  #203
 	nop
 bge_else.880:
 	ret
 	nop
-mul.370:  #1464
+mul.370:  #1348
 	mv	%x22, %x3  #192
 	addi	%x3, %x3, 24  #192
-	addi	%x24, %x0, 1308  #192 loop1.499
+	addi	%x24, %x0, 1196  #192 loop1.499
 	mv	%x12, %x24  #192
 	sw	%x12, 0(%x22)  #192
 	sw	%x7, 20(%x22)  #192
@@ -379,9 +379,9 @@ mul.370:  #1464
 	sw	%x9, 4(%x22)  #192
 	addi	%x5, %x5, -1  #204
 	lw	0(%x23), %x22  #204
-	jalr	%x0, %x23  #204
+	jalr	%x0, %x23, 0  #204
 	nop
-init.486:  #1524
+init.486:  #1404
 	lw	%x6, 8(%x22)  #0
 	lw	%x7, 4(%x22)  #0
 	bge	%x5, %x0, 12  #209
@@ -404,12 +404,12 @@ init.486:  #1524
 	addi	%x5, %x6, -1  #211
 	lw	%x22, 0(%x2)  #211
 	lw	0(%x23), %x22  #211
-	jalr	%x0, %x23  #211
+	jalr	%x0, %x23, 0  #211
 	nop
 bge_else.882:
 	ret
 	nop
-make.378:  #1636
+make.378:  #1512
 	lw	%x7, 4(%x22)  #207
 	sw	%x5, 0(%x2)  #207
 	sw	%x6, 4(%x2)  #207
@@ -421,7 +421,7 @@ make.378:  #1636
 	lw	%x1, 12(%x2) #207
 	mv	%x22, %x3  #208
 	addi	%x3, %x3, 16  #208
-	addi	%x24, %x0, 1524  #208 init.486
+	addi	%x24, %x0, 1404  #208 init.486
 	mv	%x6, %x24  #208
 	sw	%x6, 0(%x22)  #208
 	lw	%x6, 4(%x2)  #208
@@ -434,7 +434,7 @@ make.378:  #1636
 	sw	%x1, 12(%x2)  #212
 	lw	%x23, 0(%x22)  #212
 	addi	%x2, %x2, 16  #212
-	jalr	%x1, %x23  #212
+	jalr	%x1, %x23, 0  #212
 	addi	%x2, %x2, -16  #212
 	lw	%x1, 12(%x2)  #212
 	lw	%x5, 8(%x2)  #213
@@ -452,7 +452,7 @@ min_caml_start:
 	lw	%x1, 12(%x2) #205
 	mv	%x22, %x3  #206
 	addi	%x3, %x3, 8  #206
-	addi	%x24, %x0, 1636  #206 make.378
+	addi	%x24, %x0, 1512  #206 make.378
 	mv	%x6, %x24  #206
 	sw	%x6, 0(%x22)  #206
 	sw	%x5, 4(%x22)  #206
@@ -462,7 +462,7 @@ min_caml_start:
 	sw	%x1, 12(%x2)  #214
 	lw	%x23, 0(%x22)  #214
 	addi	%x2, %x2, 16  #214
-	jalr	%x1, %x23  #214
+	jalr	%x1, %x23, 0  #214
 	addi	%x2, %x2, -16  #214
 	lw	%x1, 12(%x2)  #214
 	addi	%x6, %x0, 3  #0
@@ -474,7 +474,7 @@ min_caml_start:
 	sw	%x1, 20(%x2)  #215
 	lw	%x23, 0(%x22)  #215
 	addi	%x2, %x2, 24  #215
-	jalr	%x1, %x23  #215
+	jalr	%x1, %x23, 0  #215
 	addi	%x2, %x2, -24  #215
 	lw	%x1, 20(%x2)  #215
 	addi	%x6, %x0, 2  #0
@@ -484,7 +484,7 @@ min_caml_start:
 	sw	%x1, 20(%x2)  #216
 	lw	%x23, 0(%x22)  #216
 	addi	%x2, %x2, 24  #216
-	jalr	%x1, %x23  #216
+	jalr	%x1, %x23, 0  #216
 	addi	%x2, %x2, -24  #216
 	lw	%x1, 20(%x2)  #216
 	mv	%x11, %x5  #216

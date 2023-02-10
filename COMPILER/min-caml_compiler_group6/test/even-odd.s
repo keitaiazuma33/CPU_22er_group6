@@ -1,7 +1,7 @@
 .section	".rodata"
 .align	8
 .section	".text"
-odd.21:  #16
+odd.21:  #0
 	bge	%x0, %x5, 12  #5
 	j	ble_else.36
 	nop
@@ -19,7 +19,7 @@ ble_else.36:
 	addi	%x5, %x5, -1  #5
 	j	even.17  #5
 	nop
-even.17:  #88
+even.17:  #68
 	bge	%x0, %x5, 12  #8
 	j	ble_else.38
 	nop

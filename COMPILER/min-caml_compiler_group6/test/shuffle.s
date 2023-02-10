@@ -1,7 +1,7 @@
 .section	".rodata"
 .align	8
 .section	".text"
-foo.12:  #16
+foo.12:  #0
 	sw	%x11, 0(%x2)  #2
 	sw	%x10, 4(%x2)  #2
 	sw	%x9, 8(%x2)  #2
@@ -39,7 +39,7 @@ foo.12:  #16
 	lw	%x5, 0(%x2)  #7
 	j	min_caml_print_int  #7
 	nop
-bar.19:  #168
+bar.19:  #148
 	mv	%x23, %x11
 	mv	%x11, %x7
 	mv	%x7, %x9
