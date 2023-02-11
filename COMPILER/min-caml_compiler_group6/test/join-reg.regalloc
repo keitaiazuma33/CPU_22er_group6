@@ -1,5 +1,5 @@
 Name : f.12
-Args : %x5 
+Args : 
 
 FArgs : 
 Body :
@@ -7,7 +7,7 @@ ANS
 	SET 123
 
 Name : g.14
-Args : %x5 
+Args : 
 
 FArgs : 
 Body :
@@ -15,7 +15,7 @@ ANS
 	SET 456
 
 Name : h.16
-Args : %x5 
+Args : 
 
 FArgs : 
 Body :
@@ -29,7 +29,7 @@ LET
 	LET
 		%x5
 		CALLDIR f.12
-			%g0 
+			
 			
 		LET
 			%g0
@@ -40,7 +40,7 @@ LET
 				LET
 					%x5
 					CALLDIR g.14
-						%g0 
+						
 						
 					LET
 						%g0
@@ -51,7 +51,7 @@ LET
 							LET
 								%x5
 								CALLDIR h.16
-									%g0 
+									
 									
 								LET
 									%x5

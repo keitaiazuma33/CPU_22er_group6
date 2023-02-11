@@ -1,5 +1,5 @@
 Name : f.9
-Args : %x5 
+Args : 
 
 FArgs : 
 Body :
@@ -7,7 +7,7 @@ ANS
 	SET 123
 
 Name : g.11
-Args : %x5 
+Args : 
 
 FArgs : 
 Body :
@@ -21,7 +21,7 @@ LET
 	LET
 		%x5
 		CALLDIR f.9
-			%g0 
+			
 			
 		LET
 			Tu22
@@ -38,7 +38,7 @@ LET
 							LET
 								%x5
 								CALLDIR g.11
-									%g0 
+									
 									
 								LET
 									%x6

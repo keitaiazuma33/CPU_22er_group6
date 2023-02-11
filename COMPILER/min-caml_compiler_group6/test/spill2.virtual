@@ -270,12 +270,18 @@ LET
 								ANS
 									OUT Ti98.381
 			LET
-				Ti100.378
-				NEG a.229
-				ANS
-					CALLDIR print_int.228
-						Ti100.378 
-						
+				Ti99.379
+				SET 45
+				LET
+					Tu1.377
+					OUT Ti99.379
+					LET
+						Ti100.378
+						NEG a.229
+						ANS
+							CALLDIR print_int.228
+								Ti100.378 
+								
 
 Name : assign_array.242
 Args : hp.243 a.244 n.245 
@@ -324,15 +330,27 @@ LET
 			hp_array.316
 			MOV hp.315
 			LET
-				Tu4.318
-				CALLDIR assign_array.242
-					hp_array.316 a.248 n.247 
-					
-				ANS
-					MOV hp_array.316
+				Ti42.321
+				SET 2
+				LET
+					Ti43.320
+					SLL n.247 Ti42.321
+					LET
+						Ti44.319
+						ADD hp.315 Ti43.320
+						LET
+							Tu5.317
+							SETHP Ti44.319
+							LET
+								Tu4.318
+								CALLDIR assign_array.242
+									hp_array.316 a.248 n.247 
+									
+								ANS
+									MOV hp_array.316
 
 Name : f.256
-Args : Tu9.257 
+Args : 
 
 FArgs : 
 Body :
@@ -368,7 +386,7 @@ LET
 				LET
 					x.261
 					CALLDIR f.256
-						Tu12.299 
+						
 						
 					LET
 						y.262

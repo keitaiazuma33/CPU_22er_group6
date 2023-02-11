@@ -213,12 +213,18 @@ ANS
 					ANS
 						OUT Ti212.610
 		LET
-			Ti214.607
-			NEG a.343
-			ANS
-				CALLDIR print_int.342
-					Ti214.607 
-					
+			Ti213.608
+			SET 45
+			LET
+				Tu1.606
+				OUT Ti213.608
+				LET
+					Ti214.607
+					NEG a.343
+					ANS
+						CALLDIR print_int.342
+							Ti214.607 
+							
 
 Name : assign_array.356
 Args : hp.357 a.358 n.359 
@@ -261,12 +267,21 @@ LET
 			hp_array.545
 			MOV hp.544
 			LET
-				Tu4.547
-				CALLDIR assign_array.356
-					hp_array.545 a.362 n.361 
-					
-				ANS
-					MOV hp_array.545
+				Ti157.549
+				SLL n.361 2
+				LET
+					Ti158.548
+					ADD hp.544 Ti157.549
+					LET
+						Tu5.546
+						SETHP Ti158.548
+						LET
+							Tu4.547
+							CALLDIR assign_array.356
+								hp_array.545 a.362 n.361 
+								
+							ANS
+								MOV hp_array.545
 
 Name : assign_farray.363
 Args : hp.364 n.366 
@@ -309,12 +324,21 @@ LET
 			hp_array.533
 			MOV hp.532
 			LET
-				Tu7.535
-				CALLDIR assign_farray.363
-					hp_array.533 n.368 
-					a.369 
-				ANS
-					MOV hp_array.533
+				Ti150.537
+				SLL n.368 3
+				LET
+					Ti151.536
+					ADD hp.532 Ti150.537
+					LET
+						Tu8.534
+						SETHP Ti151.536
+						LET
+							Tu7.535
+							CALLDIR assign_farray.363
+								hp_array.533 n.368 
+								a.369 
+							ANS
+								MOV hp_array.533
 
 Name : loop3.512
 Args : k.513 
@@ -631,7 +655,7 @@ LET
 			MOV %x3
 			LET
 				%x3
-				ADD %x3 16
+				ADD %x3 12
 				LET
 					l.757
 					init.486
@@ -853,7 +877,7 @@ LET
 																																																												LET
 																																																													Tu19.398
 																																																													CALLDIR min_caml_print_newline
-																																																														Tu98.422 
+																																																														
 																																																														
 																																																													LET
 																																																														Ta100.419
@@ -877,7 +901,7 @@ LET
 																																																																		LET
 																																																																			Tu17.400
 																																																																			CALLDIR min_caml_print_newline
-																																																																				Tu104.416 
+																																																																				
 																																																																				
 																																																																			LET
 																																																																				Ta106.413
@@ -901,7 +925,7 @@ LET
 																																																																								LET
 																																																																									Tu15.402
 																																																																									CALLDIR min_caml_print_newline
-																																																																										Tu110.410 
+																																																																										
 																																																																										
 																																																																									LET
 																																																																										Ta112.407
@@ -924,5 +948,5 @@ LET
 																																																																														NOP
 																																																																														ANS
 																																																																															CALLDIR min_caml_print_newline
-																																																																																Tu116.404 
+																																																																																
 																																																																																

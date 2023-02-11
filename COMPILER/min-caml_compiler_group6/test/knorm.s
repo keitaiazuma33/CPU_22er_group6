@@ -14,18 +14,19 @@ x.8:  #pc 0
 	nop #pc 36
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x2, -112
-	addi	%x5, %x0, 125  #0 pc 40
-	sw	%x1, 12(%x2)  #5 pc 44
-	addi	%x2, %x2, 16  #5 pc 48
-	jal	%x1, x.8  #5 pc 52
-	addi	%x2, %x2, -16  #5 pc 56
-	lw	%x1, 12(%x2) #5 pc 60
-	sub	%x6, %x0, %x5  #5 pc 64
-	sub	%x5, %x5, %x6  #5 pc 68
-	sw	%x1, 12(%x2)  #5 pc 72
-	addi	%x2, %x2, 16  #5 pc 76
-	jal	%x1, min_caml_print_int  #5 pc 80
-	addi	%x2, %x2, -16  #5 pc 84
-	lw	%x1, 12(%x2) #5 pc 88
+	addi	%x2, %x0, 0
+	addi	%x3, %x0, 1024
+	addi	%x5, %x0, 125  #0 pc 48
+	sw	%x1, 0(%x2)  #5 pc 52
+	addi	%x2, %x2, 4  #5 pc 56
+	jal	%x1, x.8  #5 pc 60
+	addi	%x2, %x2, -4  #5 pc 64
+	lw	%x1, 0(%x2) #5 pc 68
+	sub	%x6, %x0, %x5  #5 pc 72
+	sub	%x5, %x5, %x6  #5 pc 76
+	sw	%x1, 0(%x2)  #5 pc 80
+	addi	%x2, %x2, 4  #5 pc 84
+	jal	%x1, min_caml_print_int  #5 pc 88
+	addi	%x2, %x2, -4  #5 pc 92
+	lw	%x1, 0(%x2) #5 pc 96
 	addi	%x2, %x2, 112

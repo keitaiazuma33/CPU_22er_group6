@@ -143,9 +143,13 @@ LET REC mul_abs.193 a.194 b.195 i.196 acc.197
 										LET Ti81.328
 											ADD a.212 Ti80.329
 											OUT Ti81.328
-							LET Ti83.325
-								NEG a.212
-								APP print_int.211 Ti83.325 
+							LET Ti82.326
+								INT 45
+								LET Tu1.324
+									OUT Ti82.326
+									LET Ti83.325
+										NEG a.212
+										APP print_int.211 Ti83.325 
 					LET REC assign_array.225 hp.226 a.227 n.228 
 						LET Ti28.270
 							INT 0
@@ -165,9 +169,17 @@ LET REC mul_abs.193 a.194 b.195 i.196 acc.197
 									GETHP Tu24.269
 									LET hp_array.263
 										ITOIA hp.262
-										LET Tu4.265
-											APP assign_array.225 hp_array.263 a.231 n.230 
-											VAR hp_array.263
+										LET Ti25.268
+											INT 2
+											LET Ti26.267
+												SLL n.230 Ti25.268
+												LET Ti27.266
+													ADD hp.262 Ti26.267
+													LET Tu5.264
+														SETHP Ti27.266
+														LET Tu4.265
+															APP assign_array.225 hp_array.263 a.231 n.230 
+															VAR hp_array.263
 							LET REC f.239 n.240 
 								LET Ti11.242
 									INT 0

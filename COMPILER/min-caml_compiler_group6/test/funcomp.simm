@@ -29,7 +29,7 @@ LET
 	MOV %x3
 	LET
 		%x3
-		ADD %x3 16
+		ADD %x3 12
 		LET
 			l.27
 			composed.22
@@ -75,7 +75,7 @@ LET
 	MOV %x3
 	LET
 		%x3
-		ADD %x3 8
+		ADD %x3 4
 		LET
 			l.33
 			dbl.10
@@ -87,7 +87,7 @@ LET
 					MOV %x3
 					LET
 						%x3
-						ADD %x3 8
+						ADD %x3 4
 						LET
 							l.31
 							inc.12
@@ -99,7 +99,7 @@ LET
 									MOV %x3
 									LET
 										%x3
-										ADD %x3 8
+										ADD %x3 4
 										LET
 											l.29
 											dec.14

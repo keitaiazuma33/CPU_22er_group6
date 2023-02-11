@@ -162,9 +162,13 @@ LET Ti80.342
 					LET Ti89.347
 						ADD a.220 Ti88.348
 						OUT Ti89.347
-		LET Ti91.344
-			NEG a.220
-			APPDIR print_int.219 : Ti91.344 
+		LET Ti90.345
+			INT 45
+			LET Tu1.343
+				OUT Ti90.345
+				LET Ti91.344
+					NEG a.220
+					APPDIR print_int.219 : Ti91.344 
 
 Name : assign_farray.240
 Args : hp.241 a.242 n.243 
@@ -192,9 +196,17 @@ LET Tu25.276
 		GETHP
 		LET hp_array.270
 			ITOFA hp.269
-			LET Tu7.272
-				APPDIR assign_farray.240 : hp_array.270 a.246 n.245 
-				VAR hp_array.270
+			LET Ti26.275
+				INT 3
+				LET Ti27.274
+					SLL n.245 Ti26.275
+					LET Ti28.273
+						ADD hp.269 Ti27.274
+						LET Tu8.271
+							SETHP Ti28.273
+							LET Tu7.272
+								APPDIR assign_farray.240 : hp_array.270 a.246 n.245 
+								VAR hp_array.270
 
 Name : inprod.247
 Args : v1.248 v2.249 i.250 

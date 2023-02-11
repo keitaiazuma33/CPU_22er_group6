@@ -213,12 +213,18 @@ ANS
 					ANS
 						OUT Ti81.328
 		LET
-			Ti83.325
-			NEG a.212
-			ANS
-				CALLDIR print_int.211
-					Ti83.325 
-					
+			Ti82.326
+			SET 45
+			LET
+				Tu1.324
+				OUT Ti82.326
+				LET
+					Ti83.325
+					NEG a.212
+					ANS
+						CALLDIR print_int.211
+							Ti83.325 
+							
 
 Name : assign_array.225
 Args : hp.226 a.227 n.228 
@@ -261,12 +267,21 @@ LET
 			hp_array.263
 			MOV hp.262
 			LET
-				Tu4.265
-				CALLDIR assign_array.225
-					hp_array.263 a.231 n.230 
-					
-				ANS
-					MOV hp_array.263
+				Ti26.267
+				SLL n.230 2
+				LET
+					Ti27.266
+					ADD hp.262 Ti26.267
+					LET
+						Tu5.264
+						SETHP Ti27.266
+						LET
+							Tu4.265
+							CALLDIR assign_array.225
+								hp_array.263 a.231 n.230 
+								
+							ANS
+								MOV hp_array.263
 
 Name : f.239
 Args : n.240 
@@ -307,7 +322,7 @@ LET
 	MOV %x3
 	LET
 		%x3
-		ADD %x3 8
+		ADD %x3 4
 		LET
 			l.440
 			f.239

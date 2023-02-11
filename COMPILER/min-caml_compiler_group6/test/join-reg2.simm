@@ -1,5 +1,5 @@
 Name : f.12
-Args : Tu1.13 
+Args : 
 
 FArgs : 
 Body :
@@ -7,7 +7,7 @@ ANS
 	SET 123
 
 Name : g.14
-Args : Tu2.15 
+Args : 
 
 FArgs : 
 Body :
@@ -15,7 +15,7 @@ ANS
 	SET 456
 
 Name : h.16
-Args : Tu3.17 
+Args : 
 
 FArgs : 
 Body :
@@ -29,7 +29,7 @@ LET
 	LET
 		x.18
 		CALLDIR f.12
-			Tu4.26 
+			
 			
 		LET
 			Ti10.20
@@ -40,7 +40,7 @@ LET
 					LET
 						Ti7.24
 						CALLDIR g.14
-							Tu6.25 
+							
 							
 						ANS
 							ADD Ti7.24 x.18
@@ -50,7 +50,7 @@ LET
 					LET
 						Ti9.22
 						CALLDIR h.16
-							Tu8.23 
+							
 							
 						ANS
 							SUB Ti9.22 x.18

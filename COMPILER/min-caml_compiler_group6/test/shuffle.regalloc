@@ -1,17 +1,17 @@
 Name : foo.12
-Args : %x5 %x6 %x7 %x9 %x10 %x11 
+Args : %x5 %x6 %x7 %x8 %x9 %x10 
 
 FArgs : 
 Body :
 LET
 	Tu42
-	SAVE %x11 f.18
+	SAVE %x10 f.18
 	LET
 		Tu41
-		SAVE %x10 e.17
+		SAVE %x9 e.17
 		LET
 			Tu40
-			SAVE %x9 d.16
+			SAVE %x8 d.16
 			LET
 				Tu39
 				SAVE %x7 c.15
@@ -64,13 +64,13 @@ LET
 																	
 
 Name : bar.19
-Args : %x5 %x6 %x7 %x9 %x10 %x11 
+Args : %x5 %x6 %x7 %x8 %x9 %x10 
 
 FArgs : 
 Body :
 ANS
 	CALLDIR foo.12
-		%x6 %x5 %x9 %x10 %x11 %x7 
+		%x6 %x5 %x8 %x9 %x10 %x7 
 		
 
 
@@ -84,15 +84,15 @@ LET
 			%x7
 			SET 3
 			LET
-				%x9
+				%x8
 				SET 4
 				LET
-					%x10
+					%x9
 					SET 5
 					LET
-						%x11
+						%x10
 						SET 6
 						ANS
 							CALLDIR bar.19
-								%x5 %x6 %x7 %x9 %x10 %x11 
+								%x5 %x6 %x7 %x8 %x9 %x10 
 								

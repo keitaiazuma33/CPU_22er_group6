@@ -16,7 +16,7 @@ FArgs :
 Body :
 LET
 	%f0
-	LDDF %x5 8
+	LDDF %x5 4
 	ANS
 		FMOVD %f0
 
@@ -27,7 +27,7 @@ FArgs :
 Body :
 LET
 	%f0
-	LDDF %x5 16
+	LDDF %x5 8
 	ANS
 		FMOVD %f0
 
@@ -159,13 +159,13 @@ LET
 					MOV %x3
 					LET
 						%x3
-						ADD %x3 24
+						ADD %x3 12
 						LET
 							%g0
-							STDF %f3 %x5 16
+							STDF %f3 %x5 8
 							LET
 								%g0
-								STDF %f2 %x5 8
+								STDF %f2 %x5 4
 								LET
 									%g0
 									STDF %f1 %x5 0
@@ -186,13 +186,13 @@ LET
 														MOV %x3
 														LET
 															%x3
-															ADD %x3 24
+															ADD %x3 12
 															LET
 																%g0
-																STDF %f3 %x6 16
+																STDF %f3 %x6 8
 																LET
 																	%g0
-																	STDF %f2 %x6 8
+																	STDF %f2 %x6 4
 																	LET
 																		%g0
 																		STDF %f1 %x6 0

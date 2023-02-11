@@ -155,7 +155,7 @@ let rec g env = function (* K�������롼�������� (c
         (fun x -> Gethp(x, n), Type.Int)
   | Syntax.Sethp(e, n) ->
       insert_let (g env e)
-        (fun x -> Out(x, n), Type.Unit)
+        (fun x -> Sethp(x, n), Type.Unit)
   | Syntax.FAdd(e1, e2, n) ->
       insert_let (g env e1)
         (fun x -> insert_let (g env e2)

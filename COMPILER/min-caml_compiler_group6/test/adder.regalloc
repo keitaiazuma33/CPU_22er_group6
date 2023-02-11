@@ -5,7 +5,7 @@ FArgs :
 Body :
 LET
 	%x6
-	LD %x22 4
+	LD %x29 4
 	ANS
 		ADD %x6 %x5
 
@@ -37,7 +37,7 @@ LET
 	%x5
 	SET 3
 	LET
-		%x22
+		%x29
 		CALLDIR make_adder.5
 			%x5 
 			
@@ -46,7 +46,7 @@ LET
 			SET 7
 			LET
 				%x5
-				CALLCLS %x22
+				CALLCLS %x29
 					%x5 
 					
 				ANS

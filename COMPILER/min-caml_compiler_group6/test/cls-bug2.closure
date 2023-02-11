@@ -162,9 +162,13 @@ LET Ti72.323
 					LET Ti81.328
 						ADD a.212 Ti80.329
 						OUT Ti81.328
-		LET Ti83.325
-			NEG a.212
-			APPDIR print_int.211 : Ti83.325 
+		LET Ti82.326
+			INT 45
+			LET Tu1.324
+				OUT Ti82.326
+				LET Ti83.325
+					NEG a.212
+					APPDIR print_int.211 : Ti83.325 
 
 Name : assign_array.225
 Args : hp.226 a.227 n.228 
@@ -192,9 +196,17 @@ LET Tu24.269
 		GETHP
 		LET hp_array.263
 			ITOIA hp.262
-			LET Tu4.265
-				APPDIR assign_array.225 : hp_array.263 a.231 n.230 
-				VAR hp_array.263
+			LET Ti25.268
+				INT 2
+				LET Ti26.267
+					SLL n.230 Ti25.268
+					LET Ti27.266
+						ADD hp.262 Ti26.267
+						LET Tu5.264
+							SETHP Ti27.266
+							LET Tu4.265
+								APPDIR assign_array.225 : hp_array.263 a.231 n.230 
+								VAR hp_array.263
 
 Name : f.239
 Args : n.240 

@@ -5,7 +5,7 @@ FArgs :
 Body :
 LET
 	%x6
-	LD %x22 4
+	LD %x29 4
 	ANS
 		IFEQ %x5 0
 			ANS
@@ -18,7 +18,7 @@ LET
 					SAVE %x6 x.7
 					LET
 						%x5
-						CALLCLS %x22
+						CALLCLS %x29
 							%x5 
 							
 						LET
@@ -32,7 +32,7 @@ LET
 	%x5
 	SET 10
 	LET
-		%x22
+		%x29
 		MOV %x3
 		LET
 			%x3
@@ -42,16 +42,16 @@ LET
 				f.8
 				LET
 					%g0
-					ST %x6 %x22 0
+					ST %x6 %x29 0
 					LET
 						%g0
-						ST %x5 %x22 4
+						ST %x5 %x29 4
 						LET
 							%x5
 							SET 123
 							LET
 								%x5
-								CALLCLS %x22
+								CALLCLS %x29
 									%x5 
 									
 								ANS

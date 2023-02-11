@@ -143,9 +143,13 @@ LET REC mul_abs.202 a.203 b.204 i.205 acc.206
 										LET Ti90.350
 											ADD a.221 Ti89.351
 											OUT Ti90.350
-							LET Ti92.347
-								NEG a.221
-								APP print_int.220 Ti92.347 
+							LET Ti91.348
+								INT 45
+								LET Tu1.346
+									OUT Ti91.348
+									LET Ti92.347
+										NEG a.221
+										APP print_int.220 Ti92.347 
 					LET REC assign_farray.241 hp.242 a.243 n.244 
 						LET Ti30.280
 							INT 0
@@ -165,9 +169,17 @@ LET REC mul_abs.202 a.203 b.204 i.205 acc.206
 									GETHP Tu26.279
 									LET hp_array.273
 										ITOFA hp.272
-										LET Tu7.275
-											APP assign_farray.241 hp_array.273 a.247 n.246 
-											VAR hp_array.273
+										LET Ti27.278
+											INT 3
+											LET Ti28.277
+												SLL n.246 Ti27.278
+												LET Ti29.276
+													ADD hp.272 Ti28.277
+													LET Tu8.274
+														SETHP Ti29.276
+														LET Tu7.275
+															APP assign_farray.241 hp_array.273 a.247 n.246 
+															VAR hp_array.273
 							LET REC inprod.248 v1.249 v2.250 acc.251 i.252 
 								LET Ti19.265
 									INT 0

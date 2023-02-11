@@ -157,34 +157,40 @@ let rec read_float a =
 in
 
 let rec assign_array hp a n =
-  if n = 0 then
-    hp.(n) <- a 
-  else
-    (hp.(n) <- a;
-    assign_array hp a (n-1))
+  if n < 0 then
+    ()
+  else 
+    if n = 0 then
+      hp.(n) <- a 
+    else
+      (hp.(n) <- a;
+      assign_array hp a (n-1))
 in
 
 let rec create_array n a =
   let hp = gethp () in
   let hp_array = itoia(hp) in
   sethp (hp + (n lsl 2));
-  assign_array hp_array a n;
+  assign_array hp_array a (n-1);
   hp_array
 in
 
 let rec assign_farray hp a n =
-  if n = 0 then
-    hp.(n) <- a 
-  else
-    (hp.(n) <- a;
-    assign_farray hp a (n-1))
+  if n < 0 then
+    ()
+  else 
+    if n = 0 then
+      hp.(n) <- a 
+    else
+      (hp.(n) <- a;
+      assign_farray hp a (n-1))
 in
 
 let rec create_float_array n a =
   let hp = gethp () in
   let hp_array = itofa(hp) in
-  sethp (hp + (n lsl 3));
-  assign_farray hp_array a n;
+  sethp (hp + (n lsl 2));
+  assign_farray hp_array a (n-1);
   hp_array
 in
 
@@ -2631,6 +2637,6 @@ in
 
 (* rt size_x size_y version *)
 (* version は 3 or 6 *)
-let _ = rt 8 8 3
+let _ = rt 512 512 3
 
 in ()

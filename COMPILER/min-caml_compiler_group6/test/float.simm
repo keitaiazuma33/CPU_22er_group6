@@ -325,12 +325,18 @@ ANS
 					ANS
 						OUT Ti70.285
 		LET
-			Ti72.282
-			NEG a.201
-			ANS
-				CALLDIR print_int.200
-					Ti72.282 
-					
+			Ti71.283
+			SET 45
+			LET
+				Tu1.281
+				OUT Ti71.283
+				LET
+					Ti72.282
+					NEG a.201
+					ANS
+						CALLDIR print_int.200
+							Ti72.282 
+							
 
 
 LET

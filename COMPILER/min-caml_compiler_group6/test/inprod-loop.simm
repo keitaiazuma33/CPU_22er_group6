@@ -213,12 +213,18 @@ ANS
 					ANS
 						OUT Ti90.350
 		LET
-			Ti92.347
-			NEG a.221
-			ANS
-				CALLDIR print_int.220
-					Ti92.347 
-					
+			Ti91.348
+			SET 45
+			LET
+				Tu1.346
+				OUT Ti91.348
+				LET
+					Ti92.347
+					NEG a.221
+					ANS
+						CALLDIR print_int.220
+							Ti92.347 
+							
 
 Name : assign_farray.241
 Args : hp.242 n.244 
@@ -261,12 +267,21 @@ LET
 			hp_array.273
 			MOV hp.272
 			LET
-				Tu7.275
-				CALLDIR assign_farray.241
-					hp_array.273 n.246 
-					a.247 
-				ANS
-					MOV hp_array.273
+				Ti28.277
+				SLL n.246 3
+				LET
+					Ti29.276
+					ADD hp.272 Ti28.277
+					LET
+						Tu8.274
+						SETHP Ti29.276
+						LET
+							Tu7.275
+							CALLDIR assign_farray.241
+								hp_array.273 n.246 
+								a.247 
+							ANS
+								MOV hp_array.273
 
 Name : inprod.248
 Args : v1.249 v2.250 i.252 

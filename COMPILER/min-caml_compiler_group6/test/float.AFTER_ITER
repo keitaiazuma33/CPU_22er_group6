@@ -201,9 +201,13 @@ LET REC sin.168 x.169
 															LET Ti70.285
 																ADD a.201 Ti69.286
 																OUT Ti70.285
-												LET Ti72.282
-													NEG a.201
-													APP print_int.200 Ti72.282 
+												LET Ti71.283
+													INT 45
+													LET Tu1.281
+														OUT Ti71.283
+														LET Ti72.282
+															NEG a.201
+															APP print_int.200 Ti72.282 
 										LET Td3.230
 											FLOAT -12.300000
 											LET Td4.229

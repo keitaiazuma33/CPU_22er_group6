@@ -443,24 +443,30 @@ LET REC fiszero x
 																										FLOAT 0.000000
 																									LET REC assign_array hp a n 
 																										IF
-																											EQ
-																												VAR n
-																												INT 0
-																											PUT
-																												VAR hp
-																												VAR n
-																												VAR a
-																											LET Tu3
+																											NOT
+																												LE
+																													INT 0
+																													VAR n
+																											UNIT
+																											IF
+																												EQ
+																													VAR n
+																													INT 0
 																												PUT
 																													VAR hp
 																													VAR n
 																													VAR a
-																												APP VAR assign_array
-																													VAR hp
-																													VAR a
-																													SUB
+																												LET Tu3
+																													PUT
+																														VAR hp
 																														VAR n
-																														INT 1
+																														VAR a
+																													APP VAR assign_array
+																														VAR hp
+																														VAR a
+																														SUB
+																															VAR n
+																															INT 1
 																										LET REC create_array n a 
 																											LET hp
 																												GETHP
@@ -479,28 +485,36 @@ LET REC fiszero x
 																															APP VAR assign_array
 																																VAR hp_array
 																																VAR a
-																																VAR n
+																																SUB
+																																	VAR n
+																																	INT 1
 																															VAR hp_array
 																											LET REC assign_farray hp a n 
 																												IF
-																													EQ
-																														VAR n
-																														INT 0
-																													PUT
-																														VAR hp
-																														VAR n
-																														VAR a
-																													LET Tu6
+																													NOT
+																														LE
+																															INT 0
+																															VAR n
+																													UNIT
+																													IF
+																														EQ
+																															VAR n
+																															INT 0
 																														PUT
 																															VAR hp
 																															VAR n
 																															VAR a
-																														APP VAR assign_farray
-																															VAR hp
-																															VAR a
-																															SUB
+																														LET Tu6
+																															PUT
+																																VAR hp
 																																VAR n
-																																INT 1
+																																VAR a
+																															APP VAR assign_farray
+																																VAR hp
+																																VAR a
+																																SUB
+																																	VAR n
+																																	INT 1
 																												LET REC create_float_array n a 
 																													LET hp
 																														GETHP
@@ -514,12 +528,14 @@ LET REC fiszero x
 																																		VAR hp
 																																		SLL
 																																			VAR n
-																																			INT 3
+																																			INT 2
 																																LET Tu7
 																																	APP VAR assign_farray
 																																		VAR hp_array
 																																		VAR a
-																																		VAR n
+																																		SUB
+																																			VAR n
+																																			INT 1
 																																	VAR hp_array
 																													LET n_objects
 																														ARRAY
@@ -6446,7 +6462,7 @@ LET REC fiszero x
 																																																																																																																																																																																																																													VAR version
 																																																																																																																																																																																																													LET Tu254
 																																																																																																																																																																																																														APP VAR rt
-																																																																																																																																																																																																															INT 8
-																																																																																																																																																																																																															INT 8
+																																																																																																																																																																																																															INT 512
+																																																																																																																																																																																																															INT 512
 																																																																																																																																																																																																															INT 3
 																																																																																																																																																																																																														UNIT

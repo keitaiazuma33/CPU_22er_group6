@@ -1,42 +1,42 @@
 Name : mul_abs.324
-Args : %x5 %x6 %x7 %x9 
+Args : %x5 %x6 %x7 %x8 
 
 FArgs : 
 Body :
 ANS
 	IFEQ %x7 -1
 		ANS
-			MOV %x9
+			MOV %x8
 		LET
-			%x10
+			%x9
 			SET 1
 			LET
-				%x10
-				SLL %x10 %x7
+				%x9
+				SLL %x9 %x7
 				LET
-					%x10
-					AND %x6 %x10
+					%x9
+					AND %x6 %x9
 					ANS
-						IFEQ %x10 0
+						IFEQ %x9 0
 							LET
 								%x7
 								SUB %x7 1
 								ANS
 									CALLDIR mul_abs.324
-										%x5 %x6 %x7 %x9 
+										%x5 %x6 %x7 %x8 
 										
 							LET
-								%x10
+								%x9
 								SUB %x7 1
 								LET
 									%x7
 									SLL %x5 %x7
 									LET
-										%x9
-										ADD %x9 %x7
+										%x8
+										ADD %x8 %x7
 										ANS
 											CALLDIR mul_abs.324
-												%x5 %x6 %x10 %x9 
+												%x5 %x6 %x9 %x8 
 												
 
 Name : mul.329
@@ -52,17 +52,17 @@ LET
 		ANS
 			NEG %x5
 	LET
-		%x9
+		%x8
 		IFGE %x6 0
 			ANS
 				MOV %x6
 			ANS
 				NEG %x6
 		LET
-			%x10
+			%x9
 			SET 30
 			LET
-				%x11
+				%x10
 				SET 0
 				LET
 					Tu810
@@ -73,7 +73,7 @@ LET
 						LET
 							%x5
 							CALLDIR mul_abs.324
-								%x7 %x9 %x10 %x11 
+								%x7 %x8 %x9 %x10 
 								
 							LET
 								%x6
@@ -95,47 +95,47 @@ LET
 														NEG %x5
 
 Name : div_abs.332
-Args : %x5 %x6 %x7 %x9 
+Args : %x5 %x6 %x7 %x8 
 
 FArgs : 
 Body :
 ANS
 	IFEQ %x7 -1
 		ANS
-			MOV %x9
+			MOV %x8
 		LET
-			%x10
+			%x9
 			SRL %x5 %x7
 			ANS
-				IFLE %x6 %x10
+				IFLE %x6 %x9
 					LET
-						%x10
+						%x9
 						SLL %x6 %x7
 						LET
 							%x5
-							SUB %x5 %x10
+							SUB %x5 %x9
 							LET
-								%x10
+								%x9
 								SUB %x7 1
 								LET
-									%x11
+									%x10
 									SET 1
 									LET
 										%x7
-										SLL %x11 %x7
+										SLL %x10 %x7
 										LET
-											%x9
-											ADD %x9 %x7
+											%x8
+											ADD %x8 %x7
 											ANS
 												CALLDIR div_abs.332
-													%x5 %x6 %x10 %x9 
+													%x5 %x6 %x9 %x8 
 													
 					LET
 						%x7
 						SUB %x7 1
 						ANS
 							CALLDIR div_abs.332
-								%x5 %x6 %x7 %x9 
+								%x5 %x6 %x7 %x8 
 								
 
 Name : div.337
@@ -151,17 +151,17 @@ LET
 		ANS
 			NEG %x5
 	LET
-		%x9
+		%x8
 		IFGE %x6 0
 			ANS
 				MOV %x6
 			ANS
 				NEG %x6
 		LET
-			%x10
+			%x9
 			SET 30
 			LET
-				%x11
+				%x10
 				SET 0
 				LET
 					Tu812
@@ -172,7 +172,7 @@ LET
 						LET
 							%x5
 							CALLDIR div_abs.332
-								%x7 %x9 %x10 %x11 
+								%x7 %x8 %x9 %x10 
 								
 							LET
 								%x6
@@ -249,12 +249,18 @@ ANS
 					ANS
 						OUT %x5
 		LET
-			%x5
-			NEG %x5
-			ANS
-				CALLDIR print_int.342
-					%x5 
-					
+			%x6
+			SET 45
+			LET
+				%g0
+				OUT %x6
+				LET
+					%x5
+					NEG %x5
+					ANS
+						CALLDIR print_int.342
+							%x5 
+							
 
 Name : assign_array.356
 Args : %x5 %x6 %x7 
@@ -269,11 +275,11 @@ ANS
 			ANS
 				ST %x6 %x5 %x7
 		LET
-			%x9
+			%x8
 			SLL %x7 2
 			LET
 				%g0
-				ST %x6 %x5 %x9
+				ST %x6 %x5 %x8
 				LET
 					%x7
 					SUB %x7 1
@@ -294,21 +300,30 @@ LET
 		%x7
 		GETHP
 		LET
-			%x7
+			%x8
 			MOV %x7
 			LET
-				Tu817
-				SAVE %x7 hp_array.563
+				%x9
+				SLL %x5 2
 				LET
-					%g0
-					CALLDIR assign_array.356
-						%x7 %x6 %x5 
-						
+					%x7
+					ADD %x7 %x9
 					LET
-						%x5
-						RESTORE hp_array.563
-						ANS
-							MOV %x5
+						%g0
+						SETHP %x7
+						LET
+							Tu817
+							SAVE %x8 hp_array.563
+							LET
+								%g0
+								CALLDIR assign_array.356
+									%x8 %x6 %x5 
+									
+								LET
+									%x5
+									RESTORE hp_array.563
+									ANS
+										MOV %x5
 
 Name : assign_farray.363
 Args : %x5 %x6 
@@ -348,71 +363,80 @@ LET
 		%x6
 		GETHP
 		LET
-			%x6
+			%x7
 			MOV %x6
 			LET
-				Tu819
-				SAVE %x6 hp_array.551
+				%x8
+				SLL %x5 3
 				LET
-					%g0
-					CALLDIR assign_farray.363
-						%x6 %x5 
-						%f0 
+					%x6
+					ADD %x6 %x8
 					LET
-						%x5
-						RESTORE hp_array.551
-						ANS
-							MOV %x5
+						%g0
+						SETHP %x6
+						LET
+							Tu819
+							SAVE %x7 hp_array.551
+							LET
+								%g0
+								CALLDIR assign_farray.363
+									%x7 %x5 
+									%f0 
+								LET
+									%x5
+									RESTORE hp_array.551
+									ANS
+										MOV %x5
 
 Name : loop3.370
-Args : %x5 %x6 %x7 %x9 %x10 %x11 
+Args : %x5 %x6 %x7 %x8 %x9 %x10 
 
 FArgs : 
 Body :
 ANS
 	IFGE %x6 0
 		LET
-			%x12
+			%x11
 			SLL %x5 2
 			LET
-				%x12
-				LD %x11 %x12
+				%x11
+				LD %x10 %x11
 				LET
-					%x13
+					%x12
 					SLL %x5 2
 					LET
-						%x13
-						LD %x11 %x13
+						%x12
+						LD %x10 %x12
 						LET
-							%x14
+							%x13
 							SLL %x7 2
 							LET
 								%f0
-								LDDF %x13 %x14
+								LDDF %x12 %x13
 								LET
-									%x13
+									%x12
 									SLL %x5 2
 									LET
-										%x13
-										LD %x9 %x13
+										%x12
+										LD %x8 %x12
 										LET
-											%x14
+											%x13
 											SLL %x6 2
 											LET
 												%f1
-												LDDF %x13 %x14
+												LDDF %x12 %x13
 												LET
-													%x13
+													%x12
 													SLL %x6 2
 													LET
-														%x13
-														LD %x10 %x13
+														%x12
+														LD %x9 %x12
 														LET
-															%x14
+															%x13
 															SLL %x7 2
 															LET
 																%f2
-																LDDF %x13 %x14
+																LDDF %x12 %x13
 																LET
 																	%f1
 																	FMULD %f1 %f2
@@ -420,40 +444,40 @@ ANS
 																		%f0
 																		FADDD %f0 %f1
 																		LET
-																			%x13
+																			%x12
 																			SLL %x7 2
 																			LET
 																				%g0
-																				STDF %f0 %x12 %x13
+																				STDF %f0 %x11 %x12
 																				LET
 																					%x6
 																					SUB %x6 1
 																					ANS
 																						CALLDIR loop3.370
-																							%x5 %x6 %x7 %x9 %x10 %x11 
+																							%x5 %x6 %x7 %x8 %x9 %x10 
 																							
 		ANS
 			NOP
 
 Name : loop2.377
-Args : %x5 %x6 %x7 %x9 %x10 %x11 
+Args : %x5 %x6 %x7 %x8 %x9 %x10 
 
 FArgs : 
 Body :
 ANS
 	IFGE %x7 0
 		LET
-			%x12
+			%x11
 			SUB %x6 1
 			LET
 				Tu827
-				SAVE %x11 c.383
+				SAVE %x10 c.383
 				LET
 					Tu826
-					SAVE %x10 b.382
+					SAVE %x9 b.382
 					LET
 						Tu825
-						SAVE %x9 a.381
+						SAVE %x8 a.381
 						LET
 							Tu824
 							SAVE %x6 m.379
@@ -466,7 +490,7 @@ ANS
 									LET
 										%g0
 										CALLDIR loop3.370
-											%x5 %x12 %x7 %x9 %x10 %x11 
+											%x5 %x11 %x7 %x8 %x9 %x10 
 											
 										LET
 											%x5
@@ -481,40 +505,40 @@ ANS
 														%x6
 														RESTORE m.379
 														LET
-															%x9
+															%x8
 															RESTORE a.381
 															LET
-																%x10
+																%x9
 																RESTORE b.382
 																LET
-																	%x11
+																	%x10
 																	RESTORE c.383
 																	ANS
 																		CALLDIR loop2.377
-																			%x5 %x6 %x7 %x9 %x10 %x11 
+																			%x5 %x6 %x7 %x8 %x9 %x10 
 																			
 		ANS
 			NOP
 
 Name : loop1.384
-Args : %x5 %x6 %x7 %x9 %x10 %x11 
+Args : %x5 %x6 %x7 %x8 %x9 %x10 
 
 FArgs : 
 Body :
 ANS
 	IFGE %x5 0
 		LET
-			%x12
+			%x11
 			SUB %x7 1
 			LET
 				Tu834
-				SAVE %x11 c.390
+				SAVE %x10 c.390
 				LET
 					Tu833
-					SAVE %x10 b.389
+					SAVE %x9 b.389
 					LET
 						Tu832
-						SAVE %x9 a.388
+						SAVE %x8 a.388
 						LET
 							Tu831
 							SAVE %x7 n.387
@@ -527,7 +551,7 @@ ANS
 									LET
 										%g0
 										CALLDIR loop2.377
-											%x5 %x6 %x12 %x9 %x10 %x11 
+											%x5 %x6 %x11 %x8 %x9 %x10 
 											
 										LET
 											%x5
@@ -542,23 +566,23 @@ ANS
 														%x7
 														RESTORE n.387
 														LET
-															%x9
+															%x8
 															RESTORE a.388
 															LET
-																%x10
+																%x9
 																RESTORE b.389
 																LET
-																	%x11
+																	%x10
 																	RESTORE c.390
 																	ANS
 																		CALLDIR loop1.384
-																			%x5 %x6 %x7 %x9 %x10 %x11 
+																			%x5 %x6 %x7 %x8 %x9 %x10 
 																			
 		ANS
 			NOP
 
 Name : mul.391
-Args : %x5 %x6 %x7 %x9 %x10 %x11 
+Args : %x5 %x6 %x7 %x8 %x9 %x10 
 
 FArgs : 
 Body :
@@ -567,7 +591,7 @@ LET
 	SUB %x5 1
 	ANS
 		CALLDIR loop1.384
-			%x5 %x6 %x7 %x9 %x10 %x11 
+			%x5 %x6 %x7 %x8 %x9 %x10 
 			
 
 Name : init.399
@@ -601,11 +625,11 @@ ANS
 									%x7
 									SLL %x6 2
 									LET
-										%x9
+										%x8
 										RESTORE mat.402
 										LET
 											%g0
-											ST %x5 %x9 %x7
+											ST %x5 %x8 %x7
 											LET
 												%x5
 												SUB %x6 1
@@ -614,7 +638,7 @@ ANS
 													RESTORE n.401
 													ANS
 														CALLDIR init.399
-															%x5 %x6 %x9 
+															%x5 %x6 %x8 
 															
 		ANS
 			NOP
@@ -691,18 +715,18 @@ LET
 									%x7
 									SET 2
 									LET
-										%x9
+										%x8
 										RESTORE dummy.398
 										LET
 											Tu846
 											SAVE %x5 a.407
 											LET
 												Tu845
-												SAVE %x9 dummy.398
+												SAVE %x8 dummy.398
 												LET
 													%x5
 													CALLDIR make.403
-														%x6 %x7 %x9 
+														%x6 %x7 %x8 
 														
 													LET
 														%x6
@@ -714,16 +738,16 @@ LET
 																Tu847
 																SAVE %x5 b.408
 																LET
-																	%x11
+																	%x10
 																	CALLDIR make.403
 																		%x6 %x6 %x7 
 																		
 																	LET
-																		%x9
+																		%x8
 																		RESTORE a.407
 																		LET
 																			%x5
-																			LD %x9 0
+																			LD %x8 0
 																			LET
 																				%f0
 																				l.754
@@ -732,7 +756,7 @@ LET
 																					STDF %f0 %x5 0
 																					LET
 																						%x5
-																						LD %x9 0
+																						LD %x8 0
 																						LET
 																							%f0
 																							l.758
@@ -741,7 +765,7 @@ LET
 																								STDF %f0 %x5 4
 																								LET
 																									%x5
-																									LD %x9 0
+																									LD %x8 0
 																									LET
 																										%f0
 																										l.762
@@ -750,7 +774,7 @@ LET
 																											STDF %f0 %x5 8
 																											LET
 																												%x5
-																												LD %x9 4
+																												LD %x8 4
 																												LET
 																													%f0
 																													l.766
@@ -759,7 +783,7 @@ LET
 																														STDF %f0 %x5 0
 																														LET
 																															%x5
-																															LD %x9 4
+																															LD %x8 4
 																															LET
 																																%f0
 																																l.770
@@ -768,7 +792,7 @@ LET
 																																	STDF %f0 %x5 4
 																																	LET
 																																		%x5
-																																		LD %x9 4
+																																		LD %x8 4
 																																		LET
 																																			%f0
 																																			l.774
@@ -776,11 +800,11 @@ LET
 																																				%g0
 																																				STDF %f0 %x5 8
 																																				LET
-																																					%x10
+																																					%x9
 																																					RESTORE b.408
 																																					LET
 																																						%x5
-																																						LD %x10 0
+																																						LD %x9 0
 																																						LET
 																																							%f0
 																																							l.778
@@ -789,7 +813,7 @@ LET
 																																								STDF %f0 %x5 0
 																																								LET
 																																									%x5
-																																									LD %x10 0
+																																									LD %x9 0
 																																									LET
 																																										%f0
 																																										l.782
@@ -798,7 +822,7 @@ LET
 																																											STDF %f0 %x5 4
 																																											LET
 																																												%x5
-																																												LD %x10 4
+																																												LD %x9 4
 																																												LET
 																																													%f0
 																																													l.786
@@ -807,7 +831,7 @@ LET
 																																														STDF %f0 %x5 0
 																																														LET
 																																															%x5
-																																															LD %x10 4
+																																															LD %x9 4
 																																															LET
 																																																%f0
 																																																l.790
@@ -816,7 +840,7 @@ LET
 																																																	STDF %f0 %x5 4
 																																																	LET
 																																																		%x5
-																																																		LD %x10 8
+																																																		LD %x9 8
 																																																		LET
 																																																			%f0
 																																																			l.794
@@ -825,7 +849,7 @@ LET
 																																																				STDF %f0 %x5 0
 																																																				LET
 																																																					%x5
-																																																					LD %x10 8
+																																																					LD %x9 8
 																																																					LET
 																																																						%f0
 																																																						l.798
@@ -840,11 +864,11 @@ LET
 																																																									SET 3
 																																																									LET
 																																																										Tu848
-																																																										SAVE %x11 c.409
+																																																										SAVE %x10 c.409
 																																																										LET
 																																																											%g0
 																																																											CALLDIR mul.391
-																																																												%x5 %x6 %x5 %x9 %x10 %x11 
+																																																												%x5 %x6 %x5 %x8 %x9 %x10 
 																																																												
 																																																											LET
 																																																												%x5
@@ -874,7 +898,7 @@ LET
 																																																																		LET
 																																																																			%g0
 																																																																			CALLDIR min_caml_print_newline
-																																																																				%g0 
+																																																																				
 																																																																				
 																																																																			LET
 																																																																				%x5
@@ -904,7 +928,7 @@ LET
 																																																																										LET
 																																																																											%g0
 																																																																											CALLDIR min_caml_print_newline
-																																																																												%g0 
+																																																																												
 																																																																												
 																																																																											LET
 																																																																												%x5
@@ -934,7 +958,7 @@ LET
 																																																																																		LET
 																																																																																			%g0
 																																																																																			CALLDIR min_caml_print_newline
-																																																																																				%g0 
+																																																																																				
 																																																																																				
 																																																																																			LET
 																																																																																				%x5
@@ -960,5 +984,5 @@ LET
 																																																																																									NOP
 																																																																																									ANS
 																																																																																										CALLDIR min_caml_print_newline
-																																																																																											%g0 
+																																																																																											
 																																																																																											

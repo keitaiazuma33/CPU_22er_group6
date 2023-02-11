@@ -72,6 +72,4 @@ val is_freg : Id.t -> bool
 val fv : t -> Id.t list
 val concat : t -> Id.t * Type.t -> t -> t
 
-val align : int -> int
-
 val print_asm : out_channel -> prog -> unit

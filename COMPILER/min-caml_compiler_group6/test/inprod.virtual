@@ -16,7 +16,7 @@ FArgs :
 Body :
 LET
 	y.58
-	LDDF v.26 8
+	LDDF v.26 4
 	ANS
 		FMOVD y.58
 
@@ -27,7 +27,7 @@ FArgs :
 Body :
 LET
 	z.56
-	LDDF v.28 16
+	LDDF v.28 8
 	ANS
 		FMOVD z.56
 
@@ -99,13 +99,13 @@ LET
 					MOV %x3
 					LET
 						%x3
-						ADD %x3 24
+						ADD %x3 12
 						LET
 							Tu74
-							STDF Td4.43 t.71 16
+							STDF Td4.43 t.71 8
 							LET
 								Tu73
-								STDF Td3.42 t.71 8
+								STDF Td3.42 t.71 4
 								LET
 									Tu72
 									STDF Td2.41 t.71 0
@@ -126,13 +126,13 @@ LET
 														MOV %x3
 														LET
 															%x3
-															ADD %x3 24
+															ADD %x3 12
 															LET
 																Tu84
-																STDF Td8.40 t.81 16
+																STDF Td8.40 t.81 8
 																LET
 																	Tu83
-																	STDF Td7.39 t.81 8
+																	STDF Td7.39 t.81 4
 																	LET
 																		Tu82
 																		STDF Td6.38 t.81 0

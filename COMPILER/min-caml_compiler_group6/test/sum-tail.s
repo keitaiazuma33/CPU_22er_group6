@@ -14,17 +14,18 @@ ble_else.19: #pc 20
 	nop #pc 32
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x2, -112
-	addi	%x5, %x0, 0  #0 pc 36
-	addi	%x6, %x0, 10000  #0 pc 40
-	sw	%x1, 12(%x2)  #4 pc 44
-	addi	%x2, %x2, 16  #4 pc 48
-	jal	%x1, sum.8  #4 pc 52
-	addi	%x2, %x2, -16  #4 pc 56
-	lw	%x1, 12(%x2) #4 pc 60
-	sw	%x1, 12(%x2)  #4 pc 64
-	addi	%x2, %x2, 16  #4 pc 68
-	jal	%x1, min_caml_print_int  #4 pc 72
-	addi	%x2, %x2, -16  #4 pc 76
-	lw	%x1, 12(%x2) #4 pc 80
+	addi	%x2, %x0, 0
+	addi	%x3, %x0, 1024
+	addi	%x5, %x0, 0  #0 pc 44
+	addi	%x6, %x0, 10000  #0 pc 48
+	sw	%x1, 0(%x2)  #4 pc 52
+	addi	%x2, %x2, 4  #4 pc 56
+	jal	%x1, sum.8  #4 pc 60
+	addi	%x2, %x2, -4  #4 pc 64
+	lw	%x1, 0(%x2) #4 pc 68
+	sw	%x1, 0(%x2)  #4 pc 72
+	addi	%x2, %x2, 4  #4 pc 76
+	jal	%x1, min_caml_print_int  #4 pc 80
+	addi	%x2, %x2, -4  #4 pc 84
+	lw	%x1, 0(%x2) #4 pc 88
 	addi	%x2, %x2, 112

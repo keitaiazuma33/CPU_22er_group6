@@ -162,9 +162,13 @@ LET Ti203.623
 					LET Ti212.628
 						ADD a.343 Ti211.629
 						OUT Ti212.628
-		LET Ti214.625
-			NEG a.343
-			APPDIR print_int.342 : Ti214.625 
+		LET Ti213.626
+			INT 45
+			LET Tu1.624
+				OUT Ti213.626
+				LET Ti214.625
+					NEG a.343
+					APPDIR print_int.342 : Ti214.625 
 
 Name : assign_array.356
 Args : hp.357 a.358 n.359 
@@ -192,9 +196,17 @@ LET Tu155.569
 		GETHP
 		LET hp_array.563
 			ITOIA hp.562
-			LET Tu4.565
-				APPDIR assign_array.356 : hp_array.563 a.362 n.361 
-				VAR hp_array.563
+			LET Ti156.568
+				INT 2
+				LET Ti157.567
+					SLL n.361 Ti156.568
+					LET Ti158.566
+						ADD hp.562 Ti157.567
+						LET Tu5.564
+							SETHP Ti158.566
+							LET Tu4.565
+								APPDIR assign_array.356 : hp_array.563 a.362 n.361 
+								VAR hp_array.563
 
 Name : assign_farray.363
 Args : hp.364 a.365 n.366 
@@ -222,9 +234,17 @@ LET Tu148.557
 		GETHP
 		LET hp_array.551
 			ITOFA hp.550
-			LET Tu7.553
-				APPDIR assign_farray.363 : hp_array.551 a.369 n.368 
-				VAR hp_array.551
+			LET Ti149.556
+				INT 3
+				LET Ti150.555
+					SLL n.368 Ti149.556
+					LET Ti151.554
+						ADD hp.550 Ti150.555
+						LET Tu8.552
+							SETHP Ti151.554
+							LET Tu7.553
+								APPDIR assign_farray.363 : hp_array.551 a.369 n.368 
+								VAR hp_array.551
 
 Name : loop3.370
 Args : i.371 k.372 j.373 a.374 b.375 c.376 

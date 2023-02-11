@@ -112,7 +112,7 @@ LET
 											MOV %x3
 											LET
 												%x3
-												ADD %x3 48
+												ADD %x3 44
 												LET
 													l.76
 													g.52
@@ -242,5 +242,5 @@ LET
 																										NOP
 																										ANS
 																											CALLDIR min_caml_print_newline
-																												Tu14.29 
+																												
 																												

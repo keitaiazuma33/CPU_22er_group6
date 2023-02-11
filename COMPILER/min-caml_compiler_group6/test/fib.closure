@@ -162,9 +162,13 @@ LET Ti53.266
 					LET Ti62.271
 						ADD a.193 Ti61.272
 						OUT Ti62.271
-		LET Ti64.268
-			NEG a.193
-			APPDIR print_int.192 : Ti64.268 
+		LET Ti63.269
+			INT 45
+			LET Tu1.267
+				OUT Ti63.269
+				LET Ti64.268
+					NEG a.193
+					APPDIR print_int.192 : Ti64.268 
 
 Name : fib.206
 Args : n.207 

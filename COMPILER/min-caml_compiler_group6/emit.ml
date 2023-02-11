@@ -30,7 +30,7 @@ let locate x =
     | y :: zs -> List.map succ (loc zs) in
   loc !stackmap
 let offset x = try 4 * List.hd (locate x) with Failure _ -> Printf.fprintf stdout "%s\n" x; assert false
-let stacksize () = align ((List.length !stackmap + 1) * 4)
+let stacksize () = ((List.length !stackmap + 1) * 4)
 
 let pp_id_or_imm = function
   | V(x) -> x
@@ -102,12 +102,18 @@ and g' oc = function (* ��̿��Υ�����֥����� (caml2h
   | NonTail(x), SLL(y, C i), n -> incr_pc ();Printf.fprintf oc "\tslli\t%s, %s, %d  #%d pc %d\n" x y i n (!pc)
   | NonTail(x), SRL(y, V z), n -> incr_pc ();Printf.fprintf oc "\tsrl\t%s, %s, %s  #%d pc %d\n" x y z n (!pc)
   | NonTail(x), SRL(y, C i), n -> incr_pc ();Printf.fprintf oc "\tsrli\t%s, %s, %d  #%d pc %d\n" x y i n (!pc)
-  | NonTail(x), Ld(y, z', _), n -> let z = pp_id_or_imm' oc z' in
+  | NonTail(x), Ld(y, C i, _), n -> incr_pc ();Printf.fprintf oc "\tlw\t%s, %d(%s)  #%d pc %d\n"x i y n (!pc)
+  | NonTail(x), Ld(y, V z, _), n -> incr_pc ();Printf.fprintf oc "\tadd\t%s, %s, %s  #%d pc %d\n" reg_cons z y n (!pc);
+                                    incr_pc ();Printf.fprintf oc "\tlw\t%s, %d(%s)  #%d pc %d\n" x 0 reg_cons n (!pc)
+  (*| NonTail(x), Ld(y, z', _), n -> let z = pp_id_or_imm' oc z' in
                                   (incr_pc ();Printf.fprintf oc "\tadd\t%s, %s, %s  #%d pc %d\n" reg_cons z y n (!pc);
-                                  incr_pc ();Printf.fprintf oc "\tlw\t%s, %d(%s)  #%d pc %d\n" x 0 reg_cons n (!pc))
-  | NonTail(_), St(x, y, z', _), n -> let z = pp_id_or_imm' oc z' in
+                                  incr_pc ();Printf.fprintf oc "\tlw\t%s, %d(%s)  #%d pc %d\n" x 0 reg_cons n (!pc))*)
+  | NonTail(_), St(x, y, C i, _), n -> incr_pc ();Printf.fprintf oc "\tsw\t%s, %d(%s)  #%d pc %d\n" x i y n (!pc)
+  | NonTail(_), St(x, y, V z, _), n -> incr_pc ();Printf.fprintf oc "\tadd\t%s, %s, %s  #%d pc %d\n" reg_cons z y n (!pc);
+                                      incr_pc ();Printf.fprintf oc "\tsw\t%s, %d(%s)  #%d pc %d\n" x 0 reg_cons n (!pc)
+  (*| NonTail(_), St(x, y, z', _), n -> let z = pp_id_or_imm' oc z' in
                                     (incr_pc ();Printf.fprintf oc "\tadd\t%s, %s, %s  #%d pc %d\n" reg_cons z y n (!pc);
-                                    incr_pc ();Printf.fprintf oc "\tsw\t%s, %d(%s)  #%d pc %d\n" x 0 reg_cons n (!pc))
+                                    incr_pc ();Printf.fprintf oc "\tsw\t%s, %d(%s)  #%d pc %d\n" x 0 reg_cons n (!pc))*)
   | NonTail(x), FAbs(y), n ->
       incr_pc ();Printf.fprintf oc "\tfabs\t%s, %s  #%d pc %d\n" x y n (!pc)
   | NonTail(x), Sqrt(y), n ->
@@ -132,12 +138,18 @@ and g' oc = function (* ��̿��Υ�����֥����� (caml2h
                               print_mv oc reg_hp x n
   | NonTail(x), Gethp, n -> (*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" x reg_hp n (!pc)*)
                             print_mv oc x reg_hp n
-  | NonTail(x), LdDF(y, z', _), n -> let z = pp_id_or_imm' oc z' in
+  | NonTail(x), LdDF(y, C i, _), n -> incr_pc ();Printf.fprintf oc "\tflw\t%s, %d(%s)  #%d pc %d\n" x i y n (!pc)
+  | NonTail(x), LdDF(y, V z, _), n -> incr_pc ();Printf.fprintf oc "\tadd\t%s, %s, %s  #%d pc %d\n" reg_cons z y n (!pc);
+                                      incr_pc ();Printf.fprintf oc "\tflw\t%s, %d(%s)  #%d pc %d\n" x 0 reg_cons n (!pc)
+  (*| NonTail(x), LdDF(y, z', _), n -> let z = pp_id_or_imm' oc z' in
                                     (incr_pc ();Printf.fprintf oc "\tadd\t%s, %s, %s  #%d pc %d\n" reg_cons z y n (!pc);
-                                    incr_pc ();Printf.fprintf oc "\tflw\t%s, %d(%s)  #%d pc %d\n" x 0 reg_cons n (!pc))
-  | NonTail(_), StDF(x, y, z', _), n -> let z = pp_id_or_imm' oc z' in
+                                    incr_pc ();Printf.fprintf oc "\tflw\t%s, %d(%s)  #%d pc %d\n" x 0 reg_cons n (!pc))*)
+  | NonTail(_), StDF(x, y, C i, _), n -> incr_pc ();Printf.fprintf oc "\tfsw\t%s, %d(%s)  #%d pc %d\n" x i y n (!pc)
+  | NonTail(_), StDF(x, y, V z, _), n -> incr_pc ();Printf.fprintf oc "\tadd\t%s, %s, %s  #%d pc %d\n" reg_cons z y n (!pc);
+                                        incr_pc ();Printf.fprintf oc "\tfsw\t%s, %d(%s) #%d pc %d\n" x 0 reg_cons n (!pc)
+  (*| NonTail(_), StDF(x, y, z', _), n -> let z = pp_id_or_imm' oc z' in
                                     (incr_pc ();Printf.fprintf oc "\tadd\t%s, %s, %s  #%d pc %d\n" reg_cons z y n (!pc);
-                                    incr_pc ();Printf.fprintf oc "\tfsw\t%s, %d(%s) #%d pc %d\n" x 0 reg_cons n (!pc))
+                                    incr_pc ();Printf.fprintf oc "\tfsw\t%s, %d(%s) #%d pc %d\n" x 0 reg_cons n (!pc))*)
   | NonTail(_), Comment(s), n -> Printf.fprintf oc "\t# %s  %d\n" s n
   (* ����β���̿��μ��� (caml2html: emit_save) *)
   | NonTail(_), Save(x, y), n when List.mem x allregs && not (S.mem y !stackset) ->
@@ -331,10 +343,11 @@ let f oc (Prog(data, fundefs, e)) =
   Printf.fprintf oc ".global\tmin_caml_start\n";
   Printf.fprintf oc "min_caml_start:\n";
   (*Printf.fprintf oc "\tsave\t%%sp, -112, %%sp\n";  from gcc; why 112? *)
-  Printf.fprintf oc "\taddi\t%s, %s, -112\n" reg_sp reg_sp;
+  incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 0\n" reg_sp reg_zero;
+  incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 1024\n" reg_hp reg_zero;
   stackset := S.empty;
-  stackmap := ["mul"; "div"];
+  stackmap := [];
   g oc (NonTail("%g0"), e);
   (* Printf.fprintf oc "\tret\n"; *)
   (* Printf.fprintf oc "\trestore\n" *)
-  Printf.fprintf oc "\taddi\t%s, %s, 112\n" reg_sp reg_sp;
+  incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 112\n" reg_sp reg_sp;

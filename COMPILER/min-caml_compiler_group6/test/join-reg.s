@@ -15,47 +15,45 @@ h.16:  #pc 24
 	nop #pc 32
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x2, -112
-	addi	%x5, %x0, 0  #0 pc 36
-	sw	%x1, 12(%x2)  #5 pc 40
-	addi	%x2, %x2, 16  #5 pc 44
-	jal	%x1, f.12  #5 pc 48
-	addi	%x2, %x2, -16  #5 pc 52
-	lw	%x1, 12(%x2) #5 pc 56
-	sw	%x5, 8(%x2)  #6 pc 60
-	addi	%x5, %x0, 0  #0 pc 64
-	sw	%x1, 12(%x2)  #6 pc 68
-	addi	%x2, %x2, 16  #6 pc 72
+	addi	%x2, %x0, 0
+	addi	%x3, %x0, 1024
+	sw	%x1, 0(%x2)  #5 pc 44
+	addi	%x2, %x2, 4  #5 pc 48
+	jal	%x1, f.12  #5 pc 52
+	addi	%x2, %x2, -4  #5 pc 56
+	lw	%x1, 0(%x2) #5 pc 60
+	sw	%x5, 0(%x2)  #6 pc 64
+	sw	%x1, 4(%x2)  #6 pc 68
+	addi	%x2, %x2, 8  #6 pc 72
 	jal	%x1, g.14  #6 pc 76
-	addi	%x2, %x2, -16  #6 pc 80
-	lw	%x1, 12(%x2) #6 pc 84
-	sw	%x5, 12(%x2)  #7 pc 88
-	addi	%x5, %x0, 0  #0 pc 92
-	sw	%x1, 20(%x2)  #7 pc 96
-	addi	%x2, %x2, 24  #7 pc 100
-	jal	%x1, h.16  #7 pc 104
-	addi	%x2, %x2, -24  #7 pc 108
-	lw	%x1, 20(%x2) #7 pc 112
-	beq	%x5, %x0, 12  #7 pc 116
-	j	be_else.31 #pc 120
-	nop #pc 124
-	lw	%x5, 12(%x2)  #7 pc 128
-	lw	%x6, 8(%x2)  #7 pc 132
-	sub	%x5, %x6, %x5  #7 pc 136
-	j	be_cont.32 #pc 140
-	nop #pc 144
-be_else.31: #pc 148
-	lw	%x5, 8(%x2)  #7 pc 148
-	lw	%x6, 12(%x2)  #7 pc 152
-	sub	%x5, %x6, %x5  #7 pc 156
-be_cont.32: #pc 160
-	lw	%x6, 8(%x2)  #7 pc 160
-	add	%x5, %x5, %x6  #7 pc 164
-	lw	%x6, 12(%x2)  #7 pc 168
-	add	%x5, %x5, %x6  #7 pc 172
-	sw	%x1, 20(%x2)  #7 pc 176
-	addi	%x2, %x2, 24  #7 pc 180
-	jal	%x1, min_caml_print_int  #7 pc 184
-	addi	%x2, %x2, -24  #7 pc 188
-	lw	%x1, 20(%x2) #7 pc 192
+	addi	%x2, %x2, -8  #6 pc 80
+	lw	%x1, 4(%x2) #6 pc 84
+	sw	%x5, 4(%x2)  #7 pc 88
+	sw	%x1, 8(%x2)  #7 pc 92
+	addi	%x2, %x2, 12  #7 pc 96
+	jal	%x1, h.16  #7 pc 100
+	addi	%x2, %x2, -12  #7 pc 104
+	lw	%x1, 8(%x2) #7 pc 108
+	beq	%x5, %x0, 12  #7 pc 112
+	j	be_else.31 #pc 116
+	nop #pc 120
+	lw	%x5, 4(%x2)  #7 pc 124
+	lw	%x6, 0(%x2)  #7 pc 128
+	sub	%x5, %x6, %x5  #7 pc 132
+	j	be_cont.32 #pc 136
+	nop #pc 140
+be_else.31: #pc 144
+	lw	%x5, 0(%x2)  #7 pc 144
+	lw	%x6, 4(%x2)  #7 pc 148
+	sub	%x5, %x6, %x5  #7 pc 152
+be_cont.32: #pc 156
+	lw	%x6, 0(%x2)  #7 pc 156
+	add	%x5, %x5, %x6  #7 pc 160
+	lw	%x6, 4(%x2)  #7 pc 164
+	add	%x5, %x5, %x6  #7 pc 168
+	sw	%x1, 8(%x2)  #7 pc 172
+	addi	%x2, %x2, 12  #7 pc 176
+	jal	%x1, min_caml_print_int  #7 pc 180
+	addi	%x2, %x2, -12  #7 pc 184
+	lw	%x1, 8(%x2) #7 pc 188
 	addi	%x2, %x2, 112

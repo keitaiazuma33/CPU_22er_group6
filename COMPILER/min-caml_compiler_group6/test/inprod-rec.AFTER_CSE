@@ -447,7 +447,7 @@ LET REC fiszero.172 x.173
 																																	INT 2
 																																	SLL n.238 Ti33.287
 																																ADD hp.281 Ti34.286
-																															OUT Ti35.285
+																															SETHP Ti35.285
 																														LET Tu4.284
 																															APP assign_array.233 hp_array.282 a.239 n.238 
 																															VAR hp_array.282
@@ -477,7 +477,7 @@ LET REC fiszero.172 x.173
 																																			INT 3
 																																			SLL n.245 Ti26.275
 																																		ADD hp.269 Ti27.274
-																																	OUT Ti28.273
+																																	SETHP Ti28.273
 																																LET Tu7.272
 																																	APP assign_farray.240 hp_array.270 a.246 n.245 
 																																	VAR hp_array.270

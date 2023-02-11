@@ -213,12 +213,18 @@ ANS
 					ANS
 						OUT Ti62.271
 		LET
-			Ti64.268
-			NEG a.193
-			ANS
-				CALLDIR print_int.192
-					Ti64.268 
-					
+			Ti63.269
+			SET 45
+			LET
+				Tu1.267
+				OUT Ti63.269
+				LET
+					Ti64.268
+					NEG a.193
+					ANS
+						CALLDIR print_int.192
+							Ti64.268 
+							
 
 Name : fib.206
 Args : n.207 

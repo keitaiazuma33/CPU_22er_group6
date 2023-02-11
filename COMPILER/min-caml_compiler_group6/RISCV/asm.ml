@@ -55,9 +55,10 @@ let fletd(x, e1, e2, n) = Let((x, Type.Float), e1, e2, n)
 let seq(e1, e2, n) = Let((Id.gentmp Type.Unit, Type.Unit), e1, e2, n)
 
 let regs = (* Array.init 16 (fun i -> Printf.sprintf "%%r%d" i) *)
-  [| "%x5"; "%x6"; "%x7"; "%x9";
+  [| "%x5"; "%x6"; "%x7"; "%x8"; "%x9";
      "%x10"; "%x11"; "%x12"; "%x13"; "%x14"; "%x15"; "%x16"; "%x17";
-     "%x18"; "%x19"; "%x20"; "%x21"; "%x22"; "%x23" |]
+     "%x18"; "%x19"; "%x20"; "%x21"; "%x22"; "%x23"; "%x24"; "%x25";
+     "%x26"; "%x27"; "%x28"; "%x29"; "%x30" |]
 let fregs = Array.init 30 (fun i -> Printf.sprintf "%%f%d" i) 
 (* let fregs =
   [| "%f1"; "%f2"; "%f3"; "%f4"; "%f5"; "%f6"; "%f7"; "%f8";
@@ -73,7 +74,7 @@ let reg_sp = "%x2" (* stack pointer *)
 let reg_hp = "%x3" (* heap pointer (caml2html: sparcasm_reghp) *)
 let reg_ra = "%x1" (* return address *)
 let reg_zero = "%x0"
-let reg_cons = "%x24"
+let reg_cons = "%x31"
 let freg_zero = "%f30"
 let freg_cons = "%f31"
 let is_reg x = (x.[0] = '%')
@@ -121,7 +122,7 @@ let rec concat e1 xt e2 =
   | Ans(exp, n) -> Let(xt, exp, e2, n)
   | Let(yt, exp, e1', n) -> Let(yt, exp, concat e1' xt e2, n)
 
-let align i = (if i mod 8 = 0 then i else i + 4)
+(*let align i = (if i mod 8 = 0 then i else i + 4)*)
 
 
 (* \t��n����Ϥ���ؿ� *)

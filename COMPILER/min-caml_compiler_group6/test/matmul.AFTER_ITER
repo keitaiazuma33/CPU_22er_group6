@@ -143,9 +143,13 @@ LET REC mul_abs.324 a.325 b.326 i.327 acc.328
 										LET Ti212.610
 											ADD a.343 Ti211.611
 											OUT Ti212.610
-							LET Ti214.607
-								NEG a.343
-								APP print_int.342 Ti214.607 
+							LET Ti213.608
+								INT 45
+								LET Tu1.606
+									OUT Ti213.608
+									LET Ti214.607
+										NEG a.343
+										APP print_int.342 Ti214.607 
 					LET REC assign_array.356 hp.357 a.358 n.359 
 						LET Ti159.552
 							INT 0
@@ -165,9 +169,17 @@ LET REC mul_abs.324 a.325 b.326 i.327 acc.328
 									GETHP Tu155.551
 									LET hp_array.545
 										ITOIA hp.544
-										LET Tu4.547
-											APP assign_array.356 hp_array.545 a.362 n.361 
-											VAR hp_array.545
+										LET Ti156.550
+											INT 2
+											LET Ti157.549
+												SLL n.361 Ti156.550
+												LET Ti158.548
+													ADD hp.544 Ti157.549
+													LET Tu5.546
+														SETHP Ti158.548
+														LET Tu4.547
+															APP assign_array.356 hp_array.545 a.362 n.361 
+															VAR hp_array.545
 							LET REC assign_farray.363 hp.364 a.365 n.366 
 								LET Ti152.540
 									INT 0
@@ -187,9 +199,17 @@ LET REC mul_abs.324 a.325 b.326 i.327 acc.328
 											GETHP Tu148.539
 											LET hp_array.533
 												ITOFA hp.532
-												LET Tu7.535
-													APP assign_farray.363 hp_array.533 a.369 n.368 
-													VAR hp_array.533
+												LET Ti149.538
+													INT 3
+													LET Ti150.537
+														SLL n.368 Ti149.538
+														LET Ti151.536
+															ADD hp.532 Ti150.537
+															LET Tu8.534
+																SETHP Ti151.536
+																LET Tu7.535
+																	APP assign_farray.363 hp_array.533 a.369 n.368 
+																	VAR hp_array.533
 									LET REC mul.370 l.371 m.372 n.373 a.374 b.375 c.376 
 										LET REC loop1.499 i.500 
 											LET Ti126.503
