@@ -23,12 +23,12 @@
 
 // data structures for cache tag & data
 parameter int TAGMSB    = 26; //tag msb
-parameter int TAGLSB    = 14; //tag lsb
+parameter int TAGLSB    = 15; //tag lsb
 
-parameter int INDEXMSB  = 13; //index msb
-parameter int INDEXLSB  = 2 ; //index lsb
+parameter int INDEXMSB  = 14; //index msb
+parameter int INDEXLSB  = 3 ; //index lsb
 
-parameter int OFFSETMSB =  1; //offset msb
+parameter int OFFSETMSB =  2; //offset msb
 parameter int OFFSETLSB =  0; //offset lsb
 
 parameter        PMT_depth    = 12;       // PMT depth
@@ -38,7 +38,7 @@ parameter        CACHE_width  = 128 ;     // CACHE depth
 
 //data structure for cache tag
 typedef struct packed {
-    bit [2:0]           accessed;  //accessed bit
+    bit [3:0]           accessed;  //accessed bit
     bit [0:0]           valid;     //valid bit
     bit [0:0]           dirty;     //dirty bit
     bit [TAGMSB:TAGLSB] tag; //tag bits
@@ -191,7 +191,7 @@ module L1_cache(
     assign cpu_res = cpu_res_L1;
     
     logic [1:0] more_accessed_max;
-    assign more_accessed_max = (accessed_save_way0_logic >= accessed_save_way1_logic) ? ((accessed_save_way0_logic == 3'b111) ? 2'b01 : 2'b00) : ((accessed_save_way1_logic == 3'b111) ? 2'b11 : 2'b10);
+    assign more_accessed_max = (accessed_save_way0_logic >= accessed_save_way1_logic) ? ((accessed_save_way0_logic == 4'b1111) ? 2'b01 : 2'b00) : ((accessed_save_way1_logic == 4'b1111) ? 2'b11 : 2'b10);
     
     logic [1:0] LRU_input;
     assign LRU_input = (~(L1_way0_hit || L1_way1_hit)) ? ((more_accessed_max[1:1] == 1'b1) ? (pmt_L1_way1_dout.valid ? 1'b0 : 1'b1) : (pmt_L1_way0_dout.valid ? 1'b1 : 1'b0)) : ( (~L1_way0_hit) ? 1'b0 : ((~L1_way1_hit) ? 1'b1 : ((more_accessed_max[1:1] == 1'b1) ? 1'b0 : 1'b1)));
@@ -223,149 +223,49 @@ module L1_cache(
     cache_L1_way1_din = cache_L1_way1_dout;
     
     // 書き込みたいデータが入るべき場所にデータを格納しておく
-    case({2'b0, cpu_to_cache_request.addr[OFFSETMSB:OFFSETLSB]})
-        4'b0000: begin
+    case(cpu_to_cache_request.addr[OFFSETMSB:OFFSETLSB])
+        3'b000: begin
             cache_L1_way0_din[31:0]     = cpu_to_cache_request.data;
             cache_L1_way1_din[31:0]     = cpu_to_cache_request.data;
         end
-        4'b0001: begin
+        3'b010: begin
             cache_L1_way0_din[63:32]    = cpu_to_cache_request.data;
             cache_L1_way1_din[63:32]    = cpu_to_cache_request.data;
         end
-        4'b0010: begin
+        3'b100: begin
             cache_L1_way0_din[95:64]   = cpu_to_cache_request.data;
             cache_L1_way1_din[95:64]   = cpu_to_cache_request.data;
         end
-        4'b0011: begin
+        3'b110: begin
             cache_L1_way0_din[127:96]  = cpu_to_cache_request.data;
             cache_L1_way1_din[127:96]  = cpu_to_cache_request.data;
         end
-        /*
-        4'b0100: begin
-            cache_L1_way0_din[159:128]  = cpu_to_cache_request.data;
-            cache_L1_way1_din[159:128]  = cpu_to_cache_request.data;
-        end
-        4'b0101: begin
-            cache_L1_way0_din[191:160]  = cpu_to_cache_request.data;
-            cache_L1_way1_din[191:160]  = cpu_to_cache_request.data;
-        end
-        4'b0110: begin
-            cache_L1_way0_din[223:192]  = cpu_to_cache_request.data;
-            cache_L1_way1_din[223:192]  = cpu_to_cache_request.data;
-        end
-        4'b0111: begin
-            cache_L1_way0_din[255:224]  = cpu_to_cache_request.data;
-            cache_L1_way1_din[255:224]  = cpu_to_cache_request.data;
-        end
-        4'b1000: begin
-            cache_L1_way0_din[287:256]  = cpu_to_cache_request.data;
-            cache_L1_way1_din[287:256]  = cpu_to_cache_request.data;
-        end
-        4'b1001: begin
-            cache_L1_way0_din[319:288]  = cpu_to_cache_request.data;
-            cache_L1_way1_din[319:288]  = cpu_to_cache_request.data;
-        end
-        4'b1010: begin
-            cache_L1_way0_din[351:320]  = cpu_to_cache_request.data;
-            cache_L1_way1_din[351:320]  = cpu_to_cache_request.data;
-        end
-        4'b1011: begin
-            cache_L1_way0_din[383:352]  = cpu_to_cache_request.data;
-            cache_L1_way1_din[383:352]  = cpu_to_cache_request.data;
-        end
-        4'b1100: begin
-            cache_L1_way0_din[415:384]  = cpu_to_cache_request.data;
-            cache_L1_way1_din[415:384]  = cpu_to_cache_request.data;
-        end
-        4'b1101: begin
-            cache_L1_way0_din[447:416]  = cpu_to_cache_request.data;
-            cache_L1_way1_din[447:416]  = cpu_to_cache_request.data;
-        end
-        4'b1110: begin
-            cache_L1_way0_din[479:448]  = cpu_to_cache_request.data;
-            cache_L1_way1_din[479:448]  = cpu_to_cache_request.data;
-        end
-        4'b1111: begin
-            cache_L1_way0_din[511:480]  = cpu_to_cache_request.data;
-            cache_L1_way1_din[511:480]  = cpu_to_cache_request.data;
-        end
-        */
     endcase
     
     // 出てきたデータのうち所望の箇所だけ切り取ってCPUに返す
-    case({2'b0, cpu_to_cache_request.addr[OFFSETMSB:OFFSETLSB]})
-        4'b0000: begin
+    case(cpu_to_cache_request.addr[OFFSETMSB:OFFSETLSB])
+        3'b000: begin
             cpu_res_L1_way0.data = cache_L1_way0_dout[31:0];
             cpu_res_L1_way1.data = cache_L1_way1_dout[31:0];
         end
-        4'b0001: begin
+        3'b010: begin
             cpu_res_L1_way0.data = cache_L1_way0_dout[63:32];
             cpu_res_L1_way1.data = cache_L1_way1_dout[63:32];
         end
-        4'b0010: begin
+        3'b100: begin
             cpu_res_L1_way0.data = cache_L1_way0_dout[95:64];
             cpu_res_L1_way1.data = cache_L1_way1_dout[95:64];
         end
-        4'b0011: begin
+        3'b110: begin
             cpu_res_L1_way0.data = cache_L1_way0_dout[127:96];
             cpu_res_L1_way1.data = cache_L1_way1_dout[127:96];
         end
-        /*
-        4'b0100: begin
-            cpu_res_L1_way0.data = cache_L1_way0_dout[159:128];
-            cpu_res_L1_way1.data = cache_L1_way1_dout[159:128];
-        end
-        4'b0101: begin
-            cpu_res_L1_way0.data = cache_L1_way0_dout[191:160];
-            cpu_res_L1_way1.data = cache_L1_way1_dout[191:160];
-        end
-        4'b0110: begin
-            cpu_res_L1_way0.data = cache_L1_way0_dout[223:192];
-            cpu_res_L1_way1.data = cache_L1_way1_dout[223:192];
-        end
-        4'b0111: begin
-            cpu_res_L1_way0.data = cache_L1_way0_dout[255:224];
-            cpu_res_L1_way1.data = cache_L1_way1_dout[255:224];
-        end
-        4'b1000: begin
-            cpu_res_L1_way0.data = cache_L1_way0_dout[287:256];
-            cpu_res_L1_way1.data = cache_L1_way1_dout[287:256];
-        end
-        4'b1001: begin
-            cpu_res_L1_way0.data = cache_L1_way0_dout[319:288];
-            cpu_res_L1_way1.data = cache_L1_way1_dout[319:288];
-        end
-        4'b1010: begin
-            cpu_res_L1_way0.data = cache_L1_way0_dout[351:320];
-            cpu_res_L1_way1.data = cache_L1_way1_dout[351:320];
-        end
-        4'b1011: begin
-            cpu_res_L1_way0.data = cache_L1_way0_dout[383:352];
-            cpu_res_L1_way1.data = cache_L1_way1_dout[383:352];
-        end
-        4'b1100: begin
-            cpu_res_L1_way0.data = cache_L1_way0_dout[415:384];
-            cpu_res_L1_way1.data = cache_L1_way1_dout[415:384];
-        end
-        4'b1101: begin
-            cpu_res_L1_way0.data = cache_L1_way0_dout[447:416];
-            cpu_res_L1_way1.data = cache_L1_way1_dout[447:416];
-        end
-        4'b1110: begin
-            cpu_res_L1_way0.data = cache_L1_way0_dout[479:448];
-            cpu_res_L1_way1.data = cache_L1_way1_dout[479:448];
-        end
-        4'b1111: begin
-            cpu_res_L1_way0.data = cache_L1_way0_dout[511:480];
-            cpu_res_L1_way1.data = cache_L1_way1_dout[511:480];
-        end
-        */
     endcase
     
     // L1で見つからない場合は同じアドレスで下位メモリに尋ねる
-    mem_req_L1_to_L2.addr = {cpu_to_cache_request.addr[26:3], 3'b0}; 
+    mem_req_L1_to_L2.addr = {cpu_to_cache_request.addr[26:3], 3'b0};
     //書き戻す場合はLRUで選んで、いらない方のデータを下位キャッシュに書き戻す
-    mem_req_L1_to_L2.data = 128'b0; //LRU ? cache_L1_way1_dout : cache_L1_way0_dout;
+    mem_req_L1_to_L2.data = 128'b0;
     //ただし、デフォルトでは書き戻さない
     mem_req_L1_to_L2.rw = 1'b0;
     mem_req_L1_to_L2.valid = 1'b0;
@@ -400,7 +300,7 @@ case(rstate)
                 pmt_req_L1_way0.we = 1'b1;
                 data_req_L1_way0.we = 1'b1;
                 //キャッシュに書き込んだら、そのことをPMTの方に反映させておく（validとdirtyを立てるということ）
-                pmt_L1_way0_din.accessed = (more_accessed_max[1:1] == 1'b0) ? ((accessed_save_way0_logic == 3'b111) ? 3'b111 : accessed_save_way0_logic + 1) : ((accessed_save_way1_logic == 3'b111) ? 3'b111 : accessed_save_way1_logic + 1);
+                pmt_L1_way0_din.accessed = (more_accessed_max[1:1] == 1'b0) ? ((accessed_save_way0_logic == 4'b1111) ? 4'b1111 : accessed_save_way0_logic + 1) : ((accessed_save_way1_logic == 4'b1111) ? 4'b1111 : accessed_save_way1_logic + 1);
                 pmt_L1_way0_din.tag = pmt_L1_way0_dout.tag;
                 pmt_L1_way0_din.valid = 1'b1;
                 //書き込んだからdirtyになっている
@@ -409,10 +309,10 @@ case(rstate)
             else
             begin 
                 /*read/modify cache line*/
-                pmt_req_L1_way0.we = '1;
+                pmt_req_L1_way0.we = 1'b1;
                 data_req_L1_way0.we = 1'b0;
                 //キャッシュに書き込んだら、そのことをPMTの方に反映させておく（validとdirtyを立てるということ）
-                pmt_L1_way0_din.accessed = (more_accessed_max[1:1] == 1'b0) ? ((accessed_save_way0_logic == 3'b111) ? 3'b111 : accessed_save_way0_logic + 1) : ((accessed_save_way1_logic == 3'b111) ? 3'b111 : accessed_save_way1_logic + 1);
+                pmt_L1_way0_din.accessed = (more_accessed_max[1:1] == 1'b0) ? ((accessed_save_way0_logic == 4'b1111) ? 4'b1111 : accessed_save_way0_logic + 1) : ((accessed_save_way1_logic == 4'b1111) ? 4'b1111 : accessed_save_way1_logic + 1);
                 pmt_L1_way0_din.tag = pmt_L1_way0_dout.tag;
                 pmt_L1_way0_din.valid = 1'b1;
                 //書き込んだからdirtyになっている
@@ -436,7 +336,7 @@ case(rstate)
                 pmt_req_L1_way1.we = 1'b1;
                 data_req_L1_way1.we = 1'b1;
                 //キャッシュに書き込んだら、そのことをPMTの方に反映させておく（validとdirtyを立てるということ）
-                pmt_L1_way1_din.accessed = (more_accessed_max[1:1] == 1'b0) ? ((accessed_save_way0_logic == 3'b111) ? 3'b111 : accessed_save_way0_logic + 1) : ((accessed_save_way1_logic == 3'b111) ? 3'b111 : accessed_save_way1_logic + 1);
+                pmt_L1_way1_din.accessed = (more_accessed_max[1:1] == 1'b0) ? ((accessed_save_way0_logic == 4'b1111) ? 4'b1111 : accessed_save_way0_logic + 1) : ((accessed_save_way1_logic == 4'b1111) ? 4'b1111 : accessed_save_way1_logic + 1);
                 pmt_L1_way1_din.tag = pmt_L1_way1_dout.tag; 
                 pmt_L1_way1_din.valid = 1'b1;
                 //書き込んだからdirtyになっている
@@ -448,7 +348,7 @@ case(rstate)
                 pmt_req_L1_way1.we = 1'b1;
                 data_req_L1_way1.we = 1'b0;
                 //キャッシュに書き込んだら、そのことをPMTの方に反映させておく（validとdirtyを立てるということ）
-                pmt_L1_way1_din.accessed = (more_accessed_max[1:1] == 1'b0) ? ((accessed_save_way0_logic == 3'b111) ? 3'b111 : accessed_save_way0_logic + 1) : ((accessed_save_way1_logic == 3'b111) ? 3'b111 : accessed_save_way1_logic + 1);
+                pmt_L1_way1_din.accessed = (more_accessed_max[1:1] == 1'b0) ? ((accessed_save_way0_logic == 4'b1111) ? 4'b1111 : accessed_save_way0_logic + 1) : ((accessed_save_way1_logic == 4'b1111) ? 4'b1111 : accessed_save_way1_logic + 1);
                 pmt_L1_way1_din.tag = pmt_L1_way1_dout.tag;
                 pmt_L1_way1_din.valid = 1'b1;
                 //書き込んだからdirtyになっている
@@ -474,16 +374,16 @@ case(rstate)
             //今持ってきたからaccessedは0にしておく
             pmt_L1_way0_din.accessed = 
                 (more_accessed_max == 2'b00) ? accessed_save_way0_logic :
-                (more_accessed_max == 2'b01) ? 3'b000                   :
+                (more_accessed_max == 2'b01) ? 4'b0000                   :
                 (more_accessed_max == 2'b10) ? accessed_save_way1_logic :
-                                               3'b000                   ;
+                                               4'b0000                   ;
             
             //更新しないほうもLRU(Accessed)がmaxに達していたらリセットする(Accessed以外は変えない)
             pmt_req_L1_way1.we = 1'b1;
             pmt_L1_way1_din.valid = pmt_L1_way1_dout.valid;
             pmt_L1_way1_din.tag = pmt_L1_way1_dout.tag;
             pmt_L1_way1_din.dirty = pmt_L1_way1_dout.dirty;
-            pmt_L1_way1_din.accessed = (more_accessed_max[0:0] == 1'b1) ? 3'b000 : pmt_L1_way1_dout.accessed;
+            pmt_L1_way1_din.accessed = (more_accessed_max[0:0] == 1'b1) ? 4'b0000 : pmt_L1_way1_dout.accessed;
             
             //下位キャッシュへ向けてデータをくれという必要がある。
             mem_req_L1_to_L2.valid = 1'b1;
@@ -517,15 +417,15 @@ case(rstate)
             //今持ってきたからaccessedは0にしておく
             pmt_L1_way1_din.accessed = 
                 (more_accessed_max == 2'b00) ? accessed_save_way0_logic :
-                (more_accessed_max == 2'b01) ? 3'b000                   :
+                (more_accessed_max == 2'b01) ? 4'b0000                   :
                 (more_accessed_max == 2'b10) ? accessed_save_way1_logic :
-                                               3'b000                   ;
+                                               4'b0000                   ;
             //更新しないほうもLRU(Accessed)がmaxに達していたらリセットする(Accessed以外は変えない)
             pmt_req_L1_way0.we = 1'b1;
             pmt_L1_way0_din.valid = pmt_L1_way0_dout.valid;
             pmt_L1_way0_din.tag = pmt_L1_way0_dout.tag;
             pmt_L1_way0_din.dirty = pmt_L1_way0_dout.dirty;
-            pmt_L1_way0_din.accessed = (more_accessed_max[0:0] == 1'b1) ? 3'b000 : pmt_L1_way0_dout.accessed;
+            pmt_L1_way0_din.accessed = (more_accessed_max[0:0] == 1'b1) ? 4'b0000 : pmt_L1_way0_dout.accessed;
         
             //下位キャッシュへ向けてデータをくれという必要がある。
             mem_req_L1_to_L2.valid = 1'b1;
