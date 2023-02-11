@@ -265,12 +265,12 @@ ANS
 	IFEQ %x6 0
 		LET
 			%x6
-			SLL %x6 3
+			SLL %x6 2
 			ANS
 				STDF %f0 %x5 %x6
 		LET
 			%x7
-			SLL %x6 3
+			SLL %x6 2
 			LET
 				%g0
 				STDF %f0 %x5 %x7
@@ -319,19 +319,19 @@ ANS
 	IFGE %x7 0
 		LET
 			%x9
-			SLL %x7 3
+			SLL %x7 2
 			LET
 				%f0
 				LDDF %x5 %x9
 				LET
 					%x9
-					SLL %x7 3
+					SLL %x7 2
 					LET
-						%f2
+						%f1
 						LDDF %x6 %x9
 						LET
 							%f0
-							FMULD %f0 %f2
+							FMULD %f0 %f1
 							LET
 								%x7
 								SUB %x7 1
@@ -344,10 +344,10 @@ ANS
 											%x5 %x6 %x7 
 											
 										LET
-											%f2
+											%f1
 											RESTORE Td21.263
 											ANS
-												FADDD %f2 %f0
+												FADDD %f1 %f0
 		ANS
 			l.458
 
@@ -395,11 +395,11 @@ LET
 													%x5 %x6 %x7 
 													
 												LET
-													%f2
+													%f1
 													RESTORE Td13.255
 													LET
 														%f0
-														FMULD %f2 %f0
+														FMULD %f1 %f0
 														LET
 															%x5
 															CALLDIR min_caml_truncate

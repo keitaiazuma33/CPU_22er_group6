@@ -7,20 +7,20 @@ l.28:	! 1.230000
 .global	min_caml_start
 min_caml_start:
 	addi	%x2, %x2, -112
-	mv	%f0, l.28  #0 pc 4
+	fmv	%f0, l.28  #0 pc 4
 	sw	%x1, 12(%x2)  #1 pc 8
 	addi	%x2, %x2, 16  #1 pc 12
 	jal	%x1, min_caml_truncate  #1 pc 16
 	addi	%x2, %x2, -16  #1 pc 20
 	lw	%x1, 12(%x2) #1 pc 24
-	mv	%f0, l.30  #0 pc 28
+	fmv	%f0, l.30  #0 pc 28
 	sw	%x5, 8(%x2)  #2 pc 32
 	sw	%x1, 12(%x2)  #2 pc 36
 	addi	%x2, %x2, 16  #2 pc 40
 	jal	%x1, min_caml_truncate  #2 pc 44
 	addi	%x2, %x2, -16  #2 pc 48
 	lw	%x1, 12(%x2) #2 pc 52
-	mv	%f0, l.32  #0 pc 56
+	fmv	%f0, l.32  #0 pc 56
 	sw	%x5, 12(%x2)  #3 pc 60
 	sw	%x1, 20(%x2)  #3 pc 64
 	addi	%x2, %x2, 24  #3 pc 68
@@ -44,7 +44,7 @@ bge_cont.38: #pc 108
 	j	ble_cont.40 #pc 132
 	nop #pc 136
 ble_else.39: #pc 136
-	mv	%x9, %x5  #6 pc 140
+	addi	%x9, %x5, 0  #6 pc 140
 ble_cont.40: #pc 140
 	add	%x6, %x6, %x9  #5 pc 144
 	lw	%x9, 12(%x2)  #7 pc 148
@@ -54,7 +54,7 @@ ble_cont.40: #pc 140
 	j	bge_cont.42 #pc 164
 	nop #pc 168
 bge_else.41: #pc 168
-	mv	%x5, %x7  #7 pc 172
+	addi	%x5, %x7, 0  #7 pc 172
 bge_cont.42: #pc 172
 	add	%x5, %x6, %x5  #5 pc 176
 	sw	%x1, 20(%x2)  #4 pc 180

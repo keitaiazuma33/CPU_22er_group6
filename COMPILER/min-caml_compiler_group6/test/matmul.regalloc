@@ -319,12 +319,12 @@ ANS
 	IFEQ %x6 0
 		LET
 			%x6
-			SLL %x6 3
+			SLL %x6 2
 			ANS
 				STDF %f0 %x5 %x6
 		LET
 			%x7
-			SLL %x6 3
+			SLL %x6 2
 			LET
 				%g0
 				STDF %f0 %x5 %x7
@@ -400,7 +400,7 @@ LET
 											LD %x9 %x13
 											LET
 												%x13
-												SLL %x6 3
+												SLL %x6 2
 												LET
 													%f0
 													LDDF %x9 %x13
@@ -412,9 +412,9 @@ LET
 															LD %x11 %x7
 															LET
 																%x9
-																SLL %x5 3
+																SLL %x5 2
 																LET
-																	%f2
+																	%f1
 																	LDDF %x7 %x9
 																	LET
 																		%x7
@@ -424,19 +424,19 @@ LET
 																			LD %x10 %x7
 																			LET
 																				%x9
-																				SLL %x6 3
+																				SLL %x6 2
 																				LET
-																					%f4
+																					%f2
 																					LDDF %x7 %x9
 																					LET
-																						%f2
-																						FMULD %f2 %f4
+																						%f1
+																						FMULD %f1 %f2
 																						LET
 																							%f0
-																							FADDD %f0 %f2
+																							FADDD %f0 %f1
 																							LET
 																								%x6
-																								SLL %x6 3
+																								SLL %x6 2
 																								LET
 																									%g0
 																									STDF %f0 %x12 %x6
@@ -858,7 +858,7 @@ LET
 																												l.765
 																												LET
 																													%g0
-																													STDF %f0 %x5 8
+																													STDF %f0 %x5 4
 																													LET
 																														%x5
 																														LD %x9 0
@@ -867,7 +867,7 @@ LET
 																															l.769
 																															LET
 																																%g0
-																																STDF %f0 %x5 16
+																																STDF %f0 %x5 8
 																																LET
 																																	%x5
 																																	LD %x9 4
@@ -885,7 +885,7 @@ LET
 																																					l.777
 																																					LET
 																																						%g0
-																																						STDF %f0 %x5 8
+																																						STDF %f0 %x5 4
 																																						LET
 																																							%x5
 																																							LD %x9 4
@@ -894,7 +894,7 @@ LET
 																																								l.781
 																																								LET
 																																									%g0
-																																									STDF %f0 %x5 16
+																																									STDF %f0 %x5 8
 																																									LET
 																																										%x10
 																																										RESTORE b.382
@@ -915,7 +915,7 @@ LET
 																																															l.789
 																																															LET
 																																																%g0
-																																																STDF %f0 %x5 8
+																																																STDF %f0 %x5 4
 																																																LET
 																																																	%x5
 																																																	LD %x10 4
@@ -933,7 +933,7 @@ LET
 																																																					l.797
 																																																					LET
 																																																						%g0
-																																																						STDF %f0 %x5 8
+																																																						STDF %f0 %x5 4
 																																																						LET
 																																																							%x5
 																																																							LD %x10 8
@@ -951,7 +951,7 @@ LET
 																																																											l.805
 																																																											LET
 																																																												%g0
-																																																												STDF %f0 %x5 8
+																																																												STDF %f0 %x5 4
 																																																												LET
 																																																													%x5
 																																																													SET 2
@@ -1004,7 +1004,7 @@ LET
 																																																																										LD %x5 0
 																																																																										LET
 																																																																											%f0
-																																																																											LDDF %x6 8
+																																																																											LDDF %x6 4
 																																																																											LET
 																																																																												Tu852
 																																																																												SAVE %x5 c.383
@@ -1064,7 +1064,7 @@ LET
 																																																																																										LD %x5 4
 																																																																																										LET
 																																																																																											%f0
-																																																																																											LDDF %x5 8
+																																																																																											LDDF %x5 4
 																																																																																											LET
 																																																																																												%x5
 																																																																																												CALLDIR min_caml_truncate

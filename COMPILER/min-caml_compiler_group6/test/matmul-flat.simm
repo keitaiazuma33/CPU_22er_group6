@@ -277,12 +277,12 @@ ANS
 	IFEQ n.366 0
 		LET
 			o.740
-			SLL n.366 3
+			SLL n.366 2
 			ANS
 				STDF a.365 hp.364 o.740
 		LET
 			o.739
-			SLL n.366 3
+			SLL n.366 2
 			LET
 				Tu6.559
 				STDF a.365 hp.364 o.739
@@ -337,7 +337,7 @@ ANS
 						LD c.376 o.742
 						LET
 							o.743
-							SLL j.373 3
+							SLL j.373 2
 							LET
 								Td139.543
 								LDDF Ta138.549 o.743
@@ -349,7 +349,7 @@ ANS
 										LD a.374 o.744
 										LET
 											o.745
-											SLL k.372 3
+											SLL k.372 2
 											LET
 												Td141.545
 												LDDF Ta140.548 o.745
@@ -361,7 +361,7 @@ ANS
 														LD b.375 o.746
 														LET
 															o.747
-															SLL j.373 3
+															SLL j.373 2
 															LET
 																Td143.546
 																LDDF Ta142.547 o.747
@@ -373,7 +373,7 @@ ANS
 																		FADDD Td139.543 Td144.544
 																		LET
 																			o.748
-																			SLL j.373 3
+																			SLL j.373 2
 																			LET
 																				Tu9.538
 																				STDF Td145.542 Ta137.541 o.748
@@ -561,7 +561,7 @@ LET
 																l.758
 																LET
 																	Tu32.411
-																	STDF Td49.499 Ta47.497 8
+																	STDF Td49.499 Ta47.497 4
 																	LET
 																		Ta51.493
 																		LD a.407 0
@@ -570,7 +570,7 @@ LET
 																			l.762
 																			LET
 																				Tu31.412
-																				STDF Td53.495 Ta51.493 16
+																				STDF Td53.495 Ta51.493 8
 																				LET
 																					Ta55.489
 																					LD a.407 4
@@ -588,7 +588,7 @@ LET
 																									l.770
 																									LET
 																										Tu29.414
-																										STDF Td61.487 Ta59.485 8
+																										STDF Td61.487 Ta59.485 4
 																										LET
 																											Ta63.481
 																											LD a.407 4
@@ -597,7 +597,7 @@ LET
 																												l.774
 																												LET
 																													Tu28.415
-																													STDF Td65.483 Ta63.481 16
+																													STDF Td65.483 Ta63.481 8
 																													LET
 																														Ta67.477
 																														LD b.408 0
@@ -615,7 +615,7 @@ LET
 																																		l.782
 																																		LET
 																																			Tu26.417
-																																			STDF Td73.475 Ta71.473 8
+																																			STDF Td73.475 Ta71.473 4
 																																			LET
 																																				Ta75.469
 																																				LD b.408 4
@@ -633,7 +633,7 @@ LET
 																																								l.790
 																																								LET
 																																									Tu24.419
-																																									STDF Td81.467 Ta79.465 8
+																																									STDF Td81.467 Ta79.465 4
 																																									LET
 																																										Ta83.461
 																																										LD b.408 8
@@ -651,7 +651,7 @@ LET
 																																														l.798
 																																														LET
 																																															Tu22.421
-																																															STDF Td89.459 Ta87.457 8
+																																															STDF Td89.459 Ta87.457 4
 																																															LET
 																																																Ti90.454
 																																																SET 2
@@ -692,7 +692,7 @@ LET
 																																																									LD c.409 0
 																																																									LET
 																																																										Td102.444
-																																																										LDDF Ta100.445 8
+																																																										LDDF Ta100.445 4
 																																																										LET
 																																																											Ti103.443
 																																																											CALLDIR min_caml_truncate
@@ -740,7 +740,7 @@ LET
 																																																																					LD c.409 4
 																																																																					LET
 																																																																						Td114.432
-																																																																						LDDF Ta112.433 8
+																																																																						LDDF Ta112.433 4
 																																																																						LET
 																																																																							Ti115.431
 																																																																							CALLDIR min_caml_truncate

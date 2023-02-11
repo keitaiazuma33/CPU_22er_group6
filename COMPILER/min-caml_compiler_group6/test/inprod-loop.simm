@@ -229,12 +229,12 @@ ANS
 	IFEQ n.244 0
 		LET
 			o.460
-			SLL n.244 3
+			SLL n.244 2
 			ANS
 				STDF a.243 hp.242 o.460
 		LET
 			o.459
-			SLL n.244 3
+			SLL n.244 2
 			LET
 				Tu6.281
 				STDF a.243 hp.242 o.459
@@ -277,13 +277,13 @@ ANS
 	IFGE i.252 0
 		LET
 			o.461
-			SLL i.252 3
+			SLL i.252 2
 			LET
 				Td20.270
 				LDDF v1.249 o.461
 				LET
 					o.462
-					SLL i.252 3
+					SLL i.252 2
 					LET
 						Td21.271
 						LDDF v2.250 o.462

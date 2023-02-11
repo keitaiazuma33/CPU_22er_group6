@@ -804,12 +804,12 @@ ANS
 	IFEQ n.2599 0
 		LET
 			o.6340
-			SLL n.2599 3
+			SLL n.2599 2
 			ANS
 				STDF a.2598 hp.2597 o.6340
 		LET
 			o.6339
-			SLL n.2599 3
+			SLL n.2599 2
 			LET
 				Tu6.6115
 				STDF a.2598 hp.2597 o.6339
@@ -924,9 +924,9 @@ LET
 	STDF x.2646 v.2645 0
 	LET
 		Tu9.5997
-		STDF y.2647 v.2645 8
+		STDF y.2647 v.2645 4
 		ANS
-			STDF z.2648 v.2645 16
+			STDF z.2648 v.2645 8
 
 Name : vecfill.2649
 Args : v.2650 
@@ -938,9 +938,9 @@ LET
 	STDF elem.2651 v.2650 0
 	LET
 		Tu11.5992
-		STDF elem.2651 v.2650 8
+		STDF elem.2651 v.2650 4
 		ANS
-			STDF elem.2651 v.2650 16
+			STDF elem.2651 v.2650 8
 
 Name : vecbzero.2652
 Args : v.2653 
@@ -968,15 +968,15 @@ LET
 		STDF Td2358.5988 dest.2655 0
 		LET
 			Td2361.5985
-			LDDF src.2656 8
+			LDDF src.2656 4
 			LET
 				Tu13.5980
-				STDF Td2361.5985 dest.2655 8
+				STDF Td2361.5985 dest.2655 4
 				LET
 					Td2364.5982
-					LDDF src.2656 16
+					LDDF src.2656 8
 					ANS
-						STDF Td2364.5982 dest.2655 16
+						STDF Td2364.5982 dest.2655 8
 
 Name : vecunit_sgn.2657
 Args : v.2658 inv.2659 
@@ -993,7 +993,7 @@ LET
 			Td2329.5977 
 		LET
 			Td2332.5975
-			LDDF v.2658 8
+			LDDF v.2658 4
 			LET
 				Td2333.5974
 				CALLDIR fsqr.2536
@@ -1004,7 +1004,7 @@ LET
 					FADDD Td2330.5973 Td2333.5974
 					LET
 						Td2336.5971
-						LDDF v.2658 16
+						LDDF v.2658 8
 						LET
 							Td2337.5970
 							CALLDIR fsqr.2536
@@ -1049,21 +1049,21 @@ LET
 														STDF Td2347.5960 v.2658 0
 														LET
 															Td2350.5957
-															LDDF v.2658 8
+															LDDF v.2658 4
 															LET
 																Td2351.5956
 																FMULD Td2350.5957 il.5948
 																LET
 																	Tu15.5950
-																	STDF Td2351.5956 v.2658 8
+																	STDF Td2351.5956 v.2658 4
 																	LET
 																		Td2354.5953
-																		LDDF v.2658 16
+																		LDDF v.2658 8
 																		LET
 																			Td2355.5952
 																			FMULD Td2354.5953 il.5948
 																			ANS
-																				STDF Td2355.5952 v.2658 16
+																				STDF Td2355.5952 v.2658 8
 
 Name : veciprod.2660
 Args : v.2661 w.2662 
@@ -1081,10 +1081,10 @@ LET
 			FMULD Td2313.5943 Td2315.5944
 			LET
 				Td2318.5939
-				LDDF v.2661 8
+				LDDF v.2661 4
 				LET
 					Td2320.5940
-					LDDF w.2662 8
+					LDDF w.2662 4
 					LET
 						Td2321.5938
 						FMULD Td2318.5939 Td2320.5940
@@ -1093,10 +1093,10 @@ LET
 							FADDD Td2316.5937 Td2321.5938
 							LET
 								Td2324.5933
-								LDDF v.2661 16
+								LDDF v.2661 8
 								LET
 									Td2326.5934
-									LDDF w.2662 16
+									LDDF w.2662 8
 									LET
 										Td2327.5932
 										FMULD Td2324.5933 Td2326.5934
@@ -1116,7 +1116,7 @@ LET
 		FMULD Td2303.5929 w0.2665
 		LET
 			Td2306.5927
-			LDDF v.2664 8
+			LDDF v.2664 4
 			LET
 				Td2307.5926
 				FMULD Td2306.5927 w1.2666
@@ -1125,7 +1125,7 @@ LET
 					FADDD Td2304.5925 Td2307.5926
 					LET
 						Td2310.5923
-						LDDF v.2664 16
+						LDDF v.2664 8
 						LET
 							Td2311.5922
 							FMULD Td2310.5923 w2.2667
@@ -1154,10 +1154,10 @@ LET
 					STDF Td2287.5915 dest.2669 0
 					LET
 						Td2290.5909
-						LDDF dest.2669 8
+						LDDF dest.2669 4
 						LET
 							Td2292.5911
-							LDDF v.2671 8
+							LDDF v.2671 4
 							LET
 								Td2293.5910
 								FMULD scale.2670 Td2292.5911
@@ -1166,13 +1166,13 @@ LET
 									FADDD Td2290.5909 Td2293.5910
 									LET
 										Tu17.5899
-										STDF Td2294.5908 dest.2669 8
+										STDF Td2294.5908 dest.2669 4
 										LET
 											Td2297.5902
-											LDDF dest.2669 16
+											LDDF dest.2669 8
 											LET
 												Td2299.5904
-												LDDF v.2671 16
+												LDDF v.2671 8
 												LET
 													Td2300.5903
 													FMULD scale.2670 Td2299.5904
@@ -1180,7 +1180,7 @@ LET
 														Td2301.5901
 														FADDD Td2297.5902 Td2300.5903
 														ANS
-															STDF Td2301.5901 dest.2669 16
+															STDF Td2301.5901 dest.2669 8
 
 Name : vecadd.2672
 Args : dest.2673 v.2674 
@@ -1201,27 +1201,27 @@ LET
 				STDF Td2268.5893 dest.2673 0
 				LET
 					Td2271.5888
-					LDDF dest.2673 8
+					LDDF dest.2673 4
 					LET
 						Td2273.5889
-						LDDF v.2674 8
+						LDDF v.2674 4
 						LET
 							Td2274.5887
 							FADDD Td2271.5888 Td2273.5889
 							LET
 								Tu19.5879
-								STDF Td2274.5887 dest.2673 8
+								STDF Td2274.5887 dest.2673 4
 								LET
 									Td2277.5882
-									LDDF dest.2673 16
+									LDDF dest.2673 8
 									LET
 										Td2279.5883
-										LDDF v.2674 16
+										LDDF v.2674 8
 										LET
 											Td2280.5881
 											FADDD Td2277.5882 Td2279.5883
 											ANS
-												STDF Td2280.5881 dest.2673 16
+												STDF Td2280.5881 dest.2673 8
 
 Name : vecscale.2675
 Args : dest.2676 
@@ -1239,21 +1239,21 @@ LET
 			STDF Td2254.5875 dest.2676 0
 			LET
 				Td2257.5872
-				LDDF dest.2676 8
+				LDDF dest.2676 4
 				LET
 					Td2258.5871
 					FMULD Td2257.5872 scale.2677
 					LET
 						Tu21.5865
-						STDF Td2258.5871 dest.2676 8
+						STDF Td2258.5871 dest.2676 4
 						LET
 							Td2261.5868
-							LDDF dest.2676 16
+							LDDF dest.2676 8
 							LET
 								Td2262.5867
 								FMULD Td2261.5868 scale.2677
 								ANS
-									STDF Td2262.5867 dest.2676 16
+									STDF Td2262.5867 dest.2676 8
 
 Name : vecaccumv.2678
 Args : dest.2679 v.2680 w.2681 
@@ -1280,13 +1280,13 @@ LET
 						STDF Td2232.5856 dest.2679 0
 						LET
 							Td2235.5848
-							LDDF dest.2679 8
+							LDDF dest.2679 4
 							LET
 								Td2237.5850
-								LDDF v.2680 8
+								LDDF v.2680 4
 								LET
 									Td2239.5851
-									LDDF w.2681 8
+									LDDF w.2681 4
 									LET
 										Td2240.5849
 										FMULD Td2237.5850 Td2239.5851
@@ -1295,16 +1295,16 @@ LET
 											FADDD Td2235.5848 Td2240.5849
 											LET
 												Tu23.5836
-												STDF Td2241.5847 dest.2679 8
+												STDF Td2241.5847 dest.2679 4
 												LET
 													Td2244.5839
-													LDDF dest.2679 16
+													LDDF dest.2679 8
 													LET
 														Td2246.5841
-														LDDF v.2680 16
+														LDDF v.2680 8
 														LET
 															Td2248.5842
-															LDDF w.2681 16
+															LDDF w.2681 8
 															LET
 																Td2249.5840
 																FMULD Td2246.5841 Td2248.5842
@@ -1312,7 +1312,7 @@ LET
 																	Td2250.5838
 																	FADDD Td2244.5839 Td2249.5840
 																	ANS
-																		STDF Td2250.5838 dest.2679 16
+																		STDF Td2250.5838 dest.2679 8
 
 Name : o_texturetype.2682
 Args : m.2683 
@@ -1389,7 +1389,7 @@ LET
 	m_abc.5760
 	LD m.2695 16
 	ANS
-		LDDF m_abc.5760 8
+		LDDF m_abc.5760 4
 
 Name : o_param_c.2696
 Args : m.2697 
@@ -1400,7 +1400,7 @@ LET
 	m_abc.5748
 	LD m.2697 16
 	ANS
-		LDDF m_abc.5748 16
+		LDDF m_abc.5748 8
 
 Name : o_param_abc.2698
 Args : m.2699 
@@ -1433,7 +1433,7 @@ LET
 	m_xyz.5714
 	LD m.2703 20
 	ANS
-		LDDF m_xyz.5714 8
+		LDDF m_xyz.5714 4
 
 Name : o_param_z.2704
 Args : m.2705 
@@ -1444,7 +1444,7 @@ LET
 	m_xyz.5702
 	LD m.2705 20
 	ANS
-		LDDF m_xyz.5702 16
+		LDDF m_xyz.5702 8
 
 Name : o_diffuse.2706
 Args : m.2707 
@@ -1466,7 +1466,7 @@ LET
 	m_surfparams.5680
 	LD m.2709 28
 	ANS
-		LDDF m_surfparams.5680 8
+		LDDF m_surfparams.5680 4
 
 Name : o_color_red.2710
 Args : m.2711 
@@ -1488,7 +1488,7 @@ LET
 	m_color.5657
 	LD m.2713 32
 	ANS
-		LDDF m_color.5657 8
+		LDDF m_color.5657 4
 
 Name : o_color_blue.2714
 Args : m.2715 
@@ -1499,7 +1499,7 @@ LET
 	m_color.5645
 	LD m.2715 32
 	ANS
-		LDDF m_color.5645 16
+		LDDF m_color.5645 8
 
 Name : o_param_r1.2716
 Args : m.2717 
@@ -1521,7 +1521,7 @@ LET
 	m_rot123.5622
 	LD m.2719 36
 	ANS
-		LDDF m_rot123.5622 8
+		LDDF m_rot123.5622 4
 
 Name : o_param_r3.2720
 Args : m.2721 
@@ -1532,7 +1532,7 @@ LET
 	m_rot123.5610
 	LD m.2721 36
 	ANS
-		LDDF m_rot123.5610 16
+		LDDF m_rot123.5610 8
 
 Name : o_param_ctbl.2722
 Args : m.2723 
@@ -1751,7 +1751,7 @@ LET
 											
 										LET
 											Tu38.5428
-											STDF Td2157.5497 screen.2605 8
+											STDF Td2157.5497 screen.2605 4
 											LET
 												Tu2159.5495
 												NOP
@@ -1762,7 +1762,7 @@ LET
 														
 													LET
 														Tu37.5429
-														STDF Td2160.5494 screen.2605 16
+														STDF Td2160.5494 screen.2605 8
 														LET
 															Tu2161.5492
 															NOP
@@ -1829,7 +1829,7 @@ LET
 																														FMULD sin_v1.5432 Td2170.5484
 																														LET
 																															Tu35.5437
-																															STDF Td2171.5483 screenz_dir.2627 8
+																															STDF Td2171.5483 screenz_dir.2627 4
 																															LET
 																																Td2173.5480
 																																FMULD cos_v1.5431 cos_v2.5434
@@ -1841,7 +1841,7 @@ LET
 																																		FMULD Td2173.5480 Td2174.5481
 																																		LET
 																																			Tu34.5438
-																																			STDF Td2175.5479 screenz_dir.2627 16
+																																			STDF Td2175.5479 screenz_dir.2627 8
 																																			LET
 																																				Tu33.5439
 																																				STDF cos_v2.5434 screenx_dir.2625 0
@@ -1850,7 +1850,7 @@ LET
 																																					l.6293
 																																					LET
 																																						Tu32.5440
-																																						STDF Td2178.5476 screenx_dir.2625 8
+																																						STDF Td2178.5476 screenx_dir.2625 4
 																																						LET
 																																							Td2180.5474
 																																							CALLDIR fneg.2534
@@ -1858,7 +1858,7 @@ LET
 																																								sin_v2.5435 
 																																							LET
 																																								Tu31.5441
-																																								STDF Td2180.5474 screenx_dir.2625 16
+																																								STDF Td2180.5474 screenx_dir.2625 8
 																																								LET
 																																									Td2182.5472
 																																									CALLDIR fneg.2534
@@ -1877,7 +1877,7 @@ LET
 																																													cos_v1.5431 
 																																												LET
 																																													Tu29.5443
-																																													STDF Td2185.5469 screeny_dir.2626 8
+																																													STDF Td2185.5469 screeny_dir.2626 4
 																																													LET
 																																														Td2187.5467
 																																														CALLDIR fneg.2534
@@ -1888,7 +1888,7 @@ LET
 																																															FMULD Td2187.5467 cos_v2.5434
 																																															LET
 																																																Tu28.5444
-																																																STDF Td2188.5466 screeny_dir.2626 16
+																																																STDF Td2188.5466 screeny_dir.2626 8
 																																																LET
 																																																	Td2191.5461
 																																																	LDDF screen.2605 0
@@ -1903,27 +1903,27 @@ LET
 																																																				STDF Td2194.5460 viewpoint.2606 0
 																																																				LET
 																																																					Td2197.5455
-																																																					LDDF screen.2605 8
+																																																					LDDF screen.2605 4
 																																																					LET
 																																																						Td2199.5456
-																																																						LDDF screenz_dir.2627 8
+																																																						LDDF screenz_dir.2627 4
 																																																						LET
 																																																							Td2200.5454
 																																																							FSUBD Td2197.5455 Td2199.5456
 																																																							LET
 																																																								Tu26.5446
-																																																								STDF Td2200.5454 viewpoint.2606 8
+																																																								STDF Td2200.5454 viewpoint.2606 4
 																																																								LET
 																																																									Td2203.5449
-																																																									LDDF screen.2605 16
+																																																									LDDF screen.2605 8
 																																																									LET
 																																																										Td2205.5450
-																																																										LDDF screenz_dir.2627 16
+																																																										LDDF screenz_dir.2627 8
 																																																										LET
 																																																											Td2206.5448
 																																																											FSUBD Td2203.5449 Td2205.5450
 																																																											ANS
-																																																												STDF Td2206.5448 viewpoint.2606 16
+																																																												STDF Td2206.5448 viewpoint.2606 8
 
 Name : read_light.2757
 Args : Tu40.2758 
@@ -1969,7 +1969,7 @@ LET
 										sl1.5405 
 									LET
 										Tu44.5406
-										STDF Td2142.5423 light.2607 8
+										STDF Td2142.5423 light.2607 4
 										LET
 											Tu2143.5421
 											NOP
@@ -2009,7 +2009,7 @@ LET
 																			FMULD cl1.5408 cl2.5411
 																			LET
 																				Tu42.5412
-																				STDF Td2148.5417 light.2607 16
+																				STDF Td2148.5417 light.2607 8
 																				LET
 																					Tu2150.5415
 																					NOP
@@ -2044,7 +2044,7 @@ LET
 					Td2054.5399 
 				LET
 					Td2056.5397
-					LDDF rot.2761 8
+					LDDF rot.2761 4
 					LET
 						cos_y.5295
 						CALLDIR cos.2545
@@ -2052,7 +2052,7 @@ LET
 							Td2056.5397 
 						LET
 							Td2058.5395
-							LDDF rot.2761 8
+							LDDF rot.2761 4
 							LET
 								sin_y.5296
 								CALLDIR sin.2543
@@ -2060,7 +2060,7 @@ LET
 									Td2058.5395 
 								LET
 									Td2060.5393
-									LDDF rot.2761 16
+									LDDF rot.2761 8
 									LET
 										cos_z.5297
 										CALLDIR cos.2545
@@ -2068,7 +2068,7 @@ LET
 											Td2060.5393 
 										LET
 											Td2062.5391
-											LDDF rot.2761 16
+											LDDF rot.2761 8
 											LET
 												sin_z.5298
 												CALLDIR sin.2543
@@ -2144,10 +2144,10 @@ LET
 																																		LDDF abc.2760 0
 																																		LET
 																																			bo.5309
-																																			LDDF abc.2760 8
+																																			LDDF abc.2760 4
 																																			LET
 																																				co.5310
-																																				LDDF abc.2760 16
+																																				LDDF abc.2760 8
 																																				LET
 																																					Td2079.5375
 																																					CALLDIR fsqr.2536
@@ -2213,7 +2213,7 @@ LET
 																																																					FADDD Td2092.5360 Td2094.5361
 																																																					LET
 																																																						Tu48.5312
-																																																						STDF Td2095.5359 abc.2760 8
+																																																						STDF Td2095.5359 abc.2760 4
 																																																						LET
 																																																							Td2097.5357
 																																																							CALLDIR fsqr.2536
@@ -2246,7 +2246,7 @@ LET
 																																																														FADDD Td2101.5351 Td2103.5352
 																																																														LET
 																																																															Tu47.5313
-																																																															STDF Td2104.5350 abc.2760 16
+																																																															STDF Td2104.5350 abc.2760 8
 																																																															LET
 																																																																Td2106.5340
 																																																																l.6476
@@ -2312,7 +2312,7 @@ LET
 																																																																																				FMULD Td2117.5329 Td2125.5330
 																																																																																				LET
 																																																																																					Tu45.5315
-																																																																																					STDF Td2126.5328 rot.2761 8
+																																																																																					STDF Td2126.5328 rot.2761 4
 																																																																																					LET
 																																																																																						Td2128.5318
 																																																																																						l.6476
@@ -2344,7 +2344,7 @@ LET
 																																																																																															Td2137.5317
 																																																																																															FMULD Td2128.5318 Td2136.5319
 																																																																																															ANS
-																																																																																																STDF Td2137.5317 rot.2761 16
+																																																																																																STDF Td2137.5317 rot.2761 8
 
 Name : read_nth_object.2762
 Args : n.2763 
@@ -2422,7 +2422,7 @@ LET
 																				
 																			LET
 																				Tu67.5172
-																				STDF Td1971.5281 abc.5170 8
+																				STDF Td1971.5281 abc.5170 4
 																				LET
 																					Tu1973.5279
 																					NOP
@@ -2433,7 +2433,7 @@ LET
 																							
 																						LET
 																							Tu66.5173
-																							STDF Td1974.5278 abc.5170 16
+																							STDF Td1974.5278 abc.5170 8
 																							LET
 																								Ti1975.5275
 																								SET 3
@@ -2466,7 +2466,7 @@ LET
 																																
 																															LET
 																																Tu64.5176
-																																STDF Td1982.5270 xyz.5174 8
+																																STDF Td1982.5270 xyz.5174 4
 																																LET
 																																	Tu1984.5268
 																																	NOP
@@ -2477,7 +2477,7 @@ LET
 																																			
 																																		LET
 																																			Tu63.5177
-																																			STDF Td1985.5267 xyz.5174 16
+																																			STDF Td1985.5267 xyz.5174 8
 																																			LET
 																																				Tu1986.5265
 																																				NOP
@@ -2523,7 +2523,7 @@ LET
 																																															
 																																														LET
 																																															Tu61.5181
-																																															STDF Td1995.5257 reflparam.5179 8
+																																															STDF Td1995.5257 reflparam.5179 4
 																																															LET
 																																																Ti1996.5254
 																																																SET 3
@@ -2556,7 +2556,7 @@ LET
 																																																								
 																																																							LET
 																																																								Tu59.5184
-																																																								STDF Td2003.5249 color.5182 8
+																																																								STDF Td2003.5249 color.5182 4
 																																																								LET
 																																																									Tu2005.5247
 																																																									NOP
@@ -2567,7 +2567,7 @@ LET
 																																																											
 																																																										LET
 																																																											Tu58.5185
-																																																											STDF Td2006.5246 color.5182 16
+																																																											STDF Td2006.5246 color.5182 8
 																																																											LET
 																																																												Ti2007.5243
 																																																												SET 3
@@ -2615,7 +2615,7 @@ LET
 																																																																								Td2016.5237 
 																																																																							LET
 																																																																								Tu50.5230
-																																																																								STDF Td2017.5236 rotation.5186 8
+																																																																								STDF Td2017.5236 rotation.5186 4
 																																																																								LET
 																																																																									Tu2019.5234
 																																																																									NOP
@@ -2630,7 +2630,7 @@ LET
 																																																																												
 																																																																												Td2020.5233 
 																																																																											ANS
-																																																																												STDF Td2021.5232 rotation.5186 16
+																																																																												STDF Td2021.5232 rotation.5186 8
 																																																															LET
 																																																																m_invert2.5188
 																																																																IFEQ form.5167 2
@@ -2730,7 +2730,7 @@ LET
 																																																																																									STDF Td2032.5219 abc.5170 0
 																																																																																									LET
 																																																																																										b.5201
-																																																																																										LDDF abc.5170 8
+																																																																																										LDDF abc.5170 4
 																																																																																										LET
 																																																																																											Tb2035.5213
 																																																																																											CALLDIR fiszero.2528
@@ -2755,10 +2755,10 @@ LET
 																																																																																														l.6293
 																																																																																												LET
 																																																																																													Tu52.5202
-																																																																																													STDF Td2039.5212 abc.5170 8
+																																																																																													STDF Td2039.5212 abc.5170 4
 																																																																																													LET
 																																																																																														c.5203
-																																																																																														LDDF abc.5170 16
+																																																																																														LDDF abc.5170 8
 																																																																																														LET
 																																																																																															Tb2042.5206
 																																																																																															CALLDIR fiszero.2528
@@ -2782,7 +2782,7 @@ LET
 																																																																																																	ANS
 																																																																																																		l.6293
 																																																																																																ANS
-																																																																																																	STDF Td2046.5205 abc.5170 16
+																																																																																																	STDF Td2046.5205 abc.5170 8
 																																																																																					ANS
 																																																																																						IFEQ form.5167 2
 																																																																																							LET
@@ -3052,7 +3052,7 @@ LET
 	LD solver_rect_surface.2776 4
 	LET
 		o.6532
-		SLL i0.2782 3
+		SLL i0.2782 2
 		LET
 			Td1894.5113
 			LDDF dirvec.2778 o.6532
@@ -3075,7 +3075,7 @@ LET
 									
 								LET
 									o.6533
-									SLL i0.2782 3
+									SLL i0.2782 2
 									LET
 										Td1898.5112
 										LDDF dirvec.2778 o.6533
@@ -3091,7 +3091,7 @@ LET
 													
 												LET
 													o.6534
-													SLL i0.2782 3
+													SLL i0.2782 2
 													LET
 														Td1901.5109
 														LDDF abc.5087 o.6534
@@ -3105,7 +3105,7 @@ LET
 																FSUBD d.5088 b0.2779
 																LET
 																	o.6535
-																	SLL i0.2782 3
+																	SLL i0.2782 2
 																	LET
 																		Td1903.5107
 																		LDDF dirvec.2778 o.6535
@@ -3114,7 +3114,7 @@ LET
 																			FDIVD Td1902.5106 Td1903.5107
 																			LET
 																				o.6536
-																				SLL i1.2783 3
+																				SLL i1.2783 2
 																				LET
 																					Td1904.5105
 																					LDDF dirvec.2778 o.6536
@@ -3129,7 +3129,7 @@ LET
 																								FABS Td1906.5103
 																								LET
 																									o.6537
-																									SLL i1.2783 3
+																									SLL i1.2783 2
 																									LET
 																										Td1908.5102
 																										LDDF abc.5087 o.6537
@@ -3144,7 +3144,7 @@ LET
 																														SET 0
 																													LET
 																														o.6538
-																														SLL i2.2784 3
+																														SLL i2.2784 2
 																														LET
 																															Td1911.5100
 																															LDDF dirvec.2778 o.6538
@@ -3159,7 +3159,7 @@ LET
 																																		FABS Td1913.5098
 																																		LET
 																																			o.6539
-																																			SLL i2.2784 3
+																																			SLL i2.2784 2
 																																			LET
 																																				Td1915.5097
 																																				LDDF abc.5087 o.6539
@@ -3523,10 +3523,10 @@ LET
 		LDDF dirvec.2812 0
 		LET
 			Td1797.5001
-			LDDF dirvec.2812 8
+			LDDF dirvec.2812 4
 			LET
 				Td1799.5002
-				LDDF dirvec.2812 16
+				LDDF dirvec.2812 8
 				LET
 					aa.4972
 					CALLDIR quadratic.2797
@@ -3544,10 +3544,10 @@ LET
 									LDDF dirvec.2812 0
 									LET
 										Td1805.4995
-										LDDF dirvec.2812 8
+										LDDF dirvec.2812 4
 										LET
 											Td1807.4996
-											LDDF dirvec.2812 16
+											LDDF dirvec.2812 8
 											LET
 												bb.4975
 												CALLDIR bilinear.2802
@@ -3660,7 +3660,7 @@ LET
 									FSUBD Td1784.4969 Td1785.4970
 									LET
 										Td1787.4966
-										LDDF org.2819 8
+										LDDF org.2819 4
 										LET
 											Td1788.4967
 											CALLDIR o_param_y.2702
@@ -3671,7 +3671,7 @@ LET
 												FSUBD Td1787.4966 Td1788.4967
 												LET
 													Td1790.4963
-													LDDF org.2819 16
+													LDDF org.2819 8
 													LET
 														Td1791.4964
 														CALLDIR o_param_z.2704
@@ -3718,13 +3718,13 @@ LET
 			FSUBD Td1700.4954 b0.2824
 			LET
 				Td1703.4952
-				LDDF dconst.2823 8
+				LDDF dconst.2823 4
 				LET
 					d0.4866
 					FMULD Td1701.4951 Td1703.4952
 					LET
 						Td1705.4949
-						LDDF v.2822 8
+						LDDF v.2822 4
 						LET
 							Td1706.4948
 							FMULD d0.4866 Td1705.4949
@@ -3751,7 +3751,7 @@ LET
 														SET 0
 													LET
 														Td1713.4943
-														LDDF v.2822 16
+														LDDF v.2822 8
 														LET
 															Td1714.4942
 															FMULD d0.4866 Td1713.4943
@@ -3777,7 +3777,7 @@ LET
 																						SET 0
 																					LET
 																						Td1721.4937
-																						LDDF dconst.2823 8
+																						LDDF dconst.2823 4
 																						LET
 																							Tb1722.4935
 																							CALLDIR fiszero.2528
@@ -3793,13 +3793,13 @@ LET
 													IFEQ Ti1724.4867 0
 														LET
 															Td1727.4929
-															LDDF dconst.2823 16
+															LDDF dconst.2823 8
 															LET
 																Td1728.4926
 																FSUBD Td1727.4929 b1.2825
 																LET
 																	Td1730.4927
-																	LDDF dconst.2823 24
+																	LDDF dconst.2823 12
 																	LET
 																		d1.4871
 																		FMULD Td1728.4926 Td1730.4927
@@ -3832,7 +3832,7 @@ LET
 																											SET 0
 																										LET
 																											Td1740.4918
-																											LDDF v.2822 16
+																											LDDF v.2822 8
 																											LET
 																												Td1741.4917
 																												FMULD d1.4871 Td1740.4918
@@ -3858,7 +3858,7 @@ LET
 																																			SET 0
 																																		LET
 																																			Td1748.4912
-																																			LDDF dconst.2823 24
+																																			LDDF dconst.2823 12
 																																			LET
 																																				Tb1749.4910
 																																				CALLDIR fiszero.2528
@@ -3874,13 +3874,13 @@ LET
 																										IFEQ Ti1751.4872 0
 																											LET
 																												Td1754.4904
-																												LDDF dconst.2823 32
+																												LDDF dconst.2823 16
 																												LET
 																													Td1755.4901
 																													FSUBD Td1754.4904 b2.2826
 																													LET
 																														Td1757.4902
-																														LDDF dconst.2823 40
+																														LDDF dconst.2823 20
 																														LET
 																															d2.4876
 																															FMULD Td1755.4901 Td1757.4902
@@ -3913,7 +3913,7 @@ LET
 																																								SET 0
 																																							LET
 																																								Td1767.4893
-																																								LDDF v.2822 8
+																																								LDDF v.2822 4
 																																								LET
 																																									Td1768.4892
 																																									FMULD d2.4876 Td1767.4893
@@ -3939,7 +3939,7 @@ LET
 																																																SET 0
 																																															LET
 																																																Td1775.4887
-																																																LDDF dconst.2823 40
+																																																LDDF dconst.2823 20
 																																																LET
 																																																	Tb1776.4885
 																																																	CALLDIR fiszero.2528
@@ -3993,13 +3993,13 @@ LET
 						SET 0
 					LET
 						Td1689.4862
-						LDDF dconst.2829 8
+						LDDF dconst.2829 4
 						LET
 							Td1690.4858
 							FMULD Td1689.4862 b0.2830
 							LET
 								Td1692.4860
-								LDDF dconst.2829 16
+								LDDF dconst.2829 8
 								LET
 									Td1693.4859
 									FMULD Td1692.4860 b1.2831
@@ -4008,7 +4008,7 @@ LET
 										FADDD Td1690.4858 Td1693.4859
 										LET
 											Td1696.4856
-											LDDF dconst.2829 24
+											LDDF dconst.2829 12
 											LET
 												Td1697.4855
 												FMULD Td1696.4856 b2.2832
@@ -4041,13 +4041,13 @@ LET
 				IFEQ Tb1650.4810 0
 					LET
 						Td1653.4846
-						LDDF dconst.2835 8
+						LDDF dconst.2835 4
 						LET
 							Td1654.4842
 							FMULD Td1653.4846 b0.2836
 							LET
 								Td1656.4844
-								LDDF dconst.2835 16
+								LDDF dconst.2835 8
 								LET
 									Td1657.4843
 									FMULD Td1656.4844 b1.2837
@@ -4056,7 +4056,7 @@ LET
 										FADDD Td1654.4842 Td1657.4843
 										LET
 											Td1660.4840
-											LDDF dconst.2835 24
+											LDDF dconst.2835 12
 											LET
 												Td1661.4839
 												FMULD Td1660.4840 b2.2838
@@ -4119,7 +4119,7 @@ LET
 																											FSUBD neg_bb.4812 Td1672.4832
 																											LET
 																												Td1675.4830
-																												LDDF dconst.2835 32
+																												LDDF dconst.2835 16
 																												LET
 																													Td1676.4828
 																													FMULD Td1673.4829 Td1675.4830
@@ -4133,7 +4133,7 @@ LET
 																											FADDD neg_bb.4812 Td1678.4826
 																											LET
 																												Td1681.4824
-																												LDDF dconst.2835 32
+																												LDDF dconst.2835 16
 																												LET
 																													Td1682.4822
 																													FMULD Td1679.4823 Td1681.4824
@@ -4180,7 +4180,7 @@ LET
 									FSUBD Td1638.4806 Td1639.4807
 									LET
 										Td1641.4803
-										LDDF org.2842 8
+										LDDF org.2842 4
 										LET
 											Td1642.4804
 											CALLDIR o_param_y.2702
@@ -4191,7 +4191,7 @@ LET
 												FSUBD Td1641.4803 Td1642.4804
 												LET
 													Td1644.4800
-													LDDF org.2842 16
+													LDDF org.2842 8
 													LET
 														Td1645.4801
 														CALLDIR o_param_z.2704
@@ -4263,7 +4263,7 @@ LET
 						LDDF dconst.2845 0
 						LET
 							Td1635.4785
-							LDDF sconst.2846 24
+							LDDF sconst.2846 12
 							LET
 								Td1636.4783
 								FMULD Td1633.4784 Td1635.4785
@@ -4293,13 +4293,13 @@ LET
 				IFEQ Tb1596.4743 0
 					LET
 						Td1599.4776
-						LDDF dconst.2852 8
+						LDDF dconst.2852 4
 						LET
 							Td1600.4772
 							FMULD Td1599.4776 b0.2854
 							LET
 								Td1602.4774
-								LDDF dconst.2852 16
+								LDDF dconst.2852 8
 								LET
 									Td1603.4773
 									FMULD Td1602.4774 b1.2855
@@ -4308,7 +4308,7 @@ LET
 										FADDD Td1600.4772 Td1603.4773
 										LET
 											Td1606.4770
-											LDDF dconst.2852 24
+											LDDF dconst.2852 12
 											LET
 												Td1607.4769
 												FMULD Td1606.4770 b2.2856
@@ -4317,7 +4317,7 @@ LET
 													FADDD Td1604.4768 Td1607.4769
 													LET
 														cc.4746
-														LDDF sconst.2853 24
+														LDDF sconst.2853 12
 														LET
 															Td1609.4765
 															CALLDIR fsqr.2536
@@ -4354,7 +4354,7 @@ LET
 																									FSUBD neg_bb.4745 Td1616.4764
 																									LET
 																										Td1619.4762
-																										LDDF dconst.2852 32
+																										LDDF dconst.2852 16
 																										LET
 																											Td1620.4760
 																											FMULD Td1617.4761 Td1619.4762
@@ -4368,7 +4368,7 @@ LET
 																									FADDD neg_bb.4745 Td1622.4758
 																									LET
 																										Td1625.4756
-																										LDDF dconst.2852 32
+																										LDDF dconst.2852 16
 																										LET
 																											Td1626.4754
 																											FMULD Td1623.4755 Td1625.4756
@@ -4412,10 +4412,10 @@ LET
 								LDDF sconst.4729 0
 								LET
 									b1.4731
-									LDDF sconst.4729 8
+									LDDF sconst.4729 4
 									LET
 										b2.4732
-										LDDF sconst.4729 16
+										LDDF sconst.4729 8
 										LET
 											dconsts.4733
 											CALLDIR d_const.2745
@@ -4522,15 +4522,15 @@ LET
 																	Td1548.4712
 																	FDIVD Td1545.4713 Td1547.4714
 																	ANS
-																		STDF Td1548.4712 const.4662 8
+																		STDF Td1548.4712 const.4662 4
 							LET
 								Td1550.4709
 								l.6293
 								ANS
-									STDF Td1550.4709 const.4662 8
+									STDF Td1550.4709 const.4662 4
 						LET
 							Td1552.4704
-							LDDF vec.2861 8
+							LDDF vec.2861 4
 							LET
 								Tb1553.4686
 								CALLDIR fiszero.2528
@@ -4546,7 +4546,7 @@ LET
 												
 											LET
 												Td1558.4702
-												LDDF vec.2861 8
+												LDDF vec.2861 4
 												LET
 													Tb1559.4701
 													CALLDIR fisneg.2532
@@ -4569,26 +4569,26 @@ LET
 																	Td1561.4699 
 																LET
 																	Tu89.4690
-																	STDF Td1562.4697 const.4662 16
+																	STDF Td1562.4697 const.4662 8
 																	LET
 																		Td1564.4693
 																		l.6305
 																		LET
 																			Td1566.4694
-																			LDDF vec.2861 8
+																			LDDF vec.2861 4
 																			LET
 																				Td1567.4692
 																				FDIVD Td1564.4693 Td1566.4694
 																				ANS
-																					STDF Td1567.4692 const.4662 24
+																					STDF Td1567.4692 const.4662 12
 										LET
 											Td1569.4689
 											l.6293
 											ANS
-												STDF Td1569.4689 const.4662 24
+												STDF Td1569.4689 const.4662 12
 									LET
 										Td1571.4684
-										LDDF vec.2861 16
+										LDDF vec.2861 8
 										LET
 											Tb1572.4666
 											CALLDIR fiszero.2528
@@ -4604,7 +4604,7 @@ LET
 															
 														LET
 															Td1577.4682
-															LDDF vec.2861 16
+															LDDF vec.2861 8
 															LET
 																Tb1578.4681
 																CALLDIR fisneg.2532
@@ -4627,23 +4627,23 @@ LET
 																				Td1580.4679 
 																			LET
 																				Tu90.4670
-																				STDF Td1581.4677 const.4662 32
+																				STDF Td1581.4677 const.4662 16
 																				LET
 																					Td1583.4673
 																					l.6305
 																					LET
 																						Td1585.4674
-																						LDDF vec.2861 16
+																						LDDF vec.2861 8
 																						LET
 																							Td1586.4672
 																							FDIVD Td1583.4673 Td1585.4674
 																							ANS
-																								STDF Td1586.4672 const.4662 40
+																								STDF Td1586.4672 const.4662 20
 													LET
 														Td1588.4669
 														l.6293
 														ANS
-															STDF Td1588.4669 const.4662 40
+															STDF Td1588.4669 const.4662 20
 												ANS
 													MOV const.4662
 
@@ -4676,7 +4676,7 @@ LET
 						FMULD Td1499.4657 Td1500.4658
 						LET
 							Td1503.4654
-							LDDF vec.2864 8
+							LDDF vec.2864 4
 							LET
 								Td1504.4655
 								CALLDIR o_param_b.2694
@@ -4690,7 +4690,7 @@ LET
 										FADDD Td1501.4652 Td1505.4653
 										LET
 											Td1508.4649
-											LDDF vec.2864 16
+											LDDF vec.2864 8
 											LET
 												Td1509.4650
 												CALLDIR o_param_c.2696
@@ -4739,7 +4739,7 @@ LET
 																								Td1520.4640 
 																							LET
 																								Tu95.4628
-																								STDF Td1521.4639 const.4622 8
+																								STDF Td1521.4639 const.4622 4
 																								LET
 																									Td1523.4637
 																									CALLDIR o_param_b.2694
@@ -4755,7 +4755,7 @@ LET
 																												Td1524.4636 
 																											LET
 																												Tu94.4629
-																												STDF Td1525.4635 const.4622 16
+																												STDF Td1525.4635 const.4622 8
 																												LET
 																													Td1527.4633
 																													CALLDIR o_param_c.2696
@@ -4770,7 +4770,7 @@ LET
 																																
 																																Td1528.4632 
 																															ANS
-																																STDF Td1529.4631 const.4622 24
+																																STDF Td1529.4631 const.4622 12
 																ANS
 																	MOV const.4622
 
@@ -4795,10 +4795,10 @@ LET
 				LDDF v.2867 0
 				LET
 					Td1434.4615
-					LDDF v.2867 8
+					LDDF v.2867 4
 					LET
 						Td1436.4616
-						LDDF v.2867 16
+						LDDF v.2867 8
 						LET
 							aa.4544
 							CALLDIR quadratic.2797
@@ -4822,7 +4822,7 @@ LET
 												Td1440.4610 
 											LET
 												Td1442.4607
-												LDDF v.2867 8
+												LDDF v.2867 4
 												LET
 													Td1443.4608
 													CALLDIR o_param_b.2694
@@ -4838,7 +4838,7 @@ LET
 																Td1444.4606 
 															LET
 																Td1446.4603
-																LDDF v.2867 16
+																LDDF v.2867 8
 																LET
 																	Td1447.4604
 																	CALLDIR o_param_c.2696
@@ -4865,15 +4865,15 @@ LET
 																						IFEQ Ti1450.4556 0
 																							LET
 																								Tu101.4596
-																								STDF c1.4545 const.4543 8
+																								STDF c1.4545 const.4543 4
 																								LET
 																									Tu100.4597
-																									STDF c2.4546 const.4543 16
+																									STDF c2.4546 const.4543 8
 																									ANS
-																										STDF c3.4547 const.4543 24
+																										STDF c3.4547 const.4543 12
 																							LET
 																								Td1457.4593
-																								LDDF v.2867 16
+																								LDDF v.2867 8
 																								LET
 																									Td1458.4594
 																									CALLDIR o_param_r2.2718
@@ -4884,7 +4884,7 @@ LET
 																										FMULD Td1457.4593 Td1458.4594
 																										LET
 																											Td1461.4590
-																											LDDF v.2867 8
+																											LDDF v.2867 4
 																											LET
 																												Td1462.4591
 																												CALLDIR o_param_r3.2720
@@ -4906,10 +4906,10 @@ LET
 																																FSUBD c1.4545 Td1465.4586
 																																LET
 																																	Tu99.4558
-																																	STDF Td1466.4585 const.4543 8
+																																	STDF Td1466.4585 const.4543 4
 																																	LET
 																																		Td1469.4581
-																																		LDDF v.2867 16
+																																		LDDF v.2867 8
 																																		LET
 																																			Td1470.4582
 																																			CALLDIR o_param_r1.2716
@@ -4942,10 +4942,10 @@ LET
 																																										FSUBD c2.4546 Td1477.4574
 																																										LET
 																																											Tu98.4559
-																																											STDF Td1478.4573 const.4543 16
+																																											STDF Td1478.4573 const.4543 8
 																																											LET
 																																												Td1481.4569
-																																												LDDF v.2867 8
+																																												LDDF v.2867 4
 																																												LET
 																																													Td1482.4570
 																																													CALLDIR o_param_r1.2716
@@ -4977,7 +4977,7 @@ LET
 																																																				Td1490.4561
 																																																				FSUBD c3.4547 Td1489.4562
 																																																				ANS
-																																																					STDF Td1490.4561 const.4543 24
+																																																					STDF Td1490.4561 const.4543 12
 																						LET
 																							Tb1491.4551
 																							CALLDIR fiszero.2528
@@ -4993,7 +4993,7 @@ LET
 																											Td1495.4554
 																											FDIVD Td1494.4555 aa.4544
 																											ANS
-																												STDF Td1495.4554 const.4543 32
+																												STDF Td1495.4554 const.4543 16
 																									ANS
 																										NOP
 																								ANS
@@ -5139,7 +5139,7 @@ LET
 											STDF Td1383.4522 sconst.4481 0
 											LET
 												Td1386.4518
-												LDDF p.2875 8
+												LDDF p.2875 4
 												LET
 													Td1387.4519
 													CALLDIR o_param_y.2702
@@ -5150,10 +5150,10 @@ LET
 														FSUBD Td1386.4518 Td1387.4519
 														LET
 															Tu108.4484
-															STDF Td1388.4517 sconst.4481 8
+															STDF Td1388.4517 sconst.4481 4
 															LET
 																Td1391.4513
-																LDDF p.2875 16
+																LDDF p.2875 8
 																LET
 																	Td1392.4514
 																	CALLDIR o_param_z.2704
@@ -5164,7 +5164,7 @@ LET
 																		FSUBD Td1391.4513 Td1392.4514
 																		LET
 																			Tu107.4485
-																			STDF Td1393.4512 sconst.4481 16
+																			STDF Td1393.4512 sconst.4481 8
 																			LET
 																				Tu106.4486
 																				IFEQ m_shape.4482 2
@@ -5178,17 +5178,17 @@ LET
 																							LDDF sconst.4481 0
 																							LET
 																								Td1400.4506
-																								LDDF sconst.4481 8
+																								LDDF sconst.4481 4
 																								LET
 																									Td1402.4507
-																									LDDF sconst.4481 16
+																									LDDF sconst.4481 8
 																									LET
 																										Td1403.4503
 																										CALLDIR veciprod2.2663
 																											Ta1396.4504 
 																											Td1398.4505 Td1400.4506 Td1402.4507 
 																										ANS
-																											STDF Td1403.4503 sconst.4481 24
+																											STDF Td1403.4503 sconst.4481 12
 																					ANS
 																						IFLE m_shape.4482 2
 																							ANS
@@ -5198,10 +5198,10 @@ LET
 																								LDDF sconst.4481 0
 																								LET
 																									Td1408.4497
-																									LDDF sconst.4481 8
+																									LDDF sconst.4481 4
 																									LET
 																										Td1410.4498
-																										LDDF sconst.4481 16
+																										LDDF sconst.4481 8
 																										LET
 																											cc0.4491
 																											CALLDIR quadratic.2797
@@ -5218,7 +5218,7 @@ LET
 																													ANS
 																														FMOVD cc0.4491
 																												ANS
-																													STDF Td1414.4493 sconst.4481 24
+																													STDF Td1414.4493 sconst.4481 12
 																				LET
 																					Ti1416.4487
 																					SUB index.2876 1
@@ -5611,25 +5611,25 @@ LET
 																								FADDD Td1318.4413 Td1320.4414
 																								LET
 																									Td1322.4411
-																									LDDF light.2607 8
+																									LDDF light.2607 4
 																									LET
 																										Td1323.4408
 																										FMULD Td1322.4411 t.4394
 																										LET
 																											Td1325.4409
-																											LDDF intersection_point.2614 8
+																											LDDF intersection_point.2614 4
 																											LET
 																												q1.4396
 																												FADDD Td1323.4408 Td1325.4409
 																												LET
 																													Td1327.4406
-																													LDDF light.2607 16
+																													LDDF light.2607 8
 																													LET
 																														Td1328.4403
 																														FMULD Td1327.4406 t.4394
 																														LET
 																															Td1330.4404
-																															LDDF intersection_point.2614 16
+																															LDDF intersection_point.2614 8
 																															LET
 																																q2.4397
 																																FADDD Td1328.4403 Td1330.4404
@@ -5924,25 +5924,25 @@ LET
 																															FADDD Td1253.4337 Td1255.4338
 																															LET
 																																Td1257.4335
-																																LDDF dirvec.2917 8
+																																LDDF dirvec.2917 4
 																																LET
 																																	Td1258.4332
 																																	FMULD Td1257.4335 t.4314
 																																	LET
 																																		Td1260.4333
-																																		LDDF startp.2623 8
+																																		LDDF startp.2623 4
 																																		LET
 																																			q1.4316
 																																			FADDD Td1258.4332 Td1260.4333
 																																			LET
 																																				Td1262.4330
-																																				LDDF dirvec.2917 16
+																																				LDDF dirvec.2917 8
 																																				LET
 																																					Td1263.4327
 																																					FMULD Td1262.4330 t.4314
 																																					LET
 																																						Td1265.4328
-																																						LDDF startp.2623 16
+																																						LDDF startp.2623 8
 																																						LET
 																																							q2.4317
 																																							FADDD Td1263.4327 Td1265.4328
@@ -6282,25 +6282,25 @@ LET
 																																FADDD Td1184.4246 Td1186.4247
 																																LET
 																																	Td1188.4244
-																																	LDDF vec.4210 8
+																																	LDDF vec.4210 4
 																																	LET
 																																		Td1189.4241
 																																		FMULD Td1188.4244 t.4223
 																																		LET
 																																			Td1191.4242
-																																			LDDF startp_fast.2624 8
+																																			LDDF startp_fast.2624 4
 																																			LET
 																																				q1.4225
 																																				FADDD Td1189.4241 Td1191.4242
 																																				LET
 																																					Td1193.4239
-																																					LDDF vec.4210 16
+																																					LDDF vec.4210 8
 																																					LET
 																																						Td1194.4236
 																																						FMULD Td1193.4239 t.4223
 																																						LET
 																																							Td1196.4237
-																																							LDDF startp_fast.2624 16
+																																							LDDF startp_fast.2624 8
 																																							LET
 																																								q2.4226
 																																								FADDD Td1194.4236 Td1196.4237
@@ -6540,7 +6540,7 @@ LET
 						SUB rectside.4160 1
 						LET
 							o.6770
-							SLL Ti1132.4166 3
+							SLL Ti1132.4166 2
 							LET
 								Td1133.4165
 								LDDF dirvec.2943 o.6770
@@ -6556,7 +6556,7 @@ LET
 											Td1134.4164 
 										LET
 											o.6771
-											SLL Ti1130.4162 3
+											SLL Ti1130.4162 2
 											ANS
 												STDF Td1135.4163 nvector.2616 o.6771
 
@@ -6593,7 +6593,7 @@ LET
 							Td1123.4156 
 						LET
 							Tu128.4150
-							STDF Td1124.4155 nvector.2616 8
+							STDF Td1124.4155 nvector.2616 4
 							LET
 								Td1126.4153
 								CALLDIR o_param_c.2696
@@ -6605,7 +6605,7 @@ LET
 										
 										Td1126.4153 
 									ANS
-										STDF Td1127.4152 nvector.2616 16
+										STDF Td1127.4152 nvector.2616 8
 
 Name : get_nvector_second.2946
 Args : m.2947 
@@ -6631,7 +6631,7 @@ LET
 					FSUBD Td1078.4146 Td1079.4147
 					LET
 						Td1081.4143
-						LDDF intersection_point.2614 8
+						LDDF intersection_point.2614 4
 						LET
 							Td1082.4144
 							CALLDIR o_param_y.2702
@@ -6642,7 +6642,7 @@ LET
 								FSUBD Td1081.4143 Td1082.4144
 								LET
 									Td1084.4140
-									LDDF intersection_point.2614 16
+									LDDF intersection_point.2614 8
 									LET
 										Td1085.4141
 										CALLDIR o_param_z.2704
@@ -6688,9 +6688,9 @@ LET
 																					STDF d0.4099 nvector.2616 0
 																					LET
 																						Tu130.4133
-																						STDF d1.4100 nvector.2616 8
+																						STDF d1.4100 nvector.2616 4
 																						ANS
-																							STDF d2.4101 nvector.2616 16
+																							STDF d2.4101 nvector.2616 8
 																				LET
 																					Td1095.4131
 																					CALLDIR o_param_r3.2720
@@ -6750,7 +6750,7 @@ LET
 																																			FADDD d1.4100 Td1108.4118
 																																			LET
 																																				Tu132.4107
-																																				STDF Td1109.4117 nvector.2616 8
+																																				STDF Td1109.4117 nvector.2616 4
 																																				LET
 																																					Td1111.4115
 																																					CALLDIR o_param_r2.2718
@@ -6779,7 +6779,7 @@ LET
 																																											Td1117.4109
 																																											FADDD d2.4101 Td1116.4110
 																																											ANS
-																																												STDF Td1117.4109 nvector.2616 16
+																																												STDF Td1117.4109 nvector.2616 8
 																			LET
 																				Tb1118.4103
 																				CALLDIR o_isinvert.2688
@@ -6854,7 +6854,7 @@ LET
 						
 					LET
 						Tu138.3941
-						STDF Td954.4090 texture_color.2617 8
+						STDF Td954.4090 texture_color.2617 4
 						LET
 							Td956.4088
 							CALLDIR o_color_blue.2714
@@ -6862,7 +6862,7 @@ LET
 								
 							LET
 								Tu137.3942
-								STDF Td956.4088 texture_color.2617 16
+								STDF Td956.4088 texture_color.2617 8
 								ANS
 									IFEQ m_tex.3939 1
 										LET
@@ -6906,7 +6906,7 @@ LET
 																						Td965.4078 Td966.4079 
 																					LET
 																						Td968.4074
-																						LDDF p.2953 16
+																						LDDF p.2953 8
 																						LET
 																							Td969.4075
 																							CALLDIR o_param_z.2704
@@ -6959,12 +6959,12 @@ LET
 																																				ANS
 																																					l.6807
 																																	ANS
-																																		STDF Td980.4063 texture_color.2617 8
+																																		STDF Td980.4063 texture_color.2617 4
 										ANS
 											IFEQ m_tex.3939 2
 												LET
 													Td983.4055
-													LDDF p.2953 8
+													LDDF p.2953 4
 													LET
 														Td984.4056
 														l.6822
@@ -7003,7 +7003,7 @@ LET
 																								Td994.4046
 																								FMULD Td991.4047 Td993.4048
 																								ANS
-																									STDF Td994.4046 texture_color.2617 8
+																									STDF Td994.4046 texture_color.2617 4
 												ANS
 													IFEQ m_tex.3939 3
 														LET
@@ -7019,7 +7019,7 @@ LET
 																	FSUBD Td997.4040 Td998.4041
 																	LET
 																		Td1000.4037
-																		LDDF p.2953 16
+																		LDDF p.2953 8
 																		LET
 																			Td1001.4038
 																			CALLDIR o_param_z.2704
@@ -7082,7 +7082,7 @@ LET
 																																		FMULD cws.4018 Td1012.4027
 																																		LET
 																																			Tu136.4019
-																																			STDF Td1013.4026 texture_color.2617 8
+																																			STDF Td1013.4026 texture_color.2617 4
 																																			LET
 																																				Td1015.4024
 																																				l.6305
@@ -7096,7 +7096,7 @@ LET
 																																							Td1018.4021
 																																							FMULD Td1016.4022 Td1017.4023
 																																							ANS
-																																								STDF Td1018.4021 texture_color.2617 16
+																																								STDF Td1018.4021 texture_color.2617 8
 														ANS
 															IFEQ m_tex.3939 4
 																LET
@@ -7123,7 +7123,7 @@ LET
 																						FMULD Td1023.4008 Td1025.4009
 																						LET
 																							Td1027.4005
-																							LDDF p.2953 16
+																							LDDF p.2953 8
 																							LET
 																								Td1028.4006
 																								CALLDIR o_param_z.2704
@@ -7204,7 +7204,7 @@ LET
 																																					FSUBD w7.3950 Td1043.3989
 																																					LET
 																																						Td1045.3986
-																																						LDDF p.2953 8
+																																						LDDF p.2953 4
 																																						LET
 																																							Td1046.3987
 																																							CALLDIR o_param_y.2702
@@ -7326,7 +7326,7 @@ LET
 																																																																Td1074.3958
 																																																																FDIVD Td1072.3959 Td1073.3960
 																																																																ANS
-																																																																	STDF Td1074.3958 texture_color.2617 16
+																																																																	STDF Td1074.3958 texture_color.2617 8
 																ANS
 																	NOP
 
@@ -7388,21 +7388,21 @@ LET
 													STDF Td942.3932 rgb.2619 0
 													LET
 														Td945.3929
-														LDDF rgb.2619 8
+														LDDF rgb.2619 4
 														LET
 															Td946.3928
 															FADDD Td945.3929 ihl.3920
 															LET
 																Tu140.3922
-																STDF Td946.3928 rgb.2619 8
+																STDF Td946.3928 rgb.2619 4
 																LET
 																	Td949.3925
-																	LDDF rgb.2619 16
+																	LDDF rgb.2619 8
 																	LET
 																		Td950.3924
 																		FADDD Td949.3925 ihl.3920
 																		ANS
-																			STDF Td950.3924 rgb.2619 16
+																			STDF Td950.3924 rgb.2619 8
 
 Name : trace_reflections.2958
 Args : index.2959 dirvec.2962 
@@ -7684,21 +7684,21 @@ LET
 																																												STDF Td850.3877 rgb.2619 0
 																																												LET
 																																													Td853.3874
-																																													LDDF rgb.2619 8
+																																													LDDF rgb.2619 4
 																																													LET
 																																														Td854.3873
 																																														FADDD Td853.3874 ihl.3865
 																																														LET
 																																															Tu158.3867
-																																															STDF Td854.3873 rgb.2619 8
+																																															STDF Td854.3873 rgb.2619 4
 																																															LET
 																																																Td857.3870
-																																																LDDF rgb.2619 16
+																																																LDDF rgb.2619 8
 																																																LET
 																																																	Td858.3869
 																																																	FADDD Td857.3870 ihl.3865
 																																																	ANS
-																																																		STDF Td858.3869 rgb.2619 16
+																																																		STDF Td858.3869 rgb.2619 8
 																										LET
 																											obj_id.3780
 																											LD intersected_object_id.2615 0
@@ -8961,7 +8961,7 @@ LET
 								
 							LET
 								Td698.3598
-								LDDF rgb.2619 8
+								LDDF rgb.2619 4
 								LET
 									Tu188.3591
 									CALLDIR write_rgb_element_int.3019
@@ -8977,7 +8977,7 @@ LET
 												
 											LET
 												Td701.3595
-												LDDF rgb.2619 16
+												LDDF rgb.2619 8
 												LET
 													Tu186.3593
 													CALLDIR write_rgb_element_int.3019
@@ -9000,7 +9000,7 @@ LET
 						Td704.3587 
 					LET
 						Td706.3585
-						LDDF rgb.2619 8
+						LDDF rgb.2619 4
 						LET
 							Tu191.3582
 							CALLDIR write_rgb_element_char.3021
@@ -9008,7 +9008,7 @@ LET
 								Td706.3585 
 							LET
 								Td708.3583
-								LDDF rgb.2619 16
+								LDDF rgb.2619 8
 								ANS
 									CALLDIR write_rgb_element_char.3021
 										
@@ -9188,7 +9188,7 @@ LET
 																				STDF Td658.3551 ptrace_dirvec.2628 0
 																				LET
 																					Td661.3548
-																					LDDF screenx_dir.2625 8
+																					LDDF screenx_dir.2625 4
 																					LET
 																						Td662.3547
 																						FMULD xdisp.3515 Td661.3548
@@ -9197,10 +9197,10 @@ LET
 																							FADDD Td662.3547 lc1.3033
 																							LET
 																								Tu204.3517
-																								STDF Td663.3546 ptrace_dirvec.2628 8
+																								STDF Td663.3546 ptrace_dirvec.2628 4
 																								LET
 																									Td666.3543
-																									LDDF screenx_dir.2625 16
+																									LDDF screenx_dir.2625 8
 																									LET
 																										Td667.3542
 																										FMULD xdisp.3515 Td666.3543
@@ -9209,7 +9209,7 @@ LET
 																											FADDD Td667.3542 lc2.3034
 																											LET
 																												Tu203.3518
-																												STDF Td668.3541 ptrace_dirvec.2628 16
+																												STDF Td668.3541 ptrace_dirvec.2628 8
 																												LET
 																													Ti669.3539
 																													SET 0
@@ -9361,25 +9361,25 @@ LET
 															FADDD Td630.3503 Td632.3504
 															LET
 																Td634.3501
-																LDDF screeny_dir.2626 8
+																LDDF screeny_dir.2626 4
 																LET
 																	Td635.3498
 																	FMULD ydisp.3485 Td634.3501
 																	LET
 																		Td637.3499
-																		LDDF screenz_dir.2627 8
+																		LDDF screenz_dir.2627 4
 																		LET
 																			lc1.3487
 																			FADDD Td635.3498 Td637.3499
 																			LET
 																				Td639.3496
-																				LDDF screeny_dir.2626 16
+																				LDDF screeny_dir.2626 8
 																				LET
 																					Td640.3493
 																					FMULD ydisp.3485 Td639.3496
 																					LET
 																						Td642.3494
-																						LDDF screenz_dir.2627 16
+																						LDDF screenz_dir.2627 8
 																						LET
 																							lc2.3488
 																							FADDD Td640.3493 Td642.3494
@@ -10593,7 +10593,7 @@ LET
 												Td414.3241 
 											LET
 												Td416.3239
-												LDDF light.2607 8
+												LDDF light.2607 4
 												LET
 													n1.3213
 													CALLDIR fneg.2534
@@ -10601,7 +10601,7 @@ LET
 														Td416.3239 
 													LET
 														Td418.3237
-														LDDF light.2607 16
+														LDDF light.2607 8
 														LET
 															n2.3214
 															CALLDIR fneg.2534
@@ -10626,7 +10626,7 @@ LET
 																				ADD sid.3209 2
 																				LET
 																					Td428.3229
-																					LDDF light.2607 8
+																					LDDF light.2607 4
 																					LET
 																						Tu239.3216
 																						CALLCLS add_reflection.3098
@@ -10640,7 +10640,7 @@ LET
 																								ADD sid.3209 3
 																								LET
 																									Td434.3223
-																									LDDF light.2607 16
+																									LDDF light.2607 8
 																									LET
 																										Tu238.3217
 																										CALLCLS add_reflection.3098
@@ -10737,7 +10737,7 @@ LET
 																						FMULD Td394.3193 p.3176
 																						LET
 																							Td397.3191
-																							LDDF light.2607 8
+																							LDDF light.2607 4
 																							LET
 																								Td398.3182
 																								FSUBD Td395.3190 Td397.3191
@@ -10757,7 +10757,7 @@ LET
 																												FMULD Td401.3187 p.3176
 																												LET
 																													Td404.3185
-																													LDDF light.2607 16
+																													LDDF light.2607 8
 																													LET
 																														Td405.3183
 																														FSUBD Td402.3184 Td404.3185

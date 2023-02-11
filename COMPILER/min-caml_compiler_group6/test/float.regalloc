@@ -4,43 +4,43 @@ Args :
 FArgs : %f0 
 Body :
 LET
-	%f2
+	%f1
 	FMULD %f0 %f0
 	LET
-		%f4
-		FMULD %f0 %f2
+		%f2
+		FMULD %f0 %f1
 		LET
-			%f6
-			FMULD %f4 %f2
+			%f3
+			FMULD %f2 %f1
 			LET
-				%f2
-				FMULD %f6 %f2
+				%f1
+				FMULD %f3 %f1
 				LET
-					%f8
+					%f4
 					l.394
 					LET
-						%f4
-						FMULD %f8 %f4
+						%f2
+						FMULD %f4 %f2
 						LET
 							%f0
-							FSUBD %f0 %f4
+							FSUBD %f0 %f2
 							LET
-								%f4
+								%f2
 								l.396
 								LET
-									%f4
-									FMULD %f4 %f6
+									%f2
+									FMULD %f2 %f3
 									LET
 										%f0
-										FADDD %f0 %f4
+										FADDD %f0 %f2
 										LET
-											%f4
+											%f2
 											l.398
 											LET
-												%f2
-												FMULD %f4 %f2
+												%f1
+												FMULD %f2 %f1
 												ANS
-													FSUBD %f0 %f2
+													FSUBD %f0 %f1
 
 Name : cos.170
 Args : 
@@ -51,40 +51,40 @@ LET
 	%f0
 	FMULD %f0 %f0
 	LET
-		%f2
+		%f1
 		FMULD %f0 %f0
 		LET
-			%f4
-			FMULD %f2 %f0
+			%f2
+			FMULD %f1 %f0
 			LET
-				%f6
+				%f3
 				l.400
 				LET
-					%f8
+					%f4
 					l.402
 					LET
 						%f0
-						FMULD %f8 %f0
+						FMULD %f4 %f0
 						LET
 							%f0
-							FSUBD %f6 %f0
+							FSUBD %f3 %f0
 							LET
-								%f6
+								%f3
 								l.404
 								LET
-									%f2
-									FMULD %f6 %f2
+									%f1
+									FMULD %f3 %f1
 									LET
 										%f0
-										FADDD %f0 %f2
+										FADDD %f0 %f1
 										LET
-											%f2
+											%f1
 											l.406
 											LET
-												%f2
-												FMULD %f2 %f4
+												%f1
+												FMULD %f1 %f2
 												ANS
-													FSUBD %f0 %f2
+													FSUBD %f0 %f1
 
 Name : abs_float.176
 Args : 
@@ -391,17 +391,17 @@ LET
 						
 						%f0 
 					LET
-						%f2
+						%f1
 						l.410
 						LET
 							%f0
-							FADDD %f0 %f2
+							FADDD %f0 %f1
 							LET
-								%f2
+								%f1
 								l.412
 								LET
 									%f0
-									FSUBD %f0 %f2
+									FSUBD %f0 %f1
 									LET
 										%x5
 										SET 1000000
@@ -414,11 +414,11 @@ LET
 													%x5 
 													
 												LET
-													%f2
+													%f1
 													RESTORE Td15.216
 													LET
 														%f0
-														FMULD %f2 %f0
+														FMULD %f1 %f0
 														LET
 															%x5
 															CALLDIR int_of_float.180

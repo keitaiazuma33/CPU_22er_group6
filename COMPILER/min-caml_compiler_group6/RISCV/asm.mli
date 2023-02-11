@@ -66,7 +66,8 @@ val reg_cons : Id.t
 val freg_zero : Id.t
 val freg_cons : Id.t
 val is_reg : Id.t -> bool
-val co_freg : Id.t -> Id.t
+val is_xreg : Id.t -> bool
+val is_freg : Id.t -> bool
 
 val fv : t -> Id.t list
 val concat : t -> Id.t * Type.t -> t -> t

@@ -25,7 +25,7 @@ ble_else.35: #pc 52
 	jal	%x1, ack.15  #4 pc 76
 	addi	%x2, %x2, -8  #4 pc 80
 	lw	%x1, 4(%x2) #4 pc 84
-	mv	%x6, %x5  #4 pc 88
+	addi	%x6, %x5, 0  #4 pc 88
 	lw	%x5, 0(%x2)  #4 pc 92
 	j	ack.15  #4 pc 96
 	nop #pc 100

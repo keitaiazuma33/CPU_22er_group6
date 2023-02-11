@@ -28,10 +28,10 @@ be_else.21: #pc 36
 min_caml_start:
 	addi	%x2, %x2, -112
 	addi	%x5, %x0, 10  #0 pc 88
-	mv	%x22, %x3  #3 pc 92
+	addi	%x22, %x3, 0  #3 pc 92
 	addi	%x3, %x3, 8  #3 pc 96
 	addi	%x24, %x0, 0  #3 f.8 pc 100
-	mv	%x6, %x24  #3 pc 104
+	addi	%x6, %x24, 0  #3 pc 104
 	add	%x24, %x0, %x22  #3 pc 108
 	sw	%x6, 0(%x24)  #3 pc 112
 	addi	%x24, %x0, 4  #pc 116

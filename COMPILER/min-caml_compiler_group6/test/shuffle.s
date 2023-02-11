@@ -40,28 +40,28 @@ foo.12:  #pc 0
 	j	min_caml_print_int  #7 pc 144
 	nop #pc 148
 bar.19:  #pc 148
-	mv	%x23, %x11 #pc 152
-	mv	%x11, %x7 #pc 156
-	mv	%x7, %x9 #pc 160
-	mv	%x9, %x10 #pc 164
-	mv	%x10, %x23 #pc 168
-	mv	%x23, %x6 #pc 172
-	mv	%x6, %x5 #pc 176
-	mv	%x5, %x23 #pc 180
-	j	foo.12  #9 pc 184
-	nop #pc 188
+	addi	%x23, %x11, 0  #0 pc 156
+	addi	%x11, %x7, 0  #0 pc 164
+	addi	%x7, %x9, 0  #0 pc 172
+	addi	%x9, %x10, 0  #0 pc 180
+	addi	%x10, %x23, 0  #0 pc 188
+	addi	%x23, %x6, 0  #0 pc 196
+	addi	%x6, %x5, 0  #0 pc 204
+	addi	%x5, %x23, 0  #0 pc 212
+	j	foo.12  #9 pc 216
+	nop #pc 220
 .global	min_caml_start
 min_caml_start:
 	addi	%x2, %x2, -112
-	addi	%x5, %x0, 1  #0 pc 192
-	addi	%x6, %x0, 2  #0 pc 196
-	addi	%x7, %x0, 3  #0 pc 200
-	addi	%x9, %x0, 4  #0 pc 204
-	addi	%x10, %x0, 5  #0 pc 208
-	addi	%x11, %x0, 6  #0 pc 212
-	sw	%x1, 12(%x2)  #10 pc 216
-	addi	%x2, %x2, 16  #10 pc 220
-	jal	%x1, bar.19  #10 pc 224
-	addi	%x2, %x2, -16  #10 pc 228
-	lw	%x1, 12(%x2) #10 pc 232
+	addi	%x5, %x0, 1  #0 pc 224
+	addi	%x6, %x0, 2  #0 pc 228
+	addi	%x7, %x0, 3  #0 pc 232
+	addi	%x9, %x0, 4  #0 pc 236
+	addi	%x10, %x0, 5  #0 pc 240
+	addi	%x11, %x0, 6  #0 pc 244
+	sw	%x1, 12(%x2)  #10 pc 248
+	addi	%x2, %x2, 16  #10 pc 252
+	jal	%x1, bar.19  #10 pc 256
+	addi	%x2, %x2, -16  #10 pc 260
+	lw	%x1, 12(%x2) #10 pc 264
 	addi	%x2, %x2, 112

@@ -49,7 +49,7 @@ g.52:  #pc 0
 	jalr	%x0, %x23, 0  #6 pc 180
 	nop #pc 184
 ble_else.90: #pc 184
-	mv	%x5, %x6  #6 pc 188
+	addi	%x5, %x6, 0  #6 pc 188
 	ret #pc 192
 	nop #pc 196
 h.26:  #pc 196
@@ -82,10 +82,10 @@ h.26:  #pc 196
 	lw	%x15, 0(%x24)  #3 pc 304
 	add	%x24, %x0, %x5  #3 pc 308
 	lw	%x5, 0(%x24)  #3 pc 312
-	mv	%x22, %x3  #4 pc 316
+	addi	%x22, %x3, 0  #4 pc 316
 	addi	%x3, %x3, 48  #4 pc 320
 	addi	%x24, %x0, 0  #4 g.52 pc 324
-	mv	%x16, %x24  #4 pc 328
+	addi	%x16, %x24, 0  #4 pc 328
 	add	%x24, %x0, %x22  #4 pc 332
 	sw	%x16, 0(%x24)  #4 pc 336
 	addi	%x24, %x0, 40  #pc 340
@@ -135,7 +135,7 @@ min_caml_start:
 	addi	%x13, %x0, 8  #0 pc 504
 	addi	%x14, %x0, 9  #0 pc 508
 	addi	%x15, %x0, 10  #0 pc 512
-	mv	%x16, %x3  #8 pc 516
+	addi	%x16, %x3, 0  #8 pc 516
 	addi	%x3, %x3, 40  #8 pc 520
 	addi	%x24, %x0, 36  #pc 524
 	add	%x24, %x24, %x16  #8 pc 528
@@ -166,7 +166,7 @@ min_caml_start:
 	sw	%x6, 0(%x24)  #8 pc 628
 	add	%x24, %x0, %x16  #8 pc 632
 	sw	%x5, 0(%x24)  #8 pc 636
-	mv	%x5, %x16  #8 pc 640
+	addi	%x5, %x16, 0  #8 pc 640
 	sw	%x1, 12(%x2)  #8 pc 644
 	addi	%x2, %x2, 16  #8 pc 648
 	jal	%x1, h.26  #8 pc 652
@@ -177,10 +177,10 @@ min_caml_start:
 	jal	%x1, min_caml_print_int  #8 pc 672
 	addi	%x2, %x2, -16  #8 pc 676
 	lw	%x1, 12(%x2) #8 pc 680
-	mv	%x5, %x0 #pc 684
-	sw	%x1, 12(%x2)  #9 pc 688
-	addi	%x2, %x2, 16  #9 pc 692
-	jal	%x1, min_caml_print_newline  #9 pc 696
-	addi	%x2, %x2, -16  #9 pc 700
-	lw	%x1, 12(%x2) #9 pc 704
+	addi	%x5, %x0, 0  #0 pc 688
+	sw	%x1, 12(%x2)  #9 pc 692
+	addi	%x2, %x2, 16  #9 pc 696
+	jal	%x1, min_caml_print_newline  #9 pc 700
+	addi	%x2, %x2, -16  #9 pc 704
+	lw	%x1, 12(%x2) #9 pc 708
 	addi	%x2, %x2, 112

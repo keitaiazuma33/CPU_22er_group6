@@ -56,6 +56,16 @@ let rec shuffle sw xys =
                                          xys)
   | xys, acyc -> acyc @ shuffle sw xys
 
+let rec print_mv oc x y n =
+  incr_pc ();
+  if is_xreg x then
+    Printf.fprintf oc "\taddi\t%s, %s, %d  #%d pc %d\n" x y 0 n (!pc)
+  else 
+    if (is_freg x) && (is_freg y) then
+      Printf.fprintf oc "\tfadd\t%s, %s, %s  #%d pc %d\n" x y freg_zero n (!pc)
+    else
+      Printf.fprintf oc "\tfmv\t%s, %s  #%d pc %d\n" x y n (!pc)
+
 type dest = Tail | NonTail of Id.t (* �������ɤ�����ɽ���ǡ����� (caml2html: emit_dest) *)
 let rec g oc = function (* ̿����Υ�����֥����� (caml2html: emit_g) *)
   | dest, Ans(exp, n) -> g' oc (dest, exp, n)
@@ -69,11 +79,14 @@ and g' oc = function (* ��̿��Υ�����֥����� (caml2h
   | NonTail(x), SetL(Id.L(y)), n -> if M.mem y (!pc_env) then
                                       (let y_pc = find_pc_env y in
                                       incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, %d  #%d %s pc %d\n" reg_cons reg_zero y_pc n y (!pc);
-                                      incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" x reg_cons n (!pc))
+                                      (*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" x reg_cons n (!pc)*)
+                                      print_mv oc x reg_cons n)
                                     else
-                                      (incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" x y n (!pc))
+                                      ((*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" x y n (!pc)*)
+                                      print_mv oc x y n)
   | NonTail(x), Mov(y), _ when x = y -> ()
-  | NonTail(x), Mov(y), n -> incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" x y n (!pc)
+  | NonTail(x), Mov(y), n -> (*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" x y n (!pc)*)
+                            print_mv oc x y n
   | NonTail(x), Neg(y), n -> incr_pc ();Printf.fprintf oc "\tsub\t%s, %s, %s  #%d pc %d\n" x reg_zero y n (!pc)
   | NonTail(x), Add(y, V z), n -> incr_pc ();Printf.fprintf oc "\tadd\t%s, %s, %s  #%d pc %d\n" x y z n (!pc)
   | NonTail(x), Add(y, C i), n -> incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, %d  #%d pc %d\n" x y i n (!pc)
@@ -101,11 +114,12 @@ and g' oc = function (* ��̿��Υ�����֥����� (caml2h
       incr_pc ();Printf.fprintf oc "\tfsqrt\t%s, %s  #%d pc %d\n" x y n (!pc)
   | NonTail(x), FMovD(y), _ when x = y -> ()
   | NonTail(x), FMovD(y), n ->
-      incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" x y n (!pc);
-      incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" (co_freg x) (co_freg y) n (!pc)
+      (*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" x y n (!pc);*)
+      print_mv oc x y n
+      (*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" (co_freg x) (co_freg y) n (!pc)*)
   | NonTail(x), FNegD(y), n ->
       incr_pc ();Printf.fprintf oc "\tfsub\t%s, %s, %s  #%d pc %d\n" x freg_zero y n (!pc);
-      if x <> y then (incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" (co_freg x) (co_freg y) n (!pc))
+      (*if x <> y then (incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" (co_freg x) (co_freg y) n (!pc))*)
   | NonTail(x), FAddD(y, z), n -> incr_pc ();Printf.fprintf oc "\tfadd\t%s, %s, %s  #%d pc %d\n" x y z n (!pc)
   | NonTail(x), FSubD(y, z), n -> incr_pc ();Printf.fprintf oc "\tfsub\t%s, %s, %s  #%d pc %d\n" x y z n (!pc)
   | NonTail(x), FMulD(y, z), n -> incr_pc ();Printf.fprintf oc "\tfmul\t%s, %s, %s  #%d pc %d\n" x y z n (!pc)
@@ -114,8 +128,10 @@ and g' oc = function (* ��̿��Υ�����֥����� (caml2h
   | NonTail(x), ItoF(y), n -> incr_pc ();Printf.fprintf oc "\titof\t%s, %s  #%d pc %d\n" x y n (!pc)
   | NonTail(_), Out(x), n -> incr_pc ();Printf.fprintf oc "\tout\t%s  #%d pc %d\n" x n (!pc)
   | NonTail(x), In, n -> incr_pc ();Printf.fprintf oc "\tin\t%s  #%d pc %d\n" x n (!pc)
-  | NonTail(_), Sethp(x), n -> incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" reg_hp x n (!pc)
-  | NonTail(x), Gethp, n -> incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" x reg_hp n (!pc)
+  | NonTail(_), Sethp(x), n -> (*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" reg_hp x n (!pc)*)
+                              print_mv oc reg_hp x n
+  | NonTail(x), Gethp, n -> (*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" x reg_hp n (!pc)*)
+                            print_mv oc x reg_hp n
   | NonTail(x), LdDF(y, z', _), n -> let z = pp_id_or_imm' oc z' in
                                     (incr_pc ();Printf.fprintf oc "\tadd\t%s, %s, %s  #%d pc %d\n" reg_cons z y n (!pc);
                                     incr_pc ();Printf.fprintf oc "\tflw\t%s, %d(%s)  #%d pc %d\n" x 0 reg_cons n (!pc))
@@ -218,10 +234,12 @@ and g' oc = function (* ��̿��Υ�����֥����� (caml2h
       incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, %d  #%d pc %d\n" reg_sp reg_sp (-ss) n (!pc);
       incr_pc ();Printf.fprintf oc "\tlw\t%s, %d(%s)  #%d pc %d\n" reg_ra (ss - 4) reg_sp n (!pc);
       if List.mem a allregs && a <> regs.(0) then
-        (incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" a regs.(0) n (!pc))
+        ((*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" a regs.(0) n (!pc)*)
+        print_mv oc a regs.(0) n)
       else if List.mem a allfregs && a <> fregs.(0) then
-        (incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" a fregs.(0) n (!pc);
-         incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" (co_freg a) (co_freg fregs.(0)) n (!pc))
+        ((*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" a fregs.(0) n (!pc);*)
+        print_mv oc a fregs.(0) n
+         (*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" (co_freg a) (co_freg fregs.(0)) n (!pc)*))
   | NonTail(a), CallDir(Id.L(x), ys, zs), n ->
       g'_args oc [] ys zs;
       let ss = stacksize () in
@@ -232,10 +250,12 @@ and g' oc = function (* ��̿��Υ�����֥����� (caml2h
       incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, %d  #%d pc %d\n" reg_sp reg_sp (-ss) n (!pc);
       incr_pc ();Printf.fprintf oc "\tlw\t%s, %d(%s) #%d pc %d\n" reg_ra (ss - 4) reg_sp n (!pc);
       if List.mem a allregs && a <> regs.(0) then
-        (incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" a regs.(0) n (!pc))
+        ((*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" a regs.(0) n (!pc)*)
+        print_mv oc a regs.(0) n)
       else if List.mem a allfregs && a <> fregs.(0) then
-        (incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" a fregs.(0) n (!pc);
-         incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" (co_freg a) (co_freg fregs.(0)) n (!pc))
+        ((*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" a fregs.(0) n (!pc);*)
+        print_mv oc a fregs.(0) n
+         (*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" (co_freg a) (co_freg fregs.(0)) n (!pc)*))
 and g'_tail_if oc e1 e2 b =
   let b_else = Id.genid (b ^ "_else") in
   incr_pc ();Printf.fprintf oc "\tj\t%s #pc %d\n" b_else (!pc);
@@ -270,9 +290,11 @@ and g'_args oc x_reg_cl ys zs =
   List.iter
     (fun (y, r) -> incr_pc ();
                   (if y = "%g0" then 
-                    Printf.fprintf oc "\tmv\t%s, %s #pc %d\n" r reg_zero (!pc)
+                    (*Printf.fprintf oc "\tmv\t%s, %s #pc %d\n" r reg_zero (!pc)*)
+                    print_mv oc r reg_zero 0
                   else  
-                    Printf.fprintf oc "\tmv\t%s, %s #pc %d\n" r y (!pc)))
+                    (*Printf.fprintf oc "\tmv\t%s, %s #pc %d\n" r y (!pc)*)
+                    print_mv oc r y 0))
     (shuffle reg_sw yrs);
   let (d, zfrs) =
     List.fold_left
@@ -281,8 +303,9 @@ and g'_args oc x_reg_cl ys zs =
       zs in
   List.iter
     (fun (z, fr) ->
-      incr_pc ();Printf.fprintf oc "\tmv\t%s, %s #pc %d\n" fr z (!pc);
-      incr_pc ();Printf.fprintf oc "\tmv\t%s, %s #pc %d\n" (co_freg fr) (co_freg z) (!pc))
+      (*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s #pc %d\n" fr z (!pc);*)
+      print_mv oc fr z 0
+      (*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s #pc %d\n" (co_freg fr) (co_freg z) (!pc)*))
     (shuffle reg_fsw zfrs)
 
 let h oc { name = Id.L(x); args = _; fargs = _; body = e; ret = _ } =

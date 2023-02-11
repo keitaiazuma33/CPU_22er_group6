@@ -14,16 +14,16 @@ g.8:  #pc 12
 .global	min_caml_start
 min_caml_start:
 	addi	%x2, %x2, -112
-	mv	%x5, %x3  #3 pc 36
+	addi	%x5, %x3, 0  #3 pc 36
 	addi	%x3, %x3, 8  #3 pc 40
 	addi	%x24, %x0, 0  #3 f.6 pc 44
-	mv	%x6, %x24  #3 pc 48
+	addi	%x6, %x24, 0  #3 pc 48
 	add	%x24, %x0, %x5  #3 pc 52
 	sw	%x6, 0(%x24)  #3 pc 56
-	mv	%x22, %x3  #4 pc 60
+	addi	%x22, %x3, 0  #4 pc 60
 	addi	%x3, %x3, 8  #4 pc 64
 	addi	%x24, %x0, 12  #4 g.8 pc 68
-	mv	%x6, %x24  #4 pc 72
+	addi	%x6, %x24, 0  #4 pc 72
 	add	%x24, %x0, %x22  #4 pc 76
 	sw	%x6, 0(%x24)  #4 pc 80
 	addi	%x24, %x0, 4  #pc 84
@@ -36,7 +36,7 @@ min_caml_start:
 	jalr	%x1, %x23, 0  #5 pc 112
 	addi	%x2, %x2, -16  #5 pc 116
 	lw	%x1, 12(%x2)  #5 pc 120
-	mv	%x22, %x5  #5 pc 124
+	addi	%x22, %x5, 0  #5 pc 124
 	addi	%x5, %x0, 789  #0 pc 128
 	sw	%x1, 12(%x2)  #5 pc 132
 	lw	%x23, 0(%x22)  #5 pc 136

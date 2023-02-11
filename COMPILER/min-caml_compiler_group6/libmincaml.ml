@@ -183,7 +183,7 @@ in
 let rec create_float_array n a =
   let hp = gethp () in
   let hp_array = itofa(hp) in
-  sethp (hp + (n lsl 3));
+  sethp (hp + (n lsl 2));
   assign_farray hp_array a n;
   hp_array
 in

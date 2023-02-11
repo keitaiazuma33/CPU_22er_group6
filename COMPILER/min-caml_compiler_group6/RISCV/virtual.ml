@@ -32,7 +32,7 @@ let expand xts ini addf addi =
     ini
     (fun (offset, acc) x ->
       let offset = align offset in
-      (offset + 8, addf x offset acc))
+      (offset + 4, addf x offset acc))
     (fun (offset, acc) x t ->
       (offset + 4, addi x t offset acc))
 
@@ -144,7 +144,7 @@ let rec g env = function (* ???��?????????????? (caml2html: virtual_g) *)
       (match M.find x env with
       | Type.Array(Type.Unit) -> Ans(Nop, n)
       | Type.Array(Type.Float) ->
-          Let((offset, Type.Int), SLL(y, C(3)), (* y * 2**3 *)
+          Let((offset, Type.Int), SLL(y, C(2)), (* y * 2**3 *)
               Ans(LdDF(x, V(offset), n), n), n)
       | Type.Array(_) ->
           Let((offset, Type.Int), SLL(y, C(2)), (* y * 2**2 *)
@@ -155,7 +155,7 @@ let rec g env = function (* ???��?????????????? (caml2html: virtual_g) *)
       (match M.find x env with
       | Type.Array(Type.Unit) -> Ans(Nop, n)
       | Type.Array(Type.Float) ->
-          Let((offset, Type.Int), SLL(y, C(3)),
+          Let((offset, Type.Int), SLL(y, C(2)),
               Ans(StDF(z, x, V(offset), n), n), n)
       | Type.Array(_) ->
           Let((offset, Type.Int), SLL(y, C(2)),

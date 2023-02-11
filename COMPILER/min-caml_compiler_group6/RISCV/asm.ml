@@ -58,7 +58,7 @@ let regs = (* Array.init 16 (fun i -> Printf.sprintf "%%r%d" i) *)
   [| "%x5"; "%x6"; "%x7"; "%x9";
      "%x10"; "%x11"; "%x12"; "%x13"; "%x14"; "%x15"; "%x16"; "%x17";
      "%x18"; "%x19"; "%x20"; "%x21"; "%x22"; "%x23" |]
-let fregs = Array.init 15 (fun i -> Printf.sprintf "%%f%d" (i * 2)) 
+let fregs = Array.init 30 (fun i -> Printf.sprintf "%%f%d" i) 
 (* let fregs =
   [| "%f1"; "%f2"; "%f3"; "%f4"; "%f5"; "%f6"; "%f7"; "%f8";
      "%f9"; "%f10"; "%f11"; "%f12"; "%f13"; "%f14"; "%f15"; "%f16";
@@ -77,7 +77,9 @@ let reg_cons = "%x24"
 let freg_zero = "%f30"
 let freg_cons = "%f31"
 let is_reg x = (x.[0] = '%')
-let co_freg_table =
+let is_xreg x = (x.[0] = '%' && x.[1] = 'x')
+let is_freg x = (x.[0] = '%' && x.[1] = 'f')
+(*let co_freg_table =
   let ht = Hashtbl.create 16 in
   for i = 0 to 15 do
     Hashtbl.add
@@ -86,7 +88,7 @@ let co_freg_table =
       (Printf.sprintf "%%f%d" (i * 2 + 1))
   done;
   ht
-let co_freg freg = Hashtbl.find co_freg_table freg (* "companion" freg *)
+let co_freg freg = Hashtbl.find co_freg_table freg*) (* "companion" freg *)
 
 (* super-tenuki *)
 let rec remove_and_uniq xs = function

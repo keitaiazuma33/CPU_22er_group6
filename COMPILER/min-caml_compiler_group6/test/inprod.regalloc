@@ -62,11 +62,11 @@ LET
 								%x5 
 								
 							LET
-								%f2
+								%f1
 								RESTORE Td13.52
 								LET
 									%f0
-									FMULD %f2 %f0
+									FMULD %f1 %f0
 									LET
 										%x5
 										RESTORE v1.30
@@ -96,17 +96,17 @@ LET
 																		%x5 
 																		
 																	LET
-																		%f2
+																		%f1
 																		RESTORE Td16.50
 																		LET
 																			%f0
-																			FMULD %f2 %f0
+																			FMULD %f1 %f0
 																			LET
-																				%f2
+																				%f1
 																				RESTORE Td15.48
 																				LET
 																					%f0
-																					FADDD %f2 %f0
+																					FADDD %f1 %f0
 																					LET
 																						%x5
 																						RESTORE v1.30
@@ -130,29 +130,29 @@ LET
 																												%x5 
 																												
 																											LET
-																												%f2
+																												%f1
 																												RESTORE Td20.46
 																												LET
 																													%f0
-																													FMULD %f2 %f0
+																													FMULD %f1 %f0
 																													LET
-																														%f2
+																														%f1
 																														RESTORE Td19.44
 																														ANS
-																															FADDD %f2 %f0
+																															FADDD %f1 %f0
 
 
 LET
 	%f0
 	l.63
 	LET
-		%f2
+		%f1
 		l.65
 		LET
-			%f4
+			%f2
 			l.67
 			LET
-				%f6
+				%f3
 				l.69
 				LET
 					%x5
@@ -162,24 +162,24 @@ LET
 						ADD %x3 24
 						LET
 							%g0
-							STDF %f6 %x5 16
+							STDF %f3 %x5 16
 							LET
 								%g0
-								STDF %f4 %x5 8
+								STDF %f2 %x5 8
 								LET
 									%g0
-									STDF %f2 %x5 0
+									STDF %f1 %x5 0
 									LET
 										%x5
 										MOV %x5
 										LET
-											%f2
+											%f1
 											l.75
 											LET
-												%f4
+												%f2
 												l.77
 												LET
-													%f6
+													%f3
 													l.79
 													LET
 														%x6
@@ -189,13 +189,13 @@ LET
 															ADD %x3 24
 															LET
 																%g0
-																STDF %f6 %x6 16
+																STDF %f3 %x6 16
 																LET
 																	%g0
-																	STDF %f4 %x6 8
+																	STDF %f2 %x6 8
 																	LET
 																		%g0
-																		STDF %f2 %x6 0
+																		STDF %f1 %x6 0
 																		LET
 																			%x6
 																			MOV %x6
@@ -208,11 +208,11 @@ LET
 																						%x5 %x6 
 																						
 																					LET
-																						%f2
+																						%f1
 																						RESTORE Td1.34
 																						LET
 																							%f0
-																							FMULD %f2 %f0
+																							FMULD %f1 %f0
 																							LET
 																								%x5
 																								CALLDIR min_caml_truncate

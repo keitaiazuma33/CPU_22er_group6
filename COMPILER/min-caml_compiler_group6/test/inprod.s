@@ -40,8 +40,8 @@ inprod.29:  #pc 56
 	jal	%x1, getx.23  #5 pc 104
 	addi	%x2, %x2, -24  #5 pc 108
 	lw	%x1, 20(%x2) #5 pc 112
-	flw	%f2, 8(%x2)  #5 pc 116
-	fmul	%f0, %f2, %f0  #5 pc 120
+	flw	%f1, 8(%x2)  #5 pc 116
+	fmul	%f0, %f1, %f0  #5 pc 120
 	lw	%x5, 0(%x2)  #5 pc 124
 	fsw	%f0, 16(%x2)  #5 pc 128
 	sw	%x1, 28(%x2)  #5 pc 132
@@ -56,10 +56,10 @@ inprod.29:  #pc 56
 	jal	%x1, gety.25  #5 pc 168
 	addi	%x2, %x2, -40  #5 pc 172
 	lw	%x1, 36(%x2) #5 pc 176
-	flw	%f2, 24(%x2)  #5 pc 180
-	fmul	%f0, %f2, %f0  #5 pc 184
-	flw	%f2, 16(%x2)  #5 pc 188
-	fadd	%f0, %f2, %f0  #5 pc 192
+	flw	%f1, 24(%x2)  #5 pc 180
+	fmul	%f0, %f1, %f0  #5 pc 184
+	flw	%f1, 16(%x2)  #5 pc 188
+	fadd	%f0, %f1, %f0  #5 pc 192
 	lw	%x5, 0(%x2)  #5 pc 196
 	fsw	%f0, 32(%x2)  #5 pc 200
 	sw	%x1, 44(%x2)  #5 pc 204
@@ -74,50 +74,50 @@ inprod.29:  #pc 56
 	jal	%x1, getz.27  #5 pc 240
 	addi	%x2, %x2, -56  #5 pc 244
 	lw	%x1, 52(%x2) #5 pc 248
-	flw	%f2, 40(%x2)  #5 pc 252
-	fmul	%f0, %f2, %f0  #5 pc 256
-	flw	%f2, 32(%x2)  #5 pc 260
-	fadd	%f0, %f2, %f0  #5 pc 264
+	flw	%f1, 40(%x2)  #5 pc 252
+	fmul	%f0, %f1, %f0  #5 pc 256
+	flw	%f1, 32(%x2)  #5 pc 260
+	fadd	%f0, %f1, %f0  #5 pc 264
 	ret #pc 268
 	nop #pc 272
 .global	min_caml_start
 min_caml_start:
 	addi	%x2, %x2, -112
-	mv	%f0, l.63  #0 pc 276
-	mv	%f2, l.65  #0 pc 280
-	mv	%f4, l.67  #0 pc 284
-	mv	%f6, l.69  #0 pc 288
-	mv	%x5, %x3  #6 pc 292
+	fmv	%f0, l.63  #0 pc 276
+	fmv	%f1, l.65  #0 pc 280
+	fmv	%f2, l.67  #0 pc 284
+	fmv	%f3, l.69  #0 pc 288
+	addi	%x5, %x3, 0  #6 pc 292
 	addi	%x3, %x3, 24  #6 pc 296
 	addi	%x24, %x0, 16  #pc 300
 	add	%x24, %x24, %x5  #6 pc 304
-	fsw	%f6, 0(%x24) #6 pc 308
+	fsw	%f3, 0(%x24) #6 pc 308
 	addi	%x24, %x0, 8  #pc 312
 	add	%x24, %x24, %x5  #6 pc 316
-	fsw	%f4, 0(%x24) #6 pc 320
+	fsw	%f2, 0(%x24) #6 pc 320
 	add	%x24, %x0, %x5  #6 pc 324
-	fsw	%f2, 0(%x24) #6 pc 328
-	mv	%f2, l.75  #0 pc 332
-	mv	%f4, l.77  #0 pc 336
-	mv	%f6, l.79  #0 pc 340
-	mv	%x6, %x3  #6 pc 344
+	fsw	%f1, 0(%x24) #6 pc 328
+	fmv	%f1, l.75  #0 pc 332
+	fmv	%f2, l.77  #0 pc 336
+	fmv	%f3, l.79  #0 pc 340
+	addi	%x6, %x3, 0  #6 pc 344
 	addi	%x3, %x3, 24  #6 pc 348
 	addi	%x24, %x0, 16  #pc 352
 	add	%x24, %x24, %x6  #6 pc 356
-	fsw	%f6, 0(%x24) #6 pc 360
+	fsw	%f3, 0(%x24) #6 pc 360
 	addi	%x24, %x0, 8  #pc 364
 	add	%x24, %x24, %x6  #6 pc 368
-	fsw	%f4, 0(%x24) #6 pc 372
+	fsw	%f2, 0(%x24) #6 pc 372
 	add	%x24, %x0, %x6  #6 pc 376
-	fsw	%f2, 0(%x24) #6 pc 380
+	fsw	%f1, 0(%x24) #6 pc 380
 	fsw	%f0, 8(%x2)  #6 pc 384
 	sw	%x1, 20(%x2)  #6 pc 388
 	addi	%x2, %x2, 24  #6 pc 392
 	jal	%x1, inprod.29  #6 pc 396
 	addi	%x2, %x2, -24  #6 pc 400
 	lw	%x1, 20(%x2) #6 pc 404
-	flw	%f2, 8(%x2)  #6 pc 408
-	fmul	%f0, %f2, %f0  #6 pc 412
+	flw	%f1, 8(%x2)  #6 pc 408
+	fmul	%f0, %f1, %f0  #6 pc 412
 	sw	%x1, 20(%x2)  #6 pc 416
 	addi	%x2, %x2, 24  #6 pc 420
 	jal	%x1, min_caml_truncate  #6 pc 424

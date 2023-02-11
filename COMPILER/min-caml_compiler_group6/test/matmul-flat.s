@@ -19,7 +19,7 @@ mul_abs.324:  #pc 0
 	beq	%x7, %x24, 12  #57 pc 8
 	j	be_else.852 #pc 12
 	nop #pc 16
-	mv	%x5, %x9  #58 pc 20
+	addi	%x5, %x9, 0  #58 pc 20
 	ret #pc 24
 	nop #pc 28
 be_else.852: #pc 28
@@ -36,587 +36,587 @@ be_else.853: #pc 64
 	addi	%x10, %x7, -1  #63 pc 68
 	sll	%x7, %x5, %x7  #63 pc 72
 	add	%x9, %x9, %x7  #63 pc 76
-	mv	%x7, %x10 #pc 80
-	j	mul_abs.324  #63 pc 84
-	nop #pc 88
-mul.329:  #pc 88
-	bge	%x5, %x0, 12  #67 pc 92
-	j	bge_else.854 #pc 96
-	nop #pc 100
-	mv	%x7, %x5  #67 pc 104
-	j	bge_cont.855 #pc 108
-	nop #pc 112
-bge_else.854: #pc 112
-	sub	%x7, %x0, %x5  #67 pc 116
-bge_cont.855: #pc 116
-	bge	%x6, %x0, 12  #68 pc 120
-	j	bge_else.856 #pc 124
-	nop #pc 128
-	mv	%x9, %x6  #68 pc 132
-	j	bge_cont.857 #pc 136
-	nop #pc 140
-bge_else.856: #pc 140
-	sub	%x9, %x0, %x6  #68 pc 144
-bge_cont.857: #pc 144
-	addi	%x10, %x0, 30  #0 pc 148
-	addi	%x11, %x0, 0  #0 pc 152
-	sw	%x6, 0(%x2)  #69 pc 156
-	sw	%x5, 4(%x2)  #69 pc 160
-	mv	%x6, %x9 #pc 164
-	mv	%x5, %x7 #pc 168
-	mv	%x9, %x11 #pc 172
-	mv	%x7, %x10 #pc 176
-	sw	%x1, 12(%x2)  #69 pc 180
-	addi	%x2, %x2, 16  #69 pc 184
-	jal	%x1, mul_abs.324  #69 pc 188
-	addi	%x2, %x2, -16  #69 pc 192
-	lw	%x1, 12(%x2) #69 pc 196
-	lw	%x6, 4(%x2)  #70 pc 200
-	srli	%x6, %x6, 31  #70 pc 204
-	lw	%x7, 0(%x2)  #70 pc 208
-	srli	%x7, %x7, 31  #70 pc 212
-	beq	%x6, %x7, 12  #70 pc 216
-	j	be_else.858 #pc 220
-	nop #pc 224
-	ret #pc 228
-	nop #pc 232
-be_else.858: #pc 232
-	sub	%x5, %x0, %x5  #73 pc 236
-	ret #pc 240
+	addi	%x7, %x10, 0  #0 pc 84
+	j	mul_abs.324  #63 pc 88
+	nop #pc 92
+mul.329:  #pc 92
+	bge	%x5, %x0, 12  #67 pc 96
+	j	bge_else.854 #pc 100
+	nop #pc 104
+	addi	%x7, %x5, 0  #67 pc 108
+	j	bge_cont.855 #pc 112
+	nop #pc 116
+bge_else.854: #pc 116
+	sub	%x7, %x0, %x5  #67 pc 120
+bge_cont.855: #pc 120
+	bge	%x6, %x0, 12  #68 pc 124
+	j	bge_else.856 #pc 128
+	nop #pc 132
+	addi	%x9, %x6, 0  #68 pc 136
+	j	bge_cont.857 #pc 140
+	nop #pc 144
+bge_else.856: #pc 144
+	sub	%x9, %x0, %x6  #68 pc 148
+bge_cont.857: #pc 148
+	addi	%x10, %x0, 30  #0 pc 152
+	addi	%x11, %x0, 0  #0 pc 156
+	sw	%x6, 0(%x2)  #69 pc 160
+	sw	%x5, 4(%x2)  #69 pc 164
+	addi	%x6, %x9, 0  #0 pc 172
+	addi	%x5, %x7, 0  #0 pc 180
+	addi	%x9, %x11, 0  #0 pc 188
+	addi	%x7, %x10, 0  #0 pc 196
+	sw	%x1, 12(%x2)  #69 pc 200
+	addi	%x2, %x2, 16  #69 pc 204
+	jal	%x1, mul_abs.324  #69 pc 208
+	addi	%x2, %x2, -16  #69 pc 212
+	lw	%x1, 12(%x2) #69 pc 216
+	lw	%x6, 4(%x2)  #70 pc 220
+	srli	%x6, %x6, 31  #70 pc 224
+	lw	%x7, 0(%x2)  #70 pc 228
+	srli	%x7, %x7, 31  #70 pc 232
+	beq	%x6, %x7, 12  #70 pc 236
+	j	be_else.858 #pc 240
 	nop #pc 244
-div_abs.332:  #pc 244
-	addi	%x24, %x0, -1  #pc 248
-	beq	%x7, %x24, 12  #77 pc 252
-	j	be_else.859 #pc 256
-	nop #pc 260
-	mv	%x5, %x9  #78 pc 264
-	ret #pc 268
-	nop #pc 272
-be_else.859: #pc 272
-	srl	%x10, %x5, %x7  #80 pc 276
-	bge	%x10, %x6, 12  #80 pc 280
-	j	ble_else.860 #pc 284
-	nop #pc 288
-	sll	%x10, %x6, %x7  #81 pc 292
-	sub	%x5, %x5, %x10  #81 pc 296
-	addi	%x10, %x7, -1  #81 pc 300
-	addi	%x11, %x0, 1  #0 pc 304
-	sll	%x7, %x11, %x7  #81 pc 308
-	add	%x9, %x9, %x7  #81 pc 312
-	mv	%x7, %x10 #pc 316
-	j	div_abs.332  #81 pc 320
-	nop #pc 324
-ble_else.860: #pc 324
-	addi	%x7, %x7, -1  #83 pc 328
-	j	div_abs.332  #83 pc 332
-	nop #pc 336
-div.337:  #pc 336
-	bge	%x5, %x0, 12  #87 pc 340
-	j	bge_else.861 #pc 344
+	ret #pc 248
+	nop #pc 252
+be_else.858: #pc 252
+	sub	%x5, %x0, %x5  #73 pc 256
+	ret #pc 260
+	nop #pc 264
+div_abs.332:  #pc 264
+	addi	%x24, %x0, -1  #pc 268
+	beq	%x7, %x24, 12  #77 pc 272
+	j	be_else.859 #pc 276
+	nop #pc 280
+	addi	%x5, %x9, 0  #78 pc 284
+	ret #pc 288
+	nop #pc 292
+be_else.859: #pc 292
+	srl	%x10, %x5, %x7  #80 pc 296
+	bge	%x10, %x6, 12  #80 pc 300
+	j	ble_else.860 #pc 304
+	nop #pc 308
+	sll	%x10, %x6, %x7  #81 pc 312
+	sub	%x5, %x5, %x10  #81 pc 316
+	addi	%x10, %x7, -1  #81 pc 320
+	addi	%x11, %x0, 1  #0 pc 324
+	sll	%x7, %x11, %x7  #81 pc 328
+	add	%x9, %x9, %x7  #81 pc 332
+	addi	%x7, %x10, 0  #0 pc 340
+	j	div_abs.332  #81 pc 344
 	nop #pc 348
-	mv	%x7, %x5  #87 pc 352
-	j	bge_cont.862 #pc 356
+ble_else.860: #pc 348
+	addi	%x7, %x7, -1  #83 pc 352
+	j	div_abs.332  #83 pc 356
 	nop #pc 360
-bge_else.861: #pc 360
-	sub	%x7, %x0, %x5  #87 pc 364
-bge_cont.862: #pc 364
-	bge	%x6, %x0, 12  #88 pc 368
-	j	bge_else.863 #pc 372
-	nop #pc 376
-	mv	%x9, %x6  #88 pc 380
-	j	bge_cont.864 #pc 384
-	nop #pc 388
-bge_else.863: #pc 388
-	sub	%x9, %x0, %x6  #88 pc 392
-bge_cont.864: #pc 392
-	addi	%x10, %x0, 30  #0 pc 396
-	addi	%x11, %x0, 0  #0 pc 400
-	sw	%x6, 0(%x2)  #89 pc 404
-	sw	%x5, 4(%x2)  #89 pc 408
-	mv	%x6, %x9 #pc 412
-	mv	%x5, %x7 #pc 416
-	mv	%x9, %x11 #pc 420
-	mv	%x7, %x10 #pc 424
-	sw	%x1, 12(%x2)  #89 pc 428
-	addi	%x2, %x2, 16  #89 pc 432
-	jal	%x1, div_abs.332  #89 pc 436
-	addi	%x2, %x2, -16  #89 pc 440
-	lw	%x1, 12(%x2) #89 pc 444
-	lw	%x6, 4(%x2)  #90 pc 448
-	srli	%x6, %x6, 31  #90 pc 452
-	lw	%x7, 0(%x2)  #90 pc 456
-	srli	%x7, %x7, 31  #90 pc 460
-	beq	%x6, %x7, 12  #90 pc 464
-	j	be_else.865 #pc 468
-	nop #pc 472
-	ret #pc 476
-	nop #pc 480
-be_else.865: #pc 480
-	sub	%x5, %x0, %x5  #93 pc 484
-	ret #pc 488
-	nop #pc 492
-print_int.342:  #pc 492
-	bge	%x5, %x0, 12  #100 pc 496
-	j	bge_else.866 #pc 500
-	nop #pc 504
-	addi	%x24, %x0, 10  #pc 508
-	bge	%x5, %x24, 12  #104 pc 512
-	j	bge_else.867 #pc 516
+div.337:  #pc 360
+	bge	%x5, %x0, 12  #87 pc 364
+	j	bge_else.861 #pc 368
+	nop #pc 372
+	addi	%x7, %x5, 0  #87 pc 376
+	j	bge_cont.862 #pc 380
+	nop #pc 384
+bge_else.861: #pc 384
+	sub	%x7, %x0, %x5  #87 pc 388
+bge_cont.862: #pc 388
+	bge	%x6, %x0, 12  #88 pc 392
+	j	bge_else.863 #pc 396
+	nop #pc 400
+	addi	%x9, %x6, 0  #88 pc 404
+	j	bge_cont.864 #pc 408
+	nop #pc 412
+bge_else.863: #pc 412
+	sub	%x9, %x0, %x6  #88 pc 416
+bge_cont.864: #pc 416
+	addi	%x10, %x0, 30  #0 pc 420
+	addi	%x11, %x0, 0  #0 pc 424
+	sw	%x6, 0(%x2)  #89 pc 428
+	sw	%x5, 4(%x2)  #89 pc 432
+	addi	%x6, %x9, 0  #0 pc 440
+	addi	%x5, %x7, 0  #0 pc 448
+	addi	%x9, %x11, 0  #0 pc 456
+	addi	%x7, %x10, 0  #0 pc 464
+	sw	%x1, 12(%x2)  #89 pc 468
+	addi	%x2, %x2, 16  #89 pc 472
+	jal	%x1, div_abs.332  #89 pc 476
+	addi	%x2, %x2, -16  #89 pc 480
+	lw	%x1, 12(%x2) #89 pc 484
+	lw	%x6, 4(%x2)  #90 pc 488
+	srli	%x6, %x6, 31  #90 pc 492
+	lw	%x7, 0(%x2)  #90 pc 496
+	srli	%x7, %x7, 31  #90 pc 500
+	beq	%x6, %x7, 12  #90 pc 504
+	j	be_else.865 #pc 508
+	nop #pc 512
+	ret #pc 516
 	nop #pc 520
-	addi	%x6, %x0, 10  #0 pc 524
-	sw	%x5, 0(%x2)  #107 pc 528
-	sw	%x1, 4(%x2)  #107 pc 532
-	addi	%x2, %x2, 8  #107 pc 536
-	jal	%x1, div.337  #107 pc 540
-	addi	%x2, %x2, -8  #107 pc 544
-	lw	%x1, 4(%x2) #107 pc 548
-	sw	%x5, 4(%x2)  #108 pc 552
-	sw	%x1, 12(%x2)  #108 pc 556
-	addi	%x2, %x2, 16  #108 pc 560
-	jal	%x1, print_int.342  #108 pc 564
-	addi	%x2, %x2, -16  #108 pc 568
-	lw	%x1, 12(%x2) #108 pc 572
-	addi	%x6, %x0, 10  #0 pc 576
-	lw	%x5, 4(%x2)  #109 pc 580
-	sw	%x1, 12(%x2)  #109 pc 584
-	addi	%x2, %x2, 16  #109 pc 588
-	jal	%x1, mul.329  #109 pc 592
-	addi	%x2, %x2, -16  #109 pc 596
-	lw	%x1, 12(%x2) #109 pc 600
-	lw	%x6, 0(%x2)  #109 pc 604
-	sub	%x5, %x6, %x5  #109 pc 608
-	addi	%x5, %x5, 48  #109 pc 612
-	out	%x5  #109 pc 616
-	ret #pc 620
-	nop #pc 624
-bge_else.867: #pc 624
-	addi	%x5, %x5, 48  #105 pc 628
-	out	%x5  #105 pc 632
-	ret #pc 636
-	nop #pc 640
-bge_else.866: #pc 640
-	sub	%x5, %x0, %x5  #102 pc 644
-	j	print_int.342  #102 pc 648
-	nop #pc 652
-assign_array.356:  #pc 652
-	beq	%x7, %x0, 12  #160 pc 656
-	j	be_else.870 #pc 660
+be_else.865: #pc 520
+	sub	%x5, %x0, %x5  #93 pc 524
+	ret #pc 528
+	nop #pc 532
+print_int.342:  #pc 532
+	bge	%x5, %x0, 12  #100 pc 536
+	j	bge_else.866 #pc 540
+	nop #pc 544
+	addi	%x24, %x0, 10  #pc 548
+	bge	%x5, %x24, 12  #104 pc 552
+	j	bge_else.867 #pc 556
+	nop #pc 560
+	addi	%x6, %x0, 10  #0 pc 564
+	sw	%x5, 0(%x2)  #107 pc 568
+	sw	%x1, 4(%x2)  #107 pc 572
+	addi	%x2, %x2, 8  #107 pc 576
+	jal	%x1, div.337  #107 pc 580
+	addi	%x2, %x2, -8  #107 pc 584
+	lw	%x1, 4(%x2) #107 pc 588
+	sw	%x5, 4(%x2)  #108 pc 592
+	sw	%x1, 12(%x2)  #108 pc 596
+	addi	%x2, %x2, 16  #108 pc 600
+	jal	%x1, print_int.342  #108 pc 604
+	addi	%x2, %x2, -16  #108 pc 608
+	lw	%x1, 12(%x2) #108 pc 612
+	addi	%x6, %x0, 10  #0 pc 616
+	lw	%x5, 4(%x2)  #109 pc 620
+	sw	%x1, 12(%x2)  #109 pc 624
+	addi	%x2, %x2, 16  #109 pc 628
+	jal	%x1, mul.329  #109 pc 632
+	addi	%x2, %x2, -16  #109 pc 636
+	lw	%x1, 12(%x2) #109 pc 640
+	lw	%x6, 0(%x2)  #109 pc 644
+	sub	%x5, %x6, %x5  #109 pc 648
+	addi	%x5, %x5, 48  #109 pc 652
+	out	%x5  #109 pc 656
+	ret #pc 660
 	nop #pc 664
-	slli	%x7, %x7, 2  #161 pc 668
-	add	%x24, %x7, %x5  #161 pc 672
-	sw	%x6, 0(%x24)  #161 pc 676
-	ret #pc 680
-	nop #pc 684
-be_else.870: #pc 684
-	slli	%x9, %x7, 2  #163 pc 688
-	add	%x24, %x9, %x5  #163 pc 692
-	sw	%x6, 0(%x24)  #163 pc 696
-	addi	%x7, %x7, -1  #164 pc 700
-	j	assign_array.356  #164 pc 704
-	nop #pc 708
-create_array.360:  #pc 708
-	mv	%x7, %x3  #168 pc 712
-	sw	%x7, 0(%x2)  #171 pc 716
-	mv	%x23, %x7 #pc 720
-	mv	%x7, %x5 #pc 724
-	mv	%x5, %x23 #pc 728
-	sw	%x1, 4(%x2)  #171 pc 732
-	addi	%x2, %x2, 8  #171 pc 736
-	jal	%x1, assign_array.356  #171 pc 740
-	addi	%x2, %x2, -8  #171 pc 744
-	lw	%x1, 4(%x2) #171 pc 748
-	lw	%x5, 0(%x2)  #172 pc 752
-	ret #pc 756
-	nop #pc 760
-assign_farray.363:  #pc 760
-	beq	%x6, %x0, 12  #176 pc 764
-	j	be_else.872 #pc 768
-	nop #pc 772
-	slli	%x6, %x6, 3  #177 pc 776
-	add	%x24, %x6, %x5  #177 pc 780
-	fsw	%f0, 0(%x24) #177 pc 784
-	ret #pc 788
-	nop #pc 792
-be_else.872: #pc 792
-	slli	%x7, %x6, 3  #179 pc 796
-	add	%x24, %x7, %x5  #179 pc 800
-	fsw	%f0, 0(%x24) #179 pc 804
-	addi	%x6, %x6, -1  #180 pc 808
-	j	assign_farray.363  #180 pc 812
-	nop #pc 816
-create_float_array.367:  #pc 816
-	mv	%x6, %x3  #184 pc 820
-	sw	%x6, 0(%x2)  #187 pc 824
-	mv	%x23, %x6 #pc 828
-	mv	%x6, %x5 #pc 832
-	mv	%x5, %x23 #pc 836
-	sw	%x1, 4(%x2)  #187 pc 840
-	addi	%x2, %x2, 8  #187 pc 844
-	jal	%x1, assign_farray.363  #187 pc 848
-	addi	%x2, %x2, -8  #187 pc 852
-	lw	%x1, 4(%x2) #187 pc 856
-	lw	%x5, 0(%x2)  #188 pc 860
-	ret #pc 864
+bge_else.867: #pc 664
+	addi	%x5, %x5, 48  #105 pc 668
+	out	%x5  #105 pc 672
+	ret #pc 676
+	nop #pc 680
+bge_else.866: #pc 680
+	sub	%x5, %x0, %x5  #102 pc 684
+	j	print_int.342  #102 pc 688
+	nop #pc 692
+assign_array.356:  #pc 692
+	beq	%x7, %x0, 12  #160 pc 696
+	j	be_else.870 #pc 700
+	nop #pc 704
+	slli	%x7, %x7, 2  #161 pc 708
+	add	%x24, %x7, %x5  #161 pc 712
+	sw	%x6, 0(%x24)  #161 pc 716
+	ret #pc 720
+	nop #pc 724
+be_else.870: #pc 724
+	slli	%x9, %x7, 2  #163 pc 728
+	add	%x24, %x9, %x5  #163 pc 732
+	sw	%x6, 0(%x24)  #163 pc 736
+	addi	%x7, %x7, -1  #164 pc 740
+	j	assign_array.356  #164 pc 744
+	nop #pc 748
+create_array.360:  #pc 748
+	addi	%x7, %x3, 0  #168 pc 752
+	sw	%x7, 0(%x2)  #171 pc 756
+	addi	%x23, %x7, 0  #0 pc 764
+	addi	%x7, %x5, 0  #0 pc 772
+	addi	%x5, %x23, 0  #0 pc 780
+	sw	%x1, 4(%x2)  #171 pc 784
+	addi	%x2, %x2, 8  #171 pc 788
+	jal	%x1, assign_array.356  #171 pc 792
+	addi	%x2, %x2, -8  #171 pc 796
+	lw	%x1, 4(%x2) #171 pc 800
+	lw	%x5, 0(%x2)  #172 pc 804
+	ret #pc 808
+	nop #pc 812
+assign_farray.363:  #pc 812
+	beq	%x6, %x0, 12  #176 pc 816
+	j	be_else.872 #pc 820
+	nop #pc 824
+	slli	%x6, %x6, 2  #177 pc 828
+	add	%x24, %x6, %x5  #177 pc 832
+	fsw	%f0, 0(%x24) #177 pc 836
+	ret #pc 840
+	nop #pc 844
+be_else.872: #pc 844
+	slli	%x7, %x6, 2  #179 pc 848
+	add	%x24, %x7, %x5  #179 pc 852
+	fsw	%f0, 0(%x24) #179 pc 856
+	addi	%x6, %x6, -1  #180 pc 860
+	j	assign_farray.363  #180 pc 864
 	nop #pc 868
-loop3.370:  #pc 868
-	bge	%x6, %x0, 12  #192 pc 872
-	j	bge_else.874 #pc 876
-	nop #pc 880
-	slli	%x12, %x5, 2  #193 pc 884
-	add	%x24, %x12, %x11  #193 pc 888
-	lw	%x12, 0(%x24)  #193 pc 892
-	slli	%x13, %x5, 2  #193 pc 896
-	add	%x24, %x13, %x11  #193 pc 900
-	lw	%x13, 0(%x24)  #193 pc 904
-	slli	%x14, %x7, 3  #193 pc 908
-	add	%x24, %x14, %x13  #193 pc 912
-	flw	%f0, 0(%x24)  #193 pc 916
-	slli	%x13, %x5, 2  #193 pc 920
-	add	%x24, %x13, %x9  #193 pc 924
-	lw	%x13, 0(%x24)  #193 pc 928
-	slli	%x14, %x6, 3  #193 pc 932
-	add	%x24, %x14, %x13  #193 pc 936
-	flw	%f2, 0(%x24)  #193 pc 940
-	slli	%x13, %x6, 2  #193 pc 944
-	add	%x24, %x13, %x10  #193 pc 948
-	lw	%x13, 0(%x24)  #193 pc 952
-	slli	%x14, %x7, 3  #193 pc 956
-	add	%x24, %x14, %x13  #193 pc 960
-	flw	%f4, 0(%x24)  #193 pc 964
-	fmul	%f2, %f2, %f4  #193 pc 968
-	fadd	%f0, %f0, %f2  #193 pc 972
-	slli	%x13, %x7, 3  #193 pc 976
-	add	%x24, %x13, %x12  #193 pc 980
-	fsw	%f0, 0(%x24) #193 pc 984
-	addi	%x6, %x6, -1  #194 pc 988
-	j	loop3.370  #194 pc 992
-	nop #pc 996
-bge_else.874: #pc 996
-	ret #pc 1000
-	nop #pc 1004
-loop2.377:  #pc 1004
-	bge	%x7, %x0, 12  #196 pc 1008
-	j	bge_else.876 #pc 1012
-	nop #pc 1016
-	addi	%x12, %x6, -1  #197 pc 1020
-	sw	%x11, 0(%x2)  #197 pc 1024
-	sw	%x10, 4(%x2)  #197 pc 1028
-	sw	%x9, 8(%x2)  #197 pc 1032
-	sw	%x6, 12(%x2)  #197 pc 1036
-	sw	%x5, 16(%x2)  #197 pc 1040
-	sw	%x7, 20(%x2)  #197 pc 1044
-	mv	%x6, %x12 #pc 1048
-	sw	%x1, 28(%x2)  #197 pc 1052
-	addi	%x2, %x2, 32  #197 pc 1056
-	jal	%x1, loop3.370  #197 pc 1060
-	addi	%x2, %x2, -32  #197 pc 1064
-	lw	%x1, 28(%x2) #197 pc 1068
-	lw	%x5, 20(%x2)  #198 pc 1072
-	addi	%x7, %x5, -1  #198 pc 1076
-	lw	%x5, 16(%x2)  #198 pc 1080
-	lw	%x6, 12(%x2)  #198 pc 1084
-	lw	%x9, 8(%x2)  #198 pc 1088
-	lw	%x10, 4(%x2)  #198 pc 1092
-	lw	%x11, 0(%x2)  #198 pc 1096
-	j	loop2.377  #198 pc 1100
-	nop #pc 1104
-bge_else.876: #pc 1104
-	ret #pc 1108
-	nop #pc 1112
-loop1.384:  #pc 1112
-	bge	%x5, %x0, 12  #200 pc 1116
-	j	bge_else.878 #pc 1120
-	nop #pc 1124
-	addi	%x12, %x7, -1  #201 pc 1128
-	sw	%x11, 0(%x2)  #201 pc 1132
-	sw	%x10, 4(%x2)  #201 pc 1136
-	sw	%x9, 8(%x2)  #201 pc 1140
-	sw	%x7, 12(%x2)  #201 pc 1144
-	sw	%x6, 16(%x2)  #201 pc 1148
-	sw	%x5, 20(%x2)  #201 pc 1152
-	mv	%x7, %x12 #pc 1156
-	sw	%x1, 28(%x2)  #201 pc 1160
-	addi	%x2, %x2, 32  #201 pc 1164
-	jal	%x1, loop2.377  #201 pc 1168
-	addi	%x2, %x2, -32  #201 pc 1172
-	lw	%x1, 28(%x2) #201 pc 1176
-	lw	%x5, 20(%x2)  #202 pc 1180
-	addi	%x5, %x5, -1  #202 pc 1184
-	lw	%x6, 16(%x2)  #202 pc 1188
-	lw	%x7, 12(%x2)  #202 pc 1192
-	lw	%x9, 8(%x2)  #202 pc 1196
-	lw	%x10, 4(%x2)  #202 pc 1200
-	lw	%x11, 0(%x2)  #202 pc 1204
-	j	loop1.384  #202 pc 1208
-	nop #pc 1212
-bge_else.878: #pc 1212
-	ret #pc 1216
-	nop #pc 1220
-mul.391:  #pc 1220
-	addi	%x5, %x5, -1  #204 pc 1224
-	j	loop1.384  #204 pc 1228
-	nop #pc 1232
-init.399:  #pc 1232
-	bge	%x5, %x0, 12  #207 pc 1236
-	j	bge_else.880 #pc 1240
-	nop #pc 1244
-	mv	%f0, l.749  #0 pc 1248
-	sw	%x6, 0(%x2)  #208 pc 1252
-	sw	%x7, 4(%x2)  #208 pc 1256
-	sw	%x5, 8(%x2)  #208 pc 1260
-	mv	%x5, %x6 #pc 1264
-	sw	%x1, 12(%x2)  #208 pc 1268
-	addi	%x2, %x2, 16  #208 pc 1272
-	jal	%x1, create_float_array.367  #208 pc 1276
-	addi	%x2, %x2, -16  #208 pc 1280
-	lw	%x1, 12(%x2) #208 pc 1284
-	lw	%x6, 8(%x2)  #208 pc 1288
-	slli	%x7, %x6, 2  #208 pc 1292
-	lw	%x9, 4(%x2)  #208 pc 1296
-	add	%x24, %x7, %x9  #208 pc 1300
-	sw	%x5, 0(%x24)  #208 pc 1304
-	addi	%x5, %x6, -1  #209 pc 1308
-	lw	%x6, 0(%x2)  #209 pc 1312
-	mv	%x7, %x9 #pc 1316
-	j	init.399  #209 pc 1320
-	nop #pc 1324
-bge_else.880: #pc 1324
-	ret #pc 1328
-	nop #pc 1332
-make.403:  #pc 1332
-	sw	%x6, 0(%x2)  #211 pc 1336
-	sw	%x5, 4(%x2)  #211 pc 1340
-	mv	%x6, %x7 #pc 1344
-	sw	%x1, 12(%x2)  #211 pc 1348
-	addi	%x2, %x2, 16  #211 pc 1352
-	jal	%x1, create_array.360  #211 pc 1356
-	addi	%x2, %x2, -16  #211 pc 1360
-	lw	%x1, 12(%x2) #211 pc 1364
-	mv	%x7, %x5  #211 pc 1368
-	lw	%x5, 4(%x2)  #212 pc 1372
-	addi	%x5, %x5, -1  #212 pc 1376
-	lw	%x6, 0(%x2)  #212 pc 1380
-	sw	%x7, 8(%x2)  #212 pc 1384
-	sw	%x1, 12(%x2)  #212 pc 1388
-	addi	%x2, %x2, 16  #212 pc 1392
-	jal	%x1, init.399  #212 pc 1396
-	addi	%x2, %x2, -16  #212 pc 1400
-	lw	%x1, 12(%x2) #212 pc 1404
-	lw	%x5, 8(%x2)  #213 pc 1408
-	ret #pc 1412
-	nop #pc 1416
+create_float_array.367:  #pc 868
+	addi	%x6, %x3, 0  #184 pc 872
+	sw	%x6, 0(%x2)  #187 pc 876
+	addi	%x23, %x6, 0  #0 pc 884
+	addi	%x6, %x5, 0  #0 pc 892
+	addi	%x5, %x23, 0  #0 pc 900
+	sw	%x1, 4(%x2)  #187 pc 904
+	addi	%x2, %x2, 8  #187 pc 908
+	jal	%x1, assign_farray.363  #187 pc 912
+	addi	%x2, %x2, -8  #187 pc 916
+	lw	%x1, 4(%x2) #187 pc 920
+	lw	%x5, 0(%x2)  #188 pc 924
+	ret #pc 928
+	nop #pc 932
+loop3.370:  #pc 932
+	bge	%x6, %x0, 12  #192 pc 936
+	j	bge_else.874 #pc 940
+	nop #pc 944
+	slli	%x12, %x5, 2  #193 pc 948
+	add	%x24, %x12, %x11  #193 pc 952
+	lw	%x12, 0(%x24)  #193 pc 956
+	slli	%x13, %x5, 2  #193 pc 960
+	add	%x24, %x13, %x11  #193 pc 964
+	lw	%x13, 0(%x24)  #193 pc 968
+	slli	%x14, %x7, 2  #193 pc 972
+	add	%x24, %x14, %x13  #193 pc 976
+	flw	%f0, 0(%x24)  #193 pc 980
+	slli	%x13, %x5, 2  #193 pc 984
+	add	%x24, %x13, %x9  #193 pc 988
+	lw	%x13, 0(%x24)  #193 pc 992
+	slli	%x14, %x6, 2  #193 pc 996
+	add	%x24, %x14, %x13  #193 pc 1000
+	flw	%f1, 0(%x24)  #193 pc 1004
+	slli	%x13, %x6, 2  #193 pc 1008
+	add	%x24, %x13, %x10  #193 pc 1012
+	lw	%x13, 0(%x24)  #193 pc 1016
+	slli	%x14, %x7, 2  #193 pc 1020
+	add	%x24, %x14, %x13  #193 pc 1024
+	flw	%f2, 0(%x24)  #193 pc 1028
+	fmul	%f1, %f1, %f2  #193 pc 1032
+	fadd	%f0, %f0, %f1  #193 pc 1036
+	slli	%x13, %x7, 2  #193 pc 1040
+	add	%x24, %x13, %x12  #193 pc 1044
+	fsw	%f0, 0(%x24) #193 pc 1048
+	addi	%x6, %x6, -1  #194 pc 1052
+	j	loop3.370  #194 pc 1056
+	nop #pc 1060
+bge_else.874: #pc 1060
+	ret #pc 1064
+	nop #pc 1068
+loop2.377:  #pc 1068
+	bge	%x7, %x0, 12  #196 pc 1072
+	j	bge_else.876 #pc 1076
+	nop #pc 1080
+	addi	%x12, %x6, -1  #197 pc 1084
+	sw	%x11, 0(%x2)  #197 pc 1088
+	sw	%x10, 4(%x2)  #197 pc 1092
+	sw	%x9, 8(%x2)  #197 pc 1096
+	sw	%x6, 12(%x2)  #197 pc 1100
+	sw	%x5, 16(%x2)  #197 pc 1104
+	sw	%x7, 20(%x2)  #197 pc 1108
+	addi	%x6, %x12, 0  #0 pc 1116
+	sw	%x1, 28(%x2)  #197 pc 1120
+	addi	%x2, %x2, 32  #197 pc 1124
+	jal	%x1, loop3.370  #197 pc 1128
+	addi	%x2, %x2, -32  #197 pc 1132
+	lw	%x1, 28(%x2) #197 pc 1136
+	lw	%x5, 20(%x2)  #198 pc 1140
+	addi	%x7, %x5, -1  #198 pc 1144
+	lw	%x5, 16(%x2)  #198 pc 1148
+	lw	%x6, 12(%x2)  #198 pc 1152
+	lw	%x9, 8(%x2)  #198 pc 1156
+	lw	%x10, 4(%x2)  #198 pc 1160
+	lw	%x11, 0(%x2)  #198 pc 1164
+	j	loop2.377  #198 pc 1168
+	nop #pc 1172
+bge_else.876: #pc 1172
+	ret #pc 1176
+	nop #pc 1180
+loop1.384:  #pc 1180
+	bge	%x5, %x0, 12  #200 pc 1184
+	j	bge_else.878 #pc 1188
+	nop #pc 1192
+	addi	%x12, %x7, -1  #201 pc 1196
+	sw	%x11, 0(%x2)  #201 pc 1200
+	sw	%x10, 4(%x2)  #201 pc 1204
+	sw	%x9, 8(%x2)  #201 pc 1208
+	sw	%x7, 12(%x2)  #201 pc 1212
+	sw	%x6, 16(%x2)  #201 pc 1216
+	sw	%x5, 20(%x2)  #201 pc 1220
+	addi	%x7, %x12, 0  #0 pc 1228
+	sw	%x1, 28(%x2)  #201 pc 1232
+	addi	%x2, %x2, 32  #201 pc 1236
+	jal	%x1, loop2.377  #201 pc 1240
+	addi	%x2, %x2, -32  #201 pc 1244
+	lw	%x1, 28(%x2) #201 pc 1248
+	lw	%x5, 20(%x2)  #202 pc 1252
+	addi	%x5, %x5, -1  #202 pc 1256
+	lw	%x6, 16(%x2)  #202 pc 1260
+	lw	%x7, 12(%x2)  #202 pc 1264
+	lw	%x9, 8(%x2)  #202 pc 1268
+	lw	%x10, 4(%x2)  #202 pc 1272
+	lw	%x11, 0(%x2)  #202 pc 1276
+	j	loop1.384  #202 pc 1280
+	nop #pc 1284
+bge_else.878: #pc 1284
+	ret #pc 1288
+	nop #pc 1292
+mul.391:  #pc 1292
+	addi	%x5, %x5, -1  #204 pc 1296
+	j	loop1.384  #204 pc 1300
+	nop #pc 1304
+init.399:  #pc 1304
+	bge	%x5, %x0, 12  #207 pc 1308
+	j	bge_else.880 #pc 1312
+	nop #pc 1316
+	fmv	%f0, l.749  #0 pc 1320
+	sw	%x6, 0(%x2)  #208 pc 1324
+	sw	%x7, 4(%x2)  #208 pc 1328
+	sw	%x5, 8(%x2)  #208 pc 1332
+	addi	%x5, %x6, 0  #0 pc 1340
+	sw	%x1, 12(%x2)  #208 pc 1344
+	addi	%x2, %x2, 16  #208 pc 1348
+	jal	%x1, create_float_array.367  #208 pc 1352
+	addi	%x2, %x2, -16  #208 pc 1356
+	lw	%x1, 12(%x2) #208 pc 1360
+	lw	%x6, 8(%x2)  #208 pc 1364
+	slli	%x7, %x6, 2  #208 pc 1368
+	lw	%x9, 4(%x2)  #208 pc 1372
+	add	%x24, %x7, %x9  #208 pc 1376
+	sw	%x5, 0(%x24)  #208 pc 1380
+	addi	%x5, %x6, -1  #209 pc 1384
+	lw	%x6, 0(%x2)  #209 pc 1388
+	addi	%x7, %x9, 0  #0 pc 1396
+	j	init.399  #209 pc 1400
+	nop #pc 1404
+bge_else.880: #pc 1404
+	ret #pc 1408
+	nop #pc 1412
+make.403:  #pc 1412
+	sw	%x6, 0(%x2)  #211 pc 1416
+	sw	%x5, 4(%x2)  #211 pc 1420
+	addi	%x6, %x7, 0  #0 pc 1428
+	sw	%x1, 12(%x2)  #211 pc 1432
+	addi	%x2, %x2, 16  #211 pc 1436
+	jal	%x1, create_array.360  #211 pc 1440
+	addi	%x2, %x2, -16  #211 pc 1444
+	lw	%x1, 12(%x2) #211 pc 1448
+	addi	%x7, %x5, 0  #211 pc 1452
+	lw	%x5, 4(%x2)  #212 pc 1456
+	addi	%x5, %x5, -1  #212 pc 1460
+	lw	%x6, 0(%x2)  #212 pc 1464
+	sw	%x7, 8(%x2)  #212 pc 1468
+	sw	%x1, 12(%x2)  #212 pc 1472
+	addi	%x2, %x2, 16  #212 pc 1476
+	jal	%x1, init.399  #212 pc 1480
+	addi	%x2, %x2, -16  #212 pc 1484
+	lw	%x1, 12(%x2) #212 pc 1488
+	lw	%x5, 8(%x2)  #213 pc 1492
+	ret #pc 1496
+	nop #pc 1500
 .global	min_caml_start
 min_caml_start:
 	addi	%x2, %x2, -112
-	addi	%x5, %x0, 0  #0 pc 1420
-	mv	%f0, l.749  #0 pc 1424
-	sw	%x1, 12(%x2)  #205 pc 1428
-	addi	%x2, %x2, 16  #205 pc 1432
-	jal	%x1, create_float_array.367  #205 pc 1436
-	addi	%x2, %x2, -16  #205 pc 1440
-	lw	%x1, 12(%x2) #205 pc 1444
-	mv	%x7, %x5  #205 pc 1448
-	addi	%x5, %x0, 2  #0 pc 1452
-	addi	%x6, %x0, 3  #0 pc 1456
-	sw	%x7, 8(%x2)  #214 pc 1460
-	sw	%x1, 12(%x2)  #214 pc 1464
-	addi	%x2, %x2, 16  #214 pc 1468
-	jal	%x1, make.403  #214 pc 1472
-	addi	%x2, %x2, -16  #214 pc 1476
-	lw	%x1, 12(%x2) #214 pc 1480
-	addi	%x6, %x0, 3  #0 pc 1484
-	addi	%x7, %x0, 2  #0 pc 1488
-	lw	%x9, 8(%x2)  #215 pc 1492
-	sw	%x5, 12(%x2)  #215 pc 1496
-	mv	%x5, %x6 #pc 1500
-	mv	%x6, %x7 #pc 1504
-	mv	%x7, %x9 #pc 1508
-	sw	%x1, 20(%x2)  #215 pc 1512
-	addi	%x2, %x2, 24  #215 pc 1516
-	jal	%x1, make.403  #215 pc 1520
-	addi	%x2, %x2, -24  #215 pc 1524
-	lw	%x1, 20(%x2) #215 pc 1528
-	addi	%x6, %x0, 2  #0 pc 1532
-	lw	%x7, 8(%x2)  #216 pc 1536
-	sw	%x5, 16(%x2)  #216 pc 1540
-	mv	%x5, %x6 #pc 1544
-	sw	%x1, 20(%x2)  #216 pc 1548
-	addi	%x2, %x2, 24  #216 pc 1552
-	jal	%x1, make.403  #216 pc 1556
-	addi	%x2, %x2, -24  #216 pc 1560
-	lw	%x1, 20(%x2) #216 pc 1564
-	mv	%x11, %x5  #216 pc 1568
-	lw	%x9, 12(%x2)  #217 pc 1572
-	add	%x24, %x0, %x9  #217 pc 1576
-	lw	%x5, 0(%x24)  #217 pc 1580
-	mv	%f0, l.754  #0 pc 1584
-	add	%x24, %x0, %x5  #217 pc 1588
-	fsw	%f0, 0(%x24) #217 pc 1592
-	add	%x24, %x0, %x9  #217 pc 1596
-	lw	%x5, 0(%x24)  #217 pc 1600
-	mv	%f0, l.758  #0 pc 1604
-	addi	%x24, %x0, 8  #pc 1608
-	add	%x24, %x24, %x5  #217 pc 1612
-	fsw	%f0, 0(%x24) #217 pc 1616
-	add	%x24, %x0, %x9  #217 pc 1620
-	lw	%x5, 0(%x24)  #217 pc 1624
-	mv	%f0, l.762  #0 pc 1628
-	addi	%x24, %x0, 16  #pc 1632
-	add	%x24, %x24, %x5  #217 pc 1636
-	fsw	%f0, 0(%x24) #217 pc 1640
-	addi	%x24, %x0, 4  #pc 1644
-	add	%x24, %x24, %x9  #218 pc 1648
-	lw	%x5, 0(%x24)  #218 pc 1652
-	mv	%f0, l.766  #0 pc 1656
-	add	%x24, %x0, %x5  #218 pc 1660
-	fsw	%f0, 0(%x24) #218 pc 1664
-	addi	%x24, %x0, 4  #pc 1668
-	add	%x24, %x24, %x9  #218 pc 1672
-	lw	%x5, 0(%x24)  #218 pc 1676
-	mv	%f0, l.770  #0 pc 1680
-	addi	%x24, %x0, 8  #pc 1684
-	add	%x24, %x24, %x5  #218 pc 1688
-	fsw	%f0, 0(%x24) #218 pc 1692
-	addi	%x24, %x0, 4  #pc 1696
-	add	%x24, %x24, %x9  #218 pc 1700
-	lw	%x5, 0(%x24)  #218 pc 1704
-	mv	%f0, l.774  #0 pc 1708
-	addi	%x24, %x0, 16  #pc 1712
-	add	%x24, %x24, %x5  #218 pc 1716
-	fsw	%f0, 0(%x24) #218 pc 1720
-	lw	%x10, 16(%x2)  #219 pc 1724
-	add	%x24, %x0, %x10  #219 pc 1728
-	lw	%x5, 0(%x24)  #219 pc 1732
-	mv	%f0, l.778  #0 pc 1736
-	add	%x24, %x0, %x5  #219 pc 1740
-	fsw	%f0, 0(%x24) #219 pc 1744
-	add	%x24, %x0, %x10  #219 pc 1748
-	lw	%x5, 0(%x24)  #219 pc 1752
-	mv	%f0, l.782  #0 pc 1756
-	addi	%x24, %x0, 8  #pc 1760
-	add	%x24, %x24, %x5  #219 pc 1764
-	fsw	%f0, 0(%x24) #219 pc 1768
-	addi	%x24, %x0, 4  #pc 1772
-	add	%x24, %x24, %x10  #220 pc 1776
-	lw	%x5, 0(%x24)  #220 pc 1780
-	mv	%f0, l.786  #0 pc 1784
-	add	%x24, %x0, %x5  #220 pc 1788
-	fsw	%f0, 0(%x24) #220 pc 1792
+	addi	%x5, %x0, 0  #0 pc 1504
+	fmv	%f0, l.749  #0 pc 1508
+	sw	%x1, 12(%x2)  #205 pc 1512
+	addi	%x2, %x2, 16  #205 pc 1516
+	jal	%x1, create_float_array.367  #205 pc 1520
+	addi	%x2, %x2, -16  #205 pc 1524
+	lw	%x1, 12(%x2) #205 pc 1528
+	addi	%x7, %x5, 0  #205 pc 1532
+	addi	%x5, %x0, 2  #0 pc 1536
+	addi	%x6, %x0, 3  #0 pc 1540
+	sw	%x7, 8(%x2)  #214 pc 1544
+	sw	%x1, 12(%x2)  #214 pc 1548
+	addi	%x2, %x2, 16  #214 pc 1552
+	jal	%x1, make.403  #214 pc 1556
+	addi	%x2, %x2, -16  #214 pc 1560
+	lw	%x1, 12(%x2) #214 pc 1564
+	addi	%x6, %x0, 3  #0 pc 1568
+	addi	%x7, %x0, 2  #0 pc 1572
+	lw	%x9, 8(%x2)  #215 pc 1576
+	sw	%x5, 12(%x2)  #215 pc 1580
+	addi	%x5, %x6, 0  #0 pc 1588
+	addi	%x6, %x7, 0  #0 pc 1596
+	addi	%x7, %x9, 0  #0 pc 1604
+	sw	%x1, 20(%x2)  #215 pc 1608
+	addi	%x2, %x2, 24  #215 pc 1612
+	jal	%x1, make.403  #215 pc 1616
+	addi	%x2, %x2, -24  #215 pc 1620
+	lw	%x1, 20(%x2) #215 pc 1624
+	addi	%x6, %x0, 2  #0 pc 1628
+	lw	%x7, 8(%x2)  #216 pc 1632
+	sw	%x5, 16(%x2)  #216 pc 1636
+	addi	%x5, %x6, 0  #0 pc 1644
+	sw	%x1, 20(%x2)  #216 pc 1648
+	addi	%x2, %x2, 24  #216 pc 1652
+	jal	%x1, make.403  #216 pc 1656
+	addi	%x2, %x2, -24  #216 pc 1660
+	lw	%x1, 20(%x2) #216 pc 1664
+	addi	%x11, %x5, 0  #216 pc 1668
+	lw	%x9, 12(%x2)  #217 pc 1672
+	add	%x24, %x0, %x9  #217 pc 1676
+	lw	%x5, 0(%x24)  #217 pc 1680
+	fmv	%f0, l.754  #0 pc 1684
+	add	%x24, %x0, %x5  #217 pc 1688
+	fsw	%f0, 0(%x24) #217 pc 1692
+	add	%x24, %x0, %x9  #217 pc 1696
+	lw	%x5, 0(%x24)  #217 pc 1700
+	fmv	%f0, l.758  #0 pc 1704
+	addi	%x24, %x0, 4  #pc 1708
+	add	%x24, %x24, %x5  #217 pc 1712
+	fsw	%f0, 0(%x24) #217 pc 1716
+	add	%x24, %x0, %x9  #217 pc 1720
+	lw	%x5, 0(%x24)  #217 pc 1724
+	fmv	%f0, l.762  #0 pc 1728
+	addi	%x24, %x0, 8  #pc 1732
+	add	%x24, %x24, %x5  #217 pc 1736
+	fsw	%f0, 0(%x24) #217 pc 1740
+	addi	%x24, %x0, 4  #pc 1744
+	add	%x24, %x24, %x9  #218 pc 1748
+	lw	%x5, 0(%x24)  #218 pc 1752
+	fmv	%f0, l.766  #0 pc 1756
+	add	%x24, %x0, %x5  #218 pc 1760
+	fsw	%f0, 0(%x24) #218 pc 1764
+	addi	%x24, %x0, 4  #pc 1768
+	add	%x24, %x24, %x9  #218 pc 1772
+	lw	%x5, 0(%x24)  #218 pc 1776
+	fmv	%f0, l.770  #0 pc 1780
+	addi	%x24, %x0, 4  #pc 1784
+	add	%x24, %x24, %x5  #218 pc 1788
+	fsw	%f0, 0(%x24) #218 pc 1792
 	addi	%x24, %x0, 4  #pc 1796
-	add	%x24, %x24, %x10  #220 pc 1800
-	lw	%x5, 0(%x24)  #220 pc 1804
-	mv	%f0, l.790  #0 pc 1808
+	add	%x24, %x24, %x9  #218 pc 1800
+	lw	%x5, 0(%x24)  #218 pc 1804
+	fmv	%f0, l.774  #0 pc 1808
 	addi	%x24, %x0, 8  #pc 1812
-	add	%x24, %x24, %x5  #220 pc 1816
-	fsw	%f0, 0(%x24) #220 pc 1820
-	addi	%x24, %x0, 8  #pc 1824
-	add	%x24, %x24, %x10  #221 pc 1828
-	lw	%x5, 0(%x24)  #221 pc 1832
-	mv	%f0, l.794  #0 pc 1836
-	add	%x24, %x0, %x5  #221 pc 1840
-	fsw	%f0, 0(%x24) #221 pc 1844
-	addi	%x24, %x0, 8  #pc 1848
-	add	%x24, %x24, %x10  #221 pc 1852
-	lw	%x5, 0(%x24)  #221 pc 1856
-	mv	%f0, l.798  #0 pc 1860
-	addi	%x24, %x0, 8  #pc 1864
-	add	%x24, %x24, %x5  #221 pc 1868
-	fsw	%f0, 0(%x24) #221 pc 1872
-	addi	%x5, %x0, 2  #0 pc 1876
-	addi	%x6, %x0, 3  #0 pc 1880
-	sw	%x11, 20(%x2)  #222 pc 1884
-	mv	%x7, %x5 #pc 1888
-	sw	%x1, 28(%x2)  #222 pc 1892
-	addi	%x2, %x2, 32  #222 pc 1896
-	jal	%x1, mul.391  #222 pc 1900
-	addi	%x2, %x2, -32  #222 pc 1904
-	lw	%x1, 28(%x2) #222 pc 1908
-	lw	%x5, 20(%x2)  #223 pc 1912
-	add	%x24, %x0, %x5  #223 pc 1916
-	lw	%x6, 0(%x24)  #223 pc 1920
-	add	%x24, %x0, %x6  #223 pc 1924
-	flw	%f0, 0(%x24)  #223 pc 1928
-	sw	%x1, 28(%x2)  #223 pc 1932
-	addi	%x2, %x2, 32  #223 pc 1936
-	jal	%x1, min_caml_truncate  #223 pc 1940
-	addi	%x2, %x2, -32  #223 pc 1944
-	lw	%x1, 28(%x2) #223 pc 1948
-	sw	%x1, 28(%x2)  #223 pc 1952
-	addi	%x2, %x2, 32  #223 pc 1956
-	jal	%x1, print_int.342  #223 pc 1960
-	addi	%x2, %x2, -32  #223 pc 1964
-	lw	%x1, 28(%x2) #223 pc 1968
-	mv	%x5, %x0 #pc 1972
-	sw	%x1, 28(%x2)  #224 pc 1976
-	addi	%x2, %x2, 32  #224 pc 1980
-	jal	%x1, min_caml_print_newline  #224 pc 1984
-	addi	%x2, %x2, -32  #224 pc 1988
-	lw	%x1, 28(%x2) #224 pc 1992
-	lw	%x5, 20(%x2)  #225 pc 1996
-	add	%x24, %x0, %x5  #225 pc 2000
-	lw	%x6, 0(%x24)  #225 pc 2004
-	addi	%x24, %x0, 8  #pc 2008
-	add	%x24, %x24, %x6  #225 pc 2012
-	flw	%f0, 0(%x24)  #225 pc 2016
-	sw	%x1, 28(%x2)  #225 pc 2020
-	addi	%x2, %x2, 32  #225 pc 2024
-	jal	%x1, min_caml_truncate  #225 pc 2028
-	addi	%x2, %x2, -32  #225 pc 2032
-	lw	%x1, 28(%x2) #225 pc 2036
-	sw	%x1, 28(%x2)  #225 pc 2040
-	addi	%x2, %x2, 32  #225 pc 2044
-	jal	%x1, print_int.342  #225 pc 2048
-	addi	%x2, %x2, -32  #225 pc 2052
-	lw	%x1, 28(%x2) #225 pc 2056
-	mv	%x5, %x0 #pc 2060
-	sw	%x1, 28(%x2)  #226 pc 2064
-	addi	%x2, %x2, 32  #226 pc 2068
-	jal	%x1, min_caml_print_newline  #226 pc 2072
-	addi	%x2, %x2, -32  #226 pc 2076
-	lw	%x1, 28(%x2) #226 pc 2080
-	lw	%x5, 20(%x2)  #227 pc 2084
-	addi	%x24, %x0, 4  #pc 2088
-	add	%x24, %x24, %x5  #227 pc 2092
-	lw	%x6, 0(%x24)  #227 pc 2096
-	add	%x24, %x0, %x6  #227 pc 2100
-	flw	%f0, 0(%x24)  #227 pc 2104
-	sw	%x1, 28(%x2)  #227 pc 2108
-	addi	%x2, %x2, 32  #227 pc 2112
-	jal	%x1, min_caml_truncate  #227 pc 2116
-	addi	%x2, %x2, -32  #227 pc 2120
-	lw	%x1, 28(%x2) #227 pc 2124
-	sw	%x1, 28(%x2)  #227 pc 2128
-	addi	%x2, %x2, 32  #227 pc 2132
-	jal	%x1, print_int.342  #227 pc 2136
-	addi	%x2, %x2, -32  #227 pc 2140
-	lw	%x1, 28(%x2) #227 pc 2144
-	mv	%x5, %x0 #pc 2148
-	sw	%x1, 28(%x2)  #228 pc 2152
-	addi	%x2, %x2, 32  #228 pc 2156
-	jal	%x1, min_caml_print_newline  #228 pc 2160
-	addi	%x2, %x2, -32  #228 pc 2164
-	lw	%x1, 28(%x2) #228 pc 2168
-	lw	%x5, 20(%x2)  #229 pc 2172
-	addi	%x24, %x0, 4  #pc 2176
-	add	%x24, %x24, %x5  #229 pc 2180
-	lw	%x5, 0(%x24)  #229 pc 2184
-	addi	%x24, %x0, 8  #pc 2188
-	add	%x24, %x24, %x5  #229 pc 2192
-	flw	%f0, 0(%x24)  #229 pc 2196
-	sw	%x1, 28(%x2)  #229 pc 2200
-	addi	%x2, %x2, 32  #229 pc 2204
-	jal	%x1, min_caml_truncate  #229 pc 2208
-	addi	%x2, %x2, -32  #229 pc 2212
-	lw	%x1, 28(%x2) #229 pc 2216
-	sw	%x1, 28(%x2)  #229 pc 2220
-	addi	%x2, %x2, 32  #229 pc 2224
-	jal	%x1, print_int.342  #229 pc 2228
-	addi	%x2, %x2, -32  #229 pc 2232
-	lw	%x1, 28(%x2) #229 pc 2236
-	mv	%x5, %x0 #pc 2240
-	sw	%x1, 28(%x2)  #230 pc 2244
-	addi	%x2, %x2, 32  #230 pc 2248
-	jal	%x1, min_caml_print_newline  #230 pc 2252
-	addi	%x2, %x2, -32  #230 pc 2256
-	lw	%x1, 28(%x2) #230 pc 2260
+	add	%x24, %x24, %x5  #218 pc 1816
+	fsw	%f0, 0(%x24) #218 pc 1820
+	lw	%x10, 16(%x2)  #219 pc 1824
+	add	%x24, %x0, %x10  #219 pc 1828
+	lw	%x5, 0(%x24)  #219 pc 1832
+	fmv	%f0, l.778  #0 pc 1836
+	add	%x24, %x0, %x5  #219 pc 1840
+	fsw	%f0, 0(%x24) #219 pc 1844
+	add	%x24, %x0, %x10  #219 pc 1848
+	lw	%x5, 0(%x24)  #219 pc 1852
+	fmv	%f0, l.782  #0 pc 1856
+	addi	%x24, %x0, 4  #pc 1860
+	add	%x24, %x24, %x5  #219 pc 1864
+	fsw	%f0, 0(%x24) #219 pc 1868
+	addi	%x24, %x0, 4  #pc 1872
+	add	%x24, %x24, %x10  #220 pc 1876
+	lw	%x5, 0(%x24)  #220 pc 1880
+	fmv	%f0, l.786  #0 pc 1884
+	add	%x24, %x0, %x5  #220 pc 1888
+	fsw	%f0, 0(%x24) #220 pc 1892
+	addi	%x24, %x0, 4  #pc 1896
+	add	%x24, %x24, %x10  #220 pc 1900
+	lw	%x5, 0(%x24)  #220 pc 1904
+	fmv	%f0, l.790  #0 pc 1908
+	addi	%x24, %x0, 4  #pc 1912
+	add	%x24, %x24, %x5  #220 pc 1916
+	fsw	%f0, 0(%x24) #220 pc 1920
+	addi	%x24, %x0, 8  #pc 1924
+	add	%x24, %x24, %x10  #221 pc 1928
+	lw	%x5, 0(%x24)  #221 pc 1932
+	fmv	%f0, l.794  #0 pc 1936
+	add	%x24, %x0, %x5  #221 pc 1940
+	fsw	%f0, 0(%x24) #221 pc 1944
+	addi	%x24, %x0, 8  #pc 1948
+	add	%x24, %x24, %x10  #221 pc 1952
+	lw	%x5, 0(%x24)  #221 pc 1956
+	fmv	%f0, l.798  #0 pc 1960
+	addi	%x24, %x0, 4  #pc 1964
+	add	%x24, %x24, %x5  #221 pc 1968
+	fsw	%f0, 0(%x24) #221 pc 1972
+	addi	%x5, %x0, 2  #0 pc 1976
+	addi	%x6, %x0, 3  #0 pc 1980
+	sw	%x11, 20(%x2)  #222 pc 1984
+	addi	%x7, %x5, 0  #0 pc 1992
+	sw	%x1, 28(%x2)  #222 pc 1996
+	addi	%x2, %x2, 32  #222 pc 2000
+	jal	%x1, mul.391  #222 pc 2004
+	addi	%x2, %x2, -32  #222 pc 2008
+	lw	%x1, 28(%x2) #222 pc 2012
+	lw	%x5, 20(%x2)  #223 pc 2016
+	add	%x24, %x0, %x5  #223 pc 2020
+	lw	%x6, 0(%x24)  #223 pc 2024
+	add	%x24, %x0, %x6  #223 pc 2028
+	flw	%f0, 0(%x24)  #223 pc 2032
+	sw	%x1, 28(%x2)  #223 pc 2036
+	addi	%x2, %x2, 32  #223 pc 2040
+	jal	%x1, min_caml_truncate  #223 pc 2044
+	addi	%x2, %x2, -32  #223 pc 2048
+	lw	%x1, 28(%x2) #223 pc 2052
+	sw	%x1, 28(%x2)  #223 pc 2056
+	addi	%x2, %x2, 32  #223 pc 2060
+	jal	%x1, print_int.342  #223 pc 2064
+	addi	%x2, %x2, -32  #223 pc 2068
+	lw	%x1, 28(%x2) #223 pc 2072
+	addi	%x5, %x0, 0  #0 pc 2080
+	sw	%x1, 28(%x2)  #224 pc 2084
+	addi	%x2, %x2, 32  #224 pc 2088
+	jal	%x1, min_caml_print_newline  #224 pc 2092
+	addi	%x2, %x2, -32  #224 pc 2096
+	lw	%x1, 28(%x2) #224 pc 2100
+	lw	%x5, 20(%x2)  #225 pc 2104
+	add	%x24, %x0, %x5  #225 pc 2108
+	lw	%x6, 0(%x24)  #225 pc 2112
+	addi	%x24, %x0, 4  #pc 2116
+	add	%x24, %x24, %x6  #225 pc 2120
+	flw	%f0, 0(%x24)  #225 pc 2124
+	sw	%x1, 28(%x2)  #225 pc 2128
+	addi	%x2, %x2, 32  #225 pc 2132
+	jal	%x1, min_caml_truncate  #225 pc 2136
+	addi	%x2, %x2, -32  #225 pc 2140
+	lw	%x1, 28(%x2) #225 pc 2144
+	sw	%x1, 28(%x2)  #225 pc 2148
+	addi	%x2, %x2, 32  #225 pc 2152
+	jal	%x1, print_int.342  #225 pc 2156
+	addi	%x2, %x2, -32  #225 pc 2160
+	lw	%x1, 28(%x2) #225 pc 2164
+	addi	%x5, %x0, 0  #0 pc 2172
+	sw	%x1, 28(%x2)  #226 pc 2176
+	addi	%x2, %x2, 32  #226 pc 2180
+	jal	%x1, min_caml_print_newline  #226 pc 2184
+	addi	%x2, %x2, -32  #226 pc 2188
+	lw	%x1, 28(%x2) #226 pc 2192
+	lw	%x5, 20(%x2)  #227 pc 2196
+	addi	%x24, %x0, 4  #pc 2200
+	add	%x24, %x24, %x5  #227 pc 2204
+	lw	%x6, 0(%x24)  #227 pc 2208
+	add	%x24, %x0, %x6  #227 pc 2212
+	flw	%f0, 0(%x24)  #227 pc 2216
+	sw	%x1, 28(%x2)  #227 pc 2220
+	addi	%x2, %x2, 32  #227 pc 2224
+	jal	%x1, min_caml_truncate  #227 pc 2228
+	addi	%x2, %x2, -32  #227 pc 2232
+	lw	%x1, 28(%x2) #227 pc 2236
+	sw	%x1, 28(%x2)  #227 pc 2240
+	addi	%x2, %x2, 32  #227 pc 2244
+	jal	%x1, print_int.342  #227 pc 2248
+	addi	%x2, %x2, -32  #227 pc 2252
+	lw	%x1, 28(%x2) #227 pc 2256
+	addi	%x5, %x0, 0  #0 pc 2264
+	sw	%x1, 28(%x2)  #228 pc 2268
+	addi	%x2, %x2, 32  #228 pc 2272
+	jal	%x1, min_caml_print_newline  #228 pc 2276
+	addi	%x2, %x2, -32  #228 pc 2280
+	lw	%x1, 28(%x2) #228 pc 2284
+	lw	%x5, 20(%x2)  #229 pc 2288
+	addi	%x24, %x0, 4  #pc 2292
+	add	%x24, %x24, %x5  #229 pc 2296
+	lw	%x5, 0(%x24)  #229 pc 2300
+	addi	%x24, %x0, 4  #pc 2304
+	add	%x24, %x24, %x5  #229 pc 2308
+	flw	%f0, 0(%x24)  #229 pc 2312
+	sw	%x1, 28(%x2)  #229 pc 2316
+	addi	%x2, %x2, 32  #229 pc 2320
+	jal	%x1, min_caml_truncate  #229 pc 2324
+	addi	%x2, %x2, -32  #229 pc 2328
+	lw	%x1, 28(%x2) #229 pc 2332
+	sw	%x1, 28(%x2)  #229 pc 2336
+	addi	%x2, %x2, 32  #229 pc 2340
+	jal	%x1, print_int.342  #229 pc 2344
+	addi	%x2, %x2, -32  #229 pc 2348
+	lw	%x1, 28(%x2) #229 pc 2352
+	addi	%x5, %x0, 0  #0 pc 2360
+	sw	%x1, 28(%x2)  #230 pc 2364
+	addi	%x2, %x2, 32  #230 pc 2368
+	jal	%x1, min_caml_print_newline  #230 pc 2372
+	addi	%x2, %x2, -32  #230 pc 2376
+	lw	%x1, 28(%x2) #230 pc 2380
 	addi	%x2, %x2, 112
