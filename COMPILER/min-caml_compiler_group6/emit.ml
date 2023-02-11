@@ -262,7 +262,7 @@ and g'_tail_if oc e1 e2 b =
   incr_pc ();Printf.fprintf oc "\tnop #pc %d\n" (!pc);
   let stackset_back = !stackset in
   g oc (Tail, e1);
-  Printf.fprintf oc "%s: #pc %d\n" b_else (!pc);
+  Printf.fprintf oc "%s: #pc %d\n" b_else ((!pc)+4);
   stackset := stackset_back;
   g oc (Tail, e2)
 and g'_non_tail_if oc dest e1 e2 b =
@@ -275,10 +275,10 @@ and g'_non_tail_if oc dest e1 e2 b =
   let stackset1 = !stackset in
   incr_pc ();Printf.fprintf oc "\tj\t%s #pc %d\n" b_cont (!pc);
   incr_pc ();Printf.fprintf oc "\tnop #pc %d\n" (!pc);
-  Printf.fprintf oc "%s: #pc %d\n" b_else (!pc);
+  Printf.fprintf oc "%s: #pc %d\n" b_else ((!pc)+4);
   stackset := stackset_back;
   g oc (dest, e2);
-  Printf.fprintf oc "%s: #pc %d\n" b_cont (!pc);
+  Printf.fprintf oc "%s: #pc %d\n" b_cont ((!pc)+4);
   let stackset2 = !stackset in
   stackset := S.inter stackset1 stackset2
 and g'_args oc x_reg_cl ys zs =

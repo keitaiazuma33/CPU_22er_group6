@@ -43,10 +43,10 @@ min_caml_start:
 	addi	%x5, %x5, 1  #7 pc 132
 	j	be_cont.36 #pc 136
 	nop #pc 140
-be_else.35: #pc 140
+be_else.35: #pc 144
 	lw	%x5, 12(%x2)  #7 pc 144
 	addi	%x5, %x5, 2  #7 pc 148
-be_cont.36: #pc 148
+be_cont.36: #pc 152
 	lw	%x6, 8(%x2)  #7 pc 152
 	add	%x5, %x5, %x6  #7 pc 156
 	lw	%x6, 12(%x2)  #7 pc 160

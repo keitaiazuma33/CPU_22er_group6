@@ -48,7 +48,7 @@ g.52:  #pc 0
 	lw	%x23, 0(%x22)  #6 pc 172
 	jalr	%x0, %x23, 0  #6 pc 176
 	nop #pc 180
-ble_else.90: #pc 180
+ble_else.90: #pc 184
 	addi	%x5, %x6, 0  #6 pc 184
 	ret #pc 188
 	nop #pc 192

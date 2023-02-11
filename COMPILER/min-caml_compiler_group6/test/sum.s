@@ -8,7 +8,7 @@ sum.7:  #pc 0
 	addi	%x5, %x0, 0  #0 pc 12
 	ret #pc 16
 	nop #pc 20
-ble_else.17: #pc 20
+ble_else.17: #pc 24
 	addi	%x6, %x5, -1  #3 pc 24
 	sw	%x5, 0(%x2)  #3 pc 28
 	addi	%x5, %x6, 0  #0 pc 32

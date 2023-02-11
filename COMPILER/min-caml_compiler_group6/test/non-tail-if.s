@@ -33,9 +33,9 @@ min_caml_start:
 	lw	%x6, 8(%x2)  #5 pc 92
 	j	bge_cont.38 #pc 96
 	nop #pc 100
-bge_else.37: #pc 100
+bge_else.37: #pc 104
 	lw	%x6, 12(%x2)  #5 pc 104
-bge_cont.38: #pc 104
+bge_cont.38: #pc 108
 	lw	%x7, 8(%x2)  #6 pc 108
 	bge	%x0, %x7, 12  #6 pc 112
 	j	ble_else.39 #pc 116
@@ -43,9 +43,9 @@ bge_cont.38: #pc 104
 	lw	%x9, 12(%x2)  #6 pc 124
 	j	ble_cont.40 #pc 128
 	nop #pc 132
-ble_else.39: #pc 132
+ble_else.39: #pc 136
 	addi	%x9, %x5, 0  #6 pc 136
-ble_cont.40: #pc 136
+ble_cont.40: #pc 140
 	add	%x6, %x6, %x9  #5 pc 140
 	lw	%x9, 12(%x2)  #7 pc 144
 	bge	%x9, %x0, 12  #7 pc 148
@@ -53,9 +53,9 @@ ble_cont.40: #pc 136
 	nop #pc 156
 	j	bge_cont.42 #pc 160
 	nop #pc 164
-bge_else.41: #pc 164
+bge_else.41: #pc 168
 	addi	%x5, %x7, 0  #7 pc 168
-bge_cont.42: #pc 168
+bge_cont.42: #pc 172
 	add	%x5, %x6, %x5  #5 pc 172
 	sw	%x1, 20(%x2)  #4 pc 176
 	addi	%x2, %x2, 24  #4 pc 180

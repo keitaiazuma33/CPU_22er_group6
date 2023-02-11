@@ -11,7 +11,7 @@ f.8:  #pc 0
 	addi	%x5, %x0, 0  #0 pc 24
 	ret #pc 28
 	nop #pc 32
-be_else.21: #pc 32
+be_else.21: #pc 36
 	addi	%x5, %x5, -1  #5 pc 36
 	sw	%x6, 0(%x2)  #5 pc 40
 	sw	%x1, 4(%x2)  #5 pc 44

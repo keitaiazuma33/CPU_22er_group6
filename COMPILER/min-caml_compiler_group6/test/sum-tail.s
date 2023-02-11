@@ -7,7 +7,7 @@ sum.8:  #pc 0
 	nop #pc 8
 	ret #pc 12
 	nop #pc 16
-ble_else.19: #pc 16
+ble_else.19: #pc 20
 	add	%x5, %x5, %x6  #3 pc 20
 	addi	%x6, %x6, -1  #3 pc 24
 	j	sum.8  #3 pc 28

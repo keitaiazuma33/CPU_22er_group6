@@ -8,14 +8,14 @@ gcd.7:  #pc 0
 	addi	%x5, %x6, 0  #2 pc 12
 	ret #pc 16
 	nop #pc 20
-be_else.17: #pc 20
+be_else.17: #pc 24
 	bge	%x6, %x5, 12  #3 pc 24
 	j	ble_else.18 #pc 28
 	nop #pc 32
 	sub	%x6, %x6, %x5  #3 pc 36
 	j	gcd.7  #3 pc 40
 	nop #pc 44
-ble_else.18: #pc 44
+ble_else.18: #pc 48
 	sub	%x5, %x5, %x6  #4 pc 48
 	addi	%x23, %x6, 0  #0 pc 52
 	addi	%x6, %x5, 0  #0 pc 56

@@ -63,7 +63,7 @@ mul_abs.182:  #pc 156
 	addi	%x5, %x9, 0  #58 pc 172
 	ret #pc 176
 	nop #pc 180
-be_else.423: #pc 180
+be_else.423: #pc 184
 	addi	%x10, %x0, 1  #0 pc 184
 	sll	%x10, %x10, %x7  #60 pc 188
 	and	%x10, %x6, %x10  #60 pc 192
@@ -73,7 +73,7 @@ be_else.423: #pc 180
 	addi	%x7, %x7, -1  #61 pc 208
 	j	mul_abs.182  #61 pc 212
 	nop #pc 216
-be_else.424: #pc 216
+be_else.424: #pc 220
 	addi	%x10, %x7, -1  #63 pc 220
 	sll	%x7, %x5, %x7  #63 pc 224
 	add	%x9, %x9, %x7  #63 pc 228
@@ -87,18 +87,18 @@ mul.187:  #pc 244
 	addi	%x7, %x5, 0  #67 pc 256
 	j	bge_cont.426 #pc 260
 	nop #pc 264
-bge_else.425: #pc 264
+bge_else.425: #pc 268
 	sub	%x7, %x0, %x5  #67 pc 268
-bge_cont.426: #pc 268
+bge_cont.426: #pc 272
 	bge	%x6, %x0, 12  #68 pc 272
 	j	bge_else.427 #pc 276
 	nop #pc 280
 	addi	%x9, %x6, 0  #68 pc 284
 	j	bge_cont.428 #pc 288
 	nop #pc 292
-bge_else.427: #pc 292
+bge_else.427: #pc 296
 	sub	%x9, %x0, %x6  #68 pc 296
-bge_cont.428: #pc 296
+bge_cont.428: #pc 300
 	addi	%x10, %x0, 30  #0 pc 300
 	addi	%x11, %x0, 0  #0 pc 304
 	sw	%x6, 0(%x2)  #69 pc 308
@@ -121,7 +121,7 @@ bge_cont.428: #pc 296
 	nop #pc 376
 	ret #pc 380
 	nop #pc 384
-be_else.429: #pc 384
+be_else.429: #pc 388
 	sub	%x5, %x0, %x5  #73 pc 388
 	ret #pc 392
 	nop #pc 396
@@ -133,7 +133,7 @@ div_abs.190:  #pc 400
 	addi	%x5, %x9, 0  #78 pc 416
 	ret #pc 420
 	nop #pc 424
-be_else.430: #pc 424
+be_else.430: #pc 428
 	srl	%x10, %x5, %x7  #80 pc 428
 	bge	%x10, %x6, 12  #80 pc 432
 	j	ble_else.431 #pc 436
@@ -147,7 +147,7 @@ be_else.430: #pc 424
 	addi	%x7, %x10, 0  #0 pc 468
 	j	div_abs.190  #81 pc 472
 	nop #pc 476
-ble_else.431: #pc 476
+ble_else.431: #pc 480
 	addi	%x7, %x7, -1  #83 pc 480
 	j	div_abs.190  #83 pc 484
 	nop #pc 488
@@ -158,18 +158,18 @@ div.195:  #pc 492
 	addi	%x7, %x5, 0  #87 pc 504
 	j	bge_cont.433 #pc 508
 	nop #pc 512
-bge_else.432: #pc 512
+bge_else.432: #pc 516
 	sub	%x7, %x0, %x5  #87 pc 516
-bge_cont.433: #pc 516
+bge_cont.433: #pc 520
 	bge	%x6, %x0, 12  #88 pc 520
 	j	bge_else.434 #pc 524
 	nop #pc 528
 	addi	%x9, %x6, 0  #88 pc 532
 	j	bge_cont.435 #pc 536
 	nop #pc 540
-bge_else.434: #pc 540
+bge_else.434: #pc 544
 	sub	%x9, %x0, %x6  #88 pc 544
-bge_cont.435: #pc 544
+bge_cont.435: #pc 548
 	addi	%x10, %x0, 30  #0 pc 548
 	addi	%x11, %x0, 0  #0 pc 552
 	sw	%x6, 0(%x2)  #89 pc 556
@@ -192,7 +192,7 @@ bge_cont.435: #pc 544
 	nop #pc 624
 	ret #pc 628
 	nop #pc 632
-be_else.436: #pc 632
+be_else.436: #pc 636
 	sub	%x5, %x0, %x5  #93 pc 636
 	ret #pc 640
 	nop #pc 644
@@ -230,12 +230,12 @@ print_int.200:  #pc 648
 	out	%x5  #109 pc 768
 	ret #pc 772
 	nop #pc 776
-bge_else.438: #pc 776
+bge_else.438: #pc 780
 	addi	%x5, %x5, 48  #105 pc 780
 	out	%x5  #105 pc 784
 	ret #pc 788
 	nop #pc 792
-bge_else.437: #pc 792
+bge_else.437: #pc 796
 	sub	%x5, %x0, %x5  #102 pc 796
 	j	print_int.200  #102 pc 800
 	nop #pc 804

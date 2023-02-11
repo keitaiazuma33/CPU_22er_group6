@@ -22,7 +22,7 @@ mul_abs.324:  #pc 0
 	addi	%x5, %x9, 0  #58 pc 16
 	ret #pc 20
 	nop #pc 24
-be_else.854: #pc 24
+be_else.854: #pc 28
 	addi	%x10, %x0, 1  #0 pc 28
 	sll	%x10, %x10, %x7  #60 pc 32
 	and	%x10, %x6, %x10  #60 pc 36
@@ -32,7 +32,7 @@ be_else.854: #pc 24
 	addi	%x7, %x7, -1  #61 pc 52
 	j	mul_abs.324  #61 pc 56
 	nop #pc 60
-be_else.855: #pc 60
+be_else.855: #pc 64
 	addi	%x10, %x7, -1  #63 pc 64
 	sll	%x7, %x5, %x7  #63 pc 68
 	add	%x9, %x9, %x7  #63 pc 72
@@ -46,18 +46,18 @@ mul.329:  #pc 88
 	addi	%x7, %x5, 0  #67 pc 100
 	j	bge_cont.857 #pc 104
 	nop #pc 108
-bge_else.856: #pc 108
+bge_else.856: #pc 112
 	sub	%x7, %x0, %x5  #67 pc 112
-bge_cont.857: #pc 112
+bge_cont.857: #pc 116
 	bge	%x6, %x0, 12  #68 pc 116
 	j	bge_else.858 #pc 120
 	nop #pc 124
 	addi	%x9, %x6, 0  #68 pc 128
 	j	bge_cont.859 #pc 132
 	nop #pc 136
-bge_else.858: #pc 136
+bge_else.858: #pc 140
 	sub	%x9, %x0, %x6  #68 pc 140
-bge_cont.859: #pc 140
+bge_cont.859: #pc 144
 	addi	%x10, %x0, 30  #0 pc 144
 	addi	%x11, %x0, 0  #0 pc 148
 	sw	%x6, 0(%x2)  #69 pc 152
@@ -80,7 +80,7 @@ bge_cont.859: #pc 140
 	nop #pc 220
 	ret #pc 224
 	nop #pc 228
-be_else.860: #pc 228
+be_else.860: #pc 232
 	sub	%x5, %x0, %x5  #73 pc 232
 	ret #pc 236
 	nop #pc 240
@@ -92,7 +92,7 @@ div_abs.332:  #pc 244
 	addi	%x5, %x9, 0  #78 pc 260
 	ret #pc 264
 	nop #pc 268
-be_else.861: #pc 268
+be_else.861: #pc 272
 	srl	%x10, %x5, %x7  #80 pc 272
 	bge	%x10, %x6, 12  #80 pc 276
 	j	ble_else.862 #pc 280
@@ -106,7 +106,7 @@ be_else.861: #pc 268
 	addi	%x7, %x10, 0  #0 pc 312
 	j	div_abs.332  #81 pc 316
 	nop #pc 320
-ble_else.862: #pc 320
+ble_else.862: #pc 324
 	addi	%x7, %x7, -1  #83 pc 324
 	j	div_abs.332  #83 pc 328
 	nop #pc 332
@@ -117,18 +117,18 @@ div.337:  #pc 336
 	addi	%x7, %x5, 0  #87 pc 348
 	j	bge_cont.864 #pc 352
 	nop #pc 356
-bge_else.863: #pc 356
+bge_else.863: #pc 360
 	sub	%x7, %x0, %x5  #87 pc 360
-bge_cont.864: #pc 360
+bge_cont.864: #pc 364
 	bge	%x6, %x0, 12  #88 pc 364
 	j	bge_else.865 #pc 368
 	nop #pc 372
 	addi	%x9, %x6, 0  #88 pc 376
 	j	bge_cont.866 #pc 380
 	nop #pc 384
-bge_else.865: #pc 384
+bge_else.865: #pc 388
 	sub	%x9, %x0, %x6  #88 pc 388
-bge_cont.866: #pc 388
+bge_cont.866: #pc 392
 	addi	%x10, %x0, 30  #0 pc 392
 	addi	%x11, %x0, 0  #0 pc 396
 	sw	%x6, 0(%x2)  #89 pc 400
@@ -151,7 +151,7 @@ bge_cont.866: #pc 388
 	nop #pc 468
 	ret #pc 472
 	nop #pc 476
-be_else.867: #pc 476
+be_else.867: #pc 480
 	sub	%x5, %x0, %x5  #93 pc 480
 	ret #pc 484
 	nop #pc 488
@@ -189,12 +189,12 @@ print_int.342:  #pc 492
 	out	%x5  #109 pc 612
 	ret #pc 616
 	nop #pc 620
-bge_else.869: #pc 620
+bge_else.869: #pc 624
 	addi	%x5, %x5, 48  #105 pc 624
 	out	%x5  #105 pc 628
 	ret #pc 632
 	nop #pc 636
-bge_else.868: #pc 636
+bge_else.868: #pc 640
 	sub	%x5, %x0, %x5  #102 pc 640
 	j	print_int.342  #102 pc 644
 	nop #pc 648
@@ -207,7 +207,7 @@ assign_array.356:  #pc 652
 	sw	%x6, 0(%x24)  #161 pc 672
 	ret #pc 676
 	nop #pc 680
-be_else.872: #pc 680
+be_else.872: #pc 684
 	slli	%x9, %x7, 2  #163 pc 684
 	add	%x24, %x9, %x5  #163 pc 688
 	sw	%x6, 0(%x24)  #163 pc 692
@@ -237,7 +237,7 @@ assign_farray.363:  #pc 760
 	fsw	%f0, 0(%x24) #177 pc 780
 	ret #pc 784
 	nop #pc 788
-be_else.874: #pc 788
+be_else.874: #pc 792
 	slli	%x7, %x6, 2  #179 pc 792
 	add	%x24, %x7, %x5  #179 pc 796
 	fsw	%f0, 0(%x24) #179 pc 800
@@ -307,7 +307,7 @@ loop3.512:  #pc 868
 	lw	%x23, 0(%x22)  #199 pc 1048
 	jalr	%x0, %x23, 0  #199 pc 1052
 	nop #pc 1056
-bge_else.876: #pc 1056
+bge_else.876: #pc 1060
 	ret #pc 1060
 	nop #pc 1064
 loop2.504:  #pc 1068
@@ -367,7 +367,7 @@ loop2.504:  #pc 1068
 	lw	%x23, 0(%x22)  #201 pc 1280
 	jalr	%x0, %x23, 0  #201 pc 1284
 	nop #pc 1288
-bge_else.878: #pc 1288
+bge_else.878: #pc 1292
 	ret #pc 1292
 	nop #pc 1296
 loop1.499:  #pc 1300
@@ -427,7 +427,7 @@ loop1.499:  #pc 1300
 	lw	%x23, 0(%x22)  #203 pc 1512
 	jalr	%x0, %x23, 0  #203 pc 1516
 	nop #pc 1520
-bge_else.880: #pc 1520
+bge_else.880: #pc 1524
 	ret #pc 1524
 	nop #pc 1528
 mul.370:  #pc 1532
@@ -486,7 +486,7 @@ init.486:  #pc 1632
 	lw	%x23, 0(%x22)  #211 pc 1736
 	jalr	%x0, %x23, 0  #211 pc 1740
 	nop #pc 1744
-bge_else.882: #pc 1744
+bge_else.882: #pc 1748
 	ret #pc 1748
 	nop #pc 1752
 make.378:  #pc 1756

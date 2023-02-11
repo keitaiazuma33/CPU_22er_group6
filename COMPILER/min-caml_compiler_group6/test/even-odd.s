@@ -11,11 +11,11 @@ odd.21:  #pc 0
 	addi	%x5, %x0, 456  #0 pc 24
 	ret #pc 28
 	nop #pc 32
-bge_else.37: #pc 32
+bge_else.37: #pc 36
 	addi	%x5, %x5, 1  #6 pc 36
 	j	even.17  #6 pc 40
 	nop #pc 44
-ble_else.36: #pc 44
+ble_else.36: #pc 48
 	addi	%x5, %x5, -1  #5 pc 48
 	j	even.17  #5 pc 52
 	nop #pc 56
@@ -29,11 +29,11 @@ even.17:  #pc 60
 	addi	%x5, %x0, 123  #0 pc 84
 	ret #pc 88
 	nop #pc 92
-bge_else.39: #pc 92
+bge_else.39: #pc 96
 	addi	%x5, %x5, 1  #9 pc 96
 	j	odd.21  #9 pc 100
 	nop #pc 104
-ble_else.38: #pc 104
+ble_else.38: #pc 108
 	addi	%x5, %x5, -1  #8 pc 108
 	j	odd.21  #8 pc 112
 	nop #pc 116

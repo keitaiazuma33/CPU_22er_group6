@@ -36,7 +36,7 @@ min_caml_start:
 	add	%x5, %x5, %x6  #6 pc 104
 	j	ble_cont.31 #pc 108
 	nop #pc 112
-ble_else.30: #pc 112
+ble_else.30: #pc 116
 	sw	%x5, 8(%x2)  #6 pc 116
 	addi	%x5, %x0, 0  #0 pc 120
 	sw	%x1, 12(%x2)  #6 pc 124
@@ -46,7 +46,7 @@ ble_else.30: #pc 112
 	lw	%x1, 12(%x2) #6 pc 140
 	lw	%x6, 8(%x2)  #6 pc 144
 	sub	%x5, %x5, %x6  #6 pc 148
-ble_cont.31: #pc 148
+ble_cont.31: #pc 152
 	add	%x5, %x5, %x6  #6 pc 152
 	sw	%x1, 12(%x2)  #6 pc 156
 	addi	%x2, %x2, 16  #6 pc 160
