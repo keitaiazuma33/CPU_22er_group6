@@ -288,13 +288,12 @@ and g'_args oc x_reg_cl ys zs =
       (0, x_reg_cl)
       ys in
   List.iter
-    (fun (y, r) -> incr_pc ();
-                  (if y = "%g0" then 
-                    (*Printf.fprintf oc "\tmv\t%s, %s #pc %d\n" r reg_zero (!pc)*)
-                    print_mv oc r reg_zero 0
-                  else  
-                    (*Printf.fprintf oc "\tmv\t%s, %s #pc %d\n" r y (!pc)*)
-                    print_mv oc r y 0))
+    (fun (y, r) -> if y = "%g0" then 
+                      (*Printf.fprintf oc "\tmv\t%s, %s #pc %d\n" r reg_zero (!pc)*)
+                      print_mv oc r reg_zero 0
+                    else  
+                      (*Printf.fprintf oc "\tmv\t%s, %s #pc %d\n" r y (!pc)*)
+                      print_mv oc r y 0)
     (shuffle reg_sw yrs);
   let (d, zfrs) =
     List.fold_left
@@ -309,14 +308,14 @@ and g'_args oc x_reg_cl ys zs =
     (shuffle reg_fsw zfrs)
 
 let h oc { name = Id.L(x); args = _; fargs = _; body = e; ret = _ } =
-  Printf.fprintf oc "%s:  #pc %d\n" x (!pc);
-  add_pc_env x (!pc);
+  Printf.fprintf oc "%s:  #pc %d\n" x ((!pc)+4);
+  add_pc_env x ((!pc)+4);
   stackset := S.empty;
   stackmap := [];
   g oc (Tail, e)
 
 let f oc (Prog(data, fundefs, e)) =
-  pc := 0;
+  pc := -4;
   pc_env := M.empty;
   Format.eprintf "generating assembly...@.";
   Printf.fprintf oc ".section\t\".rodata\"\n";
