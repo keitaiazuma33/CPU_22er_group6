@@ -13023,7 +13023,7 @@ min_caml_start:
 	addi	%x24, %x0, 4  #pc 51388
 	add	%x24, %x24, %x10  #2613 pc 51392
 	sw	%x5, 0(%x24)  #2613 pc 51396
-	addi	%x5, %x0, 512  #0 pc 51400
+	addi	%x5, %x0, 8  #0 pc 51400
 	addi	%x7, %x0, 3  #0 pc 51404
 	addi	%x6, %x5, 0  #0 pc 51412
 	addi	%x22, %x10, 0  #0 pc 51420
