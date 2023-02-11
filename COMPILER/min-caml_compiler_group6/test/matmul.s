@@ -678,7 +678,7 @@ min_caml_start:
 	jal	%x1, print_int.342  #223 pc 2488
 	addi	%x2, %x2, -32  #223 pc 2492
 	lw	%x1, 28(%x2) #223 pc 2496
-	mv	%x5, %g0 #pc 2500
+	mv	%x5, %x0 #pc 2500
 	sw	%x1, 28(%x2)  #224 pc 2504
 	addi	%x2, %x2, 32  #224 pc 2508
 	jal	%x1, min_caml_print_newline  #224 pc 2512
@@ -700,7 +700,7 @@ min_caml_start:
 	jal	%x1, print_int.342  #225 pc 2576
 	addi	%x2, %x2, -32  #225 pc 2580
 	lw	%x1, 28(%x2) #225 pc 2584
-	mv	%x5, %g0 #pc 2588
+	mv	%x5, %x0 #pc 2588
 	sw	%x1, 28(%x2)  #226 pc 2592
 	addi	%x2, %x2, 32  #226 pc 2596
 	jal	%x1, min_caml_print_newline  #226 pc 2600
@@ -722,7 +722,7 @@ min_caml_start:
 	jal	%x1, print_int.342  #227 pc 2664
 	addi	%x2, %x2, -32  #227 pc 2668
 	lw	%x1, 28(%x2) #227 pc 2672
-	mv	%x5, %g0 #pc 2676
+	mv	%x5, %x0 #pc 2676
 	sw	%x1, 28(%x2)  #228 pc 2680
 	addi	%x2, %x2, 32  #228 pc 2684
 	jal	%x1, min_caml_print_newline  #228 pc 2688
@@ -745,7 +745,7 @@ min_caml_start:
 	jal	%x1, print_int.342  #229 pc 2756
 	addi	%x2, %x2, -32  #229 pc 2760
 	lw	%x1, 28(%x2) #229 pc 2764
-	mv	%x5, %g0 #pc 2768
+	mv	%x5, %x0 #pc 2768
 	sw	%x1, 28(%x2)  #230 pc 2772
 	addi	%x2, %x2, 32  #230 pc 2776
 	jal	%x1, min_caml_print_newline  #230 pc 2780

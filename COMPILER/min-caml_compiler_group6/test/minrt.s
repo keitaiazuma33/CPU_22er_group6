@@ -1250,7 +1250,7 @@ read_screen_settings.2755:  #pc 4268
 	sw	%x9, 8(%x2)  #806 pc 4340
 	sw	%x6, 12(%x2)  #806 pc 4344
 	sw	%x10, 16(%x2)  #806 pc 4348
-	mv	%x5, %g0 #pc 4352
+	mv	%x5, %x0 #pc 4352
 	sw	%x1, 20(%x2)  #806 pc 4356
 	addi	%x2, %x2, 24  #806 pc 4360
 	jal	%x1, read_float.2587  #806 pc 4364
@@ -1259,7 +1259,7 @@ read_screen_settings.2755:  #pc 4268
 	lw	%x5, 16(%x2)  #806 pc 4376
 	add	%x24, %x0, %x5  #806 pc 4380
 	fsw	%f0, 0(%x24) #806 pc 4384
-	mv	%x5, %g0 #pc 4388
+	mv	%x5, %x0 #pc 4388
 	sw	%x1, 20(%x2)  #807 pc 4392
 	addi	%x2, %x2, 24  #807 pc 4396
 	jal	%x1, read_float.2587  #807 pc 4400
@@ -1269,7 +1269,7 @@ read_screen_settings.2755:  #pc 4268
 	addi	%x24, %x0, 8  #pc 4416
 	add	%x24, %x24, %x5  #807 pc 4420
 	fsw	%f0, 0(%x24) #807 pc 4424
-	mv	%x5, %g0 #pc 4428
+	mv	%x5, %x0 #pc 4428
 	sw	%x1, 20(%x2)  #808 pc 4432
 	addi	%x2, %x2, 24  #808 pc 4436
 	jal	%x1, read_float.2587  #808 pc 4440
@@ -1279,7 +1279,7 @@ read_screen_settings.2755:  #pc 4268
 	addi	%x24, %x0, 16  #pc 4456
 	add	%x24, %x24, %x5  #808 pc 4460
 	fsw	%f0, 0(%x24) #808 pc 4464
-	mv	%x5, %g0 #pc 4468
+	mv	%x5, %x0 #pc 4468
 	sw	%x1, 20(%x2)  #810 pc 4472
 	addi	%x2, %x2, 24  #810 pc 4476
 	jal	%x1, read_float.2587  #810 pc 4480
@@ -1306,7 +1306,7 @@ read_screen_settings.2755:  #pc 4268
 	addi	%x2, %x2, -48  #812 pc 4564
 	lw	%x1, 44(%x2) #812 pc 4568
 	fsw	%f0, 40(%x2)  #813 pc 4572
-	mv	%x5, %g0 #pc 4576
+	mv	%x5, %x0 #pc 4576
 	sw	%x1, 52(%x2)  #813 pc 4580
 	addi	%x2, %x2, 56  #813 pc 4584
 	jal	%x1, read_float.2587  #813 pc 4588
@@ -1443,13 +1443,13 @@ read_light.2757:  #pc 5084
 	lw	%x6, 0(%x24)  #0 pc 5108
 	sw	%x6, 0(%x2)  #838 pc 5112
 	sw	%x5, 4(%x2)  #838 pc 5116
-	mv	%x5, %g0 #pc 5120
+	mv	%x5, %x0 #pc 5120
 	sw	%x1, 12(%x2)  #838 pc 5124
 	addi	%x2, %x2, 16  #838 pc 5128
 	jal	%x1, read_int.2580  #838 pc 5132
 	addi	%x2, %x2, -16  #838 pc 5136
 	lw	%x1, 12(%x2) #838 pc 5140
-	mv	%x5, %g0 #pc 5144
+	mv	%x5, %x0 #pc 5144
 	sw	%x1, 12(%x2)  #841 pc 5148
 	addi	%x2, %x2, 16  #841 pc 5152
 	jal	%x1, read_float.2587  #841 pc 5156
@@ -1475,7 +1475,7 @@ read_light.2757:  #pc 5084
 	addi	%x24, %x0, 8  #pc 5236
 	add	%x24, %x24, %x5  #843 pc 5240
 	fsw	%f0, 0(%x24) #843 pc 5244
-	mv	%x5, %g0 #pc 5248
+	mv	%x5, %x0 #pc 5248
 	sw	%x1, 20(%x2)  #844 pc 5252
 	addi	%x2, %x2, 24  #844 pc 5256
 	jal	%x1, read_float.2587  #844 pc 5260
@@ -1521,7 +1521,7 @@ read_light.2757:  #pc 5084
 	addi	%x24, %x0, 16  #pc 5420
 	add	%x24, %x24, %x5  #849 pc 5424
 	fsw	%f0, 0(%x24) #849 pc 5428
-	mv	%x5, %g0 #pc 5432
+	mv	%x5, %x0 #pc 5432
 	sw	%x1, 36(%x2)  #850 pc 5436
 	addi	%x2, %x2, 40  #850 pc 5440
 	jal	%x1, read_float.2587  #850 pc 5444
@@ -1830,7 +1830,7 @@ read_nth_object.2762:  #pc 6636
 	lw	%x6, 0(%x24)  #0 pc 6648
 	sw	%x6, 0(%x2)  #901 pc 6652
 	sw	%x5, 4(%x2)  #901 pc 6656
-	mv	%x5, %g0 #pc 6660
+	mv	%x5, %x0 #pc 6660
 	sw	%x1, 12(%x2)  #901 pc 6664
 	addi	%x2, %x2, 16  #901 pc 6668
 	jal	%x1, read_int.2580  #901 pc 6672
@@ -1845,21 +1845,21 @@ read_nth_object.2762:  #pc 6636
 	nop #pc 6708
 be_else.9236: #pc 6708
 	sw	%x5, 8(%x2)  #904 pc 6712
-	mv	%x5, %g0 #pc 6716
+	mv	%x5, %x0 #pc 6716
 	sw	%x1, 12(%x2)  #904 pc 6720
 	addi	%x2, %x2, 16  #904 pc 6724
 	jal	%x1, read_int.2580  #904 pc 6728
 	addi	%x2, %x2, -16  #904 pc 6732
 	lw	%x1, 12(%x2) #904 pc 6736
 	sw	%x5, 12(%x2)  #905 pc 6740
-	mv	%x5, %g0 #pc 6744
+	mv	%x5, %x0 #pc 6744
 	sw	%x1, 20(%x2)  #905 pc 6748
 	addi	%x2, %x2, 24  #905 pc 6752
 	jal	%x1, read_int.2580  #905 pc 6756
 	addi	%x2, %x2, -24  #905 pc 6760
 	lw	%x1, 20(%x2) #905 pc 6764
 	sw	%x5, 16(%x2)  #906 pc 6768
-	mv	%x5, %g0 #pc 6772
+	mv	%x5, %x0 #pc 6772
 	sw	%x1, 20(%x2)  #906 pc 6776
 	addi	%x2, %x2, 24  #906 pc 6780
 	jal	%x1, read_int.2580  #906 pc 6784
@@ -1875,7 +1875,7 @@ be_else.9236: #pc 6708
 	addi	%x2, %x2, -32  #908 pc 6824
 	lw	%x1, 28(%x2) #908 pc 6828
 	sw	%x5, 24(%x2)  #909 pc 6832
-	mv	%x5, %g0 #pc 6836
+	mv	%x5, %x0 #pc 6836
 	sw	%x1, 28(%x2)  #909 pc 6840
 	addi	%x2, %x2, 32  #909 pc 6844
 	jal	%x1, read_float.2587  #909 pc 6848
@@ -1884,7 +1884,7 @@ be_else.9236: #pc 6708
 	lw	%x5, 24(%x2)  #909 pc 6860
 	add	%x24, %x0, %x5  #909 pc 6864
 	fsw	%f0, 0(%x24) #909 pc 6868
-	mv	%x5, %g0 #pc 6872
+	mv	%x5, %x0 #pc 6872
 	sw	%x1, 28(%x2)  #910 pc 6876
 	addi	%x2, %x2, 32  #910 pc 6880
 	jal	%x1, read_float.2587  #910 pc 6884
@@ -1894,7 +1894,7 @@ be_else.9236: #pc 6708
 	addi	%x24, %x0, 8  #pc 6900
 	add	%x24, %x24, %x5  #910 pc 6904
 	fsw	%f0, 0(%x24) #910 pc 6908
-	mv	%x5, %g0 #pc 6912
+	mv	%x5, %x0 #pc 6912
 	sw	%x1, 28(%x2)  #911 pc 6916
 	addi	%x2, %x2, 32  #911 pc 6920
 	jal	%x1, read_float.2587  #911 pc 6924
@@ -1913,7 +1913,7 @@ be_else.9236: #pc 6708
 	addi	%x2, %x2, -32  #913 pc 6976
 	lw	%x1, 28(%x2) #913 pc 6980
 	sw	%x5, 28(%x2)  #914 pc 6984
-	mv	%x5, %g0 #pc 6988
+	mv	%x5, %x0 #pc 6988
 	sw	%x1, 36(%x2)  #914 pc 6992
 	addi	%x2, %x2, 40  #914 pc 6996
 	jal	%x1, read_float.2587  #914 pc 7000
@@ -1922,7 +1922,7 @@ be_else.9236: #pc 6708
 	lw	%x5, 28(%x2)  #914 pc 7012
 	add	%x24, %x0, %x5  #914 pc 7016
 	fsw	%f0, 0(%x24) #914 pc 7020
-	mv	%x5, %g0 #pc 7024
+	mv	%x5, %x0 #pc 7024
 	sw	%x1, 36(%x2)  #915 pc 7028
 	addi	%x2, %x2, 40  #915 pc 7032
 	jal	%x1, read_float.2587  #915 pc 7036
@@ -1932,7 +1932,7 @@ be_else.9236: #pc 6708
 	addi	%x24, %x0, 8  #pc 7052
 	add	%x24, %x24, %x5  #915 pc 7056
 	fsw	%f0, 0(%x24) #915 pc 7060
-	mv	%x5, %g0 #pc 7064
+	mv	%x5, %x0 #pc 7064
 	sw	%x1, 36(%x2)  #916 pc 7068
 	addi	%x2, %x2, 40  #916 pc 7072
 	jal	%x1, read_float.2587  #916 pc 7076
@@ -1942,7 +1942,7 @@ be_else.9236: #pc 6708
 	addi	%x24, %x0, 16  #pc 7092
 	add	%x24, %x24, %x5  #916 pc 7096
 	fsw	%f0, 0(%x24) #916 pc 7100
-	mv	%x5, %g0 #pc 7104
+	mv	%x5, %x0 #pc 7104
 	sw	%x1, 36(%x2)  #918 pc 7108
 	addi	%x2, %x2, 40  #918 pc 7112
 	jal	%x1, read_float.2587  #918 pc 7116
@@ -1963,7 +1963,7 @@ be_else.9236: #pc 6708
 	addi	%x2, %x2, -40  #920 pc 7176
 	lw	%x1, 36(%x2) #920 pc 7180
 	sw	%x5, 36(%x2)  #921 pc 7184
-	mv	%x5, %g0 #pc 7188
+	mv	%x5, %x0 #pc 7188
 	sw	%x1, 44(%x2)  #921 pc 7192
 	addi	%x2, %x2, 48  #921 pc 7196
 	jal	%x1, read_float.2587  #921 pc 7200
@@ -1972,7 +1972,7 @@ be_else.9236: #pc 6708
 	lw	%x5, 36(%x2)  #921 pc 7212
 	add	%x24, %x0, %x5  #921 pc 7216
 	fsw	%f0, 0(%x24) #921 pc 7220
-	mv	%x5, %g0 #pc 7224
+	mv	%x5, %x0 #pc 7224
 	sw	%x1, 44(%x2)  #922 pc 7228
 	addi	%x2, %x2, 48  #922 pc 7232
 	jal	%x1, read_float.2587  #922 pc 7236
@@ -1991,7 +1991,7 @@ be_else.9236: #pc 6708
 	addi	%x2, %x2, -48  #924 pc 7288
 	lw	%x1, 44(%x2) #924 pc 7292
 	sw	%x5, 40(%x2)  #925 pc 7296
-	mv	%x5, %g0 #pc 7300
+	mv	%x5, %x0 #pc 7300
 	sw	%x1, 44(%x2)  #925 pc 7304
 	addi	%x2, %x2, 48  #925 pc 7308
 	jal	%x1, read_float.2587  #925 pc 7312
@@ -2000,7 +2000,7 @@ be_else.9236: #pc 6708
 	lw	%x5, 40(%x2)  #925 pc 7324
 	add	%x24, %x0, %x5  #925 pc 7328
 	fsw	%f0, 0(%x24) #925 pc 7332
-	mv	%x5, %g0 #pc 7336
+	mv	%x5, %x0 #pc 7336
 	sw	%x1, 44(%x2)  #926 pc 7340
 	addi	%x2, %x2, 48  #926 pc 7344
 	jal	%x1, read_float.2587  #926 pc 7348
@@ -2010,7 +2010,7 @@ be_else.9236: #pc 6708
 	addi	%x24, %x0, 8  #pc 7364
 	add	%x24, %x24, %x5  #926 pc 7368
 	fsw	%f0, 0(%x24) #926 pc 7372
-	mv	%x5, %g0 #pc 7376
+	mv	%x5, %x0 #pc 7376
 	sw	%x1, 44(%x2)  #927 pc 7380
 	addi	%x2, %x2, 48  #927 pc 7384
 	jal	%x1, read_float.2587  #927 pc 7388
@@ -2036,7 +2036,7 @@ be_else.9236: #pc 6708
 	nop #pc 7468
 be_else.9237: #pc 7468
 	sw	%x5, 44(%x2)  #932 pc 7472
-	mv	%x5, %g0 #pc 7476
+	mv	%x5, %x0 #pc 7476
 	sw	%x1, 52(%x2)  #932 pc 7480
 	addi	%x2, %x2, 56  #932 pc 7484
 	jal	%x1, read_float.2587  #932 pc 7488
@@ -2050,7 +2050,7 @@ be_else.9237: #pc 7468
 	lw	%x5, 44(%x2)  #932 pc 7520
 	add	%x24, %x0, %x5  #932 pc 7524
 	fsw	%f0, 0(%x24) #932 pc 7528
-	mv	%x5, %g0 #pc 7532
+	mv	%x5, %x0 #pc 7532
 	sw	%x1, 52(%x2)  #933 pc 7536
 	addi	%x2, %x2, 56  #933 pc 7540
 	jal	%x1, read_float.2587  #933 pc 7544
@@ -2065,7 +2065,7 @@ be_else.9237: #pc 7468
 	addi	%x24, %x0, 8  #pc 7580
 	add	%x24, %x24, %x5  #933 pc 7584
 	fsw	%f0, 0(%x24) #933 pc 7588
-	mv	%x5, %g0 #pc 7592
+	mv	%x5, %x0 #pc 7592
 	sw	%x1, 52(%x2)  #934 pc 7596
 	addi	%x2, %x2, 56  #934 pc 7600
 	jal	%x1, read_float.2587  #934 pc 7604
@@ -2363,7 +2363,7 @@ read_all_object.2766:  #pc 8660
 	nop #pc 8688
 read_net_item.2768:  #pc 8688
 	sw	%x5, 0(%x2)  #999 pc 8692
-	mv	%x5, %g0 #pc 8696
+	mv	%x5, %x0 #pc 8696
 	sw	%x1, 4(%x2)  #999 pc 8700
 	addi	%x2, %x2, 8  #999 pc 8704
 	jal	%x1, read_int.2580  #999 pc 8708
@@ -2486,7 +2486,7 @@ read_parameter.2774:  #pc 9080
 	sw	%x9, 8(%x2)  #1026 pc 9152
 	sw	%x6, 12(%x2)  #1026 pc 9156
 	mv	%x22, %x5 #pc 9160
-	mv	%x5, %g0 #pc 9164
+	mv	%x5, %x0 #pc 9164
 	sw	%x1, 20(%x2)  #1026 pc 9168
 	lw	%x23, 0(%x22)  #1026 pc 9172
 	addi	%x2, %x2, 24  #1026 pc 9176
@@ -2494,7 +2494,7 @@ read_parameter.2774:  #pc 9080
 	addi	%x2, %x2, -24  #1026 pc 9184
 	lw	%x1, 20(%x2)  #1026 pc 9188
 	lw	%x22, 12(%x2)  #1027 pc 9192
-	mv	%x5, %g0 #pc 9196
+	mv	%x5, %x0 #pc 9196
 	sw	%x1, 20(%x2)  #1027 pc 9200
 	lw	%x23, 0(%x22)  #1027 pc 9204
 	addi	%x2, %x2, 24  #1027 pc 9208
@@ -2502,7 +2502,7 @@ read_parameter.2774:  #pc 9080
 	addi	%x2, %x2, -24  #1027 pc 9216
 	lw	%x1, 20(%x2)  #1027 pc 9220
 	lw	%x22, 8(%x2)  #1028 pc 9224
-	mv	%x5, %g0 #pc 9228
+	mv	%x5, %x0 #pc 9228
 	sw	%x1, 20(%x2)  #1028 pc 9232
 	lw	%x23, 0(%x22)  #1028 pc 9236
 	addi	%x2, %x2, 24  #1028 pc 9240
@@ -10042,7 +10042,7 @@ create_pixel.3055:  #pc 38116
 	addi	%x2, %x2, -8  #2406 pc 38140
 	lw	%x1, 4(%x2) #2406 pc 38144
 	sw	%x5, 0(%x2)  #2407 pc 38148
-	mv	%x5, %g0 #pc 38152
+	mv	%x5, %x0 #pc 38152
 	sw	%x1, 4(%x2)  #2407 pc 38156
 	addi	%x2, %x2, 8  #2407 pc 38160
 	jal	%x1, create_float5x3array.3053  #2407 pc 38164
@@ -10069,14 +10069,14 @@ create_pixel.3055:  #pc 38116
 	addi	%x2, %x2, -16  #2409 pc 38248
 	lw	%x1, 12(%x2) #2409 pc 38252
 	sw	%x5, 12(%x2)  #2410 pc 38256
-	mv	%x5, %g0 #pc 38260
+	mv	%x5, %x0 #pc 38260
 	sw	%x1, 20(%x2)  #2410 pc 38264
 	addi	%x2, %x2, 24  #2410 pc 38268
 	jal	%x1, create_float5x3array.3053  #2410 pc 38272
 	addi	%x2, %x2, -24  #2410 pc 38276
 	lw	%x1, 20(%x2) #2410 pc 38280
 	sw	%x5, 16(%x2)  #2411 pc 38284
-	mv	%x5, %g0 #pc 38288
+	mv	%x5, %x0 #pc 38288
 	sw	%x1, 20(%x2)  #2411 pc 38292
 	addi	%x2, %x2, 24  #2411 pc 38296
 	jal	%x1, create_float5x3array.3053  #2411 pc 38300
@@ -10093,7 +10093,7 @@ create_pixel.3055:  #pc 38116
 	addi	%x2, %x2, -32  #2412 pc 38344
 	lw	%x1, 28(%x2) #2412 pc 38348
 	sw	%x5, 24(%x2)  #2413 pc 38352
-	mv	%x5, %g0 #pc 38356
+	mv	%x5, %x0 #pc 38356
 	sw	%x1, 28(%x2)  #2413 pc 38360
 	addi	%x2, %x2, 32  #2413 pc 38364
 	jal	%x1, create_float5x3array.3053  #2413 pc 38368
@@ -10140,7 +10140,7 @@ init_line_elements.3057:  #pc 38516
 	nop #pc 38528
 	sw	%x5, 0(%x2)  #2420 pc 38532
 	sw	%x6, 4(%x2)  #2420 pc 38536
-	mv	%x5, %g0 #pc 38540
+	mv	%x5, %x0 #pc 38540
 	sw	%x1, 12(%x2)  #2420 pc 38544
 	addi	%x2, %x2, 16  #2420 pc 38548
 	jal	%x1, create_pixel.3055  #2420 pc 38552
@@ -10166,7 +10166,7 @@ create_pixelline.3060:  #pc 38604
 	lw	%x6, 0(%x24)  #2428 pc 38624
 	sw	%x5, 0(%x2)  #2428 pc 38628
 	sw	%x6, 4(%x2)  #2428 pc 38632
-	mv	%x5, %g0 #pc 38636
+	mv	%x5, %x0 #pc 38636
 	sw	%x1, 12(%x2)  #2428 pc 38640
 	addi	%x2, %x2, 16  #2428 pc 38644
 	jal	%x1, create_pixel.3055  #2428 pc 38648
@@ -10689,7 +10689,7 @@ create_dirvec_elements.3086:  #pc 40648
 	sw	%x22, 0(%x2)  #2511 pc 40676
 	sw	%x5, 4(%x2)  #2511 pc 40680
 	sw	%x6, 8(%x2)  #2511 pc 40684
-	mv	%x5, %g0 #pc 40688
+	mv	%x5, %x0 #pc 40688
 	mv	%x22, %x7 #pc 40692
 	sw	%x1, 12(%x2)  #2511 pc 40696
 	lw	%x23, 0(%x22)  #2511 pc 40700
@@ -10730,7 +10730,7 @@ create_dirvecs.3089:  #pc 40768
 	sw	%x6, 8(%x2)  #2518 pc 40832
 	sw	%x5, 12(%x2)  #2518 pc 40836
 	sw	%x10, 16(%x2)  #2518 pc 40840
-	mv	%x5, %g0 #pc 40844
+	mv	%x5, %x0 #pc 40844
 	mv	%x22, %x9 #pc 40848
 	sw	%x1, 20(%x2)  #2518 pc 40852
 	lw	%x23, 0(%x22)  #2518 pc 40856
@@ -10890,7 +10890,7 @@ add_reflection.3098:  #pc 41384
 	fsw	%f6, 32(%x2)  #2554 pc 41444
 	fsw	%f4, 40(%x2)  #2554 pc 41448
 	fsw	%f2, 48(%x2)  #2554 pc 41452
-	mv	%x5, %g0 #pc 41456
+	mv	%x5, %x0 #pc 41456
 	sw	%x1, 60(%x2)  #2554 pc 41460
 	lw	%x23, 0(%x22)  #2554 pc 41464
 	addi	%x2, %x2, 64  #2554 pc 41468
@@ -11388,7 +11388,7 @@ rt.3113:  #pc 43008
 	add	%x24, %x0, %x5  #2618 pc 43400
 	fsw	%f0, 0(%x24) #2618 pc 43404
 	lw	%x22, 44(%x2)  #2619 pc 43408
-	mv	%x5, %g0 #pc 43412
+	mv	%x5, %x0 #pc 43412
 	sw	%x1, 76(%x2)  #2619 pc 43416
 	lw	%x23, 0(%x22)  #2619 pc 43420
 	addi	%x2, %x2, 80  #2619 pc 43424
@@ -11397,7 +11397,7 @@ rt.3113:  #pc 43008
 	lw	%x1, 76(%x2)  #2619 pc 43436
 	lw	%x22, 44(%x2)  #2620 pc 43440
 	sw	%x5, 72(%x2)  #2620 pc 43444
-	mv	%x5, %g0 #pc 43448
+	mv	%x5, %x0 #pc 43448
 	sw	%x1, 76(%x2)  #2620 pc 43452
 	lw	%x23, 0(%x22)  #2620 pc 43456
 	addi	%x2, %x2, 80  #2620 pc 43460
@@ -11406,7 +11406,7 @@ rt.3113:  #pc 43008
 	lw	%x1, 76(%x2)  #2620 pc 43472
 	lw	%x22, 44(%x2)  #2621 pc 43476
 	sw	%x5, 76(%x2)  #2621 pc 43480
-	mv	%x5, %g0 #pc 43484
+	mv	%x5, %x0 #pc 43484
 	sw	%x1, 84(%x2)  #2621 pc 43488
 	lw	%x23, 0(%x22)  #2621 pc 43492
 	addi	%x2, %x2, 88  #2621 pc 43496
@@ -11415,7 +11415,7 @@ rt.3113:  #pc 43008
 	lw	%x1, 84(%x2)  #2621 pc 43508
 	lw	%x22, 40(%x2)  #2622 pc 43512
 	sw	%x5, 80(%x2)  #2622 pc 43516
-	mv	%x5, %g0 #pc 43520
+	mv	%x5, %x0 #pc 43520
 	sw	%x1, 84(%x2)  #2622 pc 43524
 	lw	%x23, 0(%x22)  #2622 pc 43528
 	addi	%x2, %x2, 88  #2622 pc 43532
@@ -11431,7 +11431,7 @@ rt.3113:  #pc 43008
 	addi	%x2, %x2, -88  #2623 pc 43572
 	lw	%x1, 84(%x2)  #2623 pc 43576
 	lw	%x22, 28(%x2)  #2624 pc 43580
-	mv	%x5, %g0 #pc 43584
+	mv	%x5, %x0 #pc 43584
 	sw	%x1, 84(%x2)  #2624 pc 43588
 	lw	%x23, 0(%x22)  #2624 pc 43592
 	addi	%x2, %x2, 88  #2624 pc 43596

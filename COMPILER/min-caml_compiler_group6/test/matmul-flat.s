@@ -546,7 +546,7 @@ min_caml_start:
 	jal	%x1, print_int.342  #223 pc 1960
 	addi	%x2, %x2, -32  #223 pc 1964
 	lw	%x1, 28(%x2) #223 pc 1968
-	mv	%x5, %g0 #pc 1972
+	mv	%x5, %x0 #pc 1972
 	sw	%x1, 28(%x2)  #224 pc 1976
 	addi	%x2, %x2, 32  #224 pc 1980
 	jal	%x1, min_caml_print_newline  #224 pc 1984
@@ -568,7 +568,7 @@ min_caml_start:
 	jal	%x1, print_int.342  #225 pc 2048
 	addi	%x2, %x2, -32  #225 pc 2052
 	lw	%x1, 28(%x2) #225 pc 2056
-	mv	%x5, %g0 #pc 2060
+	mv	%x5, %x0 #pc 2060
 	sw	%x1, 28(%x2)  #226 pc 2064
 	addi	%x2, %x2, 32  #226 pc 2068
 	jal	%x1, min_caml_print_newline  #226 pc 2072
@@ -590,7 +590,7 @@ min_caml_start:
 	jal	%x1, print_int.342  #227 pc 2136
 	addi	%x2, %x2, -32  #227 pc 2140
 	lw	%x1, 28(%x2) #227 pc 2144
-	mv	%x5, %g0 #pc 2148
+	mv	%x5, %x0 #pc 2148
 	sw	%x1, 28(%x2)  #228 pc 2152
 	addi	%x2, %x2, 32  #228 pc 2156
 	jal	%x1, min_caml_print_newline  #228 pc 2160
@@ -613,7 +613,7 @@ min_caml_start:
 	jal	%x1, print_int.342  #229 pc 2228
 	addi	%x2, %x2, -32  #229 pc 2232
 	lw	%x1, 28(%x2) #229 pc 2236
-	mv	%x5, %g0 #pc 2240
+	mv	%x5, %x0 #pc 2240
 	sw	%x1, 28(%x2)  #230 pc 2244
 	addi	%x2, %x2, 32  #230 pc 2248
 	jal	%x1, min_caml_print_newline  #230 pc 2252

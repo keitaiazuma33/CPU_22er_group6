@@ -268,7 +268,11 @@ and g'_args oc x_reg_cl ys zs =
       (0, x_reg_cl)
       ys in
   List.iter
-    (fun (y, r) -> incr_pc ();Printf.fprintf oc "\tmv\t%s, %s #pc %d\n" r y (!pc))
+    (fun (y, r) -> incr_pc ();
+                  (if y = "%g0" then 
+                    Printf.fprintf oc "\tmv\t%s, %s #pc %d\n" r reg_zero (!pc)
+                  else  
+                    Printf.fprintf oc "\tmv\t%s, %s #pc %d\n" r y (!pc)))
     (shuffle reg_sw yrs);
   let (d, zfrs) =
     List.fold_left

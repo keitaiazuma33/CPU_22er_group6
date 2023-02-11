@@ -238,7 +238,7 @@ min_caml_start:
 	nop #pc 828
 	sw	%x6, 8(%x2)  #194 pc 832
 	sw	%x5, 12(%x2)  #194 pc 836
-	mv	%x5, %g0 #pc 840
+	mv	%x5, %x0 #pc 840
 	sw	%x1, 20(%x2)  #194 pc 844
 	addi	%x2, %x2, 24  #194 pc 848
 	jal	%x1, f.243  #194 pc 852

@@ -234,7 +234,7 @@ min_caml_start:
 	addi	%x2, %x2, -16  #194 pc 808
 	lw	%x1, 12(%x2) #194 pc 812
 	sw	%x5, 8(%x2)  #195 pc 816
-	mv	%x5, %g0 #pc 820
+	mv	%x5, %x0 #pc 820
 	sw	%x1, 12(%x2)  #195 pc 824
 	addi	%x2, %x2, 16  #195 pc 828
 	jal	%x1, f.256  #195 pc 832

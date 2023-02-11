@@ -16,21 +16,21 @@ h.16:  #pc 24
 .global	min_caml_start
 min_caml_start:
 	addi	%x2, %x2, -112
-	mv	%x5, %g0 #pc 40
+	mv	%x5, %x0 #pc 40
 	sw	%x1, 12(%x2)  #5 pc 44
 	addi	%x2, %x2, 16  #5 pc 48
 	jal	%x1, f.12  #5 pc 52
 	addi	%x2, %x2, -16  #5 pc 56
 	lw	%x1, 12(%x2) #5 pc 60
 	sw	%x5, 8(%x2)  #6 pc 64
-	mv	%x5, %g0 #pc 68
+	mv	%x5, %x0 #pc 68
 	sw	%x1, 12(%x2)  #6 pc 72
 	addi	%x2, %x2, 16  #6 pc 76
 	jal	%x1, g.14  #6 pc 80
 	addi	%x2, %x2, -16  #6 pc 84
 	lw	%x1, 12(%x2) #6 pc 88
 	sw	%x5, 12(%x2)  #7 pc 92
-	mv	%x5, %g0 #pc 96
+	mv	%x5, %x0 #pc 96
 	sw	%x1, 20(%x2)  #7 pc 100
 	addi	%x2, %x2, 24  #7 pc 104
 	jal	%x1, h.16  #7 pc 108

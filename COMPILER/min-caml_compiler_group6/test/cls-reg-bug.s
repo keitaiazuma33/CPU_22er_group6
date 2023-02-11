@@ -177,7 +177,7 @@ min_caml_start:
 	jal	%x1, min_caml_print_int  #8 pc 672
 	addi	%x2, %x2, -16  #8 pc 676
 	lw	%x1, 12(%x2) #8 pc 680
-	mv	%x5, %g0 #pc 684
+	mv	%x5, %x0 #pc 684
 	sw	%x1, 12(%x2)  #9 pc 688
 	addi	%x2, %x2, 16  #9 pc 692
 	jal	%x1, min_caml_print_newline  #9 pc 696
