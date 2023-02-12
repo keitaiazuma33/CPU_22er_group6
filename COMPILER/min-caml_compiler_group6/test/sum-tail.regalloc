@@ -1,36 +1,44 @@
-Name : sum.8
-Args : %x5 %x6 
+Name : print_int.159
+Args : %x6 
 
 FArgs : 
 Body :
 ANS
-	IFLE %x6 0
+	OUT %x6
+
+Name : sum.179
+Args : %x6 %x7 
+
+FArgs : 
+Body :
+ANS
+	IFLE %x7 0
 		ANS
-			MOV %x5
+			MOV %x6
 		LET
-			%x5
-			ADD %x5 %x6
+			%x6
+			ADD %x6 %x7
 			LET
-				%x6
-				SUB %x6 1
+				%x7
+				SUB %x7 1
 				ANS
-					CALLDIR sum.8
-						%x5 %x6 
+					CALLDIR sum.179
+						%x6 %x7 
 						
 
 
 LET
-	%x5
+	%x6
 	SET 0
 	LET
-		%x6
+		%x7
 		SET 10000
 		LET
-			%x5
-			CALLDIR sum.8
-				%x5 %x6 
+			%x6
+			CALLDIR sum.179
+				%x6 %x7 
 				
 			ANS
-				CALLDIR min_caml_print_int
-					%x5 
+				CALLDIR print_int.159
+					%x6 
 					

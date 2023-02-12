@@ -1,15 +1,17 @@
-LET REC f.6 x.7 
-	LET Ti5.14
-		INT 123
-		ADD x.7 Ti5.14
-	LET REC g.8 y.9 
-		VAR f.6
-		LET Ti1.13
-			INT 456
-			LET Tf2.11
-				APP g.8 Ti1.13 
-				LET Ti3.12
-					INT 789
-					LET Ti4.10
-						APP Tf2.11 Ti3.12 
-						EXTFUNAPP print_int Ti4.10 
+LET REC print_int.157 a.158 
+	OUT a.158
+	LET REC f.177 x.178 
+		LET Ti11.185
+			INT 123
+			ADD x.178 Ti11.185
+		LET REC g.179 y.180 
+			VAR f.177
+			LET Ti7.184
+				INT 456
+				LET Tf8.182
+					APP g.179 Ti7.184 
+					LET Ti9.183
+						INT 789
+						LET Ti10.181
+							APP Tf8.182 Ti9.183 
+							APP print_int.157 Ti10.181 

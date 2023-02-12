@@ -1,240 +1,82 @@
-Name : mul_abs.193
-Args : a.194 b.195 i.196 acc.197 
+Name : print_int.160
+Args : a.161 
 Formal_fv : 
 Body :
-LET Ti113.372
-	INT -1
-	IFEQ i.196 Ti113.372
-		VAR acc.197
-		LET Ti114.382
-			INT 1
-			LET Ti115.381
-				SLL Ti114.382 i.196
-				LET Ti116.373
-					AND b.195 Ti115.381
-					LET Ti117.374
-						INT 0
-						IFEQ Ti116.373 Ti117.374
-							LET Ti118.380
-								INT 1
-								LET Ti119.379
-									SUB i.196 Ti118.380
-									APPDIR mul_abs.193 : a.194 b.195 Ti119.379 acc.197 
-							LET Ti120.378
-								INT 1
-								LET Ti121.375
-									SUB i.196 Ti120.378
-									LET Ti122.377
-										SLL a.194 i.196
-										LET Ti123.376
-											ADD acc.197 Ti122.377
-											APPDIR mul_abs.193 : a.194 b.195 Ti121.375 Ti123.376 
+OUT a.161
 
-Name : mul.198
-Args : a.199 b.200 
+Name : assign_array.166
+Args : hp.167 a.168 n.169 
 Formal_fv : 
 Body :
-LET Ti104.371
+LET Ti31.216
 	INT 0
-	LET abs_a.361
-		IFLE Ti104.371 a.199
-			VAR a.199
-			NEG a.199
-		LET Ti105.370
+	IFLE Ti31.216 n.169
+		LET Ti32.217
 			INT 0
-			LET abs_b.362
-				IFLE Ti105.370 b.200
-					VAR b.200
-					NEG b.200
-				LET Ti106.368
-					INT 30
-					LET Ti107.369
-						INT 0
-						LET abs_mul.363
-							APPDIR mul_abs.193 : abs_a.361 abs_b.362 Ti106.368 Ti107.369 
-							LET Ti108.367
-								INT 31
-								LET Ti109.364
-									SRL a.199 Ti108.367
-									LET Ti110.366
-										INT 31
-										LET Ti111.365
-											SRL b.200 Ti110.366
-											IFEQ Ti109.364 Ti111.365
-												VAR abs_mul.363
-												NEG abs_mul.363
+			IFEQ n.169 Ti32.217
+				PUT hp.167 n.169 a.168
+				LET Tu1.218
+					PUT hp.167 n.169 a.168
+					LET Ti33.220
+						INT 1
+						LET Ti34.219
+							SUB n.169 Ti33.220
+							APPDIR assign_array.166 : hp.167 a.168 Ti34.219 
+		UNIT
 
-Name : div_abs.201
-Args : a.202 b.203 i.204 acc.205 
+Name : create_array.170
+Args : n.171 a.172 
 Formal_fv : 
 Body :
-LET Ti93.349
-	INT -1
-	IFEQ i.204 Ti93.349
-		VAR acc.205
-		LET Ti94.350
-			SRL a.202 i.204
-			IFLE b.203 Ti94.350
-				LET Ti95.359
-					SLL b.203 i.204
-					LET Ti96.353
-						SUB a.202 Ti95.359
-						LET Ti97.358
-							INT 1
-							LET Ti98.354
-								SUB i.204 Ti97.358
-								LET Ti99.357
-									INT 1
-									LET Ti100.356
-										SLL Ti99.357 i.204
-										LET Ti101.355
-											ADD acc.205 Ti100.356
-											APPDIR div_abs.201 : Ti96.353 b.203 Ti98.354 Ti101.355 
-				LET Ti102.352
-					INT 1
-					LET Ti103.351
-						SUB i.204 Ti102.352
-						APPDIR div_abs.201 : a.202 b.203 Ti103.351 acc.205 
-
-Name : div.206
-Args : a.207 b.208 
-Formal_fv : 
-Body :
-LET Ti84.348
-	INT 0
-	LET abs_a.338
-		IFLE Ti84.348 a.207
-			VAR a.207
-			NEG a.207
-		LET Ti85.347
-			INT 0
-			LET abs_b.339
-				IFLE Ti85.347 b.208
-					VAR b.208
-					NEG b.208
-				LET Ti86.345
-					INT 30
-					LET Ti87.346
-						INT 0
-						LET abs_div.340
-							APPDIR div_abs.201 : abs_a.338 abs_b.339 Ti86.345 Ti87.346 
-							LET Ti88.344
-								INT 31
-								LET Ti89.341
-									SRL a.207 Ti88.344
-									LET Ti90.343
-										INT 31
-										LET Ti91.342
-											SRL b.208 Ti90.343
-											IFEQ Ti89.341 Ti91.342
-												VAR abs_div.340
-												NEG abs_div.340
-
-Name : print_int.211
-Args : a.212 
-Formal_fv : 
-Body :
-LET Ti72.323
-	INT 0
-	IFLE Ti72.323 a.212
-		LET Ti73.327
-			INT 10
-			IFLE Ti73.327 a.212
-				LET Ti74.337
-					INT 10
-					LET b.330
-						APPDIR div.206 : a.212 Ti74.337 
-						LET Tu2.331
-							APPDIR print_int.211 : b.330 
-							LET Ti75.336
-								INT 10
-								LET Ti76.335
-									APPDIR mul.198 : b.330 Ti75.336 
-									LET Ti77.333
-										SUB a.212 Ti76.335
-										LET Ti78.334
-											INT 48
-											LET Ti79.332
-												ADD Ti77.333 Ti78.334
-												OUT Ti79.332
-				LET Ti80.329
-					INT 48
-					LET Ti81.328
-						ADD a.212 Ti80.329
-						OUT Ti81.328
-		LET Ti82.326
-			INT 45
-			LET Tu1.324
-				OUT Ti82.326
-				LET Ti83.325
-					NEG a.212
-					APPDIR print_int.211 : Ti83.325 
-
-Name : assign_array.225
-Args : hp.226 a.227 n.228 
-Formal_fv : 
-Body :
-LET Ti28.270
-	INT 0
-	IFEQ n.228 Ti28.270
-		PUT hp.226 n.228 a.227
-		LET Tu3.271
-			PUT hp.226 n.228 a.227
-			LET Ti29.273
-				INT 1
-				LET Ti30.272
-					SUB n.228 Ti29.273
-					APPDIR assign_array.225 : hp.226 a.227 Ti30.272 
-
-Name : create_array.229
-Args : n.230 a.231 
-Formal_fv : 
-Body :
-LET Tu24.269
+LET Tu25.215
 	UNIT
-	LET hp.262
+	LET hp.206
 		GETHP
-		LET hp_array.263
-			ITOIA hp.262
-			LET Ti25.268
+		LET hp_array.207
+			ITOIA hp.206
+			LET Ti26.214
 				INT 2
-				LET Ti26.267
-					SLL n.230 Ti25.268
-					LET Ti27.266
-						ADD hp.262 Ti26.267
-						LET Tu5.264
-							SETHP Ti27.266
-							LET Tu4.265
-								APPDIR assign_array.225 : hp_array.263 a.231 n.230 
-								VAR hp_array.263
+				LET Ti27.213
+					SLL n.171 Ti26.214
+					LET Ti28.212
+						ADD hp.206 Ti27.213
+						LET Tu3.208
+							SETHP Ti28.212
+							LET Ti29.211
+								INT 1
+								LET Ti30.210
+									SUB n.171 Ti29.211
+									LET Tu2.209
+										APPDIR assign_array.166 : hp_array.207 a.172 Ti30.210 
+										VAR hp_array.207
 
-Name : f.239
-Args : n.240 
+Name : f.180
+Args : n.181 
 Formal_fv : 
 Body :
-LET Ti11.242
+LET Ti9.183
 	INT 0
-	IFLE Ti11.242 n.240
-		LET Tu9.243
-			APPDIR print_int.211 : n.240 
-			LET Ti12.249
+	IFLE Ti9.183 n.181
+		LET Tu7.184
+			APPDIR print_int.160 : n.181 
+			LET Ti10.190
 				INT 1
-				LET a.244
-					APPDIR create_array.229 : Ti12.249 f.239 
-					LET Ti13.248
+				LET a.185
+					APPDIR create_array.170 : Ti10.190 f.180 
+					LET Ti11.189
 						INT 0
-						LET Tf14.245
-							GET a.244 Ti13.248
-							LET Ti15.247
+						LET Tf12.186
+							GET a.185 Ti11.189
+							LET Ti13.188
 								INT 1
-								LET Ti16.246
-									SUB n.240 Ti15.247
-									APPCLS Tf14.245 : Ti16.246 
+								LET Ti14.187
+									SUB n.181 Ti13.188
+									APPCLS Tf12.186 : Ti14.187 
 		UNIT
 
 
-MAKECLS f.239
-	f.239 : 
-	LET Ti10.241
+MAKECLS f.180
+	f.180 : 
+	LET Ti8.182
 		INT 9
-		APPCLS f.239 : Ti10.241 
+		APPCLS f.180 : Ti8.182 

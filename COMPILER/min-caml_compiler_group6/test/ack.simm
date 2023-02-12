@@ -1,53 +1,61 @@
-Name : ack.15
-Args : x.16 y.17 
+Name : print_int.166
+Args : a.167 
 
 FArgs : 
 Body :
 ANS
-	IFLE x.16 0
+	OUT a.167
+
+Name : ack.186
+Args : x.187 y.188 
+
+FArgs : 
+Body :
+ANS
+	IFLE x.187 0
 		ANS
-			ADD y.17 1
+			ADD y.188 1
 		ANS
-			IFLE y.17 0
+			IFLE y.188 0
 				LET
-					Ti8.28
-					SUB x.16 1
+					Ti14.199
+					SUB x.187 1
 					LET
-						Ti9.29
+						Ti15.200
 						SET 1
 						ANS
-							CALLDIR ack.15
-								Ti8.28 Ti9.29 
+							CALLDIR ack.186
+								Ti14.199 Ti15.200 
 								
 				LET
-					Ti11.23
-					SUB x.16 1
+					Ti17.194
+					SUB x.187 1
 					LET
-						Ti13.25
-						SUB y.17 1
+						Ti19.196
+						SUB y.188 1
 						LET
-							Ti14.24
-							CALLDIR ack.15
-								x.16 Ti13.25 
+							Ti20.195
+							CALLDIR ack.186
+								x.187 Ti19.196 
 								
 							ANS
-								CALLDIR ack.15
-									Ti11.23 Ti14.24 
+								CALLDIR ack.186
+									Ti17.194 Ti20.195 
 									
 
 
 LET
-	Ti1.19
+	Ti7.190
 	SET 3
 	LET
-		Ti2.20
+		Ti8.191
 		SET 10
 		LET
-			Ti3.18
-			CALLDIR ack.15
-				Ti1.19 Ti2.20 
+			Ti9.189
+			CALLDIR ack.186
+				Ti7.190 Ti8.191 
 				
 			ANS
-				CALLDIR min_caml_print_int
-					Ti3.18 
+				CALLDIR print_int.166
+					Ti9.189 
 					

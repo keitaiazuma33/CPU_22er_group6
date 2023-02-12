@@ -1,1253 +1,1002 @@
-Name : mul_abs.324
-Args : a.325 b.326 i.327 acc.328 
+Name : print_int.291
+Args : a.292 
+
+FArgs : 
+Body :
+ANS
+	OUT a.292
+
+Name : assign_array.297
+Args : hp.298 a.299 n.300 
 
 FArgs : 
 Body :
 LET
-	Ti244.654
-	SET -1
-	ANS
-		IFEQ i.327 Ti244.654
-			ANS
-				MOV acc.328
-			LET
-				Ti245.664
-				SET 1
-				LET
-					Ti246.663
-					SLL Ti245.664 i.327
-					LET
-						Ti247.655
-						AND b.326 Ti246.663
-						LET
-							Ti248.656
-							SET 0
-							ANS
-								IFEQ Ti247.655 Ti248.656
-									LET
-										Ti249.662
-										SET 1
-										LET
-											Ti250.661
-											SUB i.327 Ti249.662
-											ANS
-												CALLDIR mul_abs.324
-													a.325 b.326 Ti250.661 acc.328 
-													
-									LET
-										Ti251.660
-										SET 1
-										LET
-											Ti252.657
-											SUB i.327 Ti251.660
-											LET
-												Ti253.659
-												SLL a.325 i.327
-												LET
-													Ti254.658
-													ADD acc.328 Ti253.659
-													ANS
-														CALLDIR mul_abs.324
-															a.325 b.326 Ti252.657 Ti254.658 
-															
-
-Name : mul.329
-Args : a.330 b.331 
-
-FArgs : 
-Body :
-LET
-	Ti235.653
+	Ti162.498
 	SET 0
-	LET
-		abs_a.643
-		IFLE Ti235.653 a.330
-			ANS
-				MOV a.330
-			ANS
-				NEG a.330
-		LET
-			Ti236.652
-			SET 0
-			LET
-				abs_b.644
-				IFLE Ti236.652 b.331
-					ANS
-						MOV b.331
-					ANS
-						NEG b.331
-				LET
-					Ti237.650
-					SET 30
-					LET
-						Ti238.651
-						SET 0
-						LET
-							abs_mul.645
-							CALLDIR mul_abs.324
-								abs_a.643 abs_b.644 Ti237.650 Ti238.651 
-								
-							LET
-								Ti239.649
-								SET 31
-								LET
-									Ti240.646
-									SRL a.330 Ti239.649
-									LET
-										Ti241.648
-										SET 31
-										LET
-											Ti242.647
-											SRL b.331 Ti241.648
-											ANS
-												IFEQ Ti240.646 Ti242.647
-													ANS
-														MOV abs_mul.645
-													ANS
-														NEG abs_mul.645
-
-Name : div_abs.332
-Args : a.333 b.334 i.335 acc.336 
-
-FArgs : 
-Body :
-LET
-	Ti224.631
-	SET -1
 	ANS
-		IFEQ i.335 Ti224.631
-			ANS
-				MOV acc.336
+		IFLE Ti162.498 n.300
 			LET
-				Ti225.632
-				SRL a.333 i.335
+				Ti163.499
+				SET 0
 				ANS
-					IFLE b.334 Ti225.632
+					IFEQ n.300 Ti163.499
 						LET
-							Ti226.641
-							SLL b.334 i.335
+							o.603
+							SLL n.300 2
+							ANS
+								ST a.299 hp.298 o.603
+						LET
+							o.602
+							SLL n.300 2
 							LET
-								Ti227.635
-								SUB a.333 Ti226.641
+								Tu1.500
+								ST a.299 hp.298 o.602
 								LET
-									Ti228.640
+									Ti164.502
 									SET 1
 									LET
-										Ti229.636
-										SUB i.335 Ti228.640
-										LET
-											Ti230.639
-											SET 1
-											LET
-												Ti231.638
-												SLL Ti230.639 i.335
-												LET
-													Ti232.637
-													ADD acc.336 Ti231.638
-													ANS
-														CALLDIR div_abs.332
-															Ti227.635 b.334 Ti229.636 Ti232.637 
-															
-						LET
-							Ti233.634
-							SET 1
-							LET
-								Ti234.633
-								SUB i.335 Ti233.634
-								ANS
-									CALLDIR div_abs.332
-										a.333 b.334 Ti234.633 acc.336 
-										
-
-Name : div.337
-Args : a.338 b.339 
-
-FArgs : 
-Body :
-LET
-	Ti215.630
-	SET 0
-	LET
-		abs_a.620
-		IFLE Ti215.630 a.338
-			ANS
-				MOV a.338
-			ANS
-				NEG a.338
-		LET
-			Ti216.629
-			SET 0
-			LET
-				abs_b.621
-				IFLE Ti216.629 b.339
-					ANS
-						MOV b.339
-					ANS
-						NEG b.339
-				LET
-					Ti217.627
-					SET 30
-					LET
-						Ti218.628
-						SET 0
-						LET
-							abs_div.622
-							CALLDIR div_abs.332
-								abs_a.620 abs_b.621 Ti217.627 Ti218.628 
-								
-							LET
-								Ti219.626
-								SET 31
-								LET
-									Ti220.623
-									SRL a.338 Ti219.626
-									LET
-										Ti221.625
-										SET 31
-										LET
-											Ti222.624
-											SRL b.339 Ti221.625
-											ANS
-												IFEQ Ti220.623 Ti222.624
-													ANS
-														MOV abs_div.622
-													ANS
-														NEG abs_div.622
-
-Name : print_int.342
-Args : a.343 
-
-FArgs : 
-Body :
-LET
-	Ti203.605
-	SET 0
-	ANS
-		IFLE Ti203.605 a.343
-			LET
-				Ti204.609
-				SET 10
-				ANS
-					IFLE Ti204.609 a.343
-						LET
-							Ti205.619
-							SET 10
-							LET
-								b.612
-								CALLDIR div.337
-									a.343 Ti205.619 
-									
-								LET
-									Tu2.613
-									CALLDIR print_int.342
-										b.612 
-										
-									LET
-										Ti206.618
-										SET 10
-										LET
-											Ti207.617
-											CALLDIR mul.329
-												b.612 Ti206.618 
+										Ti165.501
+										SUB n.300 Ti164.502
+										ANS
+											CALLDIR assign_array.297
+												hp.298 a.299 Ti165.501 
 												
-											LET
-												Ti208.615
-												SUB a.343 Ti207.617
-												LET
-													Ti209.616
-													SET 48
-													LET
-														Ti210.614
-														ADD Ti208.615 Ti209.616
-														ANS
-															OUT Ti210.614
-						LET
-							Ti211.611
-							SET 48
-							LET
-								Ti212.610
-								ADD a.343 Ti211.611
-								ANS
-									OUT Ti212.610
-			LET
-				Ti213.608
-				SET 45
-				LET
-					Tu1.606
-					OUT Ti213.608
-					LET
-						Ti214.607
-						NEG a.343
-						ANS
-							CALLDIR print_int.342
-								Ti214.607 
-								
+			ANS
+				NOP
 
-Name : assign_array.356
-Args : hp.357 a.358 n.359 
+Name : create_array.301
+Args : n.302 a.303 
 
 FArgs : 
 Body :
 LET
-	Ti159.552
-	SET 0
-	ANS
-		IFEQ n.359 Ti159.552
-			LET
-				o.720
-				SLL n.359 2
-				ANS
-					ST a.358 hp.357 o.720
-			LET
-				o.719
-				SLL n.359 2
-				LET
-					Tu3.553
-					ST a.358 hp.357 o.719
-					LET
-						Ti160.555
-						SET 1
-						LET
-							Ti161.554
-							SUB n.359 Ti160.555
-							ANS
-								CALLDIR assign_array.356
-									hp.357 a.358 Ti161.554 
-									
-
-Name : create_array.360
-Args : n.361 a.362 
-
-FArgs : 
-Body :
-LET
-	Tu155.551
+	Tu156.497
 	NOP
 	LET
-		hp.544
+		hp.488
 		GETHP
 		LET
-			hp_array.545
-			MOV hp.544
+			hp_array.489
+			MOV hp.488
 			LET
-				Ti156.550
+				Ti157.496
 				SET 2
 				LET
-					Ti157.549
-					SLL n.361 Ti156.550
+					Ti158.495
+					SLL n.302 Ti157.496
 					LET
-						Ti158.548
-						ADD hp.544 Ti157.549
+						Ti159.494
+						ADD hp.488 Ti158.495
 						LET
-							Tu5.546
-							SETHP Ti158.548
+							Tu3.490
+							SETHP Ti159.494
 							LET
-								Tu4.547
-								CALLDIR assign_array.356
-									hp_array.545 a.362 n.361 
-									
-								ANS
-									MOV hp_array.545
+								Ti160.493
+								SET 1
+								LET
+									Ti161.492
+									SUB n.302 Ti160.493
+									LET
+										Tu2.491
+										CALLDIR assign_array.297
+											hp_array.489 a.303 Ti161.492 
+											
+										ANS
+											MOV hp_array.489
 
-Name : assign_farray.363
-Args : hp.364 n.366 
+Name : assign_farray.304
+Args : hp.305 n.307 
 
-FArgs : a.365 
+FArgs : a.306 
 Body :
 LET
-	Ti152.540
+	Ti152.483
 	SET 0
 	ANS
-		IFEQ n.366 Ti152.540
+		IFLE Ti152.483 n.307
 			LET
-				o.722
-				SLL n.366 2
+				Ti153.484
+				SET 0
 				ANS
-					STDF a.365 hp.364 o.722
-			LET
-				o.721
-				SLL n.366 2
-				LET
-					Tu6.541
-					STDF a.365 hp.364 o.721
-					LET
-						Ti153.543
-						SET 1
+					IFEQ n.307 Ti153.484
 						LET
-							Ti154.542
-							SUB n.366 Ti153.543
+							o.605
+							SLL n.307 2
 							ANS
-								CALLDIR assign_farray.363
-									hp.364 Ti154.542 
-									a.365 
+								STDF a.306 hp.305 o.605
+						LET
+							o.604
+							SLL n.307 2
+							LET
+								Tu4.485
+								STDF a.306 hp.305 o.604
+								LET
+									Ti154.487
+									SET 1
+									LET
+										Ti155.486
+										SUB n.307 Ti154.487
+										ANS
+											CALLDIR assign_farray.304
+												hp.305 Ti155.486 
+												a.306 
+			ANS
+				NOP
 
-Name : create_float_array.367
-Args : n.368 
+Name : create_float_array.308
+Args : n.309 
 
-FArgs : a.369 
+FArgs : a.310 
 Body :
 LET
-	Tu148.539
+	Tu146.482
 	NOP
 	LET
-		hp.532
+		hp.473
 		GETHP
 		LET
-			hp_array.533
-			MOV hp.532
+			hp_array.474
+			MOV hp.473
 			LET
-				Ti149.538
-				SET 3
+				Ti147.481
+				SET 2
 				LET
-					Ti150.537
-					SLL n.368 Ti149.538
+					Ti148.480
+					SLL n.309 Ti147.481
 					LET
-						Ti151.536
-						ADD hp.532 Ti150.537
+						Ti149.479
+						ADD hp.473 Ti148.480
 						LET
-							Tu8.534
-							SETHP Ti151.536
+							Tu6.475
+							SETHP Ti149.479
 							LET
-								Tu7.535
-								CALLDIR assign_farray.363
-									hp_array.533 n.368 
-									a.369 
-								ANS
-									MOV hp_array.533
+								Ti150.478
+								SET 1
+								LET
+									Ti151.477
+									SUB n.309 Ti150.478
+									LET
+										Tu5.476
+										CALLDIR assign_farray.304
+											hp_array.474 Ti151.477 
+											a.310 
+										ANS
+											MOV hp_array.474
 
-Name : loop3.512
-Args : k.513 
+Name : loop3.453
+Args : k.454 
 
 FArgs : 
 Body :
 LET
-	j.505
-	LD loop3.512 20
+	j.446
+	LD loop3.453 20
 	LET
-		i.500
-		LD loop3.512 16
+		i.441
+		LD loop3.453 16
 		LET
-			c.376
-			LD loop3.512 12
+			c.317
+			LD loop3.453 12
 			LET
-				b.375
-				LD loop3.512 8
+				b.316
+				LD loop3.453 8
 				LET
-					a.374
-					LD loop3.512 4
+					a.315
+					LD loop3.453 4
 					LET
-						Ti136.519
+						Ti134.460
 						SET 0
 						ANS
-							IFLE Ti136.519 k.513
+							IFLE Ti134.460 k.454
 								LET
-									o.723
-									SLL i.500 2
+									o.606
+									SLL i.441 2
 									LET
-										Ta137.523
-										LD c.376 o.723
+										Ta135.464
+										LD c.317 o.606
 										LET
-											o.724
-											SLL i.500 2
+											o.607
+											SLL i.441 2
 											LET
-												Ta138.531
-												LD c.376 o.724
+												Ta136.472
+												LD c.317 o.607
 												LET
-													o.725
-													SLL j.505 2
+													o.608
+													SLL j.446 2
 													LET
-														Td139.525
-														LDDF Ta138.531 o.725
+														Td137.466
+														LDDF Ta136.472 o.608
 														LET
-															o.726
-															SLL i.500 2
+															o.609
+															SLL i.441 2
 															LET
-																Ta140.530
-																LD a.374 o.726
+																Ta138.471
+																LD a.315 o.609
 																LET
-																	o.727
-																	SLL k.513 2
+																	o.610
+																	SLL k.454 2
 																	LET
-																		Td141.527
-																		LDDF Ta140.530 o.727
+																		Td139.468
+																		LDDF Ta138.471 o.610
 																		LET
-																			o.728
-																			SLL k.513 2
+																			o.611
+																			SLL k.454 2
 																			LET
-																				Ta142.529
-																				LD b.375 o.728
+																				Ta140.470
+																				LD b.316 o.611
 																				LET
-																					o.729
-																					SLL j.505 2
+																					o.612
+																					SLL j.446 2
 																					LET
-																						Td143.528
-																						LDDF Ta142.529 o.729
+																						Td141.469
+																						LDDF Ta140.470 o.612
 																						LET
-																							Td144.526
-																							FMULD Td141.527 Td143.528
+																							Td142.467
+																							FMULD Td139.468 Td141.469
 																							LET
-																								Td145.524
-																								FADDD Td139.525 Td144.526
+																								Td143.465
+																								FADDD Td137.466 Td142.467
 																								LET
-																									o.730
-																									SLL j.505 2
+																									o.613
+																									SLL j.446 2
 																									LET
-																										Tu9.520
-																										STDF Td145.524 Ta137.523 o.730
+																										Tu7.461
+																										STDF Td143.465 Ta135.464 o.613
 																										LET
-																											Ti146.522
+																											Ti144.463
 																											SET 1
 																											LET
-																												Ti147.521
-																												SUB k.513 Ti146.522
+																												Ti145.462
+																												SUB k.454 Ti144.463
 																												ANS
-																													CALLCLS loop3.512
-																														Ti147.521 
+																													CALLCLS loop3.453
+																														Ti145.462 
 																														
 								ANS
 									NOP
 
-Name : loop2.504
-Args : j.505 
+Name : loop2.445
+Args : j.446 
 
 FArgs : 
 Body :
 LET
-	m.372
-	LD loop2.504 20
+	m.313
+	LD loop2.445 20
 	LET
-		i.500
-		LD loop2.504 16
+		i.441
+		LD loop2.445 16
 		LET
-			c.376
-			LD loop2.504 12
+			c.317
+			LD loop2.445 12
 			LET
-				b.375
-				LD loop2.504 8
+				b.316
+				LD loop2.445 8
 				LET
-					a.374
-					LD loop2.504 4
+					a.315
+					LD loop2.445 4
 					LET
-						Ti131.511
+						Ti129.452
 						SET 0
 						ANS
-							IFLE Ti131.511 j.505
+							IFLE Ti129.452 j.446
 								LET
-									loop3.512
+									loop3.453
 									MOV %x3
 									LET
 										%x3
 										ADD %x3 24
 										LET
-											l.736
-											loop3.512
+											l.619
+											loop3.453
 											LET
-												Tu737
-												ST l.736 loop3.512 0
+												Tu620
+												ST l.619 loop3.453 0
 												LET
-													Tu735
-													ST j.505 loop3.512 20
+													Tu618
+													ST j.446 loop3.453 20
 													LET
-														Tu734
-														ST i.500 loop3.512 16
+														Tu617
+														ST i.441 loop3.453 16
 														LET
-															Tu733
-															ST c.376 loop3.512 12
+															Tu616
+															ST c.317 loop3.453 12
 															LET
-																Tu732
-																ST b.375 loop3.512 8
+																Tu615
+																ST b.316 loop3.453 8
 																LET
-																	Tu731
-																	ST a.374 loop3.512 4
+																	Tu614
+																	ST a.315 loop3.453 4
 																	LET
-																		Ti132.518
+																		Ti130.459
 																		SET 1
 																		LET
-																			Ti133.517
-																			SUB m.372 Ti132.518
+																			Ti131.458
+																			SUB m.313 Ti130.459
 																			LET
-																				Tu10.514
-																				CALLCLS loop3.512
-																					Ti133.517 
+																				Tu8.455
+																				CALLCLS loop3.453
+																					Ti131.458 
 																					
 																				LET
-																					Ti134.516
+																					Ti132.457
 																					SET 1
 																					LET
-																						Ti135.515
-																						SUB j.505 Ti134.516
+																						Ti133.456
+																						SUB j.446 Ti132.457
 																						ANS
-																							CALLCLS loop2.504
-																								Ti135.515 
+																							CALLCLS loop2.445
+																								Ti133.456 
 																								
 								ANS
 									NOP
 
-Name : loop1.499
-Args : i.500 
+Name : loop1.440
+Args : i.441 
 
 FArgs : 
 Body :
 LET
-	n.373
-	LD loop1.499 20
+	n.314
+	LD loop1.440 20
 	LET
-		m.372
-		LD loop1.499 16
+		m.313
+		LD loop1.440 16
 		LET
-			c.376
-			LD loop1.499 12
+			c.317
+			LD loop1.440 12
 			LET
-				b.375
-				LD loop1.499 8
+				b.316
+				LD loop1.440 8
 				LET
-					a.374
-					LD loop1.499 4
+					a.315
+					LD loop1.440 4
 					LET
-						Ti126.503
+						Ti124.444
 						SET 0
 						ANS
-							IFLE Ti126.503 i.500
+							IFLE Ti124.444 i.441
 								LET
-									loop2.504
+									loop2.445
 									MOV %x3
 									LET
 										%x3
 										ADD %x3 24
 										LET
-											l.743
-											loop2.504
+											l.626
+											loop2.445
 											LET
-												Tu744
-												ST l.743 loop2.504 0
+												Tu627
+												ST l.626 loop2.445 0
 												LET
-													Tu742
-													ST m.372 loop2.504 20
+													Tu625
+													ST m.313 loop2.445 20
 													LET
-														Tu741
-														ST i.500 loop2.504 16
+														Tu624
+														ST i.441 loop2.445 16
 														LET
-															Tu740
-															ST c.376 loop2.504 12
+															Tu623
+															ST c.317 loop2.445 12
 															LET
-																Tu739
-																ST b.375 loop2.504 8
+																Tu622
+																ST b.316 loop2.445 8
 																LET
-																	Tu738
-																	ST a.374 loop2.504 4
+																	Tu621
+																	ST a.315 loop2.445 4
 																	LET
-																		Ti127.510
+																		Ti125.451
 																		SET 1
 																		LET
-																			Ti128.509
-																			SUB n.373 Ti127.510
+																			Ti126.450
+																			SUB n.314 Ti125.451
 																			LET
-																				Tu11.506
-																				CALLCLS loop2.504
-																					Ti128.509 
+																				Tu9.447
+																				CALLCLS loop2.445
+																					Ti126.450 
 																					
 																				LET
-																					Ti129.508
+																					Ti127.449
 																					SET 1
 																					LET
-																						Ti130.507
-																						SUB i.500 Ti129.508
+																						Ti128.448
+																						SUB i.441 Ti127.449
 																						ANS
-																							CALLCLS loop1.499
-																								Ti130.507 
+																							CALLCLS loop1.440
+																								Ti128.448 
 																								
 								ANS
 									NOP
 
-Name : mul.370
-Args : l.371 m.372 n.373 a.374 b.375 c.376 
+Name : mul.311
+Args : l.312 m.313 n.314 a.315 b.316 c.317 
 
 FArgs : 
 Body :
 LET
-	loop1.499
+	loop1.440
 	MOV %x3
 	LET
 		%x3
 		ADD %x3 24
 		LET
-			l.750
-			loop1.499
+			l.633
+			loop1.440
 			LET
-				Tu751
-				ST l.750 loop1.499 0
+				Tu634
+				ST l.633 loop1.440 0
 				LET
-					Tu749
-					ST n.373 loop1.499 20
+					Tu632
+					ST n.314 loop1.440 20
 					LET
-						Tu748
-						ST m.372 loop1.499 16
+						Tu631
+						ST m.313 loop1.440 16
 						LET
-							Tu747
-							ST c.376 loop1.499 12
+							Tu630
+							ST c.317 loop1.440 12
 							LET
-								Tu746
-								ST b.375 loop1.499 8
+								Tu629
+								ST b.316 loop1.440 8
 								LET
-									Tu745
-									ST a.374 loop1.499 4
+									Tu628
+									ST a.315 loop1.440 4
 									LET
-										Ti124.502
+										Ti122.443
 										SET 1
 										LET
-											Ti125.501
-											SUB l.371 Ti124.502
+											Ti123.442
+											SUB l.312 Ti122.443
 											ANS
-												CALLCLS loop1.499
-													Ti125.501 
+												CALLCLS loop1.440
+													Ti123.442 
 													
 
-Name : init.486
-Args : i.487 
+Name : init.427
+Args : i.428 
 
 FArgs : 
 Body :
 LET
-	n.380
-	LD init.486 8
+	n.321
+	LD init.427 8
 	LET
-		mat.485
-		LD init.486 4
+		mat.426
+		LD init.427 4
 		LET
-			Ti119.491
+			Ti117.432
 			SET 0
 			ANS
-				IFLE Ti119.491 i.487
+				IFLE Ti117.432 i.428
 					LET
-						Td120.496
-						l.752
+						Td118.437
+						l.635
 						LET
-							Ta121.495
-							CALLDIR create_float_array.367
-								n.380 
-								Td120.496 
+							Ta119.436
+							CALLDIR create_float_array.308
+								n.321 
+								Td118.437 
 							LET
-								o.754
-								SLL i.487 2
+								o.637
+								SLL i.428 2
 								LET
-									Tu12.492
-									ST Ta121.495 mat.485 o.754
+									Tu10.433
+									ST Ta119.436 mat.426 o.637
 									LET
-										Ti122.494
+										Ti120.435
 										SET 1
 										LET
-											Ti123.493
-											SUB i.487 Ti122.494
+											Ti121.434
+											SUB i.428 Ti120.435
 											ANS
-												CALLCLS init.486
-													Ti123.493 
+												CALLCLS init.427
+													Ti121.434 
 													
 					ANS
 						NOP
 
-Name : make.378
-Args : m.379 n.380 
+Name : make.319
+Args : m.320 n.321 
 
 FArgs : 
 Body :
 LET
-	dummy.377
-	LD make.378 4
+	dummy.318
+	LD make.319 4
 	LET
-		mat.485
-		CALLDIR create_array.360
-			m.379 dummy.377 
+		mat.426
+		CALLDIR create_array.301
+			m.320 dummy.318 
 			
 		LET
-			init.486
+			init.427
 			MOV %x3
 			LET
 				%x3
 				ADD %x3 12
 				LET
-					l.757
-					init.486
+					l.640
+					init.427
 					LET
-						Tu758
-						ST l.757 init.486 0
+						Tu641
+						ST l.640 init.427 0
 						LET
-							Tu756
-							ST n.380 init.486 8
+							Tu639
+							ST n.321 init.427 8
 							LET
-								Tu755
-								ST mat.485 init.486 4
+								Tu638
+								ST mat.426 init.427 4
 								LET
-									Ti117.490
+									Ti115.431
 									SET 1
 									LET
-										Ti118.489
-										SUB m.379 Ti117.490
+										Ti116.430
+										SUB m.320 Ti115.431
 										LET
-											Tu13.488
-											CALLCLS init.486
-												Ti118.489 
+											Tu11.429
+											CALLCLS init.427
+												Ti116.430 
 												
 											ANS
-												MOV mat.485
+												MOV mat.426
 
 
 LET
-	Ti34.497
+	Ti32.438
 	SET 0
 	LET
-		Td35.498
-		l.752
+		Td33.439
+		l.635
 		LET
-			dummy.377
-			CALLDIR create_float_array.367
-				Ti34.497 
-				Td35.498 
+			dummy.318
+			CALLDIR create_float_array.308
+				Ti32.438 
+				Td33.439 
 			LET
-				make.378
+				make.319
 				MOV %x3
 				LET
 					%x3
 					ADD %x3 8
 					LET
-						l.817
-						make.378
+						l.700
+						make.319
 						LET
-							Tu818
-							ST l.817 make.378 0
+							Tu701
+							ST l.700 make.319 0
 							LET
-								Tu816
-								ST dummy.377 make.378 4
+								Tu699
+								ST dummy.318 make.319 4
 								LET
-									Ti36.483
+									Ti34.424
 									SET 2
 									LET
-										Ti37.484
+										Ti35.425
 										SET 3
 										LET
-											a.381
-											CALLCLS make.378
-												Ti36.483 Ti37.484 
+											a.322
+											CALLCLS make.319
+												Ti34.424 Ti35.425 
 												
 											LET
-												Ti38.481
+												Ti36.422
 												SET 3
 												LET
-													Ti39.482
+													Ti37.423
 													SET 2
 													LET
-														b.382
-														CALLCLS make.378
-															Ti38.481 Ti39.482 
+														b.323
+														CALLCLS make.319
+															Ti36.422 Ti37.423 
 															
 														LET
-															Ti40.479
+															Ti38.420
 															SET 2
 															LET
-																c.383
-																CALLCLS make.378
-																	Ti40.479 Ti40.479 
+																c.324
+																CALLCLS make.319
+																	Ti38.420 Ti38.420 
 																	
 																LET
-																	Ti42.478
+																	Ti40.419
 																	SET 0
 																	LET
-																		o.760
-																		SLL Ti42.478 2
+																		o.643
+																		SLL Ti40.419 2
 																		LET
-																			Ta43.475
-																			LD a.381 o.760
+																			Ta41.416
+																			LD a.322 o.643
 																			LET
-																				Ti44.476
+																				Ti42.417
 																				SET 0
 																				LET
-																					Td45.477
-																					l.761
+																					Td43.418
+																					l.644
 																					LET
-																						o.763
-																						SLL Ti44.476 2
+																						o.646
+																						SLL Ti42.417 2
 																						LET
-																							Tu33.384
-																							STDF Td45.477 Ta43.475 o.763
+																							Tu31.325
+																							STDF Td43.418 Ta41.416 o.646
 																							LET
-																								Ti46.474
+																								Ti44.415
 																								SET 0
 																								LET
-																									o.764
-																									SLL Ti46.474 2
+																									o.647
+																									SLL Ti44.415 2
 																									LET
-																										Ta47.471
-																										LD a.381 o.764
+																										Ta45.412
+																										LD a.322 o.647
 																										LET
-																											Ti48.472
+																											Ti46.413
 																											SET 1
 																											LET
-																												Td49.473
-																												l.765
+																												Td47.414
+																												l.648
 																												LET
-																													o.767
-																													SLL Ti48.472 2
+																													o.650
+																													SLL Ti46.413 2
 																													LET
-																														Tu32.385
-																														STDF Td49.473 Ta47.471 o.767
+																														Tu30.326
+																														STDF Td47.414 Ta45.412 o.650
 																														LET
-																															Ti50.470
+																															Ti48.411
 																															SET 0
 																															LET
-																																o.768
-																																SLL Ti50.470 2
+																																o.651
+																																SLL Ti48.411 2
 																																LET
-																																	Ta51.467
-																																	LD a.381 o.768
+																																	Ta49.408
+																																	LD a.322 o.651
 																																	LET
-																																		Ti52.468
+																																		Ti50.409
 																																		SET 2
 																																		LET
-																																			Td53.469
-																																			l.769
+																																			Td51.410
+																																			l.652
 																																			LET
-																																				o.771
-																																				SLL Ti52.468 2
+																																				o.654
+																																				SLL Ti50.409 2
 																																				LET
-																																					Tu31.386
-																																					STDF Td53.469 Ta51.467 o.771
+																																					Tu29.327
+																																					STDF Td51.410 Ta49.408 o.654
 																																					LET
-																																						Ti54.466
+																																						Ti52.407
 																																						SET 1
 																																						LET
-																																							o.772
-																																							SLL Ti54.466 2
+																																							o.655
+																																							SLL Ti52.407 2
 																																							LET
-																																								Ta55.463
-																																								LD a.381 o.772
+																																								Ta53.404
+																																								LD a.322 o.655
 																																								LET
-																																									Ti56.464
+																																									Ti54.405
 																																									SET 0
 																																									LET
-																																										Td57.465
-																																										l.773
+																																										Td55.406
+																																										l.656
 																																										LET
-																																											o.775
-																																											SLL Ti56.464 2
+																																											o.658
+																																											SLL Ti54.405 2
 																																											LET
-																																												Tu30.387
-																																												STDF Td57.465 Ta55.463 o.775
+																																												Tu28.328
+																																												STDF Td55.406 Ta53.404 o.658
 																																												LET
-																																													Ti58.462
+																																													Ti56.403
 																																													SET 1
 																																													LET
-																																														o.776
-																																														SLL Ti58.462 2
+																																														o.659
+																																														SLL Ti56.403 2
 																																														LET
-																																															Ta59.459
-																																															LD a.381 o.776
+																																															Ta57.400
+																																															LD a.322 o.659
 																																															LET
-																																																Ti60.460
+																																																Ti58.401
 																																																SET 1
 																																																LET
-																																																	Td61.461
-																																																	l.777
+																																																	Td59.402
+																																																	l.660
 																																																	LET
-																																																		o.779
-																																																		SLL Ti60.460 2
+																																																		o.662
+																																																		SLL Ti58.401 2
 																																																		LET
-																																																			Tu29.388
-																																																			STDF Td61.461 Ta59.459 o.779
+																																																			Tu27.329
+																																																			STDF Td59.402 Ta57.400 o.662
 																																																			LET
-																																																				Ti62.458
+																																																				Ti60.399
 																																																				SET 1
 																																																				LET
-																																																					o.780
-																																																					SLL Ti62.458 2
+																																																					o.663
+																																																					SLL Ti60.399 2
 																																																					LET
-																																																						Ta63.455
-																																																						LD a.381 o.780
+																																																						Ta61.396
+																																																						LD a.322 o.663
 																																																						LET
-																																																							Ti64.456
+																																																							Ti62.397
 																																																							SET 2
 																																																							LET
-																																																								Td65.457
-																																																								l.781
+																																																								Td63.398
+																																																								l.664
 																																																								LET
-																																																									o.783
-																																																									SLL Ti64.456 2
+																																																									o.666
+																																																									SLL Ti62.397 2
 																																																									LET
-																																																										Tu28.389
-																																																										STDF Td65.457 Ta63.455 o.783
+																																																										Tu26.330
+																																																										STDF Td63.398 Ta61.396 o.666
 																																																										LET
-																																																											Ti66.454
+																																																											Ti64.395
 																																																											SET 0
 																																																											LET
-																																																												o.784
-																																																												SLL Ti66.454 2
+																																																												o.667
+																																																												SLL Ti64.395 2
 																																																												LET
-																																																													Ta67.451
-																																																													LD b.382 o.784
+																																																													Ta65.392
+																																																													LD b.323 o.667
 																																																													LET
-																																																														Ti68.452
+																																																														Ti66.393
 																																																														SET 0
 																																																														LET
-																																																															Td69.453
-																																																															l.785
+																																																															Td67.394
+																																																															l.668
 																																																															LET
-																																																																o.787
-																																																																SLL Ti68.452 2
+																																																																o.670
+																																																																SLL Ti66.393 2
 																																																																LET
-																																																																	Tu27.390
-																																																																	STDF Td69.453 Ta67.451 o.787
+																																																																	Tu25.331
+																																																																	STDF Td67.394 Ta65.392 o.670
 																																																																	LET
-																																																																		Ti70.450
+																																																																		Ti68.391
 																																																																		SET 0
 																																																																		LET
-																																																																			o.788
-																																																																			SLL Ti70.450 2
+																																																																			o.671
+																																																																			SLL Ti68.391 2
 																																																																			LET
-																																																																				Ta71.447
-																																																																				LD b.382 o.788
+																																																																				Ta69.388
+																																																																				LD b.323 o.671
 																																																																				LET
-																																																																					Ti72.448
+																																																																					Ti70.389
 																																																																					SET 1
 																																																																					LET
-																																																																						Td73.449
-																																																																						l.789
+																																																																						Td71.390
+																																																																						l.672
 																																																																						LET
-																																																																							o.791
-																																																																							SLL Ti72.448 2
+																																																																							o.674
+																																																																							SLL Ti70.389 2
 																																																																							LET
-																																																																								Tu26.391
-																																																																								STDF Td73.449 Ta71.447 o.791
+																																																																								Tu24.332
+																																																																								STDF Td71.390 Ta69.388 o.674
 																																																																								LET
-																																																																									Ti74.446
+																																																																									Ti72.387
 																																																																									SET 1
 																																																																									LET
-																																																																										o.792
-																																																																										SLL Ti74.446 2
+																																																																										o.675
+																																																																										SLL Ti72.387 2
 																																																																										LET
-																																																																											Ta75.443
-																																																																											LD b.382 o.792
+																																																																											Ta73.384
+																																																																											LD b.323 o.675
 																																																																											LET
-																																																																												Ti76.444
+																																																																												Ti74.385
 																																																																												SET 0
 																																																																												LET
-																																																																													Td77.445
-																																																																													l.793
+																																																																													Td75.386
+																																																																													l.676
 																																																																													LET
-																																																																														o.795
-																																																																														SLL Ti76.444 2
+																																																																														o.678
+																																																																														SLL Ti74.385 2
 																																																																														LET
-																																																																															Tu25.392
-																																																																															STDF Td77.445 Ta75.443 o.795
+																																																																															Tu23.333
+																																																																															STDF Td75.386 Ta73.384 o.678
 																																																																															LET
-																																																																																Ti78.442
+																																																																																Ti76.383
 																																																																																SET 1
 																																																																																LET
-																																																																																	o.796
-																																																																																	SLL Ti78.442 2
+																																																																																	o.679
+																																																																																	SLL Ti76.383 2
 																																																																																	LET
-																																																																																		Ta79.439
-																																																																																		LD b.382 o.796
+																																																																																		Ta77.380
+																																																																																		LD b.323 o.679
 																																																																																		LET
-																																																																																			Ti80.440
+																																																																																			Ti78.381
 																																																																																			SET 1
 																																																																																			LET
-																																																																																				Td81.441
-																																																																																				l.797
+																																																																																				Td79.382
+																																																																																				l.680
 																																																																																				LET
-																																																																																					o.799
-																																																																																					SLL Ti80.440 2
+																																																																																					o.682
+																																																																																					SLL Ti78.381 2
 																																																																																					LET
-																																																																																						Tu24.393
-																																																																																						STDF Td81.441 Ta79.439 o.799
+																																																																																						Tu22.334
+																																																																																						STDF Td79.382 Ta77.380 o.682
 																																																																																						LET
-																																																																																							Ti82.438
+																																																																																							Ti80.379
 																																																																																							SET 2
 																																																																																							LET
-																																																																																								o.800
-																																																																																								SLL Ti82.438 2
+																																																																																								o.683
+																																																																																								SLL Ti80.379 2
 																																																																																								LET
-																																																																																									Ta83.435
-																																																																																									LD b.382 o.800
+																																																																																									Ta81.376
+																																																																																									LD b.323 o.683
 																																																																																									LET
-																																																																																										Ti84.436
+																																																																																										Ti82.377
 																																																																																										SET 0
 																																																																																										LET
-																																																																																											Td85.437
-																																																																																											l.801
+																																																																																											Td83.378
+																																																																																											l.684
 																																																																																											LET
-																																																																																												o.803
-																																																																																												SLL Ti84.436 2
+																																																																																												o.686
+																																																																																												SLL Ti82.377 2
 																																																																																												LET
-																																																																																													Tu23.394
-																																																																																													STDF Td85.437 Ta83.435 o.803
+																																																																																													Tu21.335
+																																																																																													STDF Td83.378 Ta81.376 o.686
 																																																																																													LET
-																																																																																														Ti86.434
+																																																																																														Ti84.375
 																																																																																														SET 2
 																																																																																														LET
-																																																																																															o.804
-																																																																																															SLL Ti86.434 2
+																																																																																															o.687
+																																																																																															SLL Ti84.375 2
 																																																																																															LET
-																																																																																																Ta87.431
-																																																																																																LD b.382 o.804
+																																																																																																Ta85.372
+																																																																																																LD b.323 o.687
 																																																																																																LET
-																																																																																																	Ti88.432
+																																																																																																	Ti86.373
 																																																																																																	SET 1
 																																																																																																	LET
-																																																																																																		Td89.433
-																																																																																																		l.805
+																																																																																																		Td87.374
+																																																																																																		l.688
 																																																																																																		LET
-																																																																																																			o.807
-																																																																																																			SLL Ti88.432 2
+																																																																																																			o.690
+																																																																																																			SLL Ti86.373 2
 																																																																																																			LET
-																																																																																																				Tu22.395
-																																																																																																				STDF Td89.433 Ta87.431 o.807
+																																																																																																				Tu20.336
+																																																																																																				STDF Td87.374 Ta85.372 o.690
 																																																																																																				LET
-																																																																																																					Ti90.428
+																																																																																																					Ti88.369
 																																																																																																					SET 2
 																																																																																																					LET
-																																																																																																						Ti91.429
+																																																																																																						Ti89.370
 																																																																																																						SET 3
 																																																																																																						LET
-																																																																																																							Tu21.396
-																																																																																																							CALLDIR mul.370
-																																																																																																								Ti90.428 Ti91.429 Ti90.428 a.381 b.382 c.383 
+																																																																																																							Tu19.337
+																																																																																																							CALLDIR mul.311
+																																																																																																								Ti88.369 Ti89.370 Ti88.369 a.322 b.323 c.324 
 																																																																																																								
 																																																																																																							LET
-																																																																																																								Ti93.427
+																																																																																																								Ti91.368
 																																																																																																								SET 0
 																																																																																																								LET
-																																																																																																									o.808
-																																																																																																									SLL Ti93.427 2
+																																																																																																									o.691
+																																																																																																									SLL Ti91.368 2
 																																																																																																									LET
-																																																																																																										Ta94.425
-																																																																																																										LD c.383 o.808
+																																																																																																										Ta92.366
+																																																																																																										LD c.324 o.691
 																																																																																																										LET
-																																																																																																											Ti95.426
+																																																																																																											Ti93.367
 																																																																																																											SET 0
 																																																																																																											LET
-																																																																																																												o.809
-																																																																																																												SLL Ti95.426 2
+																																																																																																												o.692
+																																																																																																												SLL Ti93.367 2
 																																																																																																												LET
-																																																																																																													Td96.424
-																																																																																																													LDDF Ta94.425 o.809
+																																																																																																													Td94.365
+																																																																																																													LDDF Ta92.366 o.692
 																																																																																																													LET
-																																																																																																														Ti97.423
+																																																																																																														Ti95.364
 																																																																																																														CALLDIR min_caml_truncate
 																																																																																																															
-																																																																																																															Td96.424 
+																																																																																																															Td94.365 
 																																																																																																														LET
-																																																																																																															Tu20.397
-																																																																																																															CALLDIR print_int.342
-																																																																																																																Ti97.423 
+																																																																																																															Tu18.338
+																																																																																																															CALLDIR print_int.291
+																																																																																																																Ti95.364 
 																																																																																																																
 																																																																																																															LET
-																																																																																																																Tu98.422
+																																																																																																																Tu96.363
 																																																																																																																NOP
 																																																																																																																LET
-																																																																																																																	Tu19.398
+																																																																																																																	Tu17.339
 																																																																																																																	CALLDIR min_caml_print_newline
 																																																																																																																		
 																																																																																																																		
 																																																																																																																	LET
-																																																																																																																		Ti99.421
+																																																																																																																		Ti97.362
 																																																																																																																		SET 0
 																																																																																																																		LET
-																																																																																																																			o.810
-																																																																																																																			SLL Ti99.421 2
+																																																																																																																			o.693
+																																																																																																																			SLL Ti97.362 2
 																																																																																																																			LET
-																																																																																																																				Ta100.419
-																																																																																																																				LD c.383 o.810
+																																																																																																																				Ta98.360
+																																																																																																																				LD c.324 o.693
 																																																																																																																				LET
-																																																																																																																					Ti101.420
+																																																																																																																					Ti99.361
 																																																																																																																					SET 1
 																																																																																																																					LET
-																																																																																																																						o.811
-																																																																																																																						SLL Ti101.420 2
+																																																																																																																						o.694
+																																																																																																																						SLL Ti99.361 2
 																																																																																																																						LET
-																																																																																																																							Td102.418
-																																																																																																																							LDDF Ta100.419 o.811
+																																																																																																																							Td100.359
+																																																																																																																							LDDF Ta98.360 o.694
 																																																																																																																							LET
-																																																																																																																								Ti103.417
+																																																																																																																								Ti101.358
 																																																																																																																								CALLDIR min_caml_truncate
 																																																																																																																									
-																																																																																																																									Td102.418 
+																																																																																																																									Td100.359 
 																																																																																																																								LET
-																																																																																																																									Tu18.399
-																																																																																																																									CALLDIR print_int.342
-																																																																																																																										Ti103.417 
+																																																																																																																									Tu16.340
+																																																																																																																									CALLDIR print_int.291
+																																																																																																																										Ti101.358 
 																																																																																																																										
 																																																																																																																									LET
-																																																																																																																										Tu104.416
+																																																																																																																										Tu102.357
 																																																																																																																										NOP
 																																																																																																																										LET
-																																																																																																																											Tu17.400
+																																																																																																																											Tu15.341
 																																																																																																																											CALLDIR min_caml_print_newline
 																																																																																																																												
 																																																																																																																												
 																																																																																																																											LET
-																																																																																																																												Ti105.415
+																																																																																																																												Ti103.356
 																																																																																																																												SET 1
 																																																																																																																												LET
-																																																																																																																													o.812
-																																																																																																																													SLL Ti105.415 2
+																																																																																																																													o.695
+																																																																																																																													SLL Ti103.356 2
 																																																																																																																													LET
-																																																																																																																														Ta106.413
-																																																																																																																														LD c.383 o.812
+																																																																																																																														Ta104.354
+																																																																																																																														LD c.324 o.695
 																																																																																																																														LET
-																																																																																																																															Ti107.414
+																																																																																																																															Ti105.355
 																																																																																																																															SET 0
 																																																																																																																															LET
-																																																																																																																																o.813
-																																																																																																																																SLL Ti107.414 2
+																																																																																																																																o.696
+																																																																																																																																SLL Ti105.355 2
 																																																																																																																																LET
-																																																																																																																																	Td108.412
-																																																																																																																																	LDDF Ta106.413 o.813
+																																																																																																																																	Td106.353
+																																																																																																																																	LDDF Ta104.354 o.696
 																																																																																																																																	LET
-																																																																																																																																		Ti109.411
+																																																																																																																																		Ti107.352
 																																																																																																																																		CALLDIR min_caml_truncate
 																																																																																																																																			
-																																																																																																																																			Td108.412 
+																																																																																																																																			Td106.353 
 																																																																																																																																		LET
-																																																																																																																																			Tu16.401
-																																																																																																																																			CALLDIR print_int.342
-																																																																																																																																				Ti109.411 
+																																																																																																																																			Tu14.342
+																																																																																																																																			CALLDIR print_int.291
+																																																																																																																																				Ti107.352 
 																																																																																																																																				
 																																																																																																																																			LET
-																																																																																																																																				Tu110.410
+																																																																																																																																				Tu108.351
 																																																																																																																																				NOP
 																																																																																																																																				LET
-																																																																																																																																					Tu15.402
+																																																																																																																																					Tu13.343
 																																																																																																																																					CALLDIR min_caml_print_newline
 																																																																																																																																						
 																																																																																																																																						
 																																																																																																																																					LET
-																																																																																																																																						Ti111.409
+																																																																																																																																						Ti109.350
 																																																																																																																																						SET 1
 																																																																																																																																						LET
-																																																																																																																																							o.814
-																																																																																																																																							SLL Ti111.409 2
+																																																																																																																																							o.697
+																																																																																																																																							SLL Ti109.350 2
 																																																																																																																																							LET
-																																																																																																																																								Ta112.407
-																																																																																																																																								LD c.383 o.814
+																																																																																																																																								Ta110.348
+																																																																																																																																								LD c.324 o.697
 																																																																																																																																								LET
-																																																																																																																																									Ti113.408
+																																																																																																																																									Ti111.349
 																																																																																																																																									SET 1
 																																																																																																																																									LET
-																																																																																																																																										o.815
-																																																																																																																																										SLL Ti113.408 2
+																																																																																																																																										o.698
+																																																																																																																																										SLL Ti111.349 2
 																																																																																																																																										LET
-																																																																																																																																											Td114.406
-																																																																																																																																											LDDF Ta112.407 o.815
+																																																																																																																																											Td112.347
+																																																																																																																																											LDDF Ta110.348 o.698
 																																																																																																																																											LET
-																																																																																																																																												Ti115.405
+																																																																																																																																												Ti113.346
 																																																																																																																																												CALLDIR min_caml_truncate
 																																																																																																																																													
-																																																																																																																																													Td114.406 
+																																																																																																																																													Td112.347 
 																																																																																																																																												LET
-																																																																																																																																													Tu14.403
-																																																																																																																																													CALLDIR print_int.342
-																																																																																																																																														Ti115.405 
+																																																																																																																																													Tu12.344
+																																																																																																																																													CALLDIR print_int.291
+																																																																																																																																														Ti113.346 
 																																																																																																																																														
 																																																																																																																																													LET
-																																																																																																																																														Tu116.404
+																																																																																																																																														Tu114.345
 																																																																																																																																														NOP
 																																																																																																																																														ANS
 																																																																																																																																															CALLDIR min_caml_print_newline

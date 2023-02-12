@@ -1,8 +1,16 @@
+Name : print_int.153
+Args : a.154 
+
+FArgs : 
+Body :
+ANS
+	OUT a.154
+
 
 LET
-	Ti1.7
+	Ti7.178
 	SET 6
 	ANS
-		CALLDIR min_caml_print_int
-			Ti1.7 
+		CALLDIR print_int.153
+			Ti7.178 
 			

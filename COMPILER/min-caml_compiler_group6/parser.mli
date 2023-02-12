@@ -33,7 +33,8 @@ type token =
   | LET
   | IN
   | REC
-  | INPUT
+  | INI
+  | INF
   | OUTPUT
   | ITOIA
   | ITOFA

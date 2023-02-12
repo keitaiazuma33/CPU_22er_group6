@@ -1,60 +1,68 @@
-Name : f.8
-Args : y.9 
+Name : print_int.158
+Args : a.159 
+
+FArgs : 
+Body :
+ANS
+	OUT a.159
+
+Name : f.179
+Args : y.180 
 
 FArgs : 
 Body :
 LET
-	x.7
-	LD f.8 4
+	x.178
+	LD f.179 4
 	LET
-		Ti3.12
+		Ti9.183
 		SET 0
 		ANS
-			IFEQ y.9 Ti3.12
+			IFEQ y.180 Ti9.183
 				ANS
 					SET 0
 				LET
-					Ti4.15
+					Ti10.186
 					SET 1
 					LET
-						Ti5.14
-						SUB y.9 Ti4.15
+						Ti11.185
+						SUB y.180 Ti10.186
 						LET
-							Ti6.13
-							CALLCLS f.8
-								Ti5.14 
+							Ti12.184
+							CALLCLS f.179
+								Ti11.185 
 								
 							ANS
-								ADD x.7 Ti6.13
+								ADD x.178 Ti12.184
 
 
 LET
-	x.7
+	x.178
 	SET 10
 	LET
-		f.8
+		f.179
 		MOV %x3
 		LET
 			%x3
 			ADD %x3 8
 			LET
-				l.17
-				f.8
+				l.317
+				f.179
 				LET
-					Tu18
-					ST l.17 f.8 0
+					Tu318
+					ST l.317 f.179 0
 					LET
-						Tu16
-						ST x.7 f.8 4
+						Tu316
+						ST x.178 f.179 4
 						LET
-							Ti1.11
+							Ti7.182
 							SET 123
 							LET
-								Ti2.10
-								CALLCLS f.8
-									Ti1.11 
+								Ti8.181
+								CALLCLS f.179
+									Ti7.182 
 									
 								ANS
-									CALLDIR min_caml_print_int
-										Ti2.10 
+									CALLDIR print_int.158
+										Ti8.181 
 										

@@ -1,40 +1,46 @@
-Name : ack.15
-Args : x.16 y.17 
+Name : print_int.166
+Args : a.167 
 Formal_fv : 
 Body :
-LET Ti4.21
+OUT a.167
+
+Name : ack.186
+Args : x.187 y.188 
+Formal_fv : 
+Body :
+LET Ti10.192
 	INT 0
-	IFLE x.16 Ti4.21
-		LET Ti5.31
+	IFLE x.187 Ti10.192
+		LET Ti11.202
 			INT 1
-			ADD y.17 Ti5.31
-		LET Ti6.22
+			ADD y.188 Ti11.202
+		LET Ti12.193
 			INT 0
-			IFLE y.17 Ti6.22
-				LET Ti7.30
+			IFLE y.188 Ti12.193
+				LET Ti13.201
 					INT 1
-					LET Ti8.28
-						SUB x.16 Ti7.30
-						LET Ti9.29
+					LET Ti14.199
+						SUB x.187 Ti13.201
+						LET Ti15.200
 							INT 1
-							APPDIR ack.15 : Ti8.28 Ti9.29 
-				LET Ti10.27
+							APPDIR ack.186 : Ti14.199 Ti15.200 
+				LET Ti16.198
 					INT 1
-					LET Ti11.23
-						SUB x.16 Ti10.27
-						LET Ti12.26
+					LET Ti17.194
+						SUB x.187 Ti16.198
+						LET Ti18.197
 							INT 1
-							LET Ti13.25
-								SUB y.17 Ti12.26
-								LET Ti14.24
-									APPDIR ack.15 : x.16 Ti13.25 
-									APPDIR ack.15 : Ti11.23 Ti14.24 
+							LET Ti19.196
+								SUB y.188 Ti18.197
+								LET Ti20.195
+									APPDIR ack.186 : x.187 Ti19.196 
+									APPDIR ack.186 : Ti17.194 Ti20.195 
 
 
-LET Ti1.19
+LET Ti7.190
 	INT 3
-	LET Ti2.20
+	LET Ti8.191
 		INT 10
-		LET Ti3.18
-			APPDIR ack.15 : Ti1.19 Ti2.20 
-			APPDIR min_caml_print_int : Ti3.18 
+		LET Ti9.189
+			APPDIR ack.186 : Ti7.190 Ti8.191 
+			APPDIR print_int.166 : Ti9.189 

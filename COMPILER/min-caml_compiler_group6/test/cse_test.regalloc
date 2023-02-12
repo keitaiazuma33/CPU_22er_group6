@@ -1,8 +1,16 @@
+Name : print_int.153
+Args : %x6 
+
+FArgs : 
+Body :
+ANS
+	OUT %x6
+
 
 LET
-	%x5
+	%x6
 	SET 6
 	ANS
-		CALLDIR min_caml_print_int
-			%x5 
+		CALLDIR print_int.153
+			%x6 
 			

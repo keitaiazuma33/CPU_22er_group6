@@ -21,7 +21,8 @@ type t = (* �����������Ѵ���μ� (caml2html: closur
   | FDiv of Id.t * Id.t * int
   | FtoI of Id.t * int
   | ItoF of Id.t * int
-  | In of int
+  | Ini of int
+  | Inf of int
   | Out of Id.t * int
   | ItoIA of Id.t * int
   | ItoFA of Id.t * int
@@ -53,12 +54,12 @@ let pos_of_type e =
   | FSub (_,_,n) | FMul (_,_,n) | FDiv (_,_,n) | IfEq (_,_,_,_,n) | IfLE (_,_,_,_,n)
   | Let (_,_,_,n) | Var (_,n) | MakeCls (_,_,_,n) | AppCls (_,_,n) | AppDir (_,_,n)
   | Tuple (_,n) | LetTuple (_,_,_,n) | Get (_,_,n) | Put (_,_,_,n) | FtoI(_,n) | ItoF(_,n)
-  | ExtArray (_,n) | In n | Out(_,n) | ItoIA(_,n) | ItoFA(_,n) | Gethp n | Sethp(_,n) -> n
+  | ExtArray (_,n) | Ini n | Inf n | Out(_,n) | ItoIA(_,n) | ItoFA(_,n) | Gethp n | Sethp(_,n) -> n
 
 (* t -> list *)
 (* Closure.t�˴ޤޤ�뼫ͳ�ѿ��Υꥹ�Ȥ��֤� *)
 let rec fv = function
-  | Unit | Int(_) | Float(_) | ExtArray(_, _) | In(_) | Gethp(_) -> S.empty
+  | Unit | Int(_) | Float(_) | ExtArray(_, _) | Ini(_) | Inf(_) | Gethp(_) -> S.empty
   | Neg(x, _) | FNeg(x, _) | Sqrt(x, _) | FAbs(x, _) | FtoI(x, _) | ItoF(x, _) 
   | Out(x, _) | ItoIA(x, _) | ItoFA(x, _) | Sethp(x, _) -> S.singleton x
   | Add(x, y, _) | Sub(x, y, _) | Or(x, y, _) | Xor(x, y, _) | And(x, y, _) | SLL(x, y, _) | SRL(x, y, _)
@@ -98,7 +99,8 @@ let rec g env known = function (* �����������Ѵ��롼�
   | KNormal.FDiv(x, y, n) -> FDiv(x, y, n)
   | KNormal.FtoI(x, n) -> FtoI(x, n)
   | KNormal.ItoF(x, n) -> ItoF(x, n)
-  | KNormal.In(x, n) -> In(n)
+  | KNormal.Ini(x, n) -> Ini(n)
+  | KNormal.Inf(x, n) -> Inf(n)
   | KNormal.Out(x, n) -> Out(x, n)
   | KNormal.ItoIA(x, n) -> ItoIA(x, n)
   | KNormal.ItoFA(x, n) -> ItoFA(x, n)

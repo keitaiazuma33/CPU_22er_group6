@@ -1,295 +1,43 @@
-Name : mul_abs.197
-Args : %x5 %x6 %x7 %x8 
+Name : print_int.164
+Args : %x6 
 
 FArgs : 
 Body :
 ANS
-	IFEQ %x7 -1
+	OUT %x6
+
+Name : assign_array.170
+Args : %x6 %x7 %x8 
+
+FArgs : 
+Body :
+ANS
+	IFGE %x8 0
 		ANS
-			MOV %x8
-		LET
-			%x9
-			SET 1
-			LET
-				%x9
-				SLL %x9 %x7
+			IFEQ %x8 0
+				LET
+					%x8
+					SLL %x8 2
+					ANS
+						ST %x7 %x6 %x8
 				LET
 					%x9
-					AND %x6 %x9
-					ANS
-						IFEQ %x9 0
-							LET
-								%x7
-								SUB %x7 1
-								ANS
-									CALLDIR mul_abs.197
-										%x5 %x6 %x7 %x8 
-										
-							LET
-								%x9
-								SUB %x7 1
-								LET
-									%x7
-									SLL %x5 %x7
-									LET
-										%x8
-										ADD %x8 %x7
-										ANS
-											CALLDIR mul_abs.197
-												%x5 %x6 %x9 %x8 
-												
-
-Name : mul.202
-Args : %x5 %x6 
-
-FArgs : 
-Body :
-LET
-	%x7
-	IFGE %x5 0
-		ANS
-			MOV %x5
-		ANS
-			NEG %x5
-	LET
-		%x8
-		IFGE %x6 0
-			ANS
-				MOV %x6
-			ANS
-				NEG %x6
-		LET
-			%x9
-			SET 30
-			LET
-				%x10
-				SET 0
-				LET
-					Tu450
-					SAVE %x6 b.204
+					SLL %x8 2
 					LET
-						Tu449
-						SAVE %x5 a.203
+						%g0
+						ST %x7 %x6 %x9
 						LET
-							%x5
-							CALLDIR mul_abs.197
-								%x7 %x8 %x9 %x10 
-								
-							LET
-								%x6
-								RESTORE a.203
-								LET
-									%x6
-									SRL %x6 31
-									LET
-										%x7
-										RESTORE b.204
-										LET
-											%x7
-											SRL %x7 31
-											ANS
-												IFEQ %x6 %x7
-													ANS
-														MOV %x5
-													ANS
-														NEG %x5
-
-Name : div_abs.205
-Args : %x5 %x6 %x7 %x8 
-
-FArgs : 
-Body :
-ANS
-	IFEQ %x7 -1
+							%x8
+							SUB %x8 1
+							ANS
+								CALLDIR assign_array.170
+									%x6 %x7 %x8 
+									
 		ANS
-			MOV %x8
-		LET
-			%x9
-			SRL %x5 %x7
-			ANS
-				IFLE %x6 %x9
-					LET
-						%x9
-						SLL %x6 %x7
-						LET
-							%x5
-							SUB %x5 %x9
-							LET
-								%x9
-								SUB %x7 1
-								LET
-									%x10
-									SET 1
-									LET
-										%x7
-										SLL %x10 %x7
-										LET
-											%x8
-											ADD %x8 %x7
-											ANS
-												CALLDIR div_abs.205
-													%x5 %x6 %x9 %x8 
-													
-					LET
-						%x7
-						SUB %x7 1
-						ANS
-							CALLDIR div_abs.205
-								%x5 %x6 %x7 %x8 
-								
+			NOP
 
-Name : div.210
-Args : %x5 %x6 
-
-FArgs : 
-Body :
-LET
-	%x7
-	IFGE %x5 0
-		ANS
-			MOV %x5
-		ANS
-			NEG %x5
-	LET
-		%x8
-		IFGE %x6 0
-			ANS
-				MOV %x6
-			ANS
-				NEG %x6
-		LET
-			%x9
-			SET 30
-			LET
-				%x10
-				SET 0
-				LET
-					Tu452
-					SAVE %x6 b.212
-					LET
-						Tu451
-						SAVE %x5 a.211
-						LET
-							%x5
-							CALLDIR div_abs.205
-								%x7 %x8 %x9 %x10 
-								
-							LET
-								%x6
-								RESTORE a.211
-								LET
-									%x6
-									SRL %x6 31
-									LET
-										%x7
-										RESTORE b.212
-										LET
-											%x7
-											SRL %x7 31
-											ANS
-												IFEQ %x6 %x7
-													ANS
-														MOV %x5
-													ANS
-														NEG %x5
-
-Name : print_int.215
-Args : %x5 
-
-FArgs : 
-Body :
-ANS
-	IFGE %x5 0
-		ANS
-			IFGE %x5 10
-				LET
-					%x6
-					SET 10
-					LET
-						Tu454
-						SAVE %x5 a.216
-						LET
-							%x5
-							CALLDIR div.210
-								%x5 %x6 
-								
-							LET
-								Tu455
-								SAVE %x5 b.338
-								LET
-									%g0
-									CALLDIR print_int.215
-										%x5 
-										
-									LET
-										%x6
-										SET 10
-										LET
-											%x5
-											RESTORE b.338
-											LET
-												%x5
-												CALLDIR mul.202
-													%x5 %x6 
-													
-												LET
-													%x6
-													RESTORE a.216
-													LET
-														%x5
-														SUB %x6 %x5
-														LET
-															%x5
-															ADD %x5 48
-															ANS
-																OUT %x5
-				LET
-					%x5
-					ADD %x5 48
-					ANS
-						OUT %x5
-		LET
-			%x6
-			SET 45
-			LET
-				%g0
-				OUT %x6
-				LET
-					%x5
-					NEG %x5
-					ANS
-						CALLDIR print_int.215
-							%x5 
-							
-
-Name : assign_array.229
-Args : %x5 %x6 %x7 
-
-FArgs : 
-Body :
-ANS
-	IFEQ %x7 0
-		LET
-			%x7
-			SLL %x7 2
-			ANS
-				ST %x6 %x5 %x7
-		LET
-			%x8
-			SLL %x7 2
-			LET
-				%g0
-				ST %x6 %x5 %x8
-				LET
-					%x7
-					SUB %x7 1
-					ANS
-						CALLDIR assign_array.229
-							%x5 %x6 %x7 
-							
-
-Name : create_array.233
-Args : %x5 %x6 
+Name : create_array.174
+Args : %x6 %x7 
 
 FArgs : 
 Body :
@@ -297,35 +45,38 @@ LET
 	%g0
 	NOP
 	LET
-		%x7
+		%x8
 		GETHP
 		LET
-			%x8
-			MOV %x7
+			%x9
+			MOV %x8
 			LET
-				%x9
-				SLL %x5 2
+				%x10
+				SLL %x6 2
 				LET
-					%x7
-					ADD %x7 %x9
+					%x8
+					ADD %x8 %x10
 					LET
 						%g0
-						SETHP %x7
+						SETHP %x8
 						LET
-							Tu457
-							SAVE %x8 hp_array.271
+							%x8
+							SUB %x6 1
 							LET
-								%g0
-								CALLDIR assign_array.229
-									%x8 %x6 %x5 
-									
+								Tu334
+								SAVE %x9 hp_array.215
 								LET
-									%x5
-									RESTORE hp_array.271
-									ANS
-										MOV %x5
+									%g0
+									CALLDIR assign_array.170
+										%x9 %x7 %x8 
+										
+									LET
+										%x6
+										RESTORE hp_array.215
+										ANS
+											MOV %x6
 
-Name : f.243
+Name : f.184
 Args : 
 
 FArgs : 
@@ -335,56 +86,56 @@ ANS
 
 
 LET
-	%x5
+	%x6
 	SET 10
 	LET
-		%x6
+		%x7
 		SET 3
 		LET
-			%x5
-			CALLDIR create_array.233
-				%x5 %x6 
+			%x6
+			CALLDIR create_array.174
+				%x6 %x7 
 				
 			LET
-				%x6
+				%x7
 				SET 67890
 				LET
-					%x7
-					LD %x5 0
+					%x8
+					LD %x6 0
 					LET
-						%x5
-						IFEQ %x7 3
+						%x6
+						IFEQ %x8 3
 							LET
 								%g0
 								NOP
 								LET
-									Tu460
-									SAVE %x6 x.246
+									Tu337
+									SAVE %x7 x.187
 									LET
-										Tu459
-										SAVE %x5 y.245
+										Tu336
+										SAVE %x6 y.186
 										LET
-											%x5
-											CALLDIR f.243
+											%x6
+											CALLDIR f.184
 												
 												
 											LET
-												%x6
-												RESTORE y.245
+												%x7
+												RESTORE y.186
 												LET
-													%x6
-													LD %x6 4
+													%x7
+													LD %x7 4
 													LET
-														%x5
-														ADD %x5 %x6
+														%x6
+														ADD %x6 %x7
 														LET
-															%x6
-															RESTORE x.246
+															%x7
+															RESTORE x.187
 															ANS
-																ADD %x5 %x6
+																ADD %x6 %x7
 							ANS
 								SET 7
 						ANS
-							CALLDIR print_int.215
-								%x5 
+							CALLDIR print_int.164
+								%x6 
 								

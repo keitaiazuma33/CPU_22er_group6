@@ -1,35 +1,43 @@
-Name : f.6
-Args : %x5 
+Name : print_int.157
+Args : %x6 
 
 FArgs : 
 Body :
 ANS
-	ADD %x5 123
+	OUT %x6
 
-Name : g.8
-Args : %x5 
+Name : f.177
+Args : %x6 
+
+FArgs : 
+Body :
+ANS
+	ADD %x6 123
+
+Name : g.179
+Args : %x6 
 
 FArgs : 
 Body :
 LET
-	%x5
+	%x6
 	LD %x29 4
 	ANS
-		MOV %x5
+		MOV %x6
 
 
 LET
-	%x5
+	%x6
 	MOV %x3
 	LET
 		%x3
 		ADD %x3 4
 		LET
-			%x6
-			f.6
+			%x7
+			f.177
 			LET
 				%g0
-				ST %x6 %x5 0
+				ST %x7 %x6 0
 				LET
 					%x29
 					MOV %x3
@@ -37,31 +45,31 @@ LET
 						%x3
 						ADD %x3 8
 						LET
-							%x6
-							g.8
+							%x7
+							g.179
 							LET
 								%g0
-								ST %x6 %x29 0
+								ST %x7 %x29 0
 								LET
 									%g0
-									ST %x5 %x29 4
+									ST %x6 %x29 4
 									LET
-										%x5
+										%x6
 										SET 456
 										LET
 											%x29
 											CALLCLS %x29
-												%x5 
+												%x6 
 												
 											LET
-												%x5
+												%x6
 												SET 789
 												LET
-													%x5
+													%x6
 													CALLCLS %x29
-														%x5 
+														%x6 
 														
 													ANS
-														CALLDIR min_caml_print_int
-															%x5 
+														CALLDIR print_int.157
+															%x6 
 															

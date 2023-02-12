@@ -1,59 +1,67 @@
-Name : ack.15
-Args : %x5 %x6 
+Name : print_int.166
+Args : %x6 
 
 FArgs : 
 Body :
 ANS
-	IFLE %x5 0
+	OUT %x6
+
+Name : ack.186
+Args : %x6 %x7 
+
+FArgs : 
+Body :
+ANS
+	IFLE %x6 0
 		ANS
-			ADD %x6 1
+			ADD %x7 1
 		ANS
-			IFLE %x6 0
+			IFLE %x7 0
 				LET
-					%x5
-					SUB %x5 1
+					%x6
+					SUB %x6 1
 					LET
-						%x6
+						%x7
 						SET 1
 						ANS
-							CALLDIR ack.15
-								%x5 %x6 
+							CALLDIR ack.186
+								%x6 %x7 
 								
 				LET
-					%x7
-					SUB %x5 1
+					%x8
+					SUB %x6 1
 					LET
-						%x6
-						SUB %x6 1
+						%x7
+						SUB %x7 1
 						LET
-							Tu32
-							SAVE %x7 Ti11.23
+							Tu333
+							SAVE %x8 Ti17.194
 							LET
-								%x6
-								CALLDIR ack.15
-									%x5 %x6 
+								%x7
+								CALLDIR ack.186
+									%x6 %x7 
 									
 								LET
-									%x5
-									RESTORE Ti11.23
+									%x6
+									RESTORE Ti17.194
 									ANS
-										CALLDIR ack.15
-											%x5 %x6 
+										CALLDIR ack.186
+											%x6 %x7 
 											
 
 
 LET
-	%x5
+	%x6
 	SET 3
 	LET
-		%x6
+		%x7
 		SET 10
 		LET
-			%x5
-			CALLDIR ack.15
-				%x5 %x6 
+			%x6
+			CALLDIR ack.186
+				%x6 %x7 
 				
 			ANS
-				CALLDIR min_caml_print_int
-					%x5 
+				CALLDIR print_int.166
+					%x6 
 					

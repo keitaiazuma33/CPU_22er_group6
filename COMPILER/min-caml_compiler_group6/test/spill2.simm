@@ -1,289 +1,76 @@
-Name : mul_abs.210
-Args : a.211 b.212 i.213 acc.214 
+Name : print_int.177
+Args : a.178 
 
 FArgs : 
 Body :
 ANS
-	IFEQ i.213 -1
-		ANS
-			MOV acc.214
-		LET
-			Ti131.435
-			SET 1
-			LET
-				Ti132.434
-				SLL Ti131.435 i.213
-				LET
-					Ti133.426
-					AND b.212 Ti132.434
-					ANS
-						IFEQ Ti133.426 0
-							LET
-								Ti136.432
-								SUB i.213 1
-								ANS
-									CALLDIR mul_abs.210
-										a.211 b.212 Ti136.432 acc.214 
-										
-							LET
-								Ti138.428
-								SUB i.213 1
-								LET
-									Ti139.430
-									SLL a.211 i.213
-									LET
-										Ti140.429
-										ADD acc.214 Ti139.430
-										ANS
-											CALLDIR mul_abs.210
-												a.211 b.212 Ti138.428 Ti140.429 
-												
+	OUT a.178
 
-Name : mul.215
-Args : a.216 b.217 
+Name : assign_array.183
+Args : hp.184 a.185 n.186 
 
 FArgs : 
 Body :
-LET
-	abs_a.414
-	IFGE a.216 0
+ANS
+	IFGE n.186 0
 		ANS
-			MOV a.216
-		ANS
-			NEG a.216
-	LET
-		abs_b.415
-		IFGE b.217 0
-			ANS
-				MOV b.217
-			ANS
-				NEG b.217
-		LET
-			Ti123.421
-			SET 30
-			LET
-				Ti124.422
-				SET 0
+			IFEQ n.186 0
 				LET
-					abs_mul.416
-					CALLDIR mul_abs.210
-						abs_a.414 abs_b.415 Ti123.421 Ti124.422 
-						
+					o.374
+					SLL n.186 2
+					ANS
+						ST a.185 hp.184 o.374
+				LET
+					o.373
+					SLL n.186 2
 					LET
-						Ti126.417
-						SRL a.216 31
+						Tu1.271
+						ST a.185 hp.184 o.373
 						LET
-							Ti128.418
-							SRL b.217 31
+							Ti51.272
+							SUB n.186 1
 							ANS
-								IFEQ Ti126.417 Ti128.418
-									ANS
-										MOV abs_mul.416
-									ANS
-										NEG abs_mul.416
-
-Name : div_abs.218
-Args : a.219 b.220 i.221 acc.222 
-
-FArgs : 
-Body :
-ANS
-	IFEQ i.221 -1
+								CALLDIR assign_array.183
+									hp.184 a.185 Ti51.272 
+									
 		ANS
-			MOV acc.222
-		LET
-			Ti111.403
-			SRL a.219 i.221
-			ANS
-				IFLE b.220 Ti111.403
-					LET
-						Ti112.412
-						SLL b.220 i.221
-						LET
-							Ti113.406
-							SUB a.219 Ti112.412
-							LET
-								Ti115.407
-								SUB i.221 1
-								LET
-									Ti116.410
-									SET 1
-									LET
-										Ti117.409
-										SLL Ti116.410 i.221
-										LET
-											Ti118.408
-											ADD acc.222 Ti117.409
-											ANS
-												CALLDIR div_abs.218
-													Ti113.406 b.220 Ti115.407 Ti118.408 
-													
-					LET
-						Ti120.404
-						SUB i.221 1
-						ANS
-							CALLDIR div_abs.218
-								a.219 b.220 Ti120.404 acc.222 
-								
+			NOP
 
-Name : div.223
-Args : a.224 b.225 
+Name : create_array.187
+Args : n.188 a.189 
 
 FArgs : 
 Body :
 LET
-	abs_a.391
-	IFGE a.224 0
-		ANS
-			MOV a.224
-		ANS
-			NEG a.224
-	LET
-		abs_b.392
-		IFGE b.225 0
-			ANS
-				MOV b.225
-			ANS
-				NEG b.225
-		LET
-			Ti103.398
-			SET 30
-			LET
-				Ti104.399
-				SET 0
-				LET
-					abs_div.393
-					CALLDIR div_abs.218
-						abs_a.391 abs_b.392 Ti103.398 Ti104.399 
-						
-					LET
-						Ti106.394
-						SRL a.224 31
-						LET
-							Ti108.395
-							SRL b.225 31
-							ANS
-								IFEQ Ti106.394 Ti108.395
-									ANS
-										MOV abs_div.393
-									ANS
-										NEG abs_div.393
-
-Name : print_int.228
-Args : a.229 
-
-FArgs : 
-Body :
-ANS
-	IFGE a.229 0
-		ANS
-			IFGE a.229 10
-				LET
-					Ti91.390
-					SET 10
-					LET
-						b.383
-						CALLDIR div.223
-							a.229 Ti91.390 
-							
-						LET
-							Tu2.384
-							CALLDIR print_int.228
-								b.383 
-								
-							LET
-								Ti92.389
-								SET 10
-								LET
-									Ti93.388
-									CALLDIR mul.215
-										b.383 Ti92.389 
-										
-									LET
-										Ti94.386
-										SUB a.229 Ti93.388
-										LET
-											Ti96.385
-											ADD Ti94.386 48
-											ANS
-												OUT Ti96.385
-				LET
-					Ti98.381
-					ADD a.229 48
-					ANS
-						OUT Ti98.381
-		LET
-			Ti99.379
-			SET 45
-			LET
-				Tu1.377
-				OUT Ti99.379
-				LET
-					Ti100.378
-					NEG a.229
-					ANS
-						CALLDIR print_int.228
-							Ti100.378 
-							
-
-Name : assign_array.242
-Args : hp.243 a.244 n.245 
-
-FArgs : 
-Body :
-ANS
-	IFEQ n.245 0
-		LET
-			o.491
-			SLL n.245 2
-			ANS
-				ST a.244 hp.243 o.491
-		LET
-			o.490
-			SLL n.245 2
-			LET
-				Tu3.324
-				ST a.244 hp.243 o.490
-				LET
-					Ti47.325
-					SUB n.245 1
-					ANS
-						CALLDIR assign_array.242
-							hp.243 a.244 Ti47.325 
-							
-
-Name : create_array.246
-Args : n.247 a.248 
-
-FArgs : 
-Body :
-LET
-	Tu41.322
+	Tu42.268
 	NOP
 	LET
-		hp.315
+		hp.259
 		GETHP
 		LET
-			hp_array.316
-			MOV hp.315
+			hp_array.260
+			MOV hp.259
 			LET
-				Ti43.320
-				SLL n.247 2
+				Ti44.266
+				SLL n.188 2
 				LET
-					Ti44.319
-					ADD hp.315 Ti43.320
+					Ti45.265
+					ADD hp.259 Ti44.266
 					LET
-						Tu5.317
-						SETHP Ti44.319
+						Tu3.261
+						SETHP Ti45.265
 						LET
-							Tu4.318
-							CALLDIR assign_array.242
-								hp_array.316 a.248 n.247 
-								
-							ANS
-								MOV hp_array.316
+							Ti47.263
+							SUB n.188 1
+							LET
+								Tu2.262
+								CALLDIR assign_array.183
+									hp_array.260 a.189 Ti47.263 
+									
+								ANS
+									MOV hp_array.260
 
-Name : f.256
+Name : f.197
 Args : 
 
 FArgs : 
@@ -291,143 +78,143 @@ Body :
 ANS
 	SET 12345
 
-Name : g.258
-Args : y.259 
+Name : g.199
+Args : y.200 
 
 FArgs : 
 Body :
 ANS
-	ADD y.259 1
+	ADD y.200 1
 
 
 LET
-	Ti10.300
+	Ti8.241
 	SET 10
 	LET
-		Ti11.301
+		Ti9.242
 		SET 1
 		LET
-			z.260
-			CALLDIR create_array.246
-				Ti10.300 Ti11.301 
+			z.201
+			CALLDIR create_array.187
+				Ti8.241 Ti9.242 
 				
 			LET
-				Tu12.299
+				Tu10.240
 				NOP
 				LET
-					x.261
-					CALLDIR f.256
+					x.202
+					CALLDIR f.197
 						
 						
 					LET
-						y.262
+						y.203
 						SET 67890
 						LET
-							z0.263
-							LD z.260 0
+							z0.204
+							LD z.201 0
 							LET
-								z1.264
-								ADD z0.263 z0.263
+								z1.205
+								ADD z0.204 z0.204
 								LET
-									z2.265
-									ADD z1.264 z1.264
+									z2.206
+									ADD z1.205 z1.205
 									LET
-										z3.266
-										ADD z2.265 z2.265
+										z3.207
+										ADD z2.206 z2.206
 										LET
-											z4.267
-											ADD z3.266 z3.266
+											z4.208
+											ADD z3.207 z3.207
 											LET
-												z5.268
-												ADD z4.267 z4.267
+												z5.209
+												ADD z4.208 z4.208
 												LET
-													z6.269
-													ADD z5.268 z5.268
+													z6.210
+													ADD z5.209 z5.209
 													LET
-														z7.270
-														ADD z6.269 z6.269
+														z7.211
+														ADD z6.210 z6.210
 														LET
-															z8.271
-															ADD z7.270 z7.270
+															z8.212
+															ADD z7.211 z7.211
 															LET
-																z9.272
-																ADD z8.271 z8.271
+																z9.213
+																ADD z8.212 z8.212
 																LET
-																	z10.273
-																	ADD z9.272 z9.272
+																	z10.214
+																	ADD z9.213 z9.213
 																	LET
-																		z11.274
-																		ADD z10.273 z10.273
+																		z11.215
+																		ADD z10.214 z10.214
 																		LET
-																			z12.275
-																			ADD z11.274 z11.274
+																			z12.216
+																			ADD z11.215 z11.215
 																			LET
-																				z13.276
-																				ADD z12.275 z12.275
+																				z13.217
+																				ADD z12.216 z12.216
 																				LET
-																					z14.277
-																					ADD z13.276 z13.276
+																					z14.218
+																					ADD z13.217 z13.217
 																					LET
-																						z15.278
-																						ADD z14.277 z14.277
+																						z15.219
+																						ADD z14.218 z14.218
 																						LET
-																							Ti15.280
-																							LD z.260 4
+																							Ti13.221
+																							LD z.201 4
 																							LET
-																								Ti32.279
-																								IFEQ Ti15.280 0
+																								Ti30.220
+																								IFEQ Ti13.221 0
 																									ANS
-																										CALLDIR g.258
-																											y.262 
+																										CALLDIR g.199
+																											y.203 
 																											
 																									LET
-																										Ti17.296
-																										ADD z0.263 z1.264
+																										Ti15.237
+																										ADD z0.204 z1.205
 																										LET
-																											Ti18.295
-																											ADD Ti17.296 z2.265
+																											Ti16.236
+																											ADD Ti15.237 z2.206
 																											LET
-																												Ti19.294
-																												ADD Ti18.295 z3.266
+																												Ti17.235
+																												ADD Ti16.236 z3.207
 																												LET
-																													Ti20.293
-																													ADD Ti19.294 z4.267
+																													Ti18.234
+																													ADD Ti17.235 z4.208
 																													LET
-																														Ti21.292
-																														ADD Ti20.293 z5.268
+																														Ti19.233
+																														ADD Ti18.234 z5.209
 																														LET
-																															Ti22.291
-																															ADD Ti21.292 z6.269
+																															Ti20.232
+																															ADD Ti19.233 z6.210
 																															LET
-																																Ti23.290
-																																ADD Ti22.291 z7.270
+																																Ti21.231
+																																ADD Ti20.232 z7.211
 																																LET
-																																	Ti24.289
-																																	ADD Ti23.290 z8.271
+																																	Ti22.230
+																																	ADD Ti21.231 z8.212
 																																	LET
-																																		Ti25.288
-																																		ADD Ti24.289 z9.272
+																																		Ti23.229
+																																		ADD Ti22.230 z9.213
 																																		LET
-																																			Ti26.287
-																																			ADD Ti25.288 z10.273
+																																			Ti24.228
+																																			ADD Ti23.229 z10.214
 																																			LET
-																																				Ti27.286
-																																				ADD Ti26.287 z11.274
+																																				Ti25.227
+																																				ADD Ti24.228 z11.215
 																																				LET
-																																					Ti28.285
-																																					ADD Ti27.286 z12.275
+																																					Ti26.226
+																																					ADD Ti25.227 z12.216
 																																					LET
-																																						Ti29.284
-																																						ADD Ti28.285 z13.276
+																																						Ti27.225
+																																						ADD Ti26.226 z13.217
 																																						LET
-																																							Ti30.283
-																																							ADD Ti29.284 z14.277
+																																							Ti28.224
+																																							ADD Ti27.225 z14.218
 																																							LET
-																																								Ti31.282
-																																								ADD Ti30.283 z15.278
+																																								Ti29.223
+																																								ADD Ti28.224 z15.219
 																																								ANS
-																																									ADD Ti31.282 x.261
+																																									ADD Ti29.223 x.202
 																								ANS
-																									CALLDIR print_int.228
-																										Ti32.279 
+																									CALLDIR print_int.177
+																										Ti30.220 
 																										

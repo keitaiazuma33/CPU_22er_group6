@@ -1,112 +1,120 @@
-Name : g.52
-Args : %x5 
+Name : print_int.177
+Args : %x6 
+
+FArgs : 
+Body :
+ANS
+	OUT %x6
+
+Name : g.223
+Args : %x6 
 
 FArgs : 
 Body :
 LET
-	%x6
+	%x7
 	LD %x29 40
 	LET
-		%x7
+		%x8
 		LD %x29 36
 		LET
-			%x8
+			%x9
 			LD %x29 32
 			LET
-				%x9
+				%x10
 				LD %x29 28
 				LET
-					%x10
+					%x11
 					LD %x29 24
 					LET
-						%x11
+						%x12
 						LD %x29 20
 						LET
-							%x12
+							%x13
 							LD %x29 16
 							LET
-								%x13
+								%x14
 								LD %x29 12
 								LET
-									%x14
+									%x15
 									LD %x29 8
 									LET
-										%x15
+										%x16
 										LD %x29 4
 										LET
-											%x13
-											ADD %x15 %x13
+											%x14
+											ADD %x16 %x14
 											LET
-												%x12
-												ADD %x13 %x12
+												%x13
+												ADD %x14 %x13
 												LET
-													%x11
-													ADD %x12 %x11
+													%x12
+													ADD %x13 %x12
 													LET
-														%x10
-														ADD %x11 %x10
+														%x11
+														ADD %x12 %x11
 														LET
-															%x9
-															ADD %x10 %x9
+															%x10
+															ADD %x11 %x10
 															LET
-																%x8
-																ADD %x9 %x8
+																%x9
+																ADD %x10 %x9
 																LET
-																	%x7
-																	ADD %x8 %x7
+																	%x8
+																	ADD %x9 %x8
 																	LET
-																		%x6
-																		ADD %x7 %x6
+																		%x7
+																		ADD %x8 %x7
 																		LET
-																			%x6
-																			ADD %x6 %x14
+																			%x7
+																			ADD %x7 %x15
 																			ANS
-																				IFLE %x5 0
+																				IFLE %x6 0
 																					LET
-																						%x5
-																						NEG %x5
+																						%x6
+																						NEG %x6
 																						ANS
 																							CALLCLS %x29
-																								%x5 
+																								%x6 
 																								
 																					ANS
-																						MOV %x6
+																						MOV %x7
 
-Name : h.26
-Args : %x5 
+Name : h.197
+Args : %x6 
 
 FArgs : 
 Body :
 LET
-	%x6
-	LD %x5 36
+	%x7
+	LD %x6 36
 	LET
-		%x7
-		LD %x5 32
+		%x8
+		LD %x6 32
 		LET
-			%x8
-			LD %x5 28
+			%x9
+			LD %x6 28
 			LET
-				%x9
-				LD %x5 24
+				%x10
+				LD %x6 24
 				LET
-					%x10
-					LD %x5 20
+					%x11
+					LD %x6 20
 					LET
-						%x11
-						LD %x5 16
+						%x12
+						LD %x6 16
 						LET
-							%x12
-							LD %x5 12
+							%x13
+							LD %x6 12
 							LET
-								%x13
-								LD %x5 8
+								%x14
+								LD %x6 8
 								LET
-									%x14
-									LD %x5 4
+									%x15
+									LD %x6 4
 									LET
-										%x5
-										LD %x5 0
+										%x6
+										LD %x6 0
 										LET
 											%x29
 											MOV %x3
@@ -114,128 +122,128 @@ LET
 												%x3
 												ADD %x3 44
 												LET
-													%x15
-													g.52
+													%x16
+													g.223
 													LET
 														%g0
-														ST %x15 %x29 0
+														ST %x16 %x29 0
 														LET
 															%g0
-															ST %x7 %x29 40
+															ST %x8 %x29 40
 															LET
 																%g0
-																ST %x8 %x29 36
+																ST %x9 %x29 36
 																LET
 																	%g0
-																	ST %x9 %x29 32
+																	ST %x10 %x29 32
 																	LET
 																		%g0
-																		ST %x10 %x29 28
+																		ST %x11 %x29 28
 																		LET
 																			%g0
-																			ST %x11 %x29 24
+																			ST %x12 %x29 24
 																			LET
 																				%g0
-																				ST %x12 %x29 20
+																				ST %x13 %x29 20
 																				LET
 																					%g0
-																					ST %x13 %x29 16
+																					ST %x14 %x29 16
 																					LET
 																						%g0
-																						ST %x14 %x29 12
+																						ST %x15 %x29 12
 																						LET
 																							%g0
-																							ST %x6 %x29 8
+																							ST %x7 %x29 8
 																							LET
 																								%g0
-																								ST %x5 %x29 4
+																								ST %x6 %x29 4
 																								LET
-																									%x5
+																									%x6
 																									SET 1
 																									ANS
 																										CALLCLS %x29
-																											%x5 
+																											%x6 
 																											
 
 
 LET
-	%x5
+	%x6
 	SET 1
 	LET
-		%x6
+		%x7
 		SET 2
 		LET
-			%x7
+			%x8
 			SET 3
 			LET
-				%x8
+				%x9
 				SET 4
 				LET
-					%x9
+					%x10
 					SET 5
 					LET
-						%x10
+						%x11
 						SET 6
 						LET
-							%x11
+							%x12
 							SET 7
 							LET
-								%x12
+								%x13
 								SET 8
 								LET
-									%x13
+									%x14
 									SET 9
 									LET
-										%x14
+										%x15
 										SET 10
 										LET
-											%x15
+											%x16
 											MOV %x3
 											LET
 												%x3
 												ADD %x3 40
 												LET
 													%g0
-													ST %x14 %x15 36
+													ST %x15 %x16 36
 													LET
 														%g0
-														ST %x13 %x15 32
+														ST %x14 %x16 32
 														LET
 															%g0
-															ST %x12 %x15 28
+															ST %x13 %x16 28
 															LET
 																%g0
-																ST %x11 %x15 24
+																ST %x12 %x16 24
 																LET
 																	%g0
-																	ST %x10 %x15 20
+																	ST %x11 %x16 20
 																	LET
 																		%g0
-																		ST %x9 %x15 16
+																		ST %x10 %x16 16
 																		LET
 																			%g0
-																			ST %x8 %x15 12
+																			ST %x9 %x16 12
 																			LET
 																				%g0
-																				ST %x7 %x15 8
+																				ST %x8 %x16 8
 																				LET
 																					%g0
-																					ST %x6 %x15 4
+																					ST %x7 %x16 4
 																					LET
 																						%g0
-																						ST %x5 %x15 0
+																						ST %x6 %x16 0
 																						LET
-																							%x5
-																							MOV %x15
+																							%x6
+																							MOV %x16
 																							LET
-																								%x5
-																								CALLDIR h.26
-																									%x5 
+																								%x6
+																								CALLDIR h.197
+																									%x6 
 																									
 																								LET
 																									%g0
-																									CALLDIR min_caml_print_int
-																										%x5 
+																									CALLDIR print_int.177
+																										%x6 
 																										
 																									LET
 																										%g0

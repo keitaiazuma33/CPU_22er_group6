@@ -1,89 +1,97 @@
-Name : odd.21
-Args : x.22 
+Name : print_int.166
+Args : a.167 
+
+FArgs : 
+Body :
+ANS
+	OUT a.167
+
+Name : odd.192
+Args : x.193 
 
 FArgs : 
 Body :
 LET
-	Ti9.29
+	Ti15.200
 	SET 0
 	ANS
-		IFLE x.22 Ti9.29
+		IFLE x.193 Ti15.200
 			LET
-				Ti10.32
+				Ti16.203
 				SET 0
 				ANS
-					IFLE Ti10.32 x.22
+					IFLE Ti16.203 x.193
 						ANS
 							SET 456
 						LET
-							Ti11.34
+							Ti17.205
 							SET 1
 							LET
-								Ti12.33
-								ADD x.22 Ti11.34
+								Ti18.204
+								ADD x.193 Ti17.205
 								ANS
-									CALLDIR even.17
-										Ti12.33 
+									CALLDIR even.188
+										Ti18.204 
 										
 			LET
-				Ti13.31
+				Ti19.202
 				SET 1
 				LET
-					Ti14.30
-					SUB x.22 Ti13.31
+					Ti20.201
+					SUB x.193 Ti19.202
 					ANS
-						CALLDIR even.17
-							Ti14.30 
+						CALLDIR even.188
+							Ti20.201 
 							
 
-Name : even.17
-Args : x.18 
+Name : even.188
+Args : x.189 
 
 FArgs : 
 Body :
 LET
-	Ti3.23
+	Ti9.194
 	SET 0
 	ANS
-		IFLE x.18 Ti3.23
+		IFLE x.189 Ti9.194
 			LET
-				Ti4.26
+				Ti10.197
 				SET 0
 				ANS
-					IFLE Ti4.26 x.18
+					IFLE Ti10.197 x.189
 						ANS
 							SET 123
 						LET
-							Ti5.28
+							Ti11.199
 							SET 1
 							LET
-								Ti6.27
-								ADD x.18 Ti5.28
+								Ti12.198
+								ADD x.189 Ti11.199
 								ANS
-									CALLDIR odd.21
-										Ti6.27 
+									CALLDIR odd.192
+										Ti12.198 
 										
 			LET
-				Ti7.25
+				Ti13.196
 				SET 1
 				LET
-					Ti8.24
-					SUB x.18 Ti7.25
+					Ti14.195
+					SUB x.189 Ti13.196
 					ANS
-						CALLDIR odd.21
-							Ti8.24 
+						CALLDIR odd.192
+							Ti14.195 
 							
 
 
 LET
-	Ti1.20
+	Ti7.191
 	SET 789
 	LET
-		Ti2.19
-		CALLDIR even.17
-			Ti1.20 
+		Ti8.190
+		CALLDIR even.188
+			Ti7.191 
 			
 		ANS
-			CALLDIR min_caml_print_int
-				Ti2.19 
+			CALLDIR print_int.166
+				Ti8.190 
 				

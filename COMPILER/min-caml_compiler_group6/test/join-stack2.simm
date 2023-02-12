@@ -1,4 +1,12 @@
-Name : f.9
+Name : print_int.160
+Args : a.161 
+
+FArgs : 
+Body :
+ANS
+	OUT a.161
+
+Name : f.180
 Args : 
 
 FArgs : 
@@ -6,7 +14,7 @@ Body :
 ANS
 	SET 123
 
-Name : g.11
+Name : g.182
 Args : 
 
 FArgs : 
@@ -16,32 +24,32 @@ ANS
 
 
 LET
-	Tu3.19
+	Tu9.190
 	NOP
 	LET
-		x.13
-		CALLDIR f.9
+		x.184
+		CALLDIR f.180
 			
 			
 		LET
-			Ti7.15
-			IFLE x.13 0
+			Ti13.186
+			IFLE x.184 0
 				LET
-					Tu5.18
+					Tu11.189
 					NOP
 					LET
-						Ti6.17
-						CALLDIR g.11
+						Ti12.188
+						CALLDIR g.182
 							
 							
 						ANS
-							ADD Ti6.17 x.13
+							ADD Ti12.188 x.184
 				ANS
-					MOV x.13
+					MOV x.184
 			LET
-				Ti8.14
-				ADD Ti7.15 x.13
+				Ti14.185
+				ADD Ti13.186 x.184
 				ANS
-					CALLDIR min_caml_print_int
-						Ti8.14 
+					CALLDIR print_int.160
+						Ti14.185 
 						

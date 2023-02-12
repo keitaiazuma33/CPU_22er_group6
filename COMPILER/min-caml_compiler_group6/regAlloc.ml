@@ -122,7 +122,7 @@ and g'_and_restore dest cont regenv exp n = (* ���Ѥ�����ѿ��
     ((* Format.eprintf "restoring %s@." x; *)
      g dest cont regenv (Let((x, t), Restore(x), Ans(exp, n), n)))
 and g' dest cont regenv n = function (* ��̿��Υ쥸����������� (caml2html: regalloc_gprime) *)
-  | Nop | In | Gethp | Set _ | SetL _ | Comment _ | Restore _ as exp -> (Ans(exp, n), regenv)
+  | Nop | Ini | Inf | Gethp | Set _ | SetL _ | Comment _ | Restore _ as exp -> (Ans(exp, n), regenv)
   | Mov(x) -> (Ans(Mov(find x Type.Int regenv), n), regenv)
   | Neg(x) -> (Ans(Neg(find x Type.Int regenv), n), regenv)
   | Out(x) -> (Ans(Out(find x Type.Int regenv), n), regenv)

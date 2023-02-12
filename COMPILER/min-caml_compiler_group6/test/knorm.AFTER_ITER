@@ -1,25 +1,27 @@
-LET REC x.8 x.9 
-	LET Ti4.20
-		NEG x.9
-		LET x.16
-			SUB x.9 Ti4.20
-			LET x.18
-				NEG x.16
-				LET Ti5.19
-					NEG x.18
-					LET Ti6.17
-						SUB x.18 Ti5.19
-						LET x.14
-							SUB x.16 Ti6.17
-							LET Ti7.15
-								NEG x.14
-								SUB x.14 Ti7.15
-	LET Ti1.13
-		INT 125
-		LET x.10
-			APP x.8 Ti1.13 
-			LET Ti2.12
-				NEG x.10
-				LET Ti3.11
-					SUB x.10 Ti2.12
-					EXTFUNAPP print_int Ti3.11 
+LET REC print_int.159 a.160 
+	OUT a.160
+	LET REC x.179 x.180 
+		LET Ti10.191
+			NEG x.180
+			LET x.187
+				SUB x.180 Ti10.191
+				LET x.189
+					NEG x.187
+					LET Ti11.190
+						NEG x.189
+						LET Ti12.188
+							SUB x.189 Ti11.190
+							LET x.185
+								SUB x.187 Ti12.188
+								LET Ti13.186
+									NEG x.185
+									SUB x.185 Ti13.186
+		LET Ti7.184
+			INT 125
+			LET x.181
+				APP x.179 Ti7.184 
+				LET Ti8.183
+					NEG x.181
+					LET Ti9.182
+						SUB x.181 Ti8.183
+						APP print_int.159 Ti9.182 

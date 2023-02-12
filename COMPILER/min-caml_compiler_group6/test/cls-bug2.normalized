@@ -1,19 +1,19 @@
 LET REC fiszero x 
-	LET Td163
+	LET Td114
 		FLOAT 0.000000
-		IFEQ x Td163
+		IFEQ x Td114
 			INT 1
 			INT 0
 	LET REC fispos x 
-		LET Td162
+		LET Td113
 			FLOAT 0.000000
-			IFLE x Td162
+			IFLE x Td113
 				INT 0
 				INT 1
 		LET REC fisneg x 
-			LET Td161
+			LET Td112
 				FLOAT 0.000000
-				IFLE Td161 x
+				IFLE Td112 x
 					INT 0
 					INT 1
 			LET REC fneg x 
@@ -21,9 +21,9 @@ LET REC fiszero x
 				LET REC fsqr x 
 					FMUL x x
 					LET REC fhalf x 
-						LET Td160
+						LET Td111
 							FLOAT 0.500000
-							FMUL Td160 x
+							FMUL Td111 x
 						LET REC fless x y 
 							IFLE y x
 								INT 0
@@ -37,23 +37,23 @@ LET REC fiszero x
 											FMUL x3 x2
 											LET x7
 												FMUL x5 x2
-												LET Td157
-													LET Td154
-														LET Td153
-															LET Td152
+												LET Td108
+													LET Td105
+														LET Td104
+															LET Td103
 																FLOAT 0.166667
-																FMUL Td152 x3
-															FSUB x Td153
-														LET Td156
-															LET Td155
+																FMUL Td103 x3
+															FSUB x Td104
+														LET Td107
+															LET Td106
 																FLOAT 0.008333
-																FMUL Td155 x5
-															FADD Td154 Td156
-													LET Td159
-														LET Td158
+																FMUL Td106 x5
+															FADD Td105 Td107
+													LET Td110
+														LET Td109
 															FLOAT 0.000198
-															FMUL Td158 x7
-														FSUB Td157 Td159
+															FMUL Td109 x7
+														FSUB Td108 Td110
 								LET REC cos x 
 									LET x2
 										FMUL x x
@@ -61,25 +61,25 @@ LET REC fiszero x
 											FMUL x2 x2
 											LET x6
 												FMUL x4 x2
-												LET Td149
-													LET Td146
-														LET Td143
+												LET Td100
+													LET Td97
+														LET Td94
 															FLOAT 1.000000
-															LET Td145
-																LET Td144
+															LET Td96
+																LET Td95
 																	FLOAT 0.500000
-																	FMUL Td144 x2
-																FSUB Td143 Td145
-														LET Td148
-															LET Td147
+																	FMUL Td95 x2
+																FSUB Td94 Td96
+														LET Td99
+															LET Td98
 																FLOAT 0.041667
-																FMUL Td147 x4
-															FADD Td146 Td148
-													LET Td151
-														LET Td150
+																FMUL Td98 x4
+															FADD Td97 Td99
+													LET Td102
+														LET Td101
 															FLOAT 0.001389
-															FMUL Td150 x6
-														FSUB Td149 Td151
+															FMUL Td101 x6
+														FSUB Td100 Td102
 									LET REC atan x 
 										LET x2
 											FMUL x x
@@ -93,49 +93,49 @@ LET REC fiszero x
 															FMUL x7 x2
 															LET x11
 																FMUL x9 x2
-																LET Td140
-																	LET Td137
-																		LET Td134
-																			LET Td131
-																				LET Td130
-																					LET Td129
+																LET Td91
+																	LET Td88
+																		LET Td85
+																			LET Td82
+																				LET Td81
+																					LET Td80
 																						FLOAT 0.333333
-																						FMUL Td129 x3
-																					FSUB x Td130
-																				LET Td133
-																					LET Td132
+																						FMUL Td80 x3
+																					FSUB x Td81
+																				LET Td84
+																					LET Td83
 																						FLOAT 0.200000
-																						FMUL Td132 x5
-																					FADD Td131 Td133
-																			LET Td136
-																				LET Td135
+																						FMUL Td83 x5
+																					FADD Td82 Td84
+																			LET Td87
+																				LET Td86
 																					FLOAT 0.142857
-																					FMUL Td135 x7
-																				FSUB Td134 Td136
-																		LET Td139
-																			LET Td138
+																					FMUL Td86 x7
+																				FSUB Td85 Td87
+																		LET Td90
+																			LET Td89
 																				FLOAT 0.111111
-																				FMUL Td138 x9
-																			FADD Td137 Td139
-																	LET Td142
-																		LET Td141
+																				FMUL Td89 x9
+																			FADD Td88 Td90
+																	LET Td93
+																		LET Td92
 																			FLOAT 0.090909
-																			FMUL Td141 x11
-																		FSUB Td140 Td142
+																			FMUL Td92 x11
+																		FSUB Td91 Td93
 										LET REC floor x 
-											LET Td124
+											LET Td75
 												FLOAT 0.000000
-												IFLE Td124 x
-													LET Ti125
+												IFLE Td75 x
+													LET Ti76
 														FTOI x 
-														ITOF Ti125 
-													LET Ti128
-														LET Td127
-															LET Td126
+														ITOF Ti76 
+													LET Ti79
+														LET Td78
+															LET Td77
 																FLOAT 1.000000
-																FSUB x Td126
-															FTOI Td127 
-														ITOF Ti128 
+																FSUB x Td77
+															FTOI Td78 
+														ITOF Ti79 
 											LET REC abs_float x 
 												FABS x 
 												LET REC float_of_int x 
@@ -143,364 +143,227 @@ LET REC fiszero x
 													LET REC int_of_float x 
 														FTOI x 
 														LET REC mul_abs a b i acc 
-															LET Ti113
-																LET Ti112
+															LET Ti64
+																LET Ti63
 																	INT 1
-																	NEG Ti112
-																IFEQ i Ti113
+																	NEG Ti63
+																IFEQ i Ti64
 																	VAR acc
-																	LET Ti116
-																		LET Ti115
-																			LET Ti114
+																	LET Ti67
+																		LET Ti66
+																			LET Ti65
 																				INT 1
-																				SLL Ti114 i
-																			AND b Ti115
-																		LET Ti117
+																				SLL Ti65 i
+																			AND b Ti66
+																		LET Ti68
 																			INT 0
-																			IFEQ Ti116 Ti117
-																				LET Ti119
-																					LET Ti118
+																			IFEQ Ti67 Ti68
+																				LET Ti70
+																					LET Ti69
 																						INT 1
-																						SUB i Ti118
-																					APP mul_abs a b Ti119 acc 
-																				LET Ti121
-																					LET Ti120
+																						SUB i Ti69
+																					APP mul_abs a b Ti70 acc 
+																				LET Ti72
+																					LET Ti71
 																						INT 1
-																						SUB i Ti120
-																					LET Ti123
-																						LET Ti122
+																						SUB i Ti71
+																					LET Ti74
+																						LET Ti73
 																							SLL a i
-																							ADD acc Ti122
-																						APP mul_abs a b Ti121 Ti123 
+																							ADD acc Ti73
+																						APP mul_abs a b Ti72 Ti74 
 															LET REC mul a b 
 																LET abs_a
-																	LET Ti104
+																	LET Ti55
 																		INT 0
-																		IFLE Ti104 a
+																		IFLE Ti55 a
 																			VAR a
 																			NEG a
 																	LET abs_b
-																		LET Ti105
+																		LET Ti56
 																			INT 0
-																			IFLE Ti105 b
+																			IFLE Ti56 b
 																				VAR b
 																				NEG b
 																		LET abs_mul
-																			LET Ti106
+																			LET Ti57
 																				INT 30
-																				LET Ti107
+																				LET Ti58
 																					INT 0
-																					APP mul_abs abs_a abs_b Ti106 Ti107 
-																			LET Ti109
-																				LET Ti108
+																					APP mul_abs abs_a abs_b Ti57 Ti58 
+																			LET Ti60
+																				LET Ti59
 																					INT 31
-																					SRL a Ti108
-																				LET Ti111
-																					LET Ti110
+																					SRL a Ti59
+																				LET Ti62
+																					LET Ti61
 																						INT 31
-																						SRL b Ti110
-																					IFEQ Ti109 Ti111
+																						SRL b Ti61
+																					IFEQ Ti60 Ti62
 																						VAR abs_mul
 																						NEG abs_mul
 																LET REC div_abs a b i acc 
-																	LET Ti93
-																		LET Ti92
+																	LET Ti44
+																		LET Ti43
 																			INT 1
-																			NEG Ti92
-																		IFEQ i Ti93
+																			NEG Ti43
+																		IFEQ i Ti44
 																			VAR acc
-																			LET Ti94
+																			LET Ti45
 																				SRL a i
-																				IFLE b Ti94
-																					LET Ti96
-																						LET Ti95
+																				IFLE b Ti45
+																					LET Ti47
+																						LET Ti46
 																							SLL b i
-																							SUB a Ti95
-																						LET Ti98
-																							LET Ti97
+																							SUB a Ti46
+																						LET Ti49
+																							LET Ti48
 																								INT 1
-																								SUB i Ti97
-																							LET Ti101
-																								LET Ti100
-																									LET Ti99
+																								SUB i Ti48
+																							LET Ti52
+																								LET Ti51
+																									LET Ti50
 																										INT 1
-																										SLL Ti99 i
-																									ADD acc Ti100
-																								APP div_abs Ti96 b Ti98 Ti101 
-																					LET Ti103
-																						LET Ti102
+																										SLL Ti50 i
+																									ADD acc Ti51
+																								APP div_abs Ti47 b Ti49 Ti52 
+																					LET Ti54
+																						LET Ti53
 																							INT 1
-																							SUB i Ti102
-																						APP div_abs a b Ti103 acc 
+																							SUB i Ti53
+																						APP div_abs a b Ti54 acc 
 																	LET REC div a b 
 																		LET abs_a
-																			LET Ti84
+																			LET Ti35
 																				INT 0
-																				IFLE Ti84 a
+																				IFLE Ti35 a
 																					VAR a
 																					NEG a
 																			LET abs_b
-																				LET Ti85
+																				LET Ti36
 																					INT 0
-																					IFLE Ti85 b
+																					IFLE Ti36 b
 																						VAR b
 																						NEG b
 																				LET abs_div
-																					LET Ti86
+																					LET Ti37
 																						INT 30
-																						LET Ti87
+																						LET Ti38
 																							INT 0
-																							APP div_abs abs_a abs_b Ti86 Ti87 
-																					LET Ti89
-																						LET Ti88
+																							APP div_abs abs_a abs_b Ti37 Ti38 
+																					LET Ti40
+																						LET Ti39
 																							INT 31
-																							SRL a Ti88
-																						LET Ti91
-																							LET Ti90
+																							SRL a Ti39
+																						LET Ti42
+																							LET Ti41
 																								INT 31
-																								SRL b Ti90
-																							IFEQ Ti89 Ti91
+																								SRL b Ti41
+																							IFEQ Ti40 Ti42
 																								VAR abs_div
 																								NEG abs_div
-																		LET REC print_char a 
+																		LET REC print_int a 
 																			OUT a
-																			LET REC print_int a 
-																				LET Ti72
-																					INT 0
-																					IFLE Ti72 a
-																						LET Ti73
-																							INT 10
-																							IFLE Ti73 a
-																								LET b
-																									LET Ti74
-																										INT 10
-																										APP div a Ti74 
-																									LET Tu2
-																										APP print_int b 
-																										LET Ti79
-																											LET Ti77
-																												LET Ti76
-																													LET Ti75
-																														INT 10
-																														APP mul b Ti75 
-																													SUB a Ti76
-																												LET Ti78
-																													INT 48
-																													ADD Ti77 Ti78
-																											OUT Ti79
-																								LET Ti81
-																									LET Ti80
-																										INT 48
-																										ADD a Ti80
-																									OUT Ti81
-																						LET Tu1
-																							LET Ti82
-																								INT 45
-																								OUT Ti82
-																							LET Ti83
-																								NEG a
-																								APP print_int Ti83 
-																				LET REC read_int_sub acc cnt 
-																					LET byte
-																						LET Tu59
-																							UNIT
-																							IN Tu59
-																						LET Ti60
-																							INT 48
-																							IFLE Ti60 byte
-																								LET Ti61
-																									INT 57
-																									IFLE byte Ti61
-																										LET Ti66
-																											LET Ti63
-																												LET Ti62
-																													INT 10
-																													APP mul acc Ti62 
-																												LET Ti65
-																													LET Ti64
-																														INT 48
-																														SUB byte Ti64
-																													ADD Ti63 Ti65
-																											LET Ti68
-																												LET Ti67
-																													INT 1
-																													ADD cnt Ti67
-																												APP read_int_sub Ti66 Ti68 
-																										LET Ti69
-																											INT 45
-																											IFEQ byte Ti69
-																												LET Tt70
-																													APP read_int_sub acc cnt 
-																													LETTUPLE ac cn 
-																														Tt70
-																														LET Ti71
-																															NEG ac
-																															TUPLE
-																																Ti71 cn 
-																												TUPLE
-																													acc cnt 
-																								TUPLE
-																									acc cnt 
-																					LET REC read_int a 
-																						LET Tt58
-																							LET Ti56
-																								INT 0
-																								LET Ti57
+																			LET REC read_int a 
+																				INI a
+																				LET REC read_float a 
+																					INF a
+																					LET REC assign_array hp a n 
+																						LET Ti31
+																							INT 0
+																							IFLE Ti31 n
+																								LET Ti32
 																									INT 0
-																									APP read_int_sub Ti56 Ti57 
-																							LETTUPLE acc cnt 
-																								Tt58
-																								VAR acc
-																						LET REC pow a b 
-																							LET Ti51
-																								INT 0
-																								IFLE b Ti51
-																									VAR a
-																									LET Td53
-																										LET Td52
-																											ITOF b 
-																											FMUL a Td52
-																										LET Ti55
-																											LET Ti54
-																												INT 1
-																												SUB b Ti54
-																											APP pow Td53 Ti55 
-																							LET REC read_float_sub acc 
-																								LET byte
-																									LET Tu32
-																										UNIT
-																										IN Tu32
-																									LET Ti33
-																										INT 48
-																										IFLE Ti33 byte
+																									IFEQ n Ti32
+																										PUT hp n a
+																										LET Tu1
+																											PUT hp n a
 																											LET Ti34
-																												INT 57
-																												IFLE byte Ti34
-																													LET Td40
-																														LET Td36
-																															LET Td35
-																																FLOAT 10.000000
-																																FMUL acc Td35
-																															LET Td39
-																																LET Ti38
-																																	LET Ti37
-																																		INT 48
-																																		SUB byte Ti37
-																																	ITOF Ti38 
-																																FADD Td36 Td39
-																														APP read_float_sub Td40 
-																													LET Ti41
-																														INT 45
-																														IFEQ byte Ti41
-																															LET Td42
-																																APP read_float_sub acc 
-																																FNEG Td42 
-																															LET Ti43
-																																INT 46
-																																IFEQ byte Ti43
-																																	LET Tt46
-																																		LET Ti44
-																																			INT 0
-																																			LET Ti45
-																																				INT 0
-																																				APP read_int_sub Ti44 Ti45 
-																																		LETTUPLE acc2 cnt 
-																																			Tt46
-																																			LET Td50
-																																				LET Td47
-																																					ITOF acc2 
-																																					LET Td49
-																																						LET Td48
-																																							FLOAT 10.000000
-																																							APP pow Td48 cnt 
-																																						FDIV Td47 Td49
-																																				FADD acc Td50
-																																	VAR acc
-																											VAR acc
-																								LET REC read_float a 
-																									LET Td31
-																										FLOAT 0.000000
-																										APP read_float_sub Td31 
-																									LET REC assign_array hp a n 
+																												LET Ti33
+																													INT 1
+																													SUB n Ti33
+																												APP assign_array hp a Ti34 
+																								UNIT
+																						LET REC create_array n a 
+																							LET hp
+																								LET Tu25
+																									UNIT
+																									GETHP Tu25
+																								LET hp_array
+																									ITOIA hp
+																									LET Tu3
 																										LET Ti28
+																											LET Ti27
+																												LET Ti26
+																													INT 2
+																													SLL n Ti26
+																												ADD hp Ti27
+																											SETHP Ti28
+																										LET Tu2
+																											LET Ti30
+																												LET Ti29
+																													INT 1
+																													SUB n Ti29
+																												APP assign_array hp_array a Ti30 
+																											VAR hp_array
+																							LET REC assign_farray hp a n 
+																								LET Ti21
+																									INT 0
+																									IFLE Ti21 n
+																										LET Ti22
 																											INT 0
-																											IFEQ n Ti28
+																											IFEQ n Ti22
 																												PUT hp n a
-																												LET Tu3
+																												LET Tu4
 																													PUT hp n a
-																													LET Ti30
-																														LET Ti29
+																													LET Ti24
+																														LET Ti23
 																															INT 1
-																															SUB n Ti29
-																														APP assign_array hp a Ti30 
-																										LET REC create_array n a 
-																											LET hp
-																												LET Tu24
-																													UNIT
-																													GETHP Tu24
-																												LET hp_array
-																													ITOIA hp
-																													LET Tu5
-																														LET Ti27
-																															LET Ti26
-																																LET Ti25
-																																	INT 2
-																																	SLL n Ti25
-																																ADD hp Ti26
-																															SETHP Ti27
-																														LET Tu4
-																															APP assign_array hp_array a n 
-																															VAR hp_array
-																											LET REC assign_farray hp a n 
-																												LET Ti21
-																													INT 0
-																													IFEQ n Ti21
-																														PUT hp n a
-																														LET Tu6
-																															PUT hp n a
-																															LET Ti23
-																																LET Ti22
-																																	INT 1
-																																	SUB n Ti22
-																																APP assign_farray hp a Ti23 
-																												LET REC create_float_array n a 
-																													LET hp
-																														LET Tu17
-																															UNIT
-																															GETHP Tu17
-																														LET hp_array
-																															ITOFA hp
-																															LET Tu8
-																																LET Ti20
-																																	LET Ti19
-																																		LET Ti18
-																																			INT 3
-																																			SLL n Ti18
-																																		ADD hp Ti19
-																																	SETHP Ti20
-																																LET Tu7
-																																	APP assign_farray hp_array a n 
-																																	VAR hp_array
-																													LET REC f n 
-																														LET Ti11
-																															INT 0
-																															IFLE Ti11 n
-																																LET Tu9
-																																	APP print_int n 
-																																	LET a
-																																		LET Ti12
-																																			INT 1
-																																			APP create_array Ti12 f 
-																																		LET Tf14
-																																			LET Ti13
-																																				INT 0
-																																				GET a Ti13
-																																			LET Ti16
-																																				LET Ti15
-																																					INT 1
-																																					SUB n Ti15
-																																				APP Tf14 Ti16 
-																																UNIT
+																															SUB n Ti23
+																														APP assign_farray hp a Ti24 
+																										UNIT
+																								LET REC create_float_array n a 
+																									LET hp
+																										LET Tu15
+																											UNIT
+																											GETHP Tu15
+																										LET hp_array
+																											ITOFA hp
+																											LET Tu6
+																												LET Ti18
+																													LET Ti17
+																														LET Ti16
+																															INT 2
+																															SLL n Ti16
+																														ADD hp Ti17
+																													SETHP Ti18
+																												LET Tu5
+																													LET Ti20
+																														LET Ti19
+																															INT 1
+																															SUB n Ti19
+																														APP assign_farray hp_array a Ti20 
+																													VAR hp_array
+																									LET REC f n 
+																										LET Ti9
+																											INT 0
+																											IFLE Ti9 n
+																												LET Tu7
+																													APP print_int n 
+																													LET a
 																														LET Ti10
-																															INT 9
-																															APP f Ti10 
+																															INT 1
+																															APP create_array Ti10 f 
+																														LET Tf12
+																															LET Ti11
+																																INT 0
+																																GET a Ti11
+																															LET Ti14
+																																LET Ti13
+																																	INT 1
+																																	SUB n Ti13
+																																APP Tf12 Ti14 
+																												UNIT
+																										LET Ti8
+																											INT 9
+																											APP f Ti8 

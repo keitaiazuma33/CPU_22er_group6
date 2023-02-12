@@ -93,7 +93,7 @@ let rec div a b =
     -abs_div
 in
 
-let rec print_char a = output a 
+(*let rec print_char a = output a 
 in
 
 let rec print_int a =
@@ -107,9 +107,18 @@ let rec print_int a =
       let b = div a 10 in
       (print_int b;
       output (a - (mul b 10) + 48))
+in*)
+
+let rec print_int a = outi a 
 in
 
-let rec read_int_sub acc cnt =
+let rec read_int a = ini a
+in
+
+let rec read_float a = inf a
+in
+
+(*let rec read_int_sub acc cnt =
   let byte = input () in
   if 48 <= byte then
     if byte <= 57 then
@@ -126,9 +135,9 @@ in
 let rec read_int a =
   let (acc, cnt) = read_int_sub 0 0 in
   acc
-in
+in*)
 
-let rec pow a b =
+(*let rec pow a b =
   if b <= 0 then
     a 
   else
@@ -154,7 +163,7 @@ in
 
 let rec read_float a =
   read_float_sub 0.0
-in
+in*)
 
 let rec assign_array hp a n =
   if n < 0 then

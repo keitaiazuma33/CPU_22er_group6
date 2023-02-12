@@ -1,98 +1,106 @@
-Name : foo.12
-Args : %x5 %x6 %x7 %x8 %x9 %x10 
-
-FArgs : 
-Body :
-LET
-	Tu42
-	SAVE %x10 f.18
-	LET
-		Tu41
-		SAVE %x9 e.17
-		LET
-			Tu40
-			SAVE %x8 d.16
-			LET
-				Tu39
-				SAVE %x7 c.15
-				LET
-					Tu38
-					SAVE %x6 b.14
-					LET
-						%g0
-						CALLDIR min_caml_print_int
-							%x5 
-							
-						LET
-							%x5
-							RESTORE b.14
-							LET
-								%g0
-								CALLDIR min_caml_print_int
-									%x5 
-									
-								LET
-									%x5
-									RESTORE c.15
-									LET
-										%g0
-										CALLDIR min_caml_print_int
-											%x5 
-											
-										LET
-											%x5
-											RESTORE d.16
-											LET
-												%g0
-												CALLDIR min_caml_print_int
-													%x5 
-													
-												LET
-													%x5
-													RESTORE e.17
-													LET
-														%g0
-														CALLDIR min_caml_print_int
-															%x5 
-															
-														LET
-															%x5
-															RESTORE f.18
-															ANS
-																CALLDIR min_caml_print_int
-																	%x5 
-																	
-
-Name : bar.19
-Args : %x5 %x6 %x7 %x8 %x9 %x10 
+Name : print_int.163
+Args : %x6 
 
 FArgs : 
 Body :
 ANS
-	CALLDIR foo.12
-		%x6 %x5 %x8 %x9 %x10 %x7 
+	OUT %x6
+
+Name : foo.183
+Args : %x6 %x7 %x8 %x9 %x10 %x11 
+
+FArgs : 
+Body :
+LET
+	Tu343
+	SAVE %x11 f.189
+	LET
+		Tu342
+		SAVE %x10 e.188
+		LET
+			Tu341
+			SAVE %x9 d.187
+			LET
+				Tu340
+				SAVE %x8 c.186
+				LET
+					Tu339
+					SAVE %x7 b.185
+					LET
+						%g0
+						CALLDIR print_int.163
+							%x6 
+							
+						LET
+							%x6
+							RESTORE b.185
+							LET
+								%g0
+								CALLDIR print_int.163
+									%x6 
+									
+								LET
+									%x6
+									RESTORE c.186
+									LET
+										%g0
+										CALLDIR print_int.163
+											%x6 
+											
+										LET
+											%x6
+											RESTORE d.187
+											LET
+												%g0
+												CALLDIR print_int.163
+													%x6 
+													
+												LET
+													%x6
+													RESTORE e.188
+													LET
+														%g0
+														CALLDIR print_int.163
+															%x6 
+															
+														LET
+															%x6
+															RESTORE f.189
+															ANS
+																CALLDIR print_int.163
+																	%x6 
+																	
+
+Name : bar.190
+Args : %x6 %x7 %x8 %x9 %x10 %x11 
+
+FArgs : 
+Body :
+ANS
+	CALLDIR foo.183
+		%x7 %x6 %x9 %x10 %x11 %x8 
 		
 
 
 LET
-	%x5
+	%x6
 	SET 1
 	LET
-		%x6
+		%x7
 		SET 2
 		LET
-			%x7
+			%x8
 			SET 3
 			LET
-				%x8
+				%x9
 				SET 4
 				LET
-					%x9
+					%x10
 					SET 5
 					LET
-						%x10
+						%x11
 						SET 6
 						ANS
-							CALLDIR bar.19
-								%x5 %x6 %x7 %x8 %x9 %x10 
+							CALLDIR bar.190
+								%x6 %x7 %x8 %x9 %x10 %x11 
 								

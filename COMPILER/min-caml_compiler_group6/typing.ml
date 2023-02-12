@@ -60,7 +60,8 @@ let rec deref_term = function
   | FAbs(e1, n) -> FAbs(deref_term e1, n)
   | FtoI(e1, n) -> FtoI(deref_term e1, n)
   | ItoF(e1, n) -> ItoF(deref_term e1, n)
-  | In(e1, n) -> In(deref_term e1, n)
+  | Ini(e1, n) -> Ini(deref_term e1, n)
+  | Inf(e1, n) -> Inf(deref_term e1, n)
   | Out(e1, n) -> Out(deref_term e1, n)
   | ItoIA(e1, n) -> ItoIA(deref_term e1, n)
   | ItoFA(e1, n) -> ItoFA(deref_term e1, n)
@@ -137,9 +138,13 @@ let rec g env e = (* �������롼���� (caml2html: typing_g) 
         (try (unify Type.Int (g env e1);
         Type.Float)
         with Unify(t1,t2) -> raise (Error(deref_term e, deref_typ t1, deref_typ t2, n)))
-    | In(e1, n) ->
+    | Ini(e1, n) ->
         (try (unify Type.Unit (g env e1);
         Type.Int)
+        with Unify(t1,t2) -> raise (Error(deref_term e, deref_typ t1, deref_typ t2, n)))
+    | Inf(e1, n) ->
+        (try (unify Type.Unit (g env e1);
+        Type.Float)
         with Unify(t1,t2) -> raise (Error(deref_term e, deref_typ t1, deref_typ t2, n)))
     | Out(e1, n) ->
         (try (unify Type.Int (g env e1);

@@ -1,4 +1,10 @@
+Name : print_int.153
+Args : a.154 
+Formal_fv : 
+Body :
+OUT a.154
 
-LET Ti1.7
+
+LET Ti7.178
 	INT 6
-	APPDIR min_caml_print_int : Ti1.7 
+	APPDIR print_int.153 : Ti7.178 

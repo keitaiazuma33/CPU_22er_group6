@@ -1,12 +1,18 @@
+Name : print_int.160
+Args : a.161 
+Formal_fv : 
+Body :
+OUT a.161
 
-LET Ti3.16
+
+LET Ti9.187
 	INT 123
-	LET Tu2.9
-		APPDIR min_caml_print_int : Ti3.16 
-		LET Ti5.14
+	LET Tu8.180
+		APPDIR print_int.160 : Ti9.187 
+		LET Ti11.185
 			INT -456
-			LET Tu1.10
-				APPDIR min_caml_print_int : Ti5.14 
-				LET Ti8.11
+			LET Tu7.181
+				APPDIR print_int.160 : Ti11.185 
+				LET Ti14.182
 					INT 789
-					APPDIR min_caml_print_int : Ti8.11 
+					APPDIR print_int.160 : Ti14.182 

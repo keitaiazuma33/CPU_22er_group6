@@ -29,7 +29,8 @@ and exp =
   | ItoF of Id.t
   | Gethp
   | Sethp of Id.t 
-  | In
+  | Ini
+  | Inf
   | Out of Id.t
   | LdDF of Id.t * id_or_imm * int
   | StDF of Id.t * Id.t * id_or_imm * int
@@ -61,6 +62,8 @@ val reg_fsw : Id.t
 val reg_ra : Id.t
 val reg_hp : Id.t
 val reg_sp : Id.t
+val reg_in : Id.t
+val reg_out : Id.t
 val reg_zero : Id.t
 val reg_cons : Id.t
 val freg_zero : Id.t

@@ -1,36 +1,42 @@
-Name : f.10
-Args : Tu1.11 
+Name : print_int.161
+Args : a.162 
+Formal_fv : 
+Body :
+OUT a.162
+
+Name : f.181
+Args : Tu7.182 
 Formal_fv : 
 Body :
 INT 123
 
-Name : g.12
-Args : Tu2.13 
+Name : g.183
+Args : Tu8.184 
 Formal_fv : 
 Body :
 INT 456
 
-Name : h.14
-Args : Tu3.15 
+Name : h.185
+Args : Tu9.186 
 Formal_fv : 
 Body :
 INT 789
 
 
-LET Tu4.22
+LET Tu10.193
 	UNIT
-	LET x.16
-		APPDIR f.10 : Tu4.22 
-		LET Ti5.19
+	LET x.187
+		APPDIR f.181 : Tu10.193 
+		LET Ti11.190
 			INT 0
-			LET Ti8.18
-				IFLE x.16 Ti5.19
-					LET Tu6.21
+			LET Ti14.189
+				IFLE x.187 Ti11.190
+					LET Tu12.192
 						UNIT
-						APPDIR g.12 : Tu6.21 
-					LET Tu7.20
+						APPDIR g.183 : Tu12.192 
+					LET Tu13.191
 						UNIT
-						APPDIR h.14 : Tu7.20 
-				LET Ti9.17
-					ADD Ti8.18 x.16
-					APPDIR min_caml_print_int : Ti9.17 
+						APPDIR h.185 : Tu13.191 
+				LET Ti15.188
+					ADD Ti14.189 x.187
+					APPDIR print_int.161 : Ti15.188 

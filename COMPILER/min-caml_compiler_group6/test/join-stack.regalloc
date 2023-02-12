@@ -1,4 +1,12 @@
-Name : f.14
+Name : print_int.165
+Args : %x6 
+
+FArgs : 
+Body :
+ANS
+	OUT %x6
+
+Name : f.185
 Args : 
 
 FArgs : 
@@ -6,7 +14,7 @@ Body :
 ANS
 	SET 123
 
-Name : g.16
+Name : g.187
 Args : 
 
 FArgs : 
@@ -14,7 +22,7 @@ Body :
 ANS
 	SET 456
 
-Name : h.18
+Name : h.189
 Args : 
 
 FArgs : 
@@ -27,58 +35,58 @@ LET
 	%g0
 	NOP
 	LET
-		%x5
-		CALLDIR f.14
+		%x6
+		CALLDIR f.185
 			
 			
 		LET
 			%g0
 			NOP
 			LET
-				Tu33
-				SAVE %x5 x.20
+				Tu334
+				SAVE %x6 x.191
 				LET
-					%x5
-					CALLDIR g.16
+					%x6
+					CALLDIR g.187
 						
 						
 					LET
 						%g0
 						NOP
 						LET
-							Tu34
-							SAVE %x5 y.21
+							Tu335
+							SAVE %x6 y.192
 							LET
-								%x5
-								CALLDIR h.18
+								%x6
+								CALLDIR h.189
 									
 									
 								LET
-									%x5
-									IFEQ %x5 0
+									%x6
+									IFEQ %x6 0
 										LET
-											%x5
-											RESTORE x.20
+											%x6
+											RESTORE x.191
 											ANS
-												ADD %x5 1
+												ADD %x6 1
 										LET
-											%x5
-											RESTORE y.21
+											%x6
+											RESTORE y.192
 											ANS
-												ADD %x5 2
+												ADD %x6 2
 									LET
-										%x6
-										RESTORE x.20
+										%x7
+										RESTORE x.191
 										LET
-											%x5
-											ADD %x5 %x6
+											%x6
+											ADD %x6 %x7
 											LET
-												%x6
-												RESTORE y.21
+												%x7
+												RESTORE y.192
 												LET
-													%x5
-													ADD %x5 %x6
+													%x6
+													ADD %x6 %x7
 													ANS
-														CALLDIR min_caml_print_int
-															%x5 
+														CALLDIR print_int.165
+															%x6 
 															

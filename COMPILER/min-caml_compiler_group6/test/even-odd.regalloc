@@ -1,65 +1,73 @@
-Name : odd.21
-Args : %x5 
+Name : print_int.166
+Args : %x6 
 
 FArgs : 
 Body :
 ANS
-	IFLE %x5 0
+	OUT %x6
+
+Name : odd.192
+Args : %x6 
+
+FArgs : 
+Body :
+ANS
+	IFLE %x6 0
 		ANS
-			IFGE %x5 0
+			IFGE %x6 0
 				ANS
 					SET 456
 				LET
-					%x5
-					ADD %x5 1
+					%x6
+					ADD %x6 1
 					ANS
-						CALLDIR even.17
-							%x5 
+						CALLDIR even.188
+							%x6 
 							
 		LET
-			%x5
-			SUB %x5 1
+			%x6
+			SUB %x6 1
 			ANS
-				CALLDIR even.17
-					%x5 
+				CALLDIR even.188
+					%x6 
 					
 
-Name : even.17
-Args : %x5 
+Name : even.188
+Args : %x6 
 
 FArgs : 
 Body :
 ANS
-	IFLE %x5 0
+	IFLE %x6 0
 		ANS
-			IFGE %x5 0
+			IFGE %x6 0
 				ANS
 					SET 123
 				LET
-					%x5
-					ADD %x5 1
+					%x6
+					ADD %x6 1
 					ANS
-						CALLDIR odd.21
-							%x5 
+						CALLDIR odd.192
+							%x6 
 							
 		LET
-			%x5
-			SUB %x5 1
+			%x6
+			SUB %x6 1
 			ANS
-				CALLDIR odd.21
-					%x5 
+				CALLDIR odd.192
+					%x6 
 					
 
 
 LET
-	%x5
+	%x6
 	SET 789
 	LET
-		%x5
-		CALLDIR even.17
-			%x5 
+		%x6
+		CALLDIR even.188
+			%x6 
 			
 		ANS
-			CALLDIR min_caml_print_int
-				%x5 
+			CALLDIR print_int.166
+				%x6 
 				

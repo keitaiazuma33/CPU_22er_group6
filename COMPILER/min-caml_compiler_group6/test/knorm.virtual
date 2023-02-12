@@ -1,48 +1,56 @@
-Name : x.8
-Args : x.9 
+Name : print_int.159
+Args : a.160 
+
+FArgs : 
+Body :
+ANS
+	OUT a.160
+
+Name : x.179
+Args : x.180 
 
 FArgs : 
 Body :
 LET
-	Ti4.20
-	NEG x.9
+	Ti10.191
+	NEG x.180
 	LET
-		x.16
-		SUB x.9 Ti4.20
+		x.187
+		SUB x.180 Ti10.191
 		LET
-			x.18
-			NEG x.16
+			x.189
+			NEG x.187
 			LET
-				Ti5.19
-				NEG x.18
+				Ti11.190
+				NEG x.189
 				LET
-					Ti6.17
-					SUB x.18 Ti5.19
+					Ti12.188
+					SUB x.189 Ti11.190
 					LET
-						x.14
-						SUB x.16 Ti6.17
+						x.185
+						SUB x.187 Ti12.188
 						LET
-							Ti7.15
-							NEG x.14
+							Ti13.186
+							NEG x.185
 							ANS
-								SUB x.14 Ti7.15
+								SUB x.185 Ti13.186
 
 
 LET
-	Ti1.13
+	Ti7.184
 	SET 125
 	LET
-		x.10
-		CALLDIR x.8
-			Ti1.13 
+		x.181
+		CALLDIR x.179
+			Ti7.184 
 			
 		LET
-			Ti2.12
-			NEG x.10
+			Ti8.183
+			NEG x.181
 			LET
-				Ti3.11
-				SUB x.10 Ti2.12
+				Ti9.182
+				SUB x.181 Ti8.183
 				ANS
-					CALLDIR min_caml_print_int
-						Ti3.11 
+					CALLDIR print_int.159
+						Ti9.182 
 						

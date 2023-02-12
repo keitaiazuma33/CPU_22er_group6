@@ -1,55 +1,63 @@
-Name : adder.11
-Args : %x5 
+Name : print_int.156
+Args : %x6 
+
+FArgs : 
+Body :
+ANS
+	OUT %x6
+
+Name : adder.182
+Args : %x6 
 
 FArgs : 
 Body :
 LET
-	%x6
+	%x7
 	LD %x29 4
 	ANS
-		ADD %x6 %x5
+		ADD %x7 %x6
 
-Name : make_adder.5
-Args : %x5 
+Name : make_adder.176
+Args : %x6 
 
 FArgs : 
 Body :
 LET
-	%x6
+	%x7
 	MOV %x3
 	LET
 		%x3
 		ADD %x3 8
 		LET
-			%x7
-			adder.11
+			%x8
+			adder.182
 			LET
 				%g0
-				ST %x7 %x6 0
+				ST %x8 %x7 0
 				LET
 					%g0
-					ST %x5 %x6 4
+					ST %x6 %x7 4
 					ANS
-						MOV %x6
+						MOV %x7
 
 
 LET
-	%x5
+	%x6
 	SET 3
 	LET
 		%x29
-		CALLDIR make_adder.5
-			%x5 
+		CALLDIR make_adder.176
+			%x6 
 			
 		LET
-			%x5
+			%x6
 			SET 7
 			LET
-				%x5
+				%x6
 				CALLCLS %x29
-					%x5 
+					%x6 
 					
 				ANS
-					CALLDIR min_caml_print_int
-						%x5 
+					CALLDIR print_int.156
+						%x6 
 						

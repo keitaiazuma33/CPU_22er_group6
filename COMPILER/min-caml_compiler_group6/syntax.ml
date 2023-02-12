@@ -35,7 +35,8 @@ type t = (* MinCaml�ι�ʸ��ɽ������ǡ����� (caml2h
   | Array of t * t * int
   | Get of t * t * int
   | Put of t * t * t * int
-  | In of t * int
+  | Ini of t * int
+  | Inf of t * int
   | Out of t * int
   | ItoIA of t * int
   | ItoFA of t * int

@@ -1,36 +1,42 @@
-Name : foo.12
-Args : a.13 b.14 c.15 d.16 e.17 f.18 
+Name : print_int.163
+Args : a.164 
 Formal_fv : 
 Body :
-LET Tu5.32
-	APPDIR min_caml_print_int : a.13 
-	LET Tu4.33
-		APPDIR min_caml_print_int : b.14 
-		LET Tu3.34
-			APPDIR min_caml_print_int : c.15 
-			LET Tu2.35
-				APPDIR min_caml_print_int : d.16 
-				LET Tu1.36
-					APPDIR min_caml_print_int : e.17 
-					APPDIR min_caml_print_int : f.18 
+OUT a.164
 
-Name : bar.19
-Args : a.20 b.21 c.22 d.23 e.24 f.25 
+Name : foo.183
+Args : a.184 b.185 c.186 d.187 e.188 f.189 
 Formal_fv : 
 Body :
-APPDIR foo.12 : b.21 a.20 d.23 e.24 f.25 c.22 
+LET Tu11.203
+	APPDIR print_int.163 : a.184 
+	LET Tu10.204
+		APPDIR print_int.163 : b.185 
+		LET Tu9.205
+			APPDIR print_int.163 : c.186 
+			LET Tu8.206
+				APPDIR print_int.163 : d.187 
+				LET Tu7.207
+					APPDIR print_int.163 : e.188 
+					APPDIR print_int.163 : f.189 
+
+Name : bar.190
+Args : a.191 b.192 c.193 d.194 e.195 f.196 
+Formal_fv : 
+Body :
+APPDIR foo.183 : b.192 a.191 d.194 e.195 f.196 c.193 
 
 
-LET Ti6.26
+LET Ti12.197
 	INT 1
-	LET Ti7.27
+	LET Ti13.198
 		INT 2
-		LET Ti8.28
+		LET Ti14.199
 			INT 3
-			LET Ti9.29
+			LET Ti15.200
 				INT 4
-				LET Ti10.30
+				LET Ti16.201
 					INT 5
-					LET Ti11.31
+					LET Ti17.202
 						INT 6
-						APPDIR bar.19 : Ti6.26 Ti7.27 Ti8.28 Ti9.29 Ti10.30 Ti11.31 
+						APPDIR bar.190 : Ti12.197 Ti13.198 Ti14.199 Ti15.200 Ti16.201 Ti17.202 

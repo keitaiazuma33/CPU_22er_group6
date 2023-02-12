@@ -1,24 +1,30 @@
-Name : adder.11
-Args : y.12 
-Formal_fv : x.6 
-Body :
-ADD x.6 y.12
-
-Name : make_adder.5
-Args : x.6 
+Name : print_int.156
+Args : a.157 
 Formal_fv : 
 Body :
-MAKECLS adder.11
-	adder.11 : x.6 
-	VAR adder.11
+OUT a.157
+
+Name : adder.182
+Args : y.183 
+Formal_fv : x.177 
+Body :
+ADD x.177 y.183
+
+Name : make_adder.176
+Args : x.177 
+Formal_fv : 
+Body :
+MAKECLS adder.182
+	adder.182 : x.177 
+	VAR adder.182
 
 
-LET Ti1.10
+LET Ti7.181
 	INT 3
-	LET Tf2.8
-		APPDIR make_adder.5 : Ti1.10 
-		LET Ti3.9
+	LET Tf8.179
+		APPDIR make_adder.176 : Ti7.181 
+		LET Ti9.180
 			INT 7
-			LET Ti4.7
-				APPCLS Tf2.8 : Ti3.9 
-				APPDIR min_caml_print_int : Ti4.7 
+			LET Ti10.178
+				APPCLS Tf8.179 : Ti9.180 
+				APPDIR print_int.156 : Ti10.178 

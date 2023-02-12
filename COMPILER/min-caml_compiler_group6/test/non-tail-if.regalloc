@@ -1,77 +1,85 @@
+Name : print_int.164
+Args : %x6 
+
+FArgs : 
+Body :
+ANS
+	OUT %x6
+
 
 LET
 	%f0
-	l.28
+	l.328
 	LET
-		%x5
+		%x6
 		CALLDIR min_caml_truncate
 			
 			%f0 
 		LET
 			%f0
-			l.30
+			l.330
 			LET
-				Tu35
-				SAVE %x5 x.13
+				Tu336
+				SAVE %x6 x.184
 				LET
-					%x5
+					%x6
 					CALLDIR min_caml_truncate
 						
 						%f0 
 					LET
 						%f0
-						l.32
+						l.332
 						LET
-							Tu36
-							SAVE %x5 y.14
+							Tu337
+							SAVE %x6 y.185
 							LET
-								%x5
+								%x6
 								CALLDIR min_caml_truncate
 									
 									%f0 
 								LET
-									%x6
-									IFGE %x5 0
+									%x7
+									IFGE %x6 0
 										LET
-											%x6
-											RESTORE x.13
+											%x7
+											RESTORE x.184
 											ANS
-												MOV %x6
+												MOV %x7
 										LET
-											%x6
-											RESTORE y.14
+											%x7
+											RESTORE y.185
 											ANS
-												MOV %x6
+												MOV %x7
 									LET
-										%x7
-										RESTORE x.13
+										%x8
+										RESTORE x.184
 										LET
-											%x8
-											IFLE %x7 0
+											%x9
+											IFLE %x8 0
 												LET
-													%x8
-													RESTORE y.14
+													%x9
+													RESTORE y.185
 													ANS
-														MOV %x8
+														MOV %x9
 												ANS
-													MOV %x5
+													MOV %x6
 											LET
-												%x6
-												ADD %x6 %x8
+												%x7
+												ADD %x7 %x9
 												LET
-													%x8
-													RESTORE y.14
+													%x9
+													RESTORE y.185
 													LET
-														%x5
-														IFGE %x8 0
+														%x6
+														IFGE %x9 0
 															ANS
-																MOV %x5
+																MOV %x6
 															ANS
-																MOV %x7
+																MOV %x8
 														LET
-															%x5
-															ADD %x6 %x5
+															%x6
+															ADD %x7 %x6
 															ANS
-																CALLDIR min_caml_print_int
-																	%x5 
+																CALLDIR print_int.164
+																	%x6 
 																	

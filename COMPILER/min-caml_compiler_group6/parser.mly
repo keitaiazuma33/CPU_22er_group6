@@ -39,7 +39,8 @@ let addtyp x = (x, Type.gentyp ())
 %token LET
 %token IN
 %token REC
-%token INPUT
+%token INI
+%token INF
 %token OUTPUT
 %token ITOIA
 %token ITOFA
@@ -156,9 +157,12 @@ exp: /* (* ���̤μ� (caml2html: parser_exp) *) */
 | ITOF simple_exp
     %prec prec_app
     { ItoF($2, (Parsing.symbol_start_pos ()).pos_lnum) }
-| INPUT simple_exp
+| INI simple_exp
     %prec prec_app
-    { In($2, (Parsing.symbol_start_pos ()).pos_lnum) }
+    { Ini($2, (Parsing.symbol_start_pos ()).pos_lnum) }
+| INF simple_exp
+    %prec prec_app
+    { Inf($2, (Parsing.symbol_start_pos ()).pos_lnum) }
 | OUTPUT simple_exp
     %prec prec_app
     { Out($2, (Parsing.symbol_start_pos ()).pos_lnum) }

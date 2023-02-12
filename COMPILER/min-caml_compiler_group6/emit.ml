@@ -132,8 +132,12 @@ and g' oc = function (* ��̿��Υ�����֥����� (caml2h
   | NonTail(x), FDivD(y, z), n -> incr_pc ();Printf.fprintf oc "\tfdiv\t%s, %s, %s  #%d pc %d\n" x y z n (!pc)
   | NonTail(x), FtoI(y), n -> incr_pc ();Printf.fprintf oc "\tftoi\t%s, %s  #%d pc %d\n" x y n (!pc)
   | NonTail(x), ItoF(y), n -> incr_pc ();Printf.fprintf oc "\titof\t%s, %s  #%d pc %d\n" x y n (!pc)
-  | NonTail(_), Out(x), n -> incr_pc ();Printf.fprintf oc "\tout\t%s  #%d pc %d\n" x n (!pc)
-  | NonTail(x), In, n -> incr_pc ();Printf.fprintf oc "\tin\t%s  #%d pc %d\n" x n (!pc)
+  | NonTail(_), Out(x), n -> incr_pc ();Printf.fprintf oc "\tsw\t%s, %d(%s)  #%d pc %d\n" reg_out 0 x n (!pc);
+                            incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 4  #%d pc %d\n" reg_out reg_out n (!pc)
+  | NonTail(x), Ini, n -> incr_pc ();Printf.fprintf oc "\tlw\t%s, %d(%s)  #%d pc %d\n" x 0 reg_in n (!pc);
+                          incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 4  #%d pc %d\n" reg_in reg_in n (!pc)
+  | NonTail(x), Inf, n -> incr_pc ();Printf.fprintf oc "\tflw\t%s, %d(%s)  #%d pc %d\n" x 0 reg_in n (!pc);
+                          incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 4  #%d pc %d\n" reg_in reg_in n (!pc)
   | NonTail(_), Sethp(x), n -> (*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" reg_hp x n (!pc)*)
                               print_mv oc reg_hp x n
   | NonTail(x), Gethp, n -> (*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" x reg_hp n (!pc)*)
@@ -170,11 +174,11 @@ and g' oc = function (* ��̿��Υ�����֥����� (caml2h
       g' oc (NonTail(Id.gentmp Type.Unit), exp, n);
       incr_pc ();Printf.fprintf oc "\tret #pc %d\n" (!pc);
       incr_pc ();Printf.fprintf oc "\tnop #pc %d\n" (!pc)
-  | Tail, (FtoI _ | In | Gethp | Set _ | SetL _ | Mov _ | Neg _ | Add _ | Sub _ | Xor _ | Or _ | And _ | SLL _ | SRL _ | Ld _ as exp), n ->
+  | Tail, (FtoI _ | Ini | Gethp | Set _ | SetL _ | Mov _ | Neg _ | Add _ | Sub _ | Xor _ | Or _ | And _ | SLL _ | SRL _ | Ld _ as exp), n ->
       g' oc (NonTail(regs.(0)), exp, n);
       incr_pc ();Printf.fprintf oc "\tret #pc %d\n" (!pc);
       incr_pc ();Printf.fprintf oc "\tnop #pc %d\n" (!pc)
-  | Tail, (ItoF _ | Sqrt _ | FAbs _ | FMovD _ | FNegD _ | FAddD _ | FSubD _ | FMulD _ | FDivD _ | LdDF _ as exp), n ->
+  | Tail, (ItoF _ | Inf | Sqrt _ | FAbs _ | FMovD _ | FNegD _ | FAddD _ | FSubD _ | FMulD _ | FDivD _ | LdDF _ as exp), n ->
       g' oc (NonTail(fregs.(0)), exp, n);
       incr_pc ();Printf.fprintf oc "\tret #pc %d\n" (!pc);
       incr_pc ();Printf.fprintf oc "\tnop #pc %d\n" (!pc)

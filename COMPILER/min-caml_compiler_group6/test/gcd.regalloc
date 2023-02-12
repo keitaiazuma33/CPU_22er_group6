@@ -1,42 +1,50 @@
-Name : gcd.7
-Args : %x5 %x6 
+Name : print_int.158
+Args : %x6 
 
 FArgs : 
 Body :
 ANS
-	IFEQ %x5 0
+	OUT %x6
+
+Name : gcd.178
+Args : %x6 %x7 
+
+FArgs : 
+Body :
+ANS
+	IFEQ %x6 0
 		ANS
-			MOV %x6
+			MOV %x7
 		ANS
-			IFLE %x5 %x6
+			IFLE %x6 %x7
 				LET
-					%x6
-					SUB %x6 %x5
+					%x7
+					SUB %x7 %x6
 					ANS
-						CALLDIR gcd.7
-							%x5 %x6 
+						CALLDIR gcd.178
+							%x6 %x7 
 							
 				LET
-					%x5
-					SUB %x5 %x6
+					%x6
+					SUB %x6 %x7
 					ANS
-						CALLDIR gcd.7
-							%x6 %x5 
+						CALLDIR gcd.178
+							%x7 %x6 
 							
 
 
 LET
-	%x5
+	%x6
 	SET 21600
 	LET
-		%x6
+		%x7
 		SET 337500
 		LET
-			%x5
-			CALLDIR gcd.7
-				%x5 %x6 
+			%x6
+			CALLDIR gcd.178
+				%x6 %x7 
 				
 			ANS
-				CALLDIR min_caml_print_int
-					%x5 
+				CALLDIR print_int.158
+					%x6 
 					

@@ -292,269 +292,145 @@ LET REC fiszero x
 																						VAR abs_div
 																						NEG
 																							VAR abs_div
-																		LET REC print_char a 
+																		LET REC print_int a 
 																			OUT
 																				VAR a
-																			LET REC print_int a 
-																				IF
-																					NOT
-																						LE
-																							INT 0
-																							VAR a
-																					LET Tu1
-																						OUT
-																							INT 45
-																						APP VAR print_int
-																							NEG
-																								VAR a
-																					IF
-																						NOT
-																							LE
-																								INT 10
-																								VAR a
-																						OUT
-																							ADD
-																								VAR a
-																								INT 48
-																						LET b
-																							APP VAR div
-																								VAR a
-																								INT 10
-																							LET Tu2
-																								APP VAR print_int
-																									VAR b
-																								OUT
-																									ADD
-																										SUB
-																											VAR a
-																											APP VAR mul
-																												VAR b
-																												INT 10
-																										INT 48
-																				LET REC read_int_sub acc cnt 
-																					LET byte
-																						IN
-																							UNIT
+																			LET REC read_int a 
+																				INI
+																					VAR a
+																				LET REC read_float a 
+																					INF
+																						VAR a
+																					LET REC assign_array hp a n 
 																						IF
-																							LE
-																								INT 48
-																								VAR byte
-																							IF
+																							NOT
 																								LE
-																									VAR byte
-																									INT 57
-																								APP VAR read_int_sub
-																									ADD
-																										APP VAR mul
-																											VAR acc
-																											INT 10
-																										SUB
-																											VAR byte
-																											INT 48
-																									ADD
-																										VAR cnt
-																										INT 1
-																								IF
-																									EQ
-																										VAR byte
-																										INT 45
-																									LETTUPLE ac cn 
-																										APP VAR read_int_sub
-																											VAR acc
-																											VAR cnt
-																										TUPLE
-																											NEG
-																												VAR ac
-																											VAR cn
-																									TUPLE
-																										VAR acc
-																										VAR cnt
-																							TUPLE
-																								VAR acc
-																								VAR cnt
-																					LET REC read_int a 
-																						LETTUPLE acc cnt 
-																							APP VAR read_int_sub
-																								INT 0
-																								INT 0
-																							VAR acc
-																						LET REC pow a b 
-																							IF
-																								LE
-																									VAR b
 																									INT 0
-																								VAR a
-																								APP VAR pow
-																									FMUL
+																									VAR n
+																							UNIT
+																							IF
+																								EQ
+																									VAR n
+																									INT 0
+																								PUT
+																									VAR hp
+																									VAR n
+																									VAR a
+																								LET Tu1
+																									PUT
+																										VAR hp
+																										VAR n
 																										VAR a
-																										ITOF
-																											VAR b
-																									SUB
-																										VAR b
-																										INT 1
-																							LET REC read_float_sub acc 
-																								LET byte
-																									IN
-																										UNIT
-																									IF
+																									APP VAR assign_array
+																										VAR hp
+																										VAR a
+																										SUB
+																											VAR n
+																											INT 1
+																						LET REC create_array n a 
+																							LET hp
+																								GETHP
+																									UNIT
+																								LET hp_array
+																									ITOIA
+																										VAR hp
+																									LET Tu3
+																										SETHP
+																											ADD
+																												VAR hp
+																												SLL
+																													VAR n
+																													INT 2
+																										LET Tu2
+																											APP VAR assign_array
+																												VAR hp_array
+																												VAR a
+																												SUB
+																													VAR n
+																													INT 1
+																											VAR hp_array
+																							LET REC assign_farray hp a n 
+																								IF
+																									NOT
 																										LE
-																											INT 48
-																											VAR byte
-																										IF
-																											LE
-																												VAR byte
-																												INT 57
-																											APP VAR read_float_sub
-																												FADD
-																													FMUL
-																														VAR acc
-																														FLOAT 10.000000
-																													ITOF
-																														SUB
-																															VAR byte
-																															INT 48
-																											IF
-																												EQ
-																													VAR byte
-																													INT 45
-																												FNEG
-																													APP VAR read_float_sub
-																														VAR acc
-																												IF
-																													EQ
-																														VAR byte
-																														INT 46
-																													LETTUPLE acc2 cnt 
-																														APP VAR read_int_sub
-																															INT 0
-																															INT 0
-																														FADD
-																															VAR acc
-																															FDIV
-																																ITOF
-																																	VAR acc2
-																																APP VAR pow
-																																	FLOAT 10.000000
-																																	VAR cnt
-																													VAR acc
-																										VAR acc
-																								LET REC read_float a 
-																									APP VAR read_float_sub
-																										FLOAT 0.000000
-																									LET REC assign_array hp a n 
-																										IF
-																											EQ
-																												VAR n
-																												INT 0
+																											INT 0
+																											VAR n
+																									UNIT
+																									IF
+																										EQ
+																											VAR n
+																											INT 0
+																										PUT
+																											VAR hp
+																											VAR n
+																											VAR a
+																										LET Tu4
 																											PUT
 																												VAR hp
 																												VAR n
 																												VAR a
-																											LET Tu3
-																												PUT
-																													VAR hp
+																											APP VAR assign_farray
+																												VAR hp
+																												VAR a
+																												SUB
 																													VAR n
-																													VAR a
-																												APP VAR assign_array
-																													VAR hp
-																													VAR a
-																													SUB
-																														VAR n
-																														INT 1
-																										LET REC create_array n a 
-																											LET hp
-																												GETHP
-																													UNIT
-																												LET hp_array
-																													ITOIA
+																													INT 1
+																								LET REC create_float_array n a 
+																									LET hp
+																										GETHP
+																											UNIT
+																										LET hp_array
+																											ITOFA
+																												VAR hp
+																											LET Tu6
+																												SETHP
+																													ADD
 																														VAR hp
-																													LET Tu5
-																														SETHP
-																															ADD
-																																VAR hp
-																																SLL
-																																	VAR n
-																																	INT 2
-																														LET Tu4
-																															APP VAR assign_array
-																																VAR hp_array
-																																VAR a
-																																VAR n
-																															VAR hp_array
-																											LET REC assign_farray hp a n 
-																												IF
-																													EQ
-																														VAR n
-																														INT 0
-																													PUT
-																														VAR hp
-																														VAR n
-																														VAR a
-																													LET Tu6
-																														PUT
-																															VAR hp
+																														SLL
 																															VAR n
-																															VAR a
-																														APP VAR assign_farray
-																															VAR hp
-																															VAR a
-																															SUB
-																																VAR n
-																																INT 1
-																												LET REC create_float_array n a 
-																													LET hp
-																														GETHP
-																															UNIT
-																														LET hp_array
-																															ITOFA
-																																VAR hp
-																															LET Tu8
-																																SETHP
-																																	ADD
-																																		VAR hp
-																																		SLL
-																																			VAR n
-																																			INT 3
-																																LET Tu7
-																																	APP VAR assign_farray
-																																		VAR hp_array
-																																		VAR a
-																																		VAR n
-																																	VAR hp_array
-																													LET REC inprod v1 v2 i 
-																														IF
-																															NOT
-																																LE
-																																	INT 0
-																																	VAR i
-																															FLOAT 0.000000
-																															FADD
-																																FMUL
-																																	GET
-																																		VAR v1
-																																		VAR i
-																																	GET
-																																		VAR v2
-																																		VAR i
-																																APP VAR inprod
-																																	VAR v1
-																																	VAR v2
-																																	SUB
-																																		VAR i
-																																		INT 1
-																														LET v1
-																															ARRAY
-																																INT 3
-																																FLOAT 1.230000
-																															LET v2
-																																ARRAY
-																																	INT 3
-																																	FLOAT 4.560000
-																																APP VAR print_int
-																																	APP VAR truncate
-																																		FMUL
-																																			FLOAT 1000000.000000
-																																			APP VAR inprod
-																																				VAR v1
-																																				VAR v2
-																																				INT 2
+																															INT 2
+																												LET Tu5
+																													APP VAR assign_farray
+																														VAR hp_array
+																														VAR a
+																														SUB
+																															VAR n
+																															INT 1
+																													VAR hp_array
+																									LET REC inprod v1 v2 i 
+																										IF
+																											NOT
+																												LE
+																													INT 0
+																													VAR i
+																											FLOAT 0.000000
+																											FADD
+																												FMUL
+																													GET
+																														VAR v1
+																														VAR i
+																													GET
+																														VAR v2
+																														VAR i
+																												APP VAR inprod
+																													VAR v1
+																													VAR v2
+																													SUB
+																														VAR i
+																														INT 1
+																										LET v1
+																											ARRAY
+																												INT 3
+																												FLOAT 1.230000
+																											LET v2
+																												ARRAY
+																													INT 3
+																													FLOAT 4.560000
+																												APP VAR print_int
+																													APP VAR truncate
+																														FMUL
+																															FLOAT 1000000.000000
+																															APP VAR inprod
+																																VAR v1
+																																VAR v2
+																																INT 2

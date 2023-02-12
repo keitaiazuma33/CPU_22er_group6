@@ -1,24 +1,32 @@
+Name : print_int.160
+Args : %x6 
+
+FArgs : 
+Body :
+ANS
+	OUT %x6
+
 
 LET
-	%x5
+	%x6
 	SET 123
 	LET
 		%g0
-		CALLDIR min_caml_print_int
-			%x5 
+		CALLDIR print_int.160
+			%x6 
 			
 		LET
-			%x5
+			%x6
 			SET -456
 			LET
 				%g0
-				CALLDIR min_caml_print_int
-					%x5 
+				CALLDIR print_int.160
+					%x6 
 					
 				LET
-					%x5
+					%x6
 					SET 789
 					ANS
-						CALLDIR min_caml_print_int
-							%x5 
+						CALLDIR print_int.160
+							%x6 
 							

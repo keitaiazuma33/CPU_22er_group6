@@ -1,224 +1,232 @@
-Name : getx.23
-Args : %x5 
+Name : print_int.174
+Args : %x6 
+
+FArgs : 
+Body :
+ANS
+	OUT %x6
+
+Name : getx.194
+Args : %x6 
 
 FArgs : 
 Body :
 LET
 	%f0
-	LDDF %x5 0
+	LDDF %x6 0
 	ANS
 		FMOVD %f0
 
-Name : gety.25
-Args : %x5 
+Name : gety.196
+Args : %x6 
 
 FArgs : 
 Body :
 LET
 	%f0
-	LDDF %x5 4
+	LDDF %x6 4
 	ANS
 		FMOVD %f0
 
-Name : getz.27
-Args : %x5 
+Name : getz.198
+Args : %x6 
 
 FArgs : 
 Body :
 LET
 	%f0
-	LDDF %x5 8
+	LDDF %x6 8
 	ANS
 		FMOVD %f0
 
-Name : inprod.29
-Args : %x5 %x6 
+Name : inprod.200
+Args : %x6 %x7 
 
 FArgs : 
 Body :
 LET
-	Tu86
-	SAVE %x5 v1.30
+	Tu387
+	SAVE %x6 v1.201
 	LET
-		Tu85
-		SAVE %x6 v2.31
+		Tu386
+		SAVE %x7 v2.202
 		LET
 			%f0
-			CALLDIR getx.23
-				%x5 
+			CALLDIR getx.194
+				%x6 
 				
 			LET
-				%x5
-				RESTORE v2.31
+				%x6
+				RESTORE v2.202
 				LET
-					Tu88
-					SAVE %x5 v2.31
+					Tu389
+					SAVE %x6 v2.202
 					LET
-						Tu87
-						SAVE %f0 Td13.52
+						Tu388
+						SAVE %f0 Td19.223
 						LET
 							%f0
-							CALLDIR getx.23
-								%x5 
+							CALLDIR getx.194
+								%x6 
 								
 							LET
 								%f1
-								RESTORE Td13.52
+								RESTORE Td19.223
 								LET
 									%f0
 									FMULD %f1 %f0
 									LET
-										%x5
-										RESTORE v1.30
+										%x6
+										RESTORE v1.201
 										LET
-											Tu90
-											SAVE %x5 v1.30
+											Tu391
+											SAVE %x6 v1.201
 											LET
-												Tu89
-												SAVE %f0 Td15.48
+												Tu390
+												SAVE %f0 Td21.219
 												LET
 													%f0
-													CALLDIR gety.25
-														%x5 
+													CALLDIR gety.196
+														%x6 
 														
 													LET
-														%x5
-														RESTORE v2.31
+														%x6
+														RESTORE v2.202
 														LET
-															Tu92
-															SAVE %x5 v2.31
+															Tu393
+															SAVE %x6 v2.202
 															LET
-																Tu91
-																SAVE %f0 Td16.50
+																Tu392
+																SAVE %f0 Td22.221
 																LET
 																	%f0
-																	CALLDIR gety.25
-																		%x5 
+																	CALLDIR gety.196
+																		%x6 
 																		
 																	LET
 																		%f1
-																		RESTORE Td16.50
+																		RESTORE Td22.221
 																		LET
 																			%f0
 																			FMULD %f1 %f0
 																			LET
 																				%f1
-																				RESTORE Td15.48
+																				RESTORE Td21.219
 																				LET
 																					%f0
 																					FADDD %f1 %f0
 																					LET
-																						%x5
-																						RESTORE v1.30
+																						%x6
+																						RESTORE v1.201
 																						LET
-																							Tu93
-																							SAVE %f0 Td19.44
+																							Tu394
+																							SAVE %f0 Td25.215
 																							LET
 																								%f0
-																								CALLDIR getz.27
-																									%x5 
+																								CALLDIR getz.198
+																									%x6 
 																									
 																								LET
-																									%x5
-																									RESTORE v2.31
+																									%x6
+																									RESTORE v2.202
 																									LET
-																										Tu94
-																										SAVE %f0 Td20.46
+																										Tu395
+																										SAVE %f0 Td26.217
 																										LET
 																											%f0
-																											CALLDIR getz.27
-																												%x5 
+																											CALLDIR getz.198
+																												%x6 
 																												
 																											LET
 																												%f1
-																												RESTORE Td20.46
+																												RESTORE Td26.217
 																												LET
 																													%f0
 																													FMULD %f1 %f0
 																													LET
 																														%f1
-																														RESTORE Td19.44
+																														RESTORE Td25.215
 																														ANS
 																															FADDD %f1 %f0
 
 
 LET
 	%f0
-	l.63
+	l.363
 	LET
 		%f1
-		l.65
+		l.365
 		LET
 			%f2
-			l.67
+			l.367
 			LET
 				%f3
-				l.69
+				l.369
 				LET
-					%x5
+					%x6
 					MOV %x3
 					LET
 						%x3
 						ADD %x3 12
 						LET
 							%g0
-							STDF %f3 %x5 8
+							STDF %f3 %x6 8
 							LET
 								%g0
-								STDF %f2 %x5 4
+								STDF %f2 %x6 4
 								LET
 									%g0
-									STDF %f1 %x5 0
+									STDF %f1 %x6 0
 									LET
-										%x5
-										MOV %x5
+										%x6
+										MOV %x6
 										LET
 											%f1
-											l.75
+											l.375
 											LET
 												%f2
-												l.77
+												l.377
 												LET
 													%f3
-													l.79
+													l.379
 													LET
-														%x6
+														%x7
 														MOV %x3
 														LET
 															%x3
 															ADD %x3 12
 															LET
 																%g0
-																STDF %f3 %x6 8
+																STDF %f3 %x7 8
 																LET
 																	%g0
-																	STDF %f2 %x6 4
+																	STDF %f2 %x7 4
 																	LET
 																		%g0
-																		STDF %f1 %x6 0
+																		STDF %f1 %x7 0
 																		LET
-																			%x6
-																			MOV %x6
+																			%x7
+																			MOV %x7
 																			LET
-																				Tu96
-																				SAVE %f0 Td1.34
+																				Tu397
+																				SAVE %f0 Td7.205
 																				LET
 																					%f0
-																					CALLDIR inprod.29
-																						%x5 %x6 
+																					CALLDIR inprod.200
+																						%x6 %x7 
 																						
 																					LET
 																						%f1
-																						RESTORE Td1.34
+																						RESTORE Td7.205
 																						LET
 																							%f0
 																							FMULD %f1 %f0
 																							LET
-																								%x5
+																								%x6
 																								CALLDIR min_caml_truncate
 																									
 																									%f0 
 																								ANS
-																									CALLDIR min_caml_print_int
-																										%x5 
+																									CALLDIR print_int.174
+																										%x6 
 																										

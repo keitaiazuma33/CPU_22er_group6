@@ -1,56 +1,64 @@
+Name : print_int.164
+Args : a.165 
+
+FArgs : 
+Body :
+ANS
+	OUT a.165
+
 
 LET
-	Td1.27
-	l.28
+	Td7.198
+	l.328
 	LET
-		x.13
+		x.184
 		CALLDIR min_caml_truncate
 			
-			Td1.27 
+			Td7.198 
 		LET
-			Td2.26
-			l.30
+			Td8.197
+			l.330
 			LET
-				y.14
+				y.185
 				CALLDIR min_caml_truncate
 					
-					Td2.26 
+					Td8.197 
 				LET
-					Td4.24
-					l.32
+					Td10.195
+					l.332
 					LET
-						z.15
+						z.186
 						CALLDIR min_caml_truncate
 							
-							Td4.24 
+							Td10.195 
 						LET
-							Ti6.20
-							IFGE z.15 0
+							Ti12.191
+							IFGE z.186 0
 								ANS
-									MOV x.13
+									MOV x.184
 								ANS
-									MOV y.14
+									MOV y.185
 							LET
-								Ti8.21
-								IFLE x.13 0
+								Ti14.192
+								IFLE x.184 0
 									ANS
-										MOV y.14
+										MOV y.185
 									ANS
-										MOV z.15
+										MOV z.186
 								LET
-									Ti9.17
-									ADD Ti6.20 Ti8.21
+									Ti15.188
+									ADD Ti12.191 Ti14.192
 									LET
-										Ti11.18
-										IFGE y.14 0
+										Ti17.189
+										IFGE y.185 0
 											ANS
-												MOV z.15
+												MOV z.186
 											ANS
-												MOV x.13
+												MOV x.184
 										LET
-											Ti12.16
-											ADD Ti9.17 Ti11.18
+											Ti18.187
+											ADD Ti15.188 Ti17.189
 											ANS
-												CALLDIR min_caml_print_int
-													Ti12.16 
+												CALLDIR print_int.164
+													Ti18.187 
 													

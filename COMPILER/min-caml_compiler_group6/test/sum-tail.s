@@ -1,31 +1,36 @@
 .section	".rodata"
 .align	8
 .section	".text"
-sum.8:  #pc 0
-	bge	%x0, %x6, 12  #2 pc 0
-	j	ble_else.19 #pc 4
-	nop #pc 8
-	ret #pc 12
-	nop #pc 16
-ble_else.19: #pc 20
-	add	%x5, %x5, %x6  #3 pc 20
-	addi	%x6, %x6, -1  #3 pc 24
-	j	sum.8  #3 pc 28
+print_int.159:  #pc 0
+	sw	%x5, 0(%x6)  #112 pc 0
+	addi	%x5, %x5, 4  #112 pc 4
+	ret #pc 8
+	nop #pc 12
+sum.179:  #pc 16
+	bge	%x0, %x7, 12  #208 pc 16
+	j	ble_else.321 #pc 20
+	nop #pc 24
+	ret #pc 28
 	nop #pc 32
+ble_else.321: #pc 36
+	add	%x6, %x6, %x7  #209 pc 36
+	addi	%x7, %x7, -1  #209 pc 40
+	j	sum.179  #209 pc 44
+	nop #pc 48
 .global	min_caml_start
 min_caml_start:
 	addi	%x2, %x0, 0
 	addi	%x3, %x0, 1024
-	addi	%x5, %x0, 0  #0 pc 44
-	addi	%x6, %x0, 10000  #0 pc 48
-	sw	%x1, 0(%x2)  #4 pc 52
-	addi	%x2, %x2, 4  #4 pc 56
-	jal	%x1, sum.8  #4 pc 60
-	addi	%x2, %x2, -4  #4 pc 64
-	lw	%x1, 0(%x2) #4 pc 68
-	sw	%x1, 0(%x2)  #4 pc 72
-	addi	%x2, %x2, 4  #4 pc 76
-	jal	%x1, min_caml_print_int  #4 pc 80
-	addi	%x2, %x2, -4  #4 pc 84
-	lw	%x1, 0(%x2) #4 pc 88
+	addi	%x6, %x0, 0  #0 pc 60
+	addi	%x7, %x0, 10000  #0 pc 64
+	sw	%x1, 0(%x2)  #210 pc 68
+	addi	%x2, %x2, 4  #210 pc 72
+	jal	%x1, sum.179  #210 pc 76
+	addi	%x2, %x2, -4  #210 pc 80
+	lw	%x1, 0(%x2) #210 pc 84
+	sw	%x1, 0(%x2)  #210 pc 88
+	addi	%x2, %x2, 4  #210 pc 92
+	jal	%x1, print_int.159  #210 pc 96
+	addi	%x2, %x2, -4  #210 pc 100
+	lw	%x1, 0(%x2) #210 pc 104
 	addi	%x2, %x2, 112

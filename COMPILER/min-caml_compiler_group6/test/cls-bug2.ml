@@ -93,7 +93,7 @@ let rec div a b =
     -abs_div
 in
 
-let rec print_char a = output a 
+(*let rec print_char a = output a 
 in
 
 let rec print_int a =
@@ -107,9 +107,18 @@ let rec print_int a =
       let b = div a 10 in
       (print_int b;
       output (a - (mul b 10) + 48))
+in*)
+
+let rec print_int a = outi a 
 in
 
-let rec read_int_sub acc cnt =
+let rec read_int a = ini a
+in
+
+let rec read_float a = inf a
+in
+
+(*let rec read_int_sub acc cnt =
   let byte = input () in
   if 48 <= byte then
     if byte <= 57 then
@@ -126,9 +135,9 @@ in
 let rec read_int a =
   let (acc, cnt) = read_int_sub 0 0 in
   acc
-in
+in*)
 
-let rec pow a b =
+(*let rec pow a b =
   if b <= 0 then
     a 
   else
@@ -154,39 +163,46 @@ in
 
 let rec read_float a =
   read_float_sub 0.0
-in
+in*)
 
 let rec assign_array hp a n =
-  if n = 0 then
-    hp.(n) <- a 
-  else
-    (hp.(n) <- a;
-    assign_array hp a (n-1))
+  if n < 0 then
+    ()
+  else 
+    if n = 0 then
+      hp.(n) <- a 
+    else
+      (hp.(n) <- a;
+      assign_array hp a (n-1))
 in
 
 let rec create_array n a =
   let hp = gethp () in
   let hp_array = itoia(hp) in
   sethp (hp + (n lsl 2));
-  assign_array hp_array a n;
+  assign_array hp_array a (n-1);
   hp_array
 in
 
 let rec assign_farray hp a n =
-  if n = 0 then
-    hp.(n) <- a 
-  else
-    (hp.(n) <- a;
-    assign_farray hp a (n-1))
+  if n < 0 then
+    ()
+  else 
+    if n = 0 then
+      hp.(n) <- a 
+    else
+      (hp.(n) <- a;
+      assign_farray hp a (n-1))
 in
 
 let rec create_float_array n a =
   let hp = gethp () in
   let hp_array = itofa(hp) in
-  sethp (hp + (n lsl 3));
-  assign_farray hp_array a n;
+  sethp (hp + (n lsl 2));
+  assign_farray hp_array a (n-1);
   hp_array
 in
+
 
 (* thanks to http://ameblo.jp/nuevo-namasute/entry-10006785787.html
    and http://blog.livedoor.jp/azounoman/archives/50232574.html *)

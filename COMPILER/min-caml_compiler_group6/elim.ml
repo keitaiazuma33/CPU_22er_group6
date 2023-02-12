@@ -3,7 +3,7 @@ open KNormal
 let rec effect = function (* �����Ѥ�̵ͭ (caml2html: elim_effect) *)
   | Let(_, e1, e2, _) | IfEq(_, _, e1, e2, _) | IfLE(_, _, e1, e2, _) -> effect e1 || effect e2
   | LetRec(_, e, _) | LetTuple(_, _, e, _) -> effect e
-  | App _ | Put _ | ExtFunApp _ | In _ | Out _ | Sethp _ -> true
+  | App _ | Put _ | ExtFunApp _ | Ini _ | Inf _ | Out _ | Sethp _ -> true
   | _ -> false
 
 let rec f = function (* �����������롼�������� (caml2html: elim_f) *)

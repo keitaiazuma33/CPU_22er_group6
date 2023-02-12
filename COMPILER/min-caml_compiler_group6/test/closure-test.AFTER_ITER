@@ -1,46 +1,46 @@
-LET z.15
+LET z.186
 	INT 4
-	LET REC f.16 x.17 
-		SUB x.17 z.15
-		LET Ti5.50
+	LET REC f.187 x.188 
+		SUB x.188 z.186
+		LET Ti11.221
 			INT 8
-			LET a.18
-				APP f.16 Ti5.50 
-				LET Tu4.19
-					EXTFUNAPP print_var a.18 
-					LET REC g.20 x.21 
-						LET Ti14.49
+			LET a.189
+				APP f.187 Ti11.221 
+				LET Tu10.190
+					EXTFUNAPP print_var a.189 
+					LET REC g.191 x.192 
+						LET Ti20.220
 							INT 2
-							SUB x.21 Ti14.49
-						LET Ti6.48
+							SUB x.192 Ti20.220
+						LET Ti12.219
 							INT 6
-							LET a.22
-								APP g.20 Ti6.48 
-								LET Tu3.23
-									EXTFUNAPP print_var2 a.22 
-									LET REC f.24 x.25 
-										LET Ti13.47
+							LET a.193
+								APP g.191 Ti12.219 
+								LET Tu9.194
+									EXTFUNAPP print_var2 a.193 
+									LET REC f.195 x.196 
+										LET Ti19.218
 											INT 1
-											SUB x.25 Ti13.47
-										LET Tu2.27
-											EXTFUNAPP print_var3 f.24 
-											LET REC g.28 h.29 
-												LET REC i.45 x.46 
-													APP h.29 x.46 
-													VAR i.45
-												LET Tu1.31
-													EXTFUNAPP print_var4 g.28 
-													LET REC i.32 x.33 
-														VAR x.33
-														LET REC f.35 x.36 
-															LET Ti12.43
+											SUB x.196 Ti19.218
+										LET Tu8.198
+											EXTFUNAPP print_var3 f.195 
+											LET REC g.199 h.200 
+												LET REC i.216 x.217 
+													APP h.200 x.217 
+													VAR i.216
+												LET Tu7.202
+													EXTFUNAPP print_var4 g.199 
+													LET REC i.203 x.204 
+														VAR x.204
+														LET REC f.206 x.207 
+															LET Ti18.214
 																INT -1
-																APP i.32 Ti12.43 
-															LET Ti9.40
+																APP i.203 Ti18.214 
+															LET Ti15.211
 																INT 7
-																LET Ti10.39
-																	APP f.35 Ti9.40 
-																	LET a.38
+																LET Ti16.210
+																	APP f.206 Ti15.211 
+																	LET a.209
 																		TUPLE
-																			i.32 Ti10.39 
-																		EXTFUNAPP print_var5 a.38 
+																			i.203 Ti16.210 
+																		EXTFUNAPP print_var5 a.209 

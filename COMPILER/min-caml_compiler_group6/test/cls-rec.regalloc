@@ -1,35 +1,43 @@
-Name : f.8
-Args : %x5 
+Name : print_int.158
+Args : %x6 
+
+FArgs : 
+Body :
+ANS
+	OUT %x6
+
+Name : f.179
+Args : %x6 
 
 FArgs : 
 Body :
 LET
-	%x6
+	%x7
 	LD %x29 4
 	ANS
-		IFEQ %x5 0
+		IFEQ %x6 0
 			ANS
 				SET 0
 			LET
-				%x5
-				SUB %x5 1
+				%x6
+				SUB %x6 1
 				LET
-					Tu19
-					SAVE %x6 x.7
+					Tu320
+					SAVE %x7 x.178
 					LET
-						%x5
+						%x6
 						CALLCLS %x29
-							%x5 
+							%x6 
 							
 						LET
-							%x6
-							RESTORE x.7
+							%x7
+							RESTORE x.178
 							ANS
-								ADD %x6 %x5
+								ADD %x7 %x6
 
 
 LET
-	%x5
+	%x6
 	SET 10
 	LET
 		%x29
@@ -38,23 +46,23 @@ LET
 			%x3
 			ADD %x3 8
 			LET
-				%x6
-				f.8
+				%x7
+				f.179
 				LET
 					%g0
-					ST %x6 %x29 0
+					ST %x7 %x29 0
 					LET
 						%g0
-						ST %x5 %x29 4
+						ST %x6 %x29 4
 						LET
-							%x5
+							%x6
 							SET 123
 							LET
-								%x5
+								%x6
 								CALLCLS %x29
-									%x5 
+									%x6 
 									
 								ANS
-									CALLDIR min_caml_print_int
-										%x5 
+									CALLDIR print_int.158
+										%x6 
 										

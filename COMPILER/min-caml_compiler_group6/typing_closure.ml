@@ -88,7 +88,8 @@ let rec g env e =
     | Unit -> Type.Unit
     | Int(_) -> Type.Int
     | Float(_) -> Type.Float
-    | In(_) -> Type.Int
+    | Ini(_) -> Type.Int
+    | Inf(_) -> Type.Float
     | Gethp(_) -> Type.Int
     | Neg(x, n) when M.mem x env ->
         (try (unify Type.Int (M.find x env);

@@ -1,26 +1,32 @@
-Name : f.8
-Args : y.9 
-Formal_fv : x.7 
+Name : print_int.158
+Args : a.159 
+Formal_fv : 
 Body :
-LET Ti3.12
+OUT a.159
+
+Name : f.179
+Args : y.180 
+Formal_fv : x.178 
+Body :
+LET Ti9.183
 	INT 0
-	IFEQ y.9 Ti3.12
+	IFEQ y.180 Ti9.183
 		INT 0
-		LET Ti4.15
+		LET Ti10.186
 			INT 1
-			LET Ti5.14
-				SUB y.9 Ti4.15
-				LET Ti6.13
-					APPCLS f.8 : Ti5.14 
-					ADD x.7 Ti6.13
+			LET Ti11.185
+				SUB y.180 Ti10.186
+				LET Ti12.184
+					APPCLS f.179 : Ti11.185 
+					ADD x.178 Ti12.184
 
 
-LET x.7
+LET x.178
 	INT 10
-	MAKECLS f.8
-		f.8 : x.7 
-		LET Ti1.11
+	MAKECLS f.179
+		f.179 : x.178 
+		LET Ti7.182
 			INT 123
-			LET Ti2.10
-				APPCLS f.8 : Ti1.11 
-				APPDIR min_caml_print_int : Ti2.10 
+			LET Ti8.181
+				APPCLS f.179 : Ti7.182 
+				APPDIR print_int.158 : Ti8.181 

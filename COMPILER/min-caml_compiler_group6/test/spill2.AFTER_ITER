@@ -1,275 +1,133 @@
-LET REC mul_abs.210 a.211 b.212 i.213 acc.214 
-	LET Ti130.425
-		INT -1
-		IFEQ i.213 Ti130.425
-			VAR acc.214
-			LET Ti131.435
-				INT 1
-				LET Ti132.434
-					SLL Ti131.435 i.213
-					LET Ti133.426
-						AND b.212 Ti132.434
-						LET Ti134.427
-							INT 0
-							IFEQ Ti133.426 Ti134.427
-								LET Ti135.433
-									INT 1
-									LET Ti136.432
-										SUB i.213 Ti135.433
-										APP mul_abs.210 a.211 b.212 Ti136.432 acc.214 
-								LET Ti137.431
-									INT 1
-									LET Ti138.428
-										SUB i.213 Ti137.431
-										LET Ti139.430
-											SLL a.211 i.213
-											LET Ti140.429
-												ADD acc.214 Ti139.430
-												APP mul_abs.210 a.211 b.212 Ti138.428 Ti140.429 
-	LET REC mul.215 a.216 b.217 
-		LET Ti121.424
+LET REC print_int.177 a.178 
+	OUT a.178
+	LET REC assign_array.183 hp.184 a.185 n.186 
+		LET Ti48.269
 			INT 0
-			LET abs_a.414
-				IFLE Ti121.424 a.216
-					VAR a.216
-					NEG a.216
-				LET Ti122.423
+			IFLE Ti48.269 n.186
+				LET Ti49.270
 					INT 0
-					LET abs_b.415
-						IFLE Ti122.423 b.217
-							VAR b.217
-							NEG b.217
-						LET Ti123.421
-							INT 30
-							LET Ti124.422
-								INT 0
-								LET abs_mul.416
-									APP mul_abs.210 abs_a.414 abs_b.415 Ti123.421 Ti124.422 
-									LET Ti125.420
-										INT 31
-										LET Ti126.417
-											SRL a.216 Ti125.420
-											LET Ti127.419
-												INT 31
-												LET Ti128.418
-													SRL b.217 Ti127.419
-													IFEQ Ti126.417 Ti128.418
-														VAR abs_mul.416
-														NEG abs_mul.416
-		LET REC div_abs.218 a.219 b.220 i.221 acc.222 
-			LET Ti110.402
-				INT -1
-				IFEQ i.221 Ti110.402
-					VAR acc.222
-					LET Ti111.403
-						SRL a.219 i.221
-						IFLE b.220 Ti111.403
-							LET Ti112.412
-								SLL b.220 i.221
-								LET Ti113.406
-									SUB a.219 Ti112.412
-									LET Ti114.411
-										INT 1
-										LET Ti115.407
-											SUB i.221 Ti114.411
-											LET Ti116.410
-												INT 1
-												LET Ti117.409
-													SLL Ti116.410 i.221
-													LET Ti118.408
-														ADD acc.222 Ti117.409
-														APP div_abs.218 Ti113.406 b.220 Ti115.407 Ti118.408 
-							LET Ti119.405
+					IFEQ n.186 Ti49.270
+						PUT hp.184 n.186 a.185
+						LET Tu1.271
+							PUT hp.184 n.186 a.185
+							LET Ti50.273
 								INT 1
-								LET Ti120.404
-									SUB i.221 Ti119.405
-									APP div_abs.218 a.219 b.220 Ti120.404 acc.222 
-			LET REC div.223 a.224 b.225 
-				LET Ti101.401
-					INT 0
-					LET abs_a.391
-						IFLE Ti101.401 a.224
-							VAR a.224
-							NEG a.224
-						LET Ti102.400
-							INT 0
-							LET abs_b.392
-								IFLE Ti102.400 b.225
-									VAR b.225
-									NEG b.225
-								LET Ti103.398
-									INT 30
-									LET Ti104.399
-										INT 0
-										LET abs_div.393
-											APP div_abs.218 abs_a.391 abs_b.392 Ti103.398 Ti104.399 
-											LET Ti105.397
-												INT 31
-												LET Ti106.394
-													SRL a.224 Ti105.397
-													LET Ti107.396
-														INT 31
-														LET Ti108.395
-															SRL b.225 Ti107.396
-															IFEQ Ti106.394 Ti108.395
-																VAR abs_div.393
-																NEG abs_div.393
-				LET REC print_int.228 a.229 
-					LET Ti89.376
-						INT 0
-						IFLE Ti89.376 a.229
-							LET Ti90.380
-								INT 10
-								IFLE Ti90.380 a.229
-									LET Ti91.390
-										INT 10
-										LET b.383
-											APP div.223 a.229 Ti91.390 
-											LET Tu2.384
-												APP print_int.228 b.383 
-												LET Ti92.389
-													INT 10
-													LET Ti93.388
-														APP mul.215 b.383 Ti92.389 
-														LET Ti94.386
-															SUB a.229 Ti93.388
-															LET Ti95.387
-																INT 48
-																LET Ti96.385
-																	ADD Ti94.386 Ti95.387
-																	OUT Ti96.385
-									LET Ti97.382
-										INT 48
-										LET Ti98.381
-											ADD a.229 Ti97.382
-											OUT Ti98.381
-							LET Ti99.379
-								INT 45
-								LET Tu1.377
-									OUT Ti99.379
-									LET Ti100.378
-										NEG a.229
-										APP print_int.228 Ti100.378 
-					LET REC assign_array.242 hp.243 a.244 n.245 
-						LET Ti45.323
-							INT 0
-							IFEQ n.245 Ti45.323
-								PUT hp.243 n.245 a.244
-								LET Tu3.324
-									PUT hp.243 n.245 a.244
-									LET Ti46.326
-										INT 1
-										LET Ti47.325
-											SUB n.245 Ti46.326
-											APP assign_array.242 hp.243 a.244 Ti47.325 
-						LET REC create_array.246 n.247 a.248 
-							LET Tu41.322
-								UNIT
-								LET hp.315
-									GETHP Tu41.322
-									LET hp_array.316
-										ITOIA hp.315
-										LET Ti42.321
-											INT 2
-											LET Ti43.320
-												SLL n.247 Ti42.321
-												LET Ti44.319
-													ADD hp.315 Ti43.320
-													LET Tu5.317
-														SETHP Ti44.319
-														LET Tu4.318
-															APP assign_array.242 hp_array.316 a.248 n.247 
-															VAR hp_array.316
-							LET REC f.256 Tu9.257 
-								INT 12345
-								LET REC g.258 y.259 
-									LET Ti33.302
-										INT 1
-										ADD y.259 Ti33.302
-									LET Ti10.300
-										INT 10
-										LET Ti11.301
+								LET Ti51.272
+									SUB n.186 Ti50.273
+									APP assign_array.183 hp.184 a.185 Ti51.272 
+				UNIT
+		LET REC create_array.187 n.188 a.189 
+			LET Tu42.268
+				UNIT
+				LET hp.259
+					GETHP Tu42.268
+					LET hp_array.260
+						ITOIA hp.259
+						LET Ti43.267
+							INT 2
+							LET Ti44.266
+								SLL n.188 Ti43.267
+								LET Ti45.265
+									ADD hp.259 Ti44.266
+									LET Tu3.261
+										SETHP Ti45.265
+										LET Ti46.264
 											INT 1
-											LET z.260
-												APP create_array.246 Ti10.300 Ti11.301 
-												LET Tu12.299
-													UNIT
-													LET x.261
-														APP f.256 Tu12.299 
-														LET y.262
-															INT 67890
-															LET Ti13.298
-																INT 0
-																LET z0.263
-																	GET z.260 Ti13.298
-																	LET z1.264
-																		ADD z0.263 z0.263
-																		LET z2.265
-																			ADD z1.264 z1.264
-																			LET z3.266
-																				ADD z2.265 z2.265
-																				LET z4.267
-																					ADD z3.266 z3.266
-																					LET z5.268
-																						ADD z4.267 z4.267
-																						LET z6.269
-																							ADD z5.268 z5.268
-																							LET z7.270
-																								ADD z6.269 z6.269
-																								LET z8.271
-																									ADD z7.270 z7.270
-																									LET z9.272
-																										ADD z8.271 z8.271
-																										LET z10.273
-																											ADD z9.272 z9.272
-																											LET z11.274
-																												ADD z10.273 z10.273
-																												LET z12.275
-																													ADD z11.274 z11.274
-																													LET z13.276
-																														ADD z12.275 z12.275
-																														LET z14.277
-																															ADD z13.276 z13.276
-																															LET z15.278
-																																ADD z14.277 z14.277
-																																LET Ti14.297
-																																	INT 1
-																																	LET Ti15.280
-																																		GET z.260 Ti14.297
-																																		LET Ti16.281
-																																			INT 0
-																																			LET Ti32.279
-																																				IFEQ Ti15.280 Ti16.281
-																																					APP g.258 y.262 
-																																					LET Ti17.296
-																																						ADD z0.263 z1.264
-																																						LET Ti18.295
-																																							ADD Ti17.296 z2.265
-																																							LET Ti19.294
-																																								ADD Ti18.295 z3.266
-																																								LET Ti20.293
-																																									ADD Ti19.294 z4.267
-																																									LET Ti21.292
-																																										ADD Ti20.293 z5.268
-																																										LET Ti22.291
-																																											ADD Ti21.292 z6.269
-																																											LET Ti23.290
-																																												ADD Ti22.291 z7.270
-																																												LET Ti24.289
-																																													ADD Ti23.290 z8.271
-																																													LET Ti25.288
-																																														ADD Ti24.289 z9.272
-																																														LET Ti26.287
-																																															ADD Ti25.288 z10.273
-																																															LET Ti27.286
-																																																ADD Ti26.287 z11.274
-																																																LET Ti28.285
-																																																	ADD Ti27.286 z12.275
-																																																	LET Ti29.284
-																																																		ADD Ti28.285 z13.276
-																																																		LET Ti30.283
-																																																			ADD Ti29.284 z14.277
-																																																			LET Ti31.282
-																																																				ADD Ti30.283 z15.278
-																																																				ADD Ti31.282 x.261
-																																				APP print_int.228 Ti32.279 
+											LET Ti47.263
+												SUB n.188 Ti46.264
+												LET Tu2.262
+													APP assign_array.183 hp_array.260 a.189 Ti47.263 
+													VAR hp_array.260
+			LET REC f.197 Tu7.198 
+				INT 12345
+				LET REC g.199 y.200 
+					LET Ti31.243
+						INT 1
+						ADD y.200 Ti31.243
+					LET Ti8.241
+						INT 10
+						LET Ti9.242
+							INT 1
+							LET z.201
+								APP create_array.187 Ti8.241 Ti9.242 
+								LET Tu10.240
+									UNIT
+									LET x.202
+										APP f.197 Tu10.240 
+										LET y.203
+											INT 67890
+											LET Ti11.239
+												INT 0
+												LET z0.204
+													GET z.201 Ti11.239
+													LET z1.205
+														ADD z0.204 z0.204
+														LET z2.206
+															ADD z1.205 z1.205
+															LET z3.207
+																ADD z2.206 z2.206
+																LET z4.208
+																	ADD z3.207 z3.207
+																	LET z5.209
+																		ADD z4.208 z4.208
+																		LET z6.210
+																			ADD z5.209 z5.209
+																			LET z7.211
+																				ADD z6.210 z6.210
+																				LET z8.212
+																					ADD z7.211 z7.211
+																					LET z9.213
+																						ADD z8.212 z8.212
+																						LET z10.214
+																							ADD z9.213 z9.213
+																							LET z11.215
+																								ADD z10.214 z10.214
+																								LET z12.216
+																									ADD z11.215 z11.215
+																									LET z13.217
+																										ADD z12.216 z12.216
+																										LET z14.218
+																											ADD z13.217 z13.217
+																											LET z15.219
+																												ADD z14.218 z14.218
+																												LET Ti12.238
+																													INT 1
+																													LET Ti13.221
+																														GET z.201 Ti12.238
+																														LET Ti14.222
+																															INT 0
+																															LET Ti30.220
+																																IFEQ Ti13.221 Ti14.222
+																																	APP g.199 y.203 
+																																	LET Ti15.237
+																																		ADD z0.204 z1.205
+																																		LET Ti16.236
+																																			ADD Ti15.237 z2.206
+																																			LET Ti17.235
+																																				ADD Ti16.236 z3.207
+																																				LET Ti18.234
+																																					ADD Ti17.235 z4.208
+																																					LET Ti19.233
+																																						ADD Ti18.234 z5.209
+																																						LET Ti20.232
+																																							ADD Ti19.233 z6.210
+																																							LET Ti21.231
+																																								ADD Ti20.232 z7.211
+																																								LET Ti22.230
+																																									ADD Ti21.231 z8.212
+																																									LET Ti23.229
+																																										ADD Ti22.230 z9.213
+																																										LET Ti24.228
+																																											ADD Ti23.229 z10.214
+																																											LET Ti25.227
+																																												ADD Ti24.228 z11.215
+																																												LET Ti26.226
+																																													ADD Ti25.227 z12.216
+																																													LET Ti27.225
+																																														ADD Ti26.226 z13.217
+																																														LET Ti28.224
+																																															ADD Ti27.225 z14.218
+																																															LET Ti29.223
+																																																ADD Ti28.224 z15.219
+																																																ADD Ti29.223 x.202
+																																APP print_int.177 Ti30.220 

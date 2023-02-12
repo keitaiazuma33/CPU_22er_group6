@@ -1,27 +1,29 @@
-LET REC f.12 Tu1.13 
-	INT 123
-	LET REC g.14 Tu2.15 
-		INT 456
-		LET REC h.16 Tu3.17 
-			INT 789
-			LET Tu4.26
-				UNIT
-				LET x.18
-					APP f.12 Tu4.26 
-					LET Ti5.21
-						INT 0
-						LET Ti10.20
-							IFLE x.18 Ti5.21
-								LET Tu6.25
-									UNIT
-									LET Ti7.24
-										APP g.14 Tu6.25 
-										ADD Ti7.24 x.18
-								LET Tu8.23
-									UNIT
-									LET Ti9.22
-										APP h.16 Tu8.23 
-										SUB Ti9.22 x.18
-							LET Ti11.19
-								ADD Ti10.20 x.18
-								EXTFUNAPP print_int Ti11.19 
+LET REC print_int.163 a.164 
+	OUT a.164
+	LET REC f.183 Tu7.184 
+		INT 123
+		LET REC g.185 Tu8.186 
+			INT 456
+			LET REC h.187 Tu9.188 
+				INT 789
+				LET Tu10.197
+					UNIT
+					LET x.189
+						APP f.183 Tu10.197 
+						LET Ti11.192
+							INT 0
+							LET Ti16.191
+								IFLE x.189 Ti11.192
+									LET Tu12.196
+										UNIT
+										LET Ti13.195
+											APP g.185 Tu12.196 
+											ADD Ti13.195 x.189
+									LET Tu14.194
+										UNIT
+										LET Ti15.193
+											APP h.187 Tu14.194 
+											SUB Ti15.193 x.189
+								LET Ti17.190
+									ADD Ti16.191 x.189
+									APP print_int.163 Ti17.190 

@@ -1,27 +1,29 @@
-LET REC foo.12 a.13 b.14 c.15 d.16 e.17 f.18 
-	LET Tu5.32
-		EXTFUNAPP print_int a.13 
-		LET Tu4.33
-			EXTFUNAPP print_int b.14 
-			LET Tu3.34
-				EXTFUNAPP print_int c.15 
-				LET Tu2.35
-					EXTFUNAPP print_int d.16 
-					LET Tu1.36
-						EXTFUNAPP print_int e.17 
-						EXTFUNAPP print_int f.18 
-	LET REC bar.19 a.20 b.21 c.22 d.23 e.24 f.25 
-		APP foo.12 b.21 a.20 d.23 e.24 f.25 c.22 
-		LET Ti6.26
-			INT 1
-			LET Ti7.27
-				INT 2
-				LET Ti8.28
-					INT 3
-					LET Ti9.29
-						INT 4
-						LET Ti10.30
-							INT 5
-							LET Ti11.31
-								INT 6
-								APP bar.19 Ti6.26 Ti7.27 Ti8.28 Ti9.29 Ti10.30 Ti11.31 
+LET REC print_int.163 a.164 
+	OUT a.164
+	LET REC foo.183 a.184 b.185 c.186 d.187 e.188 f.189 
+		LET Tu11.203
+			APP print_int.163 a.184 
+			LET Tu10.204
+				APP print_int.163 b.185 
+				LET Tu9.205
+					APP print_int.163 c.186 
+					LET Tu8.206
+						APP print_int.163 d.187 
+						LET Tu7.207
+							APP print_int.163 e.188 
+							APP print_int.163 f.189 
+		LET REC bar.190 a.191 b.192 c.193 d.194 e.195 f.196 
+			APP foo.183 b.192 a.191 d.194 e.195 f.196 c.193 
+			LET Ti12.197
+				INT 1
+				LET Ti13.198
+					INT 2
+					LET Ti14.199
+						INT 3
+						LET Ti15.200
+							INT 4
+							LET Ti16.201
+								INT 5
+								LET Ti17.202
+									INT 6
+									APP bar.190 Ti12.197 Ti13.198 Ti14.199 Ti15.200 Ti16.201 Ti17.202 

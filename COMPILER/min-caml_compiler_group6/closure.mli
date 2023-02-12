@@ -20,7 +20,8 @@ type t =
   | FDiv of Id.t * Id.t * int
   | FtoI of Id.t * int
   | ItoF of Id.t * int
-  | In of int
+  | Ini of int
+  | Inf of int
   | Out of Id.t * int
   | ItoIA of Id.t * int
   | ItoFA of Id.t * int

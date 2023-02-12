@@ -1,39 +1,47 @@
-Name : sum.7
-Args : %x5 
+Name : print_int.158
+Args : %x6 
 
 FArgs : 
 Body :
 ANS
-	IFLE %x5 0
+	OUT %x6
+
+Name : sum.178
+Args : %x6 
+
+FArgs : 
+Body :
+ANS
+	IFLE %x6 0
 		ANS
 			SET 0
 		LET
-			%x6
-			SUB %x5 1
+			%x7
+			SUB %x6 1
 			LET
-				Tu15
-				SAVE %x5 x.8
+				Tu316
+				SAVE %x6 x.179
 				LET
-					%x5
-					CALLDIR sum.7
-						%x6 
+					%x6
+					CALLDIR sum.178
+						%x7 
 						
 					LET
-						%x6
-						RESTORE x.8
+						%x7
+						RESTORE x.179
 						ANS
-							ADD %x5 %x6
+							ADD %x6 %x7
 
 
 LET
-	%x5
+	%x6
 	SET 10000
 	LET
-		%x5
-		CALLDIR sum.7
-			%x5 
+		%x6
+		CALLDIR sum.178
+			%x6 
 			
 		ANS
-			CALLDIR min_caml_print_int
-				%x5 
+			CALLDIR print_int.158
+				%x6 
 				

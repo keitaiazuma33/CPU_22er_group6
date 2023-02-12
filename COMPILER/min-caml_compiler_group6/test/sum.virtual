@@ -1,39 +1,47 @@
-Name : sum.7
-Args : x.8 
+Name : print_int.158
+Args : a.159 
+
+FArgs : 
+Body :
+ANS
+	OUT a.159
+
+Name : sum.178
+Args : x.179 
 
 FArgs : 
 Body :
 LET
-	Ti3.11
+	Ti9.182
 	SET 0
 	ANS
-		IFLE x.8 Ti3.11
+		IFLE x.179 Ti9.182
 			ANS
 				SET 0
 			LET
-				Ti4.14
+				Ti10.185
 				SET 1
 				LET
-					Ti5.13
-					SUB x.8 Ti4.14
+					Ti11.184
+					SUB x.179 Ti10.185
 					LET
-						Ti6.12
-						CALLDIR sum.7
-							Ti5.13 
+						Ti12.183
+						CALLDIR sum.178
+							Ti11.184 
 							
 						ANS
-							ADD Ti6.12 x.8
+							ADD Ti12.183 x.179
 
 
 LET
-	Ti1.10
+	Ti7.181
 	SET 10000
 	LET
-		Ti2.9
-		CALLDIR sum.7
-			Ti1.10 
+		Ti8.180
+		CALLDIR sum.178
+			Ti7.181 
 			
 		ANS
-			CALLDIR min_caml_print_int
-				Ti2.9 
+			CALLDIR print_int.158
+				Ti8.180 
 				

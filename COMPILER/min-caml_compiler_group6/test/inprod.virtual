@@ -1,158 +1,166 @@
-Name : getx.23
-Args : v.24 
+Name : print_int.174
+Args : a.175 
+
+FArgs : 
+Body :
+ANS
+	OUT a.175
+
+Name : getx.194
+Args : v.195 
 
 FArgs : 
 Body :
 LET
-	x.60
-	LDDF v.24 0
+	x.231
+	LDDF v.195 0
 	ANS
-		FMOVD x.60
+		FMOVD x.231
 
-Name : gety.25
-Args : v.26 
+Name : gety.196
+Args : v.197 
 
 FArgs : 
 Body :
 LET
-	y.58
-	LDDF v.26 4
+	y.229
+	LDDF v.197 4
 	ANS
-		FMOVD y.58
+		FMOVD y.229
 
-Name : getz.27
-Args : v.28 
+Name : getz.198
+Args : v.199 
 
 FArgs : 
 Body :
 LET
-	z.56
-	LDDF v.28 8
+	z.227
+	LDDF v.199 8
 	ANS
-		FMOVD z.56
+		FMOVD z.227
 
-Name : inprod.29
-Args : v1.30 v2.31 
+Name : inprod.200
+Args : v1.201 v2.202 
 
 FArgs : 
 Body :
 LET
-	Td13.52
-	CALLDIR getx.23
-		v1.30 
+	Td19.223
+	CALLDIR getx.194
+		v1.201 
 		
 	LET
-		Td14.53
-		CALLDIR getx.23
-			v2.31 
+		Td20.224
+		CALLDIR getx.194
+			v2.202 
 			
 		LET
-			Td15.48
-			FMULD Td13.52 Td14.53
+			Td21.219
+			FMULD Td19.223 Td20.224
 			LET
-				Td16.50
-				CALLDIR gety.25
-					v1.30 
+				Td22.221
+				CALLDIR gety.196
+					v1.201 
 					
 				LET
-					Td17.51
-					CALLDIR gety.25
-						v2.31 
+					Td23.222
+					CALLDIR gety.196
+						v2.202 
 						
 					LET
-						Td18.49
-						FMULD Td16.50 Td17.51
+						Td24.220
+						FMULD Td22.221 Td23.222
 						LET
-							Td19.44
-							FADDD Td15.48 Td18.49
+							Td25.215
+							FADDD Td21.219 Td24.220
 							LET
-								Td20.46
-								CALLDIR getz.27
-									v1.30 
+								Td26.217
+								CALLDIR getz.198
+									v1.201 
 									
 								LET
-									Td21.47
-									CALLDIR getz.27
-										v2.31 
+									Td27.218
+									CALLDIR getz.198
+										v2.202 
 										
 									LET
-										Td22.45
-										FMULD Td20.46 Td21.47
+										Td28.216
+										FMULD Td26.217 Td27.218
 										ANS
-											FADDD Td19.44 Td22.45
+											FADDD Td25.215 Td28.216
 
 
 LET
-	Td1.34
-	l.63
+	Td7.205
+	l.363
 	LET
-		Td2.41
-		l.65
+		Td8.212
+		l.365
 		LET
-			Td3.42
-			l.67
+			Td9.213
+			l.367
 			LET
-				Td4.43
-				l.69
+				Td10.214
+				l.369
 				LET
-					t.71
+					t.371
 					MOV %x3
 					LET
 						%x3
 						ADD %x3 12
 						LET
-							Tu74
-							STDF Td4.43 t.71 8
+							Tu374
+							STDF Td10.214 t.371 8
 							LET
-								Tu73
-								STDF Td3.42 t.71 4
+								Tu373
+								STDF Td9.213 t.371 4
 								LET
-									Tu72
-									STDF Td2.41 t.71 0
+									Tu372
+									STDF Td8.212 t.371 0
 									LET
-										Tt5.36
-										MOV t.71
+										Tt11.207
+										MOV t.371
 										LET
-											Td6.38
-											l.75
+											Td12.209
+											l.375
 											LET
-												Td7.39
-												l.77
+												Td13.210
+												l.377
 												LET
-													Td8.40
-													l.79
+													Td14.211
+													l.379
 													LET
-														t.81
+														t.381
 														MOV %x3
 														LET
 															%x3
 															ADD %x3 12
 															LET
-																Tu84
-																STDF Td8.40 t.81 8
+																Tu384
+																STDF Td14.211 t.381 8
 																LET
-																	Tu83
-																	STDF Td7.39 t.81 4
+																	Tu383
+																	STDF Td13.210 t.381 4
 																	LET
-																		Tu82
-																		STDF Td6.38 t.81 0
+																		Tu382
+																		STDF Td12.209 t.381 0
 																		LET
-																			Tt9.37
-																			MOV t.81
+																			Tt15.208
+																			MOV t.381
 																			LET
-																				Td10.35
-																				CALLDIR inprod.29
-																					Tt5.36 Tt9.37 
+																				Td16.206
+																				CALLDIR inprod.200
+																					Tt11.207 Tt15.208 
 																					
 																				LET
-																					Td11.33
-																					FMULD Td1.34 Td10.35
+																					Td17.204
+																					FMULD Td7.205 Td16.206
 																					LET
-																						Ti12.32
+																						Ti18.203
 																						CALLDIR min_caml_truncate
 																							
-																							Td11.33 
+																							Td17.204 
 																						ANS
-																							CALLDIR min_caml_print_int
-																								Ti12.32 
+																							CALLDIR print_int.174
+																								Ti18.203 
 																								

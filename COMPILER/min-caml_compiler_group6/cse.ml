@@ -7,7 +7,7 @@ exception Not_found
 let rec effect = function (* 副作用の有無 *)
   | Let(_, e1, e2, _) | IfEq(_, _, e1, e2, _) | IfLE(_, _, e1, e2, _) -> effect e1 || effect e2
   | LetRec(_, e, _) | LetTuple(_, _, e, _) -> effect e
-  | App _ | Put _ | ExtFunApp _ -> true
+  | App _ | Put _ | ExtFunApp _ | Ini _ | Inf _ | Out _ | Sethp _ -> true
   | _ -> false
 
 let rec equal_knormal e1 e2 =
@@ -15,7 +15,8 @@ let rec equal_knormal e1 e2 =
   | Unit, Unit -> true
   | Int(i1), Int(i2) -> i1 = i2
   | Float(d1), Float(d2) -> d1 = d2
-  | Neg(x,_), Neg(y,_) | FNeg(x,_), FNeg(y,_) | Sqrt(x,_), Sqrt(y,_) | FAbs(x,_), FAbs(y,_) | In(x,_), In(y,_) | Out(x,_), Out(y,_)
+  | Neg(x,_), Neg(y,_) | FNeg(x,_), FNeg(y,_) | Sqrt(x,_), Sqrt(y,_) | FAbs(x,_), FAbs(y,_) 
+  | Ini(x,_), Ini(y,_) | Inf(x,_), Inf(y,_) | Out(x,_), Out(y,_)
   | Var(x,_), Var(y,_) | ExtArray(x,_), ExtArray(y,_) | FtoI(x,_), FtoI(y,_) | ItoF(x,_), ItoF(y,_) -> x = y
   | Sub(x1,y1,_), Sub(x2,y2,_) | FSub(x1,y1,_), FSub(x2,y2,_) | SLL(x1,y1,_), SLL(x2,y2,_)
   | FDiv(x1,y1,_), FDiv(x2,y2,_) | Get(x1,y1,_), Get(x2,y2,_) | SRL(x1,y1,_), SRL(x2,y2,_) ->
@@ -69,7 +70,7 @@ let rec g env = function
   | FDiv(x, y, n) -> FDiv(x, y, n)
   | FtoI(x, n) -> FtoI(x, n)
   | ItoF(x, n) -> ItoF(x, n)
-  | In(x, n) -> In(x, n)
+  | Ini(x, n) -> Ini(x, n)
   | Out(x, n) -> Out(x, n)
   | IfEq(x, y, e1, e2, n) -> IfEq(x, y, g env e1, g env e2, n)
   | IfLE(x, y, e1, e2, n) -> IfLE(x, y, g env e1, g env e2, n)

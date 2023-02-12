@@ -1,55 +1,60 @@
 .section	".rodata"
 .align	8
 .section	".text"
-odd.21:  #pc 0
-	bge	%x0, %x5, 12  #5 pc 0
-	j	ble_else.36 #pc 4
-	nop #pc 8
-	bge	%x5, %x0, 12  #6 pc 12
-	j	bge_else.37 #pc 16
-	nop #pc 20
-	addi	%x5, %x0, 456  #0 pc 24
-	ret #pc 28
-	nop #pc 32
-bge_else.37: #pc 36
-	addi	%x5, %x5, 1  #6 pc 36
-	j	even.17  #6 pc 40
-	nop #pc 44
-ble_else.36: #pc 48
-	addi	%x5, %x5, -1  #5 pc 48
-	j	even.17  #5 pc 52
-	nop #pc 56
-even.17:  #pc 60
-	bge	%x0, %x5, 12  #8 pc 60
-	j	ble_else.38 #pc 64
-	nop #pc 68
-	bge	%x5, %x0, 12  #9 pc 72
-	j	bge_else.39 #pc 76
-	nop #pc 80
-	addi	%x5, %x0, 123  #0 pc 84
-	ret #pc 88
-	nop #pc 92
-bge_else.39: #pc 96
-	addi	%x5, %x5, 1  #9 pc 96
-	j	odd.21  #9 pc 100
-	nop #pc 104
-ble_else.38: #pc 108
-	addi	%x5, %x5, -1  #8 pc 108
-	j	odd.21  #8 pc 112
-	nop #pc 116
+print_int.166:  #pc 0
+	sw	%x5, 0(%x6)  #112 pc 0
+	addi	%x5, %x5, 4  #112 pc 4
+	ret #pc 8
+	nop #pc 12
+odd.192:  #pc 16
+	bge	%x0, %x6, 12  #211 pc 16
+	j	ble_else.338 #pc 20
+	nop #pc 24
+	bge	%x6, %x0, 12  #212 pc 28
+	j	bge_else.339 #pc 32
+	nop #pc 36
+	addi	%x6, %x0, 456  #0 pc 40
+	ret #pc 44
+	nop #pc 48
+bge_else.339: #pc 52
+	addi	%x6, %x6, 1  #212 pc 52
+	j	even.188  #212 pc 56
+	nop #pc 60
+ble_else.338: #pc 64
+	addi	%x6, %x6, -1  #211 pc 64
+	j	even.188  #211 pc 68
+	nop #pc 72
+even.188:  #pc 76
+	bge	%x0, %x6, 12  #214 pc 76
+	j	ble_else.340 #pc 80
+	nop #pc 84
+	bge	%x6, %x0, 12  #215 pc 88
+	j	bge_else.341 #pc 92
+	nop #pc 96
+	addi	%x6, %x0, 123  #0 pc 100
+	ret #pc 104
+	nop #pc 108
+bge_else.341: #pc 112
+	addi	%x6, %x6, 1  #215 pc 112
+	j	odd.192  #215 pc 116
+	nop #pc 120
+ble_else.340: #pc 124
+	addi	%x6, %x6, -1  #214 pc 124
+	j	odd.192  #214 pc 128
+	nop #pc 132
 .global	min_caml_start
 min_caml_start:
 	addi	%x2, %x0, 0
 	addi	%x3, %x0, 1024
-	addi	%x5, %x0, 789  #0 pc 128
-	sw	%x1, 0(%x2)  #11 pc 132
-	addi	%x2, %x2, 4  #11 pc 136
-	jal	%x1, even.17  #11 pc 140
-	addi	%x2, %x2, -4  #11 pc 144
-	lw	%x1, 0(%x2) #11 pc 148
-	sw	%x1, 0(%x2)  #11 pc 152
-	addi	%x2, %x2, 4  #11 pc 156
-	jal	%x1, min_caml_print_int  #11 pc 160
-	addi	%x2, %x2, -4  #11 pc 164
-	lw	%x1, 0(%x2) #11 pc 168
+	addi	%x6, %x0, 789  #0 pc 144
+	sw	%x1, 0(%x2)  #217 pc 148
+	addi	%x2, %x2, 4  #217 pc 152
+	jal	%x1, even.188  #217 pc 156
+	addi	%x2, %x2, -4  #217 pc 160
+	lw	%x1, 0(%x2) #217 pc 164
+	sw	%x1, 0(%x2)  #217 pc 168
+	addi	%x2, %x2, 4  #217 pc 172
+	jal	%x1, print_int.166  #217 pc 176
+	addi	%x2, %x2, -4  #217 pc 180
+	lw	%x1, 0(%x2) #217 pc 184
 	addi	%x2, %x2, 112

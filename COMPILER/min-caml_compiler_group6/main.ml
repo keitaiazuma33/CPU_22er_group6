@@ -1,13 +1,13 @@
 let limit = ref 1000
 
-let rec iter n e = (* ºÇÅ¬²½½èÍý¤ò¤¯¤ê¤«¤¨¤¹ (caml2html: main_iter) *)
+let rec iter n e = (* ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò¤¯¤ê¤«ï¿½ï¿½ï¿½ï¿½ (caml2html: main_iter) *)
   Format.eprintf "iteration %d@." n;
   if n = 0 then e else
   let e' = Elim.f (ConstFold.f (Inline.f (Assoc.f (Beta.f e)))) in
   if e = e' then e else
   iter (n - 1) e'
 
-let lexbuf outchan l = (* ¥Ð¥Ã¥Õ¥¡¤ò¥³¥ó¥Ñ¥¤¥ë¤·¤Æ¥Á¥ã¥ó¥Í¥ë¤Ø½ÐÎÏ¤¹¤ë (caml2html: main_lexbuf) *)
+let lexbuf outchan l = (* ï¿½Ð¥Ã¥Õ¥ï¿½ï¿½ò¥³¥ï¿½Ñ¥ï¿½ï¿½ë¤·ï¿½Æ¥ï¿½ï¿½ï¿½ï¿½Í¥ï¿½Ø½ï¿½ï¿½Ï¤ï¿½ï¿½ï¿½ (caml2html: main_lexbuf) *)
   Id.counter := 0;
   Typing.extenv := M.empty;
   Emit.f outchan
@@ -22,88 +22,88 @@ let lexbuf outchan l = (* ¥Ð¥Ã¥Õ¥¡¤ò¥³¥ó¥Ñ¥¤¥ë¤·¤Æ¥Á¥ã¥ó¥Í¥ë¤Ø½ÐÎÏ¤¹¤ë (caml2htm
                          (Typing.f
                             (Parser.exp Lexer.token l))))))))))
 
-(* parsedÍÑ¤Î´Ø¿ô(lexbuf) *)                            
+(* parsedï¿½Ñ¤Î´Ø¿ï¿½(lexbuf) *)                            
 let lexbuf_parsed l =
   Id.counter := 0;
   Parser.exp Lexer.token l
 
-(* typingÍÑ¤Î´Ø¿ô(lexbuf) *)
+(* typingï¿½Ñ¤Î´Ø¿ï¿½(lexbuf) *)
 let lexbuf_typing l =
   Id.counter := 0;
   Typing.extenv := M.empty;
   Typing.f (Parser.exp Lexer.token l)
 
-(* normalizedÍÑ¤Î´Ø¿ô(lexbuf) *)
+(* normalizedï¿½Ñ¤Î´Ø¿ï¿½(lexbuf) *)
 let lexbuf_normalized l =
   Id.counter := 0;
   Typing.extenv := M.empty;
   KNormal.f (Typing.f (Parser.exp Lexer.token l))
 
-(* BEFORE_CSEÍÑ¤Î´Ø¿ô(lexbuf) *)
+(* BEFORE_CSEï¿½Ñ¤Î´Ø¿ï¿½(lexbuf) *)
 let lexbuf_before_cse l =
   Id.counter := 0;
   Typing.extenv := M.empty;
   Alpha.f (KNormal.f (Typing.f (Parser.exp Lexer.token l)))
 
-(* AFTER_CSEÍÑ¤Î´Ø¿ô(lexbuf) *)
+(* AFTER_CSEï¿½Ñ¤Î´Ø¿ï¿½(lexbuf) *)
 let lexbuf_after_cse l =
   Id.counter := 0;
   Typing.extenv := M.empty;
   Cse.f (Alpha.f (KNormal.f (Typing.f (Parser.exp Lexer.token l))))
 
-(* after_iterÍÑ¤Î´Ø¿ô(lexbuf) *)
+(* after_iterï¿½Ñ¤Î´Ø¿ï¿½(lexbuf) *)
 let lexbuf_after_iter l =
   Id.counter := 0;
   Typing.extenv := M.empty;
   iter !limit (Cse.f (Alpha.f (KNormal.f (Typing.f (Parser.exp Lexer.token l)))))
 
-(* closureÍÑ¤Î´Ø¿ô(lexbuf) *)
+(* closureï¿½Ñ¤Î´Ø¿ï¿½(lexbuf) *)
 let lexbuf_closure l =
   Id.counter := 0;
   Typing.extenv := M.empty;
   Closure.f (iter !limit (Cse.f (Alpha.f (KNormal.f (Typing.f (Parser.exp Lexer.token l))))))
 
-(* virtualÍÑ¤Î´Ø¿ô(lexbuf) *)
+(* virtualï¿½Ñ¤Î´Ø¿ï¿½(lexbuf) *)
 let lexbuf_virtual l =
   Id.counter := 0;
   Typing.extenv := M.empty;
   Virtual.f (Closure.f (iter !limit (Cse.f (Alpha.f (KNormal.f (Typing.f (Parser.exp Lexer.token l)))))))
 
-(* simmÍÑ¤Î´Ø¿ô(lexbuf) *)
+(* simmï¿½Ñ¤Î´Ø¿ï¿½(lexbuf) *)
 let lexbuf_simm l =
   Id.counter := 0;
   Typing.extenv := M.empty;
   Simm.f (Virtual.f (Closure.f (iter !limit (Cse.f (Alpha.f (KNormal.f (Typing.f (Parser.exp Lexer.token l))))))))
 
-(* regAllocÍÑ¤Î´Ø¿ô(lexbuf) *)
+(* regAllocï¿½Ñ¤Î´Ø¿ï¿½(lexbuf) *)
 let lexbuf_regalloc l =
   Id.counter := 0;
   Typing.extenv := M.empty;
   RegAlloc.f (Simm.f (Virtual.f (Closure.f (iter !limit (Cse.f (Alpha.f (KNormal.f (Typing.f (Parser.exp Lexer.token l)))))))))
 
-(* \t¤òn²ó½ÐÎÏ¤¹¤ë´Ø¿ô *)
+(* \tï¿½ï¿½nï¿½ï¿½ï¿½ï¿½Ï¤ï¿½ï¿½ï¿½Ø¿ï¿½ *)
 let rec print_tab outchan n =
   if n = 0 then () else (Printf.fprintf outchan "\t"; print_tab outchan (n-1))
 
-(* Id.l¤ò½ÐÎÏ¤¹¤ë´Ø¿ô *)
+(* Id.lï¿½ï¿½ï¿½ï¿½Ï¤ï¿½ï¿½ï¿½Ø¿ï¿½ *)
 let print_idl outchan i =
   match i with
   | Id.L s -> Printf.fprintf outchan "%s" s
   | _ -> ()
 
-(* ÊÑ¿ô¤Î¥ê¥¹¥È¤ò½ÐÎÏ¤¹¤ë´Ø¿ô *)
+(* ï¿½Ñ¿ï¿½ï¿½Î¥ê¥¹ï¿½È¤ï¿½ï¿½ï¿½Ï¤ï¿½ï¿½ï¿½Ø¿ï¿½ *)
 let rec print_idlist outchan ts =
   match ts with
   | [] -> Printf.fprintf outchan "\n"
   | t :: ts' -> Printf.fprintf outchan "%s " t; print_idlist outchan ts'
 
-(* (Id.t * Type.t) list¤ÎÆâÍÆ¤òfile(outchan)¤Ë½ÐÎÏ¤¹¤ë´Ø¿ô *)
+(* (Id.t * Type.t) listï¿½ï¿½ï¿½ï¿½ï¿½Æ¤ï¿½file(outchan)ï¿½Ë½ï¿½ï¿½Ï¤ï¿½ï¿½ï¿½Ø¿ï¿½ *)
 let rec print_arg outchan (arg: (Id.t * Type.t) list) =
   match arg with
   | [] -> Printf.fprintf outchan "\n"
   | (i,_) :: arg' -> Printf.fprintf outchan "%s " i; print_arg outchan arg'
 
-(* Syntax.t¤ÎÆâÍÆ¤òfile(outchan)¤Ë½ÐÎÏ¤¹¤ë´Ø¿ô *)
+(* Syntax.tï¿½ï¿½ï¿½ï¿½ï¿½Æ¤ï¿½file(outchan)ï¿½Ë½ï¿½ï¿½Ï¤ï¿½ï¿½ï¿½Ø¿ï¿½ *)
 let rec print_syntax outchan t n =
   print_tab outchan n;
   match t with
@@ -115,7 +115,9 @@ let rec print_syntax outchan t n =
                     print_syntax outchan t1 (n+1)
   | Syntax.Neg (t1,_) -> Printf.fprintf outchan "NEG\n";
                     print_syntax outchan t1 (n+1)
-  | Syntax.In (t1,_) -> Printf.fprintf outchan "IN\n";
+  | Syntax.Ini (t1,_) -> Printf.fprintf outchan "INI\n";
+                        print_syntax outchan t1 (n+1)
+  | Syntax.Inf (t1,_) -> Printf.fprintf outchan "INF\n";
                         print_syntax outchan t1 (n+1)
   | Syntax.Out (t1,_) -> Printf.fprintf outchan "OUT\n";
                         print_syntax outchan t1 (n+1)
@@ -223,7 +225,7 @@ and print_tlist outchan ts n =
   | [] -> ()
   | t :: ts' -> print_syntax outchan t n; print_tlist outchan ts' n
 
-(* KNormal.t¤ÎÆâÍÆ¤òfile(outchan)¤Ë½ÐÎÏ¤¹¤ë´Ø¿ô *)
+(* KNormal.tï¿½ï¿½ï¿½ï¿½ï¿½Æ¤ï¿½file(outchan)ï¿½Ë½ï¿½ï¿½Ï¤ï¿½ï¿½ï¿½Ø¿ï¿½ *)
 let rec print_knormal outchan t n =
   print_tab outchan n;
   match t with
@@ -232,7 +234,8 @@ let rec print_knormal outchan t n =
   | KNormal.Float f -> Printf.fprintf outchan "FLOAT %f\n" f
   | KNormal.Neg (t1,_) -> Printf.fprintf outchan "NEG %s\n" t1
   | KNormal.Out (t1,_) -> Printf.fprintf outchan "OUT %s\n" t1
-  | KNormal.In (t1,_) -> Printf.fprintf outchan "IN %s\n" t1
+  | KNormal.Ini (t1,_) -> Printf.fprintf outchan "INI %s\n" t1
+  | KNormal.Inf (t1,_) -> Printf.fprintf outchan "INF %s\n" t1
   | KNormal.ItoIA (t1,_) -> Printf.fprintf outchan "ITOIA %s\n" t1
   | KNormal.ItoFA (t1,_) -> Printf.fprintf outchan "ITOFA %s\n" t1
   | KNormal.Gethp (t1,_) -> Printf.fprintf outchan "GETHP %s\n" t1
@@ -288,18 +291,19 @@ and print_fundef2 f outchan n =
   print_arg outchan f.args;
   print_knormal outchan f.body n
 
-(* Closure.closure¤ÎÆâÍÆ¤òfile(outchan)¤Ë½ÐÎÏ¤¹¤ë´Ø¿ô *)
+(* Closure.closureï¿½ï¿½ï¿½ï¿½ï¿½Æ¤ï¿½file(outchan)ï¿½Ë½ï¿½ï¿½Ï¤ï¿½ï¿½ï¿½Ø¿ï¿½ *)
 let print_cl outchan {Closure.entry = l; Closure.actual_fv = ids} =
   print_idl outchan l;
   Printf.fprintf outchan " : ";
   print_idlist outchan ids
 
-(* Closure.t¤ÎÆâÍÆ¤òfile(outchan)¤Ë½ÐÎÏ¤¹¤ë´Ø¿ô *)
+(* Closure.tï¿½ï¿½ï¿½ï¿½ï¿½Æ¤ï¿½file(outchan)ï¿½Ë½ï¿½ï¿½Ï¤ï¿½ï¿½ï¿½Ø¿ï¿½ *)
 let rec print_closure_t outchan t n =
   print_tab outchan n;
   match t with
   | Closure.Unit -> Printf.fprintf outchan "UNIT\n"
-  | Closure.In _ -> Printf.fprintf outchan "IN\n"
+  | Closure.Ini _ -> Printf.fprintf outchan "INI\n"
+  | Closure.Inf _ -> Printf.fprintf outchan "INF\n"
   | Closure.Gethp _ -> Printf.fprintf outchan "GETHP\n"
   | Closure.Out (t1,_) -> Printf.fprintf outchan "OUT %s\n" t1
   | Closure.ItoIA (t1,_) -> Printf.fprintf outchan "ITOIA %s\n" t1
@@ -358,7 +362,7 @@ let rec print_closure_t outchan t n =
                               print_idl outchan l;
                               Printf.fprintf outchan "\n"
 
-(* Closure.fundef¤ÎÆâÍÆ¤òfile(outchan)¤Ë½ÐÎÏ¤¹¤ë´Ø¿ô *)
+(* Closure.fundefï¿½ï¿½ï¿½ï¿½ï¿½Æ¤ï¿½file(outchan)ï¿½Ë½ï¿½ï¿½Ï¤ï¿½ï¿½ï¿½Ø¿ï¿½ *)
 let print_closure_fundef outchan {Closure.name = (i,_); Closure.args = ids; Closure.formal_fv = fvs; Closure.body = t} =
   Printf.fprintf outchan "Name : ";
   print_idl outchan i;
@@ -370,7 +374,7 @@ let print_closure_fundef outchan {Closure.name = (i,_); Closure.args = ids; Clos
   print_closure_t outchan t 0;
   Printf.fprintf outchan "\n"
 
-(* Closure.prog¤ÎÆâÍÆ¤òfile(outchan)¤Ë½ÐÎÏ¤¹¤ë´Ø¿ô *)
+(* Closure.progï¿½ï¿½ï¿½ï¿½ï¿½Æ¤ï¿½file(outchan)ï¿½Ë½ï¿½ï¿½Ï¤ï¿½ï¿½ï¿½Ø¿ï¿½ *)
 let rec print_closure outchan (prog: Closure.prog) = 
   match prog with
   | Closure.Prog ([], t) -> Printf.fprintf outchan "\n"; print_closure_t outchan t 0
@@ -378,9 +382,9 @@ let rec print_closure outchan (prog: Closure.prog) =
                                   print_closure outchan (Closure.Prog (fs, t))
   | _ -> ()
 
-let string s = lexbuf stdout (Lexing.from_string s) (* Ê¸»úÎó¤ò¥³¥ó¥Ñ¥¤¥ë¤·¤ÆÉ¸½à½ÐÎÏ¤ËÉ½¼¨¤¹¤ë (caml2html: main_string) *)
+let string s = lexbuf stdout (Lexing.from_string s) (* Ê¸ï¿½ï¿½ï¿½ï¿½ò¥³¥ï¿½Ñ¥ï¿½ï¿½ë¤·ï¿½ï¿½É¸ï¿½ï¿½ï¿½ï¿½Ï¤ï¿½É½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (caml2html: main_string) *)
 
-let file f = (* ¥Õ¥¡¥¤¥ë¤ò¥³¥ó¥Ñ¥¤¥ë¤·¤Æ¥Õ¥¡¥¤¥ë¤Ë½ÐÎÏ¤¹¤ë (caml2html: main_file) *)
+let file f = (* ï¿½Õ¥ï¿½ï¿½ï¿½ï¿½ï¿½ò¥³¥ï¿½Ñ¥ï¿½ï¿½ë¤·ï¿½Æ¥Õ¥ï¿½ï¿½ï¿½ï¿½ï¿½Ë½ï¿½ï¿½Ï¤ï¿½ï¿½ï¿½ (caml2html: main_file) *)
   let inchan = open_in (f ^ ".ml") in
   let outchan = open_out (f ^ ".s") in
   try
@@ -389,7 +393,7 @@ let file f = (* ¥Õ¥¡¥¤¥ë¤ò¥³¥ó¥Ñ¥¤¥ë¤·¤Æ¥Õ¥¡¥¤¥ë¤Ë½ÐÎÏ¤¹¤ë (caml2html: main_file
     close_out outchan;
   with e -> (close_in inchan; close_out outchan; raise e)
 
-(* parsedÍÑ¤Î´Ø¿ô(file) *)
+(* parsedï¿½Ñ¤Î´Ø¿ï¿½(file) *)
 let file_parsed f =
   let inchan = open_in (f ^ ".ml") in
   let outchan = open_out (f ^ ".parsed") in
@@ -398,7 +402,7 @@ let file_parsed f =
     print_syntax outchan t 0; close_in inchan; close_out outchan;)
   with e -> (close_in inchan; close_out outchan; raise e)
 
-(* typingÍÑ¤Î´Ø¿ô(file) *)
+(* typingï¿½Ñ¤Î´Ø¿ï¿½(file) *)
 let file_typing f =
   let inchan = open_in (f ^ ".ml") in
   let outchan = open_out (f ^ ".typing") in
@@ -407,7 +411,7 @@ let file_typing f =
     print_syntax outchan t 0; close_in inchan; close_out outchan;)
   with e -> (close_in inchan; close_out outchan; raise e)
 
-(* normalizedÍÑ¤Î´Ø¿ô(file) *)
+(* normalizedï¿½Ñ¤Î´Ø¿ï¿½(file) *)
 let file_normalized f =
   let inchan = open_in (f ^ ".ml") in
   let outchan = open_out (f ^ ".normalized") in
@@ -416,7 +420,7 @@ let file_normalized f =
     print_knormal outchan t 0; close_in inchan; close_out outchan;)
   with e -> (close_in inchan; close_out outchan; raise e)
 
-(* BEFORE_CSEÍÑ¤Î´Ø¿ô(file) *)
+(* BEFORE_CSEï¿½Ñ¤Î´Ø¿ï¿½(file) *)
 let file_before_cse f =
   let inchan = open_in (f ^ ".ml") in
   let outchan = open_out (f ^ ".BEFORE_CSE") in
@@ -425,7 +429,7 @@ let file_before_cse f =
     print_knormal outchan t 0; close_in inchan; close_out outchan;)
   with e -> (close_in inchan; close_out outchan; raise e)
 
-(* AFTER_CSEÍÑ¤Î´Ø¿ô(file) *)
+(* AFTER_CSEï¿½Ñ¤Î´Ø¿ï¿½(file) *)
 let file_after_cse f =
   let inchan = open_in (f ^ ".ml") in
   let outchan = open_out (f ^ ".AFTER_CSE") in
@@ -434,7 +438,7 @@ let file_after_cse f =
     print_knormal outchan t 0; close_in inchan; close_out outchan;)
   with e -> (close_in inchan; close_out outchan; raise e)
 
-(* after_iterÍÑ¤Î´Ø¿ô(file) *)
+(* after_iterï¿½Ñ¤Î´Ø¿ï¿½(file) *)
 let file_after_iter f =
   let inchan = open_in (f ^ ".ml") in
   let outchan = open_out (f ^ ".AFTER_ITER") in
@@ -443,7 +447,7 @@ let file_after_iter f =
     print_knormal outchan t 0; close_in inchan; close_out outchan;)
   with e -> (close_in inchan; close_out outchan; raise e)
 
-(* closureÍÑ¤Î´Ø¿ô(file) *)
+(* closureï¿½Ñ¤Î´Ø¿ï¿½(file) *)
 let file_closure f =
   let inchan = open_in (f ^ ".ml") in
   let outchan = open_out (f ^ ".closure") in
@@ -452,7 +456,7 @@ let file_closure f =
     print_closure outchan prog; close_in inchan; close_out outchan;)
   with e -> (close_in inchan; close_out outchan; raise e)
 
-(* virtualÍÑ¤Î´Ø¿ô(file) *)
+(* virtualï¿½Ñ¤Î´Ø¿ï¿½(file) *)
 let file_virtual f =
   let inchan = open_in (f ^ ".ml") in
   let outchan = open_out (f ^ ".virtual") in
@@ -461,7 +465,7 @@ let file_virtual f =
     Asm.print_asm outchan prog; close_in inchan; close_out outchan;)
   with e -> (close_in inchan; close_out outchan; raise e)
 
-(* simmÍÑ¤Î´Ø¿ô(file) *)
+(* simmï¿½Ñ¤Î´Ø¿ï¿½(file) *)
 let file_simm f =
   let inchan = open_in (f ^ ".ml") in
   let outchan = open_out (f ^ ".simm") in
@@ -470,7 +474,7 @@ let file_simm f =
     Asm.print_asm outchan prog; close_in inchan; close_out outchan;)
   with e -> (close_in inchan; close_out outchan; raise e)
 
-(* regAllocÍÑ¤Î´Ø¿ô(file) *)
+(* regAllocï¿½Ñ¤Î´Ø¿ï¿½(file) *)
 let file_regalloc f =
   let inchan = open_in (f ^ ".ml") in
   let outchan = open_out (f ^ ".regalloc") in
@@ -479,7 +483,7 @@ let file_regalloc f =
     Asm.print_asm outchan prog; close_in inchan; close_out outchan;)
   with e -> (close_in inchan; close_out outchan; raise e)
 
-let () = (* ¤³¤³¤«¤é¥³¥ó¥Ñ¥¤¥é¤Î¼Â¹Ô¤¬³«»Ï¤µ¤ì¤ë (caml2html: main_entry) *)
+let () = (* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é¥³ï¿½ï¿½Ñ¥ï¿½ï¿½ï¿½Î¼Â¹Ô¤ï¿½ï¿½ï¿½ï¿½Ï¤ï¿½ï¿½ï¿½ï¿½ (caml2html: main_entry) *)
   let files = ref [] in
   Arg.parse
     [("-inline", Arg.Int(fun i -> Inline.threshold := i), "maximum size of functions inlined");

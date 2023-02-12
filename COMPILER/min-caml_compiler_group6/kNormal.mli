@@ -31,7 +31,8 @@ type t =
   | Put of Id.t * Id.t * Id.t * int
   | ExtArray of Id.t * int
   | ExtFunApp of Id.t * Id.t list * int
-  | In of Id.t * int
+  | Ini of Id.t * int
+  | Inf of Id.t * int
   | Out of Id.t * int
   | ItoIA of Id.t * int
   | ItoFA of Id.t * int

@@ -1,130 +1,138 @@
-Name : composed.22
-Args : x.23 
+Name : print_int.158
+Args : a.159 
+
+FArgs : 
+Body :
+ANS
+	OUT a.159
+
+Name : composed.193
+Args : x.194 
 
 FArgs : 
 Body :
 LET
-	g.9
-	LD composed.22 8
+	g.180
+	LD composed.193 8
 	LET
-		f.8
-		LD composed.22 4
+		f.179
+		LD composed.193 4
 		LET
-			Ti6.24
-			CALLCLS f.8
-				x.23 
+			Ti12.195
+			CALLCLS f.179
+				x.194 
 				
 			ANS
-				CALLCLS g.9
-					Ti6.24 
+				CALLCLS g.180
+					Ti12.195 
 					
 
-Name : compose.7
-Args : f.8 g.9 
+Name : compose.178
+Args : f.179 g.180 
 
 FArgs : 
 Body :
 LET
-	composed.22
+	composed.193
 	MOV %x3
 	LET
 		%x3
 		ADD %x3 12
 		LET
-			l.27
-			composed.22
+			l.327
+			composed.193
 			LET
-				Tu28
-				ST l.27 composed.22 0
+				Tu328
+				ST l.327 composed.193 0
 				LET
-					Tu26
-					ST g.9 composed.22 8
+					Tu326
+					ST g.180 composed.193 8
 					LET
-						Tu25
-						ST f.8 composed.22 4
+						Tu325
+						ST f.179 composed.193 4
 						ANS
-							MOV composed.22
+							MOV composed.193
 
-Name : dbl.10
-Args : x.11 
-
-FArgs : 
-Body :
-ANS
-	ADD x.11 x.11
-
-Name : inc.12
-Args : x.13 
+Name : dbl.181
+Args : x.182 
 
 FArgs : 
 Body :
 ANS
-	ADD x.13 1
+	ADD x.182 x.182
 
-Name : dec.14
-Args : x.15 
+Name : inc.183
+Args : x.184 
 
 FArgs : 
 Body :
 ANS
-	SUB x.15 1
+	ADD x.184 1
+
+Name : dec.185
+Args : x.186 
+
+FArgs : 
+Body :
+ANS
+	SUB x.186 1
 
 
 LET
-	dbl.10
+	dbl.181
 	MOV %x3
 	LET
 		%x3
 		ADD %x3 4
 		LET
-			l.33
-			dbl.10
+			l.333
+			dbl.181
 			LET
-				Tu34
-				ST l.33 dbl.10 0
+				Tu334
+				ST l.333 dbl.181 0
 				LET
-					inc.12
+					inc.183
 					MOV %x3
 					LET
 						%x3
 						ADD %x3 4
 						LET
-							l.31
-							inc.12
+							l.331
+							inc.183
 							LET
-								Tu32
-								ST l.31 inc.12 0
+								Tu332
+								ST l.331 inc.183 0
 								LET
-									dec.14
+									dec.185
 									MOV %x3
 									LET
 										%x3
 										ADD %x3 4
 										LET
-											l.29
-											dec.14
+											l.329
+											dec.185
 											LET
-												Tu30
-												ST l.29 dec.14 0
+												Tu330
+												ST l.329 dec.185 0
 												LET
-													Tf1.19
-													CALLDIR compose.7
-														dbl.10 dec.14 
+													Tf7.190
+													CALLDIR compose.178
+														dbl.181 dec.185 
 														
 													LET
-														h.16
-														CALLDIR compose.7
-															inc.12 Tf1.19 
+														h.187
+														CALLDIR compose.178
+															inc.183 Tf7.190 
 															
 														LET
-															Ti2.18
+															Ti8.189
 															SET 123
 															LET
-																Ti3.17
-																CALLCLS h.16
-																	Ti2.18 
+																Ti9.188
+																CALLCLS h.187
+																	Ti8.189 
 																	
 																ANS
-																	CALLDIR min_caml_print_int
-																		Ti3.17 
+																	CALLDIR print_int.158
+																		Ti9.188 
 																		

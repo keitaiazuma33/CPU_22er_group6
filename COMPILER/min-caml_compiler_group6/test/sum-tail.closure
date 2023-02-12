@@ -1,24 +1,30 @@
-Name : sum.8
-Args : acc.9 x.10 
+Name : print_int.159
+Args : a.160 
 Formal_fv : 
 Body :
-LET Ti4.14
+OUT a.160
+
+Name : sum.179
+Args : acc.180 x.181 
+Formal_fv : 
+Body :
+LET Ti10.185
 	INT 0
-	IFLE x.10 Ti4.14
-		VAR acc.9
-		LET Ti5.15
-			ADD acc.9 x.10
-			LET Ti6.17
+	IFLE x.181 Ti10.185
+		VAR acc.180
+		LET Ti11.186
+			ADD acc.180 x.181
+			LET Ti12.188
 				INT 1
-				LET Ti7.16
-					SUB x.10 Ti6.17
-					APPDIR sum.8 : Ti5.15 Ti7.16 
+				LET Ti13.187
+					SUB x.181 Ti12.188
+					APPDIR sum.179 : Ti11.186 Ti13.187 
 
 
-LET Ti1.12
+LET Ti7.183
 	INT 0
-	LET Ti2.13
+	LET Ti8.184
 		INT 10000
-		LET Ti3.11
-			APPDIR sum.8 : Ti1.12 Ti2.13 
-			APPDIR min_caml_print_int : Ti3.11 
+		LET Ti9.182
+			APPDIR sum.179 : Ti7.183 Ti8.184 
+			APPDIR print_int.159 : Ti9.182 

@@ -1,25 +1,27 @@
-LET REC compose.7 f.8 g.9 
-	LET REC composed.22 x.23 
-		LET Ti6.24
-			APP f.8 x.23 
-			APP g.9 Ti6.24 
-		VAR composed.22
-	LET REC dbl.10 x.11 
-		ADD x.11 x.11
-		LET REC inc.12 x.13 
-			LET Ti5.21
-				INT 1
-				ADD x.13 Ti5.21
-			LET REC dec.14 x.15 
-				LET Ti4.20
+LET REC print_int.158 a.159 
+	OUT a.159
+	LET REC compose.178 f.179 g.180 
+		LET REC composed.193 x.194 
+			LET Ti12.195
+				APP f.179 x.194 
+				APP g.180 Ti12.195 
+			VAR composed.193
+		LET REC dbl.181 x.182 
+			ADD x.182 x.182
+			LET REC inc.183 x.184 
+				LET Ti11.192
 					INT 1
-					SUB x.15 Ti4.20
-				LET Tf1.19
-					APP compose.7 dbl.10 dec.14 
-					LET h.16
-						APP compose.7 inc.12 Tf1.19 
-						LET Ti2.18
-							INT 123
-							LET Ti3.17
-								APP h.16 Ti2.18 
-								EXTFUNAPP print_int Ti3.17 
+					ADD x.184 Ti11.192
+				LET REC dec.185 x.186 
+					LET Ti10.191
+						INT 1
+						SUB x.186 Ti10.191
+					LET Tf7.190
+						APP compose.178 dbl.181 dec.185 
+						LET h.187
+							APP compose.178 inc.183 Tf7.190 
+							LET Ti8.189
+								INT 123
+								LET Ti9.188
+									APP h.187 Ti8.189 
+									APP print_int.158 Ti9.188 

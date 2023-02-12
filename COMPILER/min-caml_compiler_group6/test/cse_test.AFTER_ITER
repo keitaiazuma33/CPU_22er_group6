@@ -1,3 +1,5 @@
-LET Ti1.7
-	INT 6
-	EXTFUNAPP print_int Ti1.7 
+LET REC print_int.153 a.154 
+	OUT a.154
+	LET Ti7.178
+		INT 6
+		APP print_int.153 Ti7.178 

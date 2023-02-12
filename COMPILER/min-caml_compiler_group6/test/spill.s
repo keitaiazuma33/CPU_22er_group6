@@ -1,125 +1,132 @@
 .section	".rodata"
 .align	8
 .section	".text"
-f.43:  #pc 0
-	add	%x9, %x5, %x6  #2 pc 0
-	add	%x10, %x5, %x7  #3 pc 4
-	add	%x11, %x5, %x8  #4 pc 8
-	add	%x12, %x6, %x7  #5 pc 12
-	add	%x13, %x6, %x8  #6 pc 16
-	add	%x14, %x7, %x8  #7 pc 20
-	add	%x15, %x9, %x10  #9 pc 24
-	add	%x16, %x9, %x11  #10 pc 28
-	add	%x17, %x9, %x12  #11 pc 32
-	add	%x18, %x9, %x13  #12 pc 36
-	add	%x19, %x9, %x14  #13 pc 40
-	add	%x20, %x10, %x11  #14 pc 44
-	add	%x21, %x10, %x12  #15 pc 48
-	add	%x22, %x10, %x13  #16 pc 52
-	add	%x23, %x10, %x14  #17 pc 56
-	add	%x24, %x11, %x12  #18 pc 60
-	add	%x25, %x11, %x13  #19 pc 64
-	add	%x26, %x11, %x14  #20 pc 68
-	add	%x27, %x12, %x13  #21 pc 72
-	add	%x28, %x12, %x14  #22 pc 76
-	add	%x29, %x13, %x14  #23 pc 80
-	add	%x30, %x15, %x16  #25 pc 84
-	sw	%x30, 0(%x2)  #26 pc 88
-	add	%x30, %x15, %x17  #26 pc 92
-	sw	%x30, 4(%x2)  #27 pc 96
-	add	%x30, %x15, %x18  #27 pc 100
-	sw	%x30, 8(%x2)  #28 pc 104
-	add	%x30, %x15, %x19  #28 pc 108
-	sw	%x30, 12(%x2)  #29 pc 112
-	add	%x30, %x15, %x20  #29 pc 116
-	sw	%x30, 16(%x2)  #30 pc 120
-	add	%x30, %x15, %x21  #30 pc 124
-	sw	%x30, 20(%x2)  #31 pc 128
-	add	%x30, %x15, %x22  #31 pc 132
-	sw	%x30, 24(%x2)  #32 pc 136
-	add	%x30, %x15, %x23  #32 pc 140
-	sw	%x30, 28(%x2)  #33 pc 144
-	add	%x30, %x15, %x24  #33 pc 148
-	sw	%x30, 32(%x2)  #34 pc 152
-	add	%x30, %x15, %x25  #34 pc 156
-	sw	%x30, 36(%x2)  #35 pc 160
-	add	%x30, %x15, %x26  #35 pc 164
-	sw	%x30, 40(%x2)  #36 pc 168
-	add	%x30, %x15, %x27  #36 pc 172
-	sw	%x30, 44(%x2)  #37 pc 176
-	add	%x30, %x15, %x28  #37 pc 180
-	sw	%x30, 48(%x2)  #38 pc 184
-	add	%x30, %x15, %x29  #38 pc 188
-	add	%x5, %x5, %x6  #40 pc 192
-	add	%x5, %x5, %x7  #40 pc 196
-	add	%x5, %x5, %x8  #40 pc 200
-	add	%x5, %x5, %x9  #40 pc 204
-	add	%x5, %x5, %x10  #40 pc 208
-	add	%x5, %x5, %x11  #40 pc 212
-	add	%x5, %x5, %x12  #40 pc 216
-	add	%x5, %x5, %x13  #40 pc 220
-	add	%x5, %x5, %x14  #40 pc 224
-	add	%x5, %x5, %x15  #40 pc 228
-	add	%x5, %x5, %x16  #40 pc 232
-	add	%x5, %x5, %x17  #40 pc 236
-	add	%x5, %x5, %x18  #40 pc 240
-	add	%x5, %x5, %x19  #40 pc 244
-	add	%x5, %x5, %x20  #40 pc 248
-	add	%x5, %x5, %x21  #40 pc 252
-	add	%x5, %x5, %x22  #40 pc 256
-	add	%x5, %x5, %x23  #40 pc 260
-	add	%x5, %x5, %x24  #40 pc 264
-	add	%x5, %x5, %x25  #40 pc 268
-	add	%x5, %x5, %x26  #40 pc 272
-	add	%x5, %x5, %x27  #40 pc 276
-	add	%x5, %x5, %x28  #40 pc 280
-	add	%x5, %x5, %x29  #40 pc 284
-	lw	%x6, 0(%x2)  #40 pc 288
-	add	%x5, %x5, %x6  #40 pc 292
-	lw	%x6, 4(%x2)  #40 pc 296
-	add	%x5, %x5, %x6  #40 pc 300
-	lw	%x6, 8(%x2)  #40 pc 304
-	add	%x5, %x5, %x6  #40 pc 308
-	lw	%x6, 12(%x2)  #40 pc 312
-	add	%x5, %x5, %x6  #40 pc 316
-	lw	%x6, 16(%x2)  #40 pc 320
-	add	%x5, %x5, %x6  #40 pc 324
-	lw	%x6, 20(%x2)  #40 pc 328
-	add	%x5, %x5, %x6  #40 pc 332
-	lw	%x6, 24(%x2)  #40 pc 336
-	add	%x5, %x5, %x6  #40 pc 340
-	lw	%x6, 28(%x2)  #40 pc 344
-	add	%x5, %x5, %x6  #40 pc 348
-	lw	%x6, 32(%x2)  #40 pc 352
-	add	%x5, %x5, %x6  #40 pc 356
-	lw	%x6, 36(%x2)  #40 pc 360
-	add	%x5, %x5, %x6  #40 pc 364
-	lw	%x6, 40(%x2)  #40 pc 368
-	add	%x5, %x5, %x6  #40 pc 372
-	lw	%x6, 44(%x2)  #40 pc 376
-	add	%x5, %x5, %x6  #40 pc 380
-	lw	%x6, 48(%x2)  #40 pc 384
-	add	%x5, %x5, %x6  #40 pc 388
-	add	%x5, %x5, %x30  #40 pc 392
-	sub	%x5, %x0, %x5  #44 pc 396
-	ret #pc 400
-	nop #pc 404
+print_int.194:  #pc 0
+	sw	%x5, 0(%x6)  #112 pc 0
+	addi	%x5, %x5, 4  #112 pc 4
+	ret #pc 8
+	nop #pc 12
+f.214:  #pc 16
+	add	%x10, %x6, %x7  #208 pc 16
+	add	%x11, %x6, %x8  #209 pc 20
+	add	%x12, %x6, %x9  #210 pc 24
+	add	%x13, %x7, %x8  #211 pc 28
+	add	%x14, %x7, %x9  #212 pc 32
+	add	%x15, %x8, %x9  #213 pc 36
+	add	%x16, %x10, %x11  #215 pc 40
+	add	%x17, %x10, %x12  #216 pc 44
+	add	%x18, %x10, %x13  #217 pc 48
+	add	%x19, %x10, %x14  #218 pc 52
+	add	%x20, %x10, %x15  #219 pc 56
+	add	%x21, %x11, %x12  #220 pc 60
+	add	%x22, %x11, %x13  #221 pc 64
+	add	%x23, %x11, %x14  #222 pc 68
+	add	%x24, %x11, %x15  #223 pc 72
+	add	%x25, %x12, %x13  #224 pc 76
+	add	%x26, %x12, %x14  #225 pc 80
+	add	%x27, %x12, %x15  #226 pc 84
+	add	%x28, %x13, %x14  #227 pc 88
+	add	%x29, %x13, %x15  #228 pc 92
+	add	%x30, %x14, %x15  #229 pc 96
+	sw	%x17, 0(%x2)  #231 pc 100
+	add	%x17, %x16, %x17  #231 pc 104
+	sw	%x17, 4(%x2)  #232 pc 108
+	add	%x17, %x16, %x18  #232 pc 112
+	sw	%x17, 8(%x2)  #233 pc 116
+	add	%x17, %x16, %x19  #233 pc 120
+	sw	%x17, 12(%x2)  #234 pc 124
+	add	%x17, %x16, %x20  #234 pc 128
+	sw	%x17, 16(%x2)  #235 pc 132
+	add	%x17, %x16, %x21  #235 pc 136
+	sw	%x17, 20(%x2)  #236 pc 140
+	add	%x17, %x16, %x22  #236 pc 144
+	sw	%x17, 24(%x2)  #237 pc 148
+	add	%x17, %x16, %x23  #237 pc 152
+	sw	%x17, 28(%x2)  #238 pc 156
+	add	%x17, %x16, %x24  #238 pc 160
+	sw	%x17, 32(%x2)  #239 pc 164
+	add	%x17, %x16, %x25  #239 pc 168
+	sw	%x17, 36(%x2)  #240 pc 172
+	add	%x17, %x16, %x26  #240 pc 176
+	sw	%x17, 40(%x2)  #241 pc 180
+	add	%x17, %x16, %x27  #241 pc 184
+	sw	%x17, 44(%x2)  #242 pc 188
+	add	%x17, %x16, %x28  #242 pc 192
+	sw	%x17, 48(%x2)  #243 pc 196
+	add	%x17, %x16, %x29  #243 pc 200
+	sw	%x17, 52(%x2)  #244 pc 204
+	add	%x17, %x16, %x30  #244 pc 208
+	add	%x6, %x6, %x7  #246 pc 212
+	add	%x6, %x6, %x8  #246 pc 216
+	add	%x6, %x6, %x9  #246 pc 220
+	add	%x6, %x6, %x10  #246 pc 224
+	add	%x6, %x6, %x11  #246 pc 228
+	add	%x6, %x6, %x12  #246 pc 232
+	add	%x6, %x6, %x13  #246 pc 236
+	add	%x6, %x6, %x14  #246 pc 240
+	add	%x6, %x6, %x15  #246 pc 244
+	add	%x6, %x6, %x16  #246 pc 248
+	lw	%x7, 0(%x2)  #246 pc 252
+	add	%x6, %x6, %x7  #246 pc 256
+	add	%x6, %x6, %x18  #246 pc 260
+	add	%x6, %x6, %x19  #246 pc 264
+	add	%x6, %x6, %x20  #246 pc 268
+	add	%x6, %x6, %x21  #246 pc 272
+	add	%x6, %x6, %x22  #246 pc 276
+	add	%x6, %x6, %x23  #246 pc 280
+	add	%x6, %x6, %x24  #246 pc 284
+	add	%x6, %x6, %x25  #246 pc 288
+	add	%x6, %x6, %x26  #246 pc 292
+	add	%x6, %x6, %x27  #246 pc 296
+	add	%x6, %x6, %x28  #246 pc 300
+	add	%x6, %x6, %x29  #246 pc 304
+	add	%x6, %x6, %x30  #246 pc 308
+	lw	%x7, 4(%x2)  #246 pc 312
+	add	%x6, %x6, %x7  #246 pc 316
+	lw	%x7, 8(%x2)  #246 pc 320
+	add	%x6, %x6, %x7  #246 pc 324
+	lw	%x7, 12(%x2)  #246 pc 328
+	add	%x6, %x6, %x7  #246 pc 332
+	lw	%x7, 16(%x2)  #246 pc 336
+	add	%x6, %x6, %x7  #246 pc 340
+	lw	%x7, 20(%x2)  #246 pc 344
+	add	%x6, %x6, %x7  #246 pc 348
+	lw	%x7, 24(%x2)  #246 pc 352
+	add	%x6, %x6, %x7  #246 pc 356
+	lw	%x7, 28(%x2)  #246 pc 360
+	add	%x6, %x6, %x7  #246 pc 364
+	lw	%x7, 32(%x2)  #246 pc 368
+	add	%x6, %x6, %x7  #246 pc 372
+	lw	%x7, 36(%x2)  #246 pc 376
+	add	%x6, %x6, %x7  #246 pc 380
+	lw	%x7, 40(%x2)  #246 pc 384
+	add	%x6, %x6, %x7  #246 pc 388
+	lw	%x7, 44(%x2)  #246 pc 392
+	add	%x6, %x6, %x7  #246 pc 396
+	lw	%x7, 48(%x2)  #246 pc 400
+	add	%x6, %x6, %x7  #246 pc 404
+	lw	%x7, 52(%x2)  #246 pc 408
+	add	%x6, %x6, %x7  #246 pc 412
+	add	%x6, %x6, %x17  #246 pc 416
+	sub	%x6, %x0, %x6  #250 pc 420
+	ret #pc 424
+	nop #pc 428
 .global	min_caml_start
 min_caml_start:
 	addi	%x2, %x0, 0
 	addi	%x3, %x0, 1024
-	addi	%x5, %x0, 1  #0 pc 416
-	addi	%x6, %x0, 2  #0 pc 420
-	addi	%x7, %x0, 3  #0 pc 424
-	addi	%x8, %x0, 4  #0 pc 428
-	sw	%x1, 0(%x2)  #45 pc 432
-	addi	%x2, %x2, 4  #45 pc 436
-	jal	%x1, f.43  #45 pc 440
-	addi	%x2, %x2, -4  #45 pc 444
-	lw	%x1, 0(%x2) #45 pc 448
-	sw	%x1, 0(%x2)  #45 pc 452
-	addi	%x2, %x2, 4  #45 pc 456
-	jal	%x1, min_caml_print_int  #45 pc 460
-	addi	%x2, %x2, -4  #45 pc 464
-	lw	%x1, 0(%x2) #45 pc 468
+	addi	%x6, %x0, 1  #0 pc 440
+	addi	%x7, %x0, 2  #0 pc 444
+	addi	%x8, %x0, 3  #0 pc 448
+	addi	%x9, %x0, 4  #0 pc 452
+	sw	%x1, 0(%x2)  #251 pc 456
+	addi	%x2, %x2, 4  #251 pc 460
+	jal	%x1, f.214  #251 pc 464
+	addi	%x2, %x2, -4  #251 pc 468
+	lw	%x1, 0(%x2) #251 pc 472
+	sw	%x1, 0(%x2)  #251 pc 476
+	addi	%x2, %x2, 4  #251 pc 480
+	jal	%x1, print_int.194  #251 pc 484
+	addi	%x2, %x2, -4  #251 pc 488
+	lw	%x1, 0(%x2) #251 pc 492
 	addi	%x2, %x2, 112

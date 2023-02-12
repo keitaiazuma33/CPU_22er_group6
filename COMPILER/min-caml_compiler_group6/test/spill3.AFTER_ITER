@@ -1,185 +1,187 @@
-LET REC f.56 x0.57 
-	LET Ti3.148
-		INT 1
-		LET x1.60
-			ADD x0.57 Ti3.148
-			LET Ti4.147
-				INT 1
-				LET x2.61
-					ADD x1.60 Ti4.147
-					LET Ti5.146
-						INT 1
-						LET x3.62
-							ADD x2.61 Ti5.146
-							LET Ti6.145
-								INT 1
-								LET x4.63
-									ADD x3.62 Ti6.145
-									LET Ti7.144
-										INT 1
-										LET x5.64
-											ADD x4.63 Ti7.144
-											LET Ti8.143
-												INT 1
-												LET x6.65
-													ADD x5.64 Ti8.143
-													LET Ti9.142
-														INT 1
-														LET x7.66
-															ADD x6.65 Ti9.142
-															LET Ti10.141
-																INT 1
-																LET x8.67
-																	ADD x7.66 Ti10.141
-																	LET Ti11.140
-																		INT 1
-																		LET x9.68
-																			ADD x8.67 Ti11.140
-																			LET Ti12.139
-																				INT 1
-																				LET x10.69
-																					ADD x9.68 Ti12.139
-																					LET Ti13.138
-																						INT 1
-																						LET x11.70
-																							ADD x10.69 Ti13.138
-																							LET Ti14.137
-																								INT 1
-																								LET x12.71
-																									ADD x11.70 Ti14.137
-																									LET Ti15.136
-																										INT 1
-																										LET x13.72
-																											ADD x12.71 Ti15.136
-																											LET Ti16.135
-																												INT 1
-																												LET x14.73
-																													ADD x13.72 Ti16.135
-																													LET Ti17.134
-																														INT 1
-																														LET x15.74
-																															ADD x14.73 Ti17.134
-																															LET Ti18.133
-																																INT 1
-																																LET x16.75
-																																	ADD x15.74 Ti18.133
-																																	LET Ti19.132
-																																		INT 1
-																																		LET x17.76
-																																			ADD x16.75 Ti19.132
-																																			LET Ti20.131
-																																				INT 1
-																																				LET x18.77
-																																					ADD x17.76 Ti20.131
-																																					LET x19.78
-																																						ADD x18.77 x1.60
-																																						LET x20.79
-																																							ADD x19.78 x2.61
-																																							LET x21.80
-																																								ADD x20.79 x3.62
-																																								LET x22.81
-																																									ADD x21.80 x4.63
-																																									LET x23.82
-																																										ADD x22.81 x5.64
-																																										LET x24.83
-																																											ADD x23.82 x6.65
-																																											LET x25.84
-																																												ADD x24.83 x7.66
-																																												LET x26.85
-																																													ADD x25.84 x8.67
-																																													LET x27.86
-																																														ADD x26.85 x9.68
-																																														LET x28.87
-																																															ADD x27.86 x10.69
-																																															LET x29.88
-																																																ADD x28.87 x11.70
-																																																LET x30.89
-																																																	ADD x29.88 x12.71
-																																																	LET x31.90
-																																																		ADD x30.89 x13.72
-																																																		LET x32.91
-																																																			ADD x31.90 x14.73
-																																																			LET x33.92
-																																																				ADD x32.91 x15.74
-																																																				LET x34.93
-																																																					ADD x33.92 x16.75
-																																																					LET x35.94
-																																																						ADD x34.93 x17.76
-																																																						LET x36.95
-																																																							ADD x35.94 x0.57
-																																																							LET Ti21.130
-																																																								ADD x1.60 x2.61
-																																																								LET Ti22.129
-																																																									ADD Ti21.130 x3.62
-																																																									LET Ti23.128
-																																																										ADD Ti22.129 x4.63
-																																																										LET Ti24.127
-																																																											ADD Ti23.128 x5.64
-																																																											LET Ti25.126
-																																																												ADD Ti24.127 x6.65
-																																																												LET Ti26.125
-																																																													ADD Ti25.126 x7.66
-																																																													LET Ti27.124
-																																																														ADD Ti26.125 x8.67
-																																																														LET Ti28.123
-																																																															ADD Ti27.124 x9.68
-																																																															LET Ti29.122
-																																																																ADD Ti28.123 x10.69
-																																																																LET Ti30.121
-																																																																	ADD Ti29.122 x11.70
-																																																																	LET Ti31.120
-																																																																		ADD Ti30.121 x12.71
-																																																																		LET Ti32.119
-																																																																			ADD Ti31.120 x13.72
-																																																																			LET Ti33.118
-																																																																				ADD Ti32.119 x14.73
-																																																																				LET Ti34.117
-																																																																					ADD Ti33.118 x15.74
-																																																																					LET Ti35.116
-																																																																						ADD Ti34.117 x16.75
-																																																																						LET Ti36.115
-																																																																							ADD Ti35.116 x17.76
-																																																																							LET Ti37.114
-																																																																								ADD Ti36.115 x18.77
-																																																																								LET Ti38.113
-																																																																									ADD Ti37.114 x19.78
-																																																																									LET Ti39.112
-																																																																										ADD Ti38.113 x20.79
-																																																																										LET Ti40.111
-																																																																											ADD Ti39.112 x21.80
-																																																																											LET Ti41.110
-																																																																												ADD Ti40.111 x22.81
-																																																																												LET Ti42.109
-																																																																													ADD Ti41.110 x23.82
-																																																																													LET Ti43.108
-																																																																														ADD Ti42.109 x24.83
-																																																																														LET Ti44.107
-																																																																															ADD Ti43.108 x25.84
-																																																																															LET Ti45.106
-																																																																																ADD Ti44.107 x26.85
-																																																																																LET Ti46.105
-																																																																																	ADD Ti45.106 x27.86
-																																																																																	LET Ti47.104
-																																																																																		ADD Ti46.105 x28.87
-																																																																																		LET Ti48.103
-																																																																																			ADD Ti47.104 x29.88
-																																																																																			LET Ti49.102
-																																																																																				ADD Ti48.103 x30.89
-																																																																																				LET Ti50.101
-																																																																																					ADD Ti49.102 x31.90
-																																																																																					LET Ti51.100
-																																																																																						ADD Ti50.101 x32.91
-																																																																																						LET Ti52.99
-																																																																																							ADD Ti51.100 x33.92
-																																																																																							LET Ti53.98
-																																																																																								ADD Ti52.99 x34.93
-																																																																																								LET Ti54.97
-																																																																																									ADD Ti53.98 x35.94
-																																																																																									LET Ti55.96
-																																																																																										ADD Ti54.97 x36.95
-																																																																																										ADD Ti55.96 x0.57
-	LET Ti1.59
-		INT 0
-		LET Ti2.58
-			APP f.56 Ti1.59 
-			EXTFUNAPP print_int Ti2.58 
+LET REC print_int.207 a.208 
+	OUT a.208
+	LET REC f.227 x0.228 
+		LET Ti9.319
+			INT 1
+			LET x1.231
+				ADD x0.228 Ti9.319
+				LET Ti10.318
+					INT 1
+					LET x2.232
+						ADD x1.231 Ti10.318
+						LET Ti11.317
+							INT 1
+							LET x3.233
+								ADD x2.232 Ti11.317
+								LET Ti12.316
+									INT 1
+									LET x4.234
+										ADD x3.233 Ti12.316
+										LET Ti13.315
+											INT 1
+											LET x5.235
+												ADD x4.234 Ti13.315
+												LET Ti14.314
+													INT 1
+													LET x6.236
+														ADD x5.235 Ti14.314
+														LET Ti15.313
+															INT 1
+															LET x7.237
+																ADD x6.236 Ti15.313
+																LET Ti16.312
+																	INT 1
+																	LET x8.238
+																		ADD x7.237 Ti16.312
+																		LET Ti17.311
+																			INT 1
+																			LET x9.239
+																				ADD x8.238 Ti17.311
+																				LET Ti18.310
+																					INT 1
+																					LET x10.240
+																						ADD x9.239 Ti18.310
+																						LET Ti19.309
+																							INT 1
+																							LET x11.241
+																								ADD x10.240 Ti19.309
+																								LET Ti20.308
+																									INT 1
+																									LET x12.242
+																										ADD x11.241 Ti20.308
+																										LET Ti21.307
+																											INT 1
+																											LET x13.243
+																												ADD x12.242 Ti21.307
+																												LET Ti22.306
+																													INT 1
+																													LET x14.244
+																														ADD x13.243 Ti22.306
+																														LET Ti23.305
+																															INT 1
+																															LET x15.245
+																																ADD x14.244 Ti23.305
+																																LET Ti24.304
+																																	INT 1
+																																	LET x16.246
+																																		ADD x15.245 Ti24.304
+																																		LET Ti25.303
+																																			INT 1
+																																			LET x17.247
+																																				ADD x16.246 Ti25.303
+																																				LET Ti26.302
+																																					INT 1
+																																					LET x18.248
+																																						ADD x17.247 Ti26.302
+																																						LET x19.249
+																																							ADD x18.248 x1.231
+																																							LET x20.250
+																																								ADD x19.249 x2.232
+																																								LET x21.251
+																																									ADD x20.250 x3.233
+																																									LET x22.252
+																																										ADD x21.251 x4.234
+																																										LET x23.253
+																																											ADD x22.252 x5.235
+																																											LET x24.254
+																																												ADD x23.253 x6.236
+																																												LET x25.255
+																																													ADD x24.254 x7.237
+																																													LET x26.256
+																																														ADD x25.255 x8.238
+																																														LET x27.257
+																																															ADD x26.256 x9.239
+																																															LET x28.258
+																																																ADD x27.257 x10.240
+																																																LET x29.259
+																																																	ADD x28.258 x11.241
+																																																	LET x30.260
+																																																		ADD x29.259 x12.242
+																																																		LET x31.261
+																																																			ADD x30.260 x13.243
+																																																			LET x32.262
+																																																				ADD x31.261 x14.244
+																																																				LET x33.263
+																																																					ADD x32.262 x15.245
+																																																					LET x34.264
+																																																						ADD x33.263 x16.246
+																																																						LET x35.265
+																																																							ADD x34.264 x17.247
+																																																							LET x36.266
+																																																								ADD x35.265 x0.228
+																																																								LET Ti27.301
+																																																									ADD x1.231 x2.232
+																																																									LET Ti28.300
+																																																										ADD Ti27.301 x3.233
+																																																										LET Ti29.299
+																																																											ADD Ti28.300 x4.234
+																																																											LET Ti30.298
+																																																												ADD Ti29.299 x5.235
+																																																												LET Ti31.297
+																																																													ADD Ti30.298 x6.236
+																																																													LET Ti32.296
+																																																														ADD Ti31.297 x7.237
+																																																														LET Ti33.295
+																																																															ADD Ti32.296 x8.238
+																																																															LET Ti34.294
+																																																																ADD Ti33.295 x9.239
+																																																																LET Ti35.293
+																																																																	ADD Ti34.294 x10.240
+																																																																	LET Ti36.292
+																																																																		ADD Ti35.293 x11.241
+																																																																		LET Ti37.291
+																																																																			ADD Ti36.292 x12.242
+																																																																			LET Ti38.290
+																																																																				ADD Ti37.291 x13.243
+																																																																				LET Ti39.289
+																																																																					ADD Ti38.290 x14.244
+																																																																					LET Ti40.288
+																																																																						ADD Ti39.289 x15.245
+																																																																						LET Ti41.287
+																																																																							ADD Ti40.288 x16.246
+																																																																							LET Ti42.286
+																																																																								ADD Ti41.287 x17.247
+																																																																								LET Ti43.285
+																																																																									ADD Ti42.286 x18.248
+																																																																									LET Ti44.284
+																																																																										ADD Ti43.285 x19.249
+																																																																										LET Ti45.283
+																																																																											ADD Ti44.284 x20.250
+																																																																											LET Ti46.282
+																																																																												ADD Ti45.283 x21.251
+																																																																												LET Ti47.281
+																																																																													ADD Ti46.282 x22.252
+																																																																													LET Ti48.280
+																																																																														ADD Ti47.281 x23.253
+																																																																														LET Ti49.279
+																																																																															ADD Ti48.280 x24.254
+																																																																															LET Ti50.278
+																																																																																ADD Ti49.279 x25.255
+																																																																																LET Ti51.277
+																																																																																	ADD Ti50.278 x26.256
+																																																																																	LET Ti52.276
+																																																																																		ADD Ti51.277 x27.257
+																																																																																		LET Ti53.275
+																																																																																			ADD Ti52.276 x28.258
+																																																																																			LET Ti54.274
+																																																																																				ADD Ti53.275 x29.259
+																																																																																				LET Ti55.273
+																																																																																					ADD Ti54.274 x30.260
+																																																																																					LET Ti56.272
+																																																																																						ADD Ti55.273 x31.261
+																																																																																						LET Ti57.271
+																																																																																							ADD Ti56.272 x32.262
+																																																																																							LET Ti58.270
+																																																																																								ADD Ti57.271 x33.263
+																																																																																								LET Ti59.269
+																																																																																									ADD Ti58.270 x34.264
+																																																																																									LET Ti60.268
+																																																																																										ADD Ti59.269 x35.265
+																																																																																										LET Ti61.267
+																																																																																											ADD Ti60.268 x36.266
+																																																																																											ADD Ti61.267 x0.228
+		LET Ti7.230
+			INT 0
+			LET Ti8.229
+				APP f.227 Ti7.230 
+				APP print_int.207 Ti8.229 

@@ -33,7 +33,8 @@ type t = (* K��������μ� (caml2html: knormal_t) *)
   | Put of Id.t * Id.t * Id.t * int
   | ExtArray of Id.t * int
   | ExtFunApp of Id.t * Id.t list * int
-  | In of Id.t * int
+  | Ini of Id.t * int
+  | Inf of Id.t * int
   | Out of Id.t * int
   | ItoIA of Id.t * int
   | ItoFA of Id.t * int
@@ -44,7 +45,7 @@ and fundef = { name : Id.t * Type.t; args : (Id.t * Type.t) list; body : t }
 let rec fv = function (* ���˽и�����ʼ�ͳ�ʡ��ѿ� (caml2html: knormal_fv) *)
   | Unit | Int(_) | Float(_) | ExtArray(_,_) -> S.empty
   | Neg(x,_) | FNeg(x,_) | Sqrt(x,_) | FAbs(x,_) | FtoI(x,_) | ItoF(x,_) 
-  | In(x,_) | Out(x,_) | ItoIA(x,_) | ItoFA(x,_) | Gethp(x,_) | Sethp(x,_) -> S.singleton x
+  | Ini(x,_) | Inf(x,_) | Out(x,_) | ItoIA(x,_) | ItoFA(x,_) | Gethp(x,_) | Sethp(x,_) -> S.singleton x
   | Add(x, y, _) | Sub(x, y, _) | FAdd(x, y, _) | FSub(x, y, _) | FMul(x, y, _) | FDiv(x, y, _) 
   | Get(x, y, _) | Xor(x, y, _) | Or(x, y, _) | And(x, y, _) | SLL(x, y, _) | SRL(x, y, _) -> S.of_list [x; y]
   | IfEq(x, y, e1, e2, _) | IfLE(x, y, e1, e2, _) -> S.add x (S.add y (S.union (fv e1) (fv e2)))
@@ -138,9 +139,12 @@ let rec g env = function (* K�������롼�������� (c
   | Syntax.ItoF(e, n) ->
       insert_let (g env e)
         (fun x -> ItoF(x, n), Type.Float)
-  | Syntax.In(e, n) ->
+  | Syntax.Ini(e, n) ->
       insert_let (g env e)
-        (fun x -> In(x, n), Type.Int)
+        (fun x -> Ini(x, n), Type.Int)
+  | Syntax.Inf(e, n) ->
+      insert_let (g env e)
+        (fun x -> Inf(x, n), Type.Float)
   | Syntax.Out(e, n) ->
       insert_let (g env e)
         (fun x -> Out(x, n), Type.Unit)

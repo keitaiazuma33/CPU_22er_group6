@@ -1,36 +1,42 @@
+Name : print_int.164
+Args : a.165 
+Formal_fv : 
+Body :
+OUT a.165
 
-LET Td1.27
+
+LET Td7.198
 	FLOAT 1.230000
-	LET x.13
-		APPDIR min_caml_truncate : Td1.27 
-		LET Td2.26
+	LET x.184
+		APPDIR min_caml_truncate : Td7.198 
+		LET Td8.197
 			FLOAT 4.560000
-			LET y.14
-				APPDIR min_caml_truncate : Td2.26 
-				LET Td4.24
+			LET y.185
+				APPDIR min_caml_truncate : Td8.197 
+				LET Td10.195
 					FLOAT -7.890000
-					LET z.15
-						APPDIR min_caml_truncate : Td4.24 
-						LET Ti5.23
+					LET z.186
+						APPDIR min_caml_truncate : Td10.195 
+						LET Ti11.194
 							INT 0
-							LET Ti6.20
-								IFLE Ti5.23 z.15
-									VAR x.13
-									VAR y.14
-								LET Ti7.22
+							LET Ti12.191
+								IFLE Ti11.194 z.186
+									VAR x.184
+									VAR y.185
+								LET Ti13.193
 									INT 0
-									LET Ti8.21
-										IFLE x.13 Ti7.22
-											VAR y.14
-											VAR z.15
-										LET Ti9.17
-											ADD Ti6.20 Ti8.21
-											LET Ti10.19
+									LET Ti14.192
+										IFLE x.184 Ti13.193
+											VAR y.185
+											VAR z.186
+										LET Ti15.188
+											ADD Ti12.191 Ti14.192
+											LET Ti16.190
 												INT 0
-												LET Ti11.18
-													IFLE Ti10.19 y.14
-														VAR z.15
-														VAR x.13
-													LET Ti12.16
-														ADD Ti9.17 Ti11.18
-														APPDIR min_caml_print_int : Ti12.16 
+												LET Ti17.189
+													IFLE Ti16.190 y.185
+														VAR z.186
+														VAR x.184
+													LET Ti18.187
+														ADD Ti15.188 Ti17.189
+														APPDIR print_int.164 : Ti18.187 

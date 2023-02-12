@@ -1,54 +1,60 @@
-Name : composed.22
-Args : x.23 
-Formal_fv : f.8 g.9 
-Body :
-LET Ti6.24
-	APPCLS f.8 : x.23 
-	APPCLS g.9 : Ti6.24 
-
-Name : compose.7
-Args : f.8 g.9 
+Name : print_int.158
+Args : a.159 
 Formal_fv : 
 Body :
-MAKECLS composed.22
-	composed.22 : f.8 g.9 
-	VAR composed.22
+OUT a.159
 
-Name : dbl.10
-Args : x.11 
+Name : composed.193
+Args : x.194 
+Formal_fv : f.179 g.180 
+Body :
+LET Ti12.195
+	APPCLS f.179 : x.194 
+	APPCLS g.180 : Ti12.195 
+
+Name : compose.178
+Args : f.179 g.180 
 Formal_fv : 
 Body :
-ADD x.11 x.11
+MAKECLS composed.193
+	composed.193 : f.179 g.180 
+	VAR composed.193
 
-Name : inc.12
-Args : x.13 
+Name : dbl.181
+Args : x.182 
 Formal_fv : 
 Body :
-LET Ti5.21
+ADD x.182 x.182
+
+Name : inc.183
+Args : x.184 
+Formal_fv : 
+Body :
+LET Ti11.192
 	INT 1
-	ADD x.13 Ti5.21
+	ADD x.184 Ti11.192
 
-Name : dec.14
-Args : x.15 
+Name : dec.185
+Args : x.186 
 Formal_fv : 
 Body :
-LET Ti4.20
+LET Ti10.191
 	INT 1
-	SUB x.15 Ti4.20
+	SUB x.186 Ti10.191
 
 
-MAKECLS dbl.10
-	dbl.10 : 
-	MAKECLS inc.12
-		inc.12 : 
-		MAKECLS dec.14
-			dec.14 : 
-			LET Tf1.19
-				APPDIR compose.7 : dbl.10 dec.14 
-				LET h.16
-					APPDIR compose.7 : inc.12 Tf1.19 
-					LET Ti2.18
+MAKECLS dbl.181
+	dbl.181 : 
+	MAKECLS inc.183
+		inc.183 : 
+		MAKECLS dec.185
+			dec.185 : 
+			LET Tf7.190
+				APPDIR compose.178 : dbl.181 dec.185 
+				LET h.187
+					APPDIR compose.178 : inc.183 Tf7.190 
+					LET Ti8.189
 						INT 123
-						LET Ti3.17
-							APPCLS h.16 : Ti2.18 
-							APPDIR min_caml_print_int : Ti3.17 
+						LET Ti9.188
+							APPCLS h.187 : Ti8.189 
+							APPDIR print_int.158 : Ti9.188 
