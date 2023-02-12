@@ -9915,1057 +9915,1058 @@ rt.3054:  #pc 36916
 	nop #pc 37552
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 0
-	addi	%x3, %x0, 1024
-	addi	%x6, %x0, 1  #0 pc 37564
-	addi	%x7, %x0, 0  #0 pc 37568
-	sw	%x1, 0(%x2)  #223 pc 37572
-	addi	%x2, %x2, 4  #223 pc 37576
-	jal	%x1, create_array.2534  #223 pc 37580
-	addi	%x2, %x2, -4  #223 pc 37584
-	lw	%x1, 0(%x2) #223 pc 37588
-	addi	%x7, %x0, 0  #0 pc 37592
-	fmv	%f0, l.6176  #0 pc 37596
-	sw	%x6, 0(%x2)  #228 pc 37600
-	addi	%x6, %x7, 0  #0 pc 37604
-	sw	%x1, 4(%x2)  #228 pc 37608
-	addi	%x2, %x2, 8  #228 pc 37612
-	jal	%x1, create_float_array.2541  #228 pc 37616
-	addi	%x2, %x2, -8  #228 pc 37620
-	lw	%x1, 4(%x2) #228 pc 37624
-	addi	%x7, %x0, 60  #0 pc 37628
-	addi	%x8, %x0, 0  #0 pc 37632
-	addi	%x9, %x3, 0  #229 pc 37636
-	addi	%x3, %x3, 44  #229 pc 37640
-	sw	%x6, 40(%x9)  #229 pc 37644
-	sw	%x6, 36(%x9)  #229 pc 37648
-	sw	%x6, 32(%x9)  #229 pc 37652
-	sw	%x6, 28(%x9)  #229 pc 37656
-	sw	%x8, 24(%x9)  #229 pc 37660
-	sw	%x6, 20(%x9)  #229 pc 37664
-	sw	%x6, 16(%x9)  #229 pc 37668
-	sw	%x8, 12(%x9)  #229 pc 37672
-	sw	%x8, 8(%x9)  #229 pc 37676
-	sw	%x8, 4(%x9)  #229 pc 37680
-	sw	%x8, 0(%x9)  #229 pc 37684
-	addi	%x6, %x9, 0  #229 pc 37688
-	addi	%x30, %x7, 0  #0 pc 37692
-	addi	%x7, %x6, 0  #0 pc 37696
-	addi	%x6, %x30, 0  #0 pc 37700
-	sw	%x1, 4(%x2)  #229 pc 37704
-	addi	%x2, %x2, 8  #229 pc 37708
-	jal	%x1, create_array.2534  #229 pc 37712
-	addi	%x2, %x2, -8  #229 pc 37716
-	lw	%x1, 4(%x2) #229 pc 37720
-	addi	%x7, %x0, 3  #0 pc 37724
-	fmv	%f0, l.6176  #0 pc 37728
-	sw	%x6, 4(%x2)  #233 pc 37732
-	addi	%x6, %x7, 0  #0 pc 37736
-	sw	%x1, 8(%x2)  #233 pc 37740
-	addi	%x2, %x2, 12  #233 pc 37744
-	jal	%x1, create_float_array.2541  #233 pc 37748
-	addi	%x2, %x2, -12  #233 pc 37752
-	lw	%x1, 8(%x2) #233 pc 37756
-	addi	%x7, %x0, 3  #0 pc 37760
-	fmv	%f0, l.6176  #0 pc 37764
-	sw	%x6, 8(%x2)  #236 pc 37768
-	addi	%x6, %x7, 0  #0 pc 37772
-	sw	%x1, 12(%x2)  #236 pc 37776
-	addi	%x2, %x2, 16  #236 pc 37780
-	jal	%x1, create_float_array.2541  #236 pc 37784
-	addi	%x2, %x2, -16  #236 pc 37788
-	lw	%x1, 12(%x2) #236 pc 37792
-	addi	%x7, %x0, 3  #0 pc 37796
-	fmv	%f0, l.6176  #0 pc 37800
-	sw	%x6, 12(%x2)  #239 pc 37804
-	addi	%x6, %x7, 0  #0 pc 37808
-	sw	%x1, 16(%x2)  #239 pc 37812
-	addi	%x2, %x2, 20  #239 pc 37816
-	jal	%x1, create_float_array.2541  #239 pc 37820
-	addi	%x2, %x2, -20  #239 pc 37824
-	lw	%x1, 16(%x2) #239 pc 37828
-	addi	%x7, %x0, 1  #0 pc 37832
-	fmv	%f0, l.6677  #0 pc 37836
-	sw	%x6, 16(%x2)  #242 pc 37840
-	addi	%x6, %x7, 0  #0 pc 37844
-	sw	%x1, 20(%x2)  #242 pc 37848
-	addi	%x2, %x2, 24  #242 pc 37852
-	jal	%x1, create_float_array.2541  #242 pc 37856
-	addi	%x2, %x2, -24  #242 pc 37860
-	lw	%x1, 20(%x2) #242 pc 37864
-	addi	%x7, %x0, 50  #0 pc 37868
-	addi	%x8, %x0, 1  #0 pc 37872
-	addi	%x9, %x0, -1  #0 pc 37876
-	sw	%x6, 20(%x2)  #245 pc 37880
-	sw	%x7, 24(%x2)  #245 pc 37884
-	addi	%x7, %x9, 0  #0 pc 37888
-	addi	%x6, %x8, 0  #0 pc 37892
-	sw	%x1, 28(%x2)  #245 pc 37896
-	addi	%x2, %x2, 32  #245 pc 37900
-	jal	%x1, create_array.2534  #245 pc 37904
-	addi	%x2, %x2, -32  #245 pc 37908
-	lw	%x1, 28(%x2) #245 pc 37912
-	addi	%x7, %x6, 0  #245 pc 37916
-	lw	%x6, 24(%x2)  #245 pc 37920
-	sw	%x1, 28(%x2)  #245 pc 37924
-	addi	%x2, %x2, 32  #245 pc 37928
-	jal	%x1, create_array.2534  #245 pc 37932
-	addi	%x2, %x2, -32  #245 pc 37936
-	lw	%x1, 28(%x2) #245 pc 37940
-	addi	%x7, %x0, 1  #0 pc 37944
-	lw	%x8, 0(%x6)  #248 pc 37948
-	sw	%x6, 28(%x2)  #248 pc 37952
-	sw	%x7, 32(%x2)  #248 pc 37956
-	addi	%x6, %x7, 0  #0 pc 37960
-	addi	%x7, %x8, 0  #0 pc 37964
-	sw	%x1, 36(%x2)  #248 pc 37968
-	addi	%x2, %x2, 40  #248 pc 37972
-	jal	%x1, create_array.2534  #248 pc 37976
-	addi	%x2, %x2, -40  #248 pc 37980
-	lw	%x1, 36(%x2) #248 pc 37984
-	addi	%x7, %x6, 0  #248 pc 37988
-	lw	%x6, 32(%x2)  #248 pc 37992
-	sw	%x1, 36(%x2)  #248 pc 37996
-	addi	%x2, %x2, 40  #248 pc 38000
-	jal	%x1, create_array.2534  #248 pc 38004
-	addi	%x2, %x2, -40  #248 pc 38008
-	lw	%x1, 36(%x2) #248 pc 38012
-	addi	%x7, %x0, 1  #0 pc 38016
-	fmv	%f0, l.6176  #0 pc 38020
-	sw	%x6, 36(%x2)  #253 pc 38024
-	addi	%x6, %x7, 0  #0 pc 38028
-	sw	%x1, 40(%x2)  #253 pc 38032
-	addi	%x2, %x2, 44  #253 pc 38036
-	jal	%x1, create_float_array.2541  #253 pc 38040
-	addi	%x2, %x2, -44  #253 pc 38044
-	lw	%x1, 40(%x2) #253 pc 38048
-	addi	%x7, %x0, 1  #0 pc 38052
-	addi	%x8, %x0, 0  #0 pc 38056
-	sw	%x6, 40(%x2)  #256 pc 38060
-	addi	%x6, %x7, 0  #0 pc 38064
-	addi	%x7, %x8, 0  #0 pc 38068
-	sw	%x1, 44(%x2)  #256 pc 38072
-	addi	%x2, %x2, 48  #256 pc 38076
-	jal	%x1, create_array.2534  #256 pc 38080
-	addi	%x2, %x2, -48  #256 pc 38084
-	lw	%x1, 44(%x2) #256 pc 38088
-	addi	%x7, %x0, 1  #0 pc 38092
-	fmv	%f0, l.6604  #0 pc 38096
-	sw	%x6, 44(%x2)  #259 pc 38100
-	addi	%x6, %x7, 0  #0 pc 38104
-	sw	%x1, 48(%x2)  #259 pc 38108
-	addi	%x2, %x2, 52  #259 pc 38112
-	jal	%x1, create_float_array.2541  #259 pc 38116
-	addi	%x2, %x2, -52  #259 pc 38120
-	lw	%x1, 48(%x2) #259 pc 38124
-	addi	%x7, %x0, 3  #0 pc 38128
-	fmv	%f0, l.6176  #0 pc 38132
-	sw	%x6, 48(%x2)  #262 pc 38136
-	addi	%x6, %x7, 0  #0 pc 38140
-	sw	%x1, 52(%x2)  #262 pc 38144
-	addi	%x2, %x2, 56  #262 pc 38148
-	jal	%x1, create_float_array.2541  #262 pc 38152
-	addi	%x2, %x2, -56  #262 pc 38156
-	lw	%x1, 52(%x2) #262 pc 38160
-	addi	%x7, %x0, 1  #0 pc 38164
-	addi	%x8, %x0, 0  #0 pc 38168
-	sw	%x6, 52(%x2)  #265 pc 38172
-	addi	%x6, %x7, 0  #0 pc 38176
-	addi	%x7, %x8, 0  #0 pc 38180
-	sw	%x1, 56(%x2)  #265 pc 38184
-	addi	%x2, %x2, 60  #265 pc 38188
-	jal	%x1, create_array.2534  #265 pc 38192
-	addi	%x2, %x2, -60  #265 pc 38196
-	lw	%x1, 56(%x2) #265 pc 38200
-	addi	%x7, %x0, 3  #0 pc 38204
-	fmv	%f0, l.6176  #0 pc 38208
-	sw	%x6, 56(%x2)  #268 pc 38212
-	addi	%x6, %x7, 0  #0 pc 38216
-	sw	%x1, 60(%x2)  #268 pc 38220
-	addi	%x2, %x2, 64  #268 pc 38224
-	jal	%x1, create_float_array.2541  #268 pc 38228
-	addi	%x2, %x2, -64  #268 pc 38232
-	lw	%x1, 60(%x2) #268 pc 38236
-	addi	%x7, %x0, 3  #0 pc 38240
-	fmv	%f0, l.6176  #0 pc 38244
-	sw	%x6, 60(%x2)  #271 pc 38248
-	addi	%x6, %x7, 0  #0 pc 38252
-	sw	%x1, 64(%x2)  #271 pc 38256
-	addi	%x2, %x2, 68  #271 pc 38260
-	jal	%x1, create_float_array.2541  #271 pc 38264
-	addi	%x2, %x2, -68  #271 pc 38268
-	lw	%x1, 64(%x2) #271 pc 38272
-	addi	%x7, %x0, 3  #0 pc 38276
-	fmv	%f0, l.6176  #0 pc 38280
-	sw	%x6, 64(%x2)  #275 pc 38284
-	addi	%x6, %x7, 0  #0 pc 38288
-	sw	%x1, 68(%x2)  #275 pc 38292
-	addi	%x2, %x2, 72  #275 pc 38296
-	jal	%x1, create_float_array.2541  #275 pc 38300
-	addi	%x2, %x2, -72  #275 pc 38304
-	lw	%x1, 68(%x2) #275 pc 38308
-	addi	%x7, %x0, 3  #0 pc 38312
-	fmv	%f0, l.6176  #0 pc 38316
-	sw	%x6, 68(%x2)  #278 pc 38320
-	addi	%x6, %x7, 0  #0 pc 38324
-	sw	%x1, 72(%x2)  #278 pc 38328
-	addi	%x2, %x2, 76  #278 pc 38332
-	jal	%x1, create_float_array.2541  #278 pc 38336
-	addi	%x2, %x2, -76  #278 pc 38340
-	lw	%x1, 72(%x2) #278 pc 38344
-	addi	%x7, %x0, 2  #0 pc 38348
-	addi	%x8, %x0, 0  #0 pc 38352
-	sw	%x6, 72(%x2)  #282 pc 38356
-	addi	%x6, %x7, 0  #0 pc 38360
-	addi	%x7, %x8, 0  #0 pc 38364
-	sw	%x1, 76(%x2)  #282 pc 38368
-	addi	%x2, %x2, 80  #282 pc 38372
-	jal	%x1, create_array.2534  #282 pc 38376
-	addi	%x2, %x2, -80  #282 pc 38380
-	lw	%x1, 76(%x2) #282 pc 38384
-	addi	%x7, %x0, 2  #0 pc 38388
-	addi	%x8, %x0, 0  #0 pc 38392
-	sw	%x6, 76(%x2)  #285 pc 38396
-	addi	%x6, %x7, 0  #0 pc 38400
-	addi	%x7, %x8, 0  #0 pc 38404
-	sw	%x1, 80(%x2)  #285 pc 38408
-	addi	%x2, %x2, 84  #285 pc 38412
-	jal	%x1, create_array.2534  #285 pc 38416
-	addi	%x2, %x2, -84  #285 pc 38420
-	lw	%x1, 80(%x2) #285 pc 38424
-	addi	%x7, %x0, 1  #0 pc 38428
-	fmv	%f0, l.6176  #0 pc 38432
-	sw	%x6, 80(%x2)  #288 pc 38436
-	addi	%x6, %x7, 0  #0 pc 38440
-	sw	%x1, 84(%x2)  #288 pc 38444
-	addi	%x2, %x2, 88  #288 pc 38448
-	jal	%x1, create_float_array.2541  #288 pc 38452
-	addi	%x2, %x2, -88  #288 pc 38456
-	lw	%x1, 84(%x2) #288 pc 38460
-	addi	%x7, %x0, 3  #0 pc 38464
-	fmv	%f0, l.6176  #0 pc 38468
-	sw	%x6, 84(%x2)  #292 pc 38472
-	addi	%x6, %x7, 0  #0 pc 38476
-	sw	%x1, 88(%x2)  #292 pc 38480
-	addi	%x2, %x2, 92  #292 pc 38484
-	jal	%x1, create_float_array.2541  #292 pc 38488
-	addi	%x2, %x2, -92  #292 pc 38492
-	lw	%x1, 88(%x2) #292 pc 38496
-	addi	%x7, %x0, 3  #0 pc 38500
-	fmv	%f0, l.6176  #0 pc 38504
-	sw	%x6, 88(%x2)  #295 pc 38508
-	addi	%x6, %x7, 0  #0 pc 38512
-	sw	%x1, 92(%x2)  #295 pc 38516
-	addi	%x2, %x2, 96  #295 pc 38520
-	jal	%x1, create_float_array.2541  #295 pc 38524
-	addi	%x2, %x2, -96  #295 pc 38528
-	lw	%x1, 92(%x2) #295 pc 38532
-	addi	%x7, %x0, 3  #0 pc 38536
-	fmv	%f0, l.6176  #0 pc 38540
-	sw	%x6, 92(%x2)  #299 pc 38544
-	addi	%x6, %x7, 0  #0 pc 38548
-	sw	%x1, 96(%x2)  #299 pc 38552
-	addi	%x2, %x2, 100  #299 pc 38556
-	jal	%x1, create_float_array.2541  #299 pc 38560
-	addi	%x2, %x2, -100  #299 pc 38564
-	lw	%x1, 96(%x2) #299 pc 38568
-	addi	%x7, %x0, 3  #0 pc 38572
-	fmv	%f0, l.6176  #0 pc 38576
-	sw	%x6, 96(%x2)  #301 pc 38580
-	addi	%x6, %x7, 0  #0 pc 38584
-	sw	%x1, 100(%x2)  #301 pc 38588
-	addi	%x2, %x2, 104  #301 pc 38592
-	jal	%x1, create_float_array.2541  #301 pc 38596
-	addi	%x2, %x2, -104  #301 pc 38600
-	lw	%x1, 100(%x2) #301 pc 38604
-	addi	%x7, %x0, 3  #0 pc 38608
-	fmv	%f0, l.6176  #0 pc 38612
-	sw	%x6, 100(%x2)  #303 pc 38616
-	addi	%x6, %x7, 0  #0 pc 38620
-	sw	%x1, 104(%x2)  #303 pc 38624
-	addi	%x2, %x2, 108  #303 pc 38628
-	jal	%x1, create_float_array.2541  #303 pc 38632
-	addi	%x2, %x2, -108  #303 pc 38636
-	lw	%x1, 104(%x2) #303 pc 38640
-	addi	%x7, %x0, 3  #0 pc 38644
-	fmv	%f0, l.6176  #0 pc 38648
-	sw	%x6, 104(%x2)  #307 pc 38652
-	addi	%x6, %x7, 0  #0 pc 38656
-	sw	%x1, 108(%x2)  #307 pc 38660
-	addi	%x2, %x2, 112  #307 pc 38664
-	jal	%x1, create_float_array.2541  #307 pc 38668
-	addi	%x2, %x2, -112  #307 pc 38672
-	lw	%x1, 108(%x2) #307 pc 38676
-	addi	%x7, %x0, 0  #0 pc 38680
-	fmv	%f0, l.6176  #0 pc 38684
-	sw	%x6, 108(%x2)  #312 pc 38688
-	addi	%x6, %x7, 0  #0 pc 38692
-	sw	%x1, 112(%x2)  #312 pc 38696
-	addi	%x2, %x2, 116  #312 pc 38700
-	jal	%x1, create_float_array.2541  #312 pc 38704
-	addi	%x2, %x2, -116  #312 pc 38708
-	lw	%x1, 112(%x2) #312 pc 38712
-	addi	%x7, %x6, 0  #312 pc 38716
-	addi	%x6, %x0, 0  #0 pc 38720
-	sw	%x7, 112(%x2)  #313 pc 38724
-	sw	%x1, 116(%x2)  #313 pc 38728
-	addi	%x2, %x2, 120  #313 pc 38732
-	jal	%x1, create_array.2534  #313 pc 38736
-	addi	%x2, %x2, -120  #313 pc 38740
-	lw	%x1, 116(%x2) #313 pc 38744
-	addi	%x7, %x0, 0  #0 pc 38748
-	addi	%x8, %x3, 0  #314 pc 38752
-	addi	%x3, %x3, 8  #314 pc 38756
-	sw	%x6, 4(%x8)  #314 pc 38760
-	lw	%x6, 112(%x2)  #314 pc 38764
-	sw	%x6, 0(%x8)  #314 pc 38768
-	addi	%x6, %x8, 0  #314 pc 38772
-	addi	%x30, %x7, 0  #0 pc 38776
-	addi	%x7, %x6, 0  #0 pc 38780
-	addi	%x6, %x30, 0  #0 pc 38784
-	sw	%x1, 116(%x2)  #314 pc 38788
-	addi	%x2, %x2, 120  #314 pc 38792
-	jal	%x1, create_array.2534  #314 pc 38796
-	addi	%x2, %x2, -120  #314 pc 38800
-	lw	%x1, 116(%x2) #314 pc 38804
-	addi	%x7, %x6, 0  #314 pc 38808
-	addi	%x6, %x0, 5  #0 pc 38812
-	sw	%x1, 116(%x2)  #315 pc 38816
-	addi	%x2, %x2, 120  #315 pc 38820
-	jal	%x1, create_array.2534  #315 pc 38824
-	addi	%x2, %x2, -120  #315 pc 38828
-	lw	%x1, 116(%x2) #315 pc 38832
-	addi	%x7, %x0, 0  #0 pc 38836
-	fmv	%f0, l.6176  #0 pc 38840
-	sw	%x6, 116(%x2)  #320 pc 38844
-	addi	%x6, %x7, 0  #0 pc 38848
-	sw	%x1, 120(%x2)  #320 pc 38852
-	addi	%x2, %x2, 124  #320 pc 38856
-	jal	%x1, create_float_array.2541  #320 pc 38860
-	addi	%x2, %x2, -124  #320 pc 38864
-	lw	%x1, 120(%x2) #320 pc 38868
-	addi	%x7, %x0, 3  #0 pc 38872
-	fmv	%f0, l.6176  #0 pc 38876
-	sw	%x6, 120(%x2)  #321 pc 38880
-	addi	%x6, %x7, 0  #0 pc 38884
-	sw	%x1, 124(%x2)  #321 pc 38888
-	addi	%x2, %x2, 128  #321 pc 38892
-	jal	%x1, create_float_array.2541  #321 pc 38896
-	addi	%x2, %x2, -128  #321 pc 38900
-	lw	%x1, 124(%x2) #321 pc 38904
-	addi	%x7, %x0, 60  #0 pc 38908
-	lw	%x8, 120(%x2)  #322 pc 38912
-	sw	%x6, 124(%x2)  #322 pc 38916
-	addi	%x6, %x7, 0  #0 pc 38920
-	addi	%x7, %x8, 0  #0 pc 38924
-	sw	%x1, 128(%x2)  #322 pc 38928
-	addi	%x2, %x2, 132  #322 pc 38932
-	jal	%x1, create_array.2534  #322 pc 38936
-	addi	%x2, %x2, -132  #322 pc 38940
-	lw	%x1, 128(%x2) #322 pc 38944
-	addi	%x7, %x3, 0  #323 pc 38948
-	addi	%x3, %x3, 8  #323 pc 38952
-	sw	%x6, 4(%x7)  #323 pc 38956
-	lw	%x6, 124(%x2)  #323 pc 38960
-	sw	%x6, 0(%x7)  #323 pc 38964
-	addi	%x6, %x7, 0  #323 pc 38968
-	addi	%x7, %x0, 0  #0 pc 38972
-	fmv	%f0, l.6176  #0 pc 38976
-	sw	%x6, 128(%x2)  #328 pc 38980
-	addi	%x6, %x7, 0  #0 pc 38984
-	sw	%x1, 132(%x2)  #328 pc 38988
-	addi	%x2, %x2, 136  #328 pc 38992
-	jal	%x1, create_float_array.2541  #328 pc 38996
-	addi	%x2, %x2, -136  #328 pc 39000
-	lw	%x1, 132(%x2) #328 pc 39004
-	addi	%x7, %x6, 0  #328 pc 39008
-	addi	%x6, %x0, 0  #0 pc 39012
-	sw	%x7, 132(%x2)  #329 pc 39016
-	sw	%x1, 136(%x2)  #329 pc 39020
-	addi	%x2, %x2, 140  #329 pc 39024
-	jal	%x1, create_array.2534  #329 pc 39028
-	addi	%x2, %x2, -140  #329 pc 39032
-	lw	%x1, 136(%x2) #329 pc 39036
-	addi	%x7, %x3, 0  #330 pc 39040
-	addi	%x3, %x3, 8  #330 pc 39044
-	sw	%x6, 4(%x7)  #330 pc 39048
-	lw	%x6, 132(%x2)  #330 pc 39052
-	sw	%x6, 0(%x7)  #330 pc 39056
-	addi	%x6, %x7, 0  #330 pc 39060
-	addi	%x7, %x0, 180  #0 pc 39064
-	addi	%x8, %x0, 0  #0 pc 39068
-	fmv	%f0, l.6176  #0 pc 39072
-	addi	%x9, %x3, 0  #331 pc 39076
-	addi	%x3, %x3, 12  #331 pc 39080
-	fsw	%f0, 8(%x9)  #331 pc 39084
-	sw	%x6, 4(%x9)  #331 pc 39088
-	sw	%x8, 0(%x9)  #331 pc 39092
-	addi	%x6, %x9, 0  #331 pc 39096
-	addi	%x30, %x7, 0  #0 pc 39100
-	addi	%x7, %x6, 0  #0 pc 39104
-	addi	%x6, %x30, 0  #0 pc 39108
-	sw	%x1, 136(%x2)  #331 pc 39112
-	addi	%x2, %x2, 140  #331 pc 39116
-	jal	%x1, create_array.2534  #331 pc 39120
-	addi	%x2, %x2, -140  #331 pc 39124
-	lw	%x1, 136(%x2) #331 pc 39128
-	addi	%x7, %x0, 1  #0 pc 39132
-	addi	%x8, %x0, 0  #0 pc 39136
-	sw	%x6, 136(%x2)  #335 pc 39140
-	addi	%x6, %x7, 0  #0 pc 39144
-	addi	%x7, %x8, 0  #0 pc 39148
-	sw	%x1, 140(%x2)  #335 pc 39152
-	addi	%x2, %x2, 144  #335 pc 39156
-	jal	%x1, create_array.2534  #335 pc 39160
-	addi	%x2, %x2, -144  #335 pc 39164
-	lw	%x1, 140(%x2) #335 pc 39168
-	addi	%x7, %x3, 0  #818 pc 39172
-	addi	%x3, %x3, 24  #818 pc 39176
-	addi	%x31, %x0, 2756  #818 read_screen_settings.2696 pc 39180
-	addi	%x8, %x31, 0  #818 pc 39184
-	sw	%x8, 0(%x7)  #818 pc 39188
-	lw	%x8, 12(%x2)  #818 pc 39192
-	sw	%x8, 20(%x7)  #818 pc 39196
-	lw	%x9, 104(%x2)  #818 pc 39200
-	sw	%x9, 16(%x7)  #818 pc 39204
-	lw	%x10, 100(%x2)  #818 pc 39208
-	sw	%x10, 12(%x7)  #818 pc 39212
-	lw	%x11, 96(%x2)  #818 pc 39216
-	sw	%x11, 8(%x7)  #818 pc 39220
-	lw	%x12, 8(%x2)  #818 pc 39224
-	sw	%x12, 4(%x7)  #818 pc 39228
-	addi	%x12, %x3, 0  #851 pc 39232
-	addi	%x3, %x3, 12  #851 pc 39236
-	addi	%x31, %x0, 3364  #851 read_light.2698 pc 39240
-	addi	%x13, %x31, 0  #851 pc 39244
-	sw	%x13, 0(%x12)  #851 pc 39248
-	lw	%x13, 16(%x2)  #851 pc 39252
-	sw	%x13, 8(%x12)  #851 pc 39256
-	lw	%x14, 20(%x2)  #851 pc 39260
-	sw	%x14, 4(%x12)  #851 pc 39264
-	addi	%x15, %x3, 0  #914 pc 39268
-	addi	%x3, %x3, 8  #914 pc 39272
-	addi	%x31, %x0, 4700  #914 read_nth_object.2703 pc 39276
-	addi	%x16, %x31, 0  #914 pc 39280
-	sw	%x16, 0(%x15)  #914 pc 39284
-	lw	%x16, 4(%x2)  #914 pc 39288
-	sw	%x16, 4(%x15)  #914 pc 39292
-	addi	%x17, %x3, 0  #997 pc 39296
-	addi	%x3, %x3, 12  #997 pc 39300
-	addi	%x31, %x0, 6264  #997 read_object.2705 pc 39304
-	addi	%x18, %x31, 0  #997 pc 39308
-	sw	%x18, 0(%x17)  #997 pc 39312
-	sw	%x15, 8(%x17)  #997 pc 39316
-	lw	%x15, 0(%x2)  #997 pc 39320
-	sw	%x15, 4(%x17)  #997 pc 39324
-	addi	%x18, %x3, 0  #1006 pc 39328
-	addi	%x3, %x3, 8  #1006 pc 39332
-	addi	%x31, %x0, 6392  #1006 read_all_object.2707 pc 39336
-	addi	%x19, %x31, 0  #1006 pc 39340
-	sw	%x19, 0(%x18)  #1006 pc 39344
-	sw	%x17, 4(%x18)  #1006 pc 39348
-	addi	%x17, %x3, 0  #1030 pc 39352
-	addi	%x3, %x3, 8  #1030 pc 39356
-	addi	%x31, %x0, 6672  #1030 read_and_network.2713 pc 39360
-	addi	%x19, %x31, 0  #1030 pc 39364
-	sw	%x19, 0(%x17)  #1030 pc 39368
-	lw	%x19, 28(%x2)  #1030 pc 39372
-	sw	%x19, 4(%x17)  #1030 pc 39376
-	addi	%x20, %x3, 0  #1039 pc 39380
-	addi	%x3, %x3, 24  #1039 pc 39384
-	addi	%x31, %x0, 6784  #1039 read_parameter.2715 pc 39388
-	addi	%x21, %x31, 0  #1039 pc 39392
-	sw	%x21, 0(%x20)  #1039 pc 39396
-	sw	%x7, 20(%x20)  #1039 pc 39400
-	sw	%x12, 16(%x20)  #1039 pc 39404
-	sw	%x17, 12(%x20)  #1039 pc 39408
-	sw	%x18, 8(%x20)  #1039 pc 39412
-	lw	%x7, 36(%x2)  #1039 pc 39416
-	sw	%x7, 4(%x20)  #1039 pc 39420
-	addi	%x12, %x3, 0  #1064 pc 39424
-	addi	%x3, %x3, 8  #1064 pc 39428
-	addi	%x31, %x0, 6976  #1064 solver_rect_surface.2717 pc 39432
-	addi	%x17, %x31, 0  #1064 pc 39436
-	sw	%x17, 0(%x12)  #1064 pc 39440
-	lw	%x17, 40(%x2)  #1064 pc 39444
-	sw	%x17, 4(%x12)  #1064 pc 39448
-	addi	%x18, %x3, 0  #1079 pc 39452
-	addi	%x3, %x3, 8  #1079 pc 39456
-	addi	%x31, %x0, 7508  #1079 solver_rect.2726 pc 39460
-	addi	%x21, %x31, 0  #1079 pc 39464
-	sw	%x21, 0(%x18)  #1079 pc 39468
-	sw	%x12, 4(%x18)  #1079 pc 39472
-	addi	%x12, %x3, 0  #1088 pc 39476
-	addi	%x3, %x3, 8  #1088 pc 39480
-	addi	%x31, %x0, 7776  #1088 solver_surface.2732 pc 39484
-	addi	%x21, %x31, 0  #1088 pc 39488
-	sw	%x21, 0(%x12)  #1088 pc 39492
-	sw	%x17, 4(%x12)  #1088 pc 39496
-	addi	%x21, %x3, 0  #1139 pc 39500
-	addi	%x3, %x3, 8  #1139 pc 39504
-	addi	%x31, %x0, 8932  #1139 solver_second.2751 pc 39508
-	addi	%x22, %x31, 0  #1139 pc 39512
-	sw	%x22, 0(%x21)  #1139 pc 39516
-	sw	%x17, 4(%x21)  #1139 pc 39520
-	addi	%x22, %x3, 0  #1168 pc 39524
-	addi	%x3, %x3, 20  #1168 pc 39528
-	addi	%x31, %x0, 9440  #1168 solver.2757 pc 39532
-	addi	%x23, %x31, 0  #1168 pc 39536
-	sw	%x23, 0(%x22)  #1168 pc 39540
-	sw	%x12, 16(%x22)  #1168 pc 39544
-	sw	%x21, 12(%x22)  #1168 pc 39548
-	sw	%x18, 8(%x22)  #1168 pc 39552
-	sw	%x16, 4(%x22)  #1168 pc 39556
-	addi	%x12, %x3, 0  #1200 pc 39560
-	addi	%x3, %x3, 8  #1200 pc 39564
-	addi	%x31, %x0, 9796  #1200 solver_rect_fast.2761 pc 39568
-	addi	%x18, %x31, 0  #1200 pc 39572
-	sw	%x18, 0(%x12)  #1200 pc 39576
-	sw	%x17, 4(%x12)  #1200 pc 39580
-	addi	%x18, %x3, 0  #1233 pc 39584
-	addi	%x3, %x3, 8  #1233 pc 39588
-	addi	%x31, %x0, 10832  #1233 solver_surface_fast.2768 pc 39592
-	addi	%x21, %x31, 0  #1233 pc 39596
-	sw	%x21, 0(%x18)  #1233 pc 39600
-	sw	%x17, 4(%x18)  #1233 pc 39604
-	addi	%x21, %x3, 0  #1242 pc 39608
-	addi	%x3, %x3, 8  #1242 pc 39612
-	addi	%x31, %x0, 10976  #1242 solver_second_fast.2774 pc 39616
-	addi	%x23, %x31, 0  #1242 pc 39620
-	sw	%x23, 0(%x21)  #1242 pc 39624
-	sw	%x17, 4(%x21)  #1242 pc 39628
-	addi	%x23, %x3, 0  #1262 pc 39632
-	addi	%x3, %x3, 20  #1262 pc 39636
-	addi	%x31, %x0, 11444  #1262 solver_fast.2780 pc 39640
-	addi	%x24, %x31, 0  #1262 pc 39644
-	sw	%x24, 0(%x23)  #1262 pc 39648
-	sw	%x18, 16(%x23)  #1262 pc 39652
-	sw	%x21, 12(%x23)  #1262 pc 39656
-	sw	%x12, 8(%x23)  #1262 pc 39660
-	sw	%x16, 4(%x23)  #1262 pc 39664
-	addi	%x18, %x3, 0  #1282 pc 39668
-	addi	%x3, %x3, 8  #1282 pc 39672
-	addi	%x31, %x0, 11884  #1282 solver_surface_fast2.2784 pc 39676
-	addi	%x21, %x31, 0  #1282 pc 39680
-	sw	%x21, 0(%x18)  #1282 pc 39684
-	sw	%x17, 4(%x18)  #1282 pc 39688
-	addi	%x21, %x3, 0  #1290 pc 39692
-	addi	%x3, %x3, 8  #1290 pc 39696
-	addi	%x31, %x0, 11988  #1290 solver_second_fast2.2791 pc 39700
-	addi	%x24, %x31, 0  #1290 pc 39704
-	sw	%x24, 0(%x21)  #1290 pc 39708
-	sw	%x17, 4(%x21)  #1290 pc 39712
-	addi	%x24, %x3, 0  #1309 pc 39716
-	addi	%x3, %x3, 20  #1309 pc 39720
-	addi	%x31, %x0, 12352  #1309 solver_fast2.2798 pc 39724
-	addi	%x25, %x31, 0  #1309 pc 39728
-	sw	%x25, 0(%x24)  #1309 pc 39732
-	sw	%x18, 16(%x24)  #1309 pc 39736
-	sw	%x21, 12(%x24)  #1309 pc 39740
-	sw	%x12, 8(%x24)  #1309 pc 39744
-	sw	%x16, 4(%x24)  #1309 pc 39748
-	addi	%x12, %x3, 0  #1406 pc 39752
-	addi	%x3, %x3, 8  #1406 pc 39756
-	addi	%x31, %x0, 14828  #1406 iter_setup_dirvec_constants.2810 pc 39760
-	addi	%x18, %x31, 0  #1406 pc 39764
-	sw	%x18, 0(%x12)  #1406 pc 39768
-	sw	%x16, 4(%x12)  #1406 pc 39772
-	addi	%x18, %x3, 0  #1423 pc 39776
-	addi	%x3, %x3, 12  #1423 pc 39780
-	addi	%x31, %x0, 15180  #1423 setup_dirvec_constants.2813 pc 39784
-	addi	%x21, %x31, 0  #1423 pc 39788
-	sw	%x21, 0(%x18)  #1423 pc 39792
-	sw	%x15, 8(%x18)  #1423 pc 39796
-	sw	%x12, 4(%x18)  #1423 pc 39800
-	addi	%x12, %x3, 0  #1431 pc 39804
-	addi	%x3, %x3, 8  #1431 pc 39808
-	addi	%x31, %x0, 15208  #1431 setup_startp_constants.2815 pc 39812
-	addi	%x21, %x31, 0  #1431 pc 39816
-	sw	%x21, 0(%x12)  #1431 pc 39820
-	sw	%x16, 4(%x12)  #1431 pc 39824
-	addi	%x21, %x3, 0  #1450 pc 39828
-	addi	%x3, %x3, 16  #1450 pc 39832
-	addi	%x31, %x0, 15724  #1450 setup_startp.2818 pc 39836
-	addi	%x25, %x31, 0  #1450 pc 39840
-	sw	%x25, 0(%x21)  #1450 pc 39844
-	lw	%x25, 92(%x2)  #1450 pc 39848
-	sw	%x25, 12(%x21)  #1450 pc 39852
-	sw	%x12, 8(%x21)  #1450 pc 39856
-	sw	%x15, 4(%x21)  #1450 pc 39860
-	addi	%x12, %x3, 0  #1500 pc 39864
-	addi	%x3, %x3, 8  #1500 pc 39868
-	addi	%x31, %x0, 16788  #1500 check_all_inside.2840 pc 39872
-	addi	%x26, %x31, 0  #1500 pc 39876
-	sw	%x26, 0(%x12)  #1500 pc 39880
-	sw	%x16, 4(%x12)  #1500 pc 39884
-	addi	%x26, %x3, 0  #1520 pc 39888
-	addi	%x3, %x3, 32  #1520 pc 39892
-	addi	%x31, %x0, 16956  #1520 shadow_check_and_group.2846 pc 39896
-	addi	%x27, %x31, 0  #1520 pc 39900
-	sw	%x27, 0(%x26)  #1520 pc 39904
-	sw	%x23, 28(%x26)  #1520 pc 39908
-	sw	%x17, 24(%x26)  #1520 pc 39912
-	sw	%x16, 20(%x26)  #1520 pc 39916
-	lw	%x27, 128(%x2)  #1520 pc 39920
-	sw	%x27, 16(%x26)  #1520 pc 39924
-	sw	%x13, 12(%x26)  #1520 pc 39928
-	lw	%x28, 52(%x2)  #1520 pc 39932
-	sw	%x28, 8(%x26)  #1520 pc 39936
-	sw	%x12, 4(%x26)  #1520 pc 39940
-	addi	%x29, %x3, 0  #1550 pc 39944
-	addi	%x3, %x3, 12  #1550 pc 39948
-	addi	%x31, %x0, 17448  #1550 shadow_check_one_or_group.2849 pc 39952
-	addi	%x30, %x31, 0  #1550 pc 39956
-	sw	%x30, 0(%x29)  #1550 pc 39960
-	sw	%x26, 8(%x29)  #1550 pc 39964
-	sw	%x19, 4(%x29)  #1550 pc 39968
-	addi	%x26, %x3, 0  #1565 pc 39972
-	addi	%x3, %x3, 24  #1565 pc 39976
-	addi	%x31, %x0, 17612  #1565 shadow_check_one_or_matrix.2852 pc 39980
-	addi	%x30, %x31, 0  #1565 pc 39984
-	sw	%x30, 0(%x26)  #1565 pc 39988
-	sw	%x23, 20(%x26)  #1565 pc 39992
-	sw	%x17, 16(%x26)  #1565 pc 39996
-	sw	%x29, 12(%x26)  #1565 pc 40000
-	sw	%x27, 8(%x26)  #1565 pc 40004
-	sw	%x28, 4(%x26)  #1565 pc 40008
-	addi	%x23, %x3, 0  #1601 pc 40012
-	addi	%x3, %x3, 40  #1601 pc 40016
-	addi	%x31, %x0, 18040  #1601 solve_each_element.2855 pc 40020
-	addi	%x29, %x31, 0  #1601 pc 40024
-	sw	%x29, 0(%x23)  #1601 pc 40028
-	lw	%x29, 48(%x2)  #1601 pc 40032
-	sw	%x29, 36(%x23)  #1601 pc 40036
-	lw	%x30, 88(%x2)  #1601 pc 40040
-	sw	%x30, 32(%x23)  #1601 pc 40044
-	sw	%x17, 28(%x23)  #1601 pc 40048
-	sw	%x22, 24(%x23)  #1601 pc 40052
-	sw	%x16, 20(%x23)  #1601 pc 40056
-	lw	%x27, 44(%x2)  #1601 pc 40060
-	sw	%x27, 16(%x23)  #1601 pc 40064
-	sw	%x28, 12(%x23)  #1601 pc 40068
-	sw	%x20, 140(%x2)  #1601 pc 40072
-	lw	%x20, 56(%x2)  #1601 pc 40076
-	sw	%x20, 8(%x23)  #1601 pc 40080
-	sw	%x12, 4(%x23)  #1601 pc 40084
-	sw	%x18, 144(%x2)  #1642 pc 40088
-	addi	%x18, %x3, 0  #1642 pc 40092
-	addi	%x3, %x3, 12  #1642 pc 40096
-	addi	%x31, %x0, 18684  #1642 solve_one_or_network.2859 pc 40100
-	addi	%x15, %x31, 0  #1642 pc 40104
-	sw	%x15, 0(%x18)  #1642 pc 40108
-	sw	%x23, 8(%x18)  #1642 pc 40112
-	sw	%x19, 4(%x18)  #1642 pc 40116
-	addi	%x15, %x3, 0  #1652 pc 40120
-	addi	%x3, %x3, 24  #1652 pc 40124
-	addi	%x31, %x0, 18828  #1652 trace_or_matrix.2863 pc 40128
-	addi	%x23, %x31, 0  #1652 pc 40132
-	sw	%x23, 0(%x15)  #1652 pc 40136
-	sw	%x29, 20(%x15)  #1652 pc 40140
-	sw	%x30, 16(%x15)  #1652 pc 40144
-	sw	%x17, 12(%x15)  #1652 pc 40148
-	sw	%x22, 8(%x15)  #1652 pc 40152
-	sw	%x18, 4(%x15)  #1652 pc 40156
-	addi	%x18, %x3, 0  #1679 pc 40160
-	addi	%x3, %x3, 16  #1679 pc 40164
-	addi	%x31, %x0, 19172  #1679 judge_intersection.2867 pc 40168
-	addi	%x22, %x31, 0  #1679 pc 40172
-	sw	%x22, 0(%x18)  #1679 pc 40176
-	sw	%x15, 12(%x18)  #1679 pc 40180
-	sw	%x29, 8(%x18)  #1679 pc 40184
-	sw	%x7, 4(%x18)  #1679 pc 40188
-	addi	%x15, %x3, 0  #1694 pc 40192
-	addi	%x3, %x3, 40  #1694 pc 40196
-	addi	%x31, %x0, 19320  #1694 solve_each_element_fast.2869 pc 40200
-	addi	%x22, %x31, 0  #1694 pc 40204
-	sw	%x22, 0(%x15)  #1694 pc 40208
-	sw	%x29, 36(%x15)  #1694 pc 40212
-	sw	%x25, 32(%x15)  #1694 pc 40216
-	sw	%x24, 28(%x15)  #1694 pc 40220
-	sw	%x17, 24(%x15)  #1694 pc 40224
-	sw	%x16, 20(%x15)  #1694 pc 40228
-	sw	%x27, 16(%x15)  #1694 pc 40232
-	sw	%x28, 12(%x15)  #1694 pc 40236
-	sw	%x20, 8(%x15)  #1694 pc 40240
-	sw	%x12, 4(%x15)  #1694 pc 40244
-	addi	%x12, %x3, 0  #1735 pc 40248
-	addi	%x3, %x3, 12  #1735 pc 40252
-	addi	%x31, %x0, 19996  #1735 solve_one_or_network_fast.2873 pc 40256
-	addi	%x22, %x31, 0  #1735 pc 40260
-	sw	%x22, 0(%x12)  #1735 pc 40264
-	sw	%x15, 8(%x12)  #1735 pc 40268
-	sw	%x19, 4(%x12)  #1735 pc 40272
-	addi	%x15, %x3, 0  #1745 pc 40276
-	addi	%x3, %x3, 20  #1745 pc 40280
-	addi	%x31, %x0, 20140  #1745 trace_or_matrix_fast.2877 pc 40284
-	addi	%x19, %x31, 0  #1745 pc 40288
-	sw	%x19, 0(%x15)  #1745 pc 40292
-	sw	%x29, 16(%x15)  #1745 pc 40296
-	sw	%x24, 12(%x15)  #1745 pc 40300
-	sw	%x17, 8(%x15)  #1745 pc 40304
-	sw	%x12, 4(%x15)  #1745 pc 40308
-	addi	%x12, %x3, 0  #1769 pc 40312
-	addi	%x3, %x3, 16  #1769 pc 40316
-	addi	%x31, %x0, 20476  #1769 judge_intersection_fast.2881 pc 40320
-	addi	%x17, %x31, 0  #1769 pc 40324
-	sw	%x17, 0(%x12)  #1769 pc 40328
-	sw	%x15, 12(%x12)  #1769 pc 40332
-	sw	%x29, 8(%x12)  #1769 pc 40336
-	sw	%x7, 4(%x12)  #1769 pc 40340
-	addi	%x15, %x3, 0  #1790 pc 40344
-	addi	%x3, %x3, 12  #1790 pc 40348
-	addi	%x31, %x0, 20624  #1790 get_nvector_rect.2883 pc 40352
-	addi	%x17, %x31, 0  #1790 pc 40356
-	sw	%x17, 0(%x15)  #1790 pc 40360
-	lw	%x17, 60(%x2)  #1790 pc 40364
-	sw	%x17, 8(%x15)  #1790 pc 40368
-	sw	%x27, 4(%x15)  #1790 pc 40372
-	addi	%x19, %x3, 0  #1798 pc 40376
-	addi	%x3, %x3, 8  #1798 pc 40380
-	addi	%x31, %x0, 20772  #1798 get_nvector_plane.2885 pc 40384
-	addi	%x22, %x31, 0  #1798 pc 40388
-	sw	%x22, 0(%x19)  #1798 pc 40392
-	sw	%x17, 4(%x19)  #1798 pc 40396
-	addi	%x22, %x3, 0  #1806 pc 40400
-	addi	%x3, %x3, 12  #1806 pc 40404
-	addi	%x31, %x0, 20952  #1806 get_nvector_second.2887 pc 40408
-	addi	%x23, %x31, 0  #1806 pc 40412
-	sw	%x23, 0(%x22)  #1806 pc 40416
-	sw	%x17, 8(%x22)  #1806 pc 40420
-	sw	%x28, 4(%x22)  #1806 pc 40424
-	addi	%x23, %x3, 0  #1828 pc 40428
-	addi	%x3, %x3, 16  #1828 pc 40432
-	addi	%x31, %x0, 21680  #1828 get_nvector.2889 pc 40436
-	addi	%x24, %x31, 0  #1828 pc 40440
-	sw	%x24, 0(%x23)  #1828 pc 40444
-	sw	%x22, 12(%x23)  #1828 pc 40448
-	sw	%x15, 8(%x23)  #1828 pc 40452
-	sw	%x19, 4(%x23)  #1828 pc 40456
-	addi	%x15, %x3, 0  #1844 pc 40460
-	addi	%x3, %x3, 8  #1844 pc 40464
-	addi	%x31, %x0, 21824  #1844 utexture.2892 pc 40468
-	addi	%x19, %x31, 0  #1844 pc 40472
-	sw	%x19, 0(%x15)  #1844 pc 40476
-	lw	%x19, 64(%x2)  #1844 pc 40480
-	sw	%x19, 4(%x15)  #1844 pc 40484
-	addi	%x22, %x3, 0  #1922 pc 40488
-	addi	%x3, %x3, 12  #1922 pc 40492
-	addi	%x31, %x0, 23632  #1922 add_light.2895 pc 40496
-	addi	%x24, %x31, 0  #1922 pc 40500
-	sw	%x24, 0(%x22)  #1922 pc 40504
-	sw	%x19, 8(%x22)  #1922 pc 40508
-	lw	%x24, 72(%x2)  #1922 pc 40512
-	sw	%x24, 4(%x22)  #1922 pc 40516
-	addi	%x25, %x3, 0  #1939 pc 40520
-	addi	%x3, %x3, 36  #1939 pc 40524
-	addi	%x31, %x0, 23876  #1939 trace_reflections.2899 pc 40528
-	addi	%x10, %x31, 0  #1939 pc 40532
-	sw	%x10, 0(%x25)  #1939 pc 40536
-	sw	%x26, 32(%x25)  #1939 pc 40540
-	lw	%x10, 136(%x2)  #1939 pc 40544
-	sw	%x10, 28(%x25)  #1939 pc 40548
-	sw	%x7, 24(%x25)  #1939 pc 40552
-	sw	%x17, 20(%x25)  #1939 pc 40556
-	sw	%x12, 16(%x25)  #1939 pc 40560
-	sw	%x27, 12(%x25)  #1939 pc 40564
-	sw	%x20, 8(%x25)  #1939 pc 40568
-	sw	%x22, 4(%x25)  #1939 pc 40572
-	addi	%x10, %x3, 0  #1968 pc 40576
-	addi	%x3, %x3, 84  #1968 pc 40580
-	addi	%x31, %x0, 24464  #1968 trace_ray.2904 pc 40584
-	addi	%x9, %x31, 0  #1968 pc 40588
-	sw	%x9, 0(%x10)  #1968 pc 40592
-	sw	%x15, 80(%x10)  #1968 pc 40596
-	sw	%x25, 76(%x10)  #1968 pc 40600
-	sw	%x29, 72(%x10)  #1968 pc 40604
-	sw	%x19, 68(%x10)  #1968 pc 40608
-	sw	%x30, 64(%x10)  #1968 pc 40612
-	sw	%x26, 60(%x10)  #1968 pc 40616
-	sw	%x21, 56(%x10)  #1968 pc 40620
-	sw	%x24, 52(%x10)  #1968 pc 40624
-	sw	%x7, 48(%x10)  #1968 pc 40628
-	sw	%x16, 44(%x10)  #1968 pc 40632
-	sw	%x17, 40(%x10)  #1968 pc 40636
-	sw	%x6, 36(%x10)  #1968 pc 40640
-	sw	%x13, 32(%x10)  #1968 pc 40644
-	sw	%x18, 28(%x10)  #1968 pc 40648
-	sw	%x27, 24(%x10)  #1968 pc 40652
-	sw	%x28, 20(%x10)  #1968 pc 40656
-	sw	%x20, 16(%x10)  #1968 pc 40660
-	sw	%x23, 12(%x10)  #1968 pc 40664
-	sw	%x14, 8(%x10)  #1968 pc 40668
-	sw	%x22, 4(%x10)  #1968 pc 40672
-	addi	%x9, %x3, 0  #2061 pc 40676
-	addi	%x3, %x3, 52  #2061 pc 40680
-	addi	%x31, %x0, 26288  #2061 trace_diffuse_ray.2910 pc 40684
-	addi	%x14, %x31, 0  #2061 pc 40688
-	sw	%x14, 0(%x9)  #2061 pc 40692
-	sw	%x15, 48(%x9)  #2061 pc 40696
-	sw	%x19, 44(%x9)  #2061 pc 40700
-	sw	%x26, 40(%x9)  #2061 pc 40704
-	sw	%x7, 36(%x9)  #2061 pc 40708
-	sw	%x16, 32(%x9)  #2061 pc 40712
-	sw	%x17, 28(%x9)  #2061 pc 40716
-	sw	%x13, 24(%x9)  #2061 pc 40720
-	sw	%x12, 20(%x9)  #2061 pc 40724
-	sw	%x28, 16(%x9)  #2061 pc 40728
-	sw	%x20, 12(%x9)  #2061 pc 40732
-	sw	%x23, 8(%x9)  #2061 pc 40736
-	lw	%x7, 68(%x2)  #2061 pc 40740
-	sw	%x7, 4(%x9)  #2061 pc 40744
-	addi	%x12, %x3, 0  #2080 pc 40748
-	addi	%x3, %x3, 8  #2080 pc 40752
-	addi	%x31, %x0, 26784  #2080 iter_trace_diffuse_rays.2913 pc 40756
-	addi	%x14, %x31, 0  #2080 pc 40760
-	sw	%x14, 0(%x12)  #2080 pc 40764
-	sw	%x9, 4(%x12)  #2080 pc 40768
-	addi	%x9, %x3, 0  #2096 pc 40772
-	addi	%x3, %x3, 12  #2096 pc 40776
-	addi	%x31, %x0, 27104  #2096 trace_diffuse_rays.2918 pc 40780
-	addi	%x14, %x31, 0  #2096 pc 40784
-	sw	%x14, 0(%x9)  #2096 pc 40788
-	sw	%x21, 8(%x9)  #2096 pc 40792
-	sw	%x12, 4(%x9)  #2096 pc 40796
-	addi	%x12, %x3, 0  #2106 pc 40800
-	addi	%x3, %x3, 12  #2106 pc 40804
-	addi	%x31, %x0, 27192  #2106 trace_diffuse_ray_80percent.2922 pc 40808
-	addi	%x14, %x31, 0  #2106 pc 40812
-	sw	%x14, 0(%x12)  #2106 pc 40816
-	sw	%x9, 8(%x12)  #2106 pc 40820
-	lw	%x14, 116(%x2)  #2106 pc 40824
-	sw	%x14, 4(%x12)  #2106 pc 40828
-	addi	%x15, %x3, 0  #2132 pc 40832
-	addi	%x3, %x3, 16  #2132 pc 40836
-	addi	%x31, %x0, 27588  #2132 calc_diffuse_using_1point.2926 pc 40840
-	addi	%x17, %x31, 0  #2132 pc 40844
-	sw	%x17, 0(%x15)  #2132 pc 40848
-	sw	%x12, 12(%x15)  #2132 pc 40852
-	sw	%x24, 8(%x15)  #2132 pc 40856
-	sw	%x7, 4(%x15)  #2132 pc 40860
-	addi	%x12, %x3, 0  #2151 pc 40864
-	addi	%x3, %x3, 12  #2151 pc 40868
-	addi	%x31, %x0, 27924  #2151 calc_diffuse_using_5points.2929 pc 40872
-	addi	%x17, %x31, 0  #2151 pc 40876
-	sw	%x17, 0(%x12)  #2151 pc 40880
-	sw	%x24, 8(%x12)  #2151 pc 40884
-	sw	%x7, 4(%x12)  #2151 pc 40888
-	addi	%x17, %x3, 0  #2171 pc 40892
-	addi	%x3, %x3, 8  #2171 pc 40896
-	addi	%x31, %x0, 28512  #2171 do_without_neighbors.2935 pc 40900
-	addi	%x18, %x31, 0  #2171 pc 40904
-	sw	%x18, 0(%x17)  #2171 pc 40908
-	sw	%x15, 4(%x17)  #2171 pc 40912
-	addi	%x15, %x3, 0  #2186 pc 40916
-	addi	%x3, %x3, 8  #2186 pc 40920
-	addi	%x31, %x0, 28732  #2186 neighbors_exist.2938 pc 40924
-	addi	%x18, %x31, 0  #2186 pc 40928
-	sw	%x18, 0(%x15)  #2186 pc 40932
-	lw	%x18, 76(%x2)  #2186 pc 40936
-	sw	%x18, 4(%x15)  #2186 pc 40940
-	addi	%x19, %x3, 0  #2223 pc 40944
-	addi	%x3, %x3, 12  #2223 pc 40948
-	addi	%x31, %x0, 29308  #2223 try_exploit_neighbors.2951 pc 40952
-	addi	%x20, %x31, 0  #2223 pc 40956
-	sw	%x20, 0(%x19)  #2223 pc 40960
-	sw	%x17, 8(%x19)  #2223 pc 40964
-	sw	%x12, 4(%x19)  #2223 pc 40968
-	addi	%x12, %x3, 0  #2250 pc 40972
-	addi	%x3, %x3, 8  #2250 pc 40976
-	addi	%x31, %x0, 29680  #2250 write_ppm_header.2958 pc 40980
-	addi	%x20, %x31, 0  #2250 pc 40984
-	sw	%x20, 0(%x12)  #2250 pc 40988
-	sw	%x18, 4(%x12)  #2250 pc 40992
-	addi	%x20, %x3, 0  #2276 pc 40996
-	addi	%x3, %x3, 8  #2276 pc 41000
-	addi	%x31, %x0, 30076  #2276 write_rgb.2964 pc 41004
-	addi	%x21, %x31, 0  #2276 pc 41008
-	sw	%x21, 0(%x20)  #2276 pc 41012
-	sw	%x24, 4(%x20)  #2276 pc 41016
-	addi	%x21, %x3, 0  #2299 pc 41020
-	addi	%x3, %x3, 16  #2299 pc 41024
-	addi	%x31, %x0, 30312  #2299 pretrace_diffuse_rays.2966 pc 41028
-	addi	%x22, %x31, 0  #2299 pc 41032
-	sw	%x22, 0(%x21)  #2299 pc 41036
-	sw	%x9, 12(%x21)  #2299 pc 41040
-	sw	%x14, 8(%x21)  #2299 pc 41044
-	sw	%x7, 4(%x21)  #2299 pc 41048
-	addi	%x7, %x3, 0  #2329 pc 41052
-	addi	%x3, %x3, 40  #2329 pc 41056
-	addi	%x31, %x0, 30772  #2329 pretrace_pixels.2969 pc 41060
-	addi	%x9, %x31, 0  #2329 pc 41064
-	sw	%x9, 0(%x7)  #2329 pc 41068
-	sw	%x8, 36(%x7)  #2329 pc 41072
-	sw	%x10, 32(%x7)  #2329 pc 41076
-	sw	%x30, 28(%x7)  #2329 pc 41080
-	sw	%x11, 24(%x7)  #2329 pc 41084
-	lw	%x8, 84(%x2)  #2329 pc 41088
-	sw	%x8, 20(%x7)  #2329 pc 41092
-	sw	%x24, 16(%x7)  #2329 pc 41096
-	lw	%x9, 108(%x2)  #2329 pc 41100
-	sw	%x9, 12(%x7)  #2329 pc 41104
-	sw	%x21, 8(%x7)  #2329 pc 41108
-	lw	%x9, 80(%x2)  #2329 pc 41112
-	sw	%x9, 4(%x7)  #2329 pc 41116
-	addi	%x10, %x3, 0  #2354 pc 41120
-	addi	%x3, %x3, 28  #2354 pc 41124
-	addi	%x31, %x0, 31420  #2354 pretrace_line.2976 pc 41128
-	addi	%x11, %x31, 0  #2354 pc 41132
-	sw	%x11, 0(%x10)  #2354 pc 41136
-	lw	%x11, 104(%x2)  #2354 pc 41140
-	sw	%x11, 24(%x10)  #2354 pc 41144
-	lw	%x11, 100(%x2)  #2354 pc 41148
-	sw	%x11, 20(%x10)  #2354 pc 41152
-	sw	%x8, 16(%x10)  #2354 pc 41156
-	sw	%x7, 12(%x10)  #2354 pc 41160
-	sw	%x18, 8(%x10)  #2354 pc 41164
-	sw	%x9, 4(%x10)  #2354 pc 41168
-	addi	%x7, %x3, 0  #2370 pc 41172
-	addi	%x3, %x3, 28  #2370 pc 41176
-	addi	%x31, %x0, 31624  #2370 scan_pixel.2980 pc 41180
-	addi	%x11, %x31, 0  #2370 pc 41184
-	sw	%x11, 0(%x7)  #2370 pc 41188
-	sw	%x20, 24(%x7)  #2370 pc 41192
-	sw	%x19, 20(%x7)  #2370 pc 41196
-	sw	%x24, 16(%x7)  #2370 pc 41200
-	sw	%x15, 12(%x7)  #2370 pc 41204
-	sw	%x18, 8(%x7)  #2370 pc 41208
-	sw	%x17, 4(%x7)  #2370 pc 41212
-	addi	%x11, %x3, 0  #2390 pc 41216
-	addi	%x3, %x3, 16  #2390 pc 41220
-	addi	%x31, %x0, 32032  #2390 scan_line.2987 pc 41224
-	addi	%x15, %x31, 0  #2390 pc 41228
-	sw	%x15, 0(%x11)  #2390 pc 41232
-	sw	%x7, 12(%x11)  #2390 pc 41236
-	sw	%x10, 8(%x11)  #2390 pc 41240
-	sw	%x18, 4(%x11)  #2390 pc 41244
-	addi	%x7, %x3, 0  #2442 pc 41248
-	addi	%x3, %x3, 8  #2442 pc 41252
-	addi	%x31, %x0, 32936  #2442 create_pixelline.3001 pc 41256
-	addi	%x15, %x31, 0  #2442 pc 41260
-	sw	%x15, 0(%x7)  #2442 pc 41264
-	sw	%x18, 4(%x7)  #2442 pc 41268
-	addi	%x15, %x3, 0  #2470 pc 41272
-	addi	%x3, %x3, 8  #2470 pc 41276
-	addi	%x31, %x0, 33192  #2470 calc_dirvec.3008 pc 41280
-	addi	%x17, %x31, 0  #2470 pc 41284
-	sw	%x17, 0(%x15)  #2470 pc 41288
-	sw	%x14, 4(%x15)  #2470 pc 41292
-	addi	%x17, %x3, 0  #2491 pc 41296
-	addi	%x3, %x3, 8  #2491 pc 41300
-	addi	%x31, %x0, 34240  #2491 calc_dirvecs.3016 pc 41304
-	addi	%x19, %x31, 0  #2491 pc 41308
-	sw	%x19, 0(%x17)  #2491 pc 41312
-	sw	%x15, 4(%x17)  #2491 pc 41316
-	addi	%x15, %x3, 0  #2505 pc 41320
-	addi	%x3, %x3, 8  #2505 pc 41324
-	addi	%x31, %x0, 34552  #2505 calc_dirvec_rows.3021 pc 41328
-	addi	%x19, %x31, 0  #2505 pc 41332
-	sw	%x19, 0(%x15)  #2505 pc 41336
-	sw	%x17, 4(%x15)  #2505 pc 41340
-	addi	%x17, %x3, 0  #2518 pc 41344
-	addi	%x3, %x3, 8  #2518 pc 41348
-	addi	%x31, %x0, 34748  #2518 create_dirvec.3025 pc 41352
-	addi	%x19, %x31, 0  #2518 pc 41356
-	sw	%x19, 0(%x17)  #2518 pc 41360
-	lw	%x19, 0(%x2)  #2518 pc 41364
-	sw	%x19, 4(%x17)  #2518 pc 41368
-	addi	%x20, %x3, 0  #2524 pc 41372
-	addi	%x3, %x3, 8  #2524 pc 41376
-	addi	%x31, %x0, 34856  #2524 create_dirvec_elements.3027 pc 41380
-	addi	%x21, %x31, 0  #2524 pc 41384
-	sw	%x21, 0(%x20)  #2524 pc 41388
-	sw	%x17, 4(%x20)  #2524 pc 41392
-	addi	%x21, %x3, 0  #2531 pc 41396
-	addi	%x3, %x3, 16  #2531 pc 41400
-	addi	%x31, %x0, 34964  #2531 create_dirvecs.3030 pc 41404
-	addi	%x22, %x31, 0  #2531 pc 41408
-	sw	%x22, 0(%x21)  #2531 pc 41412
-	sw	%x14, 12(%x21)  #2531 pc 41416
-	sw	%x20, 8(%x21)  #2531 pc 41420
-	sw	%x17, 4(%x21)  #2531 pc 41424
-	addi	%x20, %x3, 0  #2543 pc 41428
-	addi	%x3, %x3, 8  #2543 pc 41432
-	addi	%x31, %x0, 35168  #2543 init_dirvec_constants.3032 pc 41436
-	addi	%x22, %x31, 0  #2543 pc 41440
-	sw	%x22, 0(%x20)  #2543 pc 41444
-	lw	%x22, 144(%x2)  #2543 pc 41448
-	sw	%x22, 4(%x20)  #2543 pc 41452
-	addi	%x23, %x3, 0  #2550 pc 41456
-	addi	%x3, %x3, 12  #2550 pc 41460
-	addi	%x31, %x0, 35276  #2550 init_vecset_constants.3035 pc 41464
-	addi	%x24, %x31, 0  #2550 pc 41468
-	sw	%x24, 0(%x23)  #2550 pc 41472
-	sw	%x20, 8(%x23)  #2550 pc 41476
-	sw	%x14, 4(%x23)  #2550 pc 41480
-	addi	%x14, %x3, 0  #2557 pc 41484
-	addi	%x3, %x3, 16  #2557 pc 41488
-	addi	%x31, %x0, 35388  #2557 init_dirvecs.3037 pc 41492
-	addi	%x20, %x31, 0  #2557 pc 41496
-	sw	%x20, 0(%x14)  #2557 pc 41500
-	sw	%x23, 12(%x14)  #2557 pc 41504
-	sw	%x21, 8(%x14)  #2557 pc 41508
-	sw	%x15, 4(%x14)  #2557 pc 41512
-	addi	%x15, %x3, 0  #2568 pc 41516
-	addi	%x3, %x3, 16  #2568 pc 41520
-	addi	%x31, %x0, 35504  #2568 add_reflection.3039 pc 41524
-	addi	%x20, %x31, 0  #2568 pc 41528
-	sw	%x20, 0(%x15)  #2568 pc 41532
-	sw	%x22, 12(%x15)  #2568 pc 41536
-	lw	%x20, 136(%x2)  #2568 pc 41540
-	sw	%x20, 8(%x15)  #2568 pc 41544
-	sw	%x17, 4(%x15)  #2568 pc 41548
-	addi	%x17, %x3, 0  #2577 pc 41552
-	addi	%x3, %x3, 16  #2577 pc 41556
-	addi	%x31, %x0, 35720  #2577 setup_rect_reflection.3046 pc 41560
-	addi	%x20, %x31, 0  #2577 pc 41564
-	sw	%x20, 0(%x17)  #2577 pc 41568
-	sw	%x6, 12(%x17)  #2577 pc 41572
-	sw	%x13, 8(%x17)  #2577 pc 41576
-	sw	%x15, 4(%x17)  #2577 pc 41580
-	addi	%x20, %x3, 0  #2591 pc 41584
-	addi	%x3, %x3, 16  #2591 pc 41588
-	addi	%x31, %x0, 36180  #2591 setup_surface_reflection.3049 pc 41592
-	addi	%x21, %x31, 0  #2591 pc 41596
-	sw	%x21, 0(%x20)  #2591 pc 41600
-	sw	%x6, 12(%x20)  #2591 pc 41604
-	sw	%x13, 8(%x20)  #2591 pc 41608
-	sw	%x15, 4(%x20)  #2591 pc 41612
-	addi	%x6, %x3, 0  #2606 pc 41616
-	addi	%x3, %x3, 16  #2606 pc 41620
-	addi	%x31, %x0, 36628  #2606 setup_reflections.3052 pc 41624
-	addi	%x15, %x31, 0  #2606 pc 41628
-	sw	%x15, 0(%x6)  #2606 pc 41632
-	sw	%x20, 12(%x6)  #2606 pc 41636
-	sw	%x17, 8(%x6)  #2606 pc 41640
-	sw	%x16, 4(%x6)  #2606 pc 41644
-	addi	%x29, %x3, 0  #2628 pc 41648
-	addi	%x3, %x3, 60  #2628 pc 41652
-	addi	%x31, %x0, 36916  #2628 rt.3054 pc 41656
-	addi	%x15, %x31, 0  #2628 pc 41660
-	sw	%x15, 0(%x29)  #2628 pc 41664
-	sw	%x12, 56(%x29)  #2628 pc 41668
-	sw	%x6, 52(%x29)  #2628 pc 41672
-	sw	%x22, 48(%x29)  #2628 pc 41676
-	sw	%x8, 44(%x29)  #2628 pc 41680
-	sw	%x11, 40(%x29)  #2628 pc 41684
-	lw	%x6, 140(%x2)  #2628 pc 41688
-	sw	%x6, 36(%x29)  #2628 pc 41692
-	sw	%x10, 32(%x29)  #2628 pc 41696
-	sw	%x19, 28(%x29)  #2628 pc 41700
-	lw	%x6, 128(%x2)  #2628 pc 41704
-	sw	%x6, 24(%x29)  #2628 pc 41708
-	sw	%x13, 20(%x29)  #2628 pc 41712
-	sw	%x14, 16(%x29)  #2628 pc 41716
-	sw	%x18, 12(%x29)  #2628 pc 41720
-	sw	%x9, 8(%x29)  #2628 pc 41724
-	sw	%x7, 4(%x29)  #2628 pc 41728
-	addi	%x6, %x0, 512  #0 pc 41732
-	addi	%x8, %x0, 3  #0 pc 41736
-	addi	%x7, %x6, 0  #0 pc 41740
-	sw	%x1, 148(%x2)  #2649 pc 41744
-	lw	%x30, 0(%x29)  #2649 pc 41748
-	addi	%x2, %x2, 152  #2649 pc 41752
-	jalr	%x1, %x30, 0  #2649 pc 41756
-	addi	%x2, %x2, -152  #2649 pc 41760
-	lw	%x1, 148(%x2)  #2649 pc 41764
-	addi	%x2, %x2, 112
+	addi	%x2, %x0, 1000000
+	addi	%x3, %x0, 1002000
+	addi	%x4, %x0, 8192
+	addi	%x5, %x0, 65536
+	addi	%x6, %x0, 1  #0 pc 37572
+	addi	%x7, %x0, 0  #0 pc 37576
+	sw	%x1, 0(%x2)  #223 pc 37580
+	addi	%x2, %x2, 4  #223 pc 37584
+	jal	%x1, create_array.2534  #223 pc 37588
+	addi	%x2, %x2, -4  #223 pc 37592
+	lw	%x1, 0(%x2) #223 pc 37596
+	addi	%x7, %x0, 0  #0 pc 37600
+	fmv	%f0, l.6176  #0 pc 37604
+	sw	%x6, 0(%x2)  #228 pc 37608
+	addi	%x6, %x7, 0  #0 pc 37612
+	sw	%x1, 4(%x2)  #228 pc 37616
+	addi	%x2, %x2, 8  #228 pc 37620
+	jal	%x1, create_float_array.2541  #228 pc 37624
+	addi	%x2, %x2, -8  #228 pc 37628
+	lw	%x1, 4(%x2) #228 pc 37632
+	addi	%x7, %x0, 60  #0 pc 37636
+	addi	%x8, %x0, 0  #0 pc 37640
+	addi	%x9, %x3, 0  #229 pc 37644
+	addi	%x3, %x3, 44  #229 pc 37648
+	sw	%x6, 40(%x9)  #229 pc 37652
+	sw	%x6, 36(%x9)  #229 pc 37656
+	sw	%x6, 32(%x9)  #229 pc 37660
+	sw	%x6, 28(%x9)  #229 pc 37664
+	sw	%x8, 24(%x9)  #229 pc 37668
+	sw	%x6, 20(%x9)  #229 pc 37672
+	sw	%x6, 16(%x9)  #229 pc 37676
+	sw	%x8, 12(%x9)  #229 pc 37680
+	sw	%x8, 8(%x9)  #229 pc 37684
+	sw	%x8, 4(%x9)  #229 pc 37688
+	sw	%x8, 0(%x9)  #229 pc 37692
+	addi	%x6, %x9, 0  #229 pc 37696
+	addi	%x30, %x7, 0  #0 pc 37700
+	addi	%x7, %x6, 0  #0 pc 37704
+	addi	%x6, %x30, 0  #0 pc 37708
+	sw	%x1, 4(%x2)  #229 pc 37712
+	addi	%x2, %x2, 8  #229 pc 37716
+	jal	%x1, create_array.2534  #229 pc 37720
+	addi	%x2, %x2, -8  #229 pc 37724
+	lw	%x1, 4(%x2) #229 pc 37728
+	addi	%x7, %x0, 3  #0 pc 37732
+	fmv	%f0, l.6176  #0 pc 37736
+	sw	%x6, 4(%x2)  #233 pc 37740
+	addi	%x6, %x7, 0  #0 pc 37744
+	sw	%x1, 8(%x2)  #233 pc 37748
+	addi	%x2, %x2, 12  #233 pc 37752
+	jal	%x1, create_float_array.2541  #233 pc 37756
+	addi	%x2, %x2, -12  #233 pc 37760
+	lw	%x1, 8(%x2) #233 pc 37764
+	addi	%x7, %x0, 3  #0 pc 37768
+	fmv	%f0, l.6176  #0 pc 37772
+	sw	%x6, 8(%x2)  #236 pc 37776
+	addi	%x6, %x7, 0  #0 pc 37780
+	sw	%x1, 12(%x2)  #236 pc 37784
+	addi	%x2, %x2, 16  #236 pc 37788
+	jal	%x1, create_float_array.2541  #236 pc 37792
+	addi	%x2, %x2, -16  #236 pc 37796
+	lw	%x1, 12(%x2) #236 pc 37800
+	addi	%x7, %x0, 3  #0 pc 37804
+	fmv	%f0, l.6176  #0 pc 37808
+	sw	%x6, 12(%x2)  #239 pc 37812
+	addi	%x6, %x7, 0  #0 pc 37816
+	sw	%x1, 16(%x2)  #239 pc 37820
+	addi	%x2, %x2, 20  #239 pc 37824
+	jal	%x1, create_float_array.2541  #239 pc 37828
+	addi	%x2, %x2, -20  #239 pc 37832
+	lw	%x1, 16(%x2) #239 pc 37836
+	addi	%x7, %x0, 1  #0 pc 37840
+	fmv	%f0, l.6677  #0 pc 37844
+	sw	%x6, 16(%x2)  #242 pc 37848
+	addi	%x6, %x7, 0  #0 pc 37852
+	sw	%x1, 20(%x2)  #242 pc 37856
+	addi	%x2, %x2, 24  #242 pc 37860
+	jal	%x1, create_float_array.2541  #242 pc 37864
+	addi	%x2, %x2, -24  #242 pc 37868
+	lw	%x1, 20(%x2) #242 pc 37872
+	addi	%x7, %x0, 50  #0 pc 37876
+	addi	%x8, %x0, 1  #0 pc 37880
+	addi	%x9, %x0, -1  #0 pc 37884
+	sw	%x6, 20(%x2)  #245 pc 37888
+	sw	%x7, 24(%x2)  #245 pc 37892
+	addi	%x7, %x9, 0  #0 pc 37896
+	addi	%x6, %x8, 0  #0 pc 37900
+	sw	%x1, 28(%x2)  #245 pc 37904
+	addi	%x2, %x2, 32  #245 pc 37908
+	jal	%x1, create_array.2534  #245 pc 37912
+	addi	%x2, %x2, -32  #245 pc 37916
+	lw	%x1, 28(%x2) #245 pc 37920
+	addi	%x7, %x6, 0  #245 pc 37924
+	lw	%x6, 24(%x2)  #245 pc 37928
+	sw	%x1, 28(%x2)  #245 pc 37932
+	addi	%x2, %x2, 32  #245 pc 37936
+	jal	%x1, create_array.2534  #245 pc 37940
+	addi	%x2, %x2, -32  #245 pc 37944
+	lw	%x1, 28(%x2) #245 pc 37948
+	addi	%x7, %x0, 1  #0 pc 37952
+	lw	%x8, 0(%x6)  #248 pc 37956
+	sw	%x6, 28(%x2)  #248 pc 37960
+	sw	%x7, 32(%x2)  #248 pc 37964
+	addi	%x6, %x7, 0  #0 pc 37968
+	addi	%x7, %x8, 0  #0 pc 37972
+	sw	%x1, 36(%x2)  #248 pc 37976
+	addi	%x2, %x2, 40  #248 pc 37980
+	jal	%x1, create_array.2534  #248 pc 37984
+	addi	%x2, %x2, -40  #248 pc 37988
+	lw	%x1, 36(%x2) #248 pc 37992
+	addi	%x7, %x6, 0  #248 pc 37996
+	lw	%x6, 32(%x2)  #248 pc 38000
+	sw	%x1, 36(%x2)  #248 pc 38004
+	addi	%x2, %x2, 40  #248 pc 38008
+	jal	%x1, create_array.2534  #248 pc 38012
+	addi	%x2, %x2, -40  #248 pc 38016
+	lw	%x1, 36(%x2) #248 pc 38020
+	addi	%x7, %x0, 1  #0 pc 38024
+	fmv	%f0, l.6176  #0 pc 38028
+	sw	%x6, 36(%x2)  #253 pc 38032
+	addi	%x6, %x7, 0  #0 pc 38036
+	sw	%x1, 40(%x2)  #253 pc 38040
+	addi	%x2, %x2, 44  #253 pc 38044
+	jal	%x1, create_float_array.2541  #253 pc 38048
+	addi	%x2, %x2, -44  #253 pc 38052
+	lw	%x1, 40(%x2) #253 pc 38056
+	addi	%x7, %x0, 1  #0 pc 38060
+	addi	%x8, %x0, 0  #0 pc 38064
+	sw	%x6, 40(%x2)  #256 pc 38068
+	addi	%x6, %x7, 0  #0 pc 38072
+	addi	%x7, %x8, 0  #0 pc 38076
+	sw	%x1, 44(%x2)  #256 pc 38080
+	addi	%x2, %x2, 48  #256 pc 38084
+	jal	%x1, create_array.2534  #256 pc 38088
+	addi	%x2, %x2, -48  #256 pc 38092
+	lw	%x1, 44(%x2) #256 pc 38096
+	addi	%x7, %x0, 1  #0 pc 38100
+	fmv	%f0, l.6604  #0 pc 38104
+	sw	%x6, 44(%x2)  #259 pc 38108
+	addi	%x6, %x7, 0  #0 pc 38112
+	sw	%x1, 48(%x2)  #259 pc 38116
+	addi	%x2, %x2, 52  #259 pc 38120
+	jal	%x1, create_float_array.2541  #259 pc 38124
+	addi	%x2, %x2, -52  #259 pc 38128
+	lw	%x1, 48(%x2) #259 pc 38132
+	addi	%x7, %x0, 3  #0 pc 38136
+	fmv	%f0, l.6176  #0 pc 38140
+	sw	%x6, 48(%x2)  #262 pc 38144
+	addi	%x6, %x7, 0  #0 pc 38148
+	sw	%x1, 52(%x2)  #262 pc 38152
+	addi	%x2, %x2, 56  #262 pc 38156
+	jal	%x1, create_float_array.2541  #262 pc 38160
+	addi	%x2, %x2, -56  #262 pc 38164
+	lw	%x1, 52(%x2) #262 pc 38168
+	addi	%x7, %x0, 1  #0 pc 38172
+	addi	%x8, %x0, 0  #0 pc 38176
+	sw	%x6, 52(%x2)  #265 pc 38180
+	addi	%x6, %x7, 0  #0 pc 38184
+	addi	%x7, %x8, 0  #0 pc 38188
+	sw	%x1, 56(%x2)  #265 pc 38192
+	addi	%x2, %x2, 60  #265 pc 38196
+	jal	%x1, create_array.2534  #265 pc 38200
+	addi	%x2, %x2, -60  #265 pc 38204
+	lw	%x1, 56(%x2) #265 pc 38208
+	addi	%x7, %x0, 3  #0 pc 38212
+	fmv	%f0, l.6176  #0 pc 38216
+	sw	%x6, 56(%x2)  #268 pc 38220
+	addi	%x6, %x7, 0  #0 pc 38224
+	sw	%x1, 60(%x2)  #268 pc 38228
+	addi	%x2, %x2, 64  #268 pc 38232
+	jal	%x1, create_float_array.2541  #268 pc 38236
+	addi	%x2, %x2, -64  #268 pc 38240
+	lw	%x1, 60(%x2) #268 pc 38244
+	addi	%x7, %x0, 3  #0 pc 38248
+	fmv	%f0, l.6176  #0 pc 38252
+	sw	%x6, 60(%x2)  #271 pc 38256
+	addi	%x6, %x7, 0  #0 pc 38260
+	sw	%x1, 64(%x2)  #271 pc 38264
+	addi	%x2, %x2, 68  #271 pc 38268
+	jal	%x1, create_float_array.2541  #271 pc 38272
+	addi	%x2, %x2, -68  #271 pc 38276
+	lw	%x1, 64(%x2) #271 pc 38280
+	addi	%x7, %x0, 3  #0 pc 38284
+	fmv	%f0, l.6176  #0 pc 38288
+	sw	%x6, 64(%x2)  #275 pc 38292
+	addi	%x6, %x7, 0  #0 pc 38296
+	sw	%x1, 68(%x2)  #275 pc 38300
+	addi	%x2, %x2, 72  #275 pc 38304
+	jal	%x1, create_float_array.2541  #275 pc 38308
+	addi	%x2, %x2, -72  #275 pc 38312
+	lw	%x1, 68(%x2) #275 pc 38316
+	addi	%x7, %x0, 3  #0 pc 38320
+	fmv	%f0, l.6176  #0 pc 38324
+	sw	%x6, 68(%x2)  #278 pc 38328
+	addi	%x6, %x7, 0  #0 pc 38332
+	sw	%x1, 72(%x2)  #278 pc 38336
+	addi	%x2, %x2, 76  #278 pc 38340
+	jal	%x1, create_float_array.2541  #278 pc 38344
+	addi	%x2, %x2, -76  #278 pc 38348
+	lw	%x1, 72(%x2) #278 pc 38352
+	addi	%x7, %x0, 2  #0 pc 38356
+	addi	%x8, %x0, 0  #0 pc 38360
+	sw	%x6, 72(%x2)  #282 pc 38364
+	addi	%x6, %x7, 0  #0 pc 38368
+	addi	%x7, %x8, 0  #0 pc 38372
+	sw	%x1, 76(%x2)  #282 pc 38376
+	addi	%x2, %x2, 80  #282 pc 38380
+	jal	%x1, create_array.2534  #282 pc 38384
+	addi	%x2, %x2, -80  #282 pc 38388
+	lw	%x1, 76(%x2) #282 pc 38392
+	addi	%x7, %x0, 2  #0 pc 38396
+	addi	%x8, %x0, 0  #0 pc 38400
+	sw	%x6, 76(%x2)  #285 pc 38404
+	addi	%x6, %x7, 0  #0 pc 38408
+	addi	%x7, %x8, 0  #0 pc 38412
+	sw	%x1, 80(%x2)  #285 pc 38416
+	addi	%x2, %x2, 84  #285 pc 38420
+	jal	%x1, create_array.2534  #285 pc 38424
+	addi	%x2, %x2, -84  #285 pc 38428
+	lw	%x1, 80(%x2) #285 pc 38432
+	addi	%x7, %x0, 1  #0 pc 38436
+	fmv	%f0, l.6176  #0 pc 38440
+	sw	%x6, 80(%x2)  #288 pc 38444
+	addi	%x6, %x7, 0  #0 pc 38448
+	sw	%x1, 84(%x2)  #288 pc 38452
+	addi	%x2, %x2, 88  #288 pc 38456
+	jal	%x1, create_float_array.2541  #288 pc 38460
+	addi	%x2, %x2, -88  #288 pc 38464
+	lw	%x1, 84(%x2) #288 pc 38468
+	addi	%x7, %x0, 3  #0 pc 38472
+	fmv	%f0, l.6176  #0 pc 38476
+	sw	%x6, 84(%x2)  #292 pc 38480
+	addi	%x6, %x7, 0  #0 pc 38484
+	sw	%x1, 88(%x2)  #292 pc 38488
+	addi	%x2, %x2, 92  #292 pc 38492
+	jal	%x1, create_float_array.2541  #292 pc 38496
+	addi	%x2, %x2, -92  #292 pc 38500
+	lw	%x1, 88(%x2) #292 pc 38504
+	addi	%x7, %x0, 3  #0 pc 38508
+	fmv	%f0, l.6176  #0 pc 38512
+	sw	%x6, 88(%x2)  #295 pc 38516
+	addi	%x6, %x7, 0  #0 pc 38520
+	sw	%x1, 92(%x2)  #295 pc 38524
+	addi	%x2, %x2, 96  #295 pc 38528
+	jal	%x1, create_float_array.2541  #295 pc 38532
+	addi	%x2, %x2, -96  #295 pc 38536
+	lw	%x1, 92(%x2) #295 pc 38540
+	addi	%x7, %x0, 3  #0 pc 38544
+	fmv	%f0, l.6176  #0 pc 38548
+	sw	%x6, 92(%x2)  #299 pc 38552
+	addi	%x6, %x7, 0  #0 pc 38556
+	sw	%x1, 96(%x2)  #299 pc 38560
+	addi	%x2, %x2, 100  #299 pc 38564
+	jal	%x1, create_float_array.2541  #299 pc 38568
+	addi	%x2, %x2, -100  #299 pc 38572
+	lw	%x1, 96(%x2) #299 pc 38576
+	addi	%x7, %x0, 3  #0 pc 38580
+	fmv	%f0, l.6176  #0 pc 38584
+	sw	%x6, 96(%x2)  #301 pc 38588
+	addi	%x6, %x7, 0  #0 pc 38592
+	sw	%x1, 100(%x2)  #301 pc 38596
+	addi	%x2, %x2, 104  #301 pc 38600
+	jal	%x1, create_float_array.2541  #301 pc 38604
+	addi	%x2, %x2, -104  #301 pc 38608
+	lw	%x1, 100(%x2) #301 pc 38612
+	addi	%x7, %x0, 3  #0 pc 38616
+	fmv	%f0, l.6176  #0 pc 38620
+	sw	%x6, 100(%x2)  #303 pc 38624
+	addi	%x6, %x7, 0  #0 pc 38628
+	sw	%x1, 104(%x2)  #303 pc 38632
+	addi	%x2, %x2, 108  #303 pc 38636
+	jal	%x1, create_float_array.2541  #303 pc 38640
+	addi	%x2, %x2, -108  #303 pc 38644
+	lw	%x1, 104(%x2) #303 pc 38648
+	addi	%x7, %x0, 3  #0 pc 38652
+	fmv	%f0, l.6176  #0 pc 38656
+	sw	%x6, 104(%x2)  #307 pc 38660
+	addi	%x6, %x7, 0  #0 pc 38664
+	sw	%x1, 108(%x2)  #307 pc 38668
+	addi	%x2, %x2, 112  #307 pc 38672
+	jal	%x1, create_float_array.2541  #307 pc 38676
+	addi	%x2, %x2, -112  #307 pc 38680
+	lw	%x1, 108(%x2) #307 pc 38684
+	addi	%x7, %x0, 0  #0 pc 38688
+	fmv	%f0, l.6176  #0 pc 38692
+	sw	%x6, 108(%x2)  #312 pc 38696
+	addi	%x6, %x7, 0  #0 pc 38700
+	sw	%x1, 112(%x2)  #312 pc 38704
+	addi	%x2, %x2, 116  #312 pc 38708
+	jal	%x1, create_float_array.2541  #312 pc 38712
+	addi	%x2, %x2, -116  #312 pc 38716
+	lw	%x1, 112(%x2) #312 pc 38720
+	addi	%x7, %x6, 0  #312 pc 38724
+	addi	%x6, %x0, 0  #0 pc 38728
+	sw	%x7, 112(%x2)  #313 pc 38732
+	sw	%x1, 116(%x2)  #313 pc 38736
+	addi	%x2, %x2, 120  #313 pc 38740
+	jal	%x1, create_array.2534  #313 pc 38744
+	addi	%x2, %x2, -120  #313 pc 38748
+	lw	%x1, 116(%x2) #313 pc 38752
+	addi	%x7, %x0, 0  #0 pc 38756
+	addi	%x8, %x3, 0  #314 pc 38760
+	addi	%x3, %x3, 8  #314 pc 38764
+	sw	%x6, 4(%x8)  #314 pc 38768
+	lw	%x6, 112(%x2)  #314 pc 38772
+	sw	%x6, 0(%x8)  #314 pc 38776
+	addi	%x6, %x8, 0  #314 pc 38780
+	addi	%x30, %x7, 0  #0 pc 38784
+	addi	%x7, %x6, 0  #0 pc 38788
+	addi	%x6, %x30, 0  #0 pc 38792
+	sw	%x1, 116(%x2)  #314 pc 38796
+	addi	%x2, %x2, 120  #314 pc 38800
+	jal	%x1, create_array.2534  #314 pc 38804
+	addi	%x2, %x2, -120  #314 pc 38808
+	lw	%x1, 116(%x2) #314 pc 38812
+	addi	%x7, %x6, 0  #314 pc 38816
+	addi	%x6, %x0, 5  #0 pc 38820
+	sw	%x1, 116(%x2)  #315 pc 38824
+	addi	%x2, %x2, 120  #315 pc 38828
+	jal	%x1, create_array.2534  #315 pc 38832
+	addi	%x2, %x2, -120  #315 pc 38836
+	lw	%x1, 116(%x2) #315 pc 38840
+	addi	%x7, %x0, 0  #0 pc 38844
+	fmv	%f0, l.6176  #0 pc 38848
+	sw	%x6, 116(%x2)  #320 pc 38852
+	addi	%x6, %x7, 0  #0 pc 38856
+	sw	%x1, 120(%x2)  #320 pc 38860
+	addi	%x2, %x2, 124  #320 pc 38864
+	jal	%x1, create_float_array.2541  #320 pc 38868
+	addi	%x2, %x2, -124  #320 pc 38872
+	lw	%x1, 120(%x2) #320 pc 38876
+	addi	%x7, %x0, 3  #0 pc 38880
+	fmv	%f0, l.6176  #0 pc 38884
+	sw	%x6, 120(%x2)  #321 pc 38888
+	addi	%x6, %x7, 0  #0 pc 38892
+	sw	%x1, 124(%x2)  #321 pc 38896
+	addi	%x2, %x2, 128  #321 pc 38900
+	jal	%x1, create_float_array.2541  #321 pc 38904
+	addi	%x2, %x2, -128  #321 pc 38908
+	lw	%x1, 124(%x2) #321 pc 38912
+	addi	%x7, %x0, 60  #0 pc 38916
+	lw	%x8, 120(%x2)  #322 pc 38920
+	sw	%x6, 124(%x2)  #322 pc 38924
+	addi	%x6, %x7, 0  #0 pc 38928
+	addi	%x7, %x8, 0  #0 pc 38932
+	sw	%x1, 128(%x2)  #322 pc 38936
+	addi	%x2, %x2, 132  #322 pc 38940
+	jal	%x1, create_array.2534  #322 pc 38944
+	addi	%x2, %x2, -132  #322 pc 38948
+	lw	%x1, 128(%x2) #322 pc 38952
+	addi	%x7, %x3, 0  #323 pc 38956
+	addi	%x3, %x3, 8  #323 pc 38960
+	sw	%x6, 4(%x7)  #323 pc 38964
+	lw	%x6, 124(%x2)  #323 pc 38968
+	sw	%x6, 0(%x7)  #323 pc 38972
+	addi	%x6, %x7, 0  #323 pc 38976
+	addi	%x7, %x0, 0  #0 pc 38980
+	fmv	%f0, l.6176  #0 pc 38984
+	sw	%x6, 128(%x2)  #328 pc 38988
+	addi	%x6, %x7, 0  #0 pc 38992
+	sw	%x1, 132(%x2)  #328 pc 38996
+	addi	%x2, %x2, 136  #328 pc 39000
+	jal	%x1, create_float_array.2541  #328 pc 39004
+	addi	%x2, %x2, -136  #328 pc 39008
+	lw	%x1, 132(%x2) #328 pc 39012
+	addi	%x7, %x6, 0  #328 pc 39016
+	addi	%x6, %x0, 0  #0 pc 39020
+	sw	%x7, 132(%x2)  #329 pc 39024
+	sw	%x1, 136(%x2)  #329 pc 39028
+	addi	%x2, %x2, 140  #329 pc 39032
+	jal	%x1, create_array.2534  #329 pc 39036
+	addi	%x2, %x2, -140  #329 pc 39040
+	lw	%x1, 136(%x2) #329 pc 39044
+	addi	%x7, %x3, 0  #330 pc 39048
+	addi	%x3, %x3, 8  #330 pc 39052
+	sw	%x6, 4(%x7)  #330 pc 39056
+	lw	%x6, 132(%x2)  #330 pc 39060
+	sw	%x6, 0(%x7)  #330 pc 39064
+	addi	%x6, %x7, 0  #330 pc 39068
+	addi	%x7, %x0, 180  #0 pc 39072
+	addi	%x8, %x0, 0  #0 pc 39076
+	fmv	%f0, l.6176  #0 pc 39080
+	addi	%x9, %x3, 0  #331 pc 39084
+	addi	%x3, %x3, 12  #331 pc 39088
+	fsw	%f0, 8(%x9)  #331 pc 39092
+	sw	%x6, 4(%x9)  #331 pc 39096
+	sw	%x8, 0(%x9)  #331 pc 39100
+	addi	%x6, %x9, 0  #331 pc 39104
+	addi	%x30, %x7, 0  #0 pc 39108
+	addi	%x7, %x6, 0  #0 pc 39112
+	addi	%x6, %x30, 0  #0 pc 39116
+	sw	%x1, 136(%x2)  #331 pc 39120
+	addi	%x2, %x2, 140  #331 pc 39124
+	jal	%x1, create_array.2534  #331 pc 39128
+	addi	%x2, %x2, -140  #331 pc 39132
+	lw	%x1, 136(%x2) #331 pc 39136
+	addi	%x7, %x0, 1  #0 pc 39140
+	addi	%x8, %x0, 0  #0 pc 39144
+	sw	%x6, 136(%x2)  #335 pc 39148
+	addi	%x6, %x7, 0  #0 pc 39152
+	addi	%x7, %x8, 0  #0 pc 39156
+	sw	%x1, 140(%x2)  #335 pc 39160
+	addi	%x2, %x2, 144  #335 pc 39164
+	jal	%x1, create_array.2534  #335 pc 39168
+	addi	%x2, %x2, -144  #335 pc 39172
+	lw	%x1, 140(%x2) #335 pc 39176
+	addi	%x7, %x3, 0  #818 pc 39180
+	addi	%x3, %x3, 24  #818 pc 39184
+	addi	%x31, %x0, 2756  #818 read_screen_settings.2696 pc 39188
+	addi	%x8, %x31, 0  #818 pc 39192
+	sw	%x8, 0(%x7)  #818 pc 39196
+	lw	%x8, 12(%x2)  #818 pc 39200
+	sw	%x8, 20(%x7)  #818 pc 39204
+	lw	%x9, 104(%x2)  #818 pc 39208
+	sw	%x9, 16(%x7)  #818 pc 39212
+	lw	%x10, 100(%x2)  #818 pc 39216
+	sw	%x10, 12(%x7)  #818 pc 39220
+	lw	%x11, 96(%x2)  #818 pc 39224
+	sw	%x11, 8(%x7)  #818 pc 39228
+	lw	%x12, 8(%x2)  #818 pc 39232
+	sw	%x12, 4(%x7)  #818 pc 39236
+	addi	%x12, %x3, 0  #851 pc 39240
+	addi	%x3, %x3, 12  #851 pc 39244
+	addi	%x31, %x0, 3364  #851 read_light.2698 pc 39248
+	addi	%x13, %x31, 0  #851 pc 39252
+	sw	%x13, 0(%x12)  #851 pc 39256
+	lw	%x13, 16(%x2)  #851 pc 39260
+	sw	%x13, 8(%x12)  #851 pc 39264
+	lw	%x14, 20(%x2)  #851 pc 39268
+	sw	%x14, 4(%x12)  #851 pc 39272
+	addi	%x15, %x3, 0  #914 pc 39276
+	addi	%x3, %x3, 8  #914 pc 39280
+	addi	%x31, %x0, 4700  #914 read_nth_object.2703 pc 39284
+	addi	%x16, %x31, 0  #914 pc 39288
+	sw	%x16, 0(%x15)  #914 pc 39292
+	lw	%x16, 4(%x2)  #914 pc 39296
+	sw	%x16, 4(%x15)  #914 pc 39300
+	addi	%x17, %x3, 0  #997 pc 39304
+	addi	%x3, %x3, 12  #997 pc 39308
+	addi	%x31, %x0, 6264  #997 read_object.2705 pc 39312
+	addi	%x18, %x31, 0  #997 pc 39316
+	sw	%x18, 0(%x17)  #997 pc 39320
+	sw	%x15, 8(%x17)  #997 pc 39324
+	lw	%x15, 0(%x2)  #997 pc 39328
+	sw	%x15, 4(%x17)  #997 pc 39332
+	addi	%x18, %x3, 0  #1006 pc 39336
+	addi	%x3, %x3, 8  #1006 pc 39340
+	addi	%x31, %x0, 6392  #1006 read_all_object.2707 pc 39344
+	addi	%x19, %x31, 0  #1006 pc 39348
+	sw	%x19, 0(%x18)  #1006 pc 39352
+	sw	%x17, 4(%x18)  #1006 pc 39356
+	addi	%x17, %x3, 0  #1030 pc 39360
+	addi	%x3, %x3, 8  #1030 pc 39364
+	addi	%x31, %x0, 6672  #1030 read_and_network.2713 pc 39368
+	addi	%x19, %x31, 0  #1030 pc 39372
+	sw	%x19, 0(%x17)  #1030 pc 39376
+	lw	%x19, 28(%x2)  #1030 pc 39380
+	sw	%x19, 4(%x17)  #1030 pc 39384
+	addi	%x20, %x3, 0  #1039 pc 39388
+	addi	%x3, %x3, 24  #1039 pc 39392
+	addi	%x31, %x0, 6784  #1039 read_parameter.2715 pc 39396
+	addi	%x21, %x31, 0  #1039 pc 39400
+	sw	%x21, 0(%x20)  #1039 pc 39404
+	sw	%x7, 20(%x20)  #1039 pc 39408
+	sw	%x12, 16(%x20)  #1039 pc 39412
+	sw	%x17, 12(%x20)  #1039 pc 39416
+	sw	%x18, 8(%x20)  #1039 pc 39420
+	lw	%x7, 36(%x2)  #1039 pc 39424
+	sw	%x7, 4(%x20)  #1039 pc 39428
+	addi	%x12, %x3, 0  #1064 pc 39432
+	addi	%x3, %x3, 8  #1064 pc 39436
+	addi	%x31, %x0, 6976  #1064 solver_rect_surface.2717 pc 39440
+	addi	%x17, %x31, 0  #1064 pc 39444
+	sw	%x17, 0(%x12)  #1064 pc 39448
+	lw	%x17, 40(%x2)  #1064 pc 39452
+	sw	%x17, 4(%x12)  #1064 pc 39456
+	addi	%x18, %x3, 0  #1079 pc 39460
+	addi	%x3, %x3, 8  #1079 pc 39464
+	addi	%x31, %x0, 7508  #1079 solver_rect.2726 pc 39468
+	addi	%x21, %x31, 0  #1079 pc 39472
+	sw	%x21, 0(%x18)  #1079 pc 39476
+	sw	%x12, 4(%x18)  #1079 pc 39480
+	addi	%x12, %x3, 0  #1088 pc 39484
+	addi	%x3, %x3, 8  #1088 pc 39488
+	addi	%x31, %x0, 7776  #1088 solver_surface.2732 pc 39492
+	addi	%x21, %x31, 0  #1088 pc 39496
+	sw	%x21, 0(%x12)  #1088 pc 39500
+	sw	%x17, 4(%x12)  #1088 pc 39504
+	addi	%x21, %x3, 0  #1139 pc 39508
+	addi	%x3, %x3, 8  #1139 pc 39512
+	addi	%x31, %x0, 8932  #1139 solver_second.2751 pc 39516
+	addi	%x22, %x31, 0  #1139 pc 39520
+	sw	%x22, 0(%x21)  #1139 pc 39524
+	sw	%x17, 4(%x21)  #1139 pc 39528
+	addi	%x22, %x3, 0  #1168 pc 39532
+	addi	%x3, %x3, 20  #1168 pc 39536
+	addi	%x31, %x0, 9440  #1168 solver.2757 pc 39540
+	addi	%x23, %x31, 0  #1168 pc 39544
+	sw	%x23, 0(%x22)  #1168 pc 39548
+	sw	%x12, 16(%x22)  #1168 pc 39552
+	sw	%x21, 12(%x22)  #1168 pc 39556
+	sw	%x18, 8(%x22)  #1168 pc 39560
+	sw	%x16, 4(%x22)  #1168 pc 39564
+	addi	%x12, %x3, 0  #1200 pc 39568
+	addi	%x3, %x3, 8  #1200 pc 39572
+	addi	%x31, %x0, 9796  #1200 solver_rect_fast.2761 pc 39576
+	addi	%x18, %x31, 0  #1200 pc 39580
+	sw	%x18, 0(%x12)  #1200 pc 39584
+	sw	%x17, 4(%x12)  #1200 pc 39588
+	addi	%x18, %x3, 0  #1233 pc 39592
+	addi	%x3, %x3, 8  #1233 pc 39596
+	addi	%x31, %x0, 10832  #1233 solver_surface_fast.2768 pc 39600
+	addi	%x21, %x31, 0  #1233 pc 39604
+	sw	%x21, 0(%x18)  #1233 pc 39608
+	sw	%x17, 4(%x18)  #1233 pc 39612
+	addi	%x21, %x3, 0  #1242 pc 39616
+	addi	%x3, %x3, 8  #1242 pc 39620
+	addi	%x31, %x0, 10976  #1242 solver_second_fast.2774 pc 39624
+	addi	%x23, %x31, 0  #1242 pc 39628
+	sw	%x23, 0(%x21)  #1242 pc 39632
+	sw	%x17, 4(%x21)  #1242 pc 39636
+	addi	%x23, %x3, 0  #1262 pc 39640
+	addi	%x3, %x3, 20  #1262 pc 39644
+	addi	%x31, %x0, 11444  #1262 solver_fast.2780 pc 39648
+	addi	%x24, %x31, 0  #1262 pc 39652
+	sw	%x24, 0(%x23)  #1262 pc 39656
+	sw	%x18, 16(%x23)  #1262 pc 39660
+	sw	%x21, 12(%x23)  #1262 pc 39664
+	sw	%x12, 8(%x23)  #1262 pc 39668
+	sw	%x16, 4(%x23)  #1262 pc 39672
+	addi	%x18, %x3, 0  #1282 pc 39676
+	addi	%x3, %x3, 8  #1282 pc 39680
+	addi	%x31, %x0, 11884  #1282 solver_surface_fast2.2784 pc 39684
+	addi	%x21, %x31, 0  #1282 pc 39688
+	sw	%x21, 0(%x18)  #1282 pc 39692
+	sw	%x17, 4(%x18)  #1282 pc 39696
+	addi	%x21, %x3, 0  #1290 pc 39700
+	addi	%x3, %x3, 8  #1290 pc 39704
+	addi	%x31, %x0, 11988  #1290 solver_second_fast2.2791 pc 39708
+	addi	%x24, %x31, 0  #1290 pc 39712
+	sw	%x24, 0(%x21)  #1290 pc 39716
+	sw	%x17, 4(%x21)  #1290 pc 39720
+	addi	%x24, %x3, 0  #1309 pc 39724
+	addi	%x3, %x3, 20  #1309 pc 39728
+	addi	%x31, %x0, 12352  #1309 solver_fast2.2798 pc 39732
+	addi	%x25, %x31, 0  #1309 pc 39736
+	sw	%x25, 0(%x24)  #1309 pc 39740
+	sw	%x18, 16(%x24)  #1309 pc 39744
+	sw	%x21, 12(%x24)  #1309 pc 39748
+	sw	%x12, 8(%x24)  #1309 pc 39752
+	sw	%x16, 4(%x24)  #1309 pc 39756
+	addi	%x12, %x3, 0  #1406 pc 39760
+	addi	%x3, %x3, 8  #1406 pc 39764
+	addi	%x31, %x0, 14828  #1406 iter_setup_dirvec_constants.2810 pc 39768
+	addi	%x18, %x31, 0  #1406 pc 39772
+	sw	%x18, 0(%x12)  #1406 pc 39776
+	sw	%x16, 4(%x12)  #1406 pc 39780
+	addi	%x18, %x3, 0  #1423 pc 39784
+	addi	%x3, %x3, 12  #1423 pc 39788
+	addi	%x31, %x0, 15180  #1423 setup_dirvec_constants.2813 pc 39792
+	addi	%x21, %x31, 0  #1423 pc 39796
+	sw	%x21, 0(%x18)  #1423 pc 39800
+	sw	%x15, 8(%x18)  #1423 pc 39804
+	sw	%x12, 4(%x18)  #1423 pc 39808
+	addi	%x12, %x3, 0  #1431 pc 39812
+	addi	%x3, %x3, 8  #1431 pc 39816
+	addi	%x31, %x0, 15208  #1431 setup_startp_constants.2815 pc 39820
+	addi	%x21, %x31, 0  #1431 pc 39824
+	sw	%x21, 0(%x12)  #1431 pc 39828
+	sw	%x16, 4(%x12)  #1431 pc 39832
+	addi	%x21, %x3, 0  #1450 pc 39836
+	addi	%x3, %x3, 16  #1450 pc 39840
+	addi	%x31, %x0, 15724  #1450 setup_startp.2818 pc 39844
+	addi	%x25, %x31, 0  #1450 pc 39848
+	sw	%x25, 0(%x21)  #1450 pc 39852
+	lw	%x25, 92(%x2)  #1450 pc 39856
+	sw	%x25, 12(%x21)  #1450 pc 39860
+	sw	%x12, 8(%x21)  #1450 pc 39864
+	sw	%x15, 4(%x21)  #1450 pc 39868
+	addi	%x12, %x3, 0  #1500 pc 39872
+	addi	%x3, %x3, 8  #1500 pc 39876
+	addi	%x31, %x0, 16788  #1500 check_all_inside.2840 pc 39880
+	addi	%x26, %x31, 0  #1500 pc 39884
+	sw	%x26, 0(%x12)  #1500 pc 39888
+	sw	%x16, 4(%x12)  #1500 pc 39892
+	addi	%x26, %x3, 0  #1520 pc 39896
+	addi	%x3, %x3, 32  #1520 pc 39900
+	addi	%x31, %x0, 16956  #1520 shadow_check_and_group.2846 pc 39904
+	addi	%x27, %x31, 0  #1520 pc 39908
+	sw	%x27, 0(%x26)  #1520 pc 39912
+	sw	%x23, 28(%x26)  #1520 pc 39916
+	sw	%x17, 24(%x26)  #1520 pc 39920
+	sw	%x16, 20(%x26)  #1520 pc 39924
+	lw	%x27, 128(%x2)  #1520 pc 39928
+	sw	%x27, 16(%x26)  #1520 pc 39932
+	sw	%x13, 12(%x26)  #1520 pc 39936
+	lw	%x28, 52(%x2)  #1520 pc 39940
+	sw	%x28, 8(%x26)  #1520 pc 39944
+	sw	%x12, 4(%x26)  #1520 pc 39948
+	addi	%x29, %x3, 0  #1550 pc 39952
+	addi	%x3, %x3, 12  #1550 pc 39956
+	addi	%x31, %x0, 17448  #1550 shadow_check_one_or_group.2849 pc 39960
+	addi	%x30, %x31, 0  #1550 pc 39964
+	sw	%x30, 0(%x29)  #1550 pc 39968
+	sw	%x26, 8(%x29)  #1550 pc 39972
+	sw	%x19, 4(%x29)  #1550 pc 39976
+	addi	%x26, %x3, 0  #1565 pc 39980
+	addi	%x3, %x3, 24  #1565 pc 39984
+	addi	%x31, %x0, 17612  #1565 shadow_check_one_or_matrix.2852 pc 39988
+	addi	%x30, %x31, 0  #1565 pc 39992
+	sw	%x30, 0(%x26)  #1565 pc 39996
+	sw	%x23, 20(%x26)  #1565 pc 40000
+	sw	%x17, 16(%x26)  #1565 pc 40004
+	sw	%x29, 12(%x26)  #1565 pc 40008
+	sw	%x27, 8(%x26)  #1565 pc 40012
+	sw	%x28, 4(%x26)  #1565 pc 40016
+	addi	%x23, %x3, 0  #1601 pc 40020
+	addi	%x3, %x3, 40  #1601 pc 40024
+	addi	%x31, %x0, 18040  #1601 solve_each_element.2855 pc 40028
+	addi	%x29, %x31, 0  #1601 pc 40032
+	sw	%x29, 0(%x23)  #1601 pc 40036
+	lw	%x29, 48(%x2)  #1601 pc 40040
+	sw	%x29, 36(%x23)  #1601 pc 40044
+	lw	%x30, 88(%x2)  #1601 pc 40048
+	sw	%x30, 32(%x23)  #1601 pc 40052
+	sw	%x17, 28(%x23)  #1601 pc 40056
+	sw	%x22, 24(%x23)  #1601 pc 40060
+	sw	%x16, 20(%x23)  #1601 pc 40064
+	lw	%x27, 44(%x2)  #1601 pc 40068
+	sw	%x27, 16(%x23)  #1601 pc 40072
+	sw	%x28, 12(%x23)  #1601 pc 40076
+	sw	%x20, 140(%x2)  #1601 pc 40080
+	lw	%x20, 56(%x2)  #1601 pc 40084
+	sw	%x20, 8(%x23)  #1601 pc 40088
+	sw	%x12, 4(%x23)  #1601 pc 40092
+	sw	%x18, 144(%x2)  #1642 pc 40096
+	addi	%x18, %x3, 0  #1642 pc 40100
+	addi	%x3, %x3, 12  #1642 pc 40104
+	addi	%x31, %x0, 18684  #1642 solve_one_or_network.2859 pc 40108
+	addi	%x15, %x31, 0  #1642 pc 40112
+	sw	%x15, 0(%x18)  #1642 pc 40116
+	sw	%x23, 8(%x18)  #1642 pc 40120
+	sw	%x19, 4(%x18)  #1642 pc 40124
+	addi	%x15, %x3, 0  #1652 pc 40128
+	addi	%x3, %x3, 24  #1652 pc 40132
+	addi	%x31, %x0, 18828  #1652 trace_or_matrix.2863 pc 40136
+	addi	%x23, %x31, 0  #1652 pc 40140
+	sw	%x23, 0(%x15)  #1652 pc 40144
+	sw	%x29, 20(%x15)  #1652 pc 40148
+	sw	%x30, 16(%x15)  #1652 pc 40152
+	sw	%x17, 12(%x15)  #1652 pc 40156
+	sw	%x22, 8(%x15)  #1652 pc 40160
+	sw	%x18, 4(%x15)  #1652 pc 40164
+	addi	%x18, %x3, 0  #1679 pc 40168
+	addi	%x3, %x3, 16  #1679 pc 40172
+	addi	%x31, %x0, 19172  #1679 judge_intersection.2867 pc 40176
+	addi	%x22, %x31, 0  #1679 pc 40180
+	sw	%x22, 0(%x18)  #1679 pc 40184
+	sw	%x15, 12(%x18)  #1679 pc 40188
+	sw	%x29, 8(%x18)  #1679 pc 40192
+	sw	%x7, 4(%x18)  #1679 pc 40196
+	addi	%x15, %x3, 0  #1694 pc 40200
+	addi	%x3, %x3, 40  #1694 pc 40204
+	addi	%x31, %x0, 19320  #1694 solve_each_element_fast.2869 pc 40208
+	addi	%x22, %x31, 0  #1694 pc 40212
+	sw	%x22, 0(%x15)  #1694 pc 40216
+	sw	%x29, 36(%x15)  #1694 pc 40220
+	sw	%x25, 32(%x15)  #1694 pc 40224
+	sw	%x24, 28(%x15)  #1694 pc 40228
+	sw	%x17, 24(%x15)  #1694 pc 40232
+	sw	%x16, 20(%x15)  #1694 pc 40236
+	sw	%x27, 16(%x15)  #1694 pc 40240
+	sw	%x28, 12(%x15)  #1694 pc 40244
+	sw	%x20, 8(%x15)  #1694 pc 40248
+	sw	%x12, 4(%x15)  #1694 pc 40252
+	addi	%x12, %x3, 0  #1735 pc 40256
+	addi	%x3, %x3, 12  #1735 pc 40260
+	addi	%x31, %x0, 19996  #1735 solve_one_or_network_fast.2873 pc 40264
+	addi	%x22, %x31, 0  #1735 pc 40268
+	sw	%x22, 0(%x12)  #1735 pc 40272
+	sw	%x15, 8(%x12)  #1735 pc 40276
+	sw	%x19, 4(%x12)  #1735 pc 40280
+	addi	%x15, %x3, 0  #1745 pc 40284
+	addi	%x3, %x3, 20  #1745 pc 40288
+	addi	%x31, %x0, 20140  #1745 trace_or_matrix_fast.2877 pc 40292
+	addi	%x19, %x31, 0  #1745 pc 40296
+	sw	%x19, 0(%x15)  #1745 pc 40300
+	sw	%x29, 16(%x15)  #1745 pc 40304
+	sw	%x24, 12(%x15)  #1745 pc 40308
+	sw	%x17, 8(%x15)  #1745 pc 40312
+	sw	%x12, 4(%x15)  #1745 pc 40316
+	addi	%x12, %x3, 0  #1769 pc 40320
+	addi	%x3, %x3, 16  #1769 pc 40324
+	addi	%x31, %x0, 20476  #1769 judge_intersection_fast.2881 pc 40328
+	addi	%x17, %x31, 0  #1769 pc 40332
+	sw	%x17, 0(%x12)  #1769 pc 40336
+	sw	%x15, 12(%x12)  #1769 pc 40340
+	sw	%x29, 8(%x12)  #1769 pc 40344
+	sw	%x7, 4(%x12)  #1769 pc 40348
+	addi	%x15, %x3, 0  #1790 pc 40352
+	addi	%x3, %x3, 12  #1790 pc 40356
+	addi	%x31, %x0, 20624  #1790 get_nvector_rect.2883 pc 40360
+	addi	%x17, %x31, 0  #1790 pc 40364
+	sw	%x17, 0(%x15)  #1790 pc 40368
+	lw	%x17, 60(%x2)  #1790 pc 40372
+	sw	%x17, 8(%x15)  #1790 pc 40376
+	sw	%x27, 4(%x15)  #1790 pc 40380
+	addi	%x19, %x3, 0  #1798 pc 40384
+	addi	%x3, %x3, 8  #1798 pc 40388
+	addi	%x31, %x0, 20772  #1798 get_nvector_plane.2885 pc 40392
+	addi	%x22, %x31, 0  #1798 pc 40396
+	sw	%x22, 0(%x19)  #1798 pc 40400
+	sw	%x17, 4(%x19)  #1798 pc 40404
+	addi	%x22, %x3, 0  #1806 pc 40408
+	addi	%x3, %x3, 12  #1806 pc 40412
+	addi	%x31, %x0, 20952  #1806 get_nvector_second.2887 pc 40416
+	addi	%x23, %x31, 0  #1806 pc 40420
+	sw	%x23, 0(%x22)  #1806 pc 40424
+	sw	%x17, 8(%x22)  #1806 pc 40428
+	sw	%x28, 4(%x22)  #1806 pc 40432
+	addi	%x23, %x3, 0  #1828 pc 40436
+	addi	%x3, %x3, 16  #1828 pc 40440
+	addi	%x31, %x0, 21680  #1828 get_nvector.2889 pc 40444
+	addi	%x24, %x31, 0  #1828 pc 40448
+	sw	%x24, 0(%x23)  #1828 pc 40452
+	sw	%x22, 12(%x23)  #1828 pc 40456
+	sw	%x15, 8(%x23)  #1828 pc 40460
+	sw	%x19, 4(%x23)  #1828 pc 40464
+	addi	%x15, %x3, 0  #1844 pc 40468
+	addi	%x3, %x3, 8  #1844 pc 40472
+	addi	%x31, %x0, 21824  #1844 utexture.2892 pc 40476
+	addi	%x19, %x31, 0  #1844 pc 40480
+	sw	%x19, 0(%x15)  #1844 pc 40484
+	lw	%x19, 64(%x2)  #1844 pc 40488
+	sw	%x19, 4(%x15)  #1844 pc 40492
+	addi	%x22, %x3, 0  #1922 pc 40496
+	addi	%x3, %x3, 12  #1922 pc 40500
+	addi	%x31, %x0, 23632  #1922 add_light.2895 pc 40504
+	addi	%x24, %x31, 0  #1922 pc 40508
+	sw	%x24, 0(%x22)  #1922 pc 40512
+	sw	%x19, 8(%x22)  #1922 pc 40516
+	lw	%x24, 72(%x2)  #1922 pc 40520
+	sw	%x24, 4(%x22)  #1922 pc 40524
+	addi	%x25, %x3, 0  #1939 pc 40528
+	addi	%x3, %x3, 36  #1939 pc 40532
+	addi	%x31, %x0, 23876  #1939 trace_reflections.2899 pc 40536
+	addi	%x10, %x31, 0  #1939 pc 40540
+	sw	%x10, 0(%x25)  #1939 pc 40544
+	sw	%x26, 32(%x25)  #1939 pc 40548
+	lw	%x10, 136(%x2)  #1939 pc 40552
+	sw	%x10, 28(%x25)  #1939 pc 40556
+	sw	%x7, 24(%x25)  #1939 pc 40560
+	sw	%x17, 20(%x25)  #1939 pc 40564
+	sw	%x12, 16(%x25)  #1939 pc 40568
+	sw	%x27, 12(%x25)  #1939 pc 40572
+	sw	%x20, 8(%x25)  #1939 pc 40576
+	sw	%x22, 4(%x25)  #1939 pc 40580
+	addi	%x10, %x3, 0  #1968 pc 40584
+	addi	%x3, %x3, 84  #1968 pc 40588
+	addi	%x31, %x0, 24464  #1968 trace_ray.2904 pc 40592
+	addi	%x9, %x31, 0  #1968 pc 40596
+	sw	%x9, 0(%x10)  #1968 pc 40600
+	sw	%x15, 80(%x10)  #1968 pc 40604
+	sw	%x25, 76(%x10)  #1968 pc 40608
+	sw	%x29, 72(%x10)  #1968 pc 40612
+	sw	%x19, 68(%x10)  #1968 pc 40616
+	sw	%x30, 64(%x10)  #1968 pc 40620
+	sw	%x26, 60(%x10)  #1968 pc 40624
+	sw	%x21, 56(%x10)  #1968 pc 40628
+	sw	%x24, 52(%x10)  #1968 pc 40632
+	sw	%x7, 48(%x10)  #1968 pc 40636
+	sw	%x16, 44(%x10)  #1968 pc 40640
+	sw	%x17, 40(%x10)  #1968 pc 40644
+	sw	%x6, 36(%x10)  #1968 pc 40648
+	sw	%x13, 32(%x10)  #1968 pc 40652
+	sw	%x18, 28(%x10)  #1968 pc 40656
+	sw	%x27, 24(%x10)  #1968 pc 40660
+	sw	%x28, 20(%x10)  #1968 pc 40664
+	sw	%x20, 16(%x10)  #1968 pc 40668
+	sw	%x23, 12(%x10)  #1968 pc 40672
+	sw	%x14, 8(%x10)  #1968 pc 40676
+	sw	%x22, 4(%x10)  #1968 pc 40680
+	addi	%x9, %x3, 0  #2061 pc 40684
+	addi	%x3, %x3, 52  #2061 pc 40688
+	addi	%x31, %x0, 26288  #2061 trace_diffuse_ray.2910 pc 40692
+	addi	%x14, %x31, 0  #2061 pc 40696
+	sw	%x14, 0(%x9)  #2061 pc 40700
+	sw	%x15, 48(%x9)  #2061 pc 40704
+	sw	%x19, 44(%x9)  #2061 pc 40708
+	sw	%x26, 40(%x9)  #2061 pc 40712
+	sw	%x7, 36(%x9)  #2061 pc 40716
+	sw	%x16, 32(%x9)  #2061 pc 40720
+	sw	%x17, 28(%x9)  #2061 pc 40724
+	sw	%x13, 24(%x9)  #2061 pc 40728
+	sw	%x12, 20(%x9)  #2061 pc 40732
+	sw	%x28, 16(%x9)  #2061 pc 40736
+	sw	%x20, 12(%x9)  #2061 pc 40740
+	sw	%x23, 8(%x9)  #2061 pc 40744
+	lw	%x7, 68(%x2)  #2061 pc 40748
+	sw	%x7, 4(%x9)  #2061 pc 40752
+	addi	%x12, %x3, 0  #2080 pc 40756
+	addi	%x3, %x3, 8  #2080 pc 40760
+	addi	%x31, %x0, 26784  #2080 iter_trace_diffuse_rays.2913 pc 40764
+	addi	%x14, %x31, 0  #2080 pc 40768
+	sw	%x14, 0(%x12)  #2080 pc 40772
+	sw	%x9, 4(%x12)  #2080 pc 40776
+	addi	%x9, %x3, 0  #2096 pc 40780
+	addi	%x3, %x3, 12  #2096 pc 40784
+	addi	%x31, %x0, 27104  #2096 trace_diffuse_rays.2918 pc 40788
+	addi	%x14, %x31, 0  #2096 pc 40792
+	sw	%x14, 0(%x9)  #2096 pc 40796
+	sw	%x21, 8(%x9)  #2096 pc 40800
+	sw	%x12, 4(%x9)  #2096 pc 40804
+	addi	%x12, %x3, 0  #2106 pc 40808
+	addi	%x3, %x3, 12  #2106 pc 40812
+	addi	%x31, %x0, 27192  #2106 trace_diffuse_ray_80percent.2922 pc 40816
+	addi	%x14, %x31, 0  #2106 pc 40820
+	sw	%x14, 0(%x12)  #2106 pc 40824
+	sw	%x9, 8(%x12)  #2106 pc 40828
+	lw	%x14, 116(%x2)  #2106 pc 40832
+	sw	%x14, 4(%x12)  #2106 pc 40836
+	addi	%x15, %x3, 0  #2132 pc 40840
+	addi	%x3, %x3, 16  #2132 pc 40844
+	addi	%x31, %x0, 27588  #2132 calc_diffuse_using_1point.2926 pc 40848
+	addi	%x17, %x31, 0  #2132 pc 40852
+	sw	%x17, 0(%x15)  #2132 pc 40856
+	sw	%x12, 12(%x15)  #2132 pc 40860
+	sw	%x24, 8(%x15)  #2132 pc 40864
+	sw	%x7, 4(%x15)  #2132 pc 40868
+	addi	%x12, %x3, 0  #2151 pc 40872
+	addi	%x3, %x3, 12  #2151 pc 40876
+	addi	%x31, %x0, 27924  #2151 calc_diffuse_using_5points.2929 pc 40880
+	addi	%x17, %x31, 0  #2151 pc 40884
+	sw	%x17, 0(%x12)  #2151 pc 40888
+	sw	%x24, 8(%x12)  #2151 pc 40892
+	sw	%x7, 4(%x12)  #2151 pc 40896
+	addi	%x17, %x3, 0  #2171 pc 40900
+	addi	%x3, %x3, 8  #2171 pc 40904
+	addi	%x31, %x0, 28512  #2171 do_without_neighbors.2935 pc 40908
+	addi	%x18, %x31, 0  #2171 pc 40912
+	sw	%x18, 0(%x17)  #2171 pc 40916
+	sw	%x15, 4(%x17)  #2171 pc 40920
+	addi	%x15, %x3, 0  #2186 pc 40924
+	addi	%x3, %x3, 8  #2186 pc 40928
+	addi	%x31, %x0, 28732  #2186 neighbors_exist.2938 pc 40932
+	addi	%x18, %x31, 0  #2186 pc 40936
+	sw	%x18, 0(%x15)  #2186 pc 40940
+	lw	%x18, 76(%x2)  #2186 pc 40944
+	sw	%x18, 4(%x15)  #2186 pc 40948
+	addi	%x19, %x3, 0  #2223 pc 40952
+	addi	%x3, %x3, 12  #2223 pc 40956
+	addi	%x31, %x0, 29308  #2223 try_exploit_neighbors.2951 pc 40960
+	addi	%x20, %x31, 0  #2223 pc 40964
+	sw	%x20, 0(%x19)  #2223 pc 40968
+	sw	%x17, 8(%x19)  #2223 pc 40972
+	sw	%x12, 4(%x19)  #2223 pc 40976
+	addi	%x12, %x3, 0  #2250 pc 40980
+	addi	%x3, %x3, 8  #2250 pc 40984
+	addi	%x31, %x0, 29680  #2250 write_ppm_header.2958 pc 40988
+	addi	%x20, %x31, 0  #2250 pc 40992
+	sw	%x20, 0(%x12)  #2250 pc 40996
+	sw	%x18, 4(%x12)  #2250 pc 41000
+	addi	%x20, %x3, 0  #2276 pc 41004
+	addi	%x3, %x3, 8  #2276 pc 41008
+	addi	%x31, %x0, 30076  #2276 write_rgb.2964 pc 41012
+	addi	%x21, %x31, 0  #2276 pc 41016
+	sw	%x21, 0(%x20)  #2276 pc 41020
+	sw	%x24, 4(%x20)  #2276 pc 41024
+	addi	%x21, %x3, 0  #2299 pc 41028
+	addi	%x3, %x3, 16  #2299 pc 41032
+	addi	%x31, %x0, 30312  #2299 pretrace_diffuse_rays.2966 pc 41036
+	addi	%x22, %x31, 0  #2299 pc 41040
+	sw	%x22, 0(%x21)  #2299 pc 41044
+	sw	%x9, 12(%x21)  #2299 pc 41048
+	sw	%x14, 8(%x21)  #2299 pc 41052
+	sw	%x7, 4(%x21)  #2299 pc 41056
+	addi	%x7, %x3, 0  #2329 pc 41060
+	addi	%x3, %x3, 40  #2329 pc 41064
+	addi	%x31, %x0, 30772  #2329 pretrace_pixels.2969 pc 41068
+	addi	%x9, %x31, 0  #2329 pc 41072
+	sw	%x9, 0(%x7)  #2329 pc 41076
+	sw	%x8, 36(%x7)  #2329 pc 41080
+	sw	%x10, 32(%x7)  #2329 pc 41084
+	sw	%x30, 28(%x7)  #2329 pc 41088
+	sw	%x11, 24(%x7)  #2329 pc 41092
+	lw	%x8, 84(%x2)  #2329 pc 41096
+	sw	%x8, 20(%x7)  #2329 pc 41100
+	sw	%x24, 16(%x7)  #2329 pc 41104
+	lw	%x9, 108(%x2)  #2329 pc 41108
+	sw	%x9, 12(%x7)  #2329 pc 41112
+	sw	%x21, 8(%x7)  #2329 pc 41116
+	lw	%x9, 80(%x2)  #2329 pc 41120
+	sw	%x9, 4(%x7)  #2329 pc 41124
+	addi	%x10, %x3, 0  #2354 pc 41128
+	addi	%x3, %x3, 28  #2354 pc 41132
+	addi	%x31, %x0, 31420  #2354 pretrace_line.2976 pc 41136
+	addi	%x11, %x31, 0  #2354 pc 41140
+	sw	%x11, 0(%x10)  #2354 pc 41144
+	lw	%x11, 104(%x2)  #2354 pc 41148
+	sw	%x11, 24(%x10)  #2354 pc 41152
+	lw	%x11, 100(%x2)  #2354 pc 41156
+	sw	%x11, 20(%x10)  #2354 pc 41160
+	sw	%x8, 16(%x10)  #2354 pc 41164
+	sw	%x7, 12(%x10)  #2354 pc 41168
+	sw	%x18, 8(%x10)  #2354 pc 41172
+	sw	%x9, 4(%x10)  #2354 pc 41176
+	addi	%x7, %x3, 0  #2370 pc 41180
+	addi	%x3, %x3, 28  #2370 pc 41184
+	addi	%x31, %x0, 31624  #2370 scan_pixel.2980 pc 41188
+	addi	%x11, %x31, 0  #2370 pc 41192
+	sw	%x11, 0(%x7)  #2370 pc 41196
+	sw	%x20, 24(%x7)  #2370 pc 41200
+	sw	%x19, 20(%x7)  #2370 pc 41204
+	sw	%x24, 16(%x7)  #2370 pc 41208
+	sw	%x15, 12(%x7)  #2370 pc 41212
+	sw	%x18, 8(%x7)  #2370 pc 41216
+	sw	%x17, 4(%x7)  #2370 pc 41220
+	addi	%x11, %x3, 0  #2390 pc 41224
+	addi	%x3, %x3, 16  #2390 pc 41228
+	addi	%x31, %x0, 32032  #2390 scan_line.2987 pc 41232
+	addi	%x15, %x31, 0  #2390 pc 41236
+	sw	%x15, 0(%x11)  #2390 pc 41240
+	sw	%x7, 12(%x11)  #2390 pc 41244
+	sw	%x10, 8(%x11)  #2390 pc 41248
+	sw	%x18, 4(%x11)  #2390 pc 41252
+	addi	%x7, %x3, 0  #2442 pc 41256
+	addi	%x3, %x3, 8  #2442 pc 41260
+	addi	%x31, %x0, 32936  #2442 create_pixelline.3001 pc 41264
+	addi	%x15, %x31, 0  #2442 pc 41268
+	sw	%x15, 0(%x7)  #2442 pc 41272
+	sw	%x18, 4(%x7)  #2442 pc 41276
+	addi	%x15, %x3, 0  #2470 pc 41280
+	addi	%x3, %x3, 8  #2470 pc 41284
+	addi	%x31, %x0, 33192  #2470 calc_dirvec.3008 pc 41288
+	addi	%x17, %x31, 0  #2470 pc 41292
+	sw	%x17, 0(%x15)  #2470 pc 41296
+	sw	%x14, 4(%x15)  #2470 pc 41300
+	addi	%x17, %x3, 0  #2491 pc 41304
+	addi	%x3, %x3, 8  #2491 pc 41308
+	addi	%x31, %x0, 34240  #2491 calc_dirvecs.3016 pc 41312
+	addi	%x19, %x31, 0  #2491 pc 41316
+	sw	%x19, 0(%x17)  #2491 pc 41320
+	sw	%x15, 4(%x17)  #2491 pc 41324
+	addi	%x15, %x3, 0  #2505 pc 41328
+	addi	%x3, %x3, 8  #2505 pc 41332
+	addi	%x31, %x0, 34552  #2505 calc_dirvec_rows.3021 pc 41336
+	addi	%x19, %x31, 0  #2505 pc 41340
+	sw	%x19, 0(%x15)  #2505 pc 41344
+	sw	%x17, 4(%x15)  #2505 pc 41348
+	addi	%x17, %x3, 0  #2518 pc 41352
+	addi	%x3, %x3, 8  #2518 pc 41356
+	addi	%x31, %x0, 34748  #2518 create_dirvec.3025 pc 41360
+	addi	%x19, %x31, 0  #2518 pc 41364
+	sw	%x19, 0(%x17)  #2518 pc 41368
+	lw	%x19, 0(%x2)  #2518 pc 41372
+	sw	%x19, 4(%x17)  #2518 pc 41376
+	addi	%x20, %x3, 0  #2524 pc 41380
+	addi	%x3, %x3, 8  #2524 pc 41384
+	addi	%x31, %x0, 34856  #2524 create_dirvec_elements.3027 pc 41388
+	addi	%x21, %x31, 0  #2524 pc 41392
+	sw	%x21, 0(%x20)  #2524 pc 41396
+	sw	%x17, 4(%x20)  #2524 pc 41400
+	addi	%x21, %x3, 0  #2531 pc 41404
+	addi	%x3, %x3, 16  #2531 pc 41408
+	addi	%x31, %x0, 34964  #2531 create_dirvecs.3030 pc 41412
+	addi	%x22, %x31, 0  #2531 pc 41416
+	sw	%x22, 0(%x21)  #2531 pc 41420
+	sw	%x14, 12(%x21)  #2531 pc 41424
+	sw	%x20, 8(%x21)  #2531 pc 41428
+	sw	%x17, 4(%x21)  #2531 pc 41432
+	addi	%x20, %x3, 0  #2543 pc 41436
+	addi	%x3, %x3, 8  #2543 pc 41440
+	addi	%x31, %x0, 35168  #2543 init_dirvec_constants.3032 pc 41444
+	addi	%x22, %x31, 0  #2543 pc 41448
+	sw	%x22, 0(%x20)  #2543 pc 41452
+	lw	%x22, 144(%x2)  #2543 pc 41456
+	sw	%x22, 4(%x20)  #2543 pc 41460
+	addi	%x23, %x3, 0  #2550 pc 41464
+	addi	%x3, %x3, 12  #2550 pc 41468
+	addi	%x31, %x0, 35276  #2550 init_vecset_constants.3035 pc 41472
+	addi	%x24, %x31, 0  #2550 pc 41476
+	sw	%x24, 0(%x23)  #2550 pc 41480
+	sw	%x20, 8(%x23)  #2550 pc 41484
+	sw	%x14, 4(%x23)  #2550 pc 41488
+	addi	%x14, %x3, 0  #2557 pc 41492
+	addi	%x3, %x3, 16  #2557 pc 41496
+	addi	%x31, %x0, 35388  #2557 init_dirvecs.3037 pc 41500
+	addi	%x20, %x31, 0  #2557 pc 41504
+	sw	%x20, 0(%x14)  #2557 pc 41508
+	sw	%x23, 12(%x14)  #2557 pc 41512
+	sw	%x21, 8(%x14)  #2557 pc 41516
+	sw	%x15, 4(%x14)  #2557 pc 41520
+	addi	%x15, %x3, 0  #2568 pc 41524
+	addi	%x3, %x3, 16  #2568 pc 41528
+	addi	%x31, %x0, 35504  #2568 add_reflection.3039 pc 41532
+	addi	%x20, %x31, 0  #2568 pc 41536
+	sw	%x20, 0(%x15)  #2568 pc 41540
+	sw	%x22, 12(%x15)  #2568 pc 41544
+	lw	%x20, 136(%x2)  #2568 pc 41548
+	sw	%x20, 8(%x15)  #2568 pc 41552
+	sw	%x17, 4(%x15)  #2568 pc 41556
+	addi	%x17, %x3, 0  #2577 pc 41560
+	addi	%x3, %x3, 16  #2577 pc 41564
+	addi	%x31, %x0, 35720  #2577 setup_rect_reflection.3046 pc 41568
+	addi	%x20, %x31, 0  #2577 pc 41572
+	sw	%x20, 0(%x17)  #2577 pc 41576
+	sw	%x6, 12(%x17)  #2577 pc 41580
+	sw	%x13, 8(%x17)  #2577 pc 41584
+	sw	%x15, 4(%x17)  #2577 pc 41588
+	addi	%x20, %x3, 0  #2591 pc 41592
+	addi	%x3, %x3, 16  #2591 pc 41596
+	addi	%x31, %x0, 36180  #2591 setup_surface_reflection.3049 pc 41600
+	addi	%x21, %x31, 0  #2591 pc 41604
+	sw	%x21, 0(%x20)  #2591 pc 41608
+	sw	%x6, 12(%x20)  #2591 pc 41612
+	sw	%x13, 8(%x20)  #2591 pc 41616
+	sw	%x15, 4(%x20)  #2591 pc 41620
+	addi	%x6, %x3, 0  #2606 pc 41624
+	addi	%x3, %x3, 16  #2606 pc 41628
+	addi	%x31, %x0, 36628  #2606 setup_reflections.3052 pc 41632
+	addi	%x15, %x31, 0  #2606 pc 41636
+	sw	%x15, 0(%x6)  #2606 pc 41640
+	sw	%x20, 12(%x6)  #2606 pc 41644
+	sw	%x17, 8(%x6)  #2606 pc 41648
+	sw	%x16, 4(%x6)  #2606 pc 41652
+	addi	%x29, %x3, 0  #2628 pc 41656
+	addi	%x3, %x3, 60  #2628 pc 41660
+	addi	%x31, %x0, 36916  #2628 rt.3054 pc 41664
+	addi	%x15, %x31, 0  #2628 pc 41668
+	sw	%x15, 0(%x29)  #2628 pc 41672
+	sw	%x12, 56(%x29)  #2628 pc 41676
+	sw	%x6, 52(%x29)  #2628 pc 41680
+	sw	%x22, 48(%x29)  #2628 pc 41684
+	sw	%x8, 44(%x29)  #2628 pc 41688
+	sw	%x11, 40(%x29)  #2628 pc 41692
+	lw	%x6, 140(%x2)  #2628 pc 41696
+	sw	%x6, 36(%x29)  #2628 pc 41700
+	sw	%x10, 32(%x29)  #2628 pc 41704
+	sw	%x19, 28(%x29)  #2628 pc 41708
+	lw	%x6, 128(%x2)  #2628 pc 41712
+	sw	%x6, 24(%x29)  #2628 pc 41716
+	sw	%x13, 20(%x29)  #2628 pc 41720
+	sw	%x14, 16(%x29)  #2628 pc 41724
+	sw	%x18, 12(%x29)  #2628 pc 41728
+	sw	%x9, 8(%x29)  #2628 pc 41732
+	sw	%x7, 4(%x29)  #2628 pc 41736
+	addi	%x6, %x0, 512  #0 pc 41740
+	addi	%x8, %x0, 3  #0 pc 41744
+	addi	%x7, %x6, 0  #0 pc 41748
+	sw	%x1, 148(%x2)  #2649 pc 41752
+	lw	%x30, 0(%x29)  #2649 pc 41756
+	addi	%x2, %x2, 152  #2649 pc 41760
+	jalr	%x1, %x30, 0  #2649 pc 41764
+	addi	%x2, %x2, -152  #2649 pc 41768
+	lw	%x1, 148(%x2)  #2649 pc 41772

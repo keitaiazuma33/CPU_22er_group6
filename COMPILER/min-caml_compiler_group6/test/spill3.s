@@ -107,17 +107,18 @@ f.227:  #pc 16
 	nop #pc 404
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 0
-	addi	%x3, %x0, 1024
-	addi	%x6, %x0, 0  #0 pc 416
-	sw	%x1, 0(%x2)  #249 pc 420
-	addi	%x2, %x2, 4  #249 pc 424
-	jal	%x1, f.227  #249 pc 428
-	addi	%x2, %x2, -4  #249 pc 432
-	lw	%x1, 0(%x2) #249 pc 436
-	sw	%x1, 0(%x2)  #249 pc 440
-	addi	%x2, %x2, 4  #249 pc 444
-	jal	%x1, print_int.207  #249 pc 448
-	addi	%x2, %x2, -4  #249 pc 452
-	lw	%x1, 0(%x2) #249 pc 456
-	addi	%x2, %x2, 112
+	addi	%x2, %x0, 1000000
+	addi	%x3, %x0, 1002000
+	addi	%x4, %x0, 8192
+	addi	%x5, %x0, 65536
+	addi	%x6, %x0, 0  #0 pc 424
+	sw	%x1, 0(%x2)  #249 pc 428
+	addi	%x2, %x2, 4  #249 pc 432
+	jal	%x1, f.227  #249 pc 436
+	addi	%x2, %x2, -4  #249 pc 440
+	lw	%x1, 0(%x2) #249 pc 444
+	sw	%x1, 0(%x2)  #249 pc 448
+	addi	%x2, %x2, 4  #249 pc 452
+	jal	%x1, print_int.207  #249 pc 456
+	addi	%x2, %x2, -4  #249 pc 460
+	lw	%x1, 0(%x2) #249 pc 464

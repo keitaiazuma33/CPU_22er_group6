@@ -44,17 +44,18 @@ ble_else.340: #pc 124
 	nop #pc 132
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 0
-	addi	%x3, %x0, 1024
-	addi	%x6, %x0, 789  #0 pc 144
-	sw	%x1, 0(%x2)  #217 pc 148
-	addi	%x2, %x2, 4  #217 pc 152
-	jal	%x1, even.188  #217 pc 156
-	addi	%x2, %x2, -4  #217 pc 160
-	lw	%x1, 0(%x2) #217 pc 164
-	sw	%x1, 0(%x2)  #217 pc 168
-	addi	%x2, %x2, 4  #217 pc 172
-	jal	%x1, print_int.166  #217 pc 176
-	addi	%x2, %x2, -4  #217 pc 180
-	lw	%x1, 0(%x2) #217 pc 184
-	addi	%x2, %x2, 112
+	addi	%x2, %x0, 1000000
+	addi	%x3, %x0, 1002000
+	addi	%x4, %x0, 8192
+	addi	%x5, %x0, 65536
+	addi	%x6, %x0, 789  #0 pc 152
+	sw	%x1, 0(%x2)  #217 pc 156
+	addi	%x2, %x2, 4  #217 pc 160
+	jal	%x1, even.188  #217 pc 164
+	addi	%x2, %x2, -4  #217 pc 168
+	lw	%x1, 0(%x2) #217 pc 172
+	sw	%x1, 0(%x2)  #217 pc 176
+	addi	%x2, %x2, 4  #217 pc 180
+	jal	%x1, print_int.166  #217 pc 184
+	addi	%x2, %x2, -4  #217 pc 188
+	lw	%x1, 0(%x2) #217 pc 192

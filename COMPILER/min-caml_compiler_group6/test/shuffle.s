@@ -57,17 +57,18 @@ bar.190:  #pc 164
 	nop #pc 200
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 0
-	addi	%x3, %x0, 1024
-	addi	%x6, %x0, 1  #0 pc 212
-	addi	%x7, %x0, 2  #0 pc 216
-	addi	%x8, %x0, 3  #0 pc 220
-	addi	%x9, %x0, 4  #0 pc 224
-	addi	%x10, %x0, 5  #0 pc 228
-	addi	%x11, %x0, 6  #0 pc 232
-	sw	%x1, 0(%x2)  #216 pc 236
-	addi	%x2, %x2, 4  #216 pc 240
-	jal	%x1, bar.190  #216 pc 244
-	addi	%x2, %x2, -4  #216 pc 248
-	lw	%x1, 0(%x2) #216 pc 252
-	addi	%x2, %x2, 112
+	addi	%x2, %x0, 1000000
+	addi	%x3, %x0, 1002000
+	addi	%x4, %x0, 8192
+	addi	%x5, %x0, 65536
+	addi	%x6, %x0, 1  #0 pc 220
+	addi	%x7, %x0, 2  #0 pc 224
+	addi	%x8, %x0, 3  #0 pc 228
+	addi	%x9, %x0, 4  #0 pc 232
+	addi	%x10, %x0, 5  #0 pc 236
+	addi	%x11, %x0, 6  #0 pc 240
+	sw	%x1, 0(%x2)  #216 pc 244
+	addi	%x2, %x2, 4  #216 pc 248
+	jal	%x1, bar.190  #216 pc 252
+	addi	%x2, %x2, -4  #216 pc 256
+	lw	%x1, 0(%x2) #216 pc 260

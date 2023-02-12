@@ -51,41 +51,42 @@ f.184:  #pc 156
 	nop #pc 164
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 0
-	addi	%x3, %x0, 1024
-	addi	%x6, %x0, 10  #0 pc 176
-	addi	%x7, %x0, 3  #0 pc 180
-	sw	%x1, 0(%x2)  #208 pc 184
-	addi	%x2, %x2, 4  #208 pc 188
-	jal	%x1, create_array.174  #208 pc 192
-	addi	%x2, %x2, -4  #208 pc 196
-	lw	%x1, 0(%x2) #208 pc 200
-	addi	%x7, %x0, 67890  #0 pc 204
-	lw	%x8, 0(%x6)  #210 pc 208
-	addi	%x31, %x0, 3  #pc 212
-	beq	%x8, %x31, 12  #210 pc 216
-	j	be_else.343 #pc 220
-	nop #pc 224
-	sw	%x7, 0(%x2)  #210 pc 228
-	sw	%x6, 4(%x2)  #210 pc 232
-	sw	%x1, 8(%x2)  #210 pc 236
-	addi	%x2, %x2, 12  #210 pc 240
-	jal	%x1, f.184  #210 pc 244
-	addi	%x2, %x2, -12  #210 pc 248
-	lw	%x1, 8(%x2) #210 pc 252
-	lw	%x7, 4(%x2)  #210 pc 256
-	lw	%x7, 4(%x7)  #210 pc 260
-	add	%x6, %x6, %x7  #210 pc 264
-	lw	%x7, 0(%x2)  #210 pc 268
+	addi	%x2, %x0, 1000000
+	addi	%x3, %x0, 1002000
+	addi	%x4, %x0, 8192
+	addi	%x5, %x0, 65536
+	addi	%x6, %x0, 10  #0 pc 184
+	addi	%x7, %x0, 3  #0 pc 188
+	sw	%x1, 0(%x2)  #208 pc 192
+	addi	%x2, %x2, 4  #208 pc 196
+	jal	%x1, create_array.174  #208 pc 200
+	addi	%x2, %x2, -4  #208 pc 204
+	lw	%x1, 0(%x2) #208 pc 208
+	addi	%x7, %x0, 67890  #0 pc 212
+	lw	%x8, 0(%x6)  #210 pc 216
+	addi	%x31, %x0, 3  #pc 220
+	beq	%x8, %x31, 12  #210 pc 224
+	j	be_else.343 #pc 228
+	nop #pc 232
+	sw	%x7, 0(%x2)  #210 pc 236
+	sw	%x6, 4(%x2)  #210 pc 240
+	sw	%x1, 8(%x2)  #210 pc 244
+	addi	%x2, %x2, 12  #210 pc 248
+	jal	%x1, f.184  #210 pc 252
+	addi	%x2, %x2, -12  #210 pc 256
+	lw	%x1, 8(%x2) #210 pc 260
+	lw	%x7, 4(%x2)  #210 pc 264
+	lw	%x7, 4(%x7)  #210 pc 268
 	add	%x6, %x6, %x7  #210 pc 272
-	j	be_cont.344 #pc 276
-	nop #pc 280
-be_else.343: #pc 284
-	addi	%x6, %x0, 7  #0 pc 284
-be_cont.344: #pc 288
-	sw	%x1, 8(%x2)  #210 pc 288
-	addi	%x2, %x2, 12  #210 pc 292
-	jal	%x1, print_int.164  #210 pc 296
-	addi	%x2, %x2, -12  #210 pc 300
-	lw	%x1, 8(%x2) #210 pc 304
-	addi	%x2, %x2, 112
+	lw	%x7, 0(%x2)  #210 pc 276
+	add	%x6, %x6, %x7  #210 pc 280
+	j	be_cont.344 #pc 284
+	nop #pc 288
+be_else.343: #pc 292
+	addi	%x6, %x0, 7  #0 pc 292
+be_cont.344: #pc 296
+	sw	%x1, 8(%x2)  #210 pc 296
+	addi	%x2, %x2, 12  #210 pc 300
+	jal	%x1, print_int.164  #210 pc 304
+	addi	%x2, %x2, -12  #210 pc 308
+	lw	%x1, 8(%x2) #210 pc 312

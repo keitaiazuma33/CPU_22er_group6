@@ -19,19 +19,20 @@ x.179:  #pc 16
 	nop #pc 52
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 0
-	addi	%x3, %x0, 1024
-	addi	%x6, %x0, 125  #0 pc 64
-	sw	%x1, 0(%x2)  #211 pc 68
-	addi	%x2, %x2, 4  #211 pc 72
-	jal	%x1, x.179  #211 pc 76
-	addi	%x2, %x2, -4  #211 pc 80
-	lw	%x1, 0(%x2) #211 pc 84
-	sub	%x7, %x0, %x6  #211 pc 88
-	sub	%x6, %x6, %x7  #211 pc 92
-	sw	%x1, 0(%x2)  #211 pc 96
-	addi	%x2, %x2, 4  #211 pc 100
-	jal	%x1, print_int.159  #211 pc 104
-	addi	%x2, %x2, -4  #211 pc 108
-	lw	%x1, 0(%x2) #211 pc 112
-	addi	%x2, %x2, 112
+	addi	%x2, %x0, 1000000
+	addi	%x3, %x0, 1002000
+	addi	%x4, %x0, 8192
+	addi	%x5, %x0, 65536
+	addi	%x6, %x0, 125  #0 pc 72
+	sw	%x1, 0(%x2)  #211 pc 76
+	addi	%x2, %x2, 4  #211 pc 80
+	jal	%x1, x.179  #211 pc 84
+	addi	%x2, %x2, -4  #211 pc 88
+	lw	%x1, 0(%x2) #211 pc 92
+	sub	%x7, %x0, %x6  #211 pc 96
+	sub	%x6, %x6, %x7  #211 pc 100
+	sw	%x1, 0(%x2)  #211 pc 104
+	addi	%x2, %x2, 4  #211 pc 108
+	jal	%x1, print_int.159  #211 pc 112
+	addi	%x2, %x2, -4  #211 pc 116
+	lw	%x1, 0(%x2) #211 pc 120

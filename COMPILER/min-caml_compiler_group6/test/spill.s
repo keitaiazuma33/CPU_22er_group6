@@ -113,20 +113,21 @@ f.214:  #pc 16
 	nop #pc 428
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 0
-	addi	%x3, %x0, 1024
-	addi	%x6, %x0, 1  #0 pc 440
-	addi	%x7, %x0, 2  #0 pc 444
-	addi	%x8, %x0, 3  #0 pc 448
-	addi	%x9, %x0, 4  #0 pc 452
-	sw	%x1, 0(%x2)  #251 pc 456
-	addi	%x2, %x2, 4  #251 pc 460
-	jal	%x1, f.214  #251 pc 464
-	addi	%x2, %x2, -4  #251 pc 468
-	lw	%x1, 0(%x2) #251 pc 472
-	sw	%x1, 0(%x2)  #251 pc 476
-	addi	%x2, %x2, 4  #251 pc 480
-	jal	%x1, print_int.194  #251 pc 484
-	addi	%x2, %x2, -4  #251 pc 488
-	lw	%x1, 0(%x2) #251 pc 492
-	addi	%x2, %x2, 112
+	addi	%x2, %x0, 1000000
+	addi	%x3, %x0, 1002000
+	addi	%x4, %x0, 8192
+	addi	%x5, %x0, 65536
+	addi	%x6, %x0, 1  #0 pc 448
+	addi	%x7, %x0, 2  #0 pc 452
+	addi	%x8, %x0, 3  #0 pc 456
+	addi	%x9, %x0, 4  #0 pc 460
+	sw	%x1, 0(%x2)  #251 pc 464
+	addi	%x2, %x2, 4  #251 pc 468
+	jal	%x1, f.214  #251 pc 472
+	addi	%x2, %x2, -4  #251 pc 476
+	lw	%x1, 0(%x2) #251 pc 480
+	sw	%x1, 0(%x2)  #251 pc 484
+	addi	%x2, %x2, 4  #251 pc 488
+	jal	%x1, print_int.194  #251 pc 492
+	addi	%x2, %x2, -4  #251 pc 496
+	lw	%x1, 0(%x2) #251 pc 500

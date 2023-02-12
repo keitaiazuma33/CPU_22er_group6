@@ -8,12 +8,13 @@ print_int.153:  #pc 0
 	nop #pc 12
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 0
-	addi	%x3, %x0, 1024
-	addi	%x6, %x0, 6  #0 pc 24
-	sw	%x1, 0(%x2)  #212 pc 28
-	addi	%x2, %x2, 4  #212 pc 32
-	jal	%x1, print_int.153  #212 pc 36
-	addi	%x2, %x2, -4  #212 pc 40
-	lw	%x1, 0(%x2) #212 pc 44
-	addi	%x2, %x2, 112
+	addi	%x2, %x0, 1000000
+	addi	%x3, %x0, 1002000
+	addi	%x4, %x0, 8192
+	addi	%x5, %x0, 65536
+	addi	%x6, %x0, 6  #0 pc 32
+	sw	%x1, 0(%x2)  #212 pc 36
+	addi	%x2, %x2, 4  #212 pc 40
+	jal	%x1, print_int.153  #212 pc 44
+	addi	%x2, %x2, -4  #212 pc 48
+	lw	%x1, 0(%x2) #212 pc 52

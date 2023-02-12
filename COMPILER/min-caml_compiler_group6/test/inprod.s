@@ -82,41 +82,42 @@ inprod.200:  #pc 52
 	nop #pc 264
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 0
-	addi	%x3, %x0, 1024
-	fmv	%f0, l.363  #0 pc 276
-	fmv	%f1, l.365  #0 pc 280
-	fmv	%f2, l.367  #0 pc 284
-	fmv	%f3, l.369  #0 pc 288
-	addi	%x6, %x3, 0  #212 pc 292
-	addi	%x3, %x3, 12  #212 pc 296
-	fsw	%f3, 8(%x6)  #212 pc 300
-	fsw	%f2, 4(%x6)  #212 pc 304
-	fsw	%f1, 0(%x6)  #212 pc 308
-	fmv	%f1, l.375  #0 pc 312
-	fmv	%f2, l.377  #0 pc 316
-	fmv	%f3, l.379  #0 pc 320
-	addi	%x7, %x3, 0  #212 pc 324
-	addi	%x3, %x3, 12  #212 pc 328
-	fsw	%f3, 8(%x7)  #212 pc 332
-	fsw	%f2, 4(%x7)  #212 pc 336
-	fsw	%f1, 0(%x7)  #212 pc 340
-	fsw	%f0, 0(%x2)  #212 pc 344
-	sw	%x1, 8(%x2)  #212 pc 348
-	addi	%x2, %x2, 12  #212 pc 352
-	jal	%x1, inprod.200  #212 pc 356
-	addi	%x2, %x2, -12  #212 pc 360
-	lw	%x1, 8(%x2) #212 pc 364
-	flw	%f1, 0(%x2)  #212 pc 368
-	fmul	%f0, %f1, %f0  #212 pc 372
-	sw	%x1, 8(%x2)  #212 pc 376
-	addi	%x2, %x2, 12  #212 pc 380
-	jal	%x1, min_caml_truncate  #212 pc 384
-	addi	%x2, %x2, -12  #212 pc 388
-	lw	%x1, 8(%x2) #212 pc 392
-	sw	%x1, 8(%x2)  #212 pc 396
-	addi	%x2, %x2, 12  #212 pc 400
-	jal	%x1, print_int.174  #212 pc 404
-	addi	%x2, %x2, -12  #212 pc 408
-	lw	%x1, 8(%x2) #212 pc 412
-	addi	%x2, %x2, 112
+	addi	%x2, %x0, 1000000
+	addi	%x3, %x0, 1002000
+	addi	%x4, %x0, 8192
+	addi	%x5, %x0, 65536
+	fmv	%f0, l.363  #0 pc 284
+	fmv	%f1, l.365  #0 pc 288
+	fmv	%f2, l.367  #0 pc 292
+	fmv	%f3, l.369  #0 pc 296
+	addi	%x6, %x3, 0  #212 pc 300
+	addi	%x3, %x3, 12  #212 pc 304
+	fsw	%f3, 8(%x6)  #212 pc 308
+	fsw	%f2, 4(%x6)  #212 pc 312
+	fsw	%f1, 0(%x6)  #212 pc 316
+	fmv	%f1, l.375  #0 pc 320
+	fmv	%f2, l.377  #0 pc 324
+	fmv	%f3, l.379  #0 pc 328
+	addi	%x7, %x3, 0  #212 pc 332
+	addi	%x3, %x3, 12  #212 pc 336
+	fsw	%f3, 8(%x7)  #212 pc 340
+	fsw	%f2, 4(%x7)  #212 pc 344
+	fsw	%f1, 0(%x7)  #212 pc 348
+	fsw	%f0, 0(%x2)  #212 pc 352
+	sw	%x1, 8(%x2)  #212 pc 356
+	addi	%x2, %x2, 12  #212 pc 360
+	jal	%x1, inprod.200  #212 pc 364
+	addi	%x2, %x2, -12  #212 pc 368
+	lw	%x1, 8(%x2) #212 pc 372
+	flw	%f1, 0(%x2)  #212 pc 376
+	fmul	%f0, %f1, %f0  #212 pc 380
+	sw	%x1, 8(%x2)  #212 pc 384
+	addi	%x2, %x2, 12  #212 pc 388
+	jal	%x1, min_caml_truncate  #212 pc 392
+	addi	%x2, %x2, -12  #212 pc 396
+	lw	%x1, 8(%x2) #212 pc 400
+	sw	%x1, 8(%x2)  #212 pc 404
+	addi	%x2, %x2, 12  #212 pc 408
+	jal	%x1, print_int.174  #212 pc 412
+	addi	%x2, %x2, -12  #212 pc 416
+	lw	%x1, 8(%x2) #212 pc 420

@@ -74,18 +74,19 @@ bge_else.337: #pc 248
 	nop #pc 252
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 0
-	addi	%x3, %x0, 1024
-	addi	%x29, %x3, 0  #209 pc 264
-	addi	%x3, %x3, 4  #209 pc 268
-	addi	%x31, %x0, 156  #209 f.180 pc 272
-	addi	%x6, %x31, 0  #209 pc 276
-	sw	%x6, 0(%x29)  #209 pc 280
-	addi	%x6, %x0, 9  #0 pc 284
-	sw	%x1, 0(%x2)  #214 pc 288
-	lw	%x30, 0(%x29)  #214 pc 292
-	addi	%x2, %x2, 4  #214 pc 296
-	jalr	%x1, %x30, 0  #214 pc 300
-	addi	%x2, %x2, -4  #214 pc 304
-	lw	%x1, 0(%x2)  #214 pc 308
-	addi	%x2, %x2, 112
+	addi	%x2, %x0, 1000000
+	addi	%x3, %x0, 1002000
+	addi	%x4, %x0, 8192
+	addi	%x5, %x0, 65536
+	addi	%x29, %x3, 0  #209 pc 272
+	addi	%x3, %x3, 4  #209 pc 276
+	addi	%x31, %x0, 156  #209 f.180 pc 280
+	addi	%x6, %x31, 0  #209 pc 284
+	sw	%x6, 0(%x29)  #209 pc 288
+	addi	%x6, %x0, 9  #0 pc 292
+	sw	%x1, 0(%x2)  #214 pc 296
+	lw	%x30, 0(%x29)  #214 pc 300
+	addi	%x2, %x2, 4  #214 pc 304
+	jalr	%x1, %x30, 0  #214 pc 308
+	addi	%x2, %x2, -4  #214 pc 312
+	lw	%x1, 0(%x2)  #214 pc 316

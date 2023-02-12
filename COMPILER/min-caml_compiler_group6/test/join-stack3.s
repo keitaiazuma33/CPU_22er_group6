@@ -20,36 +20,37 @@ h.185:  #pc 40
 	nop #pc 48
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 0
-	addi	%x3, %x0, 1024
-	sw	%x1, 0(%x2)  #211 pc 60
-	addi	%x2, %x2, 4  #211 pc 64
-	jal	%x1, f.181  #211 pc 68
-	addi	%x2, %x2, -4  #211 pc 72
-	lw	%x1, 0(%x2) #211 pc 76
-	sw	%x6, 0(%x2)  #212 pc 80
-	bge	%x0, %x6, 12  #212 pc 84
-	j	ble_else.329 #pc 88
-	nop #pc 92
-	sw	%x1, 4(%x2)  #212 pc 96
-	addi	%x2, %x2, 8  #212 pc 100
-	jal	%x1, g.183  #212 pc 104
-	addi	%x2, %x2, -8  #212 pc 108
-	lw	%x1, 4(%x2) #212 pc 112
-	j	ble_cont.330 #pc 116
-	nop #pc 120
-ble_else.329: #pc 124
-	sw	%x1, 4(%x2)  #212 pc 124
-	addi	%x2, %x2, 8  #212 pc 128
-	jal	%x1, h.185  #212 pc 132
-	addi	%x2, %x2, -8  #212 pc 136
-	lw	%x1, 4(%x2) #212 pc 140
-ble_cont.330: #pc 144
-	lw	%x7, 0(%x2)  #212 pc 144
-	add	%x6, %x6, %x7  #212 pc 148
-	sw	%x1, 4(%x2)  #212 pc 152
-	addi	%x2, %x2, 8  #212 pc 156
-	jal	%x1, print_int.161  #212 pc 160
-	addi	%x2, %x2, -8  #212 pc 164
-	lw	%x1, 4(%x2) #212 pc 168
-	addi	%x2, %x2, 112
+	addi	%x2, %x0, 1000000
+	addi	%x3, %x0, 1002000
+	addi	%x4, %x0, 8192
+	addi	%x5, %x0, 65536
+	sw	%x1, 0(%x2)  #211 pc 68
+	addi	%x2, %x2, 4  #211 pc 72
+	jal	%x1, f.181  #211 pc 76
+	addi	%x2, %x2, -4  #211 pc 80
+	lw	%x1, 0(%x2) #211 pc 84
+	sw	%x6, 0(%x2)  #212 pc 88
+	bge	%x0, %x6, 12  #212 pc 92
+	j	ble_else.329 #pc 96
+	nop #pc 100
+	sw	%x1, 4(%x2)  #212 pc 104
+	addi	%x2, %x2, 8  #212 pc 108
+	jal	%x1, g.183  #212 pc 112
+	addi	%x2, %x2, -8  #212 pc 116
+	lw	%x1, 4(%x2) #212 pc 120
+	j	ble_cont.330 #pc 124
+	nop #pc 128
+ble_else.329: #pc 132
+	sw	%x1, 4(%x2)  #212 pc 132
+	addi	%x2, %x2, 8  #212 pc 136
+	jal	%x1, h.185  #212 pc 140
+	addi	%x2, %x2, -8  #212 pc 144
+	lw	%x1, 4(%x2) #212 pc 148
+ble_cont.330: #pc 152
+	lw	%x7, 0(%x2)  #212 pc 152
+	add	%x6, %x6, %x7  #212 pc 156
+	sw	%x1, 4(%x2)  #212 pc 160
+	addi	%x2, %x2, 8  #212 pc 164
+	jal	%x1, print_int.161  #212 pc 168
+	addi	%x2, %x2, -8  #212 pc 172
+	lw	%x1, 4(%x2) #212 pc 176

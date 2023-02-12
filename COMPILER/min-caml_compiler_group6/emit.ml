@@ -347,11 +347,13 @@ let f oc (Prog(data, fundefs, e)) =
   Printf.fprintf oc ".global\tmin_caml_start\n";
   Printf.fprintf oc "min_caml_start:\n";
   (*Printf.fprintf oc "\tsave\t%%sp, -112, %%sp\n";  from gcc; why 112? *)
-  incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 0\n" reg_sp reg_zero;
-  incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 1024\n" reg_hp reg_zero;
+  incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 1000000\n" reg_sp reg_zero;
+  incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 1002000\n" reg_hp reg_zero;
+  incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 8192\n" reg_in reg_zero;
+  incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 65536\n" reg_out reg_zero;
   stackset := S.empty;
   stackmap := [];
   g oc (NonTail("%g0"), e);
   (* Printf.fprintf oc "\tret\n"; *)
   (* Printf.fprintf oc "\trestore\n" *)
-  incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 112\n" reg_sp reg_sp;
+  (*incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 112\n" reg_sp reg_sp;*)

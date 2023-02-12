@@ -23,25 +23,26 @@ make_adder.176:  #pc 32
 	nop #pc 64
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 0
-	addi	%x3, %x0, 1024
-	addi	%x6, %x0, 3  #0 pc 76
-	sw	%x1, 0(%x2)  #210 pc 80
-	addi	%x2, %x2, 4  #210 pc 84
-	jal	%x1, make_adder.176  #210 pc 88
-	addi	%x2, %x2, -4  #210 pc 92
-	lw	%x1, 0(%x2) #210 pc 96
-	addi	%x29, %x6, 0  #210 pc 100
-	addi	%x6, %x0, 7  #0 pc 104
-	sw	%x1, 0(%x2)  #210 pc 108
-	lw	%x30, 0(%x29)  #210 pc 112
-	addi	%x2, %x2, 4  #210 pc 116
-	jalr	%x1, %x30, 0  #210 pc 120
-	addi	%x2, %x2, -4  #210 pc 124
-	lw	%x1, 0(%x2)  #210 pc 128
-	sw	%x1, 0(%x2)  #210 pc 132
-	addi	%x2, %x2, 4  #210 pc 136
-	jal	%x1, print_int.156  #210 pc 140
-	addi	%x2, %x2, -4  #210 pc 144
-	lw	%x1, 0(%x2) #210 pc 148
-	addi	%x2, %x2, 112
+	addi	%x2, %x0, 1000000
+	addi	%x3, %x0, 1002000
+	addi	%x4, %x0, 8192
+	addi	%x5, %x0, 65536
+	addi	%x6, %x0, 3  #0 pc 84
+	sw	%x1, 0(%x2)  #210 pc 88
+	addi	%x2, %x2, 4  #210 pc 92
+	jal	%x1, make_adder.176  #210 pc 96
+	addi	%x2, %x2, -4  #210 pc 100
+	lw	%x1, 0(%x2) #210 pc 104
+	addi	%x29, %x6, 0  #210 pc 108
+	addi	%x6, %x0, 7  #0 pc 112
+	sw	%x1, 0(%x2)  #210 pc 116
+	lw	%x30, 0(%x29)  #210 pc 120
+	addi	%x2, %x2, 4  #210 pc 124
+	jalr	%x1, %x30, 0  #210 pc 128
+	addi	%x2, %x2, -4  #210 pc 132
+	lw	%x1, 0(%x2)  #210 pc 136
+	sw	%x1, 0(%x2)  #210 pc 140
+	addi	%x2, %x2, 4  #210 pc 144
+	jal	%x1, print_int.156  #210 pc 148
+	addi	%x2, %x2, -4  #210 pc 152
+	lw	%x1, 0(%x2) #210 pc 156

@@ -45,48 +45,49 @@ dec.185:  #pc 132
 	nop #pc 140
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 0
-	addi	%x3, %x0, 1024
-	addi	%x6, %x3, 0  #210 pc 152
-	addi	%x3, %x3, 4  #210 pc 156
-	addi	%x31, %x0, 108  #210 dbl.181 pc 160
-	addi	%x7, %x31, 0  #210 pc 164
-	sw	%x7, 0(%x6)  #210 pc 168
-	addi	%x7, %x3, 0  #211 pc 172
-	addi	%x3, %x3, 4  #211 pc 176
-	addi	%x31, %x0, 120  #211 inc.183 pc 180
-	addi	%x8, %x31, 0  #211 pc 184
-	sw	%x8, 0(%x7)  #211 pc 188
-	addi	%x8, %x3, 0  #212 pc 192
-	addi	%x3, %x3, 4  #212 pc 196
-	addi	%x31, %x0, 132  #212 dec.185 pc 200
-	addi	%x9, %x31, 0  #212 pc 204
-	sw	%x9, 0(%x8)  #212 pc 208
-	sw	%x7, 0(%x2)  #213 pc 212
-	addi	%x7, %x8, 0  #0 pc 216
-	sw	%x1, 4(%x2)  #213 pc 220
-	addi	%x2, %x2, 8  #213 pc 224
-	jal	%x1, compose.178  #213 pc 228
-	addi	%x2, %x2, -8  #213 pc 232
-	lw	%x1, 4(%x2) #213 pc 236
-	addi	%x7, %x6, 0  #213 pc 240
-	lw	%x6, 0(%x2)  #213 pc 244
-	sw	%x1, 4(%x2)  #213 pc 248
-	addi	%x2, %x2, 8  #213 pc 252
-	jal	%x1, compose.178  #213 pc 256
-	addi	%x2, %x2, -8  #213 pc 260
-	lw	%x1, 4(%x2) #213 pc 264
-	addi	%x29, %x6, 0  #213 pc 268
-	addi	%x6, %x0, 123  #0 pc 272
-	sw	%x1, 4(%x2)  #214 pc 276
-	lw	%x30, 0(%x29)  #214 pc 280
-	addi	%x2, %x2, 8  #214 pc 284
-	jalr	%x1, %x30, 0  #214 pc 288
-	addi	%x2, %x2, -8  #214 pc 292
-	lw	%x1, 4(%x2)  #214 pc 296
-	sw	%x1, 4(%x2)  #214 pc 300
-	addi	%x2, %x2, 8  #214 pc 304
-	jal	%x1, print_int.158  #214 pc 308
-	addi	%x2, %x2, -8  #214 pc 312
-	lw	%x1, 4(%x2) #214 pc 316
-	addi	%x2, %x2, 112
+	addi	%x2, %x0, 1000000
+	addi	%x3, %x0, 1002000
+	addi	%x4, %x0, 8192
+	addi	%x5, %x0, 65536
+	addi	%x6, %x3, 0  #210 pc 160
+	addi	%x3, %x3, 4  #210 pc 164
+	addi	%x31, %x0, 108  #210 dbl.181 pc 168
+	addi	%x7, %x31, 0  #210 pc 172
+	sw	%x7, 0(%x6)  #210 pc 176
+	addi	%x7, %x3, 0  #211 pc 180
+	addi	%x3, %x3, 4  #211 pc 184
+	addi	%x31, %x0, 120  #211 inc.183 pc 188
+	addi	%x8, %x31, 0  #211 pc 192
+	sw	%x8, 0(%x7)  #211 pc 196
+	addi	%x8, %x3, 0  #212 pc 200
+	addi	%x3, %x3, 4  #212 pc 204
+	addi	%x31, %x0, 132  #212 dec.185 pc 208
+	addi	%x9, %x31, 0  #212 pc 212
+	sw	%x9, 0(%x8)  #212 pc 216
+	sw	%x7, 0(%x2)  #213 pc 220
+	addi	%x7, %x8, 0  #0 pc 224
+	sw	%x1, 4(%x2)  #213 pc 228
+	addi	%x2, %x2, 8  #213 pc 232
+	jal	%x1, compose.178  #213 pc 236
+	addi	%x2, %x2, -8  #213 pc 240
+	lw	%x1, 4(%x2) #213 pc 244
+	addi	%x7, %x6, 0  #213 pc 248
+	lw	%x6, 0(%x2)  #213 pc 252
+	sw	%x1, 4(%x2)  #213 pc 256
+	addi	%x2, %x2, 8  #213 pc 260
+	jal	%x1, compose.178  #213 pc 264
+	addi	%x2, %x2, -8  #213 pc 268
+	lw	%x1, 4(%x2) #213 pc 272
+	addi	%x29, %x6, 0  #213 pc 276
+	addi	%x6, %x0, 123  #0 pc 280
+	sw	%x1, 4(%x2)  #214 pc 284
+	lw	%x30, 0(%x29)  #214 pc 288
+	addi	%x2, %x2, 8  #214 pc 292
+	jalr	%x1, %x30, 0  #214 pc 296
+	addi	%x2, %x2, -8  #214 pc 300
+	lw	%x1, 4(%x2)  #214 pc 304
+	sw	%x1, 4(%x2)  #214 pc 308
+	addi	%x2, %x2, 8  #214 pc 312
+	jal	%x1, print_int.158  #214 pc 316
+	addi	%x2, %x2, -8  #214 pc 320
+	lw	%x1, 4(%x2) #214 pc 324

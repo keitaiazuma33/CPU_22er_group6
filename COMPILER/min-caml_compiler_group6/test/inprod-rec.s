@@ -77,44 +77,45 @@ bge_else.363: #pc 240
 	nop #pc 248
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 0
-	addi	%x3, %x0, 1024
-	addi	%x6, %x0, 3  #0 pc 260
-	fmv	%f0, l.345  #0 pc 264
-	sw	%x1, 0(%x2)  #210 pc 268
-	addi	%x2, %x2, 4  #210 pc 272
-	jal	%x1, create_float_array.185  #210 pc 276
-	addi	%x2, %x2, -4  #210 pc 280
-	lw	%x1, 0(%x2) #210 pc 284
-	addi	%x7, %x0, 3  #0 pc 288
-	fmv	%f0, l.347  #0 pc 292
-	sw	%x6, 0(%x2)  #211 pc 296
-	addi	%x6, %x7, 0  #0 pc 300
-	sw	%x1, 4(%x2)  #211 pc 304
-	addi	%x2, %x2, 8  #211 pc 308
-	jal	%x1, create_float_array.185  #211 pc 312
-	addi	%x2, %x2, -8  #211 pc 316
-	lw	%x1, 4(%x2) #211 pc 320
-	addi	%x7, %x6, 0  #211 pc 324
-	fmv	%f0, l.349  #0 pc 328
-	addi	%x8, %x0, 2  #0 pc 332
-	lw	%x6, 0(%x2)  #212 pc 336
-	fsw	%f0, 8(%x2)  #212 pc 340
-	sw	%x1, 16(%x2)  #212 pc 344
-	addi	%x2, %x2, 20  #212 pc 348
-	jal	%x1, inprod.188  #212 pc 352
-	addi	%x2, %x2, -20  #212 pc 356
-	lw	%x1, 16(%x2) #212 pc 360
-	flw	%f1, 8(%x2)  #212 pc 364
-	fmul	%f0, %f1, %f0  #212 pc 368
-	sw	%x1, 16(%x2)  #212 pc 372
-	addi	%x2, %x2, 20  #212 pc 376
-	jal	%x1, min_caml_truncate  #212 pc 380
-	addi	%x2, %x2, -20  #212 pc 384
-	lw	%x1, 16(%x2) #212 pc 388
-	sw	%x1, 16(%x2)  #212 pc 392
-	addi	%x2, %x2, 20  #212 pc 396
-	jal	%x1, print_int.168  #212 pc 400
-	addi	%x2, %x2, -20  #212 pc 404
-	lw	%x1, 16(%x2) #212 pc 408
-	addi	%x2, %x2, 112
+	addi	%x2, %x0, 1000000
+	addi	%x3, %x0, 1002000
+	addi	%x4, %x0, 8192
+	addi	%x5, %x0, 65536
+	addi	%x6, %x0, 3  #0 pc 268
+	fmv	%f0, l.345  #0 pc 272
+	sw	%x1, 0(%x2)  #210 pc 276
+	addi	%x2, %x2, 4  #210 pc 280
+	jal	%x1, create_float_array.185  #210 pc 284
+	addi	%x2, %x2, -4  #210 pc 288
+	lw	%x1, 0(%x2) #210 pc 292
+	addi	%x7, %x0, 3  #0 pc 296
+	fmv	%f0, l.347  #0 pc 300
+	sw	%x6, 0(%x2)  #211 pc 304
+	addi	%x6, %x7, 0  #0 pc 308
+	sw	%x1, 4(%x2)  #211 pc 312
+	addi	%x2, %x2, 8  #211 pc 316
+	jal	%x1, create_float_array.185  #211 pc 320
+	addi	%x2, %x2, -8  #211 pc 324
+	lw	%x1, 4(%x2) #211 pc 328
+	addi	%x7, %x6, 0  #211 pc 332
+	fmv	%f0, l.349  #0 pc 336
+	addi	%x8, %x0, 2  #0 pc 340
+	lw	%x6, 0(%x2)  #212 pc 344
+	fsw	%f0, 8(%x2)  #212 pc 348
+	sw	%x1, 16(%x2)  #212 pc 352
+	addi	%x2, %x2, 20  #212 pc 356
+	jal	%x1, inprod.188  #212 pc 360
+	addi	%x2, %x2, -20  #212 pc 364
+	lw	%x1, 16(%x2) #212 pc 368
+	flw	%f1, 8(%x2)  #212 pc 372
+	fmul	%f0, %f1, %f0  #212 pc 376
+	sw	%x1, 16(%x2)  #212 pc 380
+	addi	%x2, %x2, 20  #212 pc 384
+	jal	%x1, min_caml_truncate  #212 pc 388
+	addi	%x2, %x2, -20  #212 pc 392
+	lw	%x1, 16(%x2) #212 pc 396
+	sw	%x1, 16(%x2)  #212 pc 400
+	addi	%x2, %x2, 20  #212 pc 404
+	jal	%x1, print_int.168  #212 pc 408
+	addi	%x2, %x2, -20  #212 pc 412
+	lw	%x1, 16(%x2) #212 pc 416
