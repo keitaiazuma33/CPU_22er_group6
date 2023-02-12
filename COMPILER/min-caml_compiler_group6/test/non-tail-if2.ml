@@ -93,7 +93,7 @@ let rec div a b =
     -abs_div
 in
 
-(*let rec print_char a = output a 
+let rec print_char a = output a 
 in
 
 let rec print_int a =
@@ -107,10 +107,10 @@ let rec print_int a =
       let b = div a 10 in
       (print_int b;
       output (a - (mul b 10) + 48))
-in*)
-
-let rec print_int a = outi a 
 in
+
+(*let rec print_int a = outi a 
+in*)
 
 let rec read_int a = ini a
 in

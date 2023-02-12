@@ -1,19 +1,19 @@
 LET REC fiszero x 
-	LET Td161
+	LET Td175
 		FLOAT 0.000000
-		IFEQ x Td161
+		IFEQ x Td175
 			INT 1
 			INT 0
 	LET REC fispos x 
-		LET Td160
+		LET Td174
 			FLOAT 0.000000
-			IFLE x Td160
+			IFLE x Td174
 				INT 0
 				INT 1
 		LET REC fisneg x 
-			LET Td159
+			LET Td173
 				FLOAT 0.000000
-				IFLE Td159 x
+				IFLE Td173 x
 					INT 0
 					INT 1
 			LET REC fneg x 
@@ -21,9 +21,9 @@ LET REC fiszero x
 				LET REC fsqr x 
 					FMUL x x
 					LET REC fhalf x 
-						LET Td158
+						LET Td172
 							FLOAT 0.500000
-							FMUL Td158 x
+							FMUL Td172 x
 						LET REC fless x y 
 							IFLE y x
 								INT 0
@@ -37,23 +37,23 @@ LET REC fiszero x
 											FMUL x3 x2
 											LET x7
 												FMUL x5 x2
-												LET Td155
-													LET Td152
-														LET Td151
-															LET Td150
+												LET Td169
+													LET Td166
+														LET Td165
+															LET Td164
 																FLOAT 0.166667
-																FMUL Td150 x3
-															FSUB x Td151
-														LET Td154
-															LET Td153
+																FMUL Td164 x3
+															FSUB x Td165
+														LET Td168
+															LET Td167
 																FLOAT 0.008333
-																FMUL Td153 x5
-															FADD Td152 Td154
-													LET Td157
-														LET Td156
+																FMUL Td167 x5
+															FADD Td166 Td168
+													LET Td171
+														LET Td170
 															FLOAT 0.000198
-															FMUL Td156 x7
-														FSUB Td155 Td157
+															FMUL Td170 x7
+														FSUB Td169 Td171
 								LET REC cos x 
 									LET x2
 										FMUL x x
@@ -61,25 +61,25 @@ LET REC fiszero x
 											FMUL x2 x2
 											LET x6
 												FMUL x4 x2
-												LET Td147
-													LET Td144
-														LET Td141
+												LET Td161
+													LET Td158
+														LET Td155
 															FLOAT 1.000000
-															LET Td143
-																LET Td142
+															LET Td157
+																LET Td156
 																	FLOAT 0.500000
-																	FMUL Td142 x2
-																FSUB Td141 Td143
-														LET Td146
-															LET Td145
+																	FMUL Td156 x2
+																FSUB Td155 Td157
+														LET Td160
+															LET Td159
 																FLOAT 0.041667
-																FMUL Td145 x4
-															FADD Td144 Td146
-													LET Td149
-														LET Td148
+																FMUL Td159 x4
+															FADD Td158 Td160
+													LET Td163
+														LET Td162
 															FLOAT 0.001389
-															FMUL Td148 x6
-														FSUB Td147 Td149
+															FMUL Td162 x6
+														FSUB Td161 Td163
 									LET REC atan x 
 										LET x2
 											FMUL x x
@@ -93,49 +93,49 @@ LET REC fiszero x
 															FMUL x7 x2
 															LET x11
 																FMUL x9 x2
-																LET Td138
-																	LET Td135
-																		LET Td132
-																			LET Td129
-																				LET Td128
-																					LET Td127
+																LET Td152
+																	LET Td149
+																		LET Td146
+																			LET Td143
+																				LET Td142
+																					LET Td141
 																						FLOAT 0.333333
-																						FMUL Td127 x3
-																					FSUB x Td128
-																				LET Td131
-																					LET Td130
+																						FMUL Td141 x3
+																					FSUB x Td142
+																				LET Td145
+																					LET Td144
 																						FLOAT 0.200000
-																						FMUL Td130 x5
-																					FADD Td129 Td131
-																			LET Td134
-																				LET Td133
+																						FMUL Td144 x5
+																					FADD Td143 Td145
+																			LET Td148
+																				LET Td147
 																					FLOAT 0.142857
-																					FMUL Td133 x7
-																				FSUB Td132 Td134
-																		LET Td137
-																			LET Td136
+																					FMUL Td147 x7
+																				FSUB Td146 Td148
+																		LET Td151
+																			LET Td150
 																				FLOAT 0.111111
-																				FMUL Td136 x9
-																			FADD Td135 Td137
-																	LET Td140
-																		LET Td139
+																				FMUL Td150 x9
+																			FADD Td149 Td151
+																	LET Td154
+																		LET Td153
 																			FLOAT 0.090909
-																			FMUL Td139 x11
-																		FSUB Td138 Td140
+																			FMUL Td153 x11
+																		FSUB Td152 Td154
 										LET REC floor x 
-											LET Td122
+											LET Td136
 												FLOAT 0.000000
-												IFLE Td122 x
-													LET Ti123
+												IFLE Td136 x
+													LET Ti137
 														FTOI x 
-														ITOF Ti123 
-													LET Ti126
-														LET Td125
-															LET Td124
+														ITOF Ti137 
+													LET Ti140
+														LET Td139
+															LET Td138
 																FLOAT 1.000000
-																FSUB x Td124
-															FTOI Td125 
-														ITOF Ti126 
+																FSUB x Td138
+															FTOI Td139 
+														ITOF Ti140 
 											LET REC abs_float x 
 												FABS x 
 												LET REC float_of_int x 
@@ -143,389 +143,425 @@ LET REC fiszero x
 													LET REC int_of_float x 
 														FTOI x 
 														LET REC mul_abs a b i acc 
-															LET Ti111
-																LET Ti110
+															LET Ti125
+																LET Ti124
 																	INT 1
-																	NEG Ti110
-																IFEQ i Ti111
+																	NEG Ti124
+																IFEQ i Ti125
 																	VAR acc
-																	LET Ti114
-																		LET Ti113
-																			LET Ti112
+																	LET Ti128
+																		LET Ti127
+																			LET Ti126
 																				INT 1
-																				SLL Ti112 i
-																			AND b Ti113
-																		LET Ti115
+																				SLL Ti126 i
+																			AND b Ti127
+																		LET Ti129
 																			INT 0
-																			IFEQ Ti114 Ti115
-																				LET Ti117
-																					LET Ti116
+																			IFEQ Ti128 Ti129
+																				LET Ti131
+																					LET Ti130
 																						INT 1
-																						SUB i Ti116
-																					APP mul_abs a b Ti117 acc 
-																				LET Ti119
-																					LET Ti118
+																						SUB i Ti130
+																					APP mul_abs a b Ti131 acc 
+																				LET Ti133
+																					LET Ti132
 																						INT 1
-																						SUB i Ti118
-																					LET Ti121
-																						LET Ti120
+																						SUB i Ti132
+																					LET Ti135
+																						LET Ti134
 																							SLL a i
-																							ADD acc Ti120
-																						APP mul_abs a b Ti119 Ti121 
+																							ADD acc Ti134
+																						APP mul_abs a b Ti133 Ti135 
 															LET REC mul a b 
 																LET abs_a
-																	LET Ti102
+																	LET Ti116
 																		INT 0
-																		IFLE Ti102 a
+																		IFLE Ti116 a
 																			VAR a
 																			NEG a
 																	LET abs_b
-																		LET Ti103
+																		LET Ti117
 																			INT 0
-																			IFLE Ti103 b
+																			IFLE Ti117 b
 																				VAR b
 																				NEG b
 																		LET abs_mul
-																			LET Ti104
+																			LET Ti118
 																				INT 30
-																				LET Ti105
+																				LET Ti119
 																					INT 0
-																					APP mul_abs abs_a abs_b Ti104 Ti105 
-																			LET Ti107
-																				LET Ti106
+																					APP mul_abs abs_a abs_b Ti118 Ti119 
+																			LET Ti121
+																				LET Ti120
 																					INT 31
-																					SRL a Ti106
-																				LET Ti109
-																					LET Ti108
+																					SRL a Ti120
+																				LET Ti123
+																					LET Ti122
 																						INT 31
-																						SRL b Ti108
-																					IFEQ Ti107 Ti109
+																						SRL b Ti122
+																					IFEQ Ti121 Ti123
 																						VAR abs_mul
 																						NEG abs_mul
 																LET REC div_abs a b i acc 
-																	LET Ti91
-																		LET Ti90
+																	LET Ti105
+																		LET Ti104
 																			INT 1
-																			NEG Ti90
-																		IFEQ i Ti91
+																			NEG Ti104
+																		IFEQ i Ti105
 																			VAR acc
-																			LET Ti92
+																			LET Ti106
 																				SRL a i
-																				IFLE b Ti92
-																					LET Ti94
-																						LET Ti93
+																				IFLE b Ti106
+																					LET Ti108
+																						LET Ti107
 																							SLL b i
-																							SUB a Ti93
-																						LET Ti96
-																							LET Ti95
+																							SUB a Ti107
+																						LET Ti110
+																							LET Ti109
 																								INT 1
-																								SUB i Ti95
-																							LET Ti99
-																								LET Ti98
-																									LET Ti97
+																								SUB i Ti109
+																							LET Ti113
+																								LET Ti112
+																									LET Ti111
 																										INT 1
-																										SLL Ti97 i
-																									ADD acc Ti98
-																								APP div_abs Ti94 b Ti96 Ti99 
-																					LET Ti101
-																						LET Ti100
+																										SLL Ti111 i
+																									ADD acc Ti112
+																								APP div_abs Ti108 b Ti110 Ti113 
+																					LET Ti115
+																						LET Ti114
 																							INT 1
-																							SUB i Ti100
-																						APP div_abs a b Ti101 acc 
+																							SUB i Ti114
+																						APP div_abs a b Ti115 acc 
 																	LET REC div a b 
 																		LET abs_a
-																			LET Ti82
+																			LET Ti96
 																				INT 0
-																				IFLE Ti82 a
+																				IFLE Ti96 a
 																					VAR a
 																					NEG a
 																			LET abs_b
-																				LET Ti83
+																				LET Ti97
 																					INT 0
-																					IFLE Ti83 b
+																					IFLE Ti97 b
 																						VAR b
 																						NEG b
 																				LET abs_div
-																					LET Ti84
+																					LET Ti98
 																						INT 30
-																						LET Ti85
+																						LET Ti99
 																							INT 0
-																							APP div_abs abs_a abs_b Ti84 Ti85 
-																					LET Ti87
-																						LET Ti86
+																							APP div_abs abs_a abs_b Ti98 Ti99 
+																					LET Ti101
+																						LET Ti100
 																							INT 31
-																							SRL a Ti86
-																						LET Ti89
-																							LET Ti88
+																							SRL a Ti100
+																						LET Ti103
+																							LET Ti102
 																								INT 31
-																								SRL b Ti88
-																							IFEQ Ti87 Ti89
+																								SRL b Ti102
+																							IFEQ Ti101 Ti103
 																								VAR abs_div
 																								NEG abs_div
-																		LET REC print_int a 
+																		LET REC print_char a 
 																			OUT a
-																			LET REC read_int a 
-																				INI a
-																				LET REC read_float a 
-																					INF a
-																					LET REC assign_array hp a n 
-																						LET Ti78
-																							INT 0
-																							IFLE Ti78 n
-																								LET Ti79
-																									INT 0
-																									IFEQ n Ti79
-																										PUT hp n a
-																										LET Tu1
+																			LET REC print_int a 
+																				LET Ti84
+																					INT 0
+																					IFLE Ti84 a
+																						LET Ti85
+																							INT 10
+																							IFLE Ti85 a
+																								LET b
+																									LET Ti86
+																										INT 10
+																										APP div a Ti86 
+																									LET Tu2
+																										APP print_int b 
+																										LET Ti91
+																											LET Ti89
+																												LET Ti88
+																													LET Ti87
+																														INT 10
+																														APP mul b Ti87 
+																													SUB a Ti88
+																												LET Ti90
+																													INT 48
+																													ADD Ti89 Ti90
+																											OUT Ti91
+																								LET Ti93
+																									LET Ti92
+																										INT 48
+																										ADD a Ti92
+																									OUT Ti93
+																						LET Tu1
+																							LET Ti94
+																								INT 45
+																								OUT Ti94
+																							LET Ti95
+																								NEG a
+																								APP print_int Ti95 
+																				LET REC read_int a 
+																					INI a
+																					LET REC read_float a 
+																						INF a
+																						LET REC assign_array hp a n 
+																							LET Ti80
+																								INT 0
+																								IFLE Ti80 n
+																									LET Ti81
+																										INT 0
+																										IFEQ n Ti81
 																											PUT hp n a
-																											LET Ti81
-																												LET Ti80
-																													INT 1
-																													SUB n Ti80
-																												APP assign_array hp a Ti81 
-																								UNIT
-																						LET REC create_array n a 
-																							LET hp
-																								LET Tu72
+																											LET Tu3
+																												PUT hp n a
+																												LET Ti83
+																													LET Ti82
+																														INT 1
+																														SUB n Ti82
+																													APP assign_array hp a Ti83 
 																									UNIT
-																									GETHP Tu72
-																								LET hp_array
-																									ITOIA hp
-																									LET Tu3
-																										LET Ti75
-																											LET Ti74
-																												LET Ti73
-																													INT 2
-																													SLL n Ti73
-																												ADD hp Ti74
-																											SETHP Ti75
-																										LET Tu2
+																							LET REC create_array n a 
+																								LET hp
+																									LET Tu74
+																										UNIT
+																										GETHP Tu74
+																									LET hp_array
+																										ITOIA hp
+																										LET Tu5
 																											LET Ti77
 																												LET Ti76
-																													INT 1
-																													SUB n Ti76
-																												APP assign_array hp_array a Ti77 
-																											VAR hp_array
-																							LET REC assign_farray hp a n 
-																								LET Ti68
-																									INT 0
-																									IFLE Ti68 n
-																										LET Ti69
-																											INT 0
-																											IFEQ n Ti69
-																												PUT hp n a
-																												LET Tu4
+																													LET Ti75
+																														INT 2
+																														SLL n Ti75
+																													ADD hp Ti76
+																												SETHP Ti77
+																											LET Tu4
+																												LET Ti79
+																													LET Ti78
+																														INT 1
+																														SUB n Ti78
+																													APP assign_array hp_array a Ti79 
+																												VAR hp_array
+																								LET REC assign_farray hp a n 
+																									LET Ti70
+																										INT 0
+																										IFLE Ti70 n
+																											LET Ti71
+																												INT 0
+																												IFEQ n Ti71
 																													PUT hp n a
-																													LET Ti71
-																														LET Ti70
-																															INT 1
-																															SUB n Ti70
-																														APP assign_farray hp a Ti71 
-																										UNIT
-																								LET REC create_float_array n a 
-																									LET hp
-																										LET Tu62
+																													LET Tu6
+																														PUT hp n a
+																														LET Ti73
+																															LET Ti72
+																																INT 1
+																																SUB n Ti72
+																															APP assign_farray hp a Ti73 
 																											UNIT
-																											GETHP Tu62
-																										LET hp_array
-																											ITOFA hp
-																											LET Tu6
-																												LET Ti65
-																													LET Ti64
-																														LET Ti63
-																															INT 2
-																															SLL n Ti63
-																														ADD hp Ti64
-																													SETHP Ti65
-																												LET Tu5
+																									LET REC create_float_array n a 
+																										LET hp
+																											LET Tu64
+																												UNIT
+																												GETHP Tu64
+																											LET hp_array
+																												ITOFA hp
+																												LET Tu8
 																													LET Ti67
 																														LET Ti66
-																															INT 1
-																															SUB n Ti66
-																														APP assign_farray hp_array a Ti67 
-																													VAR hp_array
-																									LET REC f x0 
-																										LET x1
-																											LET Ti9
-																												INT 1
-																												ADD x0 Ti9
-																											LET x2
-																												LET Ti10
-																													INT 1
-																													ADD x1 Ti10
-																												LET x3
-																													LET Ti11
-																														INT 1
-																														ADD x2 Ti11
-																													LET x4
-																														LET Ti12
-																															INT 1
-																															ADD x3 Ti12
-																														LET x5
-																															LET Ti13
+																															LET Ti65
+																																INT 2
+																																SLL n Ti65
+																															ADD hp Ti66
+																														SETHP Ti67
+																													LET Tu7
+																														LET Ti69
+																															LET Ti68
 																																INT 1
-																																ADD x4 Ti13
-																															LET x6
-																																LET Ti14
+																																SUB n Ti68
+																															APP assign_farray hp_array a Ti69 
+																														VAR hp_array
+																										LET REC f x0 
+																											LET x1
+																												LET Ti11
+																													INT 1
+																													ADD x0 Ti11
+																												LET x2
+																													LET Ti12
+																														INT 1
+																														ADD x1 Ti12
+																													LET x3
+																														LET Ti13
+																															INT 1
+																															ADD x2 Ti13
+																														LET x4
+																															LET Ti14
+																																INT 1
+																																ADD x3 Ti14
+																															LET x5
+																																LET Ti15
 																																	INT 1
-																																	ADD x5 Ti14
-																																LET x7
-																																	LET Ti15
+																																	ADD x4 Ti15
+																																LET x6
+																																	LET Ti16
 																																		INT 1
-																																		ADD x6 Ti15
-																																	LET x8
-																																		LET Ti16
+																																		ADD x5 Ti16
+																																	LET x7
+																																		LET Ti17
 																																			INT 1
-																																			ADD x7 Ti16
-																																		LET x9
-																																			LET Ti17
+																																			ADD x6 Ti17
+																																		LET x8
+																																			LET Ti18
 																																				INT 1
-																																				ADD x8 Ti17
-																																			LET x10
-																																				LET Ti18
+																																				ADD x7 Ti18
+																																			LET x9
+																																				LET Ti19
 																																					INT 1
-																																					ADD x9 Ti18
-																																				LET x11
-																																					LET Ti19
+																																					ADD x8 Ti19
+																																				LET x10
+																																					LET Ti20
 																																						INT 1
-																																						ADD x10 Ti19
-																																					LET x12
-																																						LET Ti20
+																																						ADD x9 Ti20
+																																					LET x11
+																																						LET Ti21
 																																							INT 1
-																																							ADD x11 Ti20
-																																						LET x13
-																																							LET Ti21
+																																							ADD x10 Ti21
+																																						LET x12
+																																							LET Ti22
 																																								INT 1
-																																								ADD x12 Ti21
-																																							LET x14
-																																								LET Ti22
+																																								ADD x11 Ti22
+																																							LET x13
+																																								LET Ti23
 																																									INT 1
-																																									ADD x13 Ti22
-																																								LET x15
-																																									LET Ti23
+																																									ADD x12 Ti23
+																																								LET x14
+																																									LET Ti24
 																																										INT 1
-																																										ADD x14 Ti23
-																																									LET x16
-																																										LET Ti24
+																																										ADD x13 Ti24
+																																									LET x15
+																																										LET Ti25
 																																											INT 1
-																																											ADD x15 Ti24
-																																										LET x17
-																																											LET Ti25
+																																											ADD x14 Ti25
+																																										LET x16
+																																											LET Ti26
 																																												INT 1
-																																												ADD x16 Ti25
-																																											LET x18
-																																												LET Ti26
+																																												ADD x15 Ti26
+																																											LET x17
+																																												LET Ti27
 																																													INT 1
-																																													ADD x17 Ti26
-																																												LET x19
-																																													ADD x18 x1
-																																													LET x20
-																																														ADD x19 x2
-																																														LET x21
-																																															ADD x20 x3
-																																															LET x22
-																																																ADD x21 x4
-																																																LET x23
-																																																	ADD x22 x5
-																																																	LET x24
-																																																		ADD x23 x6
-																																																		LET x25
-																																																			ADD x24 x7
-																																																			LET x26
-																																																				ADD x25 x8
-																																																				LET x27
-																																																					ADD x26 x9
-																																																					LET x28
-																																																						ADD x27 x10
-																																																						LET x29
-																																																							ADD x28 x11
-																																																							LET x30
-																																																								ADD x29 x12
-																																																								LET x31
-																																																									ADD x30 x13
-																																																									LET x32
-																																																										ADD x31 x14
-																																																										LET x33
-																																																											ADD x32 x15
-																																																											LET x34
-																																																												ADD x33 x16
-																																																												LET x35
-																																																													ADD x34 x17
-																																																													LET x36
-																																																														ADD x35 x0
-																																																														LET Ti61
-																																																															LET Ti60
-																																																																LET Ti59
-																																																																	LET Ti58
-																																																																		LET Ti57
-																																																																			LET Ti56
-																																																																				LET Ti55
-																																																																					LET Ti54
-																																																																						LET Ti53
-																																																																							LET Ti52
-																																																																								LET Ti51
-																																																																									LET Ti50
-																																																																										LET Ti49
-																																																																											LET Ti48
-																																																																												LET Ti47
-																																																																													LET Ti46
-																																																																														LET Ti45
-																																																																															LET Ti44
-																																																																																LET Ti43
-																																																																																	LET Ti42
-																																																																																		LET Ti41
-																																																																																			LET Ti40
-																																																																																				LET Ti39
-																																																																																					LET Ti38
-																																																																																						LET Ti37
-																																																																																							LET Ti36
-																																																																																								LET Ti35
-																																																																																									LET Ti34
-																																																																																										LET Ti33
-																																																																																											LET Ti32
-																																																																																												LET Ti31
-																																																																																													LET Ti30
-																																																																																														LET Ti29
-																																																																																															LET Ti28
-																																																																																																LET Ti27
-																																																																																																	ADD x1 x2
-																																																																																																	ADD Ti27 x3
-																																																																																																ADD Ti28 x4
-																																																																																															ADD Ti29 x5
-																																																																																														ADD Ti30 x6
-																																																																																													ADD Ti31 x7
-																																																																																												ADD Ti32 x8
-																																																																																											ADD Ti33 x9
-																																																																																										ADD Ti34 x10
-																																																																																									ADD Ti35 x11
-																																																																																								ADD Ti36 x12
-																																																																																							ADD Ti37 x13
-																																																																																						ADD Ti38 x14
-																																																																																					ADD Ti39 x15
-																																																																																				ADD Ti40 x16
-																																																																																			ADD Ti41 x17
-																																																																																		ADD Ti42 x18
-																																																																																	ADD Ti43 x19
-																																																																																ADD Ti44 x20
-																																																																															ADD Ti45 x21
-																																																																														ADD Ti46 x22
-																																																																													ADD Ti47 x23
-																																																																												ADD Ti48 x24
-																																																																											ADD Ti49 x25
-																																																																										ADD Ti50 x26
-																																																																									ADD Ti51 x27
-																																																																								ADD Ti52 x28
-																																																																							ADD Ti53 x29
-																																																																						ADD Ti54 x30
-																																																																					ADD Ti55 x31
-																																																																				ADD Ti56 x32
-																																																																			ADD Ti57 x33
-																																																																		ADD Ti58 x34
-																																																																	ADD Ti59 x35
-																																																																ADD Ti60 x36
-																																																															ADD Ti61 x0
-																										LET Ti8
-																											LET Ti7
-																												INT 0
-																												APP f Ti7 
-																											APP print_int Ti8 
+																																													ADD x16 Ti27
+																																												LET x18
+																																													LET Ti28
+																																														INT 1
+																																														ADD x17 Ti28
+																																													LET x19
+																																														ADD x18 x1
+																																														LET x20
+																																															ADD x19 x2
+																																															LET x21
+																																																ADD x20 x3
+																																																LET x22
+																																																	ADD x21 x4
+																																																	LET x23
+																																																		ADD x22 x5
+																																																		LET x24
+																																																			ADD x23 x6
+																																																			LET x25
+																																																				ADD x24 x7
+																																																				LET x26
+																																																					ADD x25 x8
+																																																					LET x27
+																																																						ADD x26 x9
+																																																						LET x28
+																																																							ADD x27 x10
+																																																							LET x29
+																																																								ADD x28 x11
+																																																								LET x30
+																																																									ADD x29 x12
+																																																									LET x31
+																																																										ADD x30 x13
+																																																										LET x32
+																																																											ADD x31 x14
+																																																											LET x33
+																																																												ADD x32 x15
+																																																												LET x34
+																																																													ADD x33 x16
+																																																													LET x35
+																																																														ADD x34 x17
+																																																														LET x36
+																																																															ADD x35 x0
+																																																															LET Ti63
+																																																																LET Ti62
+																																																																	LET Ti61
+																																																																		LET Ti60
+																																																																			LET Ti59
+																																																																				LET Ti58
+																																																																					LET Ti57
+																																																																						LET Ti56
+																																																																							LET Ti55
+																																																																								LET Ti54
+																																																																									LET Ti53
+																																																																										LET Ti52
+																																																																											LET Ti51
+																																																																												LET Ti50
+																																																																													LET Ti49
+																																																																														LET Ti48
+																																																																															LET Ti47
+																																																																																LET Ti46
+																																																																																	LET Ti45
+																																																																																		LET Ti44
+																																																																																			LET Ti43
+																																																																																				LET Ti42
+																																																																																					LET Ti41
+																																																																																						LET Ti40
+																																																																																							LET Ti39
+																																																																																								LET Ti38
+																																																																																									LET Ti37
+																																																																																										LET Ti36
+																																																																																											LET Ti35
+																																																																																												LET Ti34
+																																																																																													LET Ti33
+																																																																																														LET Ti32
+																																																																																															LET Ti31
+																																																																																																LET Ti30
+																																																																																																	LET Ti29
+																																																																																																		ADD x1 x2
+																																																																																																		ADD Ti29 x3
+																																																																																																	ADD Ti30 x4
+																																																																																																ADD Ti31 x5
+																																																																																															ADD Ti32 x6
+																																																																																														ADD Ti33 x7
+																																																																																													ADD Ti34 x8
+																																																																																												ADD Ti35 x9
+																																																																																											ADD Ti36 x10
+																																																																																										ADD Ti37 x11
+																																																																																									ADD Ti38 x12
+																																																																																								ADD Ti39 x13
+																																																																																							ADD Ti40 x14
+																																																																																						ADD Ti41 x15
+																																																																																					ADD Ti42 x16
+																																																																																				ADD Ti43 x17
+																																																																																			ADD Ti44 x18
+																																																																																		ADD Ti45 x19
+																																																																																	ADD Ti46 x20
+																																																																																ADD Ti47 x21
+																																																																															ADD Ti48 x22
+																																																																														ADD Ti49 x23
+																																																																													ADD Ti50 x24
+																																																																												ADD Ti51 x25
+																																																																											ADD Ti52 x26
+																																																																										ADD Ti53 x27
+																																																																									ADD Ti54 x28
+																																																																								ADD Ti55 x29
+																																																																							ADD Ti56 x30
+																																																																						ADD Ti57 x31
+																																																																					ADD Ti58 x32
+																																																																				ADD Ti59 x33
+																																																																			ADD Ti60 x34
+																																																																		ADD Ti61 x35
+																																																																	ADD Ti62 x36
+																																																																ADD Ti63 x0
+																											LET Ti10
+																												LET Ti9
+																													INT 0
+																													APP f Ti9 
+																												APP print_int Ti10 

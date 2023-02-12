@@ -1,15 +1,271 @@
-Name : print_int.164
+Name : mul_abs.162
+Args : %x6 %x7 %x8 %x9 
+
+FArgs : 
+Body :
+ANS
+	IFEQ %x8 -1
+		ANS
+			MOV %x9
+		LET
+			%x10
+			SET 1
+			LET
+				%x10
+				SLL %x10 %x8
+				LET
+					%x10
+					AND %x7 %x10
+					ANS
+						IFEQ %x10 0
+							LET
+								%x8
+								SUB %x8 1
+								ANS
+									CALLDIR mul_abs.162
+										%x6 %x7 %x8 %x9 
+										
+							LET
+								%x10
+								SUB %x8 1
+								LET
+									%x8
+									SLL %x6 %x8
+									LET
+										%x9
+										ADD %x9 %x8
+										ANS
+											CALLDIR mul_abs.162
+												%x6 %x7 %x10 %x9 
+												
+
+Name : mul.167
+Args : %x6 %x7 
+
+FArgs : 
+Body :
+LET
+	%x8
+	IFGE %x6 0
+		ANS
+			MOV %x6
+		ANS
+			NEG %x6
+	LET
+		%x9
+		IFGE %x7 0
+			ANS
+				MOV %x7
+			ANS
+				NEG %x7
+		LET
+			%x10
+			SET 30
+			LET
+				%x11
+				SET 0
+				LET
+					Tu366
+					SAVE %x7 b.169
+					LET
+						Tu365
+						SAVE %x6 a.168
+						LET
+							%x6
+							CALLDIR mul_abs.162
+								%x8 %x9 %x10 %x11 
+								
+							LET
+								%x7
+								RESTORE a.168
+								LET
+									%x7
+									SRL %x7 31
+									LET
+										%x8
+										RESTORE b.169
+										LET
+											%x8
+											SRL %x8 31
+											ANS
+												IFEQ %x7 %x8
+													ANS
+														MOV %x6
+													ANS
+														NEG %x6
+
+Name : div_abs.170
+Args : %x6 %x7 %x8 %x9 
+
+FArgs : 
+Body :
+ANS
+	IFEQ %x8 -1
+		ANS
+			MOV %x9
+		LET
+			%x10
+			SRL %x6 %x8
+			ANS
+				IFLE %x7 %x10
+					LET
+						%x10
+						SLL %x7 %x8
+						LET
+							%x6
+							SUB %x6 %x10
+							LET
+								%x10
+								SUB %x8 1
+								LET
+									%x11
+									SET 1
+									LET
+										%x8
+										SLL %x11 %x8
+										LET
+											%x9
+											ADD %x9 %x8
+											ANS
+												CALLDIR div_abs.170
+													%x6 %x7 %x10 %x9 
+													
+					LET
+						%x8
+						SUB %x8 1
+						ANS
+							CALLDIR div_abs.170
+								%x6 %x7 %x8 %x9 
+								
+
+Name : div.175
+Args : %x6 %x7 
+
+FArgs : 
+Body :
+LET
+	%x8
+	IFGE %x6 0
+		ANS
+			MOV %x6
+		ANS
+			NEG %x6
+	LET
+		%x9
+		IFGE %x7 0
+			ANS
+				MOV %x7
+			ANS
+				NEG %x7
+		LET
+			%x10
+			SET 30
+			LET
+				%x11
+				SET 0
+				LET
+					Tu368
+					SAVE %x7 b.177
+					LET
+						Tu367
+						SAVE %x6 a.176
+						LET
+							%x6
+							CALLDIR div_abs.170
+								%x8 %x9 %x10 %x11 
+								
+							LET
+								%x7
+								RESTORE a.176
+								LET
+									%x7
+									SRL %x7 31
+									LET
+										%x8
+										RESTORE b.177
+										LET
+											%x8
+											SRL %x8 31
+											ANS
+												IFEQ %x7 %x8
+													ANS
+														MOV %x6
+													ANS
+														NEG %x6
+
+Name : print_int.180
 Args : %x6 
 
 FArgs : 
 Body :
 ANS
-	OUT %x6
+	IFGE %x6 0
+		ANS
+			IFGE %x6 10
+				LET
+					%x7
+					SET 10
+					LET
+						Tu370
+						SAVE %x6 a.181
+						LET
+							%x6
+							CALLDIR div.175
+								%x6 %x7 
+								
+							LET
+								Tu371
+								SAVE %x6 b.252
+								LET
+									%g0
+									CALLDIR print_int.180
+										%x6 
+										
+									LET
+										%x7
+										SET 10
+										LET
+											%x6
+											RESTORE b.252
+											LET
+												%x6
+												CALLDIR mul.167
+													%x6 %x7 
+													
+												LET
+													%x7
+													RESTORE a.181
+													LET
+														%x6
+														SUB %x7 %x6
+														LET
+															%x6
+															ADD %x6 48
+															ANS
+																OUT %x6
+				LET
+					%x6
+					ADD %x6 48
+					ANS
+						OUT %x6
+		LET
+			%x7
+			SET 45
+			LET
+				%g0
+				OUT %x7
+				LET
+					%x6
+					NEG %x6
+					ANS
+						CALLDIR print_int.180
+							%x6 
+							
 
 
 LET
 	%f0
-	l.328
+	l.359
 	LET
 		%x6
 		CALLDIR min_caml_truncate
@@ -17,10 +273,10 @@ LET
 			%f0 
 		LET
 			%f0
-			l.330
+			l.361
 			LET
-				Tu336
-				SAVE %x6 x.184
+				Tu373
+				SAVE %x6 x.200
 				LET
 					%x6
 					CALLDIR min_caml_truncate
@@ -28,10 +284,10 @@ LET
 						%f0 
 					LET
 						%f0
-						l.332
+						l.363
 						LET
-							Tu337
-							SAVE %x6 y.185
+							Tu374
+							SAVE %x6 y.201
 							LET
 								%x6
 								CALLDIR min_caml_truncate
@@ -42,23 +298,23 @@ LET
 									IFGE %x6 0
 										LET
 											%x7
-											RESTORE x.184
+											RESTORE x.200
 											ANS
 												MOV %x7
 										LET
 											%x7
-											RESTORE y.185
+											RESTORE y.201
 											ANS
 												MOV %x7
 									LET
 										%x8
-										RESTORE x.184
+										RESTORE x.200
 										LET
 											%x9
 											IFLE %x8 0
 												LET
 													%x9
-													RESTORE y.185
+													RESTORE y.201
 													ANS
 														MOV %x9
 												ANS
@@ -68,7 +324,7 @@ LET
 												ADD %x7 %x9
 												LET
 													%x9
-													RESTORE y.185
+													RESTORE y.201
 													LET
 														%x6
 														IFGE %x9 0
@@ -80,6 +336,6 @@ LET
 															%x6
 															ADD %x7 %x6
 															ANS
-																CALLDIR print_int.164
+																CALLDIR print_int.180
 																	%x6 
 																	

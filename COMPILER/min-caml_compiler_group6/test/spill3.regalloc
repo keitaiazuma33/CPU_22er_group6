@@ -1,12 +1,268 @@
-Name : print_int.207
+Name : mul_abs.205
+Args : %x6 %x7 %x8 %x9 
+
+FArgs : 
+Body :
+ANS
+	IFEQ %x8 -1
+		ANS
+			MOV %x9
+		LET
+			%x10
+			SET 1
+			LET
+				%x10
+				SLL %x10 %x8
+				LET
+					%x10
+					AND %x7 %x10
+					ANS
+						IFEQ %x10 0
+							LET
+								%x8
+								SUB %x8 1
+								ANS
+									CALLDIR mul_abs.205
+										%x6 %x7 %x8 %x9 
+										
+							LET
+								%x10
+								SUB %x8 1
+								LET
+									%x8
+									SLL %x6 %x8
+									LET
+										%x9
+										ADD %x9 %x8
+										ANS
+											CALLDIR mul_abs.205
+												%x6 %x7 %x10 %x9 
+												
+
+Name : mul.210
+Args : %x6 %x7 
+
+FArgs : 
+Body :
+LET
+	%x8
+	IFGE %x6 0
+		ANS
+			MOV %x6
+		ANS
+			NEG %x6
+	LET
+		%x9
+		IFGE %x7 0
+			ANS
+				MOV %x7
+			ANS
+				NEG %x7
+		LET
+			%x10
+			SET 30
+			LET
+				%x11
+				SET 0
+				LET
+					Tu481
+					SAVE %x7 b.212
+					LET
+						Tu480
+						SAVE %x6 a.211
+						LET
+							%x6
+							CALLDIR mul_abs.205
+								%x8 %x9 %x10 %x11 
+								
+							LET
+								%x7
+								RESTORE a.211
+								LET
+									%x7
+									SRL %x7 31
+									LET
+										%x8
+										RESTORE b.212
+										LET
+											%x8
+											SRL %x8 31
+											ANS
+												IFEQ %x7 %x8
+													ANS
+														MOV %x6
+													ANS
+														NEG %x6
+
+Name : div_abs.213
+Args : %x6 %x7 %x8 %x9 
+
+FArgs : 
+Body :
+ANS
+	IFEQ %x8 -1
+		ANS
+			MOV %x9
+		LET
+			%x10
+			SRL %x6 %x8
+			ANS
+				IFLE %x7 %x10
+					LET
+						%x10
+						SLL %x7 %x8
+						LET
+							%x6
+							SUB %x6 %x10
+							LET
+								%x10
+								SUB %x8 1
+								LET
+									%x11
+									SET 1
+									LET
+										%x8
+										SLL %x11 %x8
+										LET
+											%x9
+											ADD %x9 %x8
+											ANS
+												CALLDIR div_abs.213
+													%x6 %x7 %x10 %x9 
+													
+					LET
+						%x8
+						SUB %x8 1
+						ANS
+							CALLDIR div_abs.213
+								%x6 %x7 %x8 %x9 
+								
+
+Name : div.218
+Args : %x6 %x7 
+
+FArgs : 
+Body :
+LET
+	%x8
+	IFGE %x6 0
+		ANS
+			MOV %x6
+		ANS
+			NEG %x6
+	LET
+		%x9
+		IFGE %x7 0
+			ANS
+				MOV %x7
+			ANS
+				NEG %x7
+		LET
+			%x10
+			SET 30
+			LET
+				%x11
+				SET 0
+				LET
+					Tu483
+					SAVE %x7 b.220
+					LET
+						Tu482
+						SAVE %x6 a.219
+						LET
+							%x6
+							CALLDIR div_abs.213
+								%x8 %x9 %x10 %x11 
+								
+							LET
+								%x7
+								RESTORE a.219
+								LET
+									%x7
+									SRL %x7 31
+									LET
+										%x8
+										RESTORE b.220
+										LET
+											%x8
+											SRL %x8 31
+											ANS
+												IFEQ %x7 %x8
+													ANS
+														MOV %x6
+													ANS
+														NEG %x6
+
+Name : print_int.223
 Args : %x6 
 
 FArgs : 
 Body :
 ANS
-	OUT %x6
+	IFGE %x6 0
+		ANS
+			IFGE %x6 10
+				LET
+					%x7
+					SET 10
+					LET
+						Tu485
+						SAVE %x6 a.224
+						LET
+							%x6
+							CALLDIR div.218
+								%x6 %x7 
+								
+							LET
+								Tu486
+								SAVE %x6 b.373
+								LET
+									%g0
+									CALLDIR print_int.223
+										%x6 
+										
+									LET
+										%x7
+										SET 10
+										LET
+											%x6
+											RESTORE b.373
+											LET
+												%x6
+												CALLDIR mul.210
+													%x6 %x7 
+													
+												LET
+													%x7
+													RESTORE a.224
+													LET
+														%x6
+														SUB %x7 %x6
+														LET
+															%x6
+															ADD %x6 48
+															ANS
+																OUT %x6
+				LET
+					%x6
+					ADD %x6 48
+					ANS
+						OUT %x6
+		LET
+			%x7
+			SET 45
+			LET
+				%g0
+				OUT %x7
+				LET
+					%x6
+					NEG %x6
+					ANS
+						CALLDIR print_int.223
+							%x6 
+							
 
-Name : f.227
+Name : f.243
 Args : %x6 
 
 FArgs : 
@@ -84,74 +340,74 @@ LET
 																								%x30
 																								ADD %x29 %x12
 																								LET
-																									Tu461
-																									SAVE %x30 x24.254
+																									Tu498
+																									SAVE %x30 x24.270
 																									LET
 																										%x30
 																										ADD %x30 %x13
 																										LET
-																											Tu460
-																											SAVE %x30 x25.255
+																											Tu497
+																											SAVE %x30 x25.271
 																											LET
 																												%x30
 																												ADD %x30 %x14
 																												LET
-																													Tu459
-																													SAVE %x30 x26.256
+																													Tu496
+																													SAVE %x30 x26.272
 																													LET
 																														%x30
 																														ADD %x30 %x15
 																														LET
-																															Tu458
-																															SAVE %x30 x27.257
+																															Tu495
+																															SAVE %x30 x27.273
 																															LET
 																																%x30
 																																ADD %x30 %x16
 																																LET
-																																	Tu457
-																																	SAVE %x30 x28.258
+																																	Tu494
+																																	SAVE %x30 x28.274
 																																	LET
 																																		%x30
 																																		ADD %x30 %x17
 																																		LET
-																																			Tu456
-																																			SAVE %x30 x29.259
+																																			Tu493
+																																			SAVE %x30 x29.275
 																																			LET
 																																				%x30
 																																				ADD %x30 %x18
 																																				LET
-																																					Tu455
-																																					SAVE %x30 x30.260
+																																					Tu492
+																																					SAVE %x30 x30.276
 																																					LET
 																																						%x30
 																																						ADD %x30 %x19
 																																						LET
-																																							Tu454
-																																							SAVE %x30 x31.261
+																																							Tu491
+																																							SAVE %x30 x31.277
 																																							LET
 																																								%x30
 																																								ADD %x30 %x20
 																																								LET
-																																									Tu453
-																																									SAVE %x30 x32.262
+																																									Tu490
+																																									SAVE %x30 x32.278
 																																									LET
 																																										%x30
 																																										ADD %x30 %x21
 																																										LET
-																																											Tu452
-																																											SAVE %x30 x33.263
+																																											Tu489
+																																											SAVE %x30 x33.279
 																																											LET
 																																												%x30
 																																												ADD %x30 %x22
 																																												LET
-																																													Tu451
-																																													SAVE %x30 x34.264
+																																													Tu488
+																																													SAVE %x30 x34.280
 																																													LET
 																																														%x30
 																																														ADD %x30 %x23
 																																														LET
-																																															Tu450
-																																															SAVE %x6 x0.228
+																																															Tu487
+																																															SAVE %x6 x0.244
 																																															LET
 																																																%x6
 																																																ADD %x30 %x6
@@ -223,67 +479,67 @@ LET
 																																																																						ADD %x7 %x29
 																																																																						LET
 																																																																							%x8
-																																																																							RESTORE x24.254
+																																																																							RESTORE x24.270
 																																																																							LET
 																																																																								%x7
 																																																																								ADD %x7 %x8
 																																																																								LET
 																																																																									%x8
-																																																																									RESTORE x25.255
+																																																																									RESTORE x25.271
 																																																																									LET
 																																																																										%x7
 																																																																										ADD %x7 %x8
 																																																																										LET
 																																																																											%x8
-																																																																											RESTORE x26.256
+																																																																											RESTORE x26.272
 																																																																											LET
 																																																																												%x7
 																																																																												ADD %x7 %x8
 																																																																												LET
 																																																																													%x8
-																																																																													RESTORE x27.257
+																																																																													RESTORE x27.273
 																																																																													LET
 																																																																														%x7
 																																																																														ADD %x7 %x8
 																																																																														LET
 																																																																															%x8
-																																																																															RESTORE x28.258
+																																																																															RESTORE x28.274
 																																																																															LET
 																																																																																%x7
 																																																																																ADD %x7 %x8
 																																																																																LET
 																																																																																	%x8
-																																																																																	RESTORE x29.259
+																																																																																	RESTORE x29.275
 																																																																																	LET
 																																																																																		%x7
 																																																																																		ADD %x7 %x8
 																																																																																		LET
 																																																																																			%x8
-																																																																																			RESTORE x30.260
+																																																																																			RESTORE x30.276
 																																																																																			LET
 																																																																																				%x7
 																																																																																				ADD %x7 %x8
 																																																																																				LET
 																																																																																					%x8
-																																																																																					RESTORE x31.261
+																																																																																					RESTORE x31.277
 																																																																																					LET
 																																																																																						%x7
 																																																																																						ADD %x7 %x8
 																																																																																						LET
 																																																																																							%x8
-																																																																																							RESTORE x32.262
+																																																																																							RESTORE x32.278
 																																																																																							LET
 																																																																																								%x7
 																																																																																								ADD %x7 %x8
 																																																																																								LET
 																																																																																									%x8
-																																																																																									RESTORE x33.263
+																																																																																									RESTORE x33.279
 																																																																																									LET
 																																																																																										%x7
 																																																																																										ADD %x7 %x8
 																																																																																										LET
 																																																																																											%x8
-																																																																																											RESTORE x34.264
+																																																																																											RESTORE x34.280
 																																																																																											LET
 																																																																																												%x7
 																																																																																												ADD %x7 %x8
@@ -295,7 +551,7 @@ LET
 																																																																																														ADD %x7 %x6
 																																																																																														LET
 																																																																																															%x7
-																																																																																															RESTORE x0.228
+																																																																																															RESTORE x0.244
 																																																																																															ANS
 																																																																																																ADD %x6 %x7
 
@@ -305,10 +561,10 @@ LET
 	SET 0
 	LET
 		%x6
-		CALLDIR f.227
+		CALLDIR f.243
 			%x6 
 			
 		ANS
-			CALLDIR print_int.207
+			CALLDIR print_int.223
 				%x6 
 				

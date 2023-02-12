@@ -1,125 +1,345 @@
-Name : print_int.160
-Args : a.161 
+Name : mul_abs.158
+Args : a.159 b.160 i.161 acc.162 
 
 FArgs : 
 Body :
 ANS
-	OUT a.161
-
-Name : assign_array.166
-Args : hp.167 a.168 n.169 
-
-FArgs : 
-Body :
-ANS
-	IFGE n.169 0
+	IFEQ i.161 -1
 		ANS
-			IFEQ n.169 0
+			MOV acc.162
+		LET
+			Ti79.296
+			SET 1
+			LET
+				Ti80.295
+				SLL Ti79.296 i.161
 				LET
-					o.321
-					SLL n.169 2
+					Ti81.287
+					AND b.160 Ti80.295
 					ANS
-						ST a.168 hp.167 o.321
-				LET
-					o.320
-					SLL n.169 2
-					LET
-						Tu1.218
-						ST a.168 hp.167 o.320
-						LET
-							Ti34.219
-							SUB n.169 1
-							ANS
-								CALLDIR assign_array.166
-									hp.167 a.168 Ti34.219 
-									
-		ANS
-			NOP
+						IFEQ Ti81.287 0
+							LET
+								Ti84.293
+								SUB i.161 1
+								ANS
+									CALLDIR mul_abs.158
+										a.159 b.160 Ti84.293 acc.162 
+										
+							LET
+								Ti86.289
+								SUB i.161 1
+								LET
+									Ti87.291
+									SLL a.159 i.161
+									LET
+										Ti88.290
+										ADD acc.162 Ti87.291
+										ANS
+											CALLDIR mul_abs.158
+												a.159 b.160 Ti86.289 Ti88.290 
+												
 
-Name : create_array.170
-Args : n.171 a.172 
+Name : mul.163
+Args : a.164 b.165 
 
 FArgs : 
 Body :
 LET
-	Tu25.215
-	NOP
+	abs_a.275
+	IFGE a.164 0
+		ANS
+			MOV a.164
+		ANS
+			NEG a.164
 	LET
-		hp.206
-		GETHP
+		abs_b.276
+		IFGE b.165 0
+			ANS
+				MOV b.165
+			ANS
+				NEG b.165
 		LET
-			hp_array.207
-			MOV hp.206
+			Ti71.282
+			SET 30
 			LET
-				Ti27.213
-				SLL n.171 2
+				Ti72.283
+				SET 0
 				LET
-					Ti28.212
-					ADD hp.206 Ti27.213
-					LET
-						Tu3.208
-						SETHP Ti28.212
-						LET
-							Ti30.210
-							SUB n.171 1
-							LET
-								Tu2.209
-								CALLDIR assign_array.166
-									hp_array.207 a.172 Ti30.210 
-									
-								ANS
-									MOV hp_array.207
-
-Name : f.180
-Args : n.181 
-
-FArgs : 
-Body :
-ANS
-	IFGE n.181 0
-		LET
-			Tu7.184
-			CALLDIR print_int.160
-				n.181 
-				
-			LET
-				Ti10.190
-				SET 1
-				LET
-					a.185
-					CALLDIR create_array.170
-						Ti10.190 f.180 
+					abs_mul.277
+					CALLDIR mul_abs.158
+						abs_a.275 abs_b.276 Ti71.282 Ti72.283 
 						
 					LET
-						Tf12.186
-						LD a.185 0
+						Ti74.278
+						SRL a.164 31
 						LET
-							Ti14.187
-							SUB n.181 1
+							Ti76.279
+							SRL b.165 31
 							ANS
-								CALLCLS Tf12.186
-									Ti14.187 
+								IFEQ Ti74.278 Ti76.279
+									ANS
+										MOV abs_mul.277
+									ANS
+										NEG abs_mul.277
+
+Name : div_abs.166
+Args : a.167 b.168 i.169 acc.170 
+
+FArgs : 
+Body :
+ANS
+	IFEQ i.169 -1
+		ANS
+			MOV acc.170
+		LET
+			Ti59.264
+			SRL a.167 i.169
+			ANS
+				IFLE b.168 Ti59.264
+					LET
+						Ti60.273
+						SLL b.168 i.169
+						LET
+							Ti61.267
+							SUB a.167 Ti60.273
+							LET
+								Ti63.268
+								SUB i.169 1
+								LET
+									Ti64.271
+									SET 1
+									LET
+										Ti65.270
+										SLL Ti64.271 i.169
+										LET
+											Ti66.269
+											ADD acc.170 Ti65.270
+											ANS
+												CALLDIR div_abs.166
+													Ti61.267 b.168 Ti63.268 Ti66.269 
+													
+					LET
+						Ti68.265
+						SUB i.169 1
+						ANS
+							CALLDIR div_abs.166
+								a.167 b.168 Ti68.265 acc.170 
+								
+
+Name : div.171
+Args : a.172 b.173 
+
+FArgs : 
+Body :
+LET
+	abs_a.252
+	IFGE a.172 0
+		ANS
+			MOV a.172
+		ANS
+			NEG a.172
+	LET
+		abs_b.253
+		IFGE b.173 0
+			ANS
+				MOV b.173
+			ANS
+				NEG b.173
+		LET
+			Ti51.259
+			SET 30
+			LET
+				Ti52.260
+				SET 0
+				LET
+					abs_div.254
+					CALLDIR div_abs.166
+						abs_a.252 abs_b.253 Ti51.259 Ti52.260 
+						
+					LET
+						Ti54.255
+						SRL a.172 31
+						LET
+							Ti56.256
+							SRL b.173 31
+							ANS
+								IFEQ Ti54.255 Ti56.256
+									ANS
+										MOV abs_div.254
+									ANS
+										NEG abs_div.254
+
+Name : print_int.176
+Args : a.177 
+
+FArgs : 
+Body :
+ANS
+	IFGE a.177 0
+		ANS
+			IFGE a.177 10
+				LET
+					Ti39.251
+					SET 10
+					LET
+						b.244
+						CALLDIR div.171
+							a.177 Ti39.251 
+							
+						LET
+							Tu2.245
+							CALLDIR print_int.176
+								b.244 
+								
+							LET
+								Ti40.250
+								SET 10
+								LET
+									Ti41.249
+									CALLDIR mul.163
+										b.244 Ti40.250 
+										
+									LET
+										Ti42.247
+										SUB a.177 Ti41.249
+										LET
+											Ti44.246
+											ADD Ti42.247 48
+											ANS
+												OUT Ti44.246
+				LET
+					Ti46.242
+					ADD a.177 48
+					ANS
+						OUT Ti46.242
+		LET
+			Ti47.240
+			SET 45
+			LET
+				Tu1.238
+				OUT Ti47.240
+				LET
+					Ti48.239
+					NEG a.177
+					ANS
+						CALLDIR print_int.176
+							Ti48.239 
+							
+
+Name : assign_array.182
+Args : hp.183 a.184 n.185 
+
+FArgs : 
+Body :
+ANS
+	IFGE n.185 0
+		ANS
+			IFEQ n.185 0
+				LET
+					o.352
+					SLL n.185 2
+					ANS
+						ST a.184 hp.183 o.352
+				LET
+					o.351
+					SLL n.185 2
+					LET
+						Tu3.234
+						ST a.184 hp.183 o.351
+						LET
+							Ti36.235
+							SUB n.185 1
+							ANS
+								CALLDIR assign_array.182
+									hp.183 a.184 Ti36.235 
+									
+		ANS
+			NOP
+
+Name : create_array.186
+Args : n.187 a.188 
+
+FArgs : 
+Body :
+LET
+	Tu27.231
+	NOP
+	LET
+		hp.222
+		GETHP
+		LET
+			hp_array.223
+			MOV hp.222
+			LET
+				Ti29.229
+				SLL n.187 2
+				LET
+					Ti30.228
+					ADD hp.222 Ti29.229
+					LET
+						Tu5.224
+						SETHP Ti30.228
+						LET
+							Ti32.226
+							SUB n.187 1
+							LET
+								Tu4.225
+								CALLDIR assign_array.182
+									hp_array.223 a.188 Ti32.226 
+									
+								ANS
+									MOV hp_array.223
+
+Name : f.196
+Args : n.197 
+
+FArgs : 
+Body :
+ANS
+	IFGE n.197 0
+		LET
+			Tu9.200
+			CALLDIR print_int.176
+				n.197 
+				
+			LET
+				Ti12.206
+				SET 1
+				LET
+					a.201
+					CALLDIR create_array.186
+						Ti12.206 f.196 
+						
+					LET
+						Tf14.202
+						LD a.201 0
+						LET
+							Ti16.203
+							SUB n.197 1
+							ANS
+								CALLCLS Tf14.202
+									Ti16.203 
 									
 		ANS
 			NOP
 
 
 LET
-	f.180
+	f.196
 	MOV %x3
 	LET
 		%x3
 		ADD %x3 4
 		LET
-			l.323
-			f.180
+			l.354
+			f.196
 			LET
-				Tu324
-				ST l.323 f.180 0
+				Tu355
+				ST l.354 f.196 0
 				LET
-					Ti8.182
+					Ti10.198
 					SET 9
 					ANS
-						CALLCLS f.180
-							Ti8.182 
+						CALLCLS f.196
+							Ti10.198 
 							

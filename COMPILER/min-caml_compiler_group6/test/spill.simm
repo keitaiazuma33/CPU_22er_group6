@@ -1,257 +1,477 @@
-Name : print_int.194
-Args : a.195 
+Name : mul_abs.192
+Args : a.193 b.194 i.195 acc.196 
 
 FArgs : 
 Body :
 ANS
-	OUT a.195
+	IFEQ i.195 -1
+		ANS
+			MOV acc.196
+		LET
+			Ti113.402
+			SET 1
+			LET
+				Ti114.401
+				SLL Ti113.402 i.195
+				LET
+					Ti115.393
+					AND b.194 Ti114.401
+					ANS
+						IFEQ Ti115.393 0
+							LET
+								Ti118.399
+								SUB i.195 1
+								ANS
+									CALLDIR mul_abs.192
+										a.193 b.194 Ti118.399 acc.196 
+										
+							LET
+								Ti120.395
+								SUB i.195 1
+								LET
+									Ti121.397
+									SLL a.193 i.195
+									LET
+										Ti122.396
+										ADD acc.196 Ti121.397
+										ANS
+											CALLDIR mul_abs.192
+												a.193 b.194 Ti120.395 Ti122.396 
+												
 
-Name : f.214
-Args : a.215 b.216 c.217 d.218 
+Name : mul.197
+Args : a.198 b.199 
 
 FArgs : 
 Body :
 LET
-	e.224
-	ADD a.215 b.216
+	abs_a.381
+	IFGE a.198 0
+		ANS
+			MOV a.198
+		ANS
+			NEG a.198
 	LET
-		f.225
-		ADD a.215 c.217
+		abs_b.382
+		IFGE b.199 0
+			ANS
+				MOV b.199
+			ANS
+				NEG b.199
 		LET
-			g.226
-			ADD a.215 d.218
+			Ti105.388
+			SET 30
 			LET
-				h.227
-				ADD b.216 c.217
+				Ti106.389
+				SET 0
 				LET
-					i.228
-					ADD b.216 d.218
+					abs_mul.383
+					CALLDIR mul_abs.192
+						abs_a.381 abs_b.382 Ti105.388 Ti106.389 
+						
 					LET
-						j.229
-						ADD c.217 d.218
+						Ti108.384
+						SRL a.198 31
 						LET
-							k.230
-							ADD e.224 f.225
+							Ti110.385
+							SRL b.199 31
+							ANS
+								IFEQ Ti108.384 Ti110.385
+									ANS
+										MOV abs_mul.383
+									ANS
+										NEG abs_mul.383
+
+Name : div_abs.200
+Args : a.201 b.202 i.203 acc.204 
+
+FArgs : 
+Body :
+ANS
+	IFEQ i.203 -1
+		ANS
+			MOV acc.204
+		LET
+			Ti93.370
+			SRL a.201 i.203
+			ANS
+				IFLE b.202 Ti93.370
+					LET
+						Ti94.379
+						SLL b.202 i.203
+						LET
+							Ti95.373
+							SUB a.201 Ti94.379
 							LET
-								l.231
-								ADD e.224 g.226
+								Ti97.374
+								SUB i.203 1
 								LET
-									m.232
-									ADD e.224 h.227
+									Ti98.377
+									SET 1
 									LET
-										n.233
-										ADD e.224 i.228
+										Ti99.376
+										SLL Ti98.377 i.203
 										LET
-											o.234
-											ADD e.224 j.229
+											Ti100.375
+											ADD acc.204 Ti99.376
+											ANS
+												CALLDIR div_abs.200
+													Ti95.373 b.202 Ti97.374 Ti100.375 
+													
+					LET
+						Ti102.371
+						SUB i.203 1
+						ANS
+							CALLDIR div_abs.200
+								a.201 b.202 Ti102.371 acc.204 
+								
+
+Name : div.205
+Args : a.206 b.207 
+
+FArgs : 
+Body :
+LET
+	abs_a.358
+	IFGE a.206 0
+		ANS
+			MOV a.206
+		ANS
+			NEG a.206
+	LET
+		abs_b.359
+		IFGE b.207 0
+			ANS
+				MOV b.207
+			ANS
+				NEG b.207
+		LET
+			Ti85.365
+			SET 30
+			LET
+				Ti86.366
+				SET 0
+				LET
+					abs_div.360
+					CALLDIR div_abs.200
+						abs_a.358 abs_b.359 Ti85.365 Ti86.366 
+						
+					LET
+						Ti88.361
+						SRL a.206 31
+						LET
+							Ti90.362
+							SRL b.207 31
+							ANS
+								IFEQ Ti88.361 Ti90.362
+									ANS
+										MOV abs_div.360
+									ANS
+										NEG abs_div.360
+
+Name : print_int.210
+Args : a.211 
+
+FArgs : 
+Body :
+ANS
+	IFGE a.211 0
+		ANS
+			IFGE a.211 10
+				LET
+					Ti73.357
+					SET 10
+					LET
+						b.350
+						CALLDIR div.205
+							a.211 Ti73.357 
+							
+						LET
+							Tu2.351
+							CALLDIR print_int.210
+								b.350 
+								
+							LET
+								Ti74.356
+								SET 10
+								LET
+									Ti75.355
+									CALLDIR mul.197
+										b.350 Ti74.356 
+										
+									LET
+										Ti76.353
+										SUB a.211 Ti75.355
+										LET
+											Ti78.352
+											ADD Ti76.353 48
+											ANS
+												OUT Ti78.352
+				LET
+					Ti80.348
+					ADD a.211 48
+					ANS
+						OUT Ti80.348
+		LET
+			Ti81.346
+			SET 45
+			LET
+				Tu1.344
+				OUT Ti81.346
+				LET
+					Ti82.345
+					NEG a.211
+					ANS
+						CALLDIR print_int.210
+							Ti82.345 
+							
+
+Name : f.230
+Args : a.231 b.232 c.233 d.234 
+
+FArgs : 
+Body :
+LET
+	e.240
+	ADD a.231 b.232
+	LET
+		f.241
+		ADD a.231 c.233
+		LET
+			g.242
+			ADD a.231 d.234
+			LET
+				h.243
+				ADD b.232 c.233
+				LET
+					i.244
+					ADD b.232 d.234
+					LET
+						j.245
+						ADD c.233 d.234
+						LET
+							k.246
+							ADD e.240 f.241
+							LET
+								l.247
+								ADD e.240 g.242
+								LET
+									m.248
+									ADD e.240 h.243
+									LET
+										n.249
+										ADD e.240 i.244
+										LET
+											o.250
+											ADD e.240 j.245
 											LET
-												p.235
-												ADD f.225 g.226
+												p.251
+												ADD f.241 g.242
 												LET
-													q.236
-													ADD f.225 h.227
+													q.252
+													ADD f.241 h.243
 													LET
-														r.237
-														ADD f.225 i.228
+														r.253
+														ADD f.241 i.244
 														LET
-															s.238
-															ADD f.225 j.229
+															s.254
+															ADD f.241 j.245
 															LET
-																t.239
-																ADD g.226 h.227
+																t.255
+																ADD g.242 h.243
 																LET
-																	u.240
-																	ADD g.226 i.228
+																	u.256
+																	ADD g.242 i.244
 																	LET
-																		v.241
-																		ADD g.226 j.229
+																		v.257
+																		ADD g.242 j.245
 																		LET
-																			w.242
-																			ADD h.227 i.228
+																			w.258
+																			ADD h.243 i.244
 																			LET
-																				x.243
-																				ADD h.227 j.229
+																				x.259
+																				ADD h.243 j.245
 																				LET
-																					y.244
-																					ADD i.228 j.229
+																					y.260
+																					ADD i.244 j.245
 																					LET
-																						aa.245
-																						ADD k.230 l.231
+																						aa.261
+																						ADD k.246 l.247
 																						LET
-																							ab.246
-																							ADD k.230 m.232
+																							ab.262
+																							ADD k.246 m.248
 																							LET
-																								ac.247
-																								ADD k.230 n.233
+																								ac.263
+																								ADD k.246 n.249
 																								LET
-																									ad.248
-																									ADD k.230 o.234
+																									ad.264
+																									ADD k.246 o.250
 																									LET
-																										ae.249
-																										ADD k.230 p.235
+																										ae.265
+																										ADD k.246 p.251
 																										LET
-																											af.250
-																											ADD k.230 q.236
+																											af.266
+																											ADD k.246 q.252
 																											LET
-																												ag.251
-																												ADD k.230 r.237
+																												ag.267
+																												ADD k.246 r.253
 																												LET
-																													ah.252
-																													ADD k.230 s.238
+																													ah.268
+																													ADD k.246 s.254
 																													LET
-																														ai.253
-																														ADD k.230 t.239
+																														ai.269
+																														ADD k.246 t.255
 																														LET
-																															aj.254
-																															ADD k.230 u.240
+																															aj.270
+																															ADD k.246 u.256
 																															LET
-																																ak.255
-																																ADD k.230 v.241
+																																ak.271
+																																ADD k.246 v.257
 																																LET
-																																	al.256
-																																	ADD k.230 w.242
+																																	al.272
+																																	ADD k.246 w.258
 																																	LET
-																																		am.257
-																																		ADD k.230 x.243
+																																		am.273
+																																		ADD k.246 x.259
 																																		LET
-																																			an.258
-																																			ADD k.230 y.244
+																																			an.274
+																																			ADD k.246 y.260
 																																			LET
-																																				Ti12.296
-																																				ADD a.215 b.216
+																																				Ti14.312
+																																				ADD a.231 b.232
 																																				LET
-																																					Ti13.295
-																																					ADD Ti12.296 c.217
+																																					Ti15.311
+																																					ADD Ti14.312 c.233
 																																					LET
-																																						Ti14.294
-																																						ADD Ti13.295 d.218
+																																						Ti16.310
+																																						ADD Ti15.311 d.234
 																																						LET
-																																							Ti15.293
-																																							ADD Ti14.294 e.224
+																																							Ti17.309
+																																							ADD Ti16.310 e.240
 																																							LET
-																																								Ti16.292
-																																								ADD Ti15.293 f.225
+																																								Ti18.308
+																																								ADD Ti17.309 f.241
 																																								LET
-																																									Ti17.291
-																																									ADD Ti16.292 g.226
+																																									Ti19.307
+																																									ADD Ti18.308 g.242
 																																									LET
-																																										Ti18.290
-																																										ADD Ti17.291 h.227
+																																										Ti20.306
+																																										ADD Ti19.307 h.243
 																																										LET
-																																											Ti19.289
-																																											ADD Ti18.290 i.228
+																																											Ti21.305
+																																											ADD Ti20.306 i.244
 																																											LET
-																																												Ti20.288
-																																												ADD Ti19.289 j.229
+																																												Ti22.304
+																																												ADD Ti21.305 j.245
 																																												LET
-																																													Ti21.287
-																																													ADD Ti20.288 k.230
+																																													Ti23.303
+																																													ADD Ti22.304 k.246
 																																													LET
-																																														Ti22.286
-																																														ADD Ti21.287 l.231
+																																														Ti24.302
+																																														ADD Ti23.303 l.247
 																																														LET
-																																															Ti23.285
-																																															ADD Ti22.286 m.232
+																																															Ti25.301
+																																															ADD Ti24.302 m.248
 																																															LET
-																																																Ti24.284
-																																																ADD Ti23.285 n.233
+																																																Ti26.300
+																																																ADD Ti25.301 n.249
 																																																LET
-																																																	Ti25.283
-																																																	ADD Ti24.284 o.234
+																																																	Ti27.299
+																																																	ADD Ti26.300 o.250
 																																																	LET
-																																																		Ti26.282
-																																																		ADD Ti25.283 p.235
+																																																		Ti28.298
+																																																		ADD Ti27.299 p.251
 																																																		LET
-																																																			Ti27.281
-																																																			ADD Ti26.282 q.236
+																																																			Ti29.297
+																																																			ADD Ti28.298 q.252
 																																																			LET
-																																																				Ti28.280
-																																																				ADD Ti27.281 r.237
+																																																				Ti30.296
+																																																				ADD Ti29.297 r.253
 																																																				LET
-																																																					Ti29.279
-																																																					ADD Ti28.280 s.238
+																																																					Ti31.295
+																																																					ADD Ti30.296 s.254
 																																																					LET
-																																																						Ti30.278
-																																																						ADD Ti29.279 t.239
+																																																						Ti32.294
+																																																						ADD Ti31.295 t.255
 																																																						LET
-																																																							Ti31.277
-																																																							ADD Ti30.278 u.240
+																																																							Ti33.293
+																																																							ADD Ti32.294 u.256
 																																																							LET
-																																																								Ti32.276
-																																																								ADD Ti31.277 v.241
+																																																								Ti34.292
+																																																								ADD Ti33.293 v.257
 																																																								LET
-																																																									Ti33.275
-																																																									ADD Ti32.276 w.242
+																																																									Ti35.291
+																																																									ADD Ti34.292 w.258
 																																																									LET
-																																																										Ti34.274
-																																																										ADD Ti33.275 x.243
+																																																										Ti36.290
+																																																										ADD Ti35.291 x.259
 																																																										LET
-																																																											Ti35.273
-																																																											ADD Ti34.274 y.244
+																																																											Ti37.289
+																																																											ADD Ti36.290 y.260
 																																																											LET
-																																																												Ti36.272
-																																																												ADD Ti35.273 aa.245
+																																																												Ti38.288
+																																																												ADD Ti37.289 aa.261
 																																																												LET
-																																																													Ti37.271
-																																																													ADD Ti36.272 ab.246
+																																																													Ti39.287
+																																																													ADD Ti38.288 ab.262
 																																																													LET
-																																																														Ti38.270
-																																																														ADD Ti37.271 ac.247
+																																																														Ti40.286
+																																																														ADD Ti39.287 ac.263
 																																																														LET
-																																																															Ti39.269
-																																																															ADD Ti38.270 ad.248
+																																																															Ti41.285
+																																																															ADD Ti40.286 ad.264
 																																																															LET
-																																																																Ti40.268
-																																																																ADD Ti39.269 ae.249
+																																																																Ti42.284
+																																																																ADD Ti41.285 ae.265
 																																																																LET
-																																																																	Ti41.267
-																																																																	ADD Ti40.268 af.250
+																																																																	Ti43.283
+																																																																	ADD Ti42.284 af.266
 																																																																	LET
-																																																																		Ti42.266
-																																																																		ADD Ti41.267 ag.251
+																																																																		Ti44.282
+																																																																		ADD Ti43.283 ag.267
 																																																																		LET
-																																																																			Ti43.265
-																																																																			ADD Ti42.266 ah.252
+																																																																			Ti45.281
+																																																																			ADD Ti44.282 ah.268
 																																																																			LET
-																																																																				Ti44.264
-																																																																				ADD Ti43.265 ai.253
+																																																																				Ti46.280
+																																																																				ADD Ti45.281 ai.269
 																																																																				LET
-																																																																					Ti45.263
-																																																																					ADD Ti44.264 aj.254
+																																																																					Ti47.279
+																																																																					ADD Ti46.280 aj.270
 																																																																					LET
-																																																																						Ti46.262
-																																																																						ADD Ti45.263 ak.255
+																																																																						Ti48.278
+																																																																						ADD Ti47.279 ak.271
 																																																																						LET
-																																																																							Ti47.261
-																																																																							ADD Ti46.262 al.256
+																																																																							Ti49.277
+																																																																							ADD Ti48.278 al.272
 																																																																							LET
-																																																																								Ti48.260
-																																																																								ADD Ti47.261 am.257
+																																																																								Ti50.276
+																																																																								ADD Ti49.277 am.273
 																																																																								LET
-																																																																									z.259
-																																																																									ADD Ti48.260 an.258
+																																																																									z.275
+																																																																									ADD Ti50.276 an.274
 																																																																									ANS
-																																																																										NEG z.259
+																																																																										NEG z.275
 
 
 LET
-	Ti7.220
+	Ti9.236
 	SET 1
 	LET
-		Ti8.221
+		Ti10.237
 		SET 2
 		LET
-			Ti9.222
+			Ti11.238
 			SET 3
 			LET
-				Ti10.223
+				Ti12.239
 				SET 4
 				LET
-					Ti11.219
-					CALLDIR f.214
-						Ti7.220 Ti8.221 Ti9.222 Ti10.223 
+					Ti13.235
+					CALLDIR f.230
+						Ti9.236 Ti10.237 Ti11.238 Ti12.239 
 						
 					ANS
-						CALLDIR print_int.194
-							Ti11.219 
+						CALLDIR print_int.210
+							Ti13.235 
 							

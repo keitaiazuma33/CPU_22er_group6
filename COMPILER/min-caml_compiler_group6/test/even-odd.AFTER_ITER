@@ -1,43 +1,193 @@
-LET REC print_int.166 a.167 
-	OUT a.167
-	LET REC even.188 x.189 
-		LET REC odd.192 x.193 
-			LET Ti15.200
-				INT 0
-				IFLE x.193 Ti15.200
-					LET Ti16.203
-						INT 0
-						IFLE Ti16.203 x.193
-							INT 456
-							LET Ti17.205
+LET REC mul_abs.164 a.165 b.166 i.167 acc.168 
+	LET Ti84.301
+		INT -1
+		IFEQ i.167 Ti84.301
+			VAR acc.168
+			LET Ti85.311
+				INT 1
+				LET Ti86.310
+					SLL Ti85.311 i.167
+					LET Ti87.302
+						AND b.166 Ti86.310
+						LET Ti88.303
+							INT 0
+							IFEQ Ti87.302 Ti88.303
+								LET Ti89.309
+									INT 1
+									LET Ti90.308
+										SUB i.167 Ti89.309
+										APP mul_abs.164 a.165 b.166 Ti90.308 acc.168 
+								LET Ti91.307
+									INT 1
+									LET Ti92.304
+										SUB i.167 Ti91.307
+										LET Ti93.306
+											SLL a.165 i.167
+											LET Ti94.305
+												ADD acc.168 Ti93.306
+												APP mul_abs.164 a.165 b.166 Ti92.304 Ti94.305 
+	LET REC mul.169 a.170 b.171 
+		LET Ti75.300
+			INT 0
+			LET abs_a.290
+				IFLE Ti75.300 a.170
+					VAR a.170
+					NEG a.170
+				LET Ti76.299
+					INT 0
+					LET abs_b.291
+						IFLE Ti76.299 b.171
+							VAR b.171
+							NEG b.171
+						LET Ti77.297
+							INT 30
+							LET Ti78.298
+								INT 0
+								LET abs_mul.292
+									APP mul_abs.164 abs_a.290 abs_b.291 Ti77.297 Ti78.298 
+									LET Ti79.296
+										INT 31
+										LET Ti80.293
+											SRL a.170 Ti79.296
+											LET Ti81.295
+												INT 31
+												LET Ti82.294
+													SRL b.171 Ti81.295
+													IFEQ Ti80.293 Ti82.294
+														VAR abs_mul.292
+														NEG abs_mul.292
+		LET REC div_abs.172 a.173 b.174 i.175 acc.176 
+			LET Ti64.278
+				INT -1
+				IFEQ i.175 Ti64.278
+					VAR acc.176
+					LET Ti65.279
+						SRL a.173 i.175
+						IFLE b.174 Ti65.279
+							LET Ti66.288
+								SLL b.174 i.175
+								LET Ti67.282
+									SUB a.173 Ti66.288
+									LET Ti68.287
+										INT 1
+										LET Ti69.283
+											SUB i.175 Ti68.287
+											LET Ti70.286
+												INT 1
+												LET Ti71.285
+													SLL Ti70.286 i.175
+													LET Ti72.284
+														ADD acc.176 Ti71.285
+														APP div_abs.172 Ti67.282 b.174 Ti69.283 Ti72.284 
+							LET Ti73.281
 								INT 1
-								LET Ti18.204
-									ADD x.193 Ti17.205
-									APP even.188 Ti18.204 
-					LET Ti19.202
-						INT 1
-						LET Ti20.201
-							SUB x.193 Ti19.202
-							APP even.188 Ti20.201 
-			LET Ti9.194
-				INT 0
-				IFLE x.189 Ti9.194
-					LET Ti10.197
+								LET Ti74.280
+									SUB i.175 Ti73.281
+									APP div_abs.172 a.173 b.174 Ti74.280 acc.176 
+			LET REC div.177 a.178 b.179 
+				LET Ti55.277
+					INT 0
+					LET abs_a.267
+						IFLE Ti55.277 a.178
+							VAR a.178
+							NEG a.178
+						LET Ti56.276
+							INT 0
+							LET abs_b.268
+								IFLE Ti56.276 b.179
+									VAR b.179
+									NEG b.179
+								LET Ti57.274
+									INT 30
+									LET Ti58.275
+										INT 0
+										LET abs_div.269
+											APP div_abs.172 abs_a.267 abs_b.268 Ti57.274 Ti58.275 
+											LET Ti59.273
+												INT 31
+												LET Ti60.270
+													SRL a.178 Ti59.273
+													LET Ti61.272
+														INT 31
+														LET Ti62.271
+															SRL b.179 Ti61.272
+															IFEQ Ti60.270 Ti62.271
+																VAR abs_div.269
+																NEG abs_div.269
+				LET REC print_int.182 a.183 
+					LET Ti43.252
 						INT 0
-						IFLE Ti10.197 x.189
-							INT 123
-							LET Ti11.199
-								INT 1
-								LET Ti12.198
-									ADD x.189 Ti11.199
-									APP odd.192 Ti12.198 
-					LET Ti13.196
-						INT 1
-						LET Ti14.195
-							SUB x.189 Ti13.196
-							APP odd.192 Ti14.195 
-		LET Ti7.191
-			INT 789
-			LET Ti8.190
-				APP even.188 Ti7.191 
-				APP print_int.166 Ti8.190 
+						IFLE Ti43.252 a.183
+							LET Ti44.256
+								INT 10
+								IFLE Ti44.256 a.183
+									LET Ti45.266
+										INT 10
+										LET b.259
+											APP div.177 a.183 Ti45.266 
+											LET Tu2.260
+												APP print_int.182 b.259 
+												LET Ti46.265
+													INT 10
+													LET Ti47.264
+														APP mul.169 b.259 Ti46.265 
+														LET Ti48.262
+															SUB a.183 Ti47.264
+															LET Ti49.263
+																INT 48
+																LET Ti50.261
+																	ADD Ti48.262 Ti49.263
+																	OUT Ti50.261
+									LET Ti51.258
+										INT 48
+										LET Ti52.257
+											ADD a.183 Ti51.258
+											OUT Ti52.257
+							LET Ti53.255
+								INT 45
+								LET Tu1.253
+									OUT Ti53.255
+									LET Ti54.254
+										NEG a.183
+										APP print_int.182 Ti54.254 
+					LET REC even.204 x.205 
+						LET REC odd.208 x.209 
+							LET Ti17.216
+								INT 0
+								IFLE x.209 Ti17.216
+									LET Ti18.219
+										INT 0
+										IFLE Ti18.219 x.209
+											INT 456
+											LET Ti19.221
+												INT 1
+												LET Ti20.220
+													ADD x.209 Ti19.221
+													APP even.204 Ti20.220 
+									LET Ti21.218
+										INT 1
+										LET Ti22.217
+											SUB x.209 Ti21.218
+											APP even.204 Ti22.217 
+							LET Ti11.210
+								INT 0
+								IFLE x.205 Ti11.210
+									LET Ti12.213
+										INT 0
+										IFLE Ti12.213 x.205
+											INT 123
+											LET Ti13.215
+												INT 1
+												LET Ti14.214
+													ADD x.205 Ti13.215
+													APP odd.208 Ti14.214 
+									LET Ti15.212
+										INT 1
+										LET Ti16.211
+											SUB x.205 Ti15.212
+											APP odd.208 Ti16.211 
+						LET Ti9.207
+							INT 789
+							LET Ti10.206
+								APP even.204 Ti9.207 
+								APP print_int.182 Ti10.206 

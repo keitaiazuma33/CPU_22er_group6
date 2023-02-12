@@ -1,12 +1,268 @@
-Name : print_int.159
+Name : mul_abs.157
+Args : %x6 %x7 %x8 %x9 
+
+FArgs : 
+Body :
+ANS
+	IFEQ %x8 -1
+		ANS
+			MOV %x9
+		LET
+			%x10
+			SET 1
+			LET
+				%x10
+				SLL %x10 %x8
+				LET
+					%x10
+					AND %x7 %x10
+					ANS
+						IFEQ %x10 0
+							LET
+								%x8
+								SUB %x8 1
+								ANS
+									CALLDIR mul_abs.157
+										%x6 %x7 %x8 %x9 
+										
+							LET
+								%x10
+								SUB %x8 1
+								LET
+									%x8
+									SLL %x6 %x8
+									LET
+										%x9
+										ADD %x9 %x8
+										ANS
+											CALLDIR mul_abs.157
+												%x6 %x7 %x10 %x9 
+												
+
+Name : mul.162
+Args : %x6 %x7 
+
+FArgs : 
+Body :
+LET
+	%x8
+	IFGE %x6 0
+		ANS
+			MOV %x6
+		ANS
+			NEG %x6
+	LET
+		%x9
+		IFGE %x7 0
+			ANS
+				MOV %x7
+			ANS
+				NEG %x7
+		LET
+			%x10
+			SET 30
+			LET
+				%x11
+				SET 0
+				LET
+					Tu353
+					SAVE %x7 b.164
+					LET
+						Tu352
+						SAVE %x6 a.163
+						LET
+							%x6
+							CALLDIR mul_abs.157
+								%x8 %x9 %x10 %x11 
+								
+							LET
+								%x7
+								RESTORE a.163
+								LET
+									%x7
+									SRL %x7 31
+									LET
+										%x8
+										RESTORE b.164
+										LET
+											%x8
+											SRL %x8 31
+											ANS
+												IFEQ %x7 %x8
+													ANS
+														MOV %x6
+													ANS
+														NEG %x6
+
+Name : div_abs.165
+Args : %x6 %x7 %x8 %x9 
+
+FArgs : 
+Body :
+ANS
+	IFEQ %x8 -1
+		ANS
+			MOV %x9
+		LET
+			%x10
+			SRL %x6 %x8
+			ANS
+				IFLE %x7 %x10
+					LET
+						%x10
+						SLL %x7 %x8
+						LET
+							%x6
+							SUB %x6 %x10
+							LET
+								%x10
+								SUB %x8 1
+								LET
+									%x11
+									SET 1
+									LET
+										%x8
+										SLL %x11 %x8
+										LET
+											%x9
+											ADD %x9 %x8
+											ANS
+												CALLDIR div_abs.165
+													%x6 %x7 %x10 %x9 
+													
+					LET
+						%x8
+						SUB %x8 1
+						ANS
+							CALLDIR div_abs.165
+								%x6 %x7 %x8 %x9 
+								
+
+Name : div.170
+Args : %x6 %x7 
+
+FArgs : 
+Body :
+LET
+	%x8
+	IFGE %x6 0
+		ANS
+			MOV %x6
+		ANS
+			NEG %x6
+	LET
+		%x9
+		IFGE %x7 0
+			ANS
+				MOV %x7
+			ANS
+				NEG %x7
+		LET
+			%x10
+			SET 30
+			LET
+				%x11
+				SET 0
+				LET
+					Tu355
+					SAVE %x7 b.172
+					LET
+						Tu354
+						SAVE %x6 a.171
+						LET
+							%x6
+							CALLDIR div_abs.165
+								%x8 %x9 %x10 %x11 
+								
+							LET
+								%x7
+								RESTORE a.171
+								LET
+									%x7
+									SRL %x7 31
+									LET
+										%x8
+										RESTORE b.172
+										LET
+											%x8
+											SRL %x8 31
+											ANS
+												IFEQ %x7 %x8
+													ANS
+														MOV %x6
+													ANS
+														NEG %x6
+
+Name : print_int.175
 Args : %x6 
 
 FArgs : 
 Body :
 ANS
-	OUT %x6
+	IFGE %x6 0
+		ANS
+			IFGE %x6 10
+				LET
+					%x7
+					SET 10
+					LET
+						Tu357
+						SAVE %x6 a.176
+						LET
+							%x6
+							CALLDIR div.170
+								%x6 %x7 
+								
+							LET
+								Tu358
+								SAVE %x6 b.245
+								LET
+									%g0
+									CALLDIR print_int.175
+										%x6 
+										
+									LET
+										%x7
+										SET 10
+										LET
+											%x6
+											RESTORE b.245
+											LET
+												%x6
+												CALLDIR mul.162
+													%x6 %x7 
+													
+												LET
+													%x7
+													RESTORE a.176
+													LET
+														%x6
+														SUB %x7 %x6
+														LET
+															%x6
+															ADD %x6 48
+															ANS
+																OUT %x6
+				LET
+					%x6
+					ADD %x6 48
+					ANS
+						OUT %x6
+		LET
+			%x7
+			SET 45
+			LET
+				%g0
+				OUT %x7
+				LET
+					%x6
+					NEG %x6
+					ANS
+						CALLDIR print_int.175
+							%x6 
+							
 
-Name : x.179
+Name : x.195
 Args : %x6 
 
 FArgs : 
@@ -41,7 +297,7 @@ LET
 	SET 125
 	LET
 		%x6
-		CALLDIR x.179
+		CALLDIR x.195
 			%x6 
 			
 		LET
@@ -51,6 +307,6 @@ LET
 				%x6
 				SUB %x6 %x7
 				ANS
-					CALLDIR print_int.159
+					CALLDIR print_int.175
 						%x6 
 						

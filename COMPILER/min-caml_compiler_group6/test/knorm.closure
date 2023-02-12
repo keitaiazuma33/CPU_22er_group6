@@ -1,36 +1,202 @@
-Name : print_int.159
-Args : a.160 
+Name : mul_abs.157
+Args : a.158 b.159 i.160 acc.161 
 Formal_fv : 
 Body :
-OUT a.160
+LET Ti77.287
+	INT -1
+	IFEQ i.160 Ti77.287
+		VAR acc.161
+		LET Ti78.297
+			INT 1
+			LET Ti79.296
+				SLL Ti78.297 i.160
+				LET Ti80.288
+					AND b.159 Ti79.296
+					LET Ti81.289
+						INT 0
+						IFEQ Ti80.288 Ti81.289
+							LET Ti82.295
+								INT 1
+								LET Ti83.294
+									SUB i.160 Ti82.295
+									APPDIR mul_abs.157 : a.158 b.159 Ti83.294 acc.161 
+							LET Ti84.293
+								INT 1
+								LET Ti85.290
+									SUB i.160 Ti84.293
+									LET Ti86.292
+										SLL a.158 i.160
+										LET Ti87.291
+											ADD acc.161 Ti86.292
+											APPDIR mul_abs.157 : a.158 b.159 Ti85.290 Ti87.291 
 
-Name : x.179
-Args : x.180 
+Name : mul.162
+Args : a.163 b.164 
 Formal_fv : 
 Body :
-LET Ti10.191
-	NEG x.180
-	LET x.187
-		SUB x.180 Ti10.191
-		LET x.189
-			NEG x.187
-			LET Ti11.190
-				NEG x.189
-				LET Ti12.188
-					SUB x.189 Ti11.190
-					LET x.185
-						SUB x.187 Ti12.188
-						LET Ti13.186
-							NEG x.185
-							SUB x.185 Ti13.186
+LET Ti68.286
+	INT 0
+	LET abs_a.276
+		IFLE Ti68.286 a.163
+			VAR a.163
+			NEG a.163
+		LET Ti69.285
+			INT 0
+			LET abs_b.277
+				IFLE Ti69.285 b.164
+					VAR b.164
+					NEG b.164
+				LET Ti70.283
+					INT 30
+					LET Ti71.284
+						INT 0
+						LET abs_mul.278
+							APPDIR mul_abs.157 : abs_a.276 abs_b.277 Ti70.283 Ti71.284 
+							LET Ti72.282
+								INT 31
+								LET Ti73.279
+									SRL a.163 Ti72.282
+									LET Ti74.281
+										INT 31
+										LET Ti75.280
+											SRL b.164 Ti74.281
+											IFEQ Ti73.279 Ti75.280
+												VAR abs_mul.278
+												NEG abs_mul.278
+
+Name : div_abs.165
+Args : a.166 b.167 i.168 acc.169 
+Formal_fv : 
+Body :
+LET Ti57.264
+	INT -1
+	IFEQ i.168 Ti57.264
+		VAR acc.169
+		LET Ti58.265
+			SRL a.166 i.168
+			IFLE b.167 Ti58.265
+				LET Ti59.274
+					SLL b.167 i.168
+					LET Ti60.268
+						SUB a.166 Ti59.274
+						LET Ti61.273
+							INT 1
+							LET Ti62.269
+								SUB i.168 Ti61.273
+								LET Ti63.272
+									INT 1
+									LET Ti64.271
+										SLL Ti63.272 i.168
+										LET Ti65.270
+											ADD acc.169 Ti64.271
+											APPDIR div_abs.165 : Ti60.268 b.167 Ti62.269 Ti65.270 
+				LET Ti66.267
+					INT 1
+					LET Ti67.266
+						SUB i.168 Ti66.267
+						APPDIR div_abs.165 : a.166 b.167 Ti67.266 acc.169 
+
+Name : div.170
+Args : a.171 b.172 
+Formal_fv : 
+Body :
+LET Ti48.263
+	INT 0
+	LET abs_a.253
+		IFLE Ti48.263 a.171
+			VAR a.171
+			NEG a.171
+		LET Ti49.262
+			INT 0
+			LET abs_b.254
+				IFLE Ti49.262 b.172
+					VAR b.172
+					NEG b.172
+				LET Ti50.260
+					INT 30
+					LET Ti51.261
+						INT 0
+						LET abs_div.255
+							APPDIR div_abs.165 : abs_a.253 abs_b.254 Ti50.260 Ti51.261 
+							LET Ti52.259
+								INT 31
+								LET Ti53.256
+									SRL a.171 Ti52.259
+									LET Ti54.258
+										INT 31
+										LET Ti55.257
+											SRL b.172 Ti54.258
+											IFEQ Ti53.256 Ti55.257
+												VAR abs_div.255
+												NEG abs_div.255
+
+Name : print_int.175
+Args : a.176 
+Formal_fv : 
+Body :
+LET Ti36.238
+	INT 0
+	IFLE Ti36.238 a.176
+		LET Ti37.242
+			INT 10
+			IFLE Ti37.242 a.176
+				LET Ti38.252
+					INT 10
+					LET b.245
+						APPDIR div.170 : a.176 Ti38.252 
+						LET Tu2.246
+							APPDIR print_int.175 : b.245 
+							LET Ti39.251
+								INT 10
+								LET Ti40.250
+									APPDIR mul.162 : b.245 Ti39.251 
+									LET Ti41.248
+										SUB a.176 Ti40.250
+										LET Ti42.249
+											INT 48
+											LET Ti43.247
+												ADD Ti41.248 Ti42.249
+												OUT Ti43.247
+				LET Ti44.244
+					INT 48
+					LET Ti45.243
+						ADD a.176 Ti44.244
+						OUT Ti45.243
+		LET Ti46.241
+			INT 45
+			LET Tu1.239
+				OUT Ti46.241
+				LET Ti47.240
+					NEG a.176
+					APPDIR print_int.175 : Ti47.240 
+
+Name : x.195
+Args : x.196 
+Formal_fv : 
+Body :
+LET Ti12.207
+	NEG x.196
+	LET x.203
+		SUB x.196 Ti12.207
+		LET x.205
+			NEG x.203
+			LET Ti13.206
+				NEG x.205
+				LET Ti14.204
+					SUB x.205 Ti13.206
+					LET x.201
+						SUB x.203 Ti14.204
+						LET Ti15.202
+							NEG x.201
+							SUB x.201 Ti15.202
 
 
-LET Ti7.184
+LET Ti9.200
 	INT 125
-	LET x.181
-		APPDIR x.179 : Ti7.184 
-		LET Ti8.183
-			NEG x.181
-			LET Ti9.182
-				SUB x.181 Ti8.183
-				APPDIR print_int.159 : Ti9.182 
+	LET x.197
+		APPDIR x.195 : Ti9.200 
+		LET Ti10.199
+			NEG x.197
+			LET Ti11.198
+				SUB x.197 Ti10.199
+				APPDIR print_int.175 : Ti11.198 

@@ -1,12 +1,268 @@
-Name : print_int.174
+Name : mul_abs.172
+Args : %x6 %x7 %x8 %x9 
+
+FArgs : 
+Body :
+ANS
+	IFEQ %x8 -1
+		ANS
+			MOV %x9
+		LET
+			%x10
+			SET 1
+			LET
+				%x10
+				SLL %x10 %x8
+				LET
+					%x10
+					AND %x7 %x10
+					ANS
+						IFEQ %x10 0
+							LET
+								%x8
+								SUB %x8 1
+								ANS
+									CALLDIR mul_abs.172
+										%x6 %x7 %x8 %x9 
+										
+							LET
+								%x10
+								SUB %x8 1
+								LET
+									%x8
+									SLL %x6 %x8
+									LET
+										%x9
+										ADD %x9 %x8
+										ANS
+											CALLDIR mul_abs.172
+												%x6 %x7 %x10 %x9 
+												
+
+Name : mul.177
+Args : %x6 %x7 
+
+FArgs : 
+Body :
+LET
+	%x8
+	IFGE %x6 0
+		ANS
+			MOV %x6
+		ANS
+			NEG %x6
+	LET
+		%x9
+		IFGE %x7 0
+			ANS
+				MOV %x7
+			ANS
+				NEG %x7
+		LET
+			%x10
+			SET 30
+			LET
+				%x11
+				SET 0
+				LET
+					Tu417
+					SAVE %x7 b.179
+					LET
+						Tu416
+						SAVE %x6 a.178
+						LET
+							%x6
+							CALLDIR mul_abs.172
+								%x8 %x9 %x10 %x11 
+								
+							LET
+								%x7
+								RESTORE a.178
+								LET
+									%x7
+									SRL %x7 31
+									LET
+										%x8
+										RESTORE b.179
+										LET
+											%x8
+											SRL %x8 31
+											ANS
+												IFEQ %x7 %x8
+													ANS
+														MOV %x6
+													ANS
+														NEG %x6
+
+Name : div_abs.180
+Args : %x6 %x7 %x8 %x9 
+
+FArgs : 
+Body :
+ANS
+	IFEQ %x8 -1
+		ANS
+			MOV %x9
+		LET
+			%x10
+			SRL %x6 %x8
+			ANS
+				IFLE %x7 %x10
+					LET
+						%x10
+						SLL %x7 %x8
+						LET
+							%x6
+							SUB %x6 %x10
+							LET
+								%x10
+								SUB %x8 1
+								LET
+									%x11
+									SET 1
+									LET
+										%x8
+										SLL %x11 %x8
+										LET
+											%x9
+											ADD %x9 %x8
+											ANS
+												CALLDIR div_abs.180
+													%x6 %x7 %x10 %x9 
+													
+					LET
+						%x8
+						SUB %x8 1
+						ANS
+							CALLDIR div_abs.180
+								%x6 %x7 %x8 %x9 
+								
+
+Name : div.185
+Args : %x6 %x7 
+
+FArgs : 
+Body :
+LET
+	%x8
+	IFGE %x6 0
+		ANS
+			MOV %x6
+		ANS
+			NEG %x6
+	LET
+		%x9
+		IFGE %x7 0
+			ANS
+				MOV %x7
+			ANS
+				NEG %x7
+		LET
+			%x10
+			SET 30
+			LET
+				%x11
+				SET 0
+				LET
+					Tu419
+					SAVE %x7 b.187
+					LET
+						Tu418
+						SAVE %x6 a.186
+						LET
+							%x6
+							CALLDIR div_abs.180
+								%x8 %x9 %x10 %x11 
+								
+							LET
+								%x7
+								RESTORE a.186
+								LET
+									%x7
+									SRL %x7 31
+									LET
+										%x8
+										RESTORE b.187
+										LET
+											%x8
+											SRL %x8 31
+											ANS
+												IFEQ %x7 %x8
+													ANS
+														MOV %x6
+													ANS
+														NEG %x6
+
+Name : print_int.190
 Args : %x6 
 
 FArgs : 
 Body :
 ANS
-	OUT %x6
+	IFGE %x6 0
+		ANS
+			IFGE %x6 10
+				LET
+					%x7
+					SET 10
+					LET
+						Tu421
+						SAVE %x6 a.191
+						LET
+							%x6
+							CALLDIR div.185
+								%x6 %x7 
+								
+							LET
+								Tu422
+								SAVE %x6 b.287
+								LET
+									%g0
+									CALLDIR print_int.190
+										%x6 
+										
+									LET
+										%x7
+										SET 10
+										LET
+											%x6
+											RESTORE b.287
+											LET
+												%x6
+												CALLDIR mul.177
+													%x6 %x7 
+													
+												LET
+													%x7
+													RESTORE a.191
+													LET
+														%x6
+														SUB %x7 %x6
+														LET
+															%x6
+															ADD %x6 48
+															ANS
+																OUT %x6
+				LET
+					%x6
+					ADD %x6 48
+					ANS
+						OUT %x6
+		LET
+			%x7
+			SET 45
+			LET
+				%g0
+				OUT %x7
+				LET
+					%x6
+					NEG %x6
+					ANS
+						CALLDIR print_int.190
+							%x6 
+							
 
-Name : getx.194
+Name : getx.210
 Args : %x6 
 
 FArgs : 
@@ -17,7 +273,7 @@ LET
 	ANS
 		FMOVD %f0
 
-Name : gety.196
+Name : gety.212
 Args : %x6 
 
 FArgs : 
@@ -28,7 +284,7 @@ LET
 	ANS
 		FMOVD %f0
 
-Name : getz.198
+Name : getz.214
 Args : %x6 
 
 FArgs : 
@@ -39,129 +295,129 @@ LET
 	ANS
 		FMOVD %f0
 
-Name : inprod.200
+Name : inprod.216
 Args : %x6 %x7 
 
 FArgs : 
 Body :
 LET
-	Tu387
-	SAVE %x6 v1.201
+	Tu424
+	SAVE %x6 v1.217
 	LET
-		Tu386
-		SAVE %x7 v2.202
+		Tu423
+		SAVE %x7 v2.218
 		LET
 			%f0
-			CALLDIR getx.194
+			CALLDIR getx.210
 				%x6 
 				
 			LET
 				%x6
-				RESTORE v2.202
+				RESTORE v2.218
 				LET
-					Tu389
-					SAVE %x6 v2.202
+					Tu426
+					SAVE %x6 v2.218
 					LET
-						Tu388
-						SAVE %f0 Td19.223
+						Tu425
+						SAVE %f0 Td21.239
 						LET
 							%f0
-							CALLDIR getx.194
+							CALLDIR getx.210
 								%x6 
 								
 							LET
 								%f1
-								RESTORE Td19.223
+								RESTORE Td21.239
 								LET
 									%f0
 									FMULD %f1 %f0
 									LET
 										%x6
-										RESTORE v1.201
+										RESTORE v1.217
 										LET
-											Tu391
-											SAVE %x6 v1.201
+											Tu428
+											SAVE %x6 v1.217
 											LET
-												Tu390
-												SAVE %f0 Td21.219
+												Tu427
+												SAVE %f0 Td23.235
 												LET
 													%f0
-													CALLDIR gety.196
+													CALLDIR gety.212
 														%x6 
 														
 													LET
 														%x6
-														RESTORE v2.202
+														RESTORE v2.218
 														LET
-															Tu393
-															SAVE %x6 v2.202
+															Tu430
+															SAVE %x6 v2.218
 															LET
-																Tu392
-																SAVE %f0 Td22.221
+																Tu429
+																SAVE %f0 Td24.237
 																LET
 																	%f0
-																	CALLDIR gety.196
+																	CALLDIR gety.212
 																		%x6 
 																		
 																	LET
 																		%f1
-																		RESTORE Td22.221
+																		RESTORE Td24.237
 																		LET
 																			%f0
 																			FMULD %f1 %f0
 																			LET
 																				%f1
-																				RESTORE Td21.219
+																				RESTORE Td23.235
 																				LET
 																					%f0
 																					FADDD %f1 %f0
 																					LET
 																						%x6
-																						RESTORE v1.201
+																						RESTORE v1.217
 																						LET
-																							Tu394
-																							SAVE %f0 Td25.215
+																							Tu431
+																							SAVE %f0 Td27.231
 																							LET
 																								%f0
-																								CALLDIR getz.198
+																								CALLDIR getz.214
 																									%x6 
 																									
 																								LET
 																									%x6
-																									RESTORE v2.202
+																									RESTORE v2.218
 																									LET
-																										Tu395
-																										SAVE %f0 Td26.217
+																										Tu432
+																										SAVE %f0 Td28.233
 																										LET
 																											%f0
-																											CALLDIR getz.198
+																											CALLDIR getz.214
 																												%x6 
 																												
 																											LET
 																												%f1
-																												RESTORE Td26.217
+																												RESTORE Td28.233
 																												LET
 																													%f0
 																													FMULD %f1 %f0
 																													LET
 																														%f1
-																														RESTORE Td25.215
+																														RESTORE Td27.231
 																														ANS
 																															FADDD %f1 %f0
 
 
 LET
 	%f0
-	l.363
+	l.394
 	LET
 		%f1
-		l.365
+		l.396
 		LET
 			%f2
-			l.367
+			l.398
 			LET
 				%f3
-				l.369
+				l.400
 				LET
 					%x6
 					MOV %x3
@@ -182,13 +438,13 @@ LET
 										MOV %x6
 										LET
 											%f1
-											l.375
+											l.406
 											LET
 												%f2
-												l.377
+												l.408
 												LET
 													%f3
-													l.379
+													l.410
 													LET
 														%x7
 														MOV %x3
@@ -208,16 +464,16 @@ LET
 																			%x7
 																			MOV %x7
 																			LET
-																				Tu397
-																				SAVE %f0 Td7.205
+																				Tu434
+																				SAVE %f0 Td9.221
 																				LET
 																					%f0
-																					CALLDIR inprod.200
+																					CALLDIR inprod.216
 																						%x6 %x7 
 																						
 																					LET
 																						%f1
-																						RESTORE Td7.205
+																						RESTORE Td9.221
 																						LET
 																							%f0
 																							FMULD %f1 %f0
@@ -227,6 +483,6 @@ LET
 																									
 																									%f0 
 																								ANS
-																									CALLDIR print_int.174
+																									CALLDIR print_int.190
 																										%x6 
 																										

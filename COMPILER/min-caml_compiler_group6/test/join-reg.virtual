@@ -1,12 +1,289 @@
-Name : print_int.163
-Args : a.164 
+Name : mul_abs.161
+Args : a.162 b.163 i.164 acc.165 
 
 FArgs : 
 Body :
-ANS
-	OUT a.164
+LET
+	Ti81.294
+	SET -1
+	ANS
+		IFEQ i.164 Ti81.294
+			ANS
+				MOV acc.165
+			LET
+				Ti82.304
+				SET 1
+				LET
+					Ti83.303
+					SLL Ti82.304 i.164
+					LET
+						Ti84.295
+						AND b.163 Ti83.303
+						LET
+							Ti85.296
+							SET 0
+							ANS
+								IFEQ Ti84.295 Ti85.296
+									LET
+										Ti86.302
+										SET 1
+										LET
+											Ti87.301
+											SUB i.164 Ti86.302
+											ANS
+												CALLDIR mul_abs.161
+													a.162 b.163 Ti87.301 acc.165 
+													
+									LET
+										Ti88.300
+										SET 1
+										LET
+											Ti89.297
+											SUB i.164 Ti88.300
+											LET
+												Ti90.299
+												SLL a.162 i.164
+												LET
+													Ti91.298
+													ADD acc.165 Ti90.299
+													ANS
+														CALLDIR mul_abs.161
+															a.162 b.163 Ti89.297 Ti91.298 
+															
 
-Name : f.183
+Name : mul.166
+Args : a.167 b.168 
+
+FArgs : 
+Body :
+LET
+	Ti72.293
+	SET 0
+	LET
+		abs_a.283
+		IFLE Ti72.293 a.167
+			ANS
+				MOV a.167
+			ANS
+				NEG a.167
+		LET
+			Ti73.292
+			SET 0
+			LET
+				abs_b.284
+				IFLE Ti73.292 b.168
+					ANS
+						MOV b.168
+					ANS
+						NEG b.168
+				LET
+					Ti74.290
+					SET 30
+					LET
+						Ti75.291
+						SET 0
+						LET
+							abs_mul.285
+							CALLDIR mul_abs.161
+								abs_a.283 abs_b.284 Ti74.290 Ti75.291 
+								
+							LET
+								Ti76.289
+								SET 31
+								LET
+									Ti77.286
+									SRL a.167 Ti76.289
+									LET
+										Ti78.288
+										SET 31
+										LET
+											Ti79.287
+											SRL b.168 Ti78.288
+											ANS
+												IFEQ Ti77.286 Ti79.287
+													ANS
+														MOV abs_mul.285
+													ANS
+														NEG abs_mul.285
+
+Name : div_abs.169
+Args : a.170 b.171 i.172 acc.173 
+
+FArgs : 
+Body :
+LET
+	Ti61.271
+	SET -1
+	ANS
+		IFEQ i.172 Ti61.271
+			ANS
+				MOV acc.173
+			LET
+				Ti62.272
+				SRL a.170 i.172
+				ANS
+					IFLE b.171 Ti62.272
+						LET
+							Ti63.281
+							SLL b.171 i.172
+							LET
+								Ti64.275
+								SUB a.170 Ti63.281
+								LET
+									Ti65.280
+									SET 1
+									LET
+										Ti66.276
+										SUB i.172 Ti65.280
+										LET
+											Ti67.279
+											SET 1
+											LET
+												Ti68.278
+												SLL Ti67.279 i.172
+												LET
+													Ti69.277
+													ADD acc.173 Ti68.278
+													ANS
+														CALLDIR div_abs.169
+															Ti64.275 b.171 Ti66.276 Ti69.277 
+															
+						LET
+							Ti70.274
+							SET 1
+							LET
+								Ti71.273
+								SUB i.172 Ti70.274
+								ANS
+									CALLDIR div_abs.169
+										a.170 b.171 Ti71.273 acc.173 
+										
+
+Name : div.174
+Args : a.175 b.176 
+
+FArgs : 
+Body :
+LET
+	Ti52.270
+	SET 0
+	LET
+		abs_a.260
+		IFLE Ti52.270 a.175
+			ANS
+				MOV a.175
+			ANS
+				NEG a.175
+		LET
+			Ti53.269
+			SET 0
+			LET
+				abs_b.261
+				IFLE Ti53.269 b.176
+					ANS
+						MOV b.176
+					ANS
+						NEG b.176
+				LET
+					Ti54.267
+					SET 30
+					LET
+						Ti55.268
+						SET 0
+						LET
+							abs_div.262
+							CALLDIR div_abs.169
+								abs_a.260 abs_b.261 Ti54.267 Ti55.268 
+								
+							LET
+								Ti56.266
+								SET 31
+								LET
+									Ti57.263
+									SRL a.175 Ti56.266
+									LET
+										Ti58.265
+										SET 31
+										LET
+											Ti59.264
+											SRL b.176 Ti58.265
+											ANS
+												IFEQ Ti57.263 Ti59.264
+													ANS
+														MOV abs_div.262
+													ANS
+														NEG abs_div.262
+
+Name : print_int.179
+Args : a.180 
+
+FArgs : 
+Body :
+LET
+	Ti40.245
+	SET 0
+	ANS
+		IFLE Ti40.245 a.180
+			LET
+				Ti41.249
+				SET 10
+				ANS
+					IFLE Ti41.249 a.180
+						LET
+							Ti42.259
+							SET 10
+							LET
+								b.252
+								CALLDIR div.174
+									a.180 Ti42.259 
+									
+								LET
+									Tu2.253
+									CALLDIR print_int.179
+										b.252 
+										
+									LET
+										Ti43.258
+										SET 10
+										LET
+											Ti44.257
+											CALLDIR mul.166
+												b.252 Ti43.258 
+												
+											LET
+												Ti45.255
+												SUB a.180 Ti44.257
+												LET
+													Ti46.256
+													SET 48
+													LET
+														Ti47.254
+														ADD Ti45.255 Ti46.256
+														ANS
+															OUT Ti47.254
+						LET
+							Ti48.251
+							SET 48
+							LET
+								Ti49.250
+								ADD a.180 Ti48.251
+								ANS
+									OUT Ti49.250
+			LET
+				Ti50.248
+				SET 45
+				LET
+					Tu1.246
+					OUT Ti50.248
+					LET
+						Ti51.247
+						NEG a.180
+						ANS
+							CALLDIR print_int.179
+								Ti51.247 
+								
+
+Name : f.199
 Args : 
 
 FArgs : 
@@ -14,7 +291,7 @@ Body :
 ANS
 	SET 123
 
-Name : g.185
+Name : g.201
 Args : 
 
 FArgs : 
@@ -22,7 +299,7 @@ Body :
 ANS
 	SET 456
 
-Name : h.187
+Name : h.203
 Args : 
 
 FArgs : 
@@ -32,46 +309,46 @@ ANS
 
 
 LET
-	Tu10.198
+	Tu12.214
 	NOP
 	LET
-		x.189
-		CALLDIR f.183
+		x.205
+		CALLDIR f.199
 			
 			
 		LET
-			Tu11.197
+			Tu13.213
 			NOP
 			LET
-				y.190
-				CALLDIR g.185
+				y.206
+				CALLDIR g.201
 					
 					
 				LET
-					Tu12.196
+					Tu14.212
 					NOP
 					LET
-						Ti13.194
-						CALLDIR h.187
+						Ti15.210
+						CALLDIR h.203
 							
 							
 						LET
-							Ti14.195
+							Ti16.211
 							SET 0
 							LET
-								Ti15.193
-								IFEQ Ti13.194 Ti14.195
+								Ti17.209
+								IFEQ Ti15.210 Ti16.211
 									ANS
-										SUB x.189 y.190
+										SUB x.205 y.206
 									ANS
-										SUB y.190 x.189
+										SUB y.206 x.205
 								LET
-									Ti16.192
-									ADD Ti15.193 x.189
+									Ti18.208
+									ADD Ti17.209 x.205
 									LET
-										Ti17.191
-										ADD Ti16.192 y.190
+										Ti19.207
+										ADD Ti18.208 y.206
 										ANS
-											CALLDIR print_int.163
-												Ti17.191 
+											CALLDIR print_int.179
+												Ti19.207 
 												

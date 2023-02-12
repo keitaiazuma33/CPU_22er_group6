@@ -95,7 +95,7 @@ rule token = parse
     { INI }
 | "inf"
     { INF }
-| "outi"
+| "output"
     { OUTPUT }
 | "itoia"
     { ITOIA }

@@ -292,117 +292,152 @@ LET REC fiszero x
 																						VAR abs_div
 																						NEG
 																							VAR abs_div
-																		LET REC print_int a 
+																		LET REC print_char a 
 																			OUT
 																				VAR a
-																			LET REC read_int a 
-																				INI
-																					VAR a
-																				LET REC read_float a 
-																					INF
+																			LET REC print_int a 
+																				IF
+																					NOT
+																						LE
+																							INT 0
+																							VAR a
+																					LET Tu1
+																						OUT
+																							INT 45
+																						APP VAR print_int
+																							NEG
+																								VAR a
+																					IF
+																						NOT
+																							LE
+																								INT 10
+																								VAR a
+																						OUT
+																							ADD
+																								VAR a
+																								INT 48
+																						LET b
+																							APP VAR div
+																								VAR a
+																								INT 10
+																							LET Tu2
+																								APP VAR print_int
+																									VAR b
+																								OUT
+																									ADD
+																										SUB
+																											VAR a
+																											APP VAR mul
+																												VAR b
+																												INT 10
+																										INT 48
+																				LET REC read_int a 
+																					INI
 																						VAR a
-																					LET REC assign_array hp a n 
-																						IF
-																							NOT
-																								LE
-																									INT 0
-																									VAR n
-																							UNIT
+																					LET REC read_float a 
+																						INF
+																							VAR a
+																						LET REC assign_array hp a n 
 																							IF
-																								EQ
-																									VAR n
-																									INT 0
-																								PUT
-																									VAR hp
-																									VAR n
-																									VAR a
-																								LET Tu1
+																								NOT
+																									LE
+																										INT 0
+																										VAR n
+																								UNIT
+																								IF
+																									EQ
+																										VAR n
+																										INT 0
 																									PUT
 																										VAR hp
 																										VAR n
 																										VAR a
-																									APP VAR assign_array
-																										VAR hp
-																										VAR a
-																										SUB
-																											VAR n
-																											INT 1
-																						LET REC create_array n a 
-																							LET hp
-																								GETHP
-																									UNIT
-																								LET hp_array
-																									ITOIA
-																										VAR hp
 																									LET Tu3
-																										SETHP
-																											ADD
-																												VAR hp
-																												SLL
-																													VAR n
-																													INT 2
-																										LET Tu2
-																											APP VAR assign_array
-																												VAR hp_array
-																												VAR a
-																												SUB
-																													VAR n
-																													INT 1
-																											VAR hp_array
-																							LET REC assign_farray hp a n 
-																								IF
-																									NOT
-																										LE
-																											INT 0
-																											VAR n
-																									UNIT
-																									IF
-																										EQ
-																											VAR n
-																											INT 0
 																										PUT
 																											VAR hp
 																											VAR n
 																											VAR a
-																										LET Tu4
+																										APP VAR assign_array
+																											VAR hp
+																											VAR a
+																											SUB
+																												VAR n
+																												INT 1
+																							LET REC create_array n a 
+																								LET hp
+																									GETHP
+																										UNIT
+																									LET hp_array
+																										ITOIA
+																											VAR hp
+																										LET Tu5
+																											SETHP
+																												ADD
+																													VAR hp
+																													SLL
+																														VAR n
+																														INT 2
+																											LET Tu4
+																												APP VAR assign_array
+																													VAR hp_array
+																													VAR a
+																													SUB
+																														VAR n
+																														INT 1
+																												VAR hp_array
+																								LET REC assign_farray hp a n 
+																									IF
+																										NOT
+																											LE
+																												INT 0
+																												VAR n
+																										UNIT
+																										IF
+																											EQ
+																												VAR n
+																												INT 0
 																											PUT
 																												VAR hp
 																												VAR n
 																												VAR a
-																											APP VAR assign_farray
-																												VAR hp
-																												VAR a
-																												SUB
-																													VAR n
-																													INT 1
-																								LET REC create_float_array n a 
-																									LET hp
-																										GETHP
-																											UNIT
-																										LET hp_array
-																											ITOFA
-																												VAR hp
 																											LET Tu6
-																												SETHP
-																													ADD
-																														VAR hp
-																														SLL
-																															VAR n
-																															INT 2
-																												LET Tu5
-																													APP VAR assign_farray
+																												PUT
+																													VAR hp
+																													VAR n
+																													VAR a
+																												APP VAR assign_farray
+																													VAR hp
+																													VAR a
+																													SUB
+																														VAR n
+																														INT 1
+																									LET REC create_float_array n a 
+																										LET hp
+																											GETHP
+																												UNIT
+																											LET hp_array
+																												ITOFA
+																													VAR hp
+																												LET Tu8
+																													SETHP
+																														ADD
+																															VAR hp
+																															SLL
+																																VAR n
+																																INT 2
+																													LET Tu7
+																														APP VAR assign_farray
+																															VAR hp_array
+																															VAR a
+																															SUB
+																																VAR n
+																																INT 1
 																														VAR hp_array
-																														VAR a
-																														SUB
-																															VAR n
-																															INT 1
-																													VAR hp_array
-																									LET REC h p 
-																										LETTUPLE v1 v2 v3 v4 v5 v6 v7 v8 v9 v10 
-																											VAR p
-																											LET REC g z 
-																												LET r
-																													ADD
+																										LET REC h p 
+																											LETTUPLE v1 v2 v3 v4 v5 v6 v7 v8 v9 v10 
+																												VAR p
+																												LET REC g z 
+																													LET r
 																														ADD
 																															ADD
 																																ADD
@@ -411,40 +446,41 @@ LET REC fiszero x
 																																			ADD
 																																				ADD
 																																					ADD
-																																						VAR v1
-																																						VAR v2
-																																					VAR v3
-																																				VAR v4
-																																			VAR v5
-																																		VAR v6
-																																	VAR v7
-																																VAR v8
-																															VAR v9
-																														VAR v10
-																													IF
-																														NOT
-																															LE
-																																VAR z
-																																INT 0
-																														VAR r
-																														APP VAR g
-																															NEG
-																																VAR z
-																												APP VAR g
-																													INT 1
-																										LET Tu7
-																											APP VAR print_int
-																												APP VAR h
-																													TUPLE
+																																						ADD
+																																							VAR v1
+																																							VAR v2
+																																						VAR v3
+																																					VAR v4
+																																				VAR v5
+																																			VAR v6
+																																		VAR v7
+																																	VAR v8
+																																VAR v9
+																															VAR v10
+																														IF
+																															NOT
+																																LE
+																																	VAR z
+																																	INT 0
+																															VAR r
+																															APP VAR g
+																																NEG
+																																	VAR z
+																													APP VAR g
 																														INT 1
-																														INT 2
-																														INT 3
-																														INT 4
-																														INT 5
-																														INT 6
-																														INT 7
-																														INT 8
-																														INT 9
-																														INT 10
-																											APP VAR print_newline
-																												UNIT
+																											LET Tu9
+																												APP VAR print_int
+																													APP VAR h
+																														TUPLE
+																															INT 1
+																															INT 2
+																															INT 3
+																															INT 4
+																															INT 5
+																															INT 6
+																															INT 7
+																															INT 8
+																															INT 9
+																															INT 10
+																												APP VAR print_newline
+																													UNIT

@@ -1,30 +1,196 @@
-Name : print_int.156
-Args : a.157 
+Name : mul_abs.154
+Args : a.155 b.156 i.157 acc.158 
 Formal_fv : 
 Body :
-OUT a.157
+LET Ti74.279
+	INT -1
+	IFEQ i.157 Ti74.279
+		VAR acc.158
+		LET Ti75.289
+			INT 1
+			LET Ti76.288
+				SLL Ti75.289 i.157
+				LET Ti77.280
+					AND b.156 Ti76.288
+					LET Ti78.281
+						INT 0
+						IFEQ Ti77.280 Ti78.281
+							LET Ti79.287
+								INT 1
+								LET Ti80.286
+									SUB i.157 Ti79.287
+									APPDIR mul_abs.154 : a.155 b.156 Ti80.286 acc.158 
+							LET Ti81.285
+								INT 1
+								LET Ti82.282
+									SUB i.157 Ti81.285
+									LET Ti83.284
+										SLL a.155 i.157
+										LET Ti84.283
+											ADD acc.158 Ti83.284
+											APPDIR mul_abs.154 : a.155 b.156 Ti82.282 Ti84.283 
 
-Name : adder.182
-Args : y.183 
-Formal_fv : x.177 
-Body :
-ADD x.177 y.183
-
-Name : make_adder.176
-Args : x.177 
+Name : mul.159
+Args : a.160 b.161 
 Formal_fv : 
 Body :
-MAKECLS adder.182
-	adder.182 : x.177 
-	VAR adder.182
+LET Ti65.278
+	INT 0
+	LET abs_a.268
+		IFLE Ti65.278 a.160
+			VAR a.160
+			NEG a.160
+		LET Ti66.277
+			INT 0
+			LET abs_b.269
+				IFLE Ti66.277 b.161
+					VAR b.161
+					NEG b.161
+				LET Ti67.275
+					INT 30
+					LET Ti68.276
+						INT 0
+						LET abs_mul.270
+							APPDIR mul_abs.154 : abs_a.268 abs_b.269 Ti67.275 Ti68.276 
+							LET Ti69.274
+								INT 31
+								LET Ti70.271
+									SRL a.160 Ti69.274
+									LET Ti71.273
+										INT 31
+										LET Ti72.272
+											SRL b.161 Ti71.273
+											IFEQ Ti70.271 Ti72.272
+												VAR abs_mul.270
+												NEG abs_mul.270
+
+Name : div_abs.162
+Args : a.163 b.164 i.165 acc.166 
+Formal_fv : 
+Body :
+LET Ti54.256
+	INT -1
+	IFEQ i.165 Ti54.256
+		VAR acc.166
+		LET Ti55.257
+			SRL a.163 i.165
+			IFLE b.164 Ti55.257
+				LET Ti56.266
+					SLL b.164 i.165
+					LET Ti57.260
+						SUB a.163 Ti56.266
+						LET Ti58.265
+							INT 1
+							LET Ti59.261
+								SUB i.165 Ti58.265
+								LET Ti60.264
+									INT 1
+									LET Ti61.263
+										SLL Ti60.264 i.165
+										LET Ti62.262
+											ADD acc.166 Ti61.263
+											APPDIR div_abs.162 : Ti57.260 b.164 Ti59.261 Ti62.262 
+				LET Ti63.259
+					INT 1
+					LET Ti64.258
+						SUB i.165 Ti63.259
+						APPDIR div_abs.162 : a.163 b.164 Ti64.258 acc.166 
+
+Name : div.167
+Args : a.168 b.169 
+Formal_fv : 
+Body :
+LET Ti45.255
+	INT 0
+	LET abs_a.245
+		IFLE Ti45.255 a.168
+			VAR a.168
+			NEG a.168
+		LET Ti46.254
+			INT 0
+			LET abs_b.246
+				IFLE Ti46.254 b.169
+					VAR b.169
+					NEG b.169
+				LET Ti47.252
+					INT 30
+					LET Ti48.253
+						INT 0
+						LET abs_div.247
+							APPDIR div_abs.162 : abs_a.245 abs_b.246 Ti47.252 Ti48.253 
+							LET Ti49.251
+								INT 31
+								LET Ti50.248
+									SRL a.168 Ti49.251
+									LET Ti51.250
+										INT 31
+										LET Ti52.249
+											SRL b.169 Ti51.250
+											IFEQ Ti50.248 Ti52.249
+												VAR abs_div.247
+												NEG abs_div.247
+
+Name : print_int.172
+Args : a.173 
+Formal_fv : 
+Body :
+LET Ti33.230
+	INT 0
+	IFLE Ti33.230 a.173
+		LET Ti34.234
+			INT 10
+			IFLE Ti34.234 a.173
+				LET Ti35.244
+					INT 10
+					LET b.237
+						APPDIR div.167 : a.173 Ti35.244 
+						LET Tu2.238
+							APPDIR print_int.172 : b.237 
+							LET Ti36.243
+								INT 10
+								LET Ti37.242
+									APPDIR mul.159 : b.237 Ti36.243 
+									LET Ti38.240
+										SUB a.173 Ti37.242
+										LET Ti39.241
+											INT 48
+											LET Ti40.239
+												ADD Ti38.240 Ti39.241
+												OUT Ti40.239
+				LET Ti41.236
+					INT 48
+					LET Ti42.235
+						ADD a.173 Ti41.236
+						OUT Ti42.235
+		LET Ti43.233
+			INT 45
+			LET Tu1.231
+				OUT Ti43.233
+				LET Ti44.232
+					NEG a.173
+					APPDIR print_int.172 : Ti44.232 
+
+Name : adder.198
+Args : y.199 
+Formal_fv : x.193 
+Body :
+ADD x.193 y.199
+
+Name : make_adder.192
+Args : x.193 
+Formal_fv : 
+Body :
+MAKECLS adder.198
+	adder.198 : x.193 
+	VAR adder.198
 
 
-LET Ti7.181
+LET Ti9.197
 	INT 3
-	LET Tf8.179
-		APPDIR make_adder.176 : Ti7.181 
-		LET Ti9.180
+	LET Tf10.195
+		APPDIR make_adder.192 : Ti9.197 
+		LET Ti11.196
 			INT 7
-			LET Ti10.178
-				APPCLS Tf8.179 : Ti9.180 
-				APPDIR print_int.156 : Ti10.178 
+			LET Ti12.194
+				APPCLS Tf10.195 : Ti11.196 
+				APPDIR print_int.172 : Ti12.194 

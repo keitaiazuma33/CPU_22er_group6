@@ -1,12 +1,268 @@
-Name : print_int.168
+Name : mul_abs.166
+Args : %x6 %x7 %x8 %x9 
+
+FArgs : 
+Body :
+ANS
+	IFEQ %x8 -1
+		ANS
+			MOV %x9
+		LET
+			%x10
+			SET 1
+			LET
+				%x10
+				SLL %x10 %x8
+				LET
+					%x10
+					AND %x7 %x10
+					ANS
+						IFEQ %x10 0
+							LET
+								%x8
+								SUB %x8 1
+								ANS
+									CALLDIR mul_abs.166
+										%x6 %x7 %x8 %x9 
+										
+							LET
+								%x10
+								SUB %x8 1
+								LET
+									%x8
+									SLL %x6 %x8
+									LET
+										%x9
+										ADD %x9 %x8
+										ANS
+											CALLDIR mul_abs.166
+												%x6 %x7 %x10 %x9 
+												
+
+Name : mul.171
+Args : %x6 %x7 
+
+FArgs : 
+Body :
+LET
+	%x8
+	IFGE %x6 0
+		ANS
+			MOV %x6
+		ANS
+			NEG %x6
+	LET
+		%x9
+		IFGE %x7 0
+			ANS
+				MOV %x7
+			ANS
+				NEG %x7
+		LET
+			%x10
+			SET 30
+			LET
+				%x11
+				SET 0
+				LET
+					Tu383
+					SAVE %x7 b.173
+					LET
+						Tu382
+						SAVE %x6 a.172
+						LET
+							%x6
+							CALLDIR mul_abs.166
+								%x8 %x9 %x10 %x11 
+								
+							LET
+								%x7
+								RESTORE a.172
+								LET
+									%x7
+									SRL %x7 31
+									LET
+										%x8
+										RESTORE b.173
+										LET
+											%x8
+											SRL %x8 31
+											ANS
+												IFEQ %x7 %x8
+													ANS
+														MOV %x6
+													ANS
+														NEG %x6
+
+Name : div_abs.174
+Args : %x6 %x7 %x8 %x9 
+
+FArgs : 
+Body :
+ANS
+	IFEQ %x8 -1
+		ANS
+			MOV %x9
+		LET
+			%x10
+			SRL %x6 %x8
+			ANS
+				IFLE %x7 %x10
+					LET
+						%x10
+						SLL %x7 %x8
+						LET
+							%x6
+							SUB %x6 %x10
+							LET
+								%x10
+								SUB %x8 1
+								LET
+									%x11
+									SET 1
+									LET
+										%x8
+										SLL %x11 %x8
+										LET
+											%x9
+											ADD %x9 %x8
+											ANS
+												CALLDIR div_abs.174
+													%x6 %x7 %x10 %x9 
+													
+					LET
+						%x8
+						SUB %x8 1
+						ANS
+							CALLDIR div_abs.174
+								%x6 %x7 %x8 %x9 
+								
+
+Name : div.179
+Args : %x6 %x7 
+
+FArgs : 
+Body :
+LET
+	%x8
+	IFGE %x6 0
+		ANS
+			MOV %x6
+		ANS
+			NEG %x6
+	LET
+		%x9
+		IFGE %x7 0
+			ANS
+				MOV %x7
+			ANS
+				NEG %x7
+		LET
+			%x10
+			SET 30
+			LET
+				%x11
+				SET 0
+				LET
+					Tu385
+					SAVE %x7 b.181
+					LET
+						Tu384
+						SAVE %x6 a.180
+						LET
+							%x6
+							CALLDIR div_abs.174
+								%x8 %x9 %x10 %x11 
+								
+							LET
+								%x7
+								RESTORE a.180
+								LET
+									%x7
+									SRL %x7 31
+									LET
+										%x8
+										RESTORE b.181
+										LET
+											%x8
+											SRL %x8 31
+											ANS
+												IFEQ %x7 %x8
+													ANS
+														MOV %x6
+													ANS
+														NEG %x6
+
+Name : print_int.184
 Args : %x6 
 
 FArgs : 
 Body :
 ANS
-	OUT %x6
+	IFGE %x6 0
+		ANS
+			IFGE %x6 10
+				LET
+					%x7
+					SET 10
+					LET
+						Tu387
+						SAVE %x6 a.185
+						LET
+							%x6
+							CALLDIR div.179
+								%x6 %x7 
+								
+							LET
+								Tu388
+								SAVE %x6 b.263
+								LET
+									%g0
+									CALLDIR print_int.184
+										%x6 
+										
+									LET
+										%x7
+										SET 10
+										LET
+											%x6
+											RESTORE b.263
+											LET
+												%x6
+												CALLDIR mul.171
+													%x6 %x7 
+													
+												LET
+													%x7
+													RESTORE a.185
+													LET
+														%x6
+														SUB %x7 %x6
+														LET
+															%x6
+															ADD %x6 48
+															ANS
+																OUT %x6
+				LET
+					%x6
+					ADD %x6 48
+					ANS
+						OUT %x6
+		LET
+			%x7
+			SET 45
+			LET
+				%g0
+				OUT %x7
+				LET
+					%x6
+					NEG %x6
+					ANS
+						CALLDIR print_int.184
+							%x6 
+							
 
-Name : assign_farray.181
+Name : assign_farray.197
 Args : %x6 %x7 
 
 FArgs : %f0 
@@ -30,13 +286,13 @@ ANS
 							%x7
 							SUB %x7 1
 							ANS
-								CALLDIR assign_farray.181
+								CALLDIR assign_farray.197
 									%x6 %x7 
 									%f0 
 		ANS
 			NOP
 
-Name : create_float_array.185
+Name : create_float_array.201
 Args : %x6 
 
 FArgs : %f0 
@@ -63,20 +319,20 @@ LET
 							%x7
 							SUB %x6 1
 							LET
-								Tu353
-								SAVE %x8 hp_array.211
+								Tu390
+								SAVE %x8 hp_array.227
 								LET
 									%g0
-									CALLDIR assign_farray.181
+									CALLDIR assign_farray.197
 										%x8 %x7 
 										%f0 
 									LET
 										%x6
-										RESTORE hp_array.211
+										RESTORE hp_array.227
 										ANS
 											MOV %x6
 
-Name : inprod.188
+Name : inprod.204
 Args : %x6 %x7 %x8 
 
 FArgs : 
@@ -102,20 +358,20 @@ ANS
 								%x8
 								SUB %x8 1
 								LET
-									Tu354
-									SAVE %f0 Td19.204
+									Tu391
+									SAVE %f0 Td21.220
 									LET
 										%f0
-										CALLDIR inprod.188
+										CALLDIR inprod.204
 											%x6 %x7 %x8 
 											
 										LET
 											%f1
-											RESTORE Td19.204
+											RESTORE Td21.220
 											ANS
 												FADDD %f1 %f0
 		ANS
-			l.341
+			l.372
 
 
 LET
@@ -123,10 +379,10 @@ LET
 	SET 3
 	LET
 		%f0
-		l.345
+		l.376
 		LET
 			%x6
-			CALLDIR create_float_array.185
+			CALLDIR create_float_array.201
 				%x6 
 				%f0 
 			LET
@@ -134,35 +390,35 @@ LET
 				SET 3
 				LET
 					%f0
-					l.347
+					l.378
 					LET
-						Tu356
-						SAVE %x6 v1.192
+						Tu393
+						SAVE %x6 v1.208
 						LET
 							%x7
-							CALLDIR create_float_array.185
+							CALLDIR create_float_array.201
 								%x7 
 								%f0 
 							LET
 								%f0
-								l.349
+								l.380
 								LET
 									%x8
 									SET 2
 									LET
 										%x6
-										RESTORE v1.192
+										RESTORE v1.208
 										LET
-											Tu357
-											SAVE %f0 Td11.196
+											Tu394
+											SAVE %f0 Td13.212
 											LET
 												%f0
-												CALLDIR inprod.188
+												CALLDIR inprod.204
 													%x6 %x7 %x8 
 													
 												LET
 													%f1
-													RESTORE Td11.196
+													RESTORE Td13.212
 													LET
 														%f0
 														FMULD %f1 %f0
@@ -172,6 +428,6 @@ LET
 																
 																%f0 
 															ANS
-																CALLDIR print_int.168
+																CALLDIR print_int.184
 																	%x6 
 																	

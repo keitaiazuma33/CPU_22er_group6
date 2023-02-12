@@ -1,98 +1,264 @@
-Name : print_int.168
-Args : a.169 
+Name : mul_abs.166
+Args : a.167 b.168 i.169 acc.170 
 Formal_fv : 
 Body :
-OUT a.169
+LET Ti86.305
+	INT -1
+	IFEQ i.169 Ti86.305
+		VAR acc.170
+		LET Ti87.315
+			INT 1
+			LET Ti88.314
+				SLL Ti87.315 i.169
+				LET Ti89.306
+					AND b.168 Ti88.314
+					LET Ti90.307
+						INT 0
+						IFEQ Ti89.306 Ti90.307
+							LET Ti91.313
+								INT 1
+								LET Ti92.312
+									SUB i.169 Ti91.313
+									APPDIR mul_abs.166 : a.167 b.168 Ti92.312 acc.170 
+							LET Ti93.311
+								INT 1
+								LET Ti94.308
+									SUB i.169 Ti93.311
+									LET Ti95.310
+										SLL a.167 i.169
+										LET Ti96.309
+											ADD acc.170 Ti95.310
+											APPDIR mul_abs.166 : a.167 b.168 Ti94.308 Ti96.309 
 
-Name : assign_farray.181
-Args : hp.182 a.183 n.184 
+Name : mul.171
+Args : a.172 b.173 
 Formal_fv : 
 Body :
-LET Ti29.220
+LET Ti77.304
 	INT 0
-	IFLE Ti29.220 n.184
-		LET Ti30.221
+	LET abs_a.294
+		IFLE Ti77.304 a.172
+			VAR a.172
+			NEG a.172
+		LET Ti78.303
 			INT 0
-			IFEQ n.184 Ti30.221
-				PUT hp.182 n.184 a.183
-				LET Tu4.222
-					PUT hp.182 n.184 a.183
-					LET Ti31.224
+			LET abs_b.295
+				IFLE Ti78.303 b.173
+					VAR b.173
+					NEG b.173
+				LET Ti79.301
+					INT 30
+					LET Ti80.302
+						INT 0
+						LET abs_mul.296
+							APPDIR mul_abs.166 : abs_a.294 abs_b.295 Ti79.301 Ti80.302 
+							LET Ti81.300
+								INT 31
+								LET Ti82.297
+									SRL a.172 Ti81.300
+									LET Ti83.299
+										INT 31
+										LET Ti84.298
+											SRL b.173 Ti83.299
+											IFEQ Ti82.297 Ti84.298
+												VAR abs_mul.296
+												NEG abs_mul.296
+
+Name : div_abs.174
+Args : a.175 b.176 i.177 acc.178 
+Formal_fv : 
+Body :
+LET Ti66.282
+	INT -1
+	IFEQ i.177 Ti66.282
+		VAR acc.178
+		LET Ti67.283
+			SRL a.175 i.177
+			IFLE b.176 Ti67.283
+				LET Ti68.292
+					SLL b.176 i.177
+					LET Ti69.286
+						SUB a.175 Ti68.292
+						LET Ti70.291
+							INT 1
+							LET Ti71.287
+								SUB i.177 Ti70.291
+								LET Ti72.290
+									INT 1
+									LET Ti73.289
+										SLL Ti72.290 i.177
+										LET Ti74.288
+											ADD acc.178 Ti73.289
+											APPDIR div_abs.174 : Ti69.286 b.176 Ti71.287 Ti74.288 
+				LET Ti75.285
+					INT 1
+					LET Ti76.284
+						SUB i.177 Ti75.285
+						APPDIR div_abs.174 : a.175 b.176 Ti76.284 acc.178 
+
+Name : div.179
+Args : a.180 b.181 
+Formal_fv : 
+Body :
+LET Ti57.281
+	INT 0
+	LET abs_a.271
+		IFLE Ti57.281 a.180
+			VAR a.180
+			NEG a.180
+		LET Ti58.280
+			INT 0
+			LET abs_b.272
+				IFLE Ti58.280 b.181
+					VAR b.181
+					NEG b.181
+				LET Ti59.278
+					INT 30
+					LET Ti60.279
+						INT 0
+						LET abs_div.273
+							APPDIR div_abs.174 : abs_a.271 abs_b.272 Ti59.278 Ti60.279 
+							LET Ti61.277
+								INT 31
+								LET Ti62.274
+									SRL a.180 Ti61.277
+									LET Ti63.276
+										INT 31
+										LET Ti64.275
+											SRL b.181 Ti63.276
+											IFEQ Ti62.274 Ti64.275
+												VAR abs_div.273
+												NEG abs_div.273
+
+Name : print_int.184
+Args : a.185 
+Formal_fv : 
+Body :
+LET Ti45.256
+	INT 0
+	IFLE Ti45.256 a.185
+		LET Ti46.260
+			INT 10
+			IFLE Ti46.260 a.185
+				LET Ti47.270
+					INT 10
+					LET b.263
+						APPDIR div.179 : a.185 Ti47.270 
+						LET Tu2.264
+							APPDIR print_int.184 : b.263 
+							LET Ti48.269
+								INT 10
+								LET Ti49.268
+									APPDIR mul.171 : b.263 Ti48.269 
+									LET Ti50.266
+										SUB a.185 Ti49.268
+										LET Ti51.267
+											INT 48
+											LET Ti52.265
+												ADD Ti50.266 Ti51.267
+												OUT Ti52.265
+				LET Ti53.262
+					INT 48
+					LET Ti54.261
+						ADD a.185 Ti53.262
+						OUT Ti54.261
+		LET Ti55.259
+			INT 45
+			LET Tu1.257
+				OUT Ti55.259
+				LET Ti56.258
+					NEG a.185
+					APPDIR print_int.184 : Ti56.258 
+
+Name : assign_farray.197
+Args : hp.198 a.199 n.200 
+Formal_fv : 
+Body :
+LET Ti31.236
+	INT 0
+	IFLE Ti31.236 n.200
+		LET Ti32.237
+			INT 0
+			IFEQ n.200 Ti32.237
+				PUT hp.198 n.200 a.199
+				LET Tu6.238
+					PUT hp.198 n.200 a.199
+					LET Ti33.240
 						INT 1
-						LET Ti32.223
-							SUB n.184 Ti31.224
-							APPDIR assign_farray.181 : hp.182 a.183 Ti32.223 
+						LET Ti34.239
+							SUB n.200 Ti33.240
+							APPDIR assign_farray.197 : hp.198 a.199 Ti34.239 
 		UNIT
 
-Name : create_float_array.185
-Args : n.186 a.187 
+Name : create_float_array.201
+Args : n.202 a.203 
 Formal_fv : 
 Body :
-LET Tu23.219
+LET Tu25.235
 	UNIT
-	LET hp.210
+	LET hp.226
 		GETHP
-		LET hp_array.211
-			ITOFA hp.210
-			LET Ti24.218
+		LET hp_array.227
+			ITOFA hp.226
+			LET Ti26.234
 				INT 2
-				LET Ti25.217
-					SLL n.186 Ti24.218
-					LET Ti26.216
-						ADD hp.210 Ti25.217
-						LET Tu6.212
-							SETHP Ti26.216
-							LET Ti27.215
+				LET Ti27.233
+					SLL n.202 Ti26.234
+					LET Ti28.232
+						ADD hp.226 Ti27.233
+						LET Tu8.228
+							SETHP Ti28.232
+							LET Ti29.231
 								INT 1
-								LET Ti28.214
-									SUB n.186 Ti27.215
-									LET Tu5.213
-										APPDIR assign_farray.181 : hp_array.211 a.187 Ti28.214 
-										VAR hp_array.211
+								LET Ti30.230
+									SUB n.202 Ti29.231
+									LET Tu7.229
+										APPDIR assign_farray.197 : hp_array.227 a.203 Ti30.230 
+										VAR hp_array.227
 
-Name : inprod.188
-Args : v1.189 v2.190 i.191 
+Name : inprod.204
+Args : v1.205 v2.206 i.207 
 Formal_fv : 
 Body :
-LET Ti16.203
+LET Ti18.219
 	INT 0
-	IFLE Ti16.203 i.191
-		LET Td17.208
-			GET v1.189 i.191
-			LET Td18.209
-				GET v2.190 i.191
-				LET Td19.204
-					FMUL Td17.208 Td18.209
-					LET Ti20.207
+	IFLE Ti18.219 i.207
+		LET Td19.224
+			GET v1.205 i.207
+			LET Td20.225
+				GET v2.206 i.207
+				LET Td21.220
+					FMUL Td19.224 Td20.225
+					LET Ti22.223
 						INT 1
-						LET Ti21.206
-							SUB i.191 Ti20.207
-							LET Td22.205
-								APPDIR inprod.188 : v1.189 v2.190 Ti21.206 
-								FADD Td19.204 Td22.205
+						LET Ti23.222
+							SUB i.207 Ti22.223
+							LET Td24.221
+								APPDIR inprod.204 : v1.205 v2.206 Ti23.222 
+								FADD Td21.220 Td24.221
 		FLOAT 0.000000
 
 
-LET Ti7.201
+LET Ti9.217
 	INT 3
-	LET Td8.202
+	LET Td10.218
 		FLOAT 1.230000
-		LET v1.192
-			APPDIR create_float_array.185 : Ti7.201 Td8.202 
-			LET Ti9.199
+		LET v1.208
+			APPDIR create_float_array.201 : Ti9.217 Td10.218 
+			LET Ti11.215
 				INT 3
-				LET Td10.200
+				LET Td12.216
 					FLOAT 4.560000
-					LET v2.193
-						APPDIR create_float_array.185 : Ti9.199 Td10.200 
-						LET Td11.196
+					LET v2.209
+						APPDIR create_float_array.201 : Ti11.215 Td12.216 
+						LET Td13.212
 							FLOAT 1000000.000000
-							LET Ti12.198
+							LET Ti14.214
 								INT 2
-								LET Td13.197
-									APPDIR inprod.188 : v1.192 v2.193 Ti12.198 
-									LET Td14.195
-										FMUL Td11.196 Td13.197
-										LET Ti15.194
-											APPDIR min_caml_truncate : Td14.195 
-											APPDIR print_int.168 : Ti15.194 
+								LET Td15.213
+									APPDIR inprod.204 : v1.208 v2.209 Ti14.214 
+									LET Td16.211
+										FMUL Td13.212 Td15.213
+										LET Ti17.210
+											APPDIR min_caml_truncate : Td16.211 
+											APPDIR print_int.184 : Ti17.210 

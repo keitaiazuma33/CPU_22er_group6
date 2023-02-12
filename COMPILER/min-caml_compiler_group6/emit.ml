@@ -132,7 +132,7 @@ and g' oc = function (* ��̿��Υ�����֥����� (caml2h
   | NonTail(x), FDivD(y, z), n -> incr_pc ();Printf.fprintf oc "\tfdiv\t%s, %s, %s  #%d pc %d\n" x y z n (!pc)
   | NonTail(x), FtoI(y), n -> incr_pc ();Printf.fprintf oc "\tftoi\t%s, %s  #%d pc %d\n" x y n (!pc)
   | NonTail(x), ItoF(y), n -> incr_pc ();Printf.fprintf oc "\titof\t%s, %s  #%d pc %d\n" x y n (!pc)
-  | NonTail(_), Out(x), n -> incr_pc ();Printf.fprintf oc "\tsw\t%s, %d(%s)  #%d pc %d\n" reg_out 0 x n (!pc);
+  | NonTail(_), Out(x), n -> incr_pc ();Printf.fprintf oc "\tsw\t%s, %d(%s)  #%d pc %d\n" x 0 reg_out n (!pc);
                             incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 4  #%d pc %d\n" reg_out reg_out n (!pc)
   | NonTail(x), Ini, n -> incr_pc ();Printf.fprintf oc "\tlw\t%s, %d(%s)  #%d pc %d\n" x 0 reg_in n (!pc);
                           incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 4  #%d pc %d\n" reg_in reg_in n (!pc)

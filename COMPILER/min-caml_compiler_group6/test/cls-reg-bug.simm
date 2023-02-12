@@ -1,252 +1,472 @@
-Name : print_int.177
-Args : a.178 
+Name : mul_abs.175
+Args : a.176 b.177 i.178 acc.179 
 
 FArgs : 
 Body :
 ANS
-	OUT a.178
+	IFEQ i.178 -1
+		ANS
+			MOV acc.179
+		LET
+			Ti96.342
+			SET 1
+			LET
+				Ti97.341
+				SLL Ti96.342 i.178
+				LET
+					Ti98.333
+					AND b.177 Ti97.341
+					ANS
+						IFEQ Ti98.333 0
+							LET
+								Ti101.339
+								SUB i.178 1
+								ANS
+									CALLDIR mul_abs.175
+										a.176 b.177 Ti101.339 acc.179 
+										
+							LET
+								Ti103.335
+								SUB i.178 1
+								LET
+									Ti104.337
+									SLL a.176 i.178
+									LET
+										Ti105.336
+										ADD acc.179 Ti104.337
+										ANS
+											CALLDIR mul_abs.175
+												a.176 b.177 Ti103.335 Ti105.336 
+												
 
-Name : g.223
-Args : z.224 
+Name : mul.180
+Args : a.181 b.182 
 
 FArgs : 
 Body :
 LET
-	v9.221
-	LD g.223 40
+	abs_a.321
+	IFGE a.181 0
+		ANS
+			MOV a.181
+		ANS
+			NEG a.181
 	LET
-		v8.220
-		LD g.223 36
+		abs_b.322
+		IFGE b.182 0
+			ANS
+				MOV b.182
+			ANS
+				NEG b.182
 		LET
-			v7.219
-			LD g.223 32
+			Ti88.328
+			SET 30
 			LET
-				v6.218
-				LD g.223 28
+				Ti89.329
+				SET 0
 				LET
-					v5.217
-					LD g.223 24
+					abs_mul.323
+					CALLDIR mul_abs.175
+						abs_a.321 abs_b.322 Ti88.328 Ti89.329 
+						
 					LET
-						v4.216
-						LD g.223 20
+						Ti91.324
+						SRL a.181 31
 						LET
-							v3.215
-							LD g.223 16
+							Ti93.325
+							SRL b.182 31
+							ANS
+								IFEQ Ti91.324 Ti93.325
+									ANS
+										MOV abs_mul.323
+									ANS
+										NEG abs_mul.323
+
+Name : div_abs.183
+Args : a.184 b.185 i.186 acc.187 
+
+FArgs : 
+Body :
+ANS
+	IFEQ i.186 -1
+		ANS
+			MOV acc.187
+		LET
+			Ti76.310
+			SRL a.184 i.186
+			ANS
+				IFLE b.185 Ti76.310
+					LET
+						Ti77.319
+						SLL b.185 i.186
+						LET
+							Ti78.313
+							SUB a.184 Ti77.319
 							LET
-								v2.214
-								LD g.223 12
+								Ti80.314
+								SUB i.186 1
 								LET
-									v10.222
-									LD g.223 8
+									Ti81.317
+									SET 1
 									LET
-										v1.213
-										LD g.223 4
+										Ti82.316
+										SLL Ti81.317 i.186
 										LET
-											Ti22.236
-											ADD v1.213 v2.214
+											Ti83.315
+											ADD acc.187 Ti82.316
+											ANS
+												CALLDIR div_abs.183
+													Ti78.313 b.185 Ti80.314 Ti83.315 
+													
+					LET
+						Ti85.311
+						SUB i.186 1
+						ANS
+							CALLDIR div_abs.183
+								a.184 b.185 Ti85.311 acc.187 
+								
+
+Name : div.188
+Args : a.189 b.190 
+
+FArgs : 
+Body :
+LET
+	abs_a.298
+	IFGE a.189 0
+		ANS
+			MOV a.189
+		ANS
+			NEG a.189
+	LET
+		abs_b.299
+		IFGE b.190 0
+			ANS
+				MOV b.190
+			ANS
+				NEG b.190
+		LET
+			Ti68.305
+			SET 30
+			LET
+				Ti69.306
+				SET 0
+				LET
+					abs_div.300
+					CALLDIR div_abs.183
+						abs_a.298 abs_b.299 Ti68.305 Ti69.306 
+						
+					LET
+						Ti71.301
+						SRL a.189 31
+						LET
+							Ti73.302
+							SRL b.190 31
+							ANS
+								IFEQ Ti71.301 Ti73.302
+									ANS
+										MOV abs_div.300
+									ANS
+										NEG abs_div.300
+
+Name : print_int.193
+Args : a.194 
+
+FArgs : 
+Body :
+ANS
+	IFGE a.194 0
+		ANS
+			IFGE a.194 10
+				LET
+					Ti56.297
+					SET 10
+					LET
+						b.290
+						CALLDIR div.188
+							a.194 Ti56.297 
+							
+						LET
+							Tu2.291
+							CALLDIR print_int.193
+								b.290 
+								
+							LET
+								Ti57.296
+								SET 10
+								LET
+									Ti58.295
+									CALLDIR mul.180
+										b.290 Ti57.296 
+										
+									LET
+										Ti59.293
+										SUB a.194 Ti58.295
+										LET
+											Ti61.292
+											ADD Ti59.293 48
+											ANS
+												OUT Ti61.292
+				LET
+					Ti63.288
+					ADD a.194 48
+					ANS
+						OUT Ti63.288
+		LET
+			Ti64.286
+			SET 45
+			LET
+				Tu1.284
+				OUT Ti64.286
+				LET
+					Ti65.285
+					NEG a.194
+					ANS
+						CALLDIR print_int.193
+							Ti65.285 
+							
+
+Name : g.239
+Args : z.240 
+
+FArgs : 
+Body :
+LET
+	v9.237
+	LD g.239 40
+	LET
+		v8.236
+		LD g.239 36
+		LET
+			v7.235
+			LD g.239 32
+			LET
+				v6.234
+				LD g.239 28
+				LET
+					v5.233
+					LD g.239 24
+					LET
+						v4.232
+						LD g.239 20
+						LET
+							v3.231
+							LD g.239 16
+							LET
+								v2.230
+								LD g.239 12
+								LET
+									v10.238
+									LD g.239 8
+									LET
+										v1.229
+										LD g.239 4
+										LET
+											Ti24.252
+											ADD v1.229 v2.230
 											LET
-												Ti23.235
-												ADD Ti22.236 v3.215
+												Ti25.251
+												ADD Ti24.252 v3.231
 												LET
-													Ti24.234
-													ADD Ti23.235 v4.216
+													Ti26.250
+													ADD Ti25.251 v4.232
 													LET
-														Ti25.233
-														ADD Ti24.234 v5.217
+														Ti27.249
+														ADD Ti26.250 v5.233
 														LET
-															Ti26.232
-															ADD Ti25.233 v6.218
+															Ti28.248
+															ADD Ti27.249 v6.234
 															LET
-																Ti27.231
-																ADD Ti26.232 v7.219
+																Ti29.247
+																ADD Ti28.248 v7.235
 																LET
-																	Ti28.230
-																	ADD Ti27.231 v8.220
+																	Ti30.246
+																	ADD Ti29.247 v8.236
 																	LET
-																		Ti29.229
-																		ADD Ti28.230 v9.221
+																		Ti31.245
+																		ADD Ti30.246 v9.237
 																		LET
-																			r.226
-																			ADD Ti29.229 v10.222
+																			r.242
+																			ADD Ti31.245 v10.238
 																			ANS
-																				IFLE z.224 0
+																				IFLE z.240 0
 																					LET
-																						Ti31.228
-																						NEG z.224
+																						Ti33.244
+																						NEG z.240
 																						ANS
-																							CALLCLS g.223
-																								Ti31.228 
+																							CALLCLS g.239
+																								Ti33.244 
 																								
 																					ANS
-																						MOV r.226
+																						MOV r.242
 
-Name : h.197
-Args : p.198 
+Name : h.213
+Args : p.214 
 
 FArgs : 
 Body :
 LET
-	v10.222
-	LD p.198 36
+	v10.238
+	LD p.214 36
 	LET
-		v9.221
-		LD p.198 32
+		v9.237
+		LD p.214 32
 		LET
-			v8.220
-			LD p.198 28
+			v8.236
+			LD p.214 28
 			LET
-				v7.219
-				LD p.198 24
+				v7.235
+				LD p.214 24
 				LET
-					v6.218
-					LD p.198 20
+					v6.234
+					LD p.214 20
 					LET
-						v5.217
-						LD p.198 16
+						v5.233
+						LD p.214 16
 						LET
-							v4.216
-							LD p.198 12
+							v4.232
+							LD p.214 12
 							LET
-								v3.215
-								LD p.198 8
+								v3.231
+								LD p.214 8
 								LET
-									v2.214
-									LD p.198 4
+									v2.230
+									LD p.214 4
 									LET
-										v1.213
-										LD p.198 0
+										v1.229
+										LD p.214 0
 										LET
-											g.223
+											g.239
 											MOV %x3
 											LET
 												%x3
 												ADD %x3 44
 												LET
-													l.376
-													g.223
+													l.407
+													g.239
 													LET
-														Tu377
-														ST l.376 g.223 0
+														Tu408
+														ST l.407 g.239 0
 														LET
-															Tu375
-															ST v9.221 g.223 40
+															Tu406
+															ST v9.237 g.239 40
 															LET
-																Tu374
-																ST v8.220 g.223 36
+																Tu405
+																ST v8.236 g.239 36
 																LET
-																	Tu373
-																	ST v7.219 g.223 32
+																	Tu404
+																	ST v7.235 g.239 32
 																	LET
-																		Tu372
-																		ST v6.218 g.223 28
+																		Tu403
+																		ST v6.234 g.239 28
 																		LET
-																			Tu371
-																			ST v5.217 g.223 24
+																			Tu402
+																			ST v5.233 g.239 24
 																			LET
-																				Tu370
-																				ST v4.216 g.223 20
+																				Tu401
+																				ST v4.232 g.239 20
 																				LET
-																					Tu369
-																					ST v3.215 g.223 16
+																					Tu400
+																					ST v3.231 g.239 16
 																					LET
-																						Tu368
-																						ST v2.214 g.223 12
+																						Tu399
+																						ST v2.230 g.239 12
 																						LET
-																							Tu367
-																							ST v10.222 g.223 8
+																							Tu398
+																							ST v10.238 g.239 8
 																							LET
-																								Tu366
-																								ST v1.213 g.223 4
+																								Tu397
+																								ST v1.229 g.239 4
 																								LET
-																									Ti21.225
+																									Ti23.241
 																									SET 1
 																									ANS
-																										CALLCLS g.223
-																											Ti21.225 
+																										CALLCLS g.239
+																											Ti23.241 
 																											
 
 
 LET
-	Ti8.203
+	Ti10.219
 	SET 1
 	LET
-		Ti9.204
+		Ti11.220
 		SET 2
 		LET
-			Ti10.205
+			Ti12.221
 			SET 3
 			LET
-				Ti11.206
+				Ti13.222
 				SET 4
 				LET
-					Ti12.207
+					Ti14.223
 					SET 5
 					LET
-						Ti13.208
+						Ti15.224
 						SET 6
 						LET
-							Ti14.209
+							Ti16.225
 							SET 7
 							LET
-								Ti15.210
+								Ti17.226
 								SET 8
 								LET
-									Ti16.211
+									Ti18.227
 									SET 9
 									LET
-										Ti17.212
+										Ti19.228
 										SET 10
 										LET
-											t.378
+											t.409
 											MOV %x3
 											LET
 												%x3
 												ADD %x3 40
 												LET
-													Tu388
-													ST Ti17.212 t.378 36
+													Tu419
+													ST Ti19.228 t.409 36
 													LET
-														Tu387
-														ST Ti16.211 t.378 32
+														Tu418
+														ST Ti18.227 t.409 32
 														LET
-															Tu386
-															ST Ti15.210 t.378 28
+															Tu417
+															ST Ti17.226 t.409 28
 															LET
-																Tu385
-																ST Ti14.209 t.378 24
+																Tu416
+																ST Ti16.225 t.409 24
 																LET
-																	Tu384
-																	ST Ti13.208 t.378 20
+																	Tu415
+																	ST Ti15.224 t.409 20
 																	LET
-																		Tu383
-																		ST Ti12.207 t.378 16
+																		Tu414
+																		ST Ti14.223 t.409 16
 																		LET
-																			Tu382
-																			ST Ti11.206 t.378 12
+																			Tu413
+																			ST Ti13.222 t.409 12
 																			LET
-																				Tu381
-																				ST Ti10.205 t.378 8
+																				Tu412
+																				ST Ti12.221 t.409 8
 																				LET
-																					Tu380
-																					ST Ti9.204 t.378 4
+																					Tu411
+																					ST Ti11.220 t.409 4
 																					LET
-																						Tu379
-																						ST Ti8.203 t.378 0
+																						Tu410
+																						ST Ti10.219 t.409 0
 																						LET
-																							Tt18.202
-																							MOV t.378
+																							Tt20.218
+																							MOV t.409
 																							LET
-																								Ti19.201
-																								CALLDIR h.197
-																									Tt18.202 
+																								Ti21.217
+																								CALLDIR h.213
+																									Tt20.218 
 																									
 																								LET
-																									Tu7.199
-																									CALLDIR print_int.177
-																										Ti19.201 
+																									Tu9.215
+																									CALLDIR print_int.193
+																										Ti21.217 
 																										
 																									LET
-																										Tu20.200
+																										Tu22.216
 																										NOP
 																										ANS
 																											CALLDIR min_caml_print_newline

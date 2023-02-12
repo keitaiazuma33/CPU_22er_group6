@@ -292,254 +292,289 @@ LET REC fiszero x
 																						VAR abs_div
 																						NEG
 																							VAR abs_div
-																		LET REC print_int a 
+																		LET REC print_char a 
 																			OUT
 																				VAR a
-																			LET REC read_int a 
-																				INI
-																					VAR a
-																				LET REC read_float a 
-																					INF
+																			LET REC print_int a 
+																				IF
+																					NOT
+																						LE
+																							INT 0
+																							VAR a
+																					LET Tu1
+																						OUT
+																							INT 45
+																						APP VAR print_int
+																							NEG
+																								VAR a
+																					IF
+																						NOT
+																							LE
+																								INT 10
+																								VAR a
+																						OUT
+																							ADD
+																								VAR a
+																								INT 48
+																						LET b
+																							APP VAR div
+																								VAR a
+																								INT 10
+																							LET Tu2
+																								APP VAR print_int
+																									VAR b
+																								OUT
+																									ADD
+																										SUB
+																											VAR a
+																											APP VAR mul
+																												VAR b
+																												INT 10
+																										INT 48
+																				LET REC read_int a 
+																					INI
 																						VAR a
-																					LET REC assign_array hp a n 
-																						IF
-																							NOT
-																								LE
-																									INT 0
-																									VAR n
-																							UNIT
+																					LET REC read_float a 
+																						INF
+																							VAR a
+																						LET REC assign_array hp a n 
 																							IF
-																								EQ
-																									VAR n
-																									INT 0
-																								PUT
-																									VAR hp
-																									VAR n
-																									VAR a
-																								LET Tu1
+																								NOT
+																									LE
+																										INT 0
+																										VAR n
+																								UNIT
+																								IF
+																									EQ
+																										VAR n
+																										INT 0
 																									PUT
 																										VAR hp
 																										VAR n
 																										VAR a
-																									APP VAR assign_array
-																										VAR hp
-																										VAR a
-																										SUB
-																											VAR n
-																											INT 1
-																						LET REC create_array n a 
-																							LET hp
-																								GETHP
-																									UNIT
-																								LET hp_array
-																									ITOIA
-																										VAR hp
 																									LET Tu3
-																										SETHP
-																											ADD
-																												VAR hp
-																												SLL
-																													VAR n
-																													INT 2
-																										LET Tu2
-																											APP VAR assign_array
-																												VAR hp_array
-																												VAR a
-																												SUB
-																													VAR n
-																													INT 1
-																											VAR hp_array
-																							LET REC assign_farray hp a n 
-																								IF
-																									NOT
-																										LE
-																											INT 0
-																											VAR n
-																									UNIT
-																									IF
-																										EQ
-																											VAR n
-																											INT 0
 																										PUT
 																											VAR hp
 																											VAR n
 																											VAR a
-																										LET Tu4
+																										APP VAR assign_array
+																											VAR hp
+																											VAR a
+																											SUB
+																												VAR n
+																												INT 1
+																							LET REC create_array n a 
+																								LET hp
+																									GETHP
+																										UNIT
+																									LET hp_array
+																										ITOIA
+																											VAR hp
+																										LET Tu5
+																											SETHP
+																												ADD
+																													VAR hp
+																													SLL
+																														VAR n
+																														INT 2
+																											LET Tu4
+																												APP VAR assign_array
+																													VAR hp_array
+																													VAR a
+																													SUB
+																														VAR n
+																														INT 1
+																												VAR hp_array
+																								LET REC assign_farray hp a n 
+																									IF
+																										NOT
+																											LE
+																												INT 0
+																												VAR n
+																										UNIT
+																										IF
+																											EQ
+																												VAR n
+																												INT 0
 																											PUT
 																												VAR hp
 																												VAR n
 																												VAR a
-																											APP VAR assign_farray
-																												VAR hp
-																												VAR a
-																												SUB
-																													VAR n
-																													INT 1
-																								LET REC create_float_array n a 
-																									LET hp
-																										GETHP
-																											UNIT
-																										LET hp_array
-																											ITOFA
-																												VAR hp
 																											LET Tu6
-																												SETHP
-																													ADD
-																														VAR hp
-																														SLL
-																															VAR n
-																															INT 2
-																												LET Tu5
-																													APP VAR assign_farray
+																												PUT
+																													VAR hp
+																													VAR n
+																													VAR a
+																												APP VAR assign_farray
+																													VAR hp
+																													VAR a
+																													SUB
+																														VAR n
+																														INT 1
+																									LET REC create_float_array n a 
+																										LET hp
+																											GETHP
+																												UNIT
+																											LET hp_array
+																												ITOFA
+																													VAR hp
+																												LET Tu8
+																													SETHP
+																														ADD
+																															VAR hp
+																															SLL
+																																VAR n
+																																INT 2
+																													LET Tu7
+																														APP VAR assign_farray
+																															VAR hp_array
+																															VAR a
+																															SUB
+																																VAR n
+																																INT 1
 																														VAR hp_array
-																														VAR a
-																														SUB
-																															VAR n
-																															INT 1
-																													VAR hp_array
-																									LET REC f a b c d 
-																										LET e
-																											ADD
-																												VAR a
-																												VAR b
-																											LET f
+																										LET REC f a b c d 
+																											LET e
 																												ADD
 																													VAR a
-																													VAR c
-																												LET g
+																													VAR b
+																												LET f
 																													ADD
 																														VAR a
-																														VAR d
-																													LET h
+																														VAR c
+																													LET g
 																														ADD
-																															VAR b
-																															VAR c
-																														LET i
+																															VAR a
+																															VAR d
+																														LET h
 																															ADD
 																																VAR b
-																																VAR d
-																															LET j
+																																VAR c
+																															LET i
 																																ADD
-																																	VAR c
+																																	VAR b
 																																	VAR d
-																																LET k
+																																LET j
 																																	ADD
-																																		VAR e
-																																		VAR f
-																																	LET l
+																																		VAR c
+																																		VAR d
+																																	LET k
 																																		ADD
 																																			VAR e
-																																			VAR g
-																																		LET m
+																																			VAR f
+																																		LET l
 																																			ADD
 																																				VAR e
-																																				VAR h
-																																			LET n
+																																				VAR g
+																																			LET m
 																																				ADD
 																																					VAR e
-																																					VAR i
-																																				LET o
+																																					VAR h
+																																				LET n
 																																					ADD
 																																						VAR e
-																																						VAR j
-																																					LET p
+																																						VAR i
+																																					LET o
 																																						ADD
-																																							VAR f
-																																							VAR g
-																																						LET q
+																																							VAR e
+																																							VAR j
+																																						LET p
 																																							ADD
 																																								VAR f
-																																								VAR h
-																																							LET r
+																																								VAR g
+																																							LET q
 																																								ADD
 																																									VAR f
-																																									VAR i
-																																								LET s
+																																									VAR h
+																																								LET r
 																																									ADD
 																																										VAR f
-																																										VAR j
-																																									LET t
+																																										VAR i
+																																									LET s
 																																										ADD
-																																											VAR g
-																																											VAR h
-																																										LET u
+																																											VAR f
+																																											VAR j
+																																										LET t
 																																											ADD
 																																												VAR g
-																																												VAR i
-																																											LET v
+																																												VAR h
+																																											LET u
 																																												ADD
 																																													VAR g
-																																													VAR j
-																																												LET w
+																																													VAR i
+																																												LET v
 																																													ADD
-																																														VAR h
-																																														VAR i
-																																													LET x
+																																														VAR g
+																																														VAR j
+																																													LET w
 																																														ADD
 																																															VAR h
-																																															VAR j
-																																														LET y
+																																															VAR i
+																																														LET x
 																																															ADD
-																																																VAR i
+																																																VAR h
 																																																VAR j
-																																															LET aa
+																																															LET y
 																																																ADD
-																																																	VAR k
-																																																	VAR l
-																																																LET ab
+																																																	VAR i
+																																																	VAR j
+																																																LET aa
 																																																	ADD
 																																																		VAR k
-																																																		VAR m
-																																																	LET ac
+																																																		VAR l
+																																																	LET ab
 																																																		ADD
 																																																			VAR k
-																																																			VAR n
-																																																		LET ad
+																																																			VAR m
+																																																		LET ac
 																																																			ADD
 																																																				VAR k
-																																																				VAR o
-																																																			LET ae
+																																																				VAR n
+																																																			LET ad
 																																																				ADD
 																																																					VAR k
-																																																					VAR p
-																																																				LET af
+																																																					VAR o
+																																																				LET ae
 																																																					ADD
 																																																						VAR k
-																																																						VAR q
-																																																					LET ag
+																																																						VAR p
+																																																					LET af
 																																																						ADD
 																																																							VAR k
-																																																							VAR r
-																																																						LET ah
+																																																							VAR q
+																																																						LET ag
 																																																							ADD
 																																																								VAR k
-																																																								VAR s
-																																																							LET ai
+																																																								VAR r
+																																																							LET ah
 																																																								ADD
 																																																									VAR k
-																																																									VAR t
-																																																								LET aj
+																																																									VAR s
+																																																								LET ai
 																																																									ADD
 																																																										VAR k
-																																																										VAR u
-																																																									LET ak
+																																																										VAR t
+																																																									LET aj
 																																																										ADD
 																																																											VAR k
-																																																											VAR v
-																																																										LET al
+																																																											VAR u
+																																																										LET ak
 																																																											ADD
 																																																												VAR k
-																																																												VAR w
-																																																											LET am
+																																																												VAR v
+																																																											LET al
 																																																												ADD
 																																																													VAR k
-																																																													VAR x
-																																																												LET an
+																																																													VAR w
+																																																												LET am
 																																																													ADD
 																																																														VAR k
-																																																														VAR y
-																																																													LET z
+																																																														VAR x
+																																																													LET an
 																																																														ADD
+																																																															VAR k
+																																																															VAR y
+																																																														LET z
 																																																															ADD
 																																																																ADD
 																																																																	ADD
@@ -577,50 +612,51 @@ LET REC fiszero x
 																																																																																																	ADD
 																																																																																																		ADD
 																																																																																																			ADD
-																																																																																																				VAR a
-																																																																																																				VAR b
-																																																																																																			VAR c
-																																																																																																		VAR d
-																																																																																																	VAR e
-																																																																																																VAR f
-																																																																																															VAR g
-																																																																																														VAR h
-																																																																																													VAR i
-																																																																																												VAR j
-																																																																																											VAR k
-																																																																																										VAR l
-																																																																																									VAR m
-																																																																																								VAR n
-																																																																																							VAR o
-																																																																																						VAR p
-																																																																																					VAR q
-																																																																																				VAR r
-																																																																																			VAR s
-																																																																																		VAR t
-																																																																																	VAR u
-																																																																																VAR v
-																																																																															VAR w
-																																																																														VAR x
-																																																																													VAR y
-																																																																												VAR aa
-																																																																											VAR ab
-																																																																										VAR ac
-																																																																									VAR ad
-																																																																								VAR ae
-																																																																							VAR af
-																																																																						VAR ag
-																																																																					VAR ah
-																																																																				VAR ai
-																																																																			VAR aj
-																																																																		VAR ak
-																																																																	VAR al
-																																																																VAR am
-																																																															VAR an
-																																																														NEG
-																																																															VAR z
-																										APP VAR print_int
-																											APP VAR f
-																												INT 1
-																												INT 2
-																												INT 3
-																												INT 4
+																																																																																																				ADD
+																																																																																																					VAR a
+																																																																																																					VAR b
+																																																																																																				VAR c
+																																																																																																			VAR d
+																																																																																																		VAR e
+																																																																																																	VAR f
+																																																																																																VAR g
+																																																																																															VAR h
+																																																																																														VAR i
+																																																																																													VAR j
+																																																																																												VAR k
+																																																																																											VAR l
+																																																																																										VAR m
+																																																																																									VAR n
+																																																																																								VAR o
+																																																																																							VAR p
+																																																																																						VAR q
+																																																																																					VAR r
+																																																																																				VAR s
+																																																																																			VAR t
+																																																																																		VAR u
+																																																																																	VAR v
+																																																																																VAR w
+																																																																															VAR x
+																																																																														VAR y
+																																																																													VAR aa
+																																																																												VAR ab
+																																																																											VAR ac
+																																																																										VAR ad
+																																																																									VAR ae
+																																																																								VAR af
+																																																																							VAR ag
+																																																																						VAR ah
+																																																																					VAR ai
+																																																																				VAR aj
+																																																																			VAR ak
+																																																																		VAR al
+																																																																	VAR am
+																																																																VAR an
+																																																															NEG
+																																																																VAR z
+																											APP VAR print_int
+																												APP VAR f
+																													INT 1
+																													INT 2
+																													INT 3
+																													INT 4

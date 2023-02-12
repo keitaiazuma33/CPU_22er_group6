@@ -1,371 +1,407 @@
-LET REC fiszero.114 x.115 
-	LET Td113.320
+LET REC fiszero.128 x.129 
+	LET Td127.351
 		FLOAT 0.000000
-		IFEQ x.115 Td113.320
+		IFEQ x.129 Td127.351
 			INT 1
 			INT 0
-	LET REC fispos.116 x.117 
-		LET Td112.319
+	LET REC fispos.130 x.131 
+		LET Td126.350
 			FLOAT 0.000000
-			IFLE x.117 Td112.319
+			IFLE x.131 Td126.350
 				INT 0
 				INT 1
-		LET REC fisneg.118 x.119 
-			LET Td111.318
+		LET REC fisneg.132 x.133 
+			LET Td125.349
 				FLOAT 0.000000
-				IFLE Td111.318 x.119
+				IFLE Td125.349 x.133
 					INT 0
 					INT 1
-			LET REC fneg.120 x.121 
-				FNEG x.121 
-				LET REC fsqr.122 x.123 
-					FMUL x.123 x.123
-					LET REC fhalf.124 x.125 
-						LET Td110.317
+			LET REC fneg.134 x.135 
+				FNEG x.135 
+				LET REC fsqr.136 x.137 
+					FMUL x.137 x.137
+					LET REC fhalf.138 x.139 
+						LET Td124.348
 							FLOAT 0.500000
-							FMUL Td110.317 x.125
-						LET REC fless.126 x.127 y.128 
-							IFLE y.128 x.127
+							FMUL Td124.348 x.139
+						LET REC fless.140 x.141 y.142 
+							IFLE y.142 x.141
 								INT 0
 								INT 1
-							LET REC sin.129 x.130 
-								LET x2.305
-									FMUL x.130 x.130
-									LET x3.306
-										FMUL x.130 x2.305
-										LET x5.307
-											FMUL x3.306 x2.305
-											LET x7.308
-												FMUL x5.307 x2.305
-												LET Td107.309
-													LET Td104.312
-														LET Td103.315
-															LET Td102.316
+							LET REC sin.143 x.144 
+								LET x2.336
+									FMUL x.144 x.144
+									LET x3.337
+										FMUL x.144 x2.336
+										LET x5.338
+											FMUL x3.337 x2.336
+											LET x7.339
+												FMUL x5.338 x2.336
+												LET Td121.340
+													LET Td118.343
+														LET Td117.346
+															LET Td116.347
 																FLOAT 0.166667
-																FMUL Td102.316 x3.306
-															FSUB x.130 Td103.315
-														LET Td106.313
-															LET Td105.314
+																FMUL Td116.347 x3.337
+															FSUB x.144 Td117.346
+														LET Td120.344
+															LET Td119.345
 																FLOAT 0.008333
-																FMUL Td105.314 x5.307
-															FADD Td104.312 Td106.313
-													LET Td109.310
-														LET Td108.311
+																FMUL Td119.345 x5.338
+															FADD Td118.343 Td120.344
+													LET Td123.341
+														LET Td122.342
 															FLOAT 0.000198
-															FMUL Td108.311 x7.308
-														FSUB Td107.309 Td109.310
-								LET REC cos.131 x.132 
-									LET x2.293
-										FMUL x.132 x.132
-										LET x4.294
-											FMUL x2.293 x2.293
-											LET x6.295
-												FMUL x4.294 x2.293
-												LET Td99.296
-													LET Td96.299
-														LET Td93.302
+															FMUL Td122.342 x7.339
+														FSUB Td121.340 Td123.341
+								LET REC cos.145 x.146 
+									LET x2.324
+										FMUL x.146 x.146
+										LET x4.325
+											FMUL x2.324 x2.324
+											LET x6.326
+												FMUL x4.325 x2.324
+												LET Td113.327
+													LET Td110.330
+														LET Td107.333
 															FLOAT 1.000000
-															LET Td95.303
-																LET Td94.304
+															LET Td109.334
+																LET Td108.335
 																	FLOAT 0.500000
-																	FMUL Td94.304 x2.293
-																FSUB Td93.302 Td95.303
-														LET Td98.300
-															LET Td97.301
+																	FMUL Td108.335 x2.324
+																FSUB Td107.333 Td109.334
+														LET Td112.331
+															LET Td111.332
 																FLOAT 0.041667
-																FMUL Td97.301 x4.294
-															FADD Td96.299 Td98.300
-													LET Td101.297
-														LET Td100.298
+																FMUL Td111.332 x4.325
+															FADD Td110.330 Td112.331
+													LET Td115.328
+														LET Td114.329
 															FLOAT 0.001389
-															FMUL Td100.298 x6.295
-														FSUB Td99.296 Td101.297
-									LET REC atan.133 x.134 
-										LET x2.273
-											FMUL x.134 x.134
-											LET x3.274
-												FMUL x.134 x2.273
-												LET x5.275
-													FMUL x3.274 x2.273
-													LET x7.276
-														FMUL x5.275 x2.273
-														LET x9.277
-															FMUL x7.276 x2.273
-															LET x11.278
-																FMUL x9.277 x2.273
-																LET Td90.279
-																	LET Td87.282
-																		LET Td84.285
-																			LET Td81.288
-																				LET Td80.291
-																					LET Td79.292
+															FMUL Td114.329 x6.326
+														FSUB Td113.327 Td115.328
+									LET REC atan.147 x.148 
+										LET x2.304
+											FMUL x.148 x.148
+											LET x3.305
+												FMUL x.148 x2.304
+												LET x5.306
+													FMUL x3.305 x2.304
+													LET x7.307
+														FMUL x5.306 x2.304
+														LET x9.308
+															FMUL x7.307 x2.304
+															LET x11.309
+																FMUL x9.308 x2.304
+																LET Td104.310
+																	LET Td101.313
+																		LET Td98.316
+																			LET Td95.319
+																				LET Td94.322
+																					LET Td93.323
 																						FLOAT 0.333333
-																						FMUL Td79.292 x3.274
-																					FSUB x.134 Td80.291
-																				LET Td83.289
-																					LET Td82.290
+																						FMUL Td93.323 x3.305
+																					FSUB x.148 Td94.322
+																				LET Td97.320
+																					LET Td96.321
 																						FLOAT 0.200000
-																						FMUL Td82.290 x5.275
-																					FADD Td81.288 Td83.289
-																			LET Td86.286
-																				LET Td85.287
+																						FMUL Td96.321 x5.306
+																					FADD Td95.319 Td97.320
+																			LET Td100.317
+																				LET Td99.318
 																					FLOAT 0.142857
-																					FMUL Td85.287 x7.276
-																				FSUB Td84.285 Td86.286
-																		LET Td89.283
-																			LET Td88.284
+																					FMUL Td99.318 x7.307
+																				FSUB Td98.316 Td100.317
+																		LET Td103.314
+																			LET Td102.315
 																				FLOAT 0.111111
-																				FMUL Td88.284 x9.277
-																			FADD Td87.282 Td89.283
-																	LET Td92.280
-																		LET Td91.281
+																				FMUL Td102.315 x9.308
+																			FADD Td101.313 Td103.314
+																	LET Td106.311
+																		LET Td105.312
 																			FLOAT 0.090909
-																			FMUL Td91.281 x11.278
-																		FSUB Td90.279 Td92.280
-										LET REC floor.135 x.136 
-											LET Td74.268
+																			FMUL Td105.312 x11.309
+																		FSUB Td104.310 Td106.311
+										LET REC floor.149 x.150 
+											LET Td88.299
 												FLOAT 0.000000
-												IFLE Td74.268 x.136
-													LET Ti75.272
-														FTOI x.136 
-														ITOF Ti75.272 
-													LET Ti78.269
-														LET Td77.270
-															LET Td76.271
+												IFLE Td88.299 x.150
+													LET Ti89.303
+														FTOI x.150 
+														ITOF Ti89.303 
+													LET Ti92.300
+														LET Td91.301
+															LET Td90.302
 																FLOAT 1.000000
-																FSUB x.136 Td76.271
-															FTOI Td77.270 
-														ITOF Ti78.269 
-											LET REC abs_float.137 x.138 
-												FABS x.138 
-												LET REC float_of_int.139 x.140 
-													ITOF x.140 
-													LET REC int_of_float.141 x.142 
-														FTOI x.142 
-														LET REC mul_abs.143 a.144 b.145 i.146 acc.147 
-															LET Ti63.256
-																LET Ti62.267
+																FSUB x.150 Td90.302
+															FTOI Td91.301 
+														ITOF Ti92.300 
+											LET REC abs_float.151 x.152 
+												FABS x.152 
+												LET REC float_of_int.153 x.154 
+													ITOF x.154 
+													LET REC int_of_float.155 x.156 
+														FTOI x.156 
+														LET REC mul_abs.157 a.158 b.159 i.160 acc.161 
+															LET Ti77.287
+																LET Ti76.298
 																	INT 1
-																	NEG Ti62.267
-																IFEQ i.146 Ti63.256
-																	VAR acc.147
-																	LET Ti66.257
-																		LET Ti65.265
-																			LET Ti64.266
+																	NEG Ti76.298
+																IFEQ i.160 Ti77.287
+																	VAR acc.161
+																	LET Ti80.288
+																		LET Ti79.296
+																			LET Ti78.297
 																				INT 1
-																				SLL Ti64.266 i.146
-																			AND b.145 Ti65.265
-																		LET Ti67.258
+																				SLL Ti78.297 i.160
+																			AND b.159 Ti79.296
+																		LET Ti81.289
 																			INT 0
-																			IFEQ Ti66.257 Ti67.258
-																				LET Ti69.263
-																					LET Ti68.264
+																			IFEQ Ti80.288 Ti81.289
+																				LET Ti83.294
+																					LET Ti82.295
 																						INT 1
-																						SUB i.146 Ti68.264
-																					APP mul_abs.143 a.144 b.145 Ti69.263 acc.147 
-																				LET Ti71.259
-																					LET Ti70.262
+																						SUB i.160 Ti82.295
+																					APP mul_abs.157 a.158 b.159 Ti83.294 acc.161 
+																				LET Ti85.290
+																					LET Ti84.293
 																						INT 1
-																						SUB i.146 Ti70.262
-																					LET Ti73.260
-																						LET Ti72.261
-																							SLL a.144 i.146
-																							ADD acc.147 Ti72.261
-																						APP mul_abs.143 a.144 b.145 Ti71.259 Ti73.260 
-															LET REC mul.148 a.149 b.150 
-																LET abs_a.245
-																	LET Ti54.255
+																						SUB i.160 Ti84.293
+																					LET Ti87.291
+																						LET Ti86.292
+																							SLL a.158 i.160
+																							ADD acc.161 Ti86.292
+																						APP mul_abs.157 a.158 b.159 Ti85.290 Ti87.291 
+															LET REC mul.162 a.163 b.164 
+																LET abs_a.276
+																	LET Ti68.286
 																		INT 0
-																		IFLE Ti54.255 a.149
-																			VAR a.149
-																			NEG a.149
-																	LET abs_b.246
-																		LET Ti55.254
+																		IFLE Ti68.286 a.163
+																			VAR a.163
+																			NEG a.163
+																	LET abs_b.277
+																		LET Ti69.285
 																			INT 0
-																			IFLE Ti55.254 b.150
-																				VAR b.150
-																				NEG b.150
-																		LET abs_mul.247
-																			LET Ti56.252
+																			IFLE Ti69.285 b.164
+																				VAR b.164
+																				NEG b.164
+																		LET abs_mul.278
+																			LET Ti70.283
 																				INT 30
-																				LET Ti57.253
+																				LET Ti71.284
 																					INT 0
-																					APP mul_abs.143 abs_a.245 abs_b.246 Ti56.252 Ti57.253 
-																			LET Ti59.248
-																				LET Ti58.251
+																					APP mul_abs.157 abs_a.276 abs_b.277 Ti70.283 Ti71.284 
+																			LET Ti73.279
+																				LET Ti72.282
 																					INT 31
-																					SRL a.149 Ti58.251
-																				LET Ti61.249
-																					LET Ti60.250
+																					SRL a.163 Ti72.282
+																				LET Ti75.280
+																					LET Ti74.281
 																						INT 31
-																						SRL b.150 Ti60.250
-																					IFEQ Ti59.248 Ti61.249
-																						VAR abs_mul.247
-																						NEG abs_mul.247
-																LET REC div_abs.151 a.152 b.153 i.154 acc.155 
-																	LET Ti43.233
-																		LET Ti42.244
+																						SRL b.164 Ti74.281
+																					IFEQ Ti73.279 Ti75.280
+																						VAR abs_mul.278
+																						NEG abs_mul.278
+																LET REC div_abs.165 a.166 b.167 i.168 acc.169 
+																	LET Ti57.264
+																		LET Ti56.275
 																			INT 1
-																			NEG Ti42.244
-																		IFEQ i.154 Ti43.233
-																			VAR acc.155
-																			LET Ti44.234
-																				SRL a.152 i.154
-																				IFLE b.153 Ti44.234
-																					LET Ti46.237
-																						LET Ti45.243
-																							SLL b.153 i.154
-																							SUB a.152 Ti45.243
-																						LET Ti48.238
-																							LET Ti47.242
+																			NEG Ti56.275
+																		IFEQ i.168 Ti57.264
+																			VAR acc.169
+																			LET Ti58.265
+																				SRL a.166 i.168
+																				IFLE b.167 Ti58.265
+																					LET Ti60.268
+																						LET Ti59.274
+																							SLL b.167 i.168
+																							SUB a.166 Ti59.274
+																						LET Ti62.269
+																							LET Ti61.273
 																								INT 1
-																								SUB i.154 Ti47.242
-																							LET Ti51.239
-																								LET Ti50.240
-																									LET Ti49.241
+																								SUB i.168 Ti61.273
+																							LET Ti65.270
+																								LET Ti64.271
+																									LET Ti63.272
 																										INT 1
-																										SLL Ti49.241 i.154
-																									ADD acc.155 Ti50.240
-																								APP div_abs.151 Ti46.237 b.153 Ti48.238 Ti51.239 
-																					LET Ti53.235
-																						LET Ti52.236
+																										SLL Ti63.272 i.168
+																									ADD acc.169 Ti64.271
+																								APP div_abs.165 Ti60.268 b.167 Ti62.269 Ti65.270 
+																					LET Ti67.266
+																						LET Ti66.267
 																							INT 1
-																							SUB i.154 Ti52.236
-																						APP div_abs.151 a.152 b.153 Ti53.235 acc.155 
-																	LET REC div.156 a.157 b.158 
-																		LET abs_a.222
-																			LET Ti34.232
+																							SUB i.168 Ti66.267
+																						APP div_abs.165 a.166 b.167 Ti67.266 acc.169 
+																	LET REC div.170 a.171 b.172 
+																		LET abs_a.253
+																			LET Ti48.263
 																				INT 0
-																				IFLE Ti34.232 a.157
-																					VAR a.157
-																					NEG a.157
-																			LET abs_b.223
-																				LET Ti35.231
+																				IFLE Ti48.263 a.171
+																					VAR a.171
+																					NEG a.171
+																			LET abs_b.254
+																				LET Ti49.262
 																					INT 0
-																					IFLE Ti35.231 b.158
-																						VAR b.158
-																						NEG b.158
-																				LET abs_div.224
-																					LET Ti36.229
+																					IFLE Ti49.262 b.172
+																						VAR b.172
+																						NEG b.172
+																				LET abs_div.255
+																					LET Ti50.260
 																						INT 30
-																						LET Ti37.230
+																						LET Ti51.261
 																							INT 0
-																							APP div_abs.151 abs_a.222 abs_b.223 Ti36.229 Ti37.230 
-																					LET Ti39.225
-																						LET Ti38.228
+																							APP div_abs.165 abs_a.253 abs_b.254 Ti50.260 Ti51.261 
+																					LET Ti53.256
+																						LET Ti52.259
 																							INT 31
-																							SRL a.157 Ti38.228
-																						LET Ti41.226
-																							LET Ti40.227
+																							SRL a.171 Ti52.259
+																						LET Ti55.257
+																							LET Ti54.258
 																								INT 31
-																								SRL b.158 Ti40.227
-																							IFEQ Ti39.225 Ti41.226
-																								VAR abs_div.224
-																								NEG abs_div.224
-																		LET REC print_int.159 a.160 
-																			OUT a.160
-																			LET REC read_int.161 a.162 
-																				INI a.162
-																				LET REC read_float.163 a.164 
-																					INF a.164
-																					LET REC assign_array.165 hp.166 a.167 n.168 
-																						LET Ti30.217
-																							INT 0
-																							IFLE Ti30.217 n.168
-																								LET Ti31.218
-																									INT 0
-																									IFEQ n.168 Ti31.218
-																										PUT hp.166 n.168 a.167
-																										LET Tu1.219
-																											PUT hp.166 n.168 a.167
-																											LET Ti33.220
-																												LET Ti32.221
-																													INT 1
-																													SUB n.168 Ti32.221
-																												APP assign_array.165 hp.166 a.167 Ti33.220 
-																								UNIT
-																						LET REC create_array.169 n.170 a.171 
-																							LET hp.207
-																								LET Tu24.216
+																								SRL b.172 Ti54.258
+																							IFEQ Ti53.256 Ti55.257
+																								VAR abs_div.255
+																								NEG abs_div.255
+																		LET REC print_char.173 a.174 
+																			OUT a.174
+																			LET REC print_int.175 a.176 
+																				LET Ti36.238
+																					INT 0
+																					IFLE Ti36.238 a.176
+																						LET Ti37.242
+																							INT 10
+																							IFLE Ti37.242 a.176
+																								LET b.245
+																									LET Ti38.252
+																										INT 10
+																										APP div.170 a.176 Ti38.252 
+																									LET Tu2.246
+																										APP print_int.175 b.245 
+																										LET Ti43.247
+																											LET Ti41.248
+																												LET Ti40.250
+																													LET Ti39.251
+																														INT 10
+																														APP mul.162 b.245 Ti39.251 
+																													SUB a.176 Ti40.250
+																												LET Ti42.249
+																													INT 48
+																													ADD Ti41.248 Ti42.249
+																											OUT Ti43.247
+																								LET Ti45.243
+																									LET Ti44.244
+																										INT 48
+																										ADD a.176 Ti44.244
+																									OUT Ti45.243
+																						LET Tu1.239
+																							LET Ti46.241
+																								INT 45
+																								OUT Ti46.241
+																							LET Ti47.240
+																								NEG a.176
+																								APP print_int.175 Ti47.240 
+																				LET REC read_int.177 a.178 
+																					INI a.178
+																					LET REC read_float.179 a.180 
+																						INF a.180
+																						LET REC assign_array.181 hp.182 a.183 n.184 
+																							LET Ti32.233
+																								INT 0
+																								IFLE Ti32.233 n.184
+																									LET Ti33.234
+																										INT 0
+																										IFEQ n.184 Ti33.234
+																											PUT hp.182 n.184 a.183
+																											LET Tu3.235
+																												PUT hp.182 n.184 a.183
+																												LET Ti35.236
+																													LET Ti34.237
+																														INT 1
+																														SUB n.184 Ti34.237
+																													APP assign_array.181 hp.182 a.183 Ti35.236 
 																									UNIT
-																									GETHP Tu24.216
-																								LET hp_array.208
-																									ITOIA hp.207
-																									LET Tu3.209
-																										LET Ti27.213
-																											LET Ti26.214
-																												LET Ti25.215
-																													INT 2
-																													SLL n.170 Ti25.215
-																												ADD hp.207 Ti26.214
-																											SETHP Ti27.213
-																										LET Tu2.210
-																											LET Ti29.211
-																												LET Ti28.212
-																													INT 1
-																													SUB n.170 Ti28.212
-																												APP assign_array.165 hp_array.208 a.171 Ti29.211 
-																											VAR hp_array.208
-																							LET REC assign_farray.172 hp.173 a.174 n.175 
-																								LET Ti20.202
-																									INT 0
-																									IFLE Ti20.202 n.175
-																										LET Ti21.203
-																											INT 0
-																											IFEQ n.175 Ti21.203
-																												PUT hp.173 n.175 a.174
-																												LET Tu4.204
-																													PUT hp.173 n.175 a.174
-																													LET Ti23.205
-																														LET Ti22.206
-																															INT 1
-																															SUB n.175 Ti22.206
-																														APP assign_farray.172 hp.173 a.174 Ti23.205 
+																							LET REC create_array.185 n.186 a.187 
+																								LET hp.223
+																									LET Tu26.232
 																										UNIT
-																								LET REC create_float_array.176 n.177 a.178 
-																									LET hp.192
-																										LET Tu14.201
+																										GETHP Tu26.232
+																									LET hp_array.224
+																										ITOIA hp.223
+																										LET Tu5.225
+																											LET Ti29.229
+																												LET Ti28.230
+																													LET Ti27.231
+																														INT 2
+																														SLL n.186 Ti27.231
+																													ADD hp.223 Ti28.230
+																												SETHP Ti29.229
+																											LET Tu4.226
+																												LET Ti31.227
+																													LET Ti30.228
+																														INT 1
+																														SUB n.186 Ti30.228
+																													APP assign_array.181 hp_array.224 a.187 Ti31.227 
+																												VAR hp_array.224
+																								LET REC assign_farray.188 hp.189 a.190 n.191 
+																									LET Ti22.218
+																										INT 0
+																										IFLE Ti22.218 n.191
+																											LET Ti23.219
+																												INT 0
+																												IFEQ n.191 Ti23.219
+																													PUT hp.189 n.191 a.190
+																													LET Tu6.220
+																														PUT hp.189 n.191 a.190
+																														LET Ti25.221
+																															LET Ti24.222
+																																INT 1
+																																SUB n.191 Ti24.222
+																															APP assign_farray.188 hp.189 a.190 Ti25.221 
 																											UNIT
-																											GETHP Tu14.201
-																										LET hp_array.193
-																											ITOFA hp.192
-																											LET Tu6.194
-																												LET Ti17.198
-																													LET Ti16.199
-																														LET Ti15.200
-																															INT 2
-																															SLL n.177 Ti15.200
-																														ADD hp.192 Ti16.199
-																													SETHP Ti17.198
-																												LET Tu5.195
-																													LET Ti19.196
-																														LET Ti18.197
-																															INT 1
-																															SUB n.177 Ti18.197
-																														APP assign_farray.172 hp_array.193 a.178 Ti19.196 
-																													VAR hp_array.193
-																									LET REC x.179 x.180 
-																										LET x.185
-																											LET x.187
-																												LET Ti10.191
-																													NEG x.180
-																													SUB x.180 Ti10.191
-																												LET Ti12.188
-																													LET x.189
-																														NEG x.187
-																														LET Ti11.190
-																															NEG x.189
-																															SUB x.189 Ti11.190
-																													SUB x.187 Ti12.188
-																											LET Ti13.186
-																												NEG x.185
-																												SUB x.185 Ti13.186
-																										LET x.181
-																											LET Ti7.184
-																												INT 125
-																												APP x.179 Ti7.184 
-																											LET Ti9.182
-																												LET Ti8.183
-																													NEG x.181
-																													SUB x.181 Ti8.183
-																												APP print_int.159 Ti9.182 
+																									LET REC create_float_array.192 n.193 a.194 
+																										LET hp.208
+																											LET Tu16.217
+																												UNIT
+																												GETHP Tu16.217
+																											LET hp_array.209
+																												ITOFA hp.208
+																												LET Tu8.210
+																													LET Ti19.214
+																														LET Ti18.215
+																															LET Ti17.216
+																																INT 2
+																																SLL n.193 Ti17.216
+																															ADD hp.208 Ti18.215
+																														SETHP Ti19.214
+																													LET Tu7.211
+																														LET Ti21.212
+																															LET Ti20.213
+																																INT 1
+																																SUB n.193 Ti20.213
+																															APP assign_farray.188 hp_array.209 a.194 Ti21.212 
+																														VAR hp_array.209
+																										LET REC x.195 x.196 
+																											LET x.201
+																												LET x.203
+																													LET Ti12.207
+																														NEG x.196
+																														SUB x.196 Ti12.207
+																													LET Ti14.204
+																														LET x.205
+																															NEG x.203
+																															LET Ti13.206
+																																NEG x.205
+																																SUB x.205 Ti13.206
+																														SUB x.203 Ti14.204
+																												LET Ti15.202
+																													NEG x.201
+																													SUB x.201 Ti15.202
+																											LET x.197
+																												LET Ti9.200
+																													INT 125
+																													APP x.195 Ti9.200 
+																												LET Ti11.198
+																													LET Ti10.199
+																														NEG x.197
+																														SUB x.197 Ti10.199
+																													APP print_int.175 Ti11.198 
