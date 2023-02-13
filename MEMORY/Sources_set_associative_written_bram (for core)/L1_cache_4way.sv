@@ -38,9 +38,9 @@ parameter        CACHE_width  = 128 ;     // CACHE depth
 
 //data structure for cache tag
 typedef struct packed {
-    bit [3:0]           accessed;  //accessed bit
-    bit [0:0]           valid;     //valid bit
-    bit [0:0]           dirty;     //dirty bit
+    bit [17-(TAGMSB-TAGLSB+1)-1-1:0]           accessed;  //accessed bit
+    bit [0:0]                                  valid;     //valid bit
+    bit [0:0]                                  dirty;     //dirty bit
     bit [TAGMSB:TAGLSB] tag; //tag bits
 }cache_tag_type;
 
