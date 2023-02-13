@@ -421,5 +421,5 @@ LET REC fiszero x
 																																			INT 2
 																																			APP inprod v1 v2 Td14 Ti15 
 																																	FMUL Td13 Td16
-																															EXTFUNAPP truncate Td17 
+																															FTOI Td17 
 																														APP print_int Ti18 

@@ -266,8 +266,8 @@ inprod.216:  #pc 708
 	nop #pc 920
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 1000000
-	addi	%x3, %x0, 1002000
+	addi	%x2, %x0, 10000000
+	addi	%x3, %x0, 10002000
 	addi	%x4, %x0, 8192
 	addi	%x5, %x0, 65536
 	fmv	%f0, l.394  #0 pc 940
@@ -295,13 +295,9 @@ min_caml_start:
 	lw	%x1, 8(%x2) #212 pc 1028
 	flw	%f1, 0(%x2)  #212 pc 1032
 	fmul	%f0, %f1, %f0  #212 pc 1036
-	sw	%x1, 8(%x2)  #212 pc 1040
-	addi	%x2, %x2, 12  #212 pc 1044
-	jal	%x1, min_caml_truncate  #212 pc 1048
-	addi	%x2, %x2, -12  #212 pc 1052
-	lw	%x1, 8(%x2) #212 pc 1056
-	sw	%x1, 8(%x2)  #212 pc 1060
-	addi	%x2, %x2, 12  #212 pc 1064
-	jal	%x1, print_int.190  #212 pc 1068
-	addi	%x2, %x2, -12  #212 pc 1072
-	lw	%x1, 8(%x2) #212 pc 1076
+	ftoi	%x6, %f0  #212 pc 1040
+	sw	%x1, 8(%x2)  #212 pc 1044
+	addi	%x2, %x2, 12  #212 pc 1048
+	jal	%x1, print_int.190  #212 pc 1052
+	addi	%x2, %x2, -12  #212 pc 1056
+	lw	%x1, 8(%x2) #212 pc 1060

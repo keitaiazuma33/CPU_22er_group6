@@ -203,8 +203,8 @@ ble_else.375: #pc 692
 	nop #pc 704
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 1000000
-	addi	%x3, %x0, 1002000
+	addi	%x2, %x0, 10000000
+	addi	%x3, %x0, 10002000
 	addi	%x4, %x0, 8192
 	addi	%x5, %x0, 65536
 	addi	%x6, %x0, 0  #0 pc 724

@@ -65,10 +65,10 @@ LET
 				%x11
 				SET 0
 				LET
-					Tu366
+					Tu368
 					SAVE %x7 b.169
 					LET
-						Tu365
+						Tu367
 						SAVE %x6 a.168
 						LET
 							%x6
@@ -164,10 +164,10 @@ LET
 				%x11
 				SET 0
 				LET
-					Tu368
+					Tu370
 					SAVE %x7 b.177
 					LET
-						Tu367
+						Tu369
 						SAVE %x6 a.176
 						LET
 							%x6
@@ -206,7 +206,7 @@ ANS
 					%x7
 					SET 10
 					LET
-						Tu370
+						Tu372
 						SAVE %x6 a.181
 						LET
 							%x6
@@ -214,8 +214,8 @@ ANS
 								%x6 %x7 
 								
 							LET
-								Tu371
-								SAVE %x6 b.252
+								Tu373
+								SAVE %x6 b.254
 								LET
 									%g0
 									CALLDIR print_int.180
@@ -226,7 +226,7 @@ ANS
 										SET 10
 										LET
 											%x6
-											RESTORE b.252
+											RESTORE b.254
 											LET
 												%x6
 												CALLDIR mul.167
@@ -262,35 +262,43 @@ ANS
 							%x6 
 							
 
+Name : truncate.200
+Args : 
+
+FArgs : %f0 
+Body :
+ANS
+	FTOI %f0
+
 
 LET
 	%f0
-	l.359
+	l.361
 	LET
 		%x6
-		CALLDIR min_caml_truncate
+		CALLDIR truncate.200
 			
 			%f0 
 		LET
 			%f0
-			l.361
+			l.363
 			LET
-				Tu373
-				SAVE %x6 x.200
+				Tu375
+				SAVE %x6 x.202
 				LET
 					%x6
-					CALLDIR min_caml_truncate
+					CALLDIR truncate.200
 						
 						%f0 
 					LET
 						%f0
-						l.363
+						l.365
 						LET
-							Tu374
-							SAVE %x6 y.201
+							Tu376
+							SAVE %x6 y.203
 							LET
 								%x6
-								CALLDIR min_caml_truncate
+								CALLDIR truncate.200
 									
 									%f0 
 								LET
@@ -298,23 +306,23 @@ LET
 									IFGE %x6 0
 										LET
 											%x7
-											RESTORE x.200
+											RESTORE x.202
 											ANS
 												MOV %x7
 										LET
 											%x7
-											RESTORE y.201
+											RESTORE y.203
 											ANS
 												MOV %x7
 									LET
 										%x8
-										RESTORE x.200
+										RESTORE x.202
 										LET
 											%x9
 											IFLE %x8 0
 												LET
 													%x9
-													RESTORE y.201
+													RESTORE y.203
 													ANS
 														MOV %x9
 												ANS
@@ -324,7 +332,7 @@ LET
 												ADD %x7 %x9
 												LET
 													%x9
-													RESTORE y.201
+													RESTORE y.203
 													LET
 														%x6
 														IFGE %x9 0

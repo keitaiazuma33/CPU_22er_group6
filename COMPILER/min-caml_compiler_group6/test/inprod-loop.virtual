@@ -445,9 +445,7 @@ LET
 											FMULD Td13.214 Td16.215
 											LET
 												Ti18.212
-												CALLDIR min_caml_truncate
-													
-													Td17.213 
+												FTOI Td17.213
 												ANS
 													CALLDIR print_int.185
 														Ti18.212 

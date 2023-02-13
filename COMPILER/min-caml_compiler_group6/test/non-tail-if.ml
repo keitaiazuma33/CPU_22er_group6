@@ -203,6 +203,10 @@ let rec create_float_array n a =
   hp_array
 in
 
+let rec truncate a =
+  ftoi a 
+in
+
 
 let x = truncate 1.23 in
 let y = truncate 4.56 in

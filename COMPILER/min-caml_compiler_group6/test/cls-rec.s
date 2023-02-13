@@ -213,26 +213,25 @@ be_else.377: #pc 700
 	nop #pc 744
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 1000000
-	addi	%x3, %x0, 1002000
+	addi	%x2, %x0, 10000000
+	addi	%x3, %x0, 10002000
 	addi	%x4, %x0, 8192
 	addi	%x5, %x0, 65536
 	addi	%x6, %x0, 10  #0 pc 764
 	addi	%x29, %x3, 0  #209 pc 768
 	addi	%x3, %x3, 8  #209 pc 772
-	addi	%x31, %x0, 672  #209 f.195 pc 776
-	addi	%x7, %x31, 0  #209 pc 780
-	sw	%x7, 0(%x29)  #209 pc 784
-	sw	%x6, 4(%x29)  #209 pc 788
-	addi	%x6, %x0, 123  #0 pc 792
-	sw	%x1, 0(%x2)  #212 pc 796
-	lw	%x30, 0(%x29)  #212 pc 800
-	addi	%x2, %x2, 4  #212 pc 804
-	jalr	%x1, %x30, 0  #212 pc 808
-	addi	%x2, %x2, -4  #212 pc 812
-	lw	%x1, 0(%x2)  #212 pc 816
-	sw	%x1, 0(%x2)  #212 pc 820
-	addi	%x2, %x2, 4  #212 pc 824
-	jal	%x1, print_int.174  #212 pc 828
-	addi	%x2, %x2, -4  #212 pc 832
-	lw	%x1, 0(%x2) #212 pc 836
+	addi	%x7, %x0, 672  #209 f.195 pc 776
+	sw	%x7, 0(%x29)  #209 pc 780
+	sw	%x6, 4(%x29)  #209 pc 784
+	addi	%x6, %x0, 123  #0 pc 788
+	sw	%x1, 0(%x2)  #212 pc 792
+	lw	%x30, 0(%x29)  #212 pc 796
+	addi	%x2, %x2, 4  #212 pc 800
+	jalr	%x1, %x30, 0  #212 pc 804
+	addi	%x2, %x2, -4  #212 pc 808
+	lw	%x1, 0(%x2)  #212 pc 812
+	sw	%x1, 0(%x2)  #212 pc 816
+	addi	%x2, %x2, 4  #212 pc 820
+	jal	%x1, print_int.174  #212 pc 824
+	addi	%x2, %x2, -4  #212 pc 828
+	lw	%x1, 0(%x2) #212 pc 832

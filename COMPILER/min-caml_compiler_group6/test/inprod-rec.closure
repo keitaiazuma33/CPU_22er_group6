@@ -260,5 +260,5 @@ LET Ti9.217
 									LET Td16.211
 										FMUL Td13.212 Td15.213
 										LET Ti17.210
-											APPDIR min_caml_truncate : Td16.211 
+											FTOI Td16.211 
 											APPDIR print_int.184 : Ti17.210 

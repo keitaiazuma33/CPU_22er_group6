@@ -198,35 +198,34 @@ adder.198:  #pc 672
 make_adder.192:  #pc 688
 	addi	%x7, %x3, 0  #208 pc 688
 	addi	%x3, %x3, 8  #208 pc 692
-	addi	%x31, %x0, 672  #208 adder.198 pc 696
-	addi	%x8, %x31, 0  #208 pc 700
-	sw	%x8, 0(%x7)  #208 pc 704
-	sw	%x6, 4(%x7)  #208 pc 708
-	addi	%x6, %x7, 0  #209 pc 712
-	ret #pc 716
-	nop #pc 720
+	addi	%x8, %x0, 672  #208 adder.198 pc 696
+	sw	%x8, 0(%x7)  #208 pc 700
+	sw	%x6, 4(%x7)  #208 pc 704
+	addi	%x6, %x7, 0  #209 pc 708
+	ret #pc 712
+	nop #pc 716
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 1000000
-	addi	%x3, %x0, 1002000
+	addi	%x2, %x0, 10000000
+	addi	%x3, %x0, 10002000
 	addi	%x4, %x0, 8192
 	addi	%x5, %x0, 65536
-	addi	%x6, %x0, 3  #0 pc 740
-	sw	%x1, 0(%x2)  #210 pc 744
-	addi	%x2, %x2, 4  #210 pc 748
-	jal	%x1, make_adder.192  #210 pc 752
-	addi	%x2, %x2, -4  #210 pc 756
-	lw	%x1, 0(%x2) #210 pc 760
-	addi	%x29, %x6, 0  #210 pc 764
-	addi	%x6, %x0, 7  #0 pc 768
-	sw	%x1, 0(%x2)  #210 pc 772
-	lw	%x30, 0(%x29)  #210 pc 776
-	addi	%x2, %x2, 4  #210 pc 780
-	jalr	%x1, %x30, 0  #210 pc 784
-	addi	%x2, %x2, -4  #210 pc 788
-	lw	%x1, 0(%x2)  #210 pc 792
-	sw	%x1, 0(%x2)  #210 pc 796
-	addi	%x2, %x2, 4  #210 pc 800
-	jal	%x1, print_int.172  #210 pc 804
-	addi	%x2, %x2, -4  #210 pc 808
-	lw	%x1, 0(%x2) #210 pc 812
+	addi	%x6, %x0, 3  #0 pc 736
+	sw	%x1, 0(%x2)  #210 pc 740
+	addi	%x2, %x2, 4  #210 pc 744
+	jal	%x1, make_adder.192  #210 pc 748
+	addi	%x2, %x2, -4  #210 pc 752
+	lw	%x1, 0(%x2) #210 pc 756
+	addi	%x29, %x6, 0  #210 pc 760
+	addi	%x6, %x0, 7  #0 pc 764
+	sw	%x1, 0(%x2)  #210 pc 768
+	lw	%x30, 0(%x29)  #210 pc 772
+	addi	%x2, %x2, 4  #210 pc 776
+	jalr	%x1, %x30, 0  #210 pc 780
+	addi	%x2, %x2, -4  #210 pc 784
+	lw	%x1, 0(%x2)  #210 pc 788
+	sw	%x1, 0(%x2)  #210 pc 792
+	addi	%x2, %x2, 4  #210 pc 796
+	jal	%x1, print_int.172  #210 pc 800
+	addi	%x2, %x2, -4  #210 pc 804
+	lw	%x1, 0(%x2) #210 pc 808

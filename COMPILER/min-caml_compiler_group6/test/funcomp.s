@@ -207,71 +207,67 @@ composed.209:  #pc 672
 compose.194:  #pc 724
 	addi	%x8, %x3, 0  #208 pc 724
 	addi	%x3, %x3, 12  #208 pc 728
-	addi	%x31, %x0, 672  #208 composed.209 pc 732
-	addi	%x9, %x31, 0  #208 pc 736
-	sw	%x9, 0(%x8)  #208 pc 740
-	sw	%x7, 8(%x8)  #208 pc 744
-	sw	%x6, 4(%x8)  #208 pc 748
-	addi	%x6, %x8, 0  #209 pc 752
-	ret #pc 756
-	nop #pc 760
-dbl.197:  #pc 764
-	add	%x6, %x6, %x6  #210 pc 764
-	ret #pc 768
-	nop #pc 772
-inc.199:  #pc 776
-	addi	%x6, %x6, 1  #211 pc 776
-	ret #pc 780
-	nop #pc 784
-dec.201:  #pc 788
-	addi	%x6, %x6, -1  #212 pc 788
-	ret #pc 792
-	nop #pc 796
+	addi	%x9, %x0, 672  #208 composed.209 pc 732
+	sw	%x9, 0(%x8)  #208 pc 736
+	sw	%x7, 8(%x8)  #208 pc 740
+	sw	%x6, 4(%x8)  #208 pc 744
+	addi	%x6, %x8, 0  #209 pc 748
+	ret #pc 752
+	nop #pc 756
+dbl.197:  #pc 760
+	add	%x6, %x6, %x6  #210 pc 760
+	ret #pc 764
+	nop #pc 768
+inc.199:  #pc 772
+	addi	%x6, %x6, 1  #211 pc 772
+	ret #pc 776
+	nop #pc 780
+dec.201:  #pc 784
+	addi	%x6, %x6, -1  #212 pc 784
+	ret #pc 788
+	nop #pc 792
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 1000000
-	addi	%x3, %x0, 1002000
+	addi	%x2, %x0, 10000000
+	addi	%x3, %x0, 10002000
 	addi	%x4, %x0, 8192
 	addi	%x5, %x0, 65536
-	addi	%x6, %x3, 0  #210 pc 816
-	addi	%x3, %x3, 4  #210 pc 820
-	addi	%x31, %x0, 764  #210 dbl.197 pc 824
-	addi	%x7, %x31, 0  #210 pc 828
-	sw	%x7, 0(%x6)  #210 pc 832
-	addi	%x7, %x3, 0  #211 pc 836
-	addi	%x3, %x3, 4  #211 pc 840
-	addi	%x31, %x0, 776  #211 inc.199 pc 844
-	addi	%x8, %x31, 0  #211 pc 848
-	sw	%x8, 0(%x7)  #211 pc 852
-	addi	%x8, %x3, 0  #212 pc 856
-	addi	%x3, %x3, 4  #212 pc 860
-	addi	%x31, %x0, 788  #212 dec.201 pc 864
-	addi	%x9, %x31, 0  #212 pc 868
-	sw	%x9, 0(%x8)  #212 pc 872
-	sw	%x7, 0(%x2)  #213 pc 876
-	addi	%x7, %x8, 0  #0 pc 880
-	sw	%x1, 4(%x2)  #213 pc 884
-	addi	%x2, %x2, 8  #213 pc 888
-	jal	%x1, compose.194  #213 pc 892
-	addi	%x2, %x2, -8  #213 pc 896
-	lw	%x1, 4(%x2) #213 pc 900
-	addi	%x7, %x6, 0  #213 pc 904
-	lw	%x6, 0(%x2)  #213 pc 908
-	sw	%x1, 4(%x2)  #213 pc 912
-	addi	%x2, %x2, 8  #213 pc 916
-	jal	%x1, compose.194  #213 pc 920
-	addi	%x2, %x2, -8  #213 pc 924
-	lw	%x1, 4(%x2) #213 pc 928
-	addi	%x29, %x6, 0  #213 pc 932
-	addi	%x6, %x0, 123  #0 pc 936
-	sw	%x1, 4(%x2)  #214 pc 940
-	lw	%x30, 0(%x29)  #214 pc 944
-	addi	%x2, %x2, 8  #214 pc 948
-	jalr	%x1, %x30, 0  #214 pc 952
-	addi	%x2, %x2, -8  #214 pc 956
-	lw	%x1, 4(%x2)  #214 pc 960
-	sw	%x1, 4(%x2)  #214 pc 964
-	addi	%x2, %x2, 8  #214 pc 968
-	jal	%x1, print_int.174  #214 pc 972
-	addi	%x2, %x2, -8  #214 pc 976
-	lw	%x1, 4(%x2) #214 pc 980
+	addi	%x6, %x3, 0  #210 pc 812
+	addi	%x3, %x3, 4  #210 pc 816
+	addi	%x7, %x0, 760  #210 dbl.197 pc 820
+	sw	%x7, 0(%x6)  #210 pc 824
+	addi	%x7, %x3, 0  #211 pc 828
+	addi	%x3, %x3, 4  #211 pc 832
+	addi	%x8, %x0, 772  #211 inc.199 pc 836
+	sw	%x8, 0(%x7)  #211 pc 840
+	addi	%x8, %x3, 0  #212 pc 844
+	addi	%x3, %x3, 4  #212 pc 848
+	addi	%x9, %x0, 784  #212 dec.201 pc 852
+	sw	%x9, 0(%x8)  #212 pc 856
+	sw	%x7, 0(%x2)  #213 pc 860
+	addi	%x7, %x8, 0  #0 pc 864
+	sw	%x1, 4(%x2)  #213 pc 868
+	addi	%x2, %x2, 8  #213 pc 872
+	jal	%x1, compose.194  #213 pc 876
+	addi	%x2, %x2, -8  #213 pc 880
+	lw	%x1, 4(%x2) #213 pc 884
+	addi	%x7, %x6, 0  #213 pc 888
+	lw	%x6, 0(%x2)  #213 pc 892
+	sw	%x1, 4(%x2)  #213 pc 896
+	addi	%x2, %x2, 8  #213 pc 900
+	jal	%x1, compose.194  #213 pc 904
+	addi	%x2, %x2, -8  #213 pc 908
+	lw	%x1, 4(%x2) #213 pc 912
+	addi	%x29, %x6, 0  #213 pc 916
+	addi	%x6, %x0, 123  #0 pc 920
+	sw	%x1, 4(%x2)  #214 pc 924
+	lw	%x30, 0(%x29)  #214 pc 928
+	addi	%x2, %x2, 8  #214 pc 932
+	jalr	%x1, %x30, 0  #214 pc 936
+	addi	%x2, %x2, -8  #214 pc 940
+	lw	%x1, 4(%x2)  #214 pc 944
+	sw	%x1, 4(%x2)  #214 pc 948
+	addi	%x2, %x2, 8  #214 pc 952
+	jal	%x1, print_int.174  #214 pc 956
+	addi	%x2, %x2, -8  #214 pc 960
+	lw	%x1, 4(%x2) #214 pc 964

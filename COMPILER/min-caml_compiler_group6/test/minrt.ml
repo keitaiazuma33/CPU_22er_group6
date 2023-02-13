@@ -12,7 +12,7 @@ let rec fhalf x = 0.5 *. x in
 
 let rec fless x y = x < y in
 
-let rec sin x = 
+let rec sin_sub x = 
   let x2 = x *. x in
   let x3 = x *. x2 in
   let x5 = x3 *. x2 in
@@ -20,11 +20,37 @@ let rec sin x =
   x -. 0.166666666 *. x3 +. 0.00833333333 *. x5 -. 0.00019841269 *. x7
 in
 
-let rec cos x =
+let rec sin x =
+  if x > 6.28318530718 then
+    sin (x -. 6.28318530718)
+  else
+    if x > 3.14159265359 then
+      -.(sin_sub (x -. 3.14159265359))
+    else
+      if x < 0.0 then
+        -.(sin (-.x))
+      else
+        sin_sub x
+in
+
+let rec cos_sub x =
   let x2 = x *. x in
   let x4 = x2 *. x2 in
   let x6 = x4 *. x2 in
   1.0 -. 0.5 *. x2 +. 0.041666666666 *. x4 -. 0.00138888888888 *. x6
+in
+
+let rec cos x =
+  if x > 6.28318530718 then
+    cos (x -. 6.28318530718)
+  else
+    if x > 3.14159265359 then
+      -.(cos_sub (x -. 3.14159265359))
+    else
+      if x < 0.0 then
+        (cos (-.x))
+      else
+        cos_sub x
 in
 
 let rec atan x =
@@ -38,10 +64,11 @@ let rec atan x =
 in
 
 let rec floor x =
-  if x >= 0.0 then
-    itof (ftoi x)
+  let y = itof (ftoi x) in
+  if x < y then
+    y -. 1.0
   else
-    itof (ftoi (x -. 1.0))
+    y
 in
 
 let rec abs_float x = fabs x
@@ -2646,6 +2673,6 @@ in
 
 (* rt size_x size_y version *)
 (* version は 3 or 6 *)
-let _ = rt 512 512 3
+let _ = rt 256 256 3
 
 in ()

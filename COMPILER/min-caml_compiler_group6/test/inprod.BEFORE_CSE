@@ -439,5 +439,5 @@ LET REC fiszero.143 x.144
 																																								Td14.225 Td15.226 Td16.227 
 																																				APP inprod.216 Tt13.223 Tt17.224 
 																																		FMUL Td9.221 Td18.222
-																																EXTFUNAPP truncate Td19.220 
+																																FTOI Td19.220 
 																															APP print_int.190 Ti20.219 

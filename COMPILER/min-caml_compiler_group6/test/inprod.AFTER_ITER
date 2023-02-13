@@ -209,5 +209,5 @@ LET REC mul_abs.172 a.173 b.174 i.175 acc.176
 																			LET Td19.220
 																				FMUL Td9.221 Td18.222
 																				LET Ti20.219
-																					EXTFUNAPP truncate Td19.220 
+																					FTOI Td19.220 
 																					APP print_int.190 Ti20.219 

@@ -479,9 +479,7 @@ LET
 																							FMULD %f1 %f0
 																							LET
 																								%x6
-																								CALLDIR min_caml_truncate
-																									
-																									%f0 
+																								FTOI %f0
 																								ANS
 																									CALLDIR print_int.190
 																										%x6 

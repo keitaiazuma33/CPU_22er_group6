@@ -1,4 +1,88 @@
-Name : mul_abs.289
+Name : mul_abs.281
+Args : a.282 b.283 i.284 acc.285 
+
+FArgs : 
+Body :
+ANS
+	IFEQ i.284 -1
+		ANS
+			MOV acc.285
+		LET
+			Ti202.582
+			SET 1
+			LET
+				Ti203.581
+				SLL Ti202.582 i.284
+				LET
+					Ti204.573
+					AND b.283 Ti203.581
+					ANS
+						IFEQ Ti204.573 0
+							LET
+								Ti207.579
+								SUB i.284 1
+								ANS
+									CALLDIR mul_abs.281
+										a.282 b.283 Ti207.579 acc.285 
+										
+							LET
+								Ti209.575
+								SUB i.284 1
+								LET
+									Ti210.577
+									SLL a.282 i.284
+									LET
+										Ti211.576
+										ADD acc.285 Ti210.577
+										ANS
+											CALLDIR mul_abs.281
+												a.282 b.283 Ti209.575 Ti211.576 
+												
+
+Name : mul.286
+Args : a.287 b.288 
+
+FArgs : 
+Body :
+LET
+	abs_a.561
+	IFGE a.287 0
+		ANS
+			MOV a.287
+		ANS
+			NEG a.287
+	LET
+		abs_b.562
+		IFGE b.288 0
+			ANS
+				MOV b.288
+			ANS
+				NEG b.288
+		LET
+			Ti194.568
+			SET 30
+			LET
+				Ti195.569
+				SET 0
+				LET
+					abs_mul.563
+					CALLDIR mul_abs.281
+						abs_a.561 abs_b.562 Ti194.568 Ti195.569 
+						
+					LET
+						Ti197.564
+						SRL a.287 31
+						LET
+							Ti199.565
+							SRL b.288 31
+							ANS
+								IFEQ Ti197.564 Ti199.565
+									ANS
+										MOV abs_mul.563
+									ANS
+										NEG abs_mul.563
+
+Name : div_abs.289
 Args : a.290 b.291 i.292 acc.293 
 
 FArgs : 
@@ -8,791 +92,683 @@ ANS
 		ANS
 			MOV acc.293
 		LET
-			Ti210.596
-			SET 1
-			LET
-				Ti211.595
-				SLL Ti210.596 i.292
-				LET
-					Ti212.587
-					AND b.291 Ti211.595
-					ANS
-						IFEQ Ti212.587 0
+			Ti182.550
+			SRL a.290 i.292
+			ANS
+				IFLE b.291 Ti182.550
+					LET
+						Ti183.559
+						SLL b.291 i.292
+						LET
+							Ti184.553
+							SUB a.290 Ti183.559
 							LET
-								Ti215.593
-								SUB i.292 1
-								ANS
-									CALLDIR mul_abs.289
-										a.290 b.291 Ti215.593 acc.293 
-										
-							LET
-								Ti217.589
+								Ti186.554
 								SUB i.292 1
 								LET
-									Ti218.591
-									SLL a.290 i.292
+									Ti187.557
+									SET 1
 									LET
-										Ti219.590
-										ADD acc.293 Ti218.591
-										ANS
-											CALLDIR mul_abs.289
-												a.290 b.291 Ti217.589 Ti219.590 
-												
+										Ti188.556
+										SLL Ti187.557 i.292
+										LET
+											Ti189.555
+											ADD acc.293 Ti188.556
+											ANS
+												CALLDIR div_abs.289
+													Ti184.553 b.291 Ti186.554 Ti189.555 
+													
+					LET
+						Ti191.551
+						SUB i.292 1
+						ANS
+							CALLDIR div_abs.289
+								a.290 b.291 Ti191.551 acc.293 
+								
 
-Name : mul.294
+Name : div.294
 Args : a.295 b.296 
 
 FArgs : 
 Body :
 LET
-	abs_a.575
+	abs_a.538
 	IFGE a.295 0
 		ANS
 			MOV a.295
 		ANS
 			NEG a.295
 	LET
-		abs_b.576
+		abs_b.539
 		IFGE b.296 0
 			ANS
 				MOV b.296
 			ANS
 				NEG b.296
 		LET
-			Ti202.582
+			Ti174.545
 			SET 30
 			LET
-				Ti203.583
+				Ti175.546
 				SET 0
 				LET
-					abs_mul.577
-					CALLDIR mul_abs.289
-						abs_a.575 abs_b.576 Ti202.582 Ti203.583 
+					abs_div.540
+					CALLDIR div_abs.289
+						abs_a.538 abs_b.539 Ti174.545 Ti175.546 
 						
 					LET
-						Ti205.578
+						Ti177.541
 						SRL a.295 31
 						LET
-							Ti207.579
+							Ti179.542
 							SRL b.296 31
 							ANS
-								IFEQ Ti205.578 Ti207.579
+								IFEQ Ti177.541 Ti179.542
 									ANS
-										MOV abs_mul.577
+										MOV abs_div.540
 									ANS
-										NEG abs_mul.577
+										NEG abs_div.540
 
-Name : div_abs.297
-Args : a.298 b.299 i.300 acc.301 
+Name : print_int.299
+Args : a.300 
 
 FArgs : 
 Body :
 ANS
-	IFEQ i.300 -1
+	IFGE a.300 0
 		ANS
-			MOV acc.301
-		LET
-			Ti190.564
-			SRL a.298 i.300
-			ANS
-				IFLE b.299 Ti190.564
-					LET
-						Ti191.573
-						SLL b.299 i.300
-						LET
-							Ti192.567
-							SUB a.298 Ti191.573
-							LET
-								Ti194.568
-								SUB i.300 1
-								LET
-									Ti195.571
-									SET 1
-									LET
-										Ti196.570
-										SLL Ti195.571 i.300
-										LET
-											Ti197.569
-											ADD acc.301 Ti196.570
-											ANS
-												CALLDIR div_abs.297
-													Ti192.567 b.299 Ti194.568 Ti197.569 
-													
-					LET
-						Ti199.565
-						SUB i.300 1
-						ANS
-							CALLDIR div_abs.297
-								a.298 b.299 Ti199.565 acc.301 
-								
-
-Name : div.302
-Args : a.303 b.304 
-
-FArgs : 
-Body :
-LET
-	abs_a.552
-	IFGE a.303 0
-		ANS
-			MOV a.303
-		ANS
-			NEG a.303
-	LET
-		abs_b.553
-		IFGE b.304 0
-			ANS
-				MOV b.304
-			ANS
-				NEG b.304
-		LET
-			Ti182.559
-			SET 30
-			LET
-				Ti183.560
-				SET 0
+			IFGE a.300 10
 				LET
-					abs_div.554
-					CALLDIR div_abs.297
-						abs_a.552 abs_b.553 Ti182.559 Ti183.560 
-						
-					LET
-						Ti185.555
-						SRL a.303 31
-						LET
-							Ti187.556
-							SRL b.304 31
-							ANS
-								IFEQ Ti185.555 Ti187.556
-									ANS
-										MOV abs_div.554
-									ANS
-										NEG abs_div.554
-
-Name : print_int.307
-Args : a.308 
-
-FArgs : 
-Body :
-ANS
-	IFGE a.308 0
-		ANS
-			IFGE a.308 10
-				LET
-					Ti170.551
+					Ti162.537
 					SET 10
 					LET
-						b.544
-						CALLDIR div.302
-							a.308 Ti170.551 
+						b.530
+						CALLDIR div.294
+							a.300 Ti162.537 
 							
 						LET
-							Tu2.545
-							CALLDIR print_int.307
-								b.544 
+							Tu2.531
+							CALLDIR print_int.299
+								b.530 
 								
 							LET
-								Ti171.550
+								Ti163.536
 								SET 10
 								LET
-									Ti172.549
-									CALLDIR mul.294
-										b.544 Ti171.550 
+									Ti164.535
+									CALLDIR mul.286
+										b.530 Ti163.536 
 										
 									LET
-										Ti173.547
-										SUB a.308 Ti172.549
+										Ti165.533
+										SUB a.300 Ti164.535
 										LET
-											Ti175.546
-											ADD Ti173.547 48
+											Ti167.532
+											ADD Ti165.533 48
 											ANS
-												OUT Ti175.546
+												OUT Ti167.532
 				LET
-					Ti177.542
-					ADD a.308 48
+					Ti169.528
+					ADD a.300 48
 					ANS
-						OUT Ti177.542
+						OUT Ti169.528
 		LET
-			Ti178.540
+			Ti170.526
 			SET 45
 			LET
-				Tu1.538
-				OUT Ti178.540
+				Tu1.524
+				OUT Ti170.526
 				LET
-					Ti179.539
-					NEG a.308
+					Ti171.525
+					NEG a.300
 					ANS
-						CALLDIR print_int.307
-							Ti179.539 
+						CALLDIR print_int.299
+							Ti171.525 
 							
 
-Name : assign_array.313
-Args : hp.314 a.315 n.316 
+Name : assign_array.305
+Args : hp.306 a.307 n.308 
 
 FArgs : 
 Body :
 ANS
-	IFGE n.316 0
+	IFGE n.308 0
 		ANS
-			IFEQ n.316 0
+			IFEQ n.308 0
 				LET
-					o.652
-					SLL n.316 2
+					o.638
+					SLL n.308 2
 					ANS
-						ST a.315 hp.314 o.652
+						ST a.307 hp.306 o.638
 				LET
-					o.651
-					SLL n.316 2
+					o.637
+					SLL n.308 2
 					LET
-						Tu3.534
-						ST a.315 hp.314 o.651
+						Tu3.520
+						ST a.307 hp.306 o.637
 						LET
-							Ti167.535
-							SUB n.316 1
+							Ti159.521
+							SUB n.308 1
 							ANS
-								CALLDIR assign_array.313
-									hp.314 a.315 Ti167.535 
+								CALLDIR assign_array.305
+									hp.306 a.307 Ti159.521 
 									
 		ANS
 			NOP
 
-Name : create_array.317
-Args : n.318 a.319 
+Name : create_array.309
+Args : n.310 a.311 
 
 FArgs : 
 Body :
 LET
-	Tu158.531
+	Tu150.517
 	NOP
 	LET
-		hp.522
+		hp.508
 		GETHP
 		LET
-			hp_array.523
-			MOV hp.522
+			hp_array.509
+			MOV hp.508
 			LET
-				Ti160.529
-				SLL n.318 2
+				Ti152.515
+				SLL n.310 2
 				LET
-					Ti161.528
-					ADD hp.522 Ti160.529
+					Ti153.514
+					ADD hp.508 Ti152.515
 					LET
-						Tu5.524
-						SETHP Ti161.528
+						Tu5.510
+						SETHP Ti153.514
 						LET
-							Ti163.526
-							SUB n.318 1
+							Ti155.512
+							SUB n.310 1
 							LET
-								Tu4.525
-								CALLDIR assign_array.313
-									hp_array.523 a.319 Ti163.526 
+								Tu4.511
+								CALLDIR assign_array.305
+									hp_array.509 a.311 Ti155.512 
 									
 								ANS
-									MOV hp_array.523
+									MOV hp_array.509
 
-Name : assign_farray.320
-Args : hp.321 n.323 
+Name : assign_farray.312
+Args : hp.313 n.315 
 
-FArgs : a.322 
+FArgs : a.314 
 Body :
 ANS
-	IFGE n.323 0
+	IFGE n.315 0
 		ANS
-			IFEQ n.323 0
+			IFEQ n.315 0
 				LET
-					o.654
-					SLL n.323 2
+					o.640
+					SLL n.315 2
 					ANS
-						STDF a.322 hp.321 o.654
+						STDF a.314 hp.313 o.640
 				LET
-					o.653
-					SLL n.323 2
+					o.639
+					SLL n.315 2
 					LET
-						Tu6.519
-						STDF a.322 hp.321 o.653
+						Tu6.505
+						STDF a.314 hp.313 o.639
 						LET
-							Ti157.520
-							SUB n.323 1
+							Ti149.506
+							SUB n.315 1
 							ANS
-								CALLDIR assign_farray.320
-									hp.321 Ti157.520 
-									a.322 
+								CALLDIR assign_farray.312
+									hp.313 Ti149.506 
+									a.314 
 		ANS
 			NOP
 
-Name : create_float_array.324
-Args : n.325 
+Name : create_float_array.316
+Args : n.317 
 
-FArgs : a.326 
+FArgs : a.318 
 Body :
 LET
-	Tu148.516
+	Tu140.502
 	NOP
 	LET
-		hp.507
+		hp.493
 		GETHP
 		LET
-			hp_array.508
-			MOV hp.507
+			hp_array.494
+			MOV hp.493
 			LET
-				Ti150.514
-				SLL n.325 2
+				Ti142.500
+				SLL n.317 2
 				LET
-					Ti151.513
-					ADD hp.507 Ti150.514
+					Ti143.499
+					ADD hp.493 Ti142.500
 					LET
-						Tu8.509
-						SETHP Ti151.513
+						Tu8.495
+						SETHP Ti143.499
 						LET
-							Ti153.511
-							SUB n.325 1
+							Ti145.497
+							SUB n.317 1
 							LET
-								Tu7.510
-								CALLDIR assign_farray.320
-									hp_array.508 Ti153.511 
-									a.326 
+								Tu7.496
+								CALLDIR assign_farray.312
+									hp_array.494 Ti145.497 
+									a.318 
 								ANS
-									MOV hp_array.508
+									MOV hp_array.494
 
-Name : loop3.327
-Args : i.328 k.329 j.330 a.331 b.332 c.333 
+Name : truncate.319
+Args : 
+
+FArgs : a.320 
+Body :
+ANS
+	FTOI a.320
+
+Name : loop3.321
+Args : i.322 k.323 j.324 a.325 b.326 c.327 
 
 FArgs : 
 Body :
 ANS
-	IFGE k.329 0
+	IFGE k.323 0
 		LET
-			o.655
-			SLL i.328 2
+			o.641
+			SLL i.322 2
 			LET
-				Ta137.498
-				LD c.333 o.655
+				Ta129.484
+				LD c.327 o.641
 				LET
-					o.656
-					SLL i.328 2
+					o.642
+					SLL i.322 2
 					LET
-						Ta138.506
-						LD c.333 o.656
+						Ta130.492
+						LD c.327 o.642
 						LET
-							o.657
-							SLL j.330 2
+							o.643
+							SLL j.324 2
 							LET
-								Td139.500
-								LDDF Ta138.506 o.657
+								Td131.486
+								LDDF Ta130.492 o.643
 								LET
-									o.658
-									SLL i.328 2
+									o.644
+									SLL i.322 2
 									LET
-										Ta140.505
-										LD a.331 o.658
+										Ta132.491
+										LD a.325 o.644
 										LET
-											o.659
-											SLL k.329 2
+											o.645
+											SLL k.323 2
 											LET
-												Td141.502
-												LDDF Ta140.505 o.659
+												Td133.488
+												LDDF Ta132.491 o.645
 												LET
-													o.660
-													SLL k.329 2
+													o.646
+													SLL k.323 2
 													LET
-														Ta142.504
-														LD b.332 o.660
+														Ta134.490
+														LD b.326 o.646
 														LET
-															o.661
-															SLL j.330 2
+															o.647
+															SLL j.324 2
 															LET
-																Td143.503
-																LDDF Ta142.504 o.661
+																Td135.489
+																LDDF Ta134.490 o.647
 																LET
-																	Td144.501
-																	FMULD Td141.502 Td143.503
+																	Td136.487
+																	FMULD Td133.488 Td135.489
 																	LET
-																		Td145.499
-																		FADDD Td139.500 Td144.501
+																		Td137.485
+																		FADDD Td131.486 Td136.487
 																		LET
-																			o.662
-																			SLL j.330 2
+																			o.648
+																			SLL j.324 2
 																			LET
-																				Tu9.495
-																				STDF Td145.499 Ta137.498 o.662
+																				Tu9.481
+																				STDF Td137.485 Ta129.484 o.648
 																				LET
-																					Ti147.496
-																					SUB k.329 1
+																					Ti139.482
+																					SUB k.323 1
 																					ANS
-																						CALLDIR loop3.327
-																							i.328 Ti147.496 j.330 a.331 b.332 c.333 
+																						CALLDIR loop3.321
+																							i.322 Ti139.482 j.324 a.325 b.326 c.327 
 																							
 		ANS
 			NOP
 
-Name : loop2.334
-Args : i.335 m.336 j.337 a.338 b.339 c.340 
+Name : loop2.328
+Args : i.329 m.330 j.331 a.332 b.333 c.334 
 
 FArgs : 
 Body :
 ANS
-	IFGE j.337 0
+	IFGE j.331 0
 		LET
-			Ti133.492
-			SUB m.336 1
+			Ti125.478
+			SUB m.330 1
 			LET
-				Tu10.489
-				CALLDIR loop3.327
-					i.335 Ti133.492 j.337 a.338 b.339 c.340 
+				Tu10.475
+				CALLDIR loop3.321
+					i.329 Ti125.478 j.331 a.332 b.333 c.334 
 					
 				LET
-					Ti135.490
-					SUB j.337 1
+					Ti127.476
+					SUB j.331 1
 					ANS
-						CALLDIR loop2.334
-							i.335 m.336 Ti135.490 a.338 b.339 c.340 
+						CALLDIR loop2.328
+							i.329 m.330 Ti127.476 a.332 b.333 c.334 
 							
 		ANS
 			NOP
 
-Name : loop1.341
-Args : i.342 m.343 n.344 a.345 b.346 c.347 
+Name : loop1.335
+Args : i.336 m.337 n.338 a.339 b.340 c.341 
 
 FArgs : 
 Body :
 ANS
-	IFGE i.342 0
+	IFGE i.336 0
 		LET
-			Ti128.486
-			SUB n.344 1
+			Ti120.472
+			SUB n.338 1
 			LET
-				Tu11.483
-				CALLDIR loop2.334
-					i.342 m.343 Ti128.486 a.345 b.346 c.347 
+				Tu11.469
+				CALLDIR loop2.328
+					i.336 m.337 Ti120.472 a.339 b.340 c.341 
 					
 				LET
-					Ti130.484
-					SUB i.342 1
+					Ti122.470
+					SUB i.336 1
 					ANS
-						CALLDIR loop1.341
-							Ti130.484 m.343 n.344 a.345 b.346 c.347 
+						CALLDIR loop1.335
+							Ti122.470 m.337 n.338 a.339 b.340 c.341 
 							
 		ANS
 			NOP
 
-Name : mul.348
-Args : l.349 m.350 n.351 a.352 b.353 c.354 
+Name : mul.342
+Args : l.343 m.344 n.345 a.346 b.347 c.348 
 
 FArgs : 
 Body :
 LET
-	Ti125.480
-	SUB l.349 1
+	Ti117.466
+	SUB l.343 1
 	ANS
-		CALLDIR loop1.341
-			Ti125.480 m.350 n.351 a.352 b.353 c.354 
+		CALLDIR loop1.335
+			Ti117.466 m.344 n.345 a.346 b.347 c.348 
 			
 
-Name : init.356
-Args : i.357 n.358 mat.359 
+Name : init.350
+Args : i.351 n.352 mat.353 
 
 FArgs : 
 Body :
 ANS
-	IFGE i.357 0
+	IFGE i.351 0
 		LET
-			Td120.477
-			l.663
+			Td112.463
+			l.649
 			LET
-				Ta121.476
-				CALLDIR create_float_array.324
-					n.358 
-					Td120.477 
+				Ta113.462
+				CALLDIR create_float_array.316
+					n.352 
+					Td112.463 
 				LET
-					o.665
-					SLL i.357 2
+					o.651
+					SLL i.351 2
 					LET
-						Tu12.473
-						ST Ta121.476 mat.359 o.665
+						Tu12.459
+						ST Ta113.462 mat.353 o.651
 						LET
-							Ti123.474
-							SUB i.357 1
+							Ti115.460
+							SUB i.351 1
 							ANS
-								CALLDIR init.356
-									Ti123.474 n.358 mat.359 
+								CALLDIR init.350
+									Ti115.460 n.352 mat.353 
 									
 		ANS
 			NOP
 
-Name : make.360
-Args : m.361 n.362 dummy.363 
+Name : make.354
+Args : m.355 n.356 dummy.357 
 
 FArgs : 
 Body :
 LET
-	mat.468
-	CALLDIR create_array.317
-		m.361 dummy.363 
+	mat.454
+	CALLDIR create_array.309
+		m.355 dummy.357 
 		
 	LET
-		Ti118.470
-		SUB m.361 1
+		Ti110.456
+		SUB m.355 1
 		LET
-			Tu13.469
-			CALLDIR init.356
-				Ti118.470 n.362 mat.468 
+			Tu13.455
+			CALLDIR init.350
+				Ti110.456 n.356 mat.454 
 				
 			ANS
-				MOV mat.468
+				MOV mat.454
 
 
 LET
-	Ti34.478
+	Ti30.464
 	SET 0
 	LET
-		Td35.479
-		l.663
+		Td31.465
+		l.649
 		LET
-			dummy.355
-			CALLDIR create_float_array.324
-				Ti34.478 
-				Td35.479 
+			dummy.349
+			CALLDIR create_float_array.316
+				Ti30.464 
+				Td31.465 
 			LET
-				Ti36.466
+				Ti32.452
 				SET 2
 				LET
-					Ti37.467
+					Ti33.453
 					SET 3
 					LET
-						a.364
-						CALLDIR make.360
-							Ti36.466 Ti37.467 dummy.355 
+						a.358
+						CALLDIR make.354
+							Ti32.452 Ti33.453 dummy.349 
 							
 						LET
-							Ti38.464
+							Ti34.450
 							SET 3
 							LET
-								Ti39.465
+								Ti35.451
 								SET 2
 								LET
-									b.365
-									CALLDIR make.360
-										Ti38.464 Ti39.465 dummy.355 
+									b.359
+									CALLDIR make.354
+										Ti34.450 Ti35.451 dummy.349 
 										
 									LET
-										Ti40.462
+										Ti36.448
 										SET 2
 										LET
-											c.366
-											CALLDIR make.360
-												Ti40.462 Ti40.462 dummy.355 
+											c.360
+											CALLDIR make.354
+												Ti36.448 Ti36.448 dummy.349 
 												
 											LET
-												Ta43.458
-												LD a.364 0
+												Ta39.444
+												LD a.358 0
 												LET
-													Td45.460
-													l.668
+													Td41.446
+													l.654
 													LET
-														Tu33.367
-														STDF Td45.460 Ta43.458 0
+														Tu29.361
+														STDF Td41.446 Ta39.444 0
 														LET
-															Ta47.454
-															LD a.364 0
+															Ta43.440
+															LD a.358 0
 															LET
-																Td49.456
-																l.672
+																Td45.442
+																l.658
 																LET
-																	Tu32.368
-																	STDF Td49.456 Ta47.454 4
+																	Tu28.362
+																	STDF Td45.442 Ta43.440 4
 																	LET
-																		Ta51.450
-																		LD a.364 0
+																		Ta47.436
+																		LD a.358 0
 																		LET
-																			Td53.452
-																			l.676
+																			Td49.438
+																			l.662
 																			LET
-																				Tu31.369
-																				STDF Td53.452 Ta51.450 8
+																				Tu27.363
+																				STDF Td49.438 Ta47.436 8
 																				LET
-																					Ta55.446
-																					LD a.364 4
+																					Ta51.432
+																					LD a.358 4
 																					LET
-																						Td57.448
-																						l.680
+																						Td53.434
+																						l.666
 																						LET
-																							Tu30.370
-																							STDF Td57.448 Ta55.446 0
+																							Tu26.364
+																							STDF Td53.434 Ta51.432 0
 																							LET
-																								Ta59.442
-																								LD a.364 4
+																								Ta55.428
+																								LD a.358 4
 																								LET
-																									Td61.444
-																									l.684
+																									Td57.430
+																									l.670
 																									LET
-																										Tu29.371
-																										STDF Td61.444 Ta59.442 4
+																										Tu25.365
+																										STDF Td57.430 Ta55.428 4
 																										LET
-																											Ta63.438
-																											LD a.364 4
+																											Ta59.424
+																											LD a.358 4
 																											LET
-																												Td65.440
-																												l.688
+																												Td61.426
+																												l.674
 																												LET
-																													Tu28.372
-																													STDF Td65.440 Ta63.438 8
+																													Tu24.366
+																													STDF Td61.426 Ta59.424 8
 																													LET
-																														Ta67.434
-																														LD b.365 0
+																														Ta63.420
+																														LD b.359 0
 																														LET
-																															Td69.436
-																															l.692
+																															Td65.422
+																															l.678
 																															LET
-																																Tu27.373
-																																STDF Td69.436 Ta67.434 0
+																																Tu23.367
+																																STDF Td65.422 Ta63.420 0
 																																LET
-																																	Ta71.430
-																																	LD b.365 0
+																																	Ta67.416
+																																	LD b.359 0
 																																	LET
-																																		Td73.432
-																																		l.696
+																																		Td69.418
+																																		l.682
 																																		LET
-																																			Tu26.374
-																																			STDF Td73.432 Ta71.430 4
+																																			Tu22.368
+																																			STDF Td69.418 Ta67.416 4
 																																			LET
-																																				Ta75.426
-																																				LD b.365 4
+																																				Ta71.412
+																																				LD b.359 4
 																																				LET
-																																					Td77.428
-																																					l.700
+																																					Td73.414
+																																					l.686
 																																					LET
-																																						Tu25.375
-																																						STDF Td77.428 Ta75.426 0
+																																						Tu21.369
+																																						STDF Td73.414 Ta71.412 0
 																																						LET
-																																							Ta79.422
-																																							LD b.365 4
+																																							Ta75.408
+																																							LD b.359 4
 																																							LET
-																																								Td81.424
-																																								l.704
+																																								Td77.410
+																																								l.690
 																																								LET
-																																									Tu24.376
-																																									STDF Td81.424 Ta79.422 4
+																																									Tu20.370
+																																									STDF Td77.410 Ta75.408 4
 																																									LET
-																																										Ta83.418
-																																										LD b.365 8
+																																										Ta79.404
+																																										LD b.359 8
 																																										LET
-																																											Td85.420
-																																											l.708
+																																											Td81.406
+																																											l.694
 																																											LET
-																																												Tu23.377
-																																												STDF Td85.420 Ta83.418 0
+																																												Tu19.371
+																																												STDF Td81.406 Ta79.404 0
 																																												LET
-																																													Ta87.414
-																																													LD b.365 8
+																																													Ta83.400
+																																													LD b.359 8
 																																													LET
-																																														Td89.416
-																																														l.712
+																																														Td85.402
+																																														l.698
 																																														LET
-																																															Tu22.378
-																																															STDF Td89.416 Ta87.414 4
+																																															Tu18.372
+																																															STDF Td85.402 Ta83.400 4
 																																															LET
-																																																Ti90.411
+																																																Ti86.397
 																																																SET 2
 																																																LET
-																																																	Ti91.412
+																																																	Ti87.398
 																																																	SET 3
 																																																	LET
-																																																		Tu21.379
-																																																		CALLDIR mul.348
-																																																			Ti90.411 Ti91.412 Ti90.411 a.364 b.365 c.366 
+																																																		Tu17.373
+																																																		CALLDIR mul.342
+																																																			Ti86.397 Ti87.398 Ti86.397 a.358 b.359 c.360 
 																																																			
 																																																		LET
-																																																			Ta94.408
-																																																			LD c.366 0
+																																																			Ta90.394
+																																																			LD c.360 0
 																																																			LET
-																																																				Td96.407
-																																																				LDDF Ta94.408 0
+																																																				Td92.393
+																																																				LDDF Ta90.394 0
 																																																				LET
-																																																					Ti97.406
-																																																					CALLDIR min_caml_truncate
+																																																					Ti93.392
+																																																					CALLDIR truncate.319
 																																																						
-																																																						Td96.407 
+																																																						Td92.393 
 																																																					LET
-																																																						Tu20.380
-																																																						CALLDIR print_int.307
-																																																							Ti97.406 
+																																																						Tu16.374
+																																																						CALLDIR print_int.299
+																																																							Ti93.392 
 																																																							
 																																																						LET
-																																																							Tu98.405
-																																																							NOP
+																																																							Ta95.389
+																																																							LD c.360 0
 																																																							LET
-																																																								Tu19.381
-																																																								CALLDIR min_caml_print_newline
-																																																									
-																																																									
+																																																								Td97.388
+																																																								LDDF Ta95.389 4
 																																																								LET
-																																																									Ta100.402
-																																																									LD c.366 0
+																																																									Ti98.387
+																																																									CALLDIR truncate.319
+																																																										
+																																																										Td97.388 
 																																																									LET
-																																																										Td102.401
-																																																										LDDF Ta100.402 4
+																																																										Tu15.375
+																																																										CALLDIR print_int.299
+																																																											Ti98.387 
+																																																											
 																																																										LET
-																																																											Ti103.400
-																																																											CALLDIR min_caml_truncate
-																																																												
-																																																												Td102.401 
+																																																											Ta100.384
+																																																											LD c.360 4
 																																																											LET
-																																																												Tu18.382
-																																																												CALLDIR print_int.307
-																																																													Ti103.400 
-																																																													
+																																																												Td102.383
+																																																												LDDF Ta100.384 0
 																																																												LET
-																																																													Tu104.399
-																																																													NOP
+																																																													Ti103.382
+																																																													CALLDIR truncate.319
+																																																														
+																																																														Td102.383 
 																																																													LET
-																																																														Tu17.383
-																																																														CALLDIR min_caml_print_newline
-																																																															
+																																																														Tu14.376
+																																																														CALLDIR print_int.299
+																																																															Ti103.382 
 																																																															
 																																																														LET
-																																																															Ta106.396
-																																																															LD c.366 4
+																																																															Ta105.379
+																																																															LD c.360 4
 																																																															LET
-																																																																Td108.395
-																																																																LDDF Ta106.396 0
+																																																																Td107.378
+																																																																LDDF Ta105.379 4
 																																																																LET
-																																																																	Ti109.394
-																																																																	CALLDIR min_caml_truncate
+																																																																	Ti108.377
+																																																																	CALLDIR truncate.319
 																																																																		
-																																																																		Td108.395 
-																																																																	LET
-																																																																		Tu16.384
-																																																																		CALLDIR print_int.307
-																																																																			Ti109.394 
+																																																																		Td107.378 
+																																																																	ANS
+																																																																		CALLDIR print_int.299
+																																																																			Ti108.377 
 																																																																			
-																																																																		LET
-																																																																			Tu110.393
-																																																																			NOP
-																																																																			LET
-																																																																				Tu15.385
-																																																																				CALLDIR min_caml_print_newline
-																																																																					
-																																																																					
-																																																																				LET
-																																																																					Ta112.390
-																																																																					LD c.366 4
-																																																																					LET
-																																																																						Td114.389
-																																																																						LDDF Ta112.390 4
-																																																																						LET
-																																																																							Ti115.388
-																																																																							CALLDIR min_caml_truncate
-																																																																								
-																																																																								Td114.389 
-																																																																							LET
-																																																																								Tu14.386
-																																																																								CALLDIR print_int.307
-																																																																									Ti115.388 
-																																																																									
-																																																																								LET
-																																																																									Tu116.387
-																																																																									NOP
-																																																																									ANS
-																																																																										CALLDIR min_caml_print_newline
-																																																																											
-																																																																											

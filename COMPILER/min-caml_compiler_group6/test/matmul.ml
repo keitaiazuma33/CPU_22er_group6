@@ -203,6 +203,10 @@ let rec create_float_array n a =
   hp_array
 in
 
+let rec truncate a =
+  ftoi a 
+in
+
 
 let rec mul l m n a b c =
   let rec loop1 i =
@@ -237,10 +241,6 @@ b.(1).(0) <- 9.; b.(1).(1) <- 10.;
 b.(2).(0) <- 11.; b.(2).(1) <- 12.;
 mul 2 3 2 a b c;
 print_int (truncate (c.(0).(0)));
-print_newline ();
 print_int (truncate (c.(0).(1)));
-print_newline ();
 print_int (truncate (c.(1).(0)));
-print_newline ();
-print_int (truncate (c.(1).(1)));
-print_newline ()
+print_int (truncate (c.(1).(1)))

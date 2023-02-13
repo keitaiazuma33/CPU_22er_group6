@@ -380,40 +380,42 @@ LET REC fiszero x
 																																SUB n Ti25
 																															APP assign_farray hp_array a Ti26 
 																														VAR hp_array
-																										LET x
-																											LET Td9
-																												FLOAT 1.230000
-																												EXTFUNAPP truncate Td9 
-																											LET y
-																												LET Td10
-																													FLOAT 4.560000
-																													EXTFUNAPP truncate Td10 
-																												LET z
-																													LET Td12
-																														LET Td11
-																															FLOAT 7.890000
-																															FNEG Td11 
-																														EXTFUNAPP truncate Td12 
-																													LET Ti20
-																														LET Ti17
-																															LET Ti14
-																																LET Ti13
-																																	INT 0
-																																	IFLE Ti13 z
-																																		VAR x
-																																		VAR y
-																																LET Ti16
-																																	LET Ti15
+																										LET REC truncate a 
+																											FTOI a 
+																											LET x
+																												LET Td9
+																													FLOAT 1.230000
+																													APP truncate Td9 
+																												LET y
+																													LET Td10
+																														FLOAT 4.560000
+																														APP truncate Td10 
+																													LET z
+																														LET Td12
+																															LET Td11
+																																FLOAT 7.890000
+																																FNEG Td11 
+																															APP truncate Td12 
+																														LET Ti20
+																															LET Ti17
+																																LET Ti14
+																																	LET Ti13
 																																		INT 0
-																																		IFLE x Ti15
+																																		IFLE Ti13 z
+																																			VAR x
 																																			VAR y
+																																	LET Ti16
+																																		LET Ti15
+																																			INT 0
+																																			IFLE x Ti15
+																																				VAR y
+																																				VAR z
+																																		ADD Ti14 Ti16
+																																LET Ti19
+																																	LET Ti18
+																																		INT 0
+																																		IFLE Ti18 y
 																																			VAR z
-																																	ADD Ti14 Ti16
-																															LET Ti19
-																																LET Ti18
-																																	INT 0
-																																	IFLE Ti18 y
-																																		VAR z
-																																		VAR x
-																																ADD Ti17 Ti19
-																														APP print_int Ti20 
+																																			VAR x
+																																	ADD Ti17 Ti19
+																															APP print_int Ti20 

@@ -256,13 +256,13 @@ inprod.204:  #pc 812
 	ret #pc 888
 	nop #pc 892
 bge_else.417: #pc 896
-	addi	%x6, l.372, 0  #0 pc 896
+	fmv	%f0, l.372  #0 pc 896
 	ret #pc 900
 	nop #pc 904
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 1000000
-	addi	%x3, %x0, 1002000
+	addi	%x2, %x0, 10000000
+	addi	%x3, %x0, 10002000
 	addi	%x4, %x0, 8192
 	addi	%x5, %x0, 65536
 	addi	%x6, %x0, 3  #0 pc 924
@@ -293,13 +293,9 @@ min_caml_start:
 	lw	%x1, 16(%x2) #212 pc 1024
 	flw	%f1, 8(%x2)  #212 pc 1028
 	fmul	%f0, %f1, %f0  #212 pc 1032
-	sw	%x1, 16(%x2)  #212 pc 1036
-	addi	%x2, %x2, 20  #212 pc 1040
-	jal	%x1, min_caml_truncate  #212 pc 1044
-	addi	%x2, %x2, -20  #212 pc 1048
-	lw	%x1, 16(%x2) #212 pc 1052
-	sw	%x1, 16(%x2)  #212 pc 1056
-	addi	%x2, %x2, 20  #212 pc 1060
-	jal	%x1, print_int.184  #212 pc 1064
-	addi	%x2, %x2, -20  #212 pc 1068
-	lw	%x1, 16(%x2) #212 pc 1072
+	ftoi	%x6, %f0  #212 pc 1036
+	sw	%x1, 16(%x2)  #212 pc 1040
+	addi	%x2, %x2, 20  #212 pc 1044
+	jal	%x1, print_int.184  #212 pc 1048
+	addi	%x2, %x2, -20  #212 pc 1052
+	lw	%x1, 16(%x2) #212 pc 1056

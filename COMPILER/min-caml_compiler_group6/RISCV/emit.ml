@@ -60,7 +60,7 @@ let rec print_mv oc x y n =
   incr_pc ();
   if is_xreg x then
     Printf.fprintf oc "\taddi\t%s, %s, %d  #%d pc %d\n" x y 0 n (!pc)
-  else 
+  else
     if (is_freg x) && (is_freg y) then
       Printf.fprintf oc "\tfadd\t%s, %s, %s  #%d pc %d\n" x y freg_zero n (!pc)
     else
@@ -78,9 +78,8 @@ and g' oc = function (* ��̿��Υ�����֥����� (caml2h
   | NonTail(x), Set(i), n -> incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, %d  #%d pc %d\n" x reg_zero i n (!pc)
   | NonTail(x), SetL(Id.L(y)), n -> if M.mem y (!pc_env) then
                                       (let y_pc = find_pc_env y in
-                                      incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, %d  #%d %s pc %d\n" reg_cons reg_zero y_pc n y (!pc);
-                                      (*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" x reg_cons n (!pc)*)
-                                      print_mv oc x reg_cons n)
+                                      incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, %d  #%d %s pc %d\n" x reg_zero y_pc n y (!pc);
+                                      (*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" x reg_cons n (!pc)*))
                                     else
                                       ((*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" x y n (!pc)*)
                                       print_mv oc x y n)
@@ -170,11 +169,20 @@ and g' oc = function (* ��̿��Υ�����֥����� (caml2h
       assert (List.mem x allfregs);
       incr_pc ();Printf.fprintf oc "\tflw\t%s, %d(%s)  #%d pc %d\n" x (offset y) reg_sp n (!pc)
   (* �������ä���׻���̤����쥸�����˥��åȤ��ƥ꥿���� (caml2html: emit_tailret) *)
+  | Tail, (SetL(Id.L(y)) as exp), n ->
+    if is_xreg y then
+      (g' oc (NonTail(regs.(0)), exp, n);
+      incr_pc ();Printf.fprintf oc "\tret #pc %d\n" (!pc);
+      incr_pc ();Printf.fprintf oc "\tnop #pc %d\n" (!pc))
+    else
+      (g' oc (NonTail(fregs.(0)), exp, n);
+      incr_pc ();Printf.fprintf oc "\tret #pc %d\n" (!pc);
+      incr_pc ();Printf.fprintf oc "\tnop #pc %d\n" (!pc))
   | Tail, (Nop | Out _ | Sethp _ | St _ | StDF _ | Comment _ | Save _ as exp), n ->
       g' oc (NonTail(Id.gentmp Type.Unit), exp, n);
       incr_pc ();Printf.fprintf oc "\tret #pc %d\n" (!pc);
       incr_pc ();Printf.fprintf oc "\tnop #pc %d\n" (!pc)
-  | Tail, (FtoI _ | Ini | Gethp | Set _ | SetL _ | Mov _ | Neg _ | Add _ | Sub _ | Xor _ | Or _ | And _ | SLL _ | SRL _ | Ld _ as exp), n ->
+  | Tail, (FtoI _ | Ini | Gethp | Set _ | Mov _ | Neg _ | Add _ | Sub _ | Xor _ | Or _ | And _ | SLL _ | SRL _ | Ld _ as exp), n ->
       g' oc (NonTail(regs.(0)), exp, n);
       incr_pc ();Printf.fprintf oc "\tret #pc %d\n" (!pc);
       incr_pc ();Printf.fprintf oc "\tnop #pc %d\n" (!pc)
@@ -203,11 +211,13 @@ and g' oc = function (* ��̿��Υ�����֥����� (caml2h
       g'_tail_if oc e1 e2 "bge"
   | Tail, IfFEq(x, y, e1, e2), n ->
       incr_pc ();Printf.fprintf oc "\tfeq\t%s, %s, %s  #%d pc %d\n" freg_cons x y n (!pc);
-      incr_pc ();Printf.fprintf oc "\tbge\t%s, %s, 12  #%d pc %d\n" freg_zero freg_cons n (!pc);
+      incr_pc ();Printf.fprintf oc "\tftoi\t%s, %s  #%d pc %d\n" reg_cons freg_cons n (!pc);
+      incr_pc ();Printf.fprintf oc "\tblt\t%s, %s, 12  #%d pc %d\n" reg_zero reg_cons n (!pc);
       g'_tail_if oc e1 e2 "fbe"
   | Tail, IfFLE(x, y, e1, e2), n ->
       incr_pc ();Printf.fprintf oc "\tfle\t%s, %s, %s  #%d pc %d\n" freg_cons x y n (!pc);
-      incr_pc ();Printf.fprintf oc "\tbge\t%s, %s, 12  #%d pc %d\n" freg_zero freg_cons n (!pc);
+      incr_pc ();Printf.fprintf oc "\tftoi\t%s, %s  #%d pc %d\n" reg_cons freg_cons n (!pc);
+      incr_pc ();Printf.fprintf oc "\tblt\t%s, %s, 12  #%d pc %d\n" reg_zero reg_cons n (!pc);
       g'_tail_if oc e1 e2 "fble"
   | NonTail(z), IfEq(x, y', e1, e2), n ->
     let y = pp_id_or_imm' oc y' in
@@ -223,11 +233,13 @@ and g' oc = function (* ��̿��Υ�����֥����� (caml2h
       g'_non_tail_if oc (NonTail(z)) e1 e2 "bge"
   | NonTail(z), IfFEq(x, y, e1, e2), n ->
       incr_pc ();Printf.fprintf oc "\tfeq\t%s, %s, %s  #%d pc %d\n" freg_cons x y n (!pc);
-      incr_pc ();Printf.fprintf oc "\tbge\t%s, %s, 12  #%d pc %d\n" freg_zero freg_cons n (!pc);
+      incr_pc ();Printf.fprintf oc "\tftoi\t%s, %s  #%d pc %d\n" reg_cons freg_cons n (!pc);
+      incr_pc ();Printf.fprintf oc "\tblt\t%s, %s, 12  #%d pc %d\n" reg_zero reg_cons n (!pc);
       g'_non_tail_if oc (NonTail(z)) e1 e2 "fbe"
   | NonTail(z), IfFLE(x, y, e1, e2), n ->
       incr_pc ();Printf.fprintf oc "\tfle\t%s, %s, %s  #%d pc %d\n" freg_cons x y n (!pc);
-      incr_pc ();Printf.fprintf oc "\tbge\t%s, %s, 12  #%d pc %d\n" freg_zero freg_cons n (!pc);
+      incr_pc ();Printf.fprintf oc "\tftoi\t%s, %s  #%d pc %d\n" reg_cons freg_cons n (!pc);
+      incr_pc ();Printf.fprintf oc "\tblt\t%s, %s, 12  #%d pc %d\n" reg_zero reg_cons n (!pc);
       g'_non_tail_if oc (NonTail(z)) e1 e2 "fble"
   (* �ؿ��ƤӽФ��β���̿��μ��� (caml2html: emit_call) *)
   | Tail, CallCls(x, ys, zs), n -> (* �����ƤӽФ� (caml2html: emit_tailcall) *)
@@ -347,8 +359,8 @@ let f oc (Prog(data, fundefs, e)) =
   Printf.fprintf oc ".global\tmin_caml_start\n";
   Printf.fprintf oc "min_caml_start:\n";
   (*Printf.fprintf oc "\tsave\t%%sp, -112, %%sp\n";  from gcc; why 112? *)
-  incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 1000000\n" reg_sp reg_zero;
-  incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 1002000\n" reg_hp reg_zero;
+  incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 10000000\n" reg_sp reg_zero;
+  incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 10002000\n" reg_hp reg_zero;
   incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 8192\n" reg_in reg_zero;
   incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 65536\n" reg_out reg_zero;
   stackset := S.empty;

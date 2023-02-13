@@ -464,7 +464,7 @@ LET REC fiszero x
 																														INT 3
 																														FLOAT 4.560000
 																													APP VAR print_int
-																														APP VAR truncate
+																														FTOI
 																															FMUL
 																																FLOAT 1000000.000000
 																																APP VAR inprod

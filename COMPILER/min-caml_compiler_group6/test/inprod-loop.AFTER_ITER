@@ -229,5 +229,5 @@ LET REC mul_abs.167 a.168 b.169 i.170 acc.171
 																		LET Td17.213
 																			FMUL Td13.214 Td16.215
 																			LET Ti18.212
-																				EXTFUNAPP truncate Td17.213 
+																				FTOI Td17.213 
 																				APP print_int.185 Ti18.212 
