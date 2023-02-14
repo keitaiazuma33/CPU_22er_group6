@@ -52,7 +52,7 @@ module ftoi
    
    assign adjusted = (shifted[0:0] == 1'b0) ? shifted[32:1] : shifted[32:1] + 32'b1;
    
-   assign stage1_y = (s == 1'b0) ? adjusted : -adjusted;
+   assign stage1_y = (e == 8'b0) ? 32'b0 : ((s == 1'b0) ? adjusted : -adjusted);
    
    assign y = stage12_y;
    assign out_valid = stage12_valid;

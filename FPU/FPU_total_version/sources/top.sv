@@ -24,7 +24,7 @@ module top
 (
     input  bit           sys_clk,
     input  bit           rstn,
-    input  logic [7:0]   opcode,
+    input  logic [9:0]   opcode,
     input  logic [31:0]  x1,
     input  logic [31:0]  x2,
     output logic [31:0]  y,
@@ -44,6 +44,8 @@ module top
     logic [31:0]  ftoi_y;
     logic [31:0]  itof_y;
     logic [31:0]  fabs_y;
+    logic [31:0]  feq_y;
+    logic [31:0]  fle_y;
     logic [0:0]   fadd_valid;
     logic [0:0]   fsub_valid;
     logic [0:0]   fmul_valid;
@@ -52,6 +54,8 @@ module top
     logic [0:0]   ftoi_valid;
     logic [0:0]   itof_valid;
     logic [0:0]   fabs_valid;
+    logic [0:0]   feq_valid;
+    logic [0:0]   fle_valid;
     
     logic [0:0]   fmul_ovf;
     logic [0:0]   fmul_unf;
@@ -151,13 +155,35 @@ module top
         .out_valid(fabs_valid)
     );
     
+    feq feq_instance // feqモジュールのインスタンスを作成
+    (
+        .sys_clk(sys_clk),
+        .rstn(rstn),
+        .stage1_valid(opcode[8:8]),
+        .x1(x1),
+        .x2(x2),
+        .y(feq_y),
+        .out_valid(feq_valid)
+    );
+    
+    fle fle_instance // feqモジュールのインスタンスを作成
+    (
+        .sys_clk(sys_clk),
+        .rstn(rstn),
+        .stage1_valid(opcode[9:9]),
+        .x1(x1),
+        .x2(x2),
+        .y(fle_y),
+        .out_valid(fle_valid)
+    );
+    
     logic [3:0] state;
-    typedef enum {idle, fadd, fsub, fmul, fdiv, fsqrt, ftoi, itof, fabs} FPU_state_type;   //オートマトンの状態：左から順に0,1,2,3
+    typedef enum {idle, fadd, fsub, fmul, fdiv, fsqrt, ftoi, itof, fabs, feq, fle} FPU_state_type;   //オートマトンの状態：左から順に0,1,2,3
     // 有限状態の現在の状態と次の状態を保持する
     FPU_state_type  current_state, next_state;
     assign state = current_state;
     
-    always_comb begin
+    always_ff@ (posedge sys_clk) begin
         case(current_state)
             idle : begin
                 if (opcode[0:0])
@@ -191,6 +217,14 @@ module top
                 if (opcode[7:7])
                 begin
                     next_state = fabs;
+                end
+                if (opcode[8:8])
+                begin
+                    next_state = feq;
+                end
+                if (opcode[9:9])
+                begin
+                    next_state = fle;
                 end
             end
             fadd : begin
@@ -241,18 +275,32 @@ module top
                     next_state = idle;
                 end
             end
+            feq : begin
+                if (feq_valid)
+                begin
+                    next_state = idle;
+                end
+            end
+            fle : begin
+                if (fle_valid)
+                begin
+                    next_state = idle;
+                end
+            end
         endcase
     end
     
-    assign {y, out_valid, ovf, unf} = (state == fadd)   ? {fadd_y, fadd_valid, 1'b0, 1'b0}:
-                                      (state == fsub)   ? {fsub_y, fsub_valid, 1'b0, 1'b0}:
+    assign {y, out_valid, ovf, unf} = (state == fadd)   ? {fadd_y, fadd_valid, 1'b0, 1'b0}        :
+                                      (state == fsub)   ? {fsub_y, fsub_valid, 1'b0, 1'b0}        :
                                       (state == fmul)   ? {fmul_y, fmul_valid, fmul_ovf, fmul_unf}:
                                       (state == fdiv)   ? {fdiv_y, fdiv_valid, fdiv_ovf, fdiv_unf}:
-                                      (state == fsqrt)  ? {fsqrt_y, fsqrt_valid, 1'b0, 1'b0}:
-                                      (state == ftoi)  ? {ftoi_y, ftoi_valid, 1'b0, 1'b0}:
-                                      (state == itof)  ? {itof_y, itof_valid, 1'b0, 1'b0}:
-                                      (state == fabs)  ? {fabs_y, fabs_valid, 1'b0, 1'b0}:
-                                                         {32'b0 , 1'b0, 1'b0, 1'b0};
+                                      (state == fsqrt)  ? {fsqrt_y, fsqrt_valid, 1'b0, 1'b0}      :
+                                      (state == ftoi)  ? {ftoi_y, ftoi_valid, 1'b0, 1'b0}         :
+                                      (state == itof)  ? {itof_y, itof_valid, 1'b0, 1'b0}         :
+                                      (state == fabs)  ? {fabs_y, fabs_valid, 1'b0, 1'b0}         :
+                                      (state == feq)   ? {feq_y, feq_valid, 1'b0, 1'b0}           :
+                                      (state == fle)   ? {fle_y, fle_valid, 1'b0, 1'b0}           :
+                                                         {32'b0 , 1'b0, 1'b0, 1'b0}               ;
     
     always_ff @(posedge(sys_clk))
     begin
