@@ -23,24 +23,24 @@
 
 // data structures for cache tag & data
 parameter int TAGMSB    = 26; //tag msb
-parameter int TAGLSB    = 15; //tag lsb
+parameter int TAGLSB    = 16; //tag lsb
 
-parameter int INDEXMSB  = 14; //index msb
+parameter int INDEXMSB  = 15; //index msb
 parameter int INDEXLSB  = 3 ; //index lsb
 
 parameter int OFFSETMSB =  2; //offset msb
 parameter int OFFSETLSB =  0; //offset lsb
 
-parameter        PMT_depth    = 12;       // PMT depth
+parameter        PMT_depth    = INDEXMSB - INDEXLSB + 1;       // PMT depth
 parameter        PMT_width    = 18 ;      // PMT width
-parameter        CACHE_depth  = 12;       // CACHE depth
+parameter        CACHE_depth  = INDEXMSB - INDEXLSB + 1;       // CACHE depth
 parameter        CACHE_width  = 128 ;     // CACHE depth
 
 //data structure for cache tag
 typedef struct packed {
-    bit [3:0]           accessed;  //accessed bit
-    bit [0:0]           valid;     //valid bit
-    bit [0:0]           dirty;     //dirty bit
+    bit [17-(TAGMSB-TAGLSB+1)-1-1:0]           accessed;  //accessed bit
+    bit [0:0]                                  valid;     //valid bit
+    bit [0:0]                                  dirty;     //dirty bit
     bit [TAGMSB:TAGLSB] tag; //tag bits
 }cache_tag_type;
 
