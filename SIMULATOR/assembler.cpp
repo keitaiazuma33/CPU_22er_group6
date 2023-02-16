@@ -51,7 +51,7 @@ struct Op {
             _type = R;
         // }else if(op == "mul" || op == "div"){
         //     _type = R;
-        }else if(op == "flw" || op == "fsw" || op == "fmadd" || op == "fmsub" || op == "fnmadd" || op == "fnmsub" || 
+        }else if(op == "itof" || op == "ftoi" ||op == "flw" || op == "fsw" || op == "fmadd" || op == "fmsub" || op == "fnmadd" || op == "fnmsub" || 
         op == "fadd" || op == "fsub" || op == "fmul" || op == "fdiv" || op == "fsqrt" 
         || op == "fsgnj" || op == "fsgnjn" || op == "fabs"||op == "fsgnjx" || op == "fmin" || op == "fmax"
         || op == "fcvt" || op == "fcvt.s.wu" || op == "fcvt.w.s" || op == "fcvt.wu.s"
@@ -123,6 +123,7 @@ string bury_zero(string imm, int dig_num){
     } 
     return s0;
 }
+
 string convert(string op){ //変数opから01文字列5桁？へ
     // string to 01
     // t0-t7
@@ -251,8 +252,11 @@ unsigned int f_to_bit (float x){
 }
 string to_bit(unsigned int f_imm){
             // imm = to_string(f_imm);
+        
             unsigned int n = f_imm;
+            
             string imm;
+            if(n == 0) imm = "0";
             // cout << "n" << n << endl;
             // else n = c_0 - '0';
             int j = 0;
@@ -270,7 +274,7 @@ string to_bit(unsigned int f_imm){
 }
 int main(){
     // ファイルから読み込む   
-    string filename ("float.s");
+    string filename ("minrt.s");
     vector<string> lines;
     string line;
 
@@ -285,11 +289,20 @@ int main(){
     std::map<string, int> label;
     map<int, string> con_line;
     map<string,string> f_data;
+    union data{
+        float f;
+        unsigned int idx;
+        int label;
+    };
+    // vector<data>
+    map<int, int> float_table; //(10000);//10000-6000
+    map<int, int> index_table;
+    int float_addr = 0;
     while(getline(file, line)){
         // ラベルを見つけたらmap配列に格納
         //  map<string, int> score; 
         
-        cout << "PC " << pc << endl;
+        // cout << "PC " << pc << endl;
         if((line.find("l.") != std::string::npos) && (line.find(':') < 100) &&  (line.find('!') != std::string::npos)){
             vector<string> words; //[0];
             words.clear();
@@ -319,12 +332,18 @@ int main(){
                 // これいる？？
                 
             }
-            // words.at(0).erase(words.at(0).find("l."), 2);
-            cout << words.at(0) << " " << words.at(1) << endl;
+            
             f_data[words.at(0)] = words.at(1); //valueがfloatの値（string型）
+
             // fdata_num[stof(words.at(1))] = words.at(0);
-            // int num = stoi(words.at(0));
-            // float_table.at(num) = stof(words.at(1)); 
+            words.at(0).erase(words.at(0).find("l."), 2);
+            cout << words.at(0) << " " << words.at(1) << endl;
+            int num = stoi(words.at(0));
+            // float_table.at(num).f = stof(words.at(1)); 
+            float_table[num] = float_addr;
+            index_table[float_addr] = num;
+            float_addr += 4;
+            // imm = num;
         }else if(line.find(':') < 100){ 
             line.erase(line.find(':')); //?
             label[line] = pc; 
@@ -356,7 +375,7 @@ int main(){
         // ofs <<"testmessage\n" << endl;
         line = con_line[pc];
         line += '\n';
-        ofs << "pc " << pc << endl;
+        // ofs << "pc " << pc << endl;
         vector<string> words; // = {""}; //[0];
         // words.push_back("");
         // cout << words[2] << endl;
@@ -417,18 +436,21 @@ int main(){
         for(int i = 0; i < words.size(); i++) {is_float[i] = false;}
         unsigned int f_imm = 0;
         bool sign_float = false;
+        unsigned int f_index;
         for(int i = 1; i < words.size(); i++){
             int label_find = label.count(words[i]); //" "
             int data_find = f_data.count(words[i]);
             // cout << "label found" << label_find << endl;
+            
             if(data_find > 0){
                 is_float[i] = true;
                 sign_float = true;
-                words[i] = f_data[words[i]]; //floatのstringが入る
-                f_imm = f_to_bit(stof(words[i]));
-                words[i] = to_string(f_imm);
-                cout << "fimm " << words[i] << endl;
-                // num = stoi(words[i].erase(words[i].find("l."),2));
+                // words[i] = f_data[words[i]]; //floatのstringが入る
+                // f_imm = f_to_bit(stof(words[i]));
+                // words[i] = to_string(f_imm);
+                // cout << "fimm " << words[i] << endl;
+                f_index = stoi(words[i].erase(words[i].find("l."),2));
+                // f_index = to_bit(f_index);
                 // words[i] = float_table.at(num)
                 // op_pc[pc].imm.f = stof(words[i]);
             }
@@ -475,6 +497,11 @@ int main(){
             opcode = "addi";
              op3 = "0"; //op2; op2 = "0";} //op3 = "zero";}
         }
+        if(opcode == "fmv"){
+            opcode = "flw";
+            // op2 = imm;
+            op3 = "x0";
+        }
         if(opcode == "li") {op3 = op2; op2 = "zero"; opcode = "addi";}
         else if(opcode == "j") {opcode = "jal"; op3 = ""; op2 = op1; op1 = "zero";}//L3?; ' '
         // else if(opcode == "mv"){opcode = "addi"; op3 = "0";}
@@ -502,17 +529,18 @@ int main(){
         // cout << op3[0] << endl;
         // cout << op3 << endl;
         string imm;
+        string shamt;
         // bitset<100> imm(imm_int);
         string rd, rs1, rs2; 
         
-        if(is_float[1]) imm = to_bit(f_imm);
+        if(is_float[1]) rd = to_bit(float_table.at(f_index));
         else if(((op1[0] >= '0') && (op1[0] <= '9')) || (op1[0] == '-')) imm = convert(op1);
         else rd = convert(op1); //zeroなどから01列に
-        if(is_float[2]) imm = to_bit(f_imm);
+        if(is_float[2]) imm = to_bit(float_table.at(f_index)); //f_imm);
         else if(((op2[0] >= '0') && (op2[0] <= '9')) || (op2[0] == '-')) imm = convert(op2);
         else rs1 = convert(op2);
-        if(is_float[3]) imm = to_bit(f_imm);
-        if(((op3[0] >= '0') && (op3[0] <= '9')) || (op3[0] == '-')) imm = convert(op3); // cout << "imm?" << endl;}
+        if(is_float[3]) imm = to_bit(float_table.at(f_index));
+        else if(((op3[0] >= '0') && (op3[0] <= '9')) || (op3[0] == '-')) imm = convert(op3); // cout << "imm?" << endl;}
         else rs2 = convert(op3); //ここまでも関数化？
         // cout << "imm" << imm << endl;
         // cout << "$" << rd << rs1 << rs2 << endl;
@@ -576,6 +604,8 @@ int main(){
                 // addi rd,rs1,imm
                 // if(imm == "") imm = rs2; //op[3];
                 imm = bury_zero(imm, 12);
+                
+                shamt = bury_zero(imm, 5);
                 // cout << imm << endl;
                 if(opcode == "mv"){
                     // ofs << "imm" << imm << endl;
@@ -584,6 +614,7 @@ int main(){
                     pc += 4;    
                 }else if(opcode == "addi"){
                     // ofs << "imm" << imm << endl;
+                    // nop: opcode = "addi"; op1 = "x0"; op2 = "x0"; op3 = "0";
                     ofs << imm.substr(0, 12)+rs1+"000"+rd+"0010011"<<endl;
                     pc += 4;    
                 }else if(opcode == "xori"){
@@ -597,13 +628,13 @@ int main(){
                     pc += 4;
                 }else if(opcode == "slli"){
                     // shamt = rs2
-                    ofs << "000000X"+rs2+rs1+"001"+rd+"0010011"<<endl;
+                    ofs << "0000000"+shamt+rs1+"001"+rd+"0010011"<<endl;
                     pc += 4;
-                }else if(opcode == "srli"){
-                    ofs << "000000X"+rs2+rs1+"101"+rd+"0010011"<<endl;
+                }else if(opcode == "srli"){ //変更
+                    ofs << "0000000"+shamt+rs1+"101"+rd+"0010011"<<endl;
                     pc += 4;
                 }else if(opcode == "srai"){
-                    ofs << "0100000X"+rs2+rs1+"101"+rd+"0010011"<<endl;
+                    ofs << "01000000"+shamt+rs1+"101"+rd+"0010011"<<endl;
                     pc += 4;
                 }else if(opcode == "slti"){
                     ofs << imm.substr(0,12)+rs1+"010"+rd+"0010011"<<endl;
@@ -684,7 +715,7 @@ int main(){
                 }else if(opcode == "blt"){
                     ofs << imm[12]+sub_reverse(imm,5,6)+rs2+rs1+"100"+sub_reverse(imm,1,4)+imm[11]+"1100011"<<endl;
                 }else if(opcode == "bge"){
-                    ofs << imm[12]+sub_reverse(imm,5,6)<<"_"<<rs2<<"_"<<rs1<<"_"<<"101"<<"_"<<sub_reverse(imm,1,4)+imm[11]<<"_"<<"1100011"<<endl;
+                    // ofs << imm[12]+sub_reverse(imm,5,6)<<"_"<<rs2<<"_"<<rs1<<"_"<<"101"<<"_"<<sub_reverse(imm,1,4)+imm[11]<<"_"<<"1100011"<<endl;
                     ofs << imm[12]+sub_reverse(imm,5,6)+rs2+rs1+"101"+sub_reverse(imm,1,4)+imm[11]+"1100011"<<endl;
                 }else if(opcode == "bltu"){
                     ofs << imm[12]+sub_reverse(imm,5,6)+rs2+rs1+"110"+sub_reverse(imm,1,4)+imm[11]+"1100011"<<endl;
@@ -737,16 +768,20 @@ int main(){
                 }else if(opcode == "fmax"){
                     ofs << "0010100"+rs2+rs1+"001"+rd+"1010011"<< endl;
                 }else if(opcode == "feq"){
-                    ofs << "1010001"+rs2+rs1+"010"+rd+"1010011" << endl;
+                    // ofs << "1010001"+rs2+rs1+"010"+rd+"1010011" << endl;
+                    ofs << "0100100"+rs2+rs1+"000"+rd+"1010011" << endl;
                 }else if(opcode == "flt"){
                     ofs << "1010001"+rs2+rs1+"001"+rd+"1010011" << endl;
                 }else if(opcode == "fle"){
-                    ofs << "1010001"+rs2+rs1+"000"+rd+"1010011" << endl;
+                    // ofs << "1010001"+rs2+rs1+"000"+rd+"1010011" << endl;
+                    ofs << "0100000"+rs2+rs1+"000"+rd+"1010011" << endl;
                 }else if(opcode == "flw"){
+                    rs1 = rs2;
                     imm = bury_zero(imm, 12);
                     ofs << imm.substr(0,12)+rs1+"010"+rd+"0000111" << endl;
                 }else if(opcode == "fsw"){
                     imm = bury_zero(imm, 12);
+                    rs1 = rs2; rs2 = rd;
                     ofs << imm.substr(5,7)+rs2+rs1+"010"+imm.substr(0,5)+"0100011" << endl;
                 }
                 pc += 4;
@@ -758,8 +793,111 @@ int main(){
         }
         // line_num++;
     }
+    
+    for(int i = 0; i < 5; i++) ofs << "00000000000000000000000000010011" << endl; //nopを0101…で
+    ofs << "11111111111111111111111100000000"<< endl; //"32'hffffff00
+    ofs << "11111111111111111111111111111111" << endl; //"32'hffffffff" << endl;
+    // ofs << "128.000000" << endl;//32bitの浮動小数
+    // for(int i = 0; i < max; i) //map<int, int> index_table;
+    int idx = 0;
+    // while(index_table[idx]){
+    //     int index = index_table[idx]; //l.128の128など
+    //     // ofs << to_bit(index) << endl;
+    //     cout << index << endl; //ok
+    //     if(f_data.count(itos(index))){
+    //         ofs << to_bit(f_data[])
+    //     }
+
+    //     idx += 4;
+    // }
+    float floats[43] = 
+    {
+        128.000000,
+        0.900000,
+        150.000000,
+        -150.000000,
+        0.100000,
+        -2.000000,
+        0.003906,
+        20.000000,
+        0.050000,
+        0.250000,
+        10.000000,
+        0.300000,
+        255.000000,
+        0.150000,
+        3.141593,
+        30.000000,
+        15.000000,
+        0.000100,
+        100000000.000000,
+        1000000000.000000,
+        -0.100000,
+        0.010000,
+        -0.200000,
+        2.000000,
+        -200.000000,
+        200.000000,
+        0.017453,
+        -1.000000,
+        0.090909,
+        0.111111,
+        0.142857,
+        0.200000,
+        0.333333,
+        0.001389,
+        0.041667,
+        1.000000,
+        3.141593,
+        6.283185,
+        0.000198, //?
+        0.008333,
+        0.166667,
+        0.500000,
+        0.000000
+    };
+    idx = 0;
+    string fimm;
+    while(1){ //floats[idx]
+        if(!floats[idx]){
+            // ofs << endl;
+            fimm = "";
+            for(int i = 0; i < 32; i++){
+                fimm += '0';
+            }
+            ofs << fimm << endl;
+            break;
+        }
+        // cout << to_bit(f_to_bit(floats[idx])) << endl;
+        fimm = to_bit(f_to_bit(floats[idx]));
+        // ofs << fimm << endl;
+        if(fimm.size() < 32){
+            for(int i = 0; i < 32-fimm.size()+1; i++){
+                fimm = '0' + fimm;
+            }
+        }
+        ofs << fimm << endl;
+        // ofs << bury_fzero(fimm, 32) << endl;
+        // ss << setw(32) << setfill('0') << stoll(fimm)
+        idx++;
+    }
+    // ofs << ""
+    // FILE *file;                                     // ファイルポインタ（出力用）
+    // file = fopen("c:¥¥test¥¥sample.txt", "w"); 
+    // FILE *fp_calculate;
+    // fp_calculate = fopen("float_table.txt", "w");
+
+    // fprintf(fp_calculate, "FLOAT TABLE\n");
+    // for (int i = 0; i < 41; i++)
+    // {
+    //     fprintf(fp_calculate, "%032d", f_to_bit(floats[i]));
+
+    //     // fprintf(fp_calculate, "%s", to_bit(f_to_bit(floats[i])));
+    //     puts("\n");
+    // }
+    // fprintf(fp_calculate, "END \n");
     // fclose(file);
-    cout << "fileclose" << endl;
+    // cout << "fileclose" << endl;
     // file2.close();
     return 0;
     
