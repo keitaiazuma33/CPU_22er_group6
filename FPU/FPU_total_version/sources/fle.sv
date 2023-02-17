@@ -48,14 +48,12 @@ module fle
    logic [0:0] compare_e2_e1;
    logic [0:0] equal_e;
    assign compare_e1_e2 = {1'b0, e1} >= {1'b0, e2};
-   assign compare_e2_e1 = ~compare_e1_e2 && ~equal_e;
+   assign compare_e2_e1 = {1'b0, e2} >= {1'b0, e1};
    assign equal_e = (e1 == e2);
    logic [0:0] compare_m1_m2;
    logic [0:0] compare_m2_m1;
-   logic [0:0] equal_m;
    assign compare_m1_m2 = {1'b0, m1} >= {1'b0, m2};
-   assign compare_m2_m1 = ~compare_m1_m2 && ~equal_m;
-   assign equal_m = (m1 == m2);
+   assign compare_m2_m1 = {1'b0, m2} >= {1'b0, m1};
    
    logic [0:0] y_check;
    assign y_check = ({s1, s2} == 2'b00) ? ((equal_e) ? compare_m2_m1 : compare_e2_e1) :
