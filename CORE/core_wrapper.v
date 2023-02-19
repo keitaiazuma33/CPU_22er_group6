@@ -5,7 +5,31 @@ module core_wrapper
     input wire uart_txd_in,
     output wire uart_rxd_out,
     output wire [15:0] led
+    /*dram*************************************************,
+    output wire [12:0] ddr2_addr,
+    output wire [2:0] ddr2_ba,
+    output wire ddr2_cas_n,
+    output wire [0:0] ddr2_ck_n,
+    output wire [0:0] ddr2_ck_p,
+    output wire [0:0] ddr2_cke,
+    output wire ddr2_ras_n,
+    output wire ddr2_we_n,
+    inout  wire [15:0] ddr2_dq,
+    inout  wire [1:0] ddr2_dqs_n,
+    inout  wire [1:0] ddr2_dqs_p,
+    output wire [0:0] ddr2_cs_n,
+    output wire [1:0] ddr2_dm,
+    output wire [0:0] ddr2_odt
+    /******************************************************/
   );
+
+  wire [26:0] addr_dram;
+  wire [31:0] din_dram;
+  wire rw_dram;
+  wire valid_dram;
+  wire led_memory;
+  wire ready_dram;
+  wire [31:0] dout_dram;
 
   //core
   wire txd;
@@ -17,7 +41,7 @@ module core_wrapper
   //top(memory)
   wire sys_clk;
   wire mem_clk;
-
+  
   //clk_wizard
   wire clk_in1;
   wire clk_out1;
@@ -92,9 +116,48 @@ module core_wrapper
     (
       .rxd(rxd),
       .clk(clk),
+      .mem_clk(mem_clk),
       .rstn(rstn),
+      .dout_dram(dout_dram),
+      .ready_dram(ready_dram),
       .txd(txd),
-      .outputs(outputs)
+      .outputs(outputs),
+      .addr_dram(addr_dram),
+      .din_dram(din_dram),
+      .rw_dram(rw_dram),
+      .valid_dram(valid_dram)
     );
 
+/*************************************************************
+  top _top 
+    (
+      .ddr2_addr(ddr2_addr),
+      .ddr2_ba(ddr2_ba),
+      .ddr2_cas_n(ddr2_cas_n),
+      .ddr2_ck_n(ddr2_ck_n),
+      .ddr2_ck_p(ddr2_ck_p),
+      .ddr2_cke(ddr2_cke),
+      .ddr2_ras_n(ddr2_ras_n),
+      .ddr2_we_n(ddr2_we_n),
+      .ddr2_dq(ddr2_dq),
+      .ddr2_dqs_n(ddr2_dqs_n),
+      .ddr2_dqs_p(ddr2_dqs_p),
+      .ddr2_cs_n(ddr2_cs_n),
+      .ddr2_dm(ddr2_dm),
+      .ddr2_odt(ddr2_odt),
+      .sys_clk(sys_clk),
+      .mig_clk(mem_clk),
+      .rstn(rstn),
+      .cpu_req_addr(addr_dram),
+      .cpu_req_data(din_dram),
+      .cpu_req_rw(rw_dram),
+      .cpu_req_valid(valid_dram),
+      .cpu_res_data(dout_dram),
+      .cpu_res_ready(ready_dram)
+    );
+    /******************************************************/
+
 endmodule
+
+
+
