@@ -47,24 +47,6 @@ module io #(CLK_PER_HALF_BIT = 100)
   reg [31:0] program_bytes;  //first four words of input
   reg [31:0] input_program;  //buffer for input program
 
-  //ASCII
-  wire [7:0] large_p;       assign large_p = 8'h50;
-  wire [7:0] number_0;      assign number_0 = 8'h30;
-  wire [7:0] space;         assign space = 8'h20;
-  wire [7:0] newline;       assign newline = 8'h0a;
-     
-  reg [7:0] color;
-  reg [7:0] color_100;
-  reg [7:0] color_10;
-  reg [7:0] color_1;
-  wire [7:0]  pixel_100;      
-  wire [7:0]  pixel_10;       
-  wire [7:0]  pixel_1;        
-  wire [31:0] pixels;        //how many pixels                                         
-  assign pixel_100 = 8'd2;                                                 
-  assign pixel_10  = 8'd5;                                                 
-  assign pixel_1   = 8'd6;                                                 
-  assign pixels    = 32'd65536; 
   
   reg [31:0] output_io_reg;
   assign output_io = output_io_reg;
@@ -75,7 +57,7 @@ module io #(CLK_PER_HALF_BIT = 100)
   reg [31:0] write_data_io_reg;
   reg memwrite_io_reg;
   reg count_1;
-  reg [1:0] what_color;
+ 
 
   assign program_words = {2'b00,program_bytes[31:2]};                      
   assign addr_in_instr = {addr_in_instr_reg[29:0],2'b00};                    
@@ -105,17 +87,12 @@ module io #(CLK_PER_HALF_BIT = 100)
       core_start_reg <= 1'b0;
       output_io_reg <= 32'b0;
       memread_io_reg <= 1'b0;
-      color <= 8'b0; 
-      color_100 <= 8'b0; 
-      color_10 <= 8'b0; 
-      color_1 <= 8'b0;
       addr_in_instr_reg <= 32'b0;
       addr_io_reg <= 32'b0;
       write_data_io_reg <= 32'b0;
       memwrite_io_reg <= 1'b0;
       count_program_words <= 32'b0;
       count_1 <= 1'b0;
-      what_color <= 2'b0;
     end else begin
       if (status == 16'd0) begin  //send "99"                    
         output_io_reg <= 32'hffff8000;                                                             
@@ -169,7 +146,7 @@ module io #(CLK_PER_HALF_BIT = 100)
         end else begin
           status <= status - 16'd96;
         end
-      end else if (status == 16'd2000) begin sdata <= 8'haa; status <= status + 16'd1;  addr_io_reg <= 32'd2048;                         //  where to put sld data (words)
+      end else if (status == 16'd2000) begin sdata <= 8'haa; status <= status + 16'd1;  addr_io_reg <= 32'd128;                         //  where to put sld data (words)
       end else if (status == 16'd2016) begin if (rx_ready) begin write_data_io_reg[7:0]   <= rdata; status <= status + 16'd4; end
       end else if (status == 16'd2032) begin if (rx_ready) begin write_data_io_reg[15:8]  <= rdata; status <= status + 16'd4; end
       end else if (status == 16'd2048) begin if (rx_ready) begin write_data_io_reg[23:16] <= rdata; status <= status + 16'd4; end
@@ -202,82 +179,20 @@ module io #(CLK_PER_HALF_BIT = 100)
         if (core_end) begin
           status <= status + 16'd16;
         end 
-        addr_io_reg <= 32'd65536;              //where the output is (words)
-      end else if (status == 16'd4016) begin sdata <= large_p;              status <= status + 16'd1; 
-      end else if (status == 16'd4032) begin sdata <= number_0 + 8'd3;      status <= status + 16'd1;
-      end else if (status == 16'd4048) begin sdata <= newline;              status <= status + 16'd1;
-      end else if (status == 16'd4064) begin sdata <= number_0 + pixel_100; status <= status + 16'd1; 
-      end else if (status == 16'd4080) begin sdata <= number_0 + pixel_10;  status <= status + 16'd1;
-      end else if (status == 16'd4096) begin sdata <= number_0 + pixel_1;   status <= status + 16'd1;
-      end else if (status == 16'd4112) begin sdata <= space;                status <= status + 16'd1;
-      end else if (status == 16'd4128) begin sdata <= number_0 + pixel_100; status <= status + 16'd1; 
-      end else if (status == 16'd4144) begin sdata <= number_0 + pixel_10;  status <= status + 16'd1;
-      end else if (status == 16'd4160) begin sdata <= number_0 + pixel_1;   status <= status + 16'd1;
-      end else if (status == 16'd4176) begin sdata <= space;                status <= status + 16'd1;
-      end else if (status == 16'd4192) begin sdata <= number_0 + 8'd2;      status <= status + 16'd1; 
-      end else if (status == 16'd4208) begin sdata <= number_0 + 8'd5;      status <= status + 16'd1;
-      end else if (status == 16'd4224) begin sdata <= number_0 + 8'd5;      status <= status + 16'd1;
-      end else if (status == 16'd4240) begin sdata <= newline;              status <= status + 16'd1; 
-      end else if (status == 16'd4256) begin memread_io_reg <= 1'b1; status <= status + 16'd32;
-      //end else if (status == 16'd4272) begin memread_io_reg <= 1'b0; status <= status + 16'd16;  addr_io_reg <= addr_io_reg + 32'd1;
-      end else if (status == 16'd4288) begin
+        addr_io_reg <= 32'd2048;              //where the output is (words)
+      end else if (status == 16'd4016) begin memread_io_reg <= 1'b1; status <= status + 16'd16;
+      end else if (status == 16'd4032) begin
         if (data_ready_io) begin
           memread_io_reg <= 1'b0;
           addr_io_reg <= addr_io_reg + 32'd1;
-          color <= data_from_memory_io[7:0];
-          status <= status + 16'd16;
+          sdata <= data_from_memory_io[7:0];
+          status <= status + 16'd1;
         end 
-      end else if (status == 16'd4304) begin //calculate color data1
-        if (color < 8'd100) begin color_100 <= 8'd0;
-        end else if (color < 8'd200) begin color_100 <= 8'd1; color <= color - 8'd100;
-        end else begin color_100 <= 8'd2; color <= color - 8'd200;
-        end 
-        status <= status + 16'd16; 
-      end else if (status == 16'd4320) begin //calculate color data2
-        if (color < 8'd10) begin color_10 <= 8'd0;
-        end else if (color < 8'd20) begin color_10 <= 8'd1; color <= color - 8'd10;
-        end else if (color < 8'd30) begin color_10 <= 8'd2; color <= color - 8'd20;
-        end else if (color < 8'd40) begin color_10 <= 8'd3; color <= color - 8'd30;
-        end else if (color < 8'd50) begin color_10 <= 8'd4; color <= color - 8'd40;
-        end else if (color < 8'd60) begin color_10 <= 8'd5; color <= color - 8'd50;
-        end else if (color < 8'd70) begin color_10 <= 8'd6; color <= color - 8'd60;
-        end else if (color < 8'd80) begin color_10 <= 8'd7; color <= color - 8'd70;
-        end else if (color < 8'd90) begin color_10 <= 8'd8; color <= color - 8'd80;
-        end else begin color_10 <= 8'd9; color <= color - 8'd90;
-        end
-        status <= status + 16'd16;
-      end else if (status == 16'd4336) begin  //calculate color data3
-        if (color < 8'd1) begin color_1 <= 8'd0;
-        end else if (color < 8'd2) begin color_1 <= 8'd1; 
-        end else if (color < 8'd3) begin color_1 <= 8'd2; 
-        end else if (color < 8'd4) begin color_1 <= 8'd3; 
-        end else if (color < 8'd5) begin color_1 <= 8'd4; 
-        end else if (color < 8'd6) begin color_1 <= 8'd5; 
-        end else if (color < 8'd7) begin color_1 <= 8'd6; 
-        end else if (color < 8'd8) begin color_1 <= 8'd7; 
-        end else if (color < 8'd9) begin color_1 <= 8'd8; 
-        end else begin color_1 <= 8'd9; 
-        end
-        status <= status + 16'd16;
-      end else if (status == 16'd4352) begin sdata <= number_0 + color_100;      status <= status + 16'd1; //send color data
-      end else if (status == 16'd4368) begin sdata <= number_0 + color_10;       status <= status + 16'd1;
-      end else if (status == 16'd4384) begin sdata <= number_0 + color_1;        status <= status + 16'd1;
-      end else if (status == 16'd4400) begin 
-        if (what_color == 2'b00 || what_color == 2'b01) begin
-          what_color <= what_color + 2'd1;
+      end else if (status == 16'd4048) begin 
+        if (addr_io_reg < 32'd65536) begin
+          status <= status - 16'd32;
+        end else begin
           status <= status + 16'd16;
-        end else begin
-          what_color <= 2'd0;
-          status <= status + 16'd48;
-        end
-      end else if (status == 16'd4416) begin sdata <= space;     status <= status + 16'd1;
-      end else if (status == 16'd4432) begin status <= status - 16'd176;
-      end else if (status == 16'd4448) begin sdata <= newline;   status <= status + 16'd1;
-      end else if (status == 16'd4464) begin
-        if (addr_io != 32'd65536 + pixels + pixels + pixels) begin
-          status <= status - 16'd208;
-        end else begin
-          status <= status + 16'd16; 
         end
       end
     end

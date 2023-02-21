@@ -60,7 +60,9 @@ module immediate_generator
     (opcode == 7'b1101111) ?
       ((instruction_id[31]) ?
         {11'h7ff,instruction_id[31],instruction_id[19:12],instruction_id[20],instruction_id[30:21],1'b0} :
-        {11'b0,instruction_id[31],instruction_id[19:12],instruction_id[20],instruction_id[30:21],1'b0}) : 32'b0;
+        {11'b0,instruction_id[31],instruction_id[19:12],instruction_id[20],instruction_id[30:21],1'b0}) : 
+    (opcode == 7'b0110111) ?
+      {instruction_id[31:12],12'b0} : 32'b0;
       
 endmodule
 
