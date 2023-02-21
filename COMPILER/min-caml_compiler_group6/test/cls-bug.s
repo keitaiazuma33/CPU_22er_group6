@@ -1,6 +1,8 @@
 .section	".rodata"
 .align	8
 .section	".text"
+	nop
+	j min_caml_start
 mul_abs.155:  #pc 0
 	addi	%x31, %x0, -1  #pc 0
 	beq	%x8, %x31, 12  #57 pc 4
@@ -200,36 +202,37 @@ g.195:  #pc 684
 	nop #pc 692
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 10000000
-	addi	%x3, %x0, 10002000
-	addi	%x4, %x0, 8192
-	addi	%x5, %x0, 65536
-	addi	%x6, %x3, 0  #209 pc 712
-	addi	%x3, %x3, 4  #209 pc 716
-	addi	%x7, %x0, 672  #209 f.193 pc 720
-	sw	%x7, 0(%x6)  #209 pc 724
-	addi	%x29, %x3, 0  #210 pc 728
-	addi	%x3, %x3, 8  #210 pc 732
-	addi	%x7, %x0, 684  #210 g.195 pc 736
-	sw	%x7, 0(%x29)  #210 pc 740
-	sw	%x6, 4(%x29)  #210 pc 744
-	addi	%x6, %x0, 456  #0 pc 748
-	sw	%x1, 0(%x2)  #211 pc 752
-	lw	%x30, 0(%x29)  #211 pc 756
-	addi	%x2, %x2, 4  #211 pc 760
-	jalr	%x1, %x30, 0  #211 pc 764
-	addi	%x2, %x2, -4  #211 pc 768
-	lw	%x1, 0(%x2)  #211 pc 772
-	addi	%x29, %x6, 0  #211 pc 776
-	addi	%x6, %x0, 789  #0 pc 780
-	sw	%x1, 0(%x2)  #211 pc 784
-	lw	%x30, 0(%x29)  #211 pc 788
-	addi	%x2, %x2, 4  #211 pc 792
-	jalr	%x1, %x30, 0  #211 pc 796
-	addi	%x2, %x2, -4  #211 pc 800
-	lw	%x1, 0(%x2)  #211 pc 804
-	sw	%x1, 0(%x2)  #211 pc 808
-	addi	%x2, %x2, 4  #211 pc 812
-	jal	%x1, print_int.173  #211 pc 816
-	addi	%x2, %x2, -4  #211 pc 820
-	lw	%x1, 0(%x2) #211 pc 824
+	addi	%x31, %x0, 1
+	slli	%x4, %x31, 13
+	slli	%x5, %x31, 16
+	slli	%x2, %x31, 24
+	add	%x3, %x2, %x4
+	addi	%x6, %x3, 0  #209 pc 716
+	addi	%x3, %x3, 4  #209 pc 720
+	addi	%x7, %x0, 672  #209 f.193 pc 724
+	sw	%x7, 0(%x6)  #209 pc 728
+	addi	%x29, %x3, 0  #210 pc 732
+	addi	%x3, %x3, 8  #210 pc 736
+	addi	%x7, %x0, 684  #210 g.195 pc 740
+	sw	%x7, 0(%x29)  #210 pc 744
+	sw	%x6, 4(%x29)  #210 pc 748
+	addi	%x6, %x0, 456  #0 pc 752
+	sw	%x1, 0(%x2)  #211 pc 756
+	lw	%x30, 0(%x29)  #211 pc 760
+	addi	%x2, %x2, 4  #211 pc 764
+	jalr	%x1, %x30, 0  #211 pc 768
+	addi	%x2, %x2, -4  #211 pc 772
+	lw	%x1, 0(%x2)  #211 pc 776
+	addi	%x29, %x6, 0  #211 pc 780
+	addi	%x6, %x0, 789  #0 pc 784
+	sw	%x1, 0(%x2)  #211 pc 788
+	lw	%x30, 0(%x29)  #211 pc 792
+	addi	%x2, %x2, 4  #211 pc 796
+	jalr	%x1, %x30, 0  #211 pc 800
+	addi	%x2, %x2, -4  #211 pc 804
+	lw	%x1, 0(%x2)  #211 pc 808
+	sw	%x1, 0(%x2)  #211 pc 812
+	addi	%x2, %x2, 4  #211 pc 816
+	jal	%x1, print_int.173  #211 pc 820
+	addi	%x2, %x2, -4  #211 pc 824
+	lw	%x1, 0(%x2) #211 pc 828

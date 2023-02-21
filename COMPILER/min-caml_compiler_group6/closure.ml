@@ -1,6 +1,5 @@
 type closure = { entry : Id.l; actual_fv : Id.t list }
-(* Id.t���ѿ���̾���Υǡ�������Id.l�ϥȥåץ�٥�ؿ���̾���Υǡ����� *)
-type t = (* �����������Ѵ���μ� (caml2html: closure_t) *)
+type t = 
   | Unit
   | Int of int
   | Float of float
@@ -57,7 +56,6 @@ let pos_of_type e =
   | ExtArray (_,n) | Ini n | Inf n | Out(_,n) | ItoIA(_,n) | ItoFA(_,n) | Gethp n | Sethp(_,n) -> n
 
 (* t -> list *)
-(* Closure.t�˴ޤޤ�뼫ͳ�ѿ��Υꥹ�Ȥ��֤� *)
 let rec fv = function
   | Unit | Int(_) | Float(_) | ExtArray(_, _) | Ini(_) | Inf(_) | Gethp(_) -> S.empty
   | Neg(x, _) | FNeg(x, _) | Sqrt(x, _) | FAbs(x, _) | FtoI(x, _) | ItoF(x, _) 
@@ -73,12 +71,11 @@ let rec fv = function
   | LetTuple(xts, y, e, _) -> S.add y (S.diff (fv e) (S.of_list (List.map fst xts)))
   | Put(x, y, z, _) -> S.of_list [x; y; z]
 
-(* �ȥåץ�٥�ؿ��ν��� *)
+
 let toplevel : fundef list ref = ref []
 
 (* (Id.t * Type.t) * Id.t list * KNormal.t -> t *)
-(* known�ϡּ�ͳ�ѿ����ʤ��Ȥ狼�äƤ��ơ����̤˸ƤӽФ���״ؿ��ν��� *)
-let rec g env known = function (* �����������Ѵ��롼�������� (caml2html: closure_g) *)
+let rec g env known = function 
   | KNormal.Unit -> Unit
   | KNormal.Int(i) -> Int(i)
   | KNormal.Float(d) -> Float(d)
@@ -110,37 +107,29 @@ let rec g env known = function (* �����������Ѵ��롼�
   | KNormal.IfLE(x, y, e1, e2, n) -> IfLE(x, y, g env known e1, g env known e2, n)
   | KNormal.Let((x, t), e1, e2, n) -> Let((x, t), g env known e1, g (M.add x t env) known e2, n)
   | KNormal.Var(x, n) -> Var(x, n)
-  | KNormal.LetRec({ KNormal.name = (x, t); KNormal.args = yts; KNormal.body = e1 }, e2, n) -> (* �ؿ�����ξ�� (caml2html: closure_letrec) *)
-      (* �ؿ����let rec x y1 ... yn = e1 in e2�ξ��ϡ�
-         x�˼�ͳ�ѿ����ʤ�(closure��𤵤�direct�˸ƤӽФ���)
-         �Ȳ��ꤷ��known���ɲä���e1�򥯥��������Ѵ����Ƥߤ� *)
+  | KNormal.LetRec({ KNormal.name = (x, t); KNormal.args = yts; KNormal.body = e1 }, e2, n) ->
       let toplevel_backup = !toplevel in
       let env' = M.add x t env in
       let known' = S.add x known in
       let e1' = g (M.add_list yts env') known' e1 in
-      (* �����˼�ͳ�ѿ����ʤ��ä������Ѵ����e1'���ǧ���� *)
-      (* ����: e1'��x���Ȥ��ѿ��Ȥ��ƽи��������closure��ɬ��!
-         (thanks to nuevo-namasute and azounoman; test/cls-bug2.ml����) *)
       let zs = S.diff (fv e1') (S.of_list (List.map fst yts)) in
       let known', e1' =
         if S.is_empty zs then known', e1' else
-        (* ���ܤ��ä������(toplevel����)���ᤷ�ơ������������Ѵ�����ľ�� *)
         (Format.eprintf "free variable(s) %s found in function %s from closure.ml@." (Id.pp_list (S.elements zs)) x;
          Format.eprintf "function %s cannot be directly applied in fact from closure.ml@." x;
          toplevel := toplevel_backup;
          let e1' = g (M.add_list yts env') known e1 in
          known, e1') in
-      let zs = S.elements (S.diff (fv e1') (S.add x (S.of_list (List.map fst yts)))) in (* ��ͳ�ѿ��Υꥹ�� *)
-      let zts = List.map (fun z -> (z, M.find z env')) zs in (* �����Ǽ�ͳ�ѿ�z�η����������˰���env��ɬ�� *)
-      (* e1'��x����ͳ�ѿ��Ȥ����о줷�ʤ��ä��ʤ�zts�϶��ꥹ�� *)
-      toplevel := { name = (Id.L(x), t); args = yts; formal_fv = zts; body = e1' } :: !toplevel; (* �ȥåץ�٥�ؿ����ɲ� *)
+      let zs = S.elements (S.diff (fv e1') (S.add x (S.of_list (List.map fst yts)))) in
+      let zts = List.map (fun z -> (z, M.find z env')) zs in 
+      toplevel := { name = (Id.L(x), t); args = yts; formal_fv = zts; body = e1' } :: !toplevel;
       let e2' = g env' known' e2 in
-      if S.mem x (fv e2') then (* x���ѿ��Ȥ���e2'�˽и����뤫 *)
-        MakeCls((x, t), { entry = Id.L(x); actual_fv = zs }, e2', n) (* �и����Ƥ����������ʤ� *)
+      if S.mem x (fv e2') then 
+        MakeCls((x, t), { entry = Id.L(x); actual_fv = zs }, e2', n) 
       else
         (Format.eprintf "eliminating closure(s) %s from closure.ml@." x;
-         e2') (* �и����ʤ����MakeCls���� *)
-  | KNormal.App(x, ys, n) when S.mem x known -> (* �ؿ�Ŭ�Ѥξ�� (caml2html: closure_app) *)
+         e2') 
+  | KNormal.App(x, ys, n) when S.mem x known -> 
       Format.eprintf "directly applying %s from closure.ml@." x;
       AppDir(Id.L(x), ys, n)
   | KNormal.App(f, xs, n) -> AppCls(f, xs, n)

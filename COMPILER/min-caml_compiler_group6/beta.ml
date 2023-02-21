@@ -1,9 +1,9 @@
 open KNormal
 
-let find x env = try M.find x env with Not_found -> x (* �ִ��Τ���δؿ� (caml2html: beta_find) *)
+let find x env = try M.find x env with Not_found -> x 
 
 (* (Id.t * Id.t) * t -> t *)
-let rec g env = function (* �´���롼�������� (caml2html: beta_g) *)
+let rec g env = function 
   | Unit -> Unit
   | Int(i) -> Int(i)
   | Float(d) -> Float(d)
@@ -33,7 +33,7 @@ let rec g env = function (* �´���롼�������� (caml2html
   | Sethp(x, n) -> Sethp(find x env, n)
   | IfEq(x, y, e1, e2, n) -> IfEq(find x env, find y env, g env e1, g env e2, n)
   | IfLE(x, y, e1, e2, n) -> IfLE(find x env, find y env, g env e1, g env e2, n)
-  | Let((x, t), e1, e2, n) -> (* let�Φ´��� (caml2html: beta_let) *)
+  | Let((x, t), e1, e2, n) -> 
       (match g env e1 with
       | Var(y, _) ->
           Format.eprintf "beta-reducing %s = %s from beta.ml@." x y;
@@ -43,7 +43,7 @@ let rec g env = function (* �´���롼�������� (caml2html
           Let((x, t), e1', e2', n))
   | LetRec({ name = xt; args = yts; body = e1 }, e2, n) ->
       LetRec({ name = xt; args = yts; body = g env e1 }, g env e2, n)
-  | Var(x, n) -> Var(find x env, n) (* �ѿ����ִ� (caml2html: beta_var) *)
+  | Var(x, n) -> Var(find x env, n) 
   | Tuple(xs, n) -> Tuple(List.map (fun x -> find x env) xs, n)
   | LetTuple(xts, y, e, n) -> LetTuple(xts, find y env, g env e, n)
   | Get(x, y, n) -> Get(find x env, find y env, n)

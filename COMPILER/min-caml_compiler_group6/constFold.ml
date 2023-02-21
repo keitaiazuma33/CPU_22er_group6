@@ -15,12 +15,12 @@ let findf x env = (match M.find x env with Float(d) -> d | _ -> raise Not_found)
 let findt x env = (match M.find x env with Tuple(ys, _) -> ys | _ -> raise Not_found)
 
 (* (Id.t * t) * t -> t *)
-let rec g env = function (* ������߹��ߥ롼�������� (caml2html: constfold_g) *)
+let rec g env = function 
   | Var(x, _) when memi x env -> Int(findi x env)
   (* | Var(x) when memf x env -> Float(findf x env) *)
   (* | Var(x) when memt x env -> Tuple(findt x env) *)
   | Neg(x, _) when memi x env -> Int(-(findi x env))
-  | Add(x, y, _) when memi x env && memi y env -> Int(findi x env + findi y env) (* ­�����Υ����� (caml2html: constfold_add) *)
+  | Add(x, y, _) when memi x env && memi y env -> Int(findi x env + findi y env)
   | Sub(x, y, _) when memi x env && memi y env -> Int(findi x env - findi y env)
   | Xor(x, y, _) when memi x env && memi y env -> Int((findi x env) lxor (findi y env))
   | Or(x, y, _) when memi x env && memi y env -> Int((findi x env) lor (findi y env))
@@ -40,7 +40,7 @@ let rec g env = function (* ������߹��ߥ롼�������
   | IfLE(x, y, e1, e2, _) when memi x env && memi y env -> if findi x env <= findi y env then g env e1 else g env e2
   | IfLE(x, y, e1, e2, _) when memf x env && memf y env -> if findf x env <= findf y env then g env e1 else g env e2
   | IfLE(x, y, e1, e2, n) -> IfLE(x, y, g env e1, g env e2, n)
-  | Let((x, t), e1, e2, n) -> (* let�Υ����� (caml2html: constfold_let) *)
+  | Let((x, t), e1, e2, n) ->
       let e1' = g env e1 in
       let e2' = g (M.add x e1' env) e2 in
       Let((x, t), e1', e2', n)

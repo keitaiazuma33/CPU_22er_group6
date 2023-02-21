@@ -11,6 +11,8 @@ l.370:	! 0.000198
 l.368:	! 0.008333
 l.366:	! 0.166667
 .section	".text"
+	nop
+	j min_caml_start
 sin.153:  #pc 0
 	fmul	%f1, %f0, %f0  #16 pc 0
 	fmul	%f2, %f0, %f1  #17 pc 4
@@ -246,47 +248,48 @@ bge_else.409: #pc 804
 	nop #pc 824
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 10000000
-	addi	%x3, %x0, 10002000
-	addi	%x4, %x0, 8192
-	addi	%x5, %x0, 65536
-	fmv	%f0, l.380  #0 pc 844
-	sw	%x1, 0(%x2)  #213 pc 848
-	addi	%x2, %x2, 4  #213 pc 852
-	jal	%x1, abs_float.161  #213 pc 856
-	addi	%x2, %x2, -4  #213 pc 860
-	lw	%x1, 0(%x2) #213 pc 864
-	fsqrt	%f0, %f0  #213 pc 868
-	sw	%x1, 0(%x2)  #213 pc 872
-	addi	%x2, %x2, 4  #213 pc 876
-	jal	%x1, cos.155  #213 pc 880
-	addi	%x2, %x2, -4  #213 pc 884
-	lw	%x1, 0(%x2) #213 pc 888
-	sw	%x1, 0(%x2)  #213 pc 892
-	addi	%x2, %x2, 4  #213 pc 896
-	jal	%x1, sin.153  #213 pc 900
-	addi	%x2, %x2, -4  #213 pc 904
-	lw	%x1, 0(%x2) #213 pc 908
-	fmv	%f1, l.382  #0 pc 912
-	fadd	%f0, %f0, %f1  #213 pc 916
-	fmv	%f1, l.384  #0 pc 920
-	fsub	%f0, %f0, %f1  #213 pc 924
-	addi	%x6, %x0, 1000000  #0 pc 928
-	fsw	%f0, 0(%x2)  #215 pc 932
-	sw	%x1, 8(%x2)  #215 pc 936
-	addi	%x2, %x2, 12  #215 pc 940
-	jal	%x1, float_of_int.163  #215 pc 944
-	addi	%x2, %x2, -12  #215 pc 948
-	lw	%x1, 8(%x2) #215 pc 952
-	flw	%f1, 0(%x2)  #213 pc 956
-	fmul	%f0, %f1, %f0  #213 pc 960
-	sw	%x1, 8(%x2)  #212 pc 964
-	addi	%x2, %x2, 12  #212 pc 968
-	jal	%x1, int_of_float.165  #212 pc 972
-	addi	%x2, %x2, -12  #212 pc 976
-	lw	%x1, 8(%x2) #212 pc 980
-	sw	%x1, 8(%x2)  #211 pc 984
-	addi	%x2, %x2, 12  #211 pc 988
-	jal	%x1, print_int.185  #211 pc 992
-	addi	%x2, %x2, -12  #211 pc 996
-	lw	%x1, 8(%x2) #211 pc 1000
+	addi	%x31, %x0, 1
+	slli	%x4, %x31, 13
+	slli	%x5, %x31, 16
+	slli	%x2, %x31, 24
+	add	%x3, %x2, %x4
+	fmv	%f0, l.380  #0 pc 848
+	sw	%x1, 0(%x2)  #213 pc 852
+	addi	%x2, %x2, 4  #213 pc 856
+	jal	%x1, abs_float.161  #213 pc 860
+	addi	%x2, %x2, -4  #213 pc 864
+	lw	%x1, 0(%x2) #213 pc 868
+	fsqrt	%f0, %f0  #213 pc 872
+	sw	%x1, 0(%x2)  #213 pc 876
+	addi	%x2, %x2, 4  #213 pc 880
+	jal	%x1, cos.155  #213 pc 884
+	addi	%x2, %x2, -4  #213 pc 888
+	lw	%x1, 0(%x2) #213 pc 892
+	sw	%x1, 0(%x2)  #213 pc 896
+	addi	%x2, %x2, 4  #213 pc 900
+	jal	%x1, sin.153  #213 pc 904
+	addi	%x2, %x2, -4  #213 pc 908
+	lw	%x1, 0(%x2) #213 pc 912
+	fmv	%f1, l.382  #0 pc 916
+	fadd	%f0, %f0, %f1  #213 pc 920
+	fmv	%f1, l.384  #0 pc 924
+	fsub	%f0, %f0, %f1  #213 pc 928
+	addi	%x6, %x0, 1000000  #0 pc 932
+	fsw	%f0, 0(%x2)  #215 pc 936
+	sw	%x1, 8(%x2)  #215 pc 940
+	addi	%x2, %x2, 12  #215 pc 944
+	jal	%x1, float_of_int.163  #215 pc 948
+	addi	%x2, %x2, -12  #215 pc 952
+	lw	%x1, 8(%x2) #215 pc 956
+	flw	%f1, 0(%x2)  #213 pc 960
+	fmul	%f0, %f1, %f0  #213 pc 964
+	sw	%x1, 8(%x2)  #212 pc 968
+	addi	%x2, %x2, 12  #212 pc 972
+	jal	%x1, int_of_float.165  #212 pc 976
+	addi	%x2, %x2, -12  #212 pc 980
+	lw	%x1, 8(%x2) #212 pc 984
+	sw	%x1, 8(%x2)  #211 pc 988
+	addi	%x2, %x2, 12  #211 pc 992
+	jal	%x1, print_int.185  #211 pc 996
+	addi	%x2, %x2, -12  #211 pc 1000
+	lw	%x1, 8(%x2) #211 pc 1004

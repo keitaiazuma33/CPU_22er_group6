@@ -1,6 +1,8 @@
 .section	".rodata"
 .align	8
 .section	".text"
+	nop
+	j min_caml_start
 mul_abs.192:  #pc 0
 	addi	%x31, %x0, -1  #pc 0
 	beq	%x8, %x31, 12  #57 pc 4
@@ -297,21 +299,22 @@ f.230:  #pc 672
 	nop #pc 1084
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 10000000
-	addi	%x3, %x0, 10002000
-	addi	%x4, %x0, 8192
-	addi	%x5, %x0, 65536
-	addi	%x6, %x0, 1  #0 pc 1104
-	addi	%x7, %x0, 2  #0 pc 1108
-	addi	%x8, %x0, 3  #0 pc 1112
-	addi	%x9, %x0, 4  #0 pc 1116
-	sw	%x1, 0(%x2)  #251 pc 1120
-	addi	%x2, %x2, 4  #251 pc 1124
-	jal	%x1, f.230  #251 pc 1128
-	addi	%x2, %x2, -4  #251 pc 1132
-	lw	%x1, 0(%x2) #251 pc 1136
-	sw	%x1, 0(%x2)  #251 pc 1140
-	addi	%x2, %x2, 4  #251 pc 1144
-	jal	%x1, print_int.210  #251 pc 1148
-	addi	%x2, %x2, -4  #251 pc 1152
-	lw	%x1, 0(%x2) #251 pc 1156
+	addi	%x31, %x0, 1
+	slli	%x4, %x31, 13
+	slli	%x5, %x31, 16
+	slli	%x2, %x31, 24
+	add	%x3, %x2, %x4
+	addi	%x6, %x0, 1  #0 pc 1108
+	addi	%x7, %x0, 2  #0 pc 1112
+	addi	%x8, %x0, 3  #0 pc 1116
+	addi	%x9, %x0, 4  #0 pc 1120
+	sw	%x1, 0(%x2)  #251 pc 1124
+	addi	%x2, %x2, 4  #251 pc 1128
+	jal	%x1, f.230  #251 pc 1132
+	addi	%x2, %x2, -4  #251 pc 1136
+	lw	%x1, 0(%x2) #251 pc 1140
+	sw	%x1, 0(%x2)  #251 pc 1144
+	addi	%x2, %x2, 4  #251 pc 1148
+	jal	%x1, print_int.210  #251 pc 1152
+	addi	%x2, %x2, -4  #251 pc 1156
+	lw	%x1, 0(%x2) #251 pc 1160

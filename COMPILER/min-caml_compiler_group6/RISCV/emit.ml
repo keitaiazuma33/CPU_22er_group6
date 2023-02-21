@@ -11,8 +11,8 @@ let add_pc_env l n =
   pc_env := M.add l n (!pc_env)
 let find_pc_env l =
   (try M.find l (!pc_env) with Not_found -> Printf.fprintf stdout "%s\n" l; assert false)
-let stackset = ref S.empty (* ���Ǥ�Save���줿�ѿ��ν��� (caml2html: emit_stackset) *)
-let stackmap = ref [] (* Save���줿�ѿ��Ρ������å��ˤ�������� (caml2html: emit_stackmap) *)
+let stackset = ref S.empty 
+let stackmap = ref [] 
 let save x =
   stackset := S.add x !stackset;
   if not (List.mem x !stackmap) then
@@ -41,7 +41,6 @@ let pp_id_or_imm' oc = function
   | C(i) when i = 0 -> reg_zero
   | C(i) -> incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, %d  #pc %d\n" reg_cons reg_zero i (!pc); reg_cons
 
-(* �ؿ��ƤӽФ��Τ���˰������¤��ؤ���(register shuffling) (caml2html: emit_shuffle) *)
 let rec shuffle sw xys =
   (* remove identical moves *)
   let _, xys = List.partition (fun (x, y) -> x = y) xys in
@@ -66,14 +65,13 @@ let rec print_mv oc x y n =
     else
       Printf.fprintf oc "\tfmv\t%s, %s  #%d pc %d\n" x y n (!pc)
 
-type dest = Tail | NonTail of Id.t (* �������ɤ�����ɽ���ǡ����� (caml2html: emit_dest) *)
-let rec g oc = function (* ̿����Υ�����֥����� (caml2html: emit_g) *)
+type dest = Tail | NonTail of Id.t 
+let rec g oc = function 
   | dest, Ans(exp, n) -> g' oc (dest, exp, n)
   | dest, Let((x, t), exp, e, n) ->
       g' oc (NonTail(x), exp, n);
       g oc (dest, e)
-and g' oc = function (* ��̿��Υ�����֥����� (caml2html: emit_gprime) *)
-  (* �����Ǥʤ��ä���׻���̤�dest�˥��å� (caml2html: emit_nontail) *)
+and g' oc = function 
   | NonTail(_), Nop, _ -> ()
   | NonTail(x), Set(i), n -> incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, %d  #%d pc %d\n" x reg_zero i n (!pc)
   | NonTail(x), SetL(Id.L(y)), n -> if M.mem y (!pc_env) then
@@ -154,7 +152,6 @@ and g' oc = function (* ��̿��Υ�����֥����� (caml2h
                                     (incr_pc ();Printf.fprintf oc "\tadd\t%s, %s, %s  #%d pc %d\n" reg_cons z y n (!pc);
                                     incr_pc ();Printf.fprintf oc "\tfsw\t%s, %d(%s) #%d pc %d\n" x 0 reg_cons n (!pc))*)
   | NonTail(_), Comment(s), n -> Printf.fprintf oc "\t# %s  %d\n" s n
-  (* ����β���̿��μ��� (caml2html: emit_save) *)
   | NonTail(_), Save(x, y), n when List.mem x allregs && not (S.mem y !stackset) ->
       save y;
       incr_pc ();Printf.fprintf oc "\tsw\t%s, %d(%s)  #%d pc %d\n" x (offset y) reg_sp n (!pc)
@@ -162,13 +159,11 @@ and g' oc = function (* ��̿��Υ�����֥����� (caml2h
       savef y;
       incr_pc ();Printf.fprintf oc "\tfsw\t%s, %d(%s)  #%d pc %d\n" x (offset y) reg_sp n (!pc)
   | NonTail(_), Save(x, y), _ -> assert (S.mem y !stackset); ()
-  (* �����β���̿��μ��� (caml2html: emit_restore) *)
   | NonTail(x), Restore(y), n when List.mem x allregs ->
       incr_pc ();Printf.fprintf oc "\tlw\t%s, %d(%s)  #%d pc %d\n" x (offset y) reg_sp n (!pc)
   | NonTail(x), Restore(y), n ->
       assert (List.mem x allfregs);
       incr_pc ();Printf.fprintf oc "\tflw\t%s, %d(%s)  #%d pc %d\n" x (offset y) reg_sp n (!pc)
-  (* �������ä���׻���̤����쥸�����˥��åȤ��ƥ꥿���� (caml2html: emit_tailret) *)
   | Tail, (SetL(Id.L(y)) as exp), n ->
     if is_xreg y then
       (g' oc (NonTail(regs.(0)), exp, n);
@@ -241,13 +236,12 @@ and g' oc = function (* ��̿��Υ�����֥����� (caml2h
       incr_pc ();Printf.fprintf oc "\tftoi\t%s, %s  #%d pc %d\n" reg_cons freg_cons n (!pc);
       incr_pc ();Printf.fprintf oc "\tblt\t%s, %s, 12  #%d pc %d\n" reg_zero reg_cons n (!pc);
       g'_non_tail_if oc (NonTail(z)) e1 e2 "fble"
-  (* �ؿ��ƤӽФ��β���̿��μ��� (caml2html: emit_call) *)
-  | Tail, CallCls(x, ys, zs), n -> (* �����ƤӽФ� (caml2html: emit_tailcall) *)
+  | Tail, CallCls(x, ys, zs), n -> 
       g'_args oc [(x, reg_cl)] ys zs;
       incr_pc ();Printf.fprintf oc "\tlw\t%s, 0(%s)  #%d pc %d\n" reg_sw reg_cl n (!pc);
       incr_pc ();Printf.fprintf oc "\tjalr\t%s, %s, %d  #%d pc %d\n" reg_zero reg_sw 0 n (!pc);
       incr_pc ();Printf.fprintf oc "\tnop #pc %d\n" (!pc)
-  | Tail, CallDir(Id.L(x), ys, zs), n -> (* �����ƤӽФ� *)
+  | Tail, CallDir(Id.L(x), ys, zs), n ->
       g'_args oc [] ys zs;
       incr_pc ();Printf.fprintf oc "\tj\t%s  #%d pc %d\n" x n (!pc);
       incr_pc ();Printf.fprintf oc "\tnop #pc %d\n" (!pc)
@@ -355,14 +349,17 @@ let f oc (Prog(data, fundefs, e)) =
       Printf.fprintf oc "\t.long\t0x%lx\n" (getlo d)*))
     data;
   Printf.fprintf oc ".section\t\".text\"\n";
+  Printf.fprintf oc "\tnop\n";
+  Printf.fprintf oc "\tj min_caml_start\n";
   List.iter (fun fundef -> h oc fundef) fundefs;
   Printf.fprintf oc ".global\tmin_caml_start\n";
   Printf.fprintf oc "min_caml_start:\n";
   (*Printf.fprintf oc "\tsave\t%%sp, -112, %%sp\n";  from gcc; why 112? *)
-  incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 10000000\n" reg_sp reg_zero;
-  incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 10002000\n" reg_hp reg_zero;
-  incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 8192\n" reg_in reg_zero;
-  incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 65536\n" reg_out reg_zero;
+  incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, 1\n" reg_cons reg_zero;
+  incr_pc ();Printf.fprintf oc "\tslli\t%s, %s, 13\n" reg_in reg_cons;
+  incr_pc ();Printf.fprintf oc "\tslli\t%s, %s, 16\n" reg_out reg_cons;
+  incr_pc ();Printf.fprintf oc "\tslli\t%s, %s, 24\n" reg_sp reg_cons;
+  incr_pc ();Printf.fprintf oc "\tadd\t%s, %s, %s\n" reg_hp reg_sp reg_in;
   stackset := S.empty;
   stackmap := [];
   g oc (NonTail("%g0"), e);

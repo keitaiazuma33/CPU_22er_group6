@@ -1,10 +1,10 @@
 (* SPARC assembly with a few virtual instructions *)
 
 type id_or_imm = V of Id.t | C of int
-type t = (* ̿����� (caml2html: sparcasm_t) *)
+type t = 
   | Ans of exp * int
   | Let of (Id.t * Type.t) * exp * t * int
-and exp = (* ��İ�Ĥ�̿����б����뼰 (caml2html: sparcasm_exp) *)
+and exp = 
   | Nop
   | Set of int
   | SetL of Id.l
@@ -40,16 +40,15 @@ and exp = (* ��İ�Ĥ�̿����б����뼰 (caml2html: sparcas
   (* virtual instructions *)
   | IfEq of Id.t * id_or_imm * t * t
   | IfLE of Id.t * id_or_imm * t * t
-  | IfGE of Id.t * id_or_imm * t * t (* �����оΤǤϤʤ��Τ�ɬ�� *)
+  | IfGE of Id.t * id_or_imm * t * t 
   | IfFEq of Id.t * Id.t * t * t
   | IfFLE of Id.t * Id.t * t * t
   (* closure address, integer arguments, and float arguments *)
   | CallCls of Id.t * Id.t list * Id.t list
   | CallDir of Id.l * Id.t list * Id.t list
-  | Save of Id.t * Id.t (* �쥸�����ѿ����ͤ򥹥��å��ѿ�����¸ (caml2html: sparcasm_save) *)
-  | Restore of Id.t (* �����å��ѿ������ͤ����� (caml2html: sparcasm_restore) *)
+  | Save of Id.t * Id.t 
+  | Restore of Id.t 
 type fundef = { name : Id.l; args : Id.t list; fargs : Id.t list; body : t; ret : Type.t }
-(* �ץ���������� = ��ư���������ơ��֥� + �ȥåץ�٥�ؿ� + �ᥤ��μ� (caml2html: sparcasm_prog) *)
 type prog = Prog of (Id.l * float) list * fundef list * t
 
 let fletd(x, e1, e2, n) = Let((x, Type.Float), e1, e2, n)
@@ -128,28 +127,23 @@ let rec concat e1 xt e2 =
 (*let align i = (if i mod 8 = 0 then i else i + 4)*)
 
 
-(* \t��n����Ϥ���ؿ� *)
 let rec print_tab outchan n =
   if n = 0 then () else (Printf.fprintf outchan "\t"; print_tab outchan (n-1))
 
-(* Id.l����Ϥ���ؿ� *)
 let print_idl outchan i =
   match i with
   | Id.L s -> Printf.fprintf outchan "%s" s
   | _ -> ()
 
-(* �ѿ��Υꥹ�Ȥ���Ϥ���ؿ� *)
 let rec print_idlist outchan ts =
   match ts with
   | [] -> Printf.fprintf outchan "\n"
   | t :: ts' -> Printf.fprintf outchan "%s " t; print_idlist outchan ts'
 
-(* Asm.id_or_imm����Ϥ���ؿ� *)
 let print_id_or_imm outchan = function
   | V x -> Printf.fprintf outchan "%s\n" x
   | C i -> Printf.fprintf outchan "%d\n" i
 
-(* Asm.t�����Ƥ���Ϥ���ؿ� *)
 let rec print_asm_t outchan t n =
   print_tab outchan n;
   match t with
@@ -238,7 +232,6 @@ and print_asm_exp outchan exp n =
   | Save (x,y) -> Printf.fprintf outchan "SAVE %s %s\n" x y
   | Restore x -> Printf.fprintf outchan "RESTORE %s\n" x
 
-(* Asm.fundef�����Ƥ���Ϥ���ؿ� *)
 let print_asm_fundef outchan {name = l; args = xs; fargs = ys; body = t; ret = _} =
   Printf.fprintf outchan "Name : ";
   print_idl outchan l;
@@ -250,7 +243,6 @@ let print_asm_fundef outchan {name = l; args = xs; fargs = ys; body = t; ret = _
   print_asm_t outchan t 0;
   Printf.fprintf outchan "\n"
 
-(* Asm.prog�����Ƥ�file(outchan)�˽��Ϥ���ؿ� *)
 let rec print_asm outchan prog = 
   match prog with
   | Prog (_, [], t) -> Printf.fprintf outchan "\n"; print_asm_t outchan t 0

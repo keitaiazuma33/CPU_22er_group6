@@ -2,7 +2,6 @@
 
 open Syntax
 
-(* �������ι��ֹ�ξ�����ɲ� *)
 exception Unify of Type.t * Type.t
 exception Error of t * Type.t * Type.t * int
 
@@ -21,7 +20,7 @@ let string_type = function
 
 (* for pretty printing (and type normalization) *)
 (* Type.t -> Type.t *)
-let rec deref_typ = function (* ���ѿ�����ȤǤ���������ؿ� (caml2html: typing_deref) *)
+let rec deref_typ = function 
   | Type.Fun(t1s, t2) -> Type.Fun(List.map deref_typ t1s, deref_typ t2)
   | Type.Tuple(ts) -> Type.Tuple(List.map deref_typ ts)
   | Type.Array(t) -> Type.Array(deref_typ t)
@@ -93,8 +92,7 @@ let rec occur r1 = function (* occur check (caml2html: typing_occur) *)
   | _ -> false
 
 (* Type.t * Type.t -> unit *)
-let rec unify t1 t2 = (* �����礦�褦�ˡ����ѿ��ؤ������򤹤� (caml2html: typing_unify) *)
-  match t1, t2 with
+let rec unify t1 t2 = match t1, t2 with
   | Type.Unit, Type.Unit | Type.Bool, Type.Bool | Type.Int, Type.Int | Type.Float, Type.Float -> ()
   | Type.Fun(t1s, t1'), Type.Fun(t2s, t2') ->
       (try List.iter2 unify t1s t2s
@@ -107,7 +105,7 @@ let rec unify t1 t2 = (* �����礦�褦�ˡ����ѿ��ؤ��
   | Type.Var(r1), Type.Var(r2) when r1 == r2 -> ()
   | Type.Var({ contents = Some(t1') }), _ -> unify t1' t2
   | _, Type.Var({ contents = Some(t2') }) -> unify t1 t2'
-  | Type.Var({ contents = None } as r1), _ -> (* ������̤����η��ѿ��ξ�� (caml2html: typing_undef) *)
+  | Type.Var({ contents = None } as r1), _ -> 
       if occur r1 t2 then raise (Unify(t1, t2));
       r1 := Some(t2)
   | _, Type.Var({ contents = None } as r2) ->
@@ -116,7 +114,7 @@ let rec unify t1 t2 = (* �����礦�褦�ˡ����ѿ��ؤ��
   | _, _ -> raise (Unify(t1, t2))
 
 (* (Id.t * Type.t) * Syntax.t -> Type.t *)
-let rec g env e = (* �������롼���� (caml2html: typing_g) *)
+let rec g env e = 
     match e with
     | Unit -> Type.Unit
     | Bool(_) -> Type.Bool
@@ -172,7 +170,7 @@ let rec g env e = (* �������롼���� (caml2html: typing_g) 
         unify Type.Int (g env e2);
         Type.Int)
     with Unify(t1,t2) -> raise (Error(deref_term e, deref_typ t1, deref_typ t2,n)))
-    | Add(e1, e2, n) | Sub(e1, e2, n) -> (* ­�����ʤȰ������ˤη����� (caml2html: typing_add) *)
+    | Add(e1, e2, n) | Sub(e1, e2, n) ->
         (try (unify Type.Int (g env e1);
         unify Type.Int (g env e2);
         Type.Int)
@@ -200,26 +198,26 @@ let rec g env e = (* �������롼���� (caml2html: typing_g) 
         unify t2 t3;
         t2)
         with Unify(t1,t2) -> raise (Error(deref_term e, deref_typ t1, deref_typ t2,n)))
-    | Let((x, t), e1, e2, n) -> (* let�η����� (caml2html: typing_let) *)
+    | Let((x, t), e1, e2, n) -> 
         (try (unify t (g env e1);
         g (M.add x t env) e2)
         with Unify(t1,t2) -> raise (Error(deref_term e, deref_typ t1, deref_typ t2,n)))
-    | Var(x, n) when M.mem x env -> (try M.find x env (* �ѿ��η����� (caml2html: typing_var) *)
+    | Var(x, n) when M.mem x env -> (try M.find x env
                                 with Unify(t1,t2) -> raise (Error(deref_term e, deref_typ t1, deref_typ t2,n)))
     | Var(x, n) when M.mem x !extenv -> (try M.find x !extenv
                                 with Unify(t1,t2) -> raise (Error(deref_term e, deref_typ t1, deref_typ t2,n)))
-    | Var(x, n) -> (* �����ѿ��η����� (caml2html: typing_extvar) *)
+    | Var(x, n) ->
         (try (Format.eprintf "free variable %s assumed as external from typing.ml@." x;
         let t = Type.gentyp () in
         extenv := M.add x t !extenv;
         t)
         with Unify(t1,t2) -> raise (Error(deref_term e, deref_typ t1, deref_typ t2,n)))
-    | LetRec({ name = (x, t); args = yts; body = e1 }, e2, n) -> (* let rec�η����� (caml2html: typing_letrec) *)
+    | LetRec({ name = (x, t); args = yts; body = e1 }, e2, n) ->
         (try (let env = M.add x t env in
         unify t (Type.Fun(List.map snd yts, g (M.add_list yts env) e1));
         g env e2)
         with Unify(t1,t2) -> raise (Error(deref_term e, deref_typ t1, deref_typ t2,n)))
-    | App(e1, es, n) -> (* �ؿ�Ŭ�Ѥη����� (caml2html: typing_app) *)
+    | App(e1, es, n) ->
         (try(let t = Type.gentyp () in
         unify (g env e1) (Type.Fun(List.map (g env) es, t));
         t)

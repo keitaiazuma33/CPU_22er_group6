@@ -1,6 +1,8 @@
 .section	".rodata"
 .align	8
 .section	".text"
+	nop
+	j min_caml_start
 mul_abs.161:  #pc 0
 	addi	%x31, %x0, -1  #pc 0
 	beq	%x8, %x31, 12  #57 pc 4
@@ -204,46 +206,47 @@ h.203:  #pc 696
 	nop #pc 704
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 10000000
-	addi	%x3, %x0, 10002000
-	addi	%x4, %x0, 8192
-	addi	%x5, %x0, 65536
-	sw	%x1, 0(%x2)  #211 pc 724
-	addi	%x2, %x2, 4  #211 pc 728
-	jal	%x1, f.199  #211 pc 732
-	addi	%x2, %x2, -4  #211 pc 736
-	lw	%x1, 0(%x2) #211 pc 740
-	sw	%x6, 0(%x2)  #212 pc 744
-	sw	%x1, 4(%x2)  #212 pc 748
-	addi	%x2, %x2, 8  #212 pc 752
-	jal	%x1, g.201  #212 pc 756
-	addi	%x2, %x2, -8  #212 pc 760
-	lw	%x1, 4(%x2) #212 pc 764
-	sw	%x6, 4(%x2)  #213 pc 768
-	sw	%x1, 8(%x2)  #213 pc 772
-	addi	%x2, %x2, 12  #213 pc 776
-	jal	%x1, h.203  #213 pc 780
-	addi	%x2, %x2, -12  #213 pc 784
-	lw	%x1, 8(%x2) #213 pc 788
-	beq	%x6, %x0, 12  #213 pc 792
-	j	be_else.387 #pc 796
-	nop #pc 800
-	lw	%x6, 4(%x2)  #213 pc 804
-	lw	%x7, 0(%x2)  #213 pc 808
-	sub	%x6, %x7, %x6  #213 pc 812
-	j	be_cont.388 #pc 816
-	nop #pc 820
-be_else.387: #pc 824
-	lw	%x6, 0(%x2)  #213 pc 824
-	lw	%x7, 4(%x2)  #213 pc 828
-	sub	%x6, %x7, %x6  #213 pc 832
-be_cont.388: #pc 836
-	lw	%x7, 0(%x2)  #213 pc 836
-	add	%x6, %x6, %x7  #213 pc 840
-	lw	%x7, 4(%x2)  #213 pc 844
-	add	%x6, %x6, %x7  #213 pc 848
-	sw	%x1, 8(%x2)  #213 pc 852
-	addi	%x2, %x2, 12  #213 pc 856
-	jal	%x1, print_int.179  #213 pc 860
-	addi	%x2, %x2, -12  #213 pc 864
-	lw	%x1, 8(%x2) #213 pc 868
+	addi	%x31, %x0, 1
+	slli	%x4, %x31, 13
+	slli	%x5, %x31, 16
+	slli	%x2, %x31, 24
+	add	%x3, %x2, %x4
+	sw	%x1, 0(%x2)  #211 pc 728
+	addi	%x2, %x2, 4  #211 pc 732
+	jal	%x1, f.199  #211 pc 736
+	addi	%x2, %x2, -4  #211 pc 740
+	lw	%x1, 0(%x2) #211 pc 744
+	sw	%x6, 0(%x2)  #212 pc 748
+	sw	%x1, 4(%x2)  #212 pc 752
+	addi	%x2, %x2, 8  #212 pc 756
+	jal	%x1, g.201  #212 pc 760
+	addi	%x2, %x2, -8  #212 pc 764
+	lw	%x1, 4(%x2) #212 pc 768
+	sw	%x6, 4(%x2)  #213 pc 772
+	sw	%x1, 8(%x2)  #213 pc 776
+	addi	%x2, %x2, 12  #213 pc 780
+	jal	%x1, h.203  #213 pc 784
+	addi	%x2, %x2, -12  #213 pc 788
+	lw	%x1, 8(%x2) #213 pc 792
+	beq	%x6, %x0, 12  #213 pc 796
+	j	be_else.387 #pc 800
+	nop #pc 804
+	lw	%x6, 4(%x2)  #213 pc 808
+	lw	%x7, 0(%x2)  #213 pc 812
+	sub	%x6, %x7, %x6  #213 pc 816
+	j	be_cont.388 #pc 820
+	nop #pc 824
+be_else.387: #pc 828
+	lw	%x6, 0(%x2)  #213 pc 828
+	lw	%x7, 4(%x2)  #213 pc 832
+	sub	%x6, %x7, %x6  #213 pc 836
+be_cont.388: #pc 840
+	lw	%x7, 0(%x2)  #213 pc 840
+	add	%x6, %x6, %x7  #213 pc 844
+	lw	%x7, 4(%x2)  #213 pc 848
+	add	%x6, %x6, %x7  #213 pc 852
+	sw	%x1, 8(%x2)  #213 pc 856
+	addi	%x2, %x2, 12  #213 pc 860
+	jal	%x1, print_int.179  #213 pc 864
+	addi	%x2, %x2, -12  #213 pc 868
+	lw	%x1, 8(%x2) #213 pc 872

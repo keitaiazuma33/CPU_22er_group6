@@ -1,10 +1,8 @@
 %{
-(* parser�����Ѥ����ѿ����ؿ������ʤɤ���� *)
 open Syntax
 let addtyp x = (x, Type.gentyp ())
 %}
 
-/* (* �����ɽ���ǡ���������� (caml2html: parser_token) *) */
 %token <bool> BOOL
 %token <int> INT
 %token <float> FLOAT
@@ -55,7 +53,6 @@ let addtyp x = (x, Type.gentyp ())
 %token RPAREN
 %token EOF
 
-/* (* ͥ���̤�associativity��������㤤������⤤���ء� (caml2html: parser_prior) *) */
 %nonassoc IN
 %right prec_let
 %right SEMICOLON
@@ -70,13 +67,12 @@ let addtyp x = (x, Type.gentyp ())
 %left prec_app
 %left DOT
 
-/* (* ���ϵ������� *) */
 %type <Syntax.t> exp
 %start exp
 
 %%
 
-simple_exp: /* (* ��̤�Ĥ��ʤ��Ƥ�ؿ��ΰ����ˤʤ�뼰 (caml2html: parser_simple) *) */
+simple_exp: 
 | LPAREN exp RPAREN
     { $2 }
 | LPAREN RPAREN
@@ -92,7 +88,7 @@ simple_exp: /* (* ��̤�Ĥ��ʤ��Ƥ�ؿ��ΰ����ˤʤ��
 | simple_exp DOT LPAREN exp RPAREN
     { Get($1, $4, (Parsing.symbol_start_pos ()).pos_lnum) }
 
-exp: /* (* ���̤μ� (caml2html: parser_exp) *) */
+exp: 
 | simple_exp
     { $1 }
 | NOT exp
@@ -101,9 +97,9 @@ exp: /* (* ���̤μ� (caml2html: parser_exp) *) */
 | MINUS exp
     %prec prec_unary_minus
     { match $2 with
-    | Float(f) -> Float(-.f) (* -1.23�ʤɤϷ����顼�ǤϤʤ��Τ��̰��� *)
+    | Float(f) -> Float(-.f) 
     | e -> Neg(e, (Parsing.symbol_start_pos ()).pos_lnum) }
-| exp PLUS exp /* (* ­������ʸ���Ϥ���롼�� (caml2html: parser_add) *) */
+| exp PLUS exp 
     { Add($1, $3, (Parsing.symbol_start_pos ()).pos_lnum) }
 | exp MINUS exp
     { Sub($1, $3, (Parsing.symbol_start_pos ()).pos_lnum) }

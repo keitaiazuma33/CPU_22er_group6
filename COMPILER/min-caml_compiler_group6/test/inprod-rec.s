@@ -5,6 +5,8 @@ l.378:	! 4.560000
 l.376:	! 1.230000
 l.372:	! 0.000000
 .section	".text"
+	nop
+	j min_caml_start
 mul_abs.166:  #pc 0
 	addi	%x31, %x0, -1  #pc 0
 	beq	%x8, %x31, 12  #57 pc 4
@@ -261,41 +263,42 @@ bge_else.417: #pc 896
 	nop #pc 904
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 10000000
-	addi	%x3, %x0, 10002000
-	addi	%x4, %x0, 8192
-	addi	%x5, %x0, 65536
-	addi	%x6, %x0, 3  #0 pc 924
-	fmv	%f0, l.376  #0 pc 928
-	sw	%x1, 0(%x2)  #210 pc 932
-	addi	%x2, %x2, 4  #210 pc 936
-	jal	%x1, create_float_array.201  #210 pc 940
-	addi	%x2, %x2, -4  #210 pc 944
-	lw	%x1, 0(%x2) #210 pc 948
-	addi	%x7, %x0, 3  #0 pc 952
-	fmv	%f0, l.378  #0 pc 956
-	sw	%x6, 0(%x2)  #211 pc 960
-	addi	%x6, %x7, 0  #0 pc 964
-	sw	%x1, 4(%x2)  #211 pc 968
-	addi	%x2, %x2, 8  #211 pc 972
-	jal	%x1, create_float_array.201  #211 pc 976
-	addi	%x2, %x2, -8  #211 pc 980
-	lw	%x1, 4(%x2) #211 pc 984
-	addi	%x7, %x6, 0  #211 pc 988
-	fmv	%f0, l.380  #0 pc 992
-	addi	%x8, %x0, 2  #0 pc 996
-	lw	%x6, 0(%x2)  #212 pc 1000
-	fsw	%f0, 8(%x2)  #212 pc 1004
-	sw	%x1, 16(%x2)  #212 pc 1008
-	addi	%x2, %x2, 20  #212 pc 1012
-	jal	%x1, inprod.204  #212 pc 1016
-	addi	%x2, %x2, -20  #212 pc 1020
-	lw	%x1, 16(%x2) #212 pc 1024
-	flw	%f1, 8(%x2)  #212 pc 1028
-	fmul	%f0, %f1, %f0  #212 pc 1032
-	ftoi	%x6, %f0  #212 pc 1036
-	sw	%x1, 16(%x2)  #212 pc 1040
-	addi	%x2, %x2, 20  #212 pc 1044
-	jal	%x1, print_int.184  #212 pc 1048
-	addi	%x2, %x2, -20  #212 pc 1052
-	lw	%x1, 16(%x2) #212 pc 1056
+	addi	%x31, %x0, 1
+	slli	%x4, %x31, 13
+	slli	%x5, %x31, 16
+	slli	%x2, %x31, 24
+	add	%x3, %x2, %x4
+	addi	%x6, %x0, 3  #0 pc 928
+	fmv	%f0, l.376  #0 pc 932
+	sw	%x1, 0(%x2)  #210 pc 936
+	addi	%x2, %x2, 4  #210 pc 940
+	jal	%x1, create_float_array.201  #210 pc 944
+	addi	%x2, %x2, -4  #210 pc 948
+	lw	%x1, 0(%x2) #210 pc 952
+	addi	%x7, %x0, 3  #0 pc 956
+	fmv	%f0, l.378  #0 pc 960
+	sw	%x6, 0(%x2)  #211 pc 964
+	addi	%x6, %x7, 0  #0 pc 968
+	sw	%x1, 4(%x2)  #211 pc 972
+	addi	%x2, %x2, 8  #211 pc 976
+	jal	%x1, create_float_array.201  #211 pc 980
+	addi	%x2, %x2, -8  #211 pc 984
+	lw	%x1, 4(%x2) #211 pc 988
+	addi	%x7, %x6, 0  #211 pc 992
+	fmv	%f0, l.380  #0 pc 996
+	addi	%x8, %x0, 2  #0 pc 1000
+	lw	%x6, 0(%x2)  #212 pc 1004
+	fsw	%f0, 8(%x2)  #212 pc 1008
+	sw	%x1, 16(%x2)  #212 pc 1012
+	addi	%x2, %x2, 20  #212 pc 1016
+	jal	%x1, inprod.204  #212 pc 1020
+	addi	%x2, %x2, -20  #212 pc 1024
+	lw	%x1, 16(%x2) #212 pc 1028
+	flw	%f1, 8(%x2)  #212 pc 1032
+	fmul	%f0, %f1, %f0  #212 pc 1036
+	ftoi	%x6, %f0  #212 pc 1040
+	sw	%x1, 16(%x2)  #212 pc 1044
+	addi	%x2, %x2, 20  #212 pc 1048
+	jal	%x1, print_int.184  #212 pc 1052
+	addi	%x2, %x2, -20  #212 pc 1056
+	lw	%x1, 16(%x2) #212 pc 1060

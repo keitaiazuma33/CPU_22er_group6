@@ -1,6 +1,8 @@
 .section	".rodata"
 .align	8
 .section	".text"
+	nop
+	j min_caml_start
 mul_abs.162:  #pc 0
 	addi	%x31, %x0, -1  #pc 0
 	beq	%x8, %x31, 12  #57 pc 4
@@ -235,42 +237,43 @@ f.200:  #pc 812
 	nop #pc 820
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 10000000
-	addi	%x3, %x0, 10002000
-	addi	%x4, %x0, 8192
-	addi	%x5, %x0, 65536
-	addi	%x6, %x0, 10  #0 pc 840
-	addi	%x7, %x0, 3  #0 pc 844
-	sw	%x1, 0(%x2)  #208 pc 848
-	addi	%x2, %x2, 4  #208 pc 852
-	jal	%x1, create_array.190  #208 pc 856
-	addi	%x2, %x2, -4  #208 pc 860
-	lw	%x1, 0(%x2) #208 pc 864
-	addi	%x7, %x0, 67890  #0 pc 868
-	lw	%x8, 0(%x6)  #210 pc 872
-	addi	%x31, %x0, 3  #pc 876
-	beq	%x8, %x31, 12  #210 pc 880
-	j	be_else.397 #pc 884
-	nop #pc 888
-	sw	%x7, 0(%x2)  #210 pc 892
-	sw	%x6, 4(%x2)  #210 pc 896
-	sw	%x1, 8(%x2)  #210 pc 900
-	addi	%x2, %x2, 12  #210 pc 904
-	jal	%x1, f.200  #210 pc 908
-	addi	%x2, %x2, -12  #210 pc 912
-	lw	%x1, 8(%x2) #210 pc 916
-	lw	%x7, 4(%x2)  #210 pc 920
-	lw	%x7, 4(%x7)  #210 pc 924
-	add	%x6, %x6, %x7  #210 pc 928
-	lw	%x7, 0(%x2)  #210 pc 932
-	add	%x6, %x6, %x7  #210 pc 936
-	j	be_cont.398 #pc 940
-	nop #pc 944
-be_else.397: #pc 948
-	addi	%x6, %x0, 7  #0 pc 948
-be_cont.398: #pc 952
-	sw	%x1, 8(%x2)  #210 pc 952
-	addi	%x2, %x2, 12  #210 pc 956
-	jal	%x1, print_int.180  #210 pc 960
-	addi	%x2, %x2, -12  #210 pc 964
-	lw	%x1, 8(%x2) #210 pc 968
+	addi	%x31, %x0, 1
+	slli	%x4, %x31, 13
+	slli	%x5, %x31, 16
+	slli	%x2, %x31, 24
+	add	%x3, %x2, %x4
+	addi	%x6, %x0, 10  #0 pc 844
+	addi	%x7, %x0, 3  #0 pc 848
+	sw	%x1, 0(%x2)  #208 pc 852
+	addi	%x2, %x2, 4  #208 pc 856
+	jal	%x1, create_array.190  #208 pc 860
+	addi	%x2, %x2, -4  #208 pc 864
+	lw	%x1, 0(%x2) #208 pc 868
+	addi	%x7, %x0, 67890  #0 pc 872
+	lw	%x8, 0(%x6)  #210 pc 876
+	addi	%x31, %x0, 3  #pc 880
+	beq	%x8, %x31, 12  #210 pc 884
+	j	be_else.397 #pc 888
+	nop #pc 892
+	sw	%x7, 0(%x2)  #210 pc 896
+	sw	%x6, 4(%x2)  #210 pc 900
+	sw	%x1, 8(%x2)  #210 pc 904
+	addi	%x2, %x2, 12  #210 pc 908
+	jal	%x1, f.200  #210 pc 912
+	addi	%x2, %x2, -12  #210 pc 916
+	lw	%x1, 8(%x2) #210 pc 920
+	lw	%x7, 4(%x2)  #210 pc 924
+	lw	%x7, 4(%x7)  #210 pc 928
+	add	%x6, %x6, %x7  #210 pc 932
+	lw	%x7, 0(%x2)  #210 pc 936
+	add	%x6, %x6, %x7  #210 pc 940
+	j	be_cont.398 #pc 944
+	nop #pc 948
+be_else.397: #pc 952
+	addi	%x6, %x0, 7  #0 pc 952
+be_cont.398: #pc 956
+	sw	%x1, 8(%x2)  #210 pc 956
+	addi	%x2, %x2, 12  #210 pc 960
+	jal	%x1, print_int.180  #210 pc 964
+	addi	%x2, %x2, -12  #210 pc 968
+	lw	%x1, 8(%x2) #210 pc 972

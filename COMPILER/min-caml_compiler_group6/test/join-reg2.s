@@ -1,6 +1,8 @@
 .section	".rodata"
 .align	8
 .section	".text"
+	nop
+	j min_caml_start
 mul_abs.161:  #pc 0
 	addi	%x31, %x0, -1  #pc 0
 	beq	%x8, %x31, 12  #57 pc 4
@@ -204,41 +206,42 @@ h.203:  #pc 696
 	nop #pc 704
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 10000000
-	addi	%x3, %x0, 10002000
-	addi	%x4, %x0, 8192
-	addi	%x5, %x0, 65536
-	sw	%x1, 0(%x2)  #211 pc 724
-	addi	%x2, %x2, 4  #211 pc 728
-	jal	%x1, f.199  #211 pc 732
-	addi	%x2, %x2, -4  #211 pc 736
-	lw	%x1, 0(%x2) #211 pc 740
-	bge	%x0, %x6, 12  #212 pc 744
-	j	ble_else.386 #pc 748
-	nop #pc 752
-	sw	%x6, 0(%x2)  #212 pc 756
-	sw	%x1, 4(%x2)  #212 pc 760
-	addi	%x2, %x2, 8  #212 pc 764
-	jal	%x1, g.201  #212 pc 768
-	addi	%x2, %x2, -8  #212 pc 772
-	lw	%x1, 4(%x2) #212 pc 776
-	lw	%x7, 0(%x2)  #212 pc 780
-	add	%x6, %x6, %x7  #212 pc 784
-	j	ble_cont.387 #pc 788
-	nop #pc 792
-ble_else.386: #pc 796
-	sw	%x6, 0(%x2)  #212 pc 796
-	sw	%x1, 4(%x2)  #212 pc 800
-	addi	%x2, %x2, 8  #212 pc 804
-	jal	%x1, h.203  #212 pc 808
-	addi	%x2, %x2, -8  #212 pc 812
-	lw	%x1, 4(%x2) #212 pc 816
-	lw	%x7, 0(%x2)  #212 pc 820
-	sub	%x6, %x6, %x7  #212 pc 824
-ble_cont.387: #pc 828
-	add	%x6, %x6, %x7  #212 pc 828
-	sw	%x1, 4(%x2)  #212 pc 832
-	addi	%x2, %x2, 8  #212 pc 836
-	jal	%x1, print_int.179  #212 pc 840
-	addi	%x2, %x2, -8  #212 pc 844
-	lw	%x1, 4(%x2) #212 pc 848
+	addi	%x31, %x0, 1
+	slli	%x4, %x31, 13
+	slli	%x5, %x31, 16
+	slli	%x2, %x31, 24
+	add	%x3, %x2, %x4
+	sw	%x1, 0(%x2)  #211 pc 728
+	addi	%x2, %x2, 4  #211 pc 732
+	jal	%x1, f.199  #211 pc 736
+	addi	%x2, %x2, -4  #211 pc 740
+	lw	%x1, 0(%x2) #211 pc 744
+	bge	%x0, %x6, 12  #212 pc 748
+	j	ble_else.386 #pc 752
+	nop #pc 756
+	sw	%x6, 0(%x2)  #212 pc 760
+	sw	%x1, 4(%x2)  #212 pc 764
+	addi	%x2, %x2, 8  #212 pc 768
+	jal	%x1, g.201  #212 pc 772
+	addi	%x2, %x2, -8  #212 pc 776
+	lw	%x1, 4(%x2) #212 pc 780
+	lw	%x7, 0(%x2)  #212 pc 784
+	add	%x6, %x6, %x7  #212 pc 788
+	j	ble_cont.387 #pc 792
+	nop #pc 796
+ble_else.386: #pc 800
+	sw	%x6, 0(%x2)  #212 pc 800
+	sw	%x1, 4(%x2)  #212 pc 804
+	addi	%x2, %x2, 8  #212 pc 808
+	jal	%x1, h.203  #212 pc 812
+	addi	%x2, %x2, -8  #212 pc 816
+	lw	%x1, 4(%x2) #212 pc 820
+	lw	%x7, 0(%x2)  #212 pc 824
+	sub	%x6, %x6, %x7  #212 pc 828
+ble_cont.387: #pc 832
+	add	%x6, %x6, %x7  #212 pc 832
+	sw	%x1, 4(%x2)  #212 pc 836
+	addi	%x2, %x2, 8  #212 pc 840
+	jal	%x1, print_int.179  #212 pc 844
+	addi	%x2, %x2, -8  #212 pc 848
+	lw	%x1, 4(%x2) #212 pc 852

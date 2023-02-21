@@ -1,10 +1,8 @@
 {
-(* lexer�����Ѥ����ѿ����ؿ������ʤɤ���� *)
 open Parser
 open Type
 }
 
-(* ����ɽ����ά�� *)
 let space = [' ' '\t' '\r']
 let line = ['\n']
 let digit = ['0'-'9']
@@ -17,7 +15,7 @@ rule token = parse
 | line
     { Lexing.new_line lexbuf; token lexbuf }
 | "(*"
-    { comment lexbuf; (* �ͥ��Ȥ��������ȤΤ���Υȥ�å� *)
+    { comment lexbuf;
       token lexbuf }
 | '('
     { LPAREN }
@@ -47,13 +45,13 @@ rule token = parse
     { FTOI }
 | "itof"
     { ITOF }
-| digit+ (* �����������Ϥ���롼�� (caml2html: lexer_int) *)
+| digit+ 
     { INT(int_of_string (Lexing.lexeme lexbuf)) }
 | digit+ ('.' digit*)? (['e' 'E'] ['+' '-']? digit+)?
     { FLOAT(float_of_string (Lexing.lexeme lexbuf)) }
-| '-' (* -.����󤷤ˤ��ʤ��Ƥ��ɤ�? ��Ĺ����? *)
+| '-' 
     { MINUS }
-| '+' (* +.����󤷤ˤ��ʤ��Ƥ��ɤ�? ��Ĺ����? *)
+| '+' 
     { PLUS }
 | '*'
     { AST }
@@ -119,7 +117,7 @@ rule token = parse
     { SEMICOLON }
 | eof
     { EOF }
-| lower (digit|lower|upper|'_')* (* ¾�Ρ�ͽ���פ���Ǥʤ��Ȥ����ʤ� *)
+| lower (digit|lower|upper|'_')* 
     { IDENT(Lexing.lexeme lexbuf) }
 | _
     { failwith

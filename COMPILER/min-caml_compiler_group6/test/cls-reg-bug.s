@@ -1,6 +1,8 @@
 .section	".rodata"
 .align	8
 .section	".text"
+	nop
+	j min_caml_start
 mul_abs.175:  #pc 0
 	addi	%x31, %x0, -1  #pc 0
 	beq	%x8, %x31, 12  #57 pc 4
@@ -252,45 +254,46 @@ h.213:  #pc 788
 	nop #pc 896
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 10000000
-	addi	%x3, %x0, 10002000
-	addi	%x4, %x0, 8192
-	addi	%x5, %x0, 65536
-	addi	%x6, %x0, 1  #0 pc 916
-	addi	%x7, %x0, 2  #0 pc 920
-	addi	%x8, %x0, 3  #0 pc 924
-	addi	%x9, %x0, 4  #0 pc 928
-	addi	%x10, %x0, 5  #0 pc 932
-	addi	%x11, %x0, 6  #0 pc 936
-	addi	%x12, %x0, 7  #0 pc 940
-	addi	%x13, %x0, 8  #0 pc 944
-	addi	%x14, %x0, 9  #0 pc 948
-	addi	%x15, %x0, 10  #0 pc 952
-	addi	%x16, %x3, 0  #214 pc 956
-	addi	%x3, %x3, 40  #214 pc 960
-	sw	%x15, 36(%x16)  #214 pc 964
-	sw	%x14, 32(%x16)  #214 pc 968
-	sw	%x13, 28(%x16)  #214 pc 972
-	sw	%x12, 24(%x16)  #214 pc 976
-	sw	%x11, 20(%x16)  #214 pc 980
-	sw	%x10, 16(%x16)  #214 pc 984
-	sw	%x9, 12(%x16)  #214 pc 988
-	sw	%x8, 8(%x16)  #214 pc 992
-	sw	%x7, 4(%x16)  #214 pc 996
-	sw	%x6, 0(%x16)  #214 pc 1000
-	addi	%x6, %x16, 0  #214 pc 1004
-	sw	%x1, 0(%x2)  #214 pc 1008
-	addi	%x2, %x2, 4  #214 pc 1012
-	jal	%x1, h.213  #214 pc 1016
-	addi	%x2, %x2, -4  #214 pc 1020
-	lw	%x1, 0(%x2) #214 pc 1024
-	sw	%x1, 0(%x2)  #214 pc 1028
-	addi	%x2, %x2, 4  #214 pc 1032
-	jal	%x1, print_int.193  #214 pc 1036
-	addi	%x2, %x2, -4  #214 pc 1040
-	lw	%x1, 0(%x2) #214 pc 1044
-	sw	%x1, 0(%x2)  #215 pc 1048
-	addi	%x2, %x2, 4  #215 pc 1052
-	jal	%x1, min_caml_print_newline  #215 pc 1056
-	addi	%x2, %x2, -4  #215 pc 1060
-	lw	%x1, 0(%x2) #215 pc 1064
+	addi	%x31, %x0, 1
+	slli	%x4, %x31, 13
+	slli	%x5, %x31, 16
+	slli	%x2, %x31, 24
+	add	%x3, %x2, %x4
+	addi	%x6, %x0, 1  #0 pc 920
+	addi	%x7, %x0, 2  #0 pc 924
+	addi	%x8, %x0, 3  #0 pc 928
+	addi	%x9, %x0, 4  #0 pc 932
+	addi	%x10, %x0, 5  #0 pc 936
+	addi	%x11, %x0, 6  #0 pc 940
+	addi	%x12, %x0, 7  #0 pc 944
+	addi	%x13, %x0, 8  #0 pc 948
+	addi	%x14, %x0, 9  #0 pc 952
+	addi	%x15, %x0, 10  #0 pc 956
+	addi	%x16, %x3, 0  #214 pc 960
+	addi	%x3, %x3, 40  #214 pc 964
+	sw	%x15, 36(%x16)  #214 pc 968
+	sw	%x14, 32(%x16)  #214 pc 972
+	sw	%x13, 28(%x16)  #214 pc 976
+	sw	%x12, 24(%x16)  #214 pc 980
+	sw	%x11, 20(%x16)  #214 pc 984
+	sw	%x10, 16(%x16)  #214 pc 988
+	sw	%x9, 12(%x16)  #214 pc 992
+	sw	%x8, 8(%x16)  #214 pc 996
+	sw	%x7, 4(%x16)  #214 pc 1000
+	sw	%x6, 0(%x16)  #214 pc 1004
+	addi	%x6, %x16, 0  #214 pc 1008
+	sw	%x1, 0(%x2)  #214 pc 1012
+	addi	%x2, %x2, 4  #214 pc 1016
+	jal	%x1, h.213  #214 pc 1020
+	addi	%x2, %x2, -4  #214 pc 1024
+	lw	%x1, 0(%x2) #214 pc 1028
+	sw	%x1, 0(%x2)  #214 pc 1032
+	addi	%x2, %x2, 4  #214 pc 1036
+	jal	%x1, print_int.193  #214 pc 1040
+	addi	%x2, %x2, -4  #214 pc 1044
+	lw	%x1, 0(%x2) #214 pc 1048
+	sw	%x1, 0(%x2)  #215 pc 1052
+	addi	%x2, %x2, 4  #215 pc 1056
+	jal	%x1, min_caml_print_newline  #215 pc 1060
+	addi	%x2, %x2, -4  #215 pc 1064
+	lw	%x1, 0(%x2) #215 pc 1068

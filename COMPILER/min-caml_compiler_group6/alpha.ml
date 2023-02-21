@@ -4,8 +4,7 @@ open KNormal
 
 let find x env = try M.find x env with Not_found -> x
 
-(* ���ֹ�ξ������¸�����С������ *)
-let rec g' env n = function (* ���Ѵ��롼�������� (caml2html: alpha_g) *)
+let rec g' env n = function 
   | Unit -> Unit
   | Int(i) -> Int(i)
   | Float(d) -> Float(d)
@@ -31,11 +30,11 @@ let rec g' env n = function (* ���Ѵ��롼�������� (cam
   | Out(x, _) -> Out(find x env, n)
   | IfEq(x, y, e1, e2, _) -> IfEq(find x env, find y env, g' env n e1, g' env n e2, n)
   | IfLE(x, y, e1, e2, _) -> IfLE(find x env, find y env, g' env n e1, g' env n e2, n)
-  | Let((x, t), e1, e2, _) -> (* let�Φ��Ѵ� (caml2html: alpha_let) *)
+  | Let((x, t), e1, e2, _) -> 
       let x' = Id.genid x in
       Let((x', t), g' env n e1, g' (M.add x x' env) n e2, n)
   | Var(x, _) -> Var(find x env, n)
-  | LetRec({ name = (x, t); args = yts; body = e1 }, e2, _) -> (* let rec�Φ��Ѵ� (caml2html: alpha_letrec) *)
+  | LetRec({ name = (x, t); args = yts; body = e1 }, e2, _) -> 
       let env = M.add x (Id.genid x) env in
       let ys = List.map fst yts in
       let env' = M.add_list2 ys (List.map Id.genid ys) env in
@@ -45,7 +44,7 @@ let rec g' env n = function (* ���Ѵ��롼�������� (cam
              g' env n e2, n)
   | App(x, ys, _) -> App(find x env, List.map (fun y -> find y env) ys, n)
   | Tuple(xs, _) -> Tuple(List.map (fun x -> find x env) xs, n)
-  | LetTuple(xts, y, e, _) -> (* LetTuple�Φ��Ѵ� (caml2html: alpha_lettuple) *)
+  | LetTuple(xts, y, e, _) ->
       let xs = List.map fst xts in
       let env' = M.add_list2 xs (List.map Id.genid xs) env in
       LetTuple(List.map (fun (x, t) -> (find x env', t)) xts,
@@ -57,7 +56,7 @@ let rec g' env n = function (* ���Ѵ��롼�������� (cam
   | ExtFunApp(x, ys, _) -> ExtFunApp(x, List.map (fun y -> find y env) ys, n)
 
 (* (Id.t * Id.t) * t -> t *)
-let rec g env = function (* ���Ѵ��롼�������� (caml2html: alpha_g) *)
+let rec g env = function 
   | Unit -> Unit
   | Int(i) -> Int(i)
   | Float(d) -> Float(d)
@@ -87,11 +86,11 @@ let rec g env = function (* ���Ѵ��롼�������� (caml2h
   | Sethp(x, n) -> Sethp(find x env, n)
   | IfEq(x, y, e1, e2, n) -> IfEq(find x env, find y env, g env e1, g env e2, n)
   | IfLE(x, y, e1, e2, n) -> IfLE(find x env, find y env, g env e1, g env e2, n)
-  | Let((x, t), e1, e2, n) -> (* let�Φ��Ѵ� (caml2html: alpha_let) *)
+  | Let((x, t), e1, e2, n) -> 
       let x' = Id.genid x in
       Let((x', t), g env e1, g (M.add x x' env) e2, n)
   | Var(x, n) -> Var(find x env, n)
-  | LetRec({ name = (x, t); args = yts; body = e1 }, e2, n) -> (* let rec�Φ��Ѵ� (caml2html: alpha_letrec) *)
+  | LetRec({ name = (x, t); args = yts; body = e1 }, e2, n) -> 
       let env = M.add x (Id.genid x) env in
       let ys = List.map fst yts in
       let env' = M.add_list2 ys (List.map Id.genid ys) env in
@@ -101,7 +100,7 @@ let rec g env = function (* ���Ѵ��롼�������� (caml2h
              g env e2, n)
   | App(x, ys, n) -> App(find x env, List.map (fun y -> find y env) ys, n)
   | Tuple(xs, n) -> Tuple(List.map (fun x -> find x env) xs, n)
-  | LetTuple(xts, y, e, n) -> (* LetTuple�Φ��Ѵ� (caml2html: alpha_lettuple) *)
+  | LetTuple(xts, y, e, n) -> 
       let xs = List.map fst xts in
       let env' = M.add_list2 xs (List.map Id.genid xs) env in
       LetTuple(List.map (fun (x, t) -> (find x env', t)) xts,

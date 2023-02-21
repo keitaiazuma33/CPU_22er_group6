@@ -1,6 +1,8 @@
 .section	".rodata"
 .align	8
 .section	".text"
+	nop
+	j min_caml_start
 mul_abs.175:  #pc 0
 	addi	%x31, %x0, -1  #pc 0
 	beq	%x8, %x31, 12  #57 pc 4
@@ -239,73 +241,74 @@ g.215:  #pc 824
 	nop #pc 832
 .global	min_caml_start
 min_caml_start:
-	addi	%x2, %x0, 10000000
-	addi	%x3, %x0, 10002000
-	addi	%x4, %x0, 8192
-	addi	%x5, %x0, 65536
-	addi	%x6, %x0, 10  #0 pc 852
-	addi	%x7, %x0, 1  #0 pc 856
-	sw	%x1, 0(%x2)  #210 pc 860
-	addi	%x2, %x2, 4  #210 pc 864
-	jal	%x1, create_array.203  #210 pc 868
-	addi	%x2, %x2, -4  #210 pc 872
-	lw	%x1, 0(%x2) #210 pc 876
-	sw	%x6, 0(%x2)  #211 pc 880
-	sw	%x1, 4(%x2)  #211 pc 884
-	addi	%x2, %x2, 8  #211 pc 888
-	jal	%x1, f.213  #211 pc 892
-	addi	%x2, %x2, -8  #211 pc 896
-	lw	%x1, 4(%x2) #211 pc 900
-	addi	%x7, %x0, 67890  #0 pc 904
-	lw	%x8, 0(%x2)  #213 pc 908
-	lw	%x9, 0(%x8)  #213 pc 912
-	add	%x10, %x9, %x9  #214 pc 916
-	add	%x11, %x10, %x10  #215 pc 920
-	add	%x12, %x11, %x11  #216 pc 924
-	add	%x13, %x12, %x12  #217 pc 928
-	add	%x14, %x13, %x13  #218 pc 932
-	add	%x15, %x14, %x14  #219 pc 936
-	add	%x16, %x15, %x15  #220 pc 940
-	add	%x17, %x16, %x16  #221 pc 944
-	add	%x18, %x17, %x17  #222 pc 948
-	add	%x19, %x18, %x18  #223 pc 952
-	add	%x20, %x19, %x19  #224 pc 956
-	add	%x21, %x20, %x20  #225 pc 960
-	add	%x22, %x21, %x21  #226 pc 964
-	add	%x23, %x22, %x22  #227 pc 968
-	add	%x24, %x23, %x23  #228 pc 972
-	lw	%x8, 4(%x8)  #230 pc 976
-	beq	%x8, %x0, 12  #230 pc 980
-	j	be_else.441 #pc 984
-	nop #pc 988
-	addi	%x6, %x7, 0  #0 pc 992
-	sw	%x1, 4(%x2)  #230 pc 996
-	addi	%x2, %x2, 8  #230 pc 1000
-	jal	%x1, g.215  #230 pc 1004
-	addi	%x2, %x2, -8  #230 pc 1008
-	lw	%x1, 4(%x2) #230 pc 1012
-	j	be_cont.442 #pc 1016
-	nop #pc 1020
-be_else.441: #pc 1024
-	add	%x7, %x9, %x10  #231 pc 1024
-	add	%x7, %x7, %x11  #231 pc 1028
-	add	%x7, %x7, %x12  #231 pc 1032
-	add	%x7, %x7, %x13  #231 pc 1036
-	add	%x7, %x7, %x14  #231 pc 1040
-	add	%x7, %x7, %x15  #231 pc 1044
-	add	%x7, %x7, %x16  #231 pc 1048
-	add	%x7, %x7, %x17  #231 pc 1052
-	add	%x7, %x7, %x18  #231 pc 1056
-	add	%x7, %x7, %x19  #231 pc 1060
-	add	%x7, %x7, %x20  #231 pc 1064
-	add	%x7, %x7, %x21  #231 pc 1068
-	add	%x7, %x7, %x22  #231 pc 1072
-	add	%x7, %x7, %x23  #231 pc 1076
-	add	%x7, %x7, %x24  #231 pc 1080
-	add	%x6, %x7, %x6  #231 pc 1084
-be_cont.442: #pc 1088
-	sw	%x1, 4(%x2)  #229 pc 1088
-	addi	%x2, %x2, 8  #229 pc 1092
-	jal	%x1, print_int.193  #229 pc 1096
-	addi	%x2, %x2, -8  #229 pc 1100
-	lw	%x1, 4(%x2) #229 pc 1104
+	addi	%x31, %x0, 1
+	slli	%x4, %x31, 13
+	slli	%x5, %x31, 16
+	slli	%x2, %x31, 24
+	add	%x3, %x2, %x4
+	addi	%x6, %x0, 10  #0 pc 856
+	addi	%x7, %x0, 1  #0 pc 860
+	sw	%x1, 0(%x2)  #210 pc 864
+	addi	%x2, %x2, 4  #210 pc 868
+	jal	%x1, create_array.203  #210 pc 872
+	addi	%x2, %x2, -4  #210 pc 876
+	lw	%x1, 0(%x2) #210 pc 880
+	sw	%x6, 0(%x2)  #211 pc 884
+	sw	%x1, 4(%x2)  #211 pc 888
+	addi	%x2, %x2, 8  #211 pc 892
+	jal	%x1, f.213  #211 pc 896
+	addi	%x2, %x2, -8  #211 pc 900
+	lw	%x1, 4(%x2) #211 pc 904
+	addi	%x7, %x0, 67890  #0 pc 908
+	lw	%x8, 0(%x2)  #213 pc 912
+	lw	%x9, 0(%x8)  #213 pc 916
+	add	%x10, %x9, %x9  #214 pc 920
+	add	%x11, %x10, %x10  #215 pc 924
+	add	%x12, %x11, %x11  #216 pc 928
+	add	%x13, %x12, %x12  #217 pc 932
+	add	%x14, %x13, %x13  #218 pc 936
+	add	%x15, %x14, %x14  #219 pc 940
+	add	%x16, %x15, %x15  #220 pc 944
+	add	%x17, %x16, %x16  #221 pc 948
+	add	%x18, %x17, %x17  #222 pc 952
+	add	%x19, %x18, %x18  #223 pc 956
+	add	%x20, %x19, %x19  #224 pc 960
+	add	%x21, %x20, %x20  #225 pc 964
+	add	%x22, %x21, %x21  #226 pc 968
+	add	%x23, %x22, %x22  #227 pc 972
+	add	%x24, %x23, %x23  #228 pc 976
+	lw	%x8, 4(%x8)  #230 pc 980
+	beq	%x8, %x0, 12  #230 pc 984
+	j	be_else.441 #pc 988
+	nop #pc 992
+	addi	%x6, %x7, 0  #0 pc 996
+	sw	%x1, 4(%x2)  #230 pc 1000
+	addi	%x2, %x2, 8  #230 pc 1004
+	jal	%x1, g.215  #230 pc 1008
+	addi	%x2, %x2, -8  #230 pc 1012
+	lw	%x1, 4(%x2) #230 pc 1016
+	j	be_cont.442 #pc 1020
+	nop #pc 1024
+be_else.441: #pc 1028
+	add	%x7, %x9, %x10  #231 pc 1028
+	add	%x7, %x7, %x11  #231 pc 1032
+	add	%x7, %x7, %x12  #231 pc 1036
+	add	%x7, %x7, %x13  #231 pc 1040
+	add	%x7, %x7, %x14  #231 pc 1044
+	add	%x7, %x7, %x15  #231 pc 1048
+	add	%x7, %x7, %x16  #231 pc 1052
+	add	%x7, %x7, %x17  #231 pc 1056
+	add	%x7, %x7, %x18  #231 pc 1060
+	add	%x7, %x7, %x19  #231 pc 1064
+	add	%x7, %x7, %x20  #231 pc 1068
+	add	%x7, %x7, %x21  #231 pc 1072
+	add	%x7, %x7, %x22  #231 pc 1076
+	add	%x7, %x7, %x23  #231 pc 1080
+	add	%x7, %x7, %x24  #231 pc 1084
+	add	%x6, %x7, %x6  #231 pc 1088
+be_cont.442: #pc 1092
+	sw	%x1, 4(%x2)  #229 pc 1092
+	addi	%x2, %x2, 8  #229 pc 1096
+	jal	%x1, print_int.193  #229 pc 1100
+	addi	%x2, %x2, -8  #229 pc 1104
+	lw	%x1, 4(%x2) #229 pc 1108

@@ -1,6 +1,6 @@
 (* give names to intermediate values (K-normalization) *)
 
-type t = (* K��������μ� (caml2html: knormal_t) *)
+type t = 
   | Unit
   | Int of int
   | Float of float
@@ -21,8 +21,8 @@ type t = (* K��������μ� (caml2html: knormal_t) *)
   | FAbs of Id.t * int
   | FtoI of Id.t * int
   | ItoF of Id.t * int
-  | IfEq of Id.t * Id.t * t * t * int (* ��� + ʬ�� (caml2html: knormal_branch) *)
-  | IfLE of Id.t * Id.t * t * t * int (* ��� + ʬ�� *)
+  | IfEq of Id.t * Id.t * t * t * int 
+  | IfLE of Id.t * Id.t * t * t * int 
   | Let of (Id.t * Type.t) * t * t * int
   | Var of Id.t * int
   | LetRec of fundef * t * int
@@ -42,7 +42,7 @@ type t = (* K��������μ� (caml2html: knormal_t) *)
   | Sethp of Id.t * int
 and fundef = { name : Id.t * Type.t; args : (Id.t * Type.t) list; body : t }
 
-let rec fv = function (* ���˽и�����ʼ�ͳ�ʡ��ѿ� (caml2html: knormal_fv) *)
+let rec fv = function 
   | Unit | Int(_) | Float(_) | ExtArray(_,_) -> S.empty
   | Neg(x,_) | FNeg(x,_) | Sqrt(x,_) | FAbs(x,_) | FtoI(x,_) | ItoF(x,_) 
   | Ini(x,_) | Inf(x,_) | Out(x,_) | ItoIA(x,_) | ItoFA(x,_) | Gethp(x,_) | Sethp(x,_) -> S.singleton x
@@ -60,7 +60,7 @@ let rec fv = function (* ���˽и�����ʼ�ͳ�ʡ��ѿ� (ca
   | LetTuple(xs, y, e, _) -> S.add y (S.diff (fv e) (S.of_list (List.map fst xs)))
 
 (* (t * Type.t) * (t -> (t * Type.t)) -> t * Type.t *)
-let insert_let (e, t) k = (* let��������������ؿ� (caml2html: knormal_insert) *)
+let insert_let (e, t) k = 
   match e with
   | Var(x, _) -> k x
   | _ ->
@@ -69,9 +69,9 @@ let insert_let (e, t) k = (* let��������������ؿ� 
       Let((x, t), e, e', 0), t'
 
 (* (Id.t * Type.t) * Syntax.t -> t * Type.t *)
-let rec g env = function (* K�������롼�������� (caml2html: knormal_g) *)
+let rec g env = function 
   | Syntax.Unit -> Unit, Type.Unit
-  | Syntax.Bool(b) -> Int(if b then 1 else 0), Type.Int (* ������true, false������1, 0���Ѵ� (caml2html: knormal_bool) *)
+  | Syntax.Bool(b) -> Int(if b then 1 else 0), Type.Int 
   | Syntax.Int(i) -> Int(i), Type.Int
   | Syntax.Float(d) -> Float(d), Type.Float
   | Syntax.Not(e,n) -> g env (Syntax.If(e, Syntax.Bool(false), Syntax.Bool(true),n))
@@ -178,7 +178,7 @@ let rec g env = function (* K�������롼�������� (c
             (fun y -> FDiv(x, y, n), Type.Float))
   | Syntax.Eq (_, _, n) | Syntax.LE (_, _, n) as cmp ->
       g env (Syntax.If(cmp, Syntax.Bool(true), Syntax.Bool(false), n))
-  | Syntax.If(Syntax.Not(e1, _), e2, e3, n) -> g env (Syntax.If(e1, e3, e2, n)) (* not�ˤ��ʬ�����Ѵ� (caml2html: knormal_not) *)
+  | Syntax.If(Syntax.Not(e1, _), e2, e3, n) -> g env (Syntax.If(e1, e3, e2, n)) 
   | Syntax.If(Syntax.Eq(e1, e2, _), e3, e4, n) ->
       insert_let (g env e1)
         (fun x -> insert_let (g env e2)
@@ -193,13 +193,13 @@ let rec g env = function (* K�������롼�������� (c
               let e3', t3 = g env e3 in
               let e4', t4 = g env e4 in
               IfLE(x, y, e3', e4', n), t3))
-  | Syntax.If(e1, e2, e3, n) -> g env (Syntax.If(Syntax.Eq(e1, Syntax.Bool(false), n), e3, e2, n)) (* ��ӤΤʤ�ʬ�����Ѵ� (caml2html: knormal_if) *)
+  | Syntax.If(e1, e2, e3, n) -> g env (Syntax.If(Syntax.Eq(e1, Syntax.Bool(false), n), e3, e2, n)) 
   | Syntax.Let((x, t), e1, e2, n) ->
       let e1', t1 = g env e1 in
       let e2', t2 = g (M.add x t env) e2 in
       Let((x, t), e1', e2', n), t2
   | Syntax.Var(x, n) when M.mem x env -> Var(x, n), M.find x env
-  | Syntax.Var(x, n) -> (* ��������λ��� (caml2html: knormal_extarray) *)
+  | Syntax.Var(x, n) -> 
       (match M.find x !Typing.extenv with
       | Type.Array(_) as t -> ExtArray (x, n), t
       | _ -> failwith (Printf.sprintf "external variable %s does not have an array type from knormal.ml" x))
@@ -208,7 +208,7 @@ let rec g env = function (* K�������롼�������� (c
       let e2', t2 = g env' e2 in
       let e1', t1 = g (M.add_list yts env') e1 in
       LetRec({ name = (x, t); args = yts; body = e1' }, e2', n), t2
-  | Syntax.App(Syntax.Var(f, _), e2s, n) when not (M.mem f env) -> (* �����ؿ��θƤӽФ� (caml2html: knormal_extfunapp) *)
+  | Syntax.App(Syntax.Var(f, _), e2s, n) when not (M.mem f env) -> 
       (match M.find f !Typing.extenv with
       | Type.Fun(_, t) ->
           let rec bind xs = function (* "xs" are identifiers for the arguments *)

@@ -3,10 +3,10 @@
 open KNormal
 
 (* t -> t *)
-let rec f = function (* ネストしたletの簡約 (caml2html: assoc_f) *)
+let rec f = function 
   | IfEq(x, y, e1, e2, n) -> IfEq(x, y, f e1, f e2, n)
   | IfLE(x, y, e1, e2, n) -> IfLE(x, y, f e1, f e2, n)
-  | Let(xt, e1, e2, n) -> (* letの場合 (caml2html: assoc_let) *)
+  | Let(xt, e1, e2, n) ->
       let rec insert = function
         | Let(yt, e3, e4, n) -> Let(yt, e3, insert e4, n)
         | LetRec(fundefs, e, n) -> LetRec(fundefs, insert e, n)
