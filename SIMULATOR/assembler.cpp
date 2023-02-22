@@ -107,6 +107,7 @@ string bury_zero(string imm, int dig_num){
     if(imm.size() > dig_num){
         s0 = imm.substr(imm.size()-dig_num, dig_num);//imm.size()-dig_num
         // cout << "s0" << s0 << endl;
+        // ofs << "即値over" << endl;
     } 
     else{
         // string imm = "1010";
@@ -302,7 +303,7 @@ int main(){
         // ラベルを見つけたらmap配列に格納
         //  map<string, int> score; 
         
-        // cout << "PC " << pc << endl;
+        cout << "PC " << pc << endl;
         if((line.find("l.") != std::string::npos) && (line.find(':') < 100) &&  (line.find('!') != std::string::npos)){
             vector<string> words; //[0];
             words.clear();
@@ -370,6 +371,9 @@ int main(){
     string s;
     s = "/Users/maimai/my-3A/cpu-simu/asm_result.txt";
     ofstream ofs(s);
+    string s2;
+    s2 = "/Users/maimai/my-3A/cpu-simu/imm_over.txt";
+    ofstream ofs2(s2);
     while(pc < pc_size) {
         // sの部分は”ファイルパス\\ファイル名.txt”のようにベタ打ちでも可
         // ofs <<"testmessage\n" << endl;
@@ -532,7 +536,9 @@ int main(){
         string shamt;
         // bitset<100> imm(imm_int);
         string rd, rs1, rs2; 
-        
+        bool is_minus = false;
+        if(op1[0] == '-' || op2[0] == '-' || op3[0] == '-') is_minus = true;
+
         if(is_float[1]) rd = to_bit(float_table.at(f_index));
         else if(((op1[0] >= '0') && (op1[0] <= '9')) || (op1[0] == '-')) imm = convert(op1);
         else rd = convert(op1); //zeroなどから01列に
@@ -552,6 +558,7 @@ int main(){
         // ofs << line << endl;
         // cout << op.conv_type(opcode) << endl;;
         string rm = "000";
+        // ofs2 << pc << endl;
         switch (op.conv_type(opcode)){
             case R:
                 if(opcode == "add"){
@@ -603,6 +610,7 @@ int main(){
             case I:
                 // addi rd,rs1,imm
                 // if(imm == "") imm = rs2; //op[3];
+                if(imm.size() >= 12 && (!is_minus)) ofs2 << line << " 即値over" << endl;
                 imm = bury_zero(imm, 12);
                 
                 shamt = bury_zero(imm, 5);
@@ -668,22 +676,25 @@ int main(){
                 } 
                 continue;
             case S:
+                if(imm.size() > 12 && (!is_minus)) ofs2 << line << " 即値over" << endl;
                 imm = bury_zero(imm, 12);
+                reverse(imm.begin(), imm.end());
                 rs1 = rs2; rs2 = rd;
                 if(opcode == "sb"){
-                    ofs << imm.substr(5,7)+rs2+rs1+"000"+imm.substr(0,5)+"0100011"<<endl;
+                    ofs << sub_reverse(imm,5,7)+rs2+rs1+"000"+sub_reverse(imm,0,5)+"0100011"<<endl;
                     pc+=4;
                     // offset[11:5]+rs2+rs1+000+offset[4:0]+0100011
                 }else if(opcode == "sh"){
-                    ofs << imm.substr(5,7)+rs2+rs1+"001"+imm.substr(0,5)+"0100011"<<endl;
+                    ofs << sub_reverse(imm,5,7)+rs2+rs1+"001"+sub_reverse(imm,0,5)+"0100011"<<endl;
                     pc+=4;
                 }else if(opcode == "sw"){
                     // cout << "sw" << imm << rs1 << rs2 << endl;
-                    ofs << imm.substr(5,7)+rs2+rs1+"010"+imm.substr(0,5)+"0100011"<<endl;
+                    ofs << sub_reverse(imm,5,7)+rs2+rs1+"010"+sub_reverse(imm,0,5)+"0100011"<<endl;
                     pc+=4;
                 }
                 continue;
-            case J: 
+            case J:
+                if(imm.size() > 21 && (!is_minus)) ofs2 << line << " 即値over" << endl; 
                 offset = bury_zero(imm, 21);
                 // cout << offset << endl;
                 reverse(offset.begin(), offset.end());
@@ -697,6 +708,7 @@ int main(){
                 pc += 4;
                 continue;
             case B:
+                if(imm.size() > 13 && (!is_minus)) ofs2 << line << " 即値over" << endl;
                 imm = bury_zero(imm, 13);
                 // rd,rs1をrs1,rs2に
                 rs2 = rs1; rs1 = rd;
@@ -728,13 +740,21 @@ int main(){
                 // continue;
             case U:
                 // imm = op[1];
-                imm = bury_zero(imm, 32);
+                cout << "case U " << imm << endl;
+                // if(imm.size() > 32 && (!is_minus)) ofs2 << line << " 即値over" << endl;
+                // imm = bury_zero(imm, 32);
+                // reverse(imm.begin(), imm.end());
+                while(imm.size() < 32){
+                    imm = '0' + imm;
+                }
+                ofs2 << "lui " << imm << endl;
+                reverse(imm.begin(), imm.end());
                 if(opcode == "lui"){
                     
-                    ofs << imm.substr(12,20) + rd + "0110111"<<endl; //imm[31:12]
+                    ofs << sub_reverse(imm,12,20) + rd + "0110111"<<endl; //imm[31:12]
                 }else if(opcode == "auipc"){
                     // imm = op[1];
-                    ofs << imm.substr(12,20) + rd + "0010111"<<endl;
+                    ofs << sub_reverse(imm,12,20) + rd + "0010111"<<endl;
                 }
                 pc += 4;
                 continue;
@@ -777,12 +797,15 @@ int main(){
                     ofs << "0100000"+rs2+rs1+"000"+rd+"1010011" << endl;
                 }else if(opcode == "flw"){
                     rs1 = rs2;
+                    if(imm.size() > 12 && (!is_minus)) ofs2 << line << " 即値over" << endl;
                     imm = bury_zero(imm, 12);
                     ofs << imm.substr(0,12)+rs1+"010"+rd+"0000111" << endl;
                 }else if(opcode == "fsw"){
+                    if(imm.size() > 12 && (!is_minus)) ofs2 << line << " 即値over" << endl;
                     imm = bury_zero(imm, 12);
+                    reverse(imm.begin(), imm.end());
                     rs1 = rs2; rs2 = rd;
-                    ofs << imm.substr(5,7)+rs2+rs1+"010"+imm.substr(0,5)+"0100011" << endl;
+                    ofs << sub_reverse(imm,5,7)+rs2+rs1+"010"+sub_reverse(imm,0,5)+"0100011" << endl;
                 }
                 pc += 4;
                 // 以下省略
