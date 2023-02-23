@@ -10467,7 +10467,7 @@ min_caml_start:
 	lw	%x1, 140(%x2) #362 pc 39692
 	addi	%x7, %x3, 0  #845 pc 39696
 	addi	%x3, %x3, 24  #845 pc 39700
-	addi	%x8, %x0, 3268  #845 read_screen_settings.2732 pc 39704
+	lui	%x8, 3268  #845 read_screen_settings.2732 pc 39704
 	sw	%x8, 0(%x7)  #845 pc 39708
 	lw	%x8, 12(%x2)  #845 pc 39712
 	sw	%x8, 20(%x7)  #845 pc 39716
@@ -10481,7 +10481,7 @@ min_caml_start:
 	sw	%x12, 4(%x7)  #845 pc 39748
 	addi	%x12, %x3, 0  #878 pc 39752
 	addi	%x3, %x3, 12  #878 pc 39756
-	addi	%x13, %x0, 3876  #878 read_light.2734 pc 39760
+	lui	%x13, 3876  #878 read_light.2734 pc 39760
 	sw	%x13, 0(%x12)  #878 pc 39764
 	lw	%x13, 16(%x2)  #878 pc 39768
 	sw	%x13, 8(%x12)  #878 pc 39772
@@ -10489,31 +10489,31 @@ min_caml_start:
 	sw	%x14, 4(%x12)  #878 pc 39780
 	addi	%x15, %x3, 0  #941 pc 39784
 	addi	%x3, %x3, 8  #941 pc 39788
-	addi	%x16, %x0, 5212  #941 read_nth_object.2739 pc 39792
+	lui	%x16, 5212  #941 read_nth_object.2739 pc 39792
 	sw	%x16, 0(%x15)  #941 pc 39796
 	lw	%x16, 4(%x2)  #941 pc 39800
 	sw	%x16, 4(%x15)  #941 pc 39804
 	addi	%x17, %x3, 0  #1024 pc 39808
 	addi	%x3, %x3, 12  #1024 pc 39812
-	addi	%x18, %x0, 6776  #1024 read_object.2741 pc 39816
+	lui	%x18, 6776  #1024 read_object.2741 pc 39816
 	sw	%x18, 0(%x17)  #1024 pc 39820
 	sw	%x15, 8(%x17)  #1024 pc 39824
 	lw	%x15, 0(%x2)  #1024 pc 39828
 	sw	%x15, 4(%x17)  #1024 pc 39832
 	addi	%x18, %x3, 0  #1033 pc 39836
 	addi	%x3, %x3, 8  #1033 pc 39840
-	addi	%x19, %x0, 6904  #1033 read_all_object.2743 pc 39844
+	lui	%x19, 6904  #1033 read_all_object.2743 pc 39844
 	sw	%x19, 0(%x18)  #1033 pc 39848
 	sw	%x17, 4(%x18)  #1033 pc 39852
 	addi	%x17, %x3, 0  #1057 pc 39856
 	addi	%x3, %x3, 8  #1057 pc 39860
-	addi	%x19, %x0, 7184  #1057 read_and_network.2749 pc 39864
+	lui	%x19, 7184  #1057 read_and_network.2749 pc 39864
 	sw	%x19, 0(%x17)  #1057 pc 39868
 	lw	%x19, 28(%x2)  #1057 pc 39872
 	sw	%x19, 4(%x17)  #1057 pc 39876
 	addi	%x20, %x3, 0  #1066 pc 39880
 	addi	%x3, %x3, 24  #1066 pc 39884
-	addi	%x21, %x0, 7296  #1066 read_parameter.2751 pc 39888
+	lui	%x21, 7296  #1066 read_parameter.2751 pc 39888
 	sw	%x21, 0(%x20)  #1066 pc 39892
 	sw	%x7, 20(%x20)  #1066 pc 39896
 	sw	%x12, 16(%x20)  #1066 pc 39900
@@ -10523,28 +10523,28 @@ min_caml_start:
 	sw	%x7, 4(%x20)  #1066 pc 39916
 	addi	%x12, %x3, 0  #1091 pc 39920
 	addi	%x3, %x3, 8  #1091 pc 39924
-	addi	%x17, %x0, 7488  #1091 solver_rect_surface.2753 pc 39928
+	lui	%x17, 7488  #1091 solver_rect_surface.2753 pc 39928
 	sw	%x17, 0(%x12)  #1091 pc 39932
 	lw	%x17, 40(%x2)  #1091 pc 39936
 	sw	%x17, 4(%x12)  #1091 pc 39940
 	addi	%x18, %x3, 0  #1106 pc 39944
 	addi	%x3, %x3, 8  #1106 pc 39948
-	addi	%x21, %x0, 8020  #1106 solver_rect.2762 pc 39952
+	lui	%x21, 8020  #1106 solver_rect.2762 pc 39952
 	sw	%x21, 0(%x18)  #1106 pc 39956
 	sw	%x12, 4(%x18)  #1106 pc 39960
 	addi	%x12, %x3, 0  #1115 pc 39964
 	addi	%x3, %x3, 8  #1115 pc 39968
-	addi	%x21, %x0, 8288  #1115 solver_surface.2768 pc 39972
+	lui	%x21, 8288  #1115 solver_surface.2768 pc 39972
 	sw	%x21, 0(%x12)  #1115 pc 39976
 	sw	%x17, 4(%x12)  #1115 pc 39980
 	addi	%x21, %x3, 0  #1166 pc 39984
 	addi	%x3, %x3, 8  #1166 pc 39988
-	addi	%x22, %x0, 9444  #1166 solver_second.2787 pc 39992
+	lui	%x22, 9444  #1166 solver_second.2787 pc 39992
 	sw	%x22, 0(%x21)  #1166 pc 39996
 	sw	%x17, 4(%x21)  #1166 pc 40000
 	addi	%x22, %x3, 0  #1195 pc 40004
 	addi	%x3, %x3, 20  #1195 pc 40008
-	addi	%x23, %x0, 9952  #1195 solver.2793 pc 40012
+	lui	%x23, 9952  #1195 solver.2793 pc 40012
 	sw	%x23, 0(%x22)  #1195 pc 40016
 	sw	%x12, 16(%x22)  #1195 pc 40020
 	sw	%x21, 12(%x22)  #1195 pc 40024
@@ -10552,22 +10552,22 @@ min_caml_start:
 	sw	%x16, 4(%x22)  #1195 pc 40032
 	addi	%x12, %x3, 0  #1227 pc 40036
 	addi	%x3, %x3, 8  #1227 pc 40040
-	addi	%x18, %x0, 10308  #1227 solver_rect_fast.2797 pc 40044
+	lui	%x18, 10308  #1227 solver_rect_fast.2797 pc 40044
 	sw	%x18, 0(%x12)  #1227 pc 40048
 	sw	%x17, 4(%x12)  #1227 pc 40052
 	addi	%x18, %x3, 0  #1260 pc 40056
 	addi	%x3, %x3, 8  #1260 pc 40060
-	addi	%x21, %x0, 11344  #1260 solver_surface_fast.2804 pc 40064
+	lui	%x21, 11344  #1260 solver_surface_fast.2804 pc 40064
 	sw	%x21, 0(%x18)  #1260 pc 40068
 	sw	%x17, 4(%x18)  #1260 pc 40072
 	addi	%x21, %x3, 0  #1269 pc 40076
 	addi	%x3, %x3, 8  #1269 pc 40080
-	addi	%x23, %x0, 11488  #1269 solver_second_fast.2810 pc 40084
+	lui	%x23, 11488  #1269 solver_second_fast.2810 pc 40084
 	sw	%x23, 0(%x21)  #1269 pc 40088
 	sw	%x17, 4(%x21)  #1269 pc 40092
 	addi	%x23, %x3, 0  #1289 pc 40096
 	addi	%x3, %x3, 20  #1289 pc 40100
-	addi	%x24, %x0, 11956  #1289 solver_fast.2816 pc 40104
+	lui	%x24, 11956  #1289 solver_fast.2816 pc 40104
 	sw	%x24, 0(%x23)  #1289 pc 40108
 	sw	%x18, 16(%x23)  #1289 pc 40112
 	sw	%x21, 12(%x23)  #1289 pc 40116
@@ -10575,17 +10575,17 @@ min_caml_start:
 	sw	%x16, 4(%x23)  #1289 pc 40124
 	addi	%x18, %x3, 0  #1309 pc 40128
 	addi	%x3, %x3, 8  #1309 pc 40132
-	addi	%x21, %x0, 12396  #1309 solver_surface_fast2.2820 pc 40136
+	lui	%x21, 12396  #1309 solver_surface_fast2.2820 pc 40136
 	sw	%x21, 0(%x18)  #1309 pc 40140
 	sw	%x17, 4(%x18)  #1309 pc 40144
 	addi	%x21, %x3, 0  #1317 pc 40148
 	addi	%x3, %x3, 8  #1317 pc 40152
-	addi	%x24, %x0, 12500  #1317 solver_second_fast2.2827 pc 40156
+	lui	%x24, 12500  #1317 solver_second_fast2.2827 pc 40156
 	sw	%x24, 0(%x21)  #1317 pc 40160
 	sw	%x17, 4(%x21)  #1317 pc 40164
 	addi	%x24, %x3, 0  #1336 pc 40168
 	addi	%x3, %x3, 20  #1336 pc 40172
-	addi	%x25, %x0, 12864  #1336 solver_fast2.2834 pc 40176
+	lui	%x25, 12864  #1336 solver_fast2.2834 pc 40176
 	sw	%x25, 0(%x24)  #1336 pc 40180
 	sw	%x18, 16(%x24)  #1336 pc 40184
 	sw	%x21, 12(%x24)  #1336 pc 40188
@@ -10593,23 +10593,23 @@ min_caml_start:
 	sw	%x16, 4(%x24)  #1336 pc 40196
 	addi	%x12, %x3, 0  #1433 pc 40200
 	addi	%x3, %x3, 8  #1433 pc 40204
-	addi	%x18, %x0, 15340  #1433 iter_setup_dirvec_constants.2846 pc 40208
+	lui	%x18, 15340  #1433 iter_setup_dirvec_constants.2846 pc 40208
 	sw	%x18, 0(%x12)  #1433 pc 40212
 	sw	%x16, 4(%x12)  #1433 pc 40216
 	addi	%x18, %x3, 0  #1450 pc 40220
 	addi	%x3, %x3, 12  #1450 pc 40224
-	addi	%x21, %x0, 15692  #1450 setup_dirvec_constants.2849 pc 40228
+	lui	%x21, 15692  #1450 setup_dirvec_constants.2849 pc 40228
 	sw	%x21, 0(%x18)  #1450 pc 40232
 	sw	%x15, 8(%x18)  #1450 pc 40236
 	sw	%x12, 4(%x18)  #1450 pc 40240
 	addi	%x12, %x3, 0  #1458 pc 40244
 	addi	%x3, %x3, 8  #1458 pc 40248
-	addi	%x21, %x0, 15720  #1458 setup_startp_constants.2851 pc 40252
+	lui	%x21, 15720  #1458 setup_startp_constants.2851 pc 40252
 	sw	%x21, 0(%x12)  #1458 pc 40256
 	sw	%x16, 4(%x12)  #1458 pc 40260
 	addi	%x21, %x3, 0  #1477 pc 40264
 	addi	%x3, %x3, 16  #1477 pc 40268
-	addi	%x25, %x0, 16236  #1477 setup_startp.2854 pc 40272
+	lui	%x25, 16236  #1477 setup_startp.2854 pc 40272
 	sw	%x25, 0(%x21)  #1477 pc 40276
 	lw	%x25, 92(%x2)  #1477 pc 40280
 	sw	%x25, 12(%x21)  #1477 pc 40284
@@ -10617,12 +10617,12 @@ min_caml_start:
 	sw	%x15, 4(%x21)  #1477 pc 40292
 	addi	%x12, %x3, 0  #1527 pc 40296
 	addi	%x3, %x3, 8  #1527 pc 40300
-	addi	%x26, %x0, 17300  #1527 check_all_inside.2876 pc 40304
+	lui	%x26, 17300  #1527 check_all_inside.2876 pc 40304
 	sw	%x26, 0(%x12)  #1527 pc 40308
 	sw	%x16, 4(%x12)  #1527 pc 40312
 	addi	%x26, %x3, 0  #1547 pc 40316
 	addi	%x3, %x3, 32  #1547 pc 40320
-	addi	%x27, %x0, 17468  #1547 shadow_check_and_group.2882 pc 40324
+	lui	%x27, 17468  #1547 shadow_check_and_group.2882 pc 40324
 	sw	%x27, 0(%x26)  #1547 pc 40328
 	sw	%x23, 28(%x26)  #1547 pc 40332
 	sw	%x17, 24(%x26)  #1547 pc 40336
@@ -10635,13 +10635,13 @@ min_caml_start:
 	sw	%x12, 4(%x26)  #1547 pc 40364
 	addi	%x29, %x3, 0  #1577 pc 40368
 	addi	%x3, %x3, 12  #1577 pc 40372
-	addi	%x30, %x0, 17960  #1577 shadow_check_one_or_group.2885 pc 40376
+	lui	%x30, 17960  #1577 shadow_check_one_or_group.2885 pc 40376
 	sw	%x30, 0(%x29)  #1577 pc 40380
 	sw	%x26, 8(%x29)  #1577 pc 40384
 	sw	%x19, 4(%x29)  #1577 pc 40388
 	addi	%x26, %x3, 0  #1592 pc 40392
 	addi	%x3, %x3, 24  #1592 pc 40396
-	addi	%x30, %x0, 18124  #1592 shadow_check_one_or_matrix.2888 pc 40400
+	lui	%x30, 18124  #1592 shadow_check_one_or_matrix.2888 pc 40400
 	sw	%x30, 0(%x26)  #1592 pc 40404
 	sw	%x23, 20(%x26)  #1592 pc 40408
 	sw	%x17, 16(%x26)  #1592 pc 40412
@@ -10650,7 +10650,7 @@ min_caml_start:
 	sw	%x28, 4(%x26)  #1592 pc 40424
 	addi	%x23, %x3, 0  #1628 pc 40428
 	addi	%x3, %x3, 40  #1628 pc 40432
-	addi	%x29, %x0, 18552  #1628 solve_each_element.2891 pc 40436
+	lui	%x29, 18552  #1628 solve_each_element.2891 pc 40436
 	sw	%x29, 0(%x23)  #1628 pc 40440
 	lw	%x29, 48(%x2)  #1628 pc 40444
 	sw	%x29, 36(%x23)  #1628 pc 40448
@@ -10669,13 +10669,13 @@ min_caml_start:
 	sw	%x18, 144(%x2)  #1669 pc 40500
 	addi	%x18, %x3, 0  #1669 pc 40504
 	addi	%x3, %x3, 12  #1669 pc 40508
-	addi	%x15, %x0, 19196  #1669 solve_one_or_network.2895 pc 40512
+	lui	%x15, 19196  #1669 solve_one_or_network.2895 pc 40512
 	sw	%x15, 0(%x18)  #1669 pc 40516
 	sw	%x23, 8(%x18)  #1669 pc 40520
 	sw	%x19, 4(%x18)  #1669 pc 40524
 	addi	%x15, %x3, 0  #1679 pc 40528
 	addi	%x3, %x3, 24  #1679 pc 40532
-	addi	%x23, %x0, 19340  #1679 trace_or_matrix.2899 pc 40536
+	lui	%x23, 19340  #1679 trace_or_matrix.2899 pc 40536
 	sw	%x23, 0(%x15)  #1679 pc 40540
 	sw	%x29, 20(%x15)  #1679 pc 40544
 	sw	%x30, 16(%x15)  #1679 pc 40548
@@ -10684,14 +10684,14 @@ min_caml_start:
 	sw	%x18, 4(%x15)  #1679 pc 40560
 	addi	%x18, %x3, 0  #1706 pc 40564
 	addi	%x3, %x3, 16  #1706 pc 40568
-	addi	%x22, %x0, 19684  #1706 judge_intersection.2903 pc 40572
+	lui	%x22, 19684  #1706 judge_intersection.2903 pc 40572
 	sw	%x22, 0(%x18)  #1706 pc 40576
 	sw	%x15, 12(%x18)  #1706 pc 40580
 	sw	%x29, 8(%x18)  #1706 pc 40584
 	sw	%x7, 4(%x18)  #1706 pc 40588
 	addi	%x15, %x3, 0  #1721 pc 40592
 	addi	%x3, %x3, 40  #1721 pc 40596
-	addi	%x22, %x0, 19832  #1721 solve_each_element_fast.2905 pc 40600
+	lui	%x22, 19832  #1721 solve_each_element_fast.2905 pc 40600
 	sw	%x22, 0(%x15)  #1721 pc 40604
 	sw	%x29, 36(%x15)  #1721 pc 40608
 	sw	%x25, 32(%x15)  #1721 pc 40612
@@ -10704,13 +10704,13 @@ min_caml_start:
 	sw	%x12, 4(%x15)  #1721 pc 40640
 	addi	%x12, %x3, 0  #1762 pc 40644
 	addi	%x3, %x3, 12  #1762 pc 40648
-	addi	%x22, %x0, 20508  #1762 solve_one_or_network_fast.2909 pc 40652
+	lui	%x22, 20508  #1762 solve_one_or_network_fast.2909 pc 40652
 	sw	%x22, 0(%x12)  #1762 pc 40656
 	sw	%x15, 8(%x12)  #1762 pc 40660
 	sw	%x19, 4(%x12)  #1762 pc 40664
 	addi	%x15, %x3, 0  #1772 pc 40668
 	addi	%x3, %x3, 20  #1772 pc 40672
-	addi	%x19, %x0, 20652  #1772 trace_or_matrix_fast.2913 pc 40676
+	lui	%x19, 20652  #1772 trace_or_matrix_fast.2913 pc 40676
 	sw	%x19, 0(%x15)  #1772 pc 40680
 	sw	%x29, 16(%x15)  #1772 pc 40684
 	sw	%x24, 12(%x15)  #1772 pc 40688
@@ -10718,52 +10718,52 @@ min_caml_start:
 	sw	%x12, 4(%x15)  #1772 pc 40696
 	addi	%x12, %x3, 0  #1796 pc 40700
 	addi	%x3, %x3, 16  #1796 pc 40704
-	addi	%x17, %x0, 20988  #1796 judge_intersection_fast.2917 pc 40708
+	lui	%x17, 20988  #1796 judge_intersection_fast.2917 pc 40708
 	sw	%x17, 0(%x12)  #1796 pc 40712
 	sw	%x15, 12(%x12)  #1796 pc 40716
 	sw	%x29, 8(%x12)  #1796 pc 40720
 	sw	%x7, 4(%x12)  #1796 pc 40724
 	addi	%x15, %x3, 0  #1817 pc 40728
 	addi	%x3, %x3, 12  #1817 pc 40732
-	addi	%x17, %x0, 21136  #1817 get_nvector_rect.2919 pc 40736
+	lui	%x17, 21136  #1817 get_nvector_rect.2919 pc 40736
 	sw	%x17, 0(%x15)  #1817 pc 40740
 	lw	%x17, 60(%x2)  #1817 pc 40744
 	sw	%x17, 8(%x15)  #1817 pc 40748
 	sw	%x27, 4(%x15)  #1817 pc 40752
 	addi	%x19, %x3, 0  #1825 pc 40756
 	addi	%x3, %x3, 8  #1825 pc 40760
-	addi	%x22, %x0, 21284  #1825 get_nvector_plane.2921 pc 40764
+	lui	%x22, 21284  #1825 get_nvector_plane.2921 pc 40764
 	sw	%x22, 0(%x19)  #1825 pc 40768
 	sw	%x17, 4(%x19)  #1825 pc 40772
 	addi	%x22, %x3, 0  #1833 pc 40776
 	addi	%x3, %x3, 12  #1833 pc 40780
-	addi	%x23, %x0, 21464  #1833 get_nvector_second.2923 pc 40784
+	lui	%x23, 21464  #1833 get_nvector_second.2923 pc 40784
 	sw	%x23, 0(%x22)  #1833 pc 40788
 	sw	%x17, 8(%x22)  #1833 pc 40792
 	sw	%x28, 4(%x22)  #1833 pc 40796
 	addi	%x23, %x3, 0  #1855 pc 40800
 	addi	%x3, %x3, 16  #1855 pc 40804
-	addi	%x24, %x0, 22192  #1855 get_nvector.2925 pc 40808
+	lui	%x24, 22192  #1855 get_nvector.2925 pc 40808
 	sw	%x24, 0(%x23)  #1855 pc 40812
 	sw	%x22, 12(%x23)  #1855 pc 40816
 	sw	%x15, 8(%x23)  #1855 pc 40820
 	sw	%x19, 4(%x23)  #1855 pc 40824
 	addi	%x15, %x3, 0  #1871 pc 40828
 	addi	%x3, %x3, 8  #1871 pc 40832
-	addi	%x19, %x0, 22336  #1871 utexture.2928 pc 40836
+	lui	%x19, 22336  #1871 utexture.2928 pc 40836
 	sw	%x19, 0(%x15)  #1871 pc 40840
 	lw	%x19, 64(%x2)  #1871 pc 40844
 	sw	%x19, 4(%x15)  #1871 pc 40848
 	addi	%x22, %x3, 0  #1949 pc 40852
 	addi	%x3, %x3, 12  #1949 pc 40856
-	addi	%x24, %x0, 24144  #1949 add_light.2931 pc 40860
+	lui	%x24, 24144  #1949 add_light.2931 pc 40860
 	sw	%x24, 0(%x22)  #1949 pc 40864
 	sw	%x19, 8(%x22)  #1949 pc 40868
 	lw	%x24, 72(%x2)  #1949 pc 40872
 	sw	%x24, 4(%x22)  #1949 pc 40876
 	addi	%x25, %x3, 0  #1966 pc 40880
 	addi	%x3, %x3, 36  #1966 pc 40884
-	addi	%x10, %x0, 24388  #1966 trace_reflections.2935 pc 40888
+	lui	%x10, 24388  #1966 trace_reflections.2935 pc 40888
 	sw	%x10, 0(%x25)  #1966 pc 40892
 	sw	%x26, 32(%x25)  #1966 pc 40896
 	lw	%x10, 136(%x2)  #1966 pc 40900
@@ -10776,7 +10776,7 @@ min_caml_start:
 	sw	%x22, 4(%x25)  #1966 pc 40928
 	addi	%x10, %x3, 0  #1995 pc 40932
 	addi	%x3, %x3, 84  #1995 pc 40936
-	addi	%x9, %x0, 24976  #1995 trace_ray.2940 pc 40940
+	lui	%x9, 24976  #1995 trace_ray.2940 pc 40940
 	sw	%x9, 0(%x10)  #1995 pc 40944
 	sw	%x15, 80(%x10)  #1995 pc 40948
 	sw	%x25, 76(%x10)  #1995 pc 40952
@@ -10800,7 +10800,7 @@ min_caml_start:
 	sw	%x22, 4(%x10)  #1995 pc 41024
 	addi	%x9, %x3, 0  #2088 pc 41028
 	addi	%x3, %x3, 52  #2088 pc 41032
-	addi	%x14, %x0, 26800  #2088 trace_diffuse_ray.2946 pc 41036
+	lui	%x14, 26800  #2088 trace_diffuse_ray.2946 pc 41036
 	sw	%x14, 0(%x9)  #2088 pc 41040
 	sw	%x15, 48(%x9)  #2088 pc 41044
 	sw	%x19, 44(%x9)  #2088 pc 41048
@@ -10817,72 +10817,72 @@ min_caml_start:
 	sw	%x7, 4(%x9)  #2088 pc 41092
 	addi	%x12, %x3, 0  #2107 pc 41096
 	addi	%x3, %x3, 8  #2107 pc 41100
-	addi	%x14, %x0, 27296  #2107 iter_trace_diffuse_rays.2949 pc 41104
+	lui	%x14, 27296  #2107 iter_trace_diffuse_rays.2949 pc 41104
 	sw	%x14, 0(%x12)  #2107 pc 41108
 	sw	%x9, 4(%x12)  #2107 pc 41112
 	addi	%x9, %x3, 0  #2123 pc 41116
 	addi	%x3, %x3, 12  #2123 pc 41120
-	addi	%x14, %x0, 27616  #2123 trace_diffuse_rays.2954 pc 41124
+	lui	%x14, 27616  #2123 trace_diffuse_rays.2954 pc 41124
 	sw	%x14, 0(%x9)  #2123 pc 41128
 	sw	%x21, 8(%x9)  #2123 pc 41132
 	sw	%x12, 4(%x9)  #2123 pc 41136
 	addi	%x12, %x3, 0  #2133 pc 41140
 	addi	%x3, %x3, 12  #2133 pc 41144
-	addi	%x14, %x0, 27704  #2133 trace_diffuse_ray_80percent.2958 pc 41148
+	lui	%x14, 27704  #2133 trace_diffuse_ray_80percent.2958 pc 41148
 	sw	%x14, 0(%x12)  #2133 pc 41152
 	sw	%x9, 8(%x12)  #2133 pc 41156
 	lw	%x14, 116(%x2)  #2133 pc 41160
 	sw	%x14, 4(%x12)  #2133 pc 41164
 	addi	%x15, %x3, 0  #2159 pc 41168
 	addi	%x3, %x3, 16  #2159 pc 41172
-	addi	%x17, %x0, 28100  #2159 calc_diffuse_using_1point.2962 pc 41176
+	lui	%x17, 28100  #2159 calc_diffuse_using_1point.2962 pc 41176
 	sw	%x17, 0(%x15)  #2159 pc 41180
 	sw	%x12, 12(%x15)  #2159 pc 41184
 	sw	%x24, 8(%x15)  #2159 pc 41188
 	sw	%x7, 4(%x15)  #2159 pc 41192
 	addi	%x12, %x3, 0  #2178 pc 41196
 	addi	%x3, %x3, 12  #2178 pc 41200
-	addi	%x17, %x0, 28436  #2178 calc_diffuse_using_5points.2965 pc 41204
+	lui	%x17, 28436  #2178 calc_diffuse_using_5points.2965 pc 41204
 	sw	%x17, 0(%x12)  #2178 pc 41208
 	sw	%x24, 8(%x12)  #2178 pc 41212
 	sw	%x7, 4(%x12)  #2178 pc 41216
 	addi	%x17, %x3, 0  #2198 pc 41220
 	addi	%x3, %x3, 8  #2198 pc 41224
-	addi	%x18, %x0, 29024  #2198 do_without_neighbors.2971 pc 41228
+	lui	%x18, 29024  #2198 do_without_neighbors.2971 pc 41228
 	sw	%x18, 0(%x17)  #2198 pc 41232
 	sw	%x15, 4(%x17)  #2198 pc 41236
 	addi	%x15, %x3, 0  #2213 pc 41240
 	addi	%x3, %x3, 8  #2213 pc 41244
-	addi	%x18, %x0, 29244  #2213 neighbors_exist.2974 pc 41248
+	lui	%x18, 29244  #2213 neighbors_exist.2974 pc 41248
 	sw	%x18, 0(%x15)  #2213 pc 41252
 	lw	%x18, 76(%x2)  #2213 pc 41256
 	sw	%x18, 4(%x15)  #2213 pc 41260
 	addi	%x19, %x3, 0  #2250 pc 41264
 	addi	%x3, %x3, 12  #2250 pc 41268
-	addi	%x20, %x0, 29820  #2250 try_exploit_neighbors.2987 pc 41272
+	lui	%x20, 29820  #2250 try_exploit_neighbors.2987 pc 41272
 	sw	%x20, 0(%x19)  #2250 pc 41276
 	sw	%x17, 8(%x19)  #2250 pc 41280
 	sw	%x12, 4(%x19)  #2250 pc 41284
 	addi	%x12, %x3, 0  #2277 pc 41288
 	addi	%x3, %x3, 8  #2277 pc 41292
-	addi	%x20, %x0, 30192  #2277 write_ppm_header.2994 pc 41296
+	lui	%x20, 30192  #2277 write_ppm_header.2994 pc 41296
 	sw	%x20, 0(%x12)  #2277 pc 41300
 	sw	%x18, 4(%x12)  #2277 pc 41304
 	addi	%x20, %x3, 0  #2303 pc 41308
 	addi	%x3, %x3, 8  #2303 pc 41312
-	addi	%x21, %x0, 30588  #2303 write_rgb.3000 pc 41316
+	lui	%x21, 30588  #2303 write_rgb.3000 pc 41316
 	sw	%x21, 0(%x20)  #2303 pc 41320
 	sw	%x24, 4(%x20)  #2303 pc 41324
 	addi	%x21, %x3, 0  #2326 pc 41328
 	addi	%x3, %x3, 16  #2326 pc 41332
-	addi	%x22, %x0, 30824  #2326 pretrace_diffuse_rays.3002 pc 41336
+	lui	%x22, 30824  #2326 pretrace_diffuse_rays.3002 pc 41336
 	sw	%x22, 0(%x21)  #2326 pc 41340
 	sw	%x9, 12(%x21)  #2326 pc 41344
 	sw	%x14, 8(%x21)  #2326 pc 41348
 	sw	%x7, 4(%x21)  #2326 pc 41352
 	addi	%x7, %x3, 0  #2356 pc 41356
 	addi	%x3, %x3, 40  #2356 pc 41360
-	addi	%x9, %x0, 31284  #2356 pretrace_pixels.3005 pc 41364
+	lui	%x9, 31284  #2356 pretrace_pixels.3005 pc 41364
 	sw	%x9, 0(%x7)  #2356 pc 41368
 	sw	%x8, 36(%x7)  #2356 pc 41372
 	sw	%x10, 32(%x7)  #2356 pc 41376
@@ -10898,7 +10898,7 @@ min_caml_start:
 	sw	%x9, 4(%x7)  #2356 pc 41416
 	addi	%x10, %x3, 0  #2381 pc 41420
 	addi	%x3, %x3, 28  #2381 pc 41424
-	addi	%x11, %x0, 31932  #2381 pretrace_line.3012 pc 41428
+	lui	%x11, 31932  #2381 pretrace_line.3012 pc 41428
 	sw	%x11, 0(%x10)  #2381 pc 41432
 	lw	%x11, 104(%x2)  #2381 pc 41436
 	sw	%x11, 24(%x10)  #2381 pc 41440
@@ -10910,7 +10910,7 @@ min_caml_start:
 	sw	%x9, 4(%x10)  #2381 pc 41464
 	addi	%x7, %x3, 0  #2397 pc 41468
 	addi	%x3, %x3, 28  #2397 pc 41472
-	addi	%x11, %x0, 32136  #2397 scan_pixel.3016 pc 41476
+	lui	%x11, 32136  #2397 scan_pixel.3016 pc 41476
 	sw	%x11, 0(%x7)  #2397 pc 41480
 	sw	%x20, 24(%x7)  #2397 pc 41484
 	sw	%x19, 20(%x7)  #2397 pc 41488
@@ -10920,71 +10920,71 @@ min_caml_start:
 	sw	%x17, 4(%x7)  #2397 pc 41504
 	addi	%x11, %x3, 0  #2417 pc 41508
 	addi	%x3, %x3, 16  #2417 pc 41512
-	addi	%x15, %x0, 32544  #2417 scan_line.3023 pc 41516
+	lui	%x15, 32544  #2417 scan_line.3023 pc 41516
 	sw	%x15, 0(%x11)  #2417 pc 41520
 	sw	%x7, 12(%x11)  #2417 pc 41524
 	sw	%x10, 8(%x11)  #2417 pc 41528
 	sw	%x18, 4(%x11)  #2417 pc 41532
 	addi	%x7, %x3, 0  #2469 pc 41536
 	addi	%x3, %x3, 8  #2469 pc 41540
-	addi	%x15, %x0, 33448  #2469 create_pixelline.3037 pc 41544
+	lui	%x15, 33448  #2469 create_pixelline.3037 pc 41544
 	sw	%x15, 0(%x7)  #2469 pc 41548
 	sw	%x18, 4(%x7)  #2469 pc 41552
 	addi	%x15, %x3, 0  #2497 pc 41556
 	addi	%x3, %x3, 8  #2497 pc 41560
-	addi	%x17, %x0, 33704  #2497 calc_dirvec.3044 pc 41564
+	lui	%x17, 33704  #2497 calc_dirvec.3044 pc 41564
 	sw	%x17, 0(%x15)  #2497 pc 41568
 	sw	%x14, 4(%x15)  #2497 pc 41572
 	addi	%x17, %x3, 0  #2518 pc 41576
 	addi	%x3, %x3, 8  #2518 pc 41580
-	addi	%x19, %x0, 34752  #2518 calc_dirvecs.3052 pc 41584
+	lui	%x19, 34752  #2518 calc_dirvecs.3052 pc 41584
 	sw	%x19, 0(%x17)  #2518 pc 41588
 	sw	%x15, 4(%x17)  #2518 pc 41592
 	addi	%x15, %x3, 0  #2532 pc 41596
 	addi	%x3, %x3, 8  #2532 pc 41600
-	addi	%x19, %x0, 35064  #2532 calc_dirvec_rows.3057 pc 41604
+	lui	%x19, 35064  #2532 calc_dirvec_rows.3057 pc 41604
 	sw	%x19, 0(%x15)  #2532 pc 41608
 	sw	%x17, 4(%x15)  #2532 pc 41612
 	addi	%x17, %x3, 0  #2545 pc 41616
 	addi	%x3, %x3, 8  #2545 pc 41620
-	addi	%x19, %x0, 35260  #2545 create_dirvec.3061 pc 41624
+	lui	%x19, 35260  #2545 create_dirvec.3061 pc 41624
 	sw	%x19, 0(%x17)  #2545 pc 41628
 	lw	%x19, 0(%x2)  #2545 pc 41632
 	sw	%x19, 4(%x17)  #2545 pc 41636
 	addi	%x20, %x3, 0  #2551 pc 41640
 	addi	%x3, %x3, 8  #2551 pc 41644
-	addi	%x21, %x0, 35368  #2551 create_dirvec_elements.3063 pc 41648
+	lui	%x21, 35368  #2551 create_dirvec_elements.3063 pc 41648
 	sw	%x21, 0(%x20)  #2551 pc 41652
 	sw	%x17, 4(%x20)  #2551 pc 41656
 	addi	%x21, %x3, 0  #2558 pc 41660
 	addi	%x3, %x3, 16  #2558 pc 41664
-	addi	%x22, %x0, 35476  #2558 create_dirvecs.3066 pc 41668
+	lui	%x22, 35476  #2558 create_dirvecs.3066 pc 41668
 	sw	%x22, 0(%x21)  #2558 pc 41672
 	sw	%x14, 12(%x21)  #2558 pc 41676
 	sw	%x20, 8(%x21)  #2558 pc 41680
 	sw	%x17, 4(%x21)  #2558 pc 41684
 	addi	%x20, %x3, 0  #2570 pc 41688
 	addi	%x3, %x3, 8  #2570 pc 41692
-	addi	%x22, %x0, 35680  #2570 init_dirvec_constants.3068 pc 41696
+	lui	%x22, 35680  #2570 init_dirvec_constants.3068 pc 41696
 	sw	%x22, 0(%x20)  #2570 pc 41700
 	lw	%x22, 144(%x2)  #2570 pc 41704
 	sw	%x22, 4(%x20)  #2570 pc 41708
 	addi	%x23, %x3, 0  #2577 pc 41712
 	addi	%x3, %x3, 12  #2577 pc 41716
-	addi	%x24, %x0, 35788  #2577 init_vecset_constants.3071 pc 41720
+	lui	%x24, 35788  #2577 init_vecset_constants.3071 pc 41720
 	sw	%x24, 0(%x23)  #2577 pc 41724
 	sw	%x20, 8(%x23)  #2577 pc 41728
 	sw	%x14, 4(%x23)  #2577 pc 41732
 	addi	%x14, %x3, 0  #2584 pc 41736
 	addi	%x3, %x3, 16  #2584 pc 41740
-	addi	%x20, %x0, 35900  #2584 init_dirvecs.3073 pc 41744
+	lui	%x20, 35900  #2584 init_dirvecs.3073 pc 41744
 	sw	%x20, 0(%x14)  #2584 pc 41748
 	sw	%x23, 12(%x14)  #2584 pc 41752
 	sw	%x21, 8(%x14)  #2584 pc 41756
 	sw	%x15, 4(%x14)  #2584 pc 41760
 	addi	%x15, %x3, 0  #2595 pc 41764
 	addi	%x3, %x3, 16  #2595 pc 41768
-	addi	%x20, %x0, 36016  #2595 add_reflection.3075 pc 41772
+	lui	%x20, 36016  #2595 add_reflection.3075 pc 41772
 	sw	%x20, 0(%x15)  #2595 pc 41776
 	sw	%x22, 12(%x15)  #2595 pc 41780
 	lw	%x20, 136(%x2)  #2595 pc 41784
@@ -10992,28 +10992,28 @@ min_caml_start:
 	sw	%x17, 4(%x15)  #2595 pc 41792
 	addi	%x17, %x3, 0  #2604 pc 41796
 	addi	%x3, %x3, 16  #2604 pc 41800
-	addi	%x20, %x0, 36232  #2604 setup_rect_reflection.3082 pc 41804
+	lui	%x20, 36232  #2604 setup_rect_reflection.3082 pc 41804
 	sw	%x20, 0(%x17)  #2604 pc 41808
 	sw	%x6, 12(%x17)  #2604 pc 41812
 	sw	%x13, 8(%x17)  #2604 pc 41816
 	sw	%x15, 4(%x17)  #2604 pc 41820
 	addi	%x20, %x3, 0  #2618 pc 41824
 	addi	%x3, %x3, 16  #2618 pc 41828
-	addi	%x21, %x0, 36692  #2618 setup_surface_reflection.3085 pc 41832
+	lui	%x21, 36692  #2618 setup_surface_reflection.3085 pc 41832
 	sw	%x21, 0(%x20)  #2618 pc 41836
 	sw	%x6, 12(%x20)  #2618 pc 41840
 	sw	%x13, 8(%x20)  #2618 pc 41844
 	sw	%x15, 4(%x20)  #2618 pc 41848
 	addi	%x6, %x3, 0  #2633 pc 41852
 	addi	%x3, %x3, 16  #2633 pc 41856
-	addi	%x15, %x0, 37140  #2633 setup_reflections.3088 pc 41860
+	lui	%x15, 37140  #2633 setup_reflections.3088 pc 41860
 	sw	%x15, 0(%x6)  #2633 pc 41864
 	sw	%x20, 12(%x6)  #2633 pc 41868
 	sw	%x17, 8(%x6)  #2633 pc 41872
 	sw	%x16, 4(%x6)  #2633 pc 41876
 	addi	%x29, %x3, 0  #2655 pc 41880
 	addi	%x3, %x3, 60  #2655 pc 41884
-	addi	%x15, %x0, 37428  #2655 rt.3090 pc 41888
+	lui	%x15, 37428  #2655 rt.3090 pc 41888
 	sw	%x15, 0(%x29)  #2655 pc 41892
 	sw	%x12, 56(%x29)  #2655 pc 41896
 	sw	%x6, 52(%x29)  #2655 pc 41900

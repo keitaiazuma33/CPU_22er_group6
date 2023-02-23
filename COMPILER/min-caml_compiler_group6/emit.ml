@@ -71,12 +71,15 @@ let rec g oc = function
   | dest, Let((x, t), exp, e, n) ->
       g' oc (NonTail(x), exp, n);
       g oc (dest, e)
-and g' oc = function 
+and g' oc = function
   | NonTail(_), Nop, _ -> ()
   | NonTail(x), Set(i), n -> incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, %d  #%d pc %d\n" x reg_zero i n (!pc)
   | NonTail(x), SetL(Id.L(y)), n -> if M.mem y (!pc_env) then
                                       (let y_pc = find_pc_env y in
-                                      incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, %d  #%d %s pc %d\n" x reg_zero y_pc n y (!pc);
+                                      if ((y_pc > 2047) || (y_pc < -2048)) then
+                                        (incr_pc ();Printf.fprintf oc "\tlui\t%s, %d  #%d %s pc %d\n" x y_pc n y (!pc);)
+                                      else
+                                        (incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, %d  #%d %s pc %d\n" x reg_zero y_pc n y (!pc));
                                       (*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" x reg_cons n (!pc)*))
                                     else
                                       ((*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" x y n (!pc)*)
