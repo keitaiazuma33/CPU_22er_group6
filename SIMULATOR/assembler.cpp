@@ -44,7 +44,7 @@ struct Op {
             _type = J;
         }else if(op == "jalr"){
             _type = I;
-        }else if(op == "lui" || op == "auipc"){
+        }else if(op == "lui" || op == "auipc" || op == "addj"){
             _type = U;
         }else if(op == "mul" || op == "mulh" || op == "mulsu"
         || op == "mulu" || op == "div" || op == "divu" || op == "rem" || op == "remu"){
@@ -755,6 +755,9 @@ int main(){
                 }else if(opcode == "auipc"){
                     // imm = op[1];
                     ofs << sub_reverse(imm,12,20) + rd + "0010111"<<endl;
+                }else if(opcode == "addj"){
+                    
+                    ofs << sub_reverse(imm,0,20) + rd + "0111111"<<endl; //imm[31:12]
                 }
                 pc += 4;
                 continue;
