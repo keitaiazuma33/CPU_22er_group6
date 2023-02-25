@@ -77,7 +77,7 @@ and g' oc = function
   | NonTail(x), SetL(Id.L(y)), n -> if M.mem y (!pc_env) then
                                       (let y_pc = find_pc_env y in
                                       if ((y_pc > 2047) || (y_pc < -2048)) then
-                                        (incr_pc ();Printf.fprintf oc "\tlui\t%s, %d  #%d %s pc %d\n" x y_pc n y (!pc);)
+                                        (incr_pc ();Printf.fprintf oc "\taddj\t%s, %d  #%d %s pc %d\n" x y_pc n y (!pc);)
                                       else
                                         (incr_pc ();Printf.fprintf oc "\taddi\t%s, %s, %d  #%d %s pc %d\n" x reg_zero y_pc n y (!pc));
                                       (*incr_pc ();Printf.fprintf oc "\tmv\t%s, %s  #%d pc %d\n" x reg_cons n (!pc)*))
@@ -352,8 +352,8 @@ let f oc (Prog(data, fundefs, e)) =
       Printf.fprintf oc "\t.long\t0x%lx\n" (getlo d)*))
     data;
   Printf.fprintf oc ".section\t\".text\"\n";
-  Printf.fprintf oc "\tnop\n";
-  Printf.fprintf oc "\tj min_caml_start\n";
+  incr_pc ();Printf.fprintf oc "\tnop\n";
+  incr_pc ();Printf.fprintf oc "\tj min_caml_start\n";
   List.iter (fun fundef -> h oc fundef) fundefs;
   Printf.fprintf oc ".global\tmin_caml_start\n";
   Printf.fprintf oc "min_caml_start:\n";
