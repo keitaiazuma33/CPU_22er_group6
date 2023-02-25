@@ -208,13 +208,13 @@ and g' oc = function
       incr_pc ();Printf.fprintf oc "\tbge\t%s, %s, 12  #%d pc %d\n" x y n (!pc);
       g'_tail_if oc e1 e2 "bge"
   | Tail, IfFEq(x, y, e1, e2), n ->
-      incr_pc ();Printf.fprintf oc "\tfeq\t%s, %s, %s  #%d pc %d\n" freg_cons x y n (!pc);
-      incr_pc ();Printf.fprintf oc "\tftoi\t%s, %s  #%d pc %d\n" reg_cons freg_cons n (!pc);
+      incr_pc ();Printf.fprintf oc "\tfeq\t%s, %s, %s  #%d pc %d\n" reg_cons x y n (!pc);
+      (*incr_pc ();Printf.fprintf oc "\tftoi\t%s, %s  #%d pc %d\n" reg_cons freg_cons n (!pc);*)
       incr_pc ();Printf.fprintf oc "\tblt\t%s, %s, 12  #%d pc %d\n" reg_zero reg_cons n (!pc);
       g'_tail_if oc e1 e2 "fbe"
   | Tail, IfFLE(x, y, e1, e2), n ->
-      incr_pc ();Printf.fprintf oc "\tfle\t%s, %s, %s  #%d pc %d\n" freg_cons x y n (!pc);
-      incr_pc ();Printf.fprintf oc "\tftoi\t%s, %s  #%d pc %d\n" reg_cons freg_cons n (!pc);
+      incr_pc ();Printf.fprintf oc "\tfle\t%s, %s, %s  #%d pc %d\n" reg_cons x y n (!pc);
+      (*incr_pc ();Printf.fprintf oc "\tftoi\t%s, %s  #%d pc %d\n" reg_cons freg_cons n (!pc);*)
       incr_pc ();Printf.fprintf oc "\tblt\t%s, %s, 12  #%d pc %d\n" reg_zero reg_cons n (!pc);
       g'_tail_if oc e1 e2 "fble"
   | NonTail(z), IfEq(x, y', e1, e2), n ->
@@ -230,13 +230,13 @@ and g' oc = function
       incr_pc ();Printf.fprintf oc "\tbge\t%s, %s, 12  #%d pc %d\n" x y n (!pc);
       g'_non_tail_if oc (NonTail(z)) e1 e2 "bge"
   | NonTail(z), IfFEq(x, y, e1, e2), n ->
-      incr_pc ();Printf.fprintf oc "\tfeq\t%s, %s, %s  #%d pc %d\n" freg_cons x y n (!pc);
-      incr_pc ();Printf.fprintf oc "\tftoi\t%s, %s  #%d pc %d\n" reg_cons freg_cons n (!pc);
+      incr_pc ();Printf.fprintf oc "\tfeq\t%s, %s, %s  #%d pc %d\n" reg_cons x y n (!pc);
+      (*incr_pc ();Printf.fprintf oc "\tftoi\t%s, %s  #%d pc %d\n" reg_cons freg_cons n (!pc);*)
       incr_pc ();Printf.fprintf oc "\tblt\t%s, %s, 12  #%d pc %d\n" reg_zero reg_cons n (!pc);
       g'_non_tail_if oc (NonTail(z)) e1 e2 "fbe"
   | NonTail(z), IfFLE(x, y, e1, e2), n ->
-      incr_pc ();Printf.fprintf oc "\tfle\t%s, %s, %s  #%d pc %d\n" freg_cons x y n (!pc);
-      incr_pc ();Printf.fprintf oc "\tftoi\t%s, %s  #%d pc %d\n" reg_cons freg_cons n (!pc);
+      incr_pc ();Printf.fprintf oc "\tfle\t%s, %s, %s  #%d pc %d\n" reg_cons x y n (!pc);
+      (*incr_pc ();Printf.fprintf oc "\tftoi\t%s, %s  #%d pc %d\n" reg_cons freg_cons n (!pc);*)
       incr_pc ();Printf.fprintf oc "\tblt\t%s, %s, 12  #%d pc %d\n" reg_zero reg_cons n (!pc);
       g'_non_tail_if oc (NonTail(z)) e1 e2 "fble"
   | Tail, CallCls(x, ys, zs), n -> 
