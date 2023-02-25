@@ -40,7 +40,7 @@ bool print_mem = false; //false
 string debug_op;
 // int break_line;
 string break_label;
-int clock_count;
+int64_t clock_count;
 
 // const auto i = read_binary_as<std::int32_t>(ifs);
 queue<int32_t> que; //<auto>?
@@ -119,7 +119,7 @@ int32_t q;
 // #include "const.hpp"
 // string s = "/Users/maimai/my-3A/cpu-simu/sim_result.txt";
 // ofstream ofs(s);
-bool fast_mode = false;
+bool fast_mode = false; //false;
 string debugmode(int argc, char* argv[]){
     
     
@@ -576,7 +576,7 @@ int main(int argc, char *argv[]){
     bool step_symbol = false;
     bool print_symbol = false;
     sld_to_ppm();
-    string filename ("minrt.s"); //asm_3
+    string filename ("minrt_addj.s"); //asm_3
     vector<string> lines;
     string line;
 
@@ -1769,15 +1769,15 @@ int main(int argc, char *argv[]){
                 }else if(op_num == 2){ //oopcode == "fmv.w.x"){
                     frd = *((float*) &frs1);
                 }else if(op_num == 3){ //oopcode == "feq.s"){
-                    frd = (frs1 == frs2) ? 1 : 0;
+                    reg_val.at(opline.rd) = (frs1 == frs2) ? 1 : 0;
                     clock_count += 3;
                 }else if(op_num == 4){ //oopcode == "flt.s"){
-                    frd = (frs1 < frs2) ? 1 : 0;
+                    reg_val.at(opline.rd) = (frs1 < frs2) ? 1 : 0;
                     clock_count += 3;
                 }else if(op_num == 5){ //oopcode == "fle.s"){
-                    frd = (frs1 <= frs2) ? 1 : 0;
+                    reg_val.at(opline.rd) = (frs1 <= frs2) ? 1 : 0;
                 }
-                if(op_num >= 83 || op_num <= 5){
+                if(op_num >= 83 || op_num <= 2){
                     freg.at(opline.rd) = frd; 
                     if(debug) cout << "   # " << frd << " "<< frs1 <<" " << frs2 << endl;
                 }
