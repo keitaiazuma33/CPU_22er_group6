@@ -42,7 +42,7 @@ bool print_mem = false; //false
 string debug_op;
 // int break_line;
 string break_label;
-int clock_count;
+int64_t clock_count;
 
 // const auto i = read_binary_as<std::int32_t>(ifs);
 queue<int32_t> que; //<auto>?
@@ -305,29 +305,36 @@ vector<vector <Status> > L_status(2, vector<Status>(L_SIZE));
 vector<vector <uint64_t> > L1_tag(2, vector<uint64_t>(L_SIZE));
 bool sign_in, sign_out;
 int LRU(vector<vector <Status> > L_status, uint64_t index_){
+    // return 0;
     // 一番accessedが低いものを選ぶ
     int min_way = 0;
-    int acc_min = 0;
-    int  acc_max;
+    int acc_min = L_status[0][index_].acc;
+    int  acc_max = acc_min; //L_status[i][index_].acc;
     // ofs << "LRU ";
-    for (int i = 0; i < way_num; i++) {
+    int max_way = 0;
+    for (int i = 1; i < way_num; i++) {
         // L1_way0; 一致していてかつvalid=1&&accessed=0なら
         // ofs << "acc" << L_status[i][index_].acc << endl;
-        if(L_status[i][index_].acc <= acc_min){
+        int acc_i = L_status[i][index_].acc;
+        if(acc_i < acc_min){
             min_way = i;
-            acc_min = L_status[i][index_].acc;
-        }else if(L_status[i][index_].acc >= acc_max){
-            acc_max = L_status[i][index_].acc;
+            acc_min = acc_i; //L_status[i][index_].acc;
+        }else if(acc_i > acc_max){
+            acc_max = acc_i; //L_status[i][index_].acc;
+            max_way = i;
         }
     }
     // L_status[min_way][index_].dirty = 0;
-    if(acc_max < 7){
+    if(acc_max < 7){//7?
         L_status[min_way][index_].acc = acc_max;    
     } 
-    else{
-        for (int i = 0; i < way_num; i++) {
-            L_status[i][index_].acc = 0;
-        }
+    else{//acc_max = 7; +1すると0に
+        // for (int i = 0; i < way_num; i++) {//ここが怪しい？
+        //     L_status[i][index_].acc = 0;
+        // }
+        L_status[min_way][index_].acc = 0;
+        L_status[max_way][index_].acc = 0;
+
     }
     // ofs << "min_way " << min_way << endl;
     return min_way;
@@ -391,6 +398,7 @@ int64_t op_to_num(string op){
     else if(op == "jalr") num = 59; // _type = I_1;
     else if(op == "lui") num = 77;
     else if (op == "auipc") num = 78; //     _type = U;
+    else if (op == "addj") num = 79;
     else if (op == "flw") num = 81;
     else if (op == "fsw") num = 82;
     else if (op == "fmadd") num = 83;
@@ -576,7 +584,7 @@ int main(int argc, char *argv[]){
     bool step_symbol = false;
     bool print_symbol = false;
     sld_to_ppm();
-    string filename ("minrt_88.s"); //asm_3
+    string filename ("minrt_addj.s"); //asm_3
     vector<string> lines;
     string line;
 
@@ -1248,7 +1256,7 @@ int main(int argc, char *argv[]){
                     hit = false;
                     for (int i = 0; i < way_num; i++) {
                         // L1_way0; 一致していてかつvalid=1&&accessed=0なら
-                        if((L1_tag[i].at(index_) == tag) && (L_status[i].at(index_)).valid == 1){//>>acc_bit) & ((1<<2)-1)) == 0b10)){ //PMT1[index_].at(0) == 1 && PMT1[index_].at(1) == 0){
+                        if((L1_tag[i].at(index_) == tag) && (L_status[i].at(index_).valid)){//>>acc_bit) & ((1<<2)-1)) == 0b10)){ //PMT1[index_].at(0) == 1 && PMT1[index_].at(1) == 0){
                             hit_count++;
                             hit = true;
                             break;
@@ -1266,6 +1274,9 @@ int main(int argc, char *argv[]){
                             clean_miss++;
                         }
                         // 他にやること？
+                        L1_tag[way_idx].at(index_) = tag;
+                        L_status[way_idx].at(index_).valid = 1;
+
                     } 
                 }
                 // cout << rs1+imm << endl;
@@ -1283,7 +1294,7 @@ int main(int argc, char *argv[]){
                     // }
                 }else rd = M.at(rs1+imm).i;
                 // ofs << "load" << " " << M.at(rs1+imm) << endl;
-                if(print_symbol) printf("mem[%lld] %lld\n", rs1+imm, rd);
+                // if(print_symbol) printf("mem[%lld] %lld\n", rs1+imm, rd);
 
                 
                 pre_pc = pc; 
@@ -1353,7 +1364,7 @@ int main(int argc, char *argv[]){
                     for(int w=0; w < way_num; w++){ //way0,way1
                         // cout << "w " << w << "index_ " << index_ << endl;
                         // cout << "status" << L_status[w][index_].valid << endl;
-                        if(L_status.at(w).at(index_).valid == 0){ //at(0)
+                        if((L1_tag.at(w).at(index_) == tag) && (L_status.at(w).at(index_).valid)){ //at(0)
                             uint64_t data_num = uint64_t(offset);
                             if(op_num == 65){ //code == "sb"){
                                 // PMT1[index_].substr(3+tag_dig+4*data_num, 4) 
@@ -1372,7 +1383,7 @@ int main(int argc, char *argv[]){
                             // dirty;まだメモリには書いてないことに
                             L_status.at(w).at(index_).dirty = 1;
                             if(L_status.at(w).at(index_).acc < 8) L_status.at(w).at(index_).acc += 1;
-                            L1_tag.at(w).at(index_) = tag;
+                            // L1_tag.at(w).at(index_) = tag;
                             flag = 1;
                             hit_count++;
                             break;
@@ -1388,7 +1399,7 @@ int main(int argc, char *argv[]){
                         // way_idxを追い出してそこに入れる;
                         // 追い出した時の処理必要
                         flag = 1;
-                        uint64_t data_num = uint64_t(offset);
+                        // uint64_t data_num = uint64_t(offset);
                         int w = way_idx;
                         // valid,dirty,accessed
                         // LRUのway_idxに入っていたデータをメモリに移行してからそこに書き込み
@@ -1508,6 +1519,8 @@ int main(int argc, char *argv[]){
                     rd = imm << 12;
                 }else if(op_num == 78){ //opcode == "auipc"){
                     rd=pc+(imm<<12);
+                }else if(op_num == 79){ //opcode == "addj"){
+                    rd = imm;
                 }
                 pre_pc = pc; 
                 pc += 4;
@@ -1556,7 +1569,7 @@ int main(int argc, char *argv[]){
                             clock_count++;
                         }
                     } 
-                    frd = 0;
+                    // frd = 0;
                     rs1 = reg_val.at(opline.rs1);//reg_index(a2);
                     if(opline.float_sign) fimm = opline.imm.f; //0や4
                     else imm = opline.imm.i;
@@ -1578,7 +1591,7 @@ int main(int argc, char *argv[]){
                         hit = false;
                         for (int i = 0; i < way_num; i++) {
                             // L1_way0; 一致していてかつvalid=1&&accessed=0なら
-                            if((L1_tag[i].at(index_) == tag) && (L_status[i].at(index_)).valid == 1){//>>acc_bit) & ((1<<2)-1)) == 0b10)){ //PMT1[index_].at(0) == 1 && PMT1[index_].at(1) == 0){
+                            if((L1_tag[i].at(index_) == tag) && (L_status[i].at(index_).valid)){//>>acc_bit) & ((1<<2)-1)) == 0b10)){ //PMT1[index_].at(0) == 1 && PMT1[index_].at(1) == 0){
                                 hit_count++;
                                 hit = true;
                                 break;
@@ -1596,17 +1609,19 @@ int main(int argc, char *argv[]){
                                 clean_miss++;
                             }
                             // 他にやること？
+                            L1_tag[way_idx].at(index_) = tag;
+                            L_status[way_idx].at(index_).valid = 1;
                         } 
                     }
-                    if(special == true) frd = q;
-                    else frd = M.at(rs1+imm).f; //round(frs1+fimm)
-                    // else frd 
+                    if(special == true) freg.at(opline.rd) = q;
+                    else freg.at(opline.rd) = M.at(rs1+imm).f; //round(frs1+fimm)
+                    // else freg.at(opline.rd) 
                     // ofs << "load" << " " << M.at(rs1+imm) << endl;
-                    // if(print_symbol) printf("mem[%lld] %lld\n", rs1+imm, frd);
+                    // if(print_symbol) printf("mem[%lld] %lld\n", rs1+imm, freg.at(opline.rd));
                     // if((a0[0] >= '0') && (a0[0] <= '9')){} 
-                    freg.at(opline.rd) = frd; 
+                    freg.at(opline.rd) = freg.at(opline.rd); 
                         // freg[frd] = M.at(rs1 + imm);
-                    if(debug) cout << "   #flw " << frd << " "<< rs1 <<" " << imm << endl;
+                    // if(debug) cout << "   #flw " << frd << " "<< rs1 <<" " << imm << endl;
                     pre_pc = pc; 
                     pc += 4;
                     instr_count++;
@@ -1641,14 +1656,14 @@ int main(int argc, char *argv[]){
                         for(int w=0; w < way_num; w++){ //way0,way1
                             // cout << "w " << w << "index_ " << index_ << endl;
                             // cout << "status" << L_status[w][index_].valid << endl;
-                            if(L_status.at(w).at(index_).valid == 0){ //at(0)
+                            if((L1_tag.at(w).at(index_) == tag) && (L_status.at(w).at(index_).valid)){ //at(0)
                                 uint64_t data_num = uint64_t(offset);
                                 M[rs1+imm].f  = frs2; //round(frs1+fimm)
                                 L_status.at(w).at(index_).valid = 1;
                                 // dirty;まだメモリには書いてないことに
                                 L_status.at(w).at(index_).dirty = 1;
                                 if(L_status.at(w).at(index_).acc < 8) L_status.at(w).at(index_).acc += 1;
-                                L1_tag.at(w).at(index_) = tag;
+                                // L1_tag.at(w).at(index_) = tag;
                                 flag = 1;
                                 hit_count++;
                                 break;
@@ -1664,7 +1679,7 @@ int main(int argc, char *argv[]){
                             // way_idxを追い出してそこに入れる;
                             // 追い出した時の処理必要
                             flag = 1;
-                            uint64_t data_num = uint64_t(offset);
+                            // uint64_t data_num = uint64_t(offset);
                             int w = way_idx;
                             M[rs1+imm].f = frs2; //round(frs1+fimm)
                             (L_status[way_idx].at(index_)).valid = 1; 
@@ -1703,24 +1718,24 @@ int main(int argc, char *argv[]){
                 frs3 = freg.at(opline.rs3);
                 Bit32 y, b_rs1, brd;
                 if(op_num == 83){ //code == "fmadd.s"){
-                    frd=frs1*frs2+frs3;
+                    freg.at(opline.rd)=frs1*frs2+frs3;
                 }else if(op_num == 84){ //opcode == "fmsub.s"){
-                    frd=frs1*frs2-frs3;
+                    freg.at(opline.rd)=frs1*frs2-frs3;
                 }else if(op_num == 85){ //oopcode == "fnmadd.s"){
-                    frd=-frs1*frs2+frs3;
+                    freg.at(opline.rd)=-frs1*frs2+frs3;
                 }else if(op_num == 86){ //oopcode == "fnmsub.s"){
-                    frd=-frs1*frs2-frs3;
+                    freg.at(opline.rd)=-frs1*frs2-frs3;
                 }else if(op_num == 87){ //oopcode == "fadd.s"){
-                    // frd=frs1+frs2;                    
+                    // freg.at(opline.rd)=frs1+frs2;                    
                     brd = fadd(f_to_bit(frs1), f_to_bit(frs2));
-                    frd = bit_to_float(brd);
+                    freg.at(opline.rd) = bit_to_float(brd);
                     // if(debug) 
-                    // ofs2 << "fadd " << frd << " ans " << frs1+frs2 << endl;
+                    // ofs2 << "fadd " << freg.at(opline.rd) << " ans " << frs1+frs2 << endl;
                     clock_count += 3;
                 }else if(op_num == 88){ //oopcode == "fsub.s"){
-                    // frd=frs1-frs2;
+                    // freg.at(opline.rd)=frs1-frs2;
                     brd = fsub(frs1, frs2); //fsub引数はfloatのままでok
-                    frd = bit_to_float(brd);
+                    freg.at(opline.rd) = bit_to_float(brd);
                     // if(debug) 
                     // ofs2 << "fsub " << frd << " ans " << frs1-frs2 <<  endl;
                     // ofs2 << frs1 << frs2 << endl;
@@ -1728,69 +1743,69 @@ int main(int argc, char *argv[]){
                 }else if(op_num == 89){ //oopcode == "fmul.s"){
                     // frd=frs1*frs2;
                     brd = fmul(f_to_bit(frs1), f_to_bit(frs2));
-                    frd = bit_to_float(brd);
+                    freg.at(opline.rd) = bit_to_float(brd);
                     // if(debug) 
-                    // ofs2 << "fmul " << frd << " ans " << frs1*frs2 << endl;
+                    // ofs2 << "fmul " << freg.at(opline.rd) << " ans " << frs1*frs2 << endl;
                     clock_count += 3;
                 }else if(op_num == 90){ //oopcode == "fdiv.s"){
                     // frd=frs1/frs2;
                     brd = fdiv(f_to_bit(frs1), f_to_bit(frs2));
-                    frd = bit_to_float(brd);
+                    freg.at(opline.rd) = bit_to_float(brd);
                     // if(debug) 
-                    // ofs2 << "fdiv " << frd << " ans " << frs1/frs2 << endl;
+                    // ofs2 << "fdiv " << freg.at(opline.rd) << " ans " << frs1/frs2 << endl;
                     clock_count += 3;
                 }else if(op_num == 91){ //oopcode == "fsqrt.s"){
-                    // frd = sqrt(frs1);
+                    // freg.at(opline.rd) = sqrt(frs1);
                     brd = fsqrt(f_to_bit(frs1));
-                    frd = bit_to_float(brd);
+                    freg.at(opline.rd) = bit_to_float(brd);
                     // if(debug) 
-                    // ofs2 << "fsqrt " << frd << " ans " << sqrt(frs1)  << endl;
+                    // ofs2 << "fsqrt " << freg.at(opline.rd) << " ans " << sqrt(frs1)  << endl;
                     clock_count += 3;
                 }else if(op_num == 92){ //oopcode == "fsgnj.s"){
-                    frd = abs(frs1) * sign(frs2);
+                    freg.at(opline.rd) = abs(frs1) * sign(frs2);
                 }else if(op_num == 93){ //oopcode == "fsgnjn.s"){
-                    frd = abs(frs1) * -sign(frs2);
+                    freg.at(opline.rd) = abs(frs1) * -sign(frs2);
                 // }else if(op_num == 94){ //oopcode == "fsgnjx.s"){
-                //     frd = frs1 * sign(frs2);
+                //     freg.at(opline.rd) = frs1 * sign(frs2);
                 }else if(op_num == 94){ //oopcode == "fabs"){
                     brd = fabs(f_to_bit(frs1));
-                    frd = bit_to_float(brd);
+                    freg.at(opline.rd) = bit_to_float(brd);
                     clock_count += 3;
-                    // cout << frd << " ans " << frs1 * sign(frs1) << endl;
+                    // cout << freg.at(opline.rd) << " ans " << frs1 * sign(frs1) << endl;
                 }else if(op_num == 95){ //oopcode == "fmin.s"){
-                    frd = min(frs1, frs2);
+                    freg.at(opline.rd) = min(frs1, frs2);
                 }else if(op_num == 96){ //oopcode == "fmax.s"){
-                    frd = max(frs1, frs2);
+                    freg.at(opline.rd) = max(frs1, frs2);
                 }else if(op_num == 97){ //oopcode == "fcvt.s.w"){
-                    frd = (float) frs1;
+                    freg.at(opline.rd) = (float) frs1;
                     clock_count += 1;
                 }else if(op_num == 98){ //oopcode == "fcvt.s.wu"){
-                    frd = (float) frs1;
+                    freg.at(opline.rd) = (float) frs1;
                 }else if(op_num == 99){ //oopcode == "fcvt.w.s"){
-                    frd = (int32_t) frs1;
+                    freg.at(opline.rd) = (int32_t) frs1;
                     clock_count += 1;
                 }else if(op_num == 0){ //oopcode == "fcvt.wu.s"){
-                    frd = (uint32_t) frs1;
+                    freg.at(opline.rd) = (uint32_t) frs1;
                 // }else if(op_num == 1){ //oopcode == "fmv.x.w"){
-                //     frd = *((int*) &frs1);
+                //     freg.at(opline.rd) = *((int*) &frs1);
                 }else if(op_num == 2){ //oopcode == "fmv.w.x"){
-                    frd = *((float*) &frs1);
+                    freg.at(opline.rd) = *((float*) &frs1);
                 }else if(op_num == 3){ //oopcode == "feq.s"){
                     // frd = (frs1 == frs2) ? 1 : 0;   
-                    frd = feq(f_to_bit(frs1), f_to_bit(frs2));
+                    reg_val.at(opline.rd) = feq(f_to_bit(frs1), f_to_bit(frs2));
                     clock_count += 3;
                 }else if(op_num == 4){ //oopcode == "flt.s"){
-                    frd = (frs1 < frs2) ? 1 : 0;
+                    reg_val.at(opline.rd) = (frs1 < frs2) ? 1 : 0;
                     clock_count += 3;
                 }else if(op_num == 5){ //oopcode == "fle.s"){
                     // frd = (frs1 <= frs2) ? 1 : 0;
-                    frd = fle(f_to_bit(frs1), f_to_bit(frs2));
+                    reg_val.at(opline.rd) = fle(f_to_bit(frs1), f_to_bit(frs2));
                     // ofs2 << frd << " ans " << ((frs1 <= frs2) ? 1 : 0) << endl;
                 }
-                if(op_num >= 83 || op_num <= 5){
-                    freg.at(opline.rd) = frd; 
-                    if(debug) cout << "   # " << frd << " "<< frs1 <<" " << frs2 << endl;
-                }
+                // if(op_num >= 83 || op_num <= 5){
+                //     freg.at(opline.rd) = frd; 
+                //     if(debug) cout << "   # " << frd << " "<< frs1 <<" " << frs2 << endl;
+                // }
                 else if(op_num == 6){ //oopcode == "ftoi"){
                     // ftoi	%x5, %f0
                     // reg_val.at(opline.rd) = round(frs1);
@@ -1884,6 +1899,7 @@ int main(int argc, char *argv[]){
         
     }
     cout << "hit miss " << hit_count << " " << miss_count << endl;
+    if(!fast_mode) cout << hit_count/(hit_count+miss_count) * 100 << "%" << endl;
     cout << "clean dirty " << clean_miss << " " << dirty_miss << endl;
     cout << "実行命令数 " << instr_count << endl;
     clock_count = instr_count + clock_count;
