@@ -94,7 +94,7 @@ int64_t imm;
 Bit32 addr = 0;
 uint64_t tag, index_, offset;
 // int offset_dig, index_dig, tag_dig;
-int hit_count, miss_count;
+int64_t hit_count, miss_count;
 int dirty_miss, clean_miss;
 // vector<int64_t> op_load(SIZE);//map<int, int64_t> op_load;
 int way_num = 2;
@@ -1899,7 +1899,7 @@ int main(int argc, char *argv[]){
         
     }
     cout << "hit miss " << hit_count << " " << miss_count << endl;
-    if(!fast_mode) cout << hit_count/(hit_count+miss_count) * 100 << "%" << endl;
+    if(!fast_mode) cout << hit_count/(hit_count+miss_count) << endl;
     cout << "clean dirty " << clean_miss << " " << dirty_miss << endl;
     cout << "実行命令数 " << instr_count << endl;
     clock_count = instr_count + clock_count;

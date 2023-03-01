@@ -12,7 +12,7 @@ SRCS += simu_ftoi.cpp
 SRCS += fdiv_fmul.cpp #ok version#simu_fmul.cpp
 SRCS += simu_fadd.cpp 
 SRCS += fsub_sim.cpp 
-SRCS += simu_fsqrt2.cpp
+SRCS += fsqrt3.cpp #simu_fsqrt2.cpp #fsqrt3
 SRCS += fpu_common.cpp 
 
 
@@ -54,7 +54,7 @@ all: clean $(OBJS) $(TARGET)
 # (3)実行ファイル名
 TARGET2  = fpu
 # (4)コンパイル対象のソースコード
-SRCS2 = simu_fsqrt2.cpp
+SRCS2 = fsqrt3.cpp #simu_fsqrt2.cpp
 # SRCS2 = fsub_sim.cpp
 # SRCS2 += simu_fmul.cpp
 # SRCS2 = simu_itof.cpp
