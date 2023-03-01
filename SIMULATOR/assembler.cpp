@@ -275,7 +275,7 @@ string to_bit(unsigned int f_imm){
 }
 int main(){
     // ファイルから読み込む   
-    string filename ("minrt.s");
+    string filename ("minrt_addj.s");
     vector<string> lines;
     string line;
 
@@ -808,7 +808,7 @@ int main(){
                     imm = bury_zero(imm, 12);
                     reverse(imm.begin(), imm.end());
                     rs1 = rs2; rs2 = rd;
-                    ofs << sub_reverse(imm,5,7)+rs2+rs1+"010"+sub_reverse(imm,0,5)+"0100011" << endl;
+                    ofs << sub_reverse(imm,5,7)+rs2+rs1+"010"+sub_reverse(imm,0,5)+"0100111" << endl;
                 }
                 pc += 4;
                 // 以下省略
