@@ -138,7 +138,7 @@ and g' dest cont regenv n = function
   | Sqrt(x) -> (Ans(Sqrt(find x Type.Float regenv), n), regenv)
   | FAbs(x) -> (Ans(FAbs(find x Type.Float regenv), n), regenv)
   | FtoI(x) -> (Ans(FtoI(find x Type.Float regenv), n), regenv)
-  | ItoF(x) -> (Ans(ItoF(find x Type.Float regenv), n), regenv)
+  | ItoF(x) -> (Ans(ItoF(find x Type.Int regenv), n), regenv)
   | FAddD(x, y) -> (Ans(FAddD(find x Type.Float regenv, find y Type.Float regenv), n), regenv)
   | FSubD(x, y) -> (Ans(FSubD(find x Type.Float regenv, find y Type.Float regenv), n), regenv)
   | FMulD(x, y) -> (Ans(FMulD(find x Type.Float regenv, find y Type.Float regenv), n), regenv)

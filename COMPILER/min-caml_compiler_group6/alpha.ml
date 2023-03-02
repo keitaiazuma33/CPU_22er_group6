@@ -28,6 +28,10 @@ let rec g' env n = function
   | Ini(x, _) -> Ini(find x env, n)
   | Inf(x, _) -> Inf(find x env, n)
   | Out(x, _) -> Out(find x env, n)
+  | ItoIA(x, _) -> ItoIA(find x env, n)
+  | ItoFA(x, _) -> ItoFA(find x env, n)
+  | Gethp(x, _) -> Gethp(find x env, n)
+  | Sethp(x, _) -> Sethp(find x env, n)
   | IfEq(x, y, e1, e2, _) -> IfEq(find x env, find y env, g' env n e1, g' env n e2, n)
   | IfLE(x, y, e1, e2, _) -> IfLE(find x env, find y env, g' env n e1, g' env n e2, n)
   | Let((x, t), e1, e2, _) -> 

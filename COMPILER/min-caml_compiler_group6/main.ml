@@ -463,5 +463,5 @@ let () =
     ("Mitou Min-Caml Compiler (C) Eijiro Sumii\n" ^
      Printf.sprintf "usage: %s [-inline m] [-iter n] ...filenames without \".ml\"..." Sys.argv.(0));
   List.iter
-    (fun f -> ignore (file_parsed f); ignore (file_typing f); ignore (file_normalized f); ignore (file_before_cse f); ignore (file_after_cse f); ignore (file_after_iter f); ignore (file_closure f); ignore (file_virtual f); ignore (file_simm f); ignore (file_regalloc f); ignore (file f))
+    (fun f -> (*(*ignore (file_parsed f); ignore (file_typing f);*) ignore (file_normalized f); ignore (file_before_cse f); (*ignore (file_after_cse f);*) ignore (file_after_iter f); ignore (file_closure f); ignore (file_virtual f); ignore (file_simm f); ignore (file_regalloc f);*) ignore (file f))
     !files
