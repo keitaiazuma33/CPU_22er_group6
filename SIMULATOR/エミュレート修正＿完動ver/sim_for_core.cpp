@@ -584,7 +584,7 @@ int main(int argc, char *argv[]){
     bool step_symbol = false;
     bool print_symbol = false;
     sld_to_ppm();
-    string filename ("minrt_addj.s"); //asm_3
+    string filename ("minrt_addj_core.s"); //asm_3
     vector<string> lines;
     string line;
 
@@ -1451,28 +1451,28 @@ int main(int argc, char *argv[]){
                 // 分岐不成立と予測し、成立していたら一回ストール
                 pre_pc = pc;
                 if(op_num == 70){ //opcode == "beq"|| opcode == "beqz"){
-                    if(rs1 == rs2) {pc += imm; clock_count+= 2;}
+                    if(rs1 == rs2) {pc += imm; clock_count+= 5;}
                     else {pc += 4;}
                 }else if(op_num == 71){ //opcode == "bne"|| opcode == "bnez"){
-                    if(rs1 != rs2) { pc += imm; clock_count+= 2;}
+                    if(rs1 != rs2) { pc += imm; clock_count+= 5;}
                     else {pc += 4;}
                 }//ここ抜け
                 else if(op_num == 72){ //opcode == "blt" || opcode == "bgt"){
                     // cout << pc << " " << imm << endl;
-                    if(rs1 < rs2) { pc += imm; clock_count+= 2;}
+                    if(rs1 < rs2) { pc += imm; clock_count+= 5;}
                     else {pc += 4;}
                     // cout << "pc" << pc << endl;
                 }else if(op_num == 73){ //opcode == "bge"|| opcode == "ble"){
                     if(rs1 >= rs2) {
                         pc += imm; 
-                        clock_count+= 2;
+                        clock_count+= 5;
                     }
                     else {pc += 4;}
                 }else if(op_num == 74){ //opcode == "bltu"||opcode == "bgtu"){
-                    if(rs1 < rs2) { pc += imm; clock_count+= 2;}
+                    if(rs1 < rs2) { pc += imm; clock_count+= 5;}
                     else {pc += 4;}
                 }else if(op_num == 75){ //opcode == "bgeu"||opcode == "bleu"){
-                    if(rs1 >= rs2) {pc += imm; clock_count+= 2;}
+                    if(rs1 >= rs2) {pc += imm; clock_count+= 5;}
                     else {pc += 4;}
                 }
                 // cout << "pc" << pc << endl;
@@ -1730,14 +1730,14 @@ int main(int argc, char *argv[]){
                     brd = fadd(f_to_bit(frs1), f_to_bit(frs2));
                     freg.at(opline.rd) = bit_to_float(brd);
                     // if(debug) 
-                    // ofs2 << "fadd " << freg.at(opline.rd) << " ans " << frs1+frs2 << endl;
-                    clock_count += 3;
+                    // ofs2 << "fadd " << setprecision(15) << freg.at(opline.rd) << " ans " << frs1+frs2 << endl;
+                    clock_count += 4;
                 }else if(op_num == 88){ //oopcode == "fsub.s"){
                     // freg.at(opline.rd)=frs1-frs2;
-                    brd = fsub(frs1, frs2); //fsub引数はfloatのままでok
+                    brd = fsub(f_to_bit(frs1), f_to_bit(frs2)); //fsub引数はfloatのままでok
                     freg.at(opline.rd) = bit_to_float(brd);
                     // if(debug) 
-                    // ofs2 << "fsub " << frd << " ans " << frs1-frs2 <<  endl;
+                    // ofs2 << "fsub " << setprecision(15) << freg.at(opline.rd) << " ans " << frs1-frs2 <<  endl;
                     // ofs2 << frs1 << frs2 << endl;
                     clock_count += 3;
                 }else if(op_num == 89){ //oopcode == "fmul.s"){
@@ -1745,21 +1745,21 @@ int main(int argc, char *argv[]){
                     brd = fmul(f_to_bit(frs1), f_to_bit(frs2));
                     freg.at(opline.rd) = bit_to_float(brd);
                     // if(debug) 
-                    // ofs2 << "fmul " << freg.at(opline.rd) << " ans " << frs1*frs2 << endl;
+                    // ofs2 << "fmul " << setprecision(15) << freg.at(opline.rd) << " ans " << frs1*frs2 << endl;
                     clock_count += 3;
                 }else if(op_num == 90){ //oopcode == "fdiv.s"){
                     // frd=frs1/frs2;
                     brd = fdiv(f_to_bit(frs1), f_to_bit(frs2));
                     freg.at(opline.rd) = bit_to_float(brd);
                     // if(debug) 
-                    // ofs2 << "fdiv " << freg.at(opline.rd) << " ans " << frs1/frs2 << endl;
+                    // ofs2 << "fdiv " << setprecision(15) << freg.at(opline.rd) << " ans " << frs1/frs2 << endl;
                     clock_count += 3;
                 }else if(op_num == 91){ //oopcode == "fsqrt.s"){
                     // freg.at(opline.rd) = sqrt(frs1);
                     brd = fsqrt(f_to_bit(frs1));
                     freg.at(opline.rd) = bit_to_float(brd);
                     // if(debug) 
-                    // ofs2 << "fsqrt " << freg.at(opline.rd) << " ans " << sqrt(frs1)  << endl;
+                    // ofs2 << "fsqrt " << setprecision(15) << freg.at(opline.rd) << " ans " << sqrt(frs1)  << endl;
                     clock_count += 3;
                 }else if(op_num == 92){ //oopcode == "fsgnj.s"){
                     freg.at(opline.rd) = abs(frs1) * sign(frs2);
@@ -1771,7 +1771,7 @@ int main(int argc, char *argv[]){
                     brd = fabs(f_to_bit(frs1));
                     freg.at(opline.rd) = bit_to_float(brd);
                     clock_count += 3;
-                    // cout << freg.at(opline.rd) << " ans " << frs1 * sign(frs1) << endl;
+                    // ofs2 << setprecision(15) << freg.at(opline.rd) << " ans " << frs1 * sign(frs1) << endl;
                 }else if(op_num == 95){ //oopcode == "fmin.s"){
                     freg.at(opline.rd) = min(frs1, frs2);
                 }else if(op_num == 96){ //oopcode == "fmax.s"){
@@ -1792,14 +1792,14 @@ int main(int argc, char *argv[]){
                     freg.at(opline.rd) = *((float*) &frs1);
                 }else if(op_num == 3){ //oopcode == "feq.s"){
                     // frd = (frs1 == frs2) ? 1 : 0;   
-                    reg_val.at(opline.rd) = feq(f_to_bit(frs1), f_to_bit(frs2));
+                    freg.at(opline.rd) = (float)feq(f_to_bit(frs1), f_to_bit(frs2));
                     clock_count += 3;
                 }else if(op_num == 4){ //oopcode == "flt.s"){
-                    reg_val.at(opline.rd) = (frs1 < frs2) ? 1 : 0;
+                    freg.at(opline.rd) = (frs1 < frs2) ? 1 : 0;
                     clock_count += 3;
                 }else if(op_num == 5){ //oopcode == "fle.s"){
                     // frd = (frs1 <= frs2) ? 1 : 0;
-                    reg_val.at(opline.rd) = fle(f_to_bit(frs1), f_to_bit(frs2));
+                    freg.at(opline.rd) = (float)fle(f_to_bit(frs1), f_to_bit(frs2));
                     // ofs2 << frd << " ans " << ((frs1 <= frs2) ? 1 : 0) << endl;
                 }
                 // if(op_num >= 83 || op_num <= 5){
@@ -1823,7 +1823,7 @@ int main(int argc, char *argv[]){
                     // cout << y << endl;
                     // // uintをintに
                     // reg_val.at(opline.rd) = y; //bit_to_float(y);
-                    // cout << "ftoi " << reg_val.at(opline.rd) << " " << frs1 << endl;
+                    // ofs2 << "ftoi " << setprecision(15) << reg_val.at(opline.rd) << " " << frs1 << endl;
                 }else if(op_num == 7){ //oopcode == "itof"){
                     // itof	%f0, %x5
                     // freg.at(opline.rd) = (float)(reg_val.at(opline.rs1));
@@ -1837,7 +1837,7 @@ int main(int argc, char *argv[]){
                     freg.at(opline.rd) = bit_to_float(y);  
                     clock_count += 3;
                     // if(debug) 
-                    // ofs2 << "itof"<< freg.at(opline.rd) << " "  << (float)(reg_val.at(opline.rs1))  << endl;
+                    // ofs2 << "itof"<< setprecision(15) << freg.at(opline.rd) << " "  << (float)(reg_val.at(opline.rs1))  << endl;
                 }
                 // freg.at(opline.rd) = frd; 
                 // else if(opcode == "fclass.s"){

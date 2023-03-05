@@ -5,7 +5,7 @@ CFLAGS    = -std=c++11 -g -O3
 # (3)実行ファイル名
 TARGET  = sim
 # (4)コンパイル対象のソースコード
-SRCS = sim_with_float.cpp #sim_float_io.cpp #simu_withoutエミュレート.cpp ##0204#実行したいファイル名をここに
+SRCS = sim_with_float.cpp #sim_for_core.cpp # #実行したいファイル名をここに
 SRCS += simu_itof.cpp
 SRCS += simu_ftoi.cpp
 # SRCS = simu_fsqrt2.cpp
@@ -56,6 +56,7 @@ TARGET2  = fpu
 # (4)コンパイル対象のソースコード
 SRCS2 = fsqrt3.cpp #simu_fsqrt2.cpp
 # SRCS2 = fsub_sim.cpp
+# SRCS2 = fsub2.cpp
 # SRCS2 += simu_fmul.cpp
 # SRCS2 = simu_itof.cpp
 # SRCS2 = simu_ftoi.cpp

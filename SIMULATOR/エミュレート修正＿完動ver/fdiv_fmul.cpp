@@ -182,7 +182,7 @@ Bit32 fdiv(Bit32 x1, Bit32 x2){
     // finv_ans違う
     // cout << ((Bit64)y_intersect << 25ULL) << " "<< (((sub_uint(delta_y,48,25) | sub_uint(delta_y,24,0))))<< endl;
     // ((sub_uint(delta_y,48,25)　<< 25ULL) | sub_uint(delta_y,24,0)
-    finv_ans = ((Bit64)y_intersect << 25ULL) - (((sub_uint(delta_y,48,25)<<25ULL | sub_uint(delta_y,24,0))));
+    finv_ans = (Bit64)((Bit64)y_intersect << 25ULL) - (Bit64)(((sub_uint(delta_y,48,25)<<25ULL | sub_uint(delta_y,24,0))));
     // cout << finv_ans << endl;
     // print_bit(finv_ans,64);
     Bit32 finv_float_s, finv_float_e, finv_float_m;
@@ -206,36 +206,37 @@ Bit32 fdiv(Bit32 x1, Bit32 x2){
     return y; //ok
 }
 // int main(){
-//     float x_1, x_2;
-//     x_1 = 1.64; //44fa21b3
-//     x_2 = 2.23; //44fa40f8
+//     // float x_1, x_2;
+//     // x_1 = 1.64; //44fa21b3
+//     // x_2 = 2.23; //44fa40f8
 //     Bit32 x1, x2;
-//     x1 = f_to_bit(x_1); x2 = f_to_bit(x_2);
+//     // x1 = f_to_bit(x_1); x2 = f_to_bit(x_2);
 //     // x1 = stoul("1000101111011110110001000110101", nullptr, 2); //45ef6235
 //     // x2 = stoul("1000100001001100100010001010101", nullptr, 2); //44264455
-//     // x1 = 0x44fa21b3;
-//     // x2 = 0x44fa40f8;
     
-//     Bit32 y = fmul(x1, x2);
-//     puts("fmul");
-//     print_sub_bit(y);
-//     cout << bit_to_float(y) << endl;
     
-//     Bit32 ans = f_to_bit(x_1 * x_2);
-//     cout << x_1*x_2 << endl;
-//     puts("fmul_ans");
-//     print_sub_bit(ans);
-    
+//     // Bit32 y = fmul(x1, x2);
+//     // puts("fmul");
+//     // print_sub_bit(y);
+//     // cout << bit_to_float(y) << endl;
+//     // printf("%#x\n", y);
+//     // Bit32 ans = f_to_bit(x_1 * x_2);
+//     // cout << x_1*x_2 << endl;
+//     // puts("fmul_ans");
+//     // print_sub_bit(ans);
+//     x1 = 0x43fa3146;
+//     x2 = 0x45fa4345;
 //     puts("fdiv");
 //     string filename = "finv_data.coe"; //inv
 //     in_data(filename);
-//     y = fdiv(x1, x2);
+//     Bit32 y = fdiv(x1, x2);
 //     print_sub_bit(y);
 //     cout << bit_to_float(y) << endl;
-//     puts("fdiv_ans");
-//     ans = f_to_bit(x_1 / x_2);
-//     print_sub_bit(ans);
-//     cout << x_1/x_2 << endl;
+//     printf("%#x\n", y);
+//     // puts("fdiv_ans");
+//     // ans = f_to_bit(x_1 / x_2);
+//     // print_sub_bit(ans);
+//     // cout << x_1/x_2 << endl;
 //     return 0;
 // }
 // // Bit32 finv(Bit32 x){ //float x_){

@@ -148,48 +148,50 @@ Bit32 fsqrt(Bit32 x){
 //     in_data_sqrt(); //filename);
 //     float x_1, x_2;
 //     x_1 = 0.89; 
-//     x_2 = 2.00; 
+// //     x_2 = 2.00; 
 //     Bit32 x1, x2;
 //     x1 = f_to_bit(x_1); x2 = f_to_bit(x_2);
 //     // x1 = 0x44fa21b3;
-//     // x2 = 0x44fa40f8;
-//     // Bit32 y = fadd(x1, x2);
-//     // puts("fadd");
-//     // print_sub_bit(y);
-//     // y = fmul(x1, x2);
-//     // puts("fmul");
-//     // print_sub_bit(y);
-    
-//     // Bit32 ans = f_to_bit(x_1 * x_2);
-//     // puts("fmul_ans");
-//     // print_sub_bit(ans);
-//     // puts("finv");
-//     // y = finv(x1);
-//     // print_sub_bit(y);
-    
-//     // puts("finv_ans");
-//     // ans = f_to_bit(1/x_1);
-//     // print_sub_bit(ans);
-//     // puts("fdiv");
-//     // y = fdiv(x1, x2);
-//     // print_sub_bit(y);
-//     // puts("fdiv_ans");
-//     // ans = f_to_bit(x_1 / x_2);
-//     // print_sub_bit(ans);
-//     // float x_1, x_2;
-//     // x_1 = 1.64; //0	100	0011	1	001	0101	0000	0000	0000	0000
-//     // x_2 = 0.82;
-//     // Bit32 x1, x2;
-//     // x1 = f_to_bit(x_1); x2 = f_to_bit(x_2);
+// //     // x2 = 0x44fa40f8;
+//         // float x_1, x_2;
+// //     // x_1 = 1.64; //0	100	0011	1	001	0101	0000	0000	0000	0000
+// //     // x_2 = 0.82;
+// //     // Bit32 x1, x2;
+// //     // x1 = f_to_bit(x_1); x2 = f_to_bit(x_2);
 //     puts("fsqrt");
 //     // Bit32 
 //     Bit32 y = fsqrt(x1);
 //     print_sub_bit(y);
 //     cout << bit_to_float(y) << endl;
+//     printf("%#x\n", y);
 //     puts("fsqrt_ans");
 //     // Bit32 
 //     cout << pow(x_1, 0.5) << endl;
 //     Bit32 ans = f_to_bit(sqrt(x_1));
 //     print_sub_bit(ans);
+// //     // Bit32 y = fadd(x1, x2);
+// //     // puts("fadd");
+// //     // print_sub_bit(y);
+// //     // y = fmul(x1, x2);
+// //     // puts("fmul");
+// //     // print_sub_bit(y);
+    
+// //     // Bit32 ans = f_to_bit(x_1 * x_2);
+// //     // puts("fmul_ans");
+// //     // print_sub_bit(ans);
+// //     // puts("finv");
+// //     // y = finv(x1);
+// //     // print_sub_bit(y);
+    
+// //     // puts("finv_ans");
+// //     // ans = f_to_bit(1/x_1);
+// //     // print_sub_bit(ans);
+// //     // puts("fdiv");
+// //     // y = fdiv(x1, x2);
+// //     // print_sub_bit(y);
+// //     // puts("fdiv_ans");
+// //     // ans = f_to_bit(x_1 / x_2);
+// //     // print_sub_bit(ans);
+// //     
 //     return 0;
 // }

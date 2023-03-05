@@ -82,14 +82,15 @@ int64_t ftoi(Bit32 x){
 //     return y;
 // }
 // int main(){
-//     float x_1 = -4.47905e+07;//-48.03; //48.03; //1.829;
-//     // int64_t x = //4250176824;
-//     Bit32 x1 = f_to_bit(x_1);
-//     cout << "x1" << x1 << endl; //0 ok
-//     // x1 = 0x44fa21b3;
+//     // float x_1 = -4.47905e+07;//-48.03; //48.03; //1.829;
+//     // // int64_t x = //4250176824;
+//     // Bit32 x1 = f_to_bit(x_1);
+//     // cout << "x1" << x1 << endl; //0 ok
+//     Bit32 x1 = 0x43fa3146;
 //     int64_t y = ftoi(x1);
 //     puts("ftoi");
 //     // print_sub_bit(y);
-//     cout << (int64_t)y << endl;
+//     printf("%#llx\n", y); 
+//     cout << setprecision(15) << (int64_t)y << endl;
 //     // cout << bit_to_int64(y) << endl;
 // }
