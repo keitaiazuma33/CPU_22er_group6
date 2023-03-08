@@ -96,11 +96,28 @@ module data_ram
   wire [31:0] dina;
   wire [31:0] douta;
   wire [31:0] doutb;
+  wire [31:0] doutbb;
+  reg  [31:0] doutb_reg;
   wire [31:0] dout_dummy;
   wire valida;
   wire readya;
   wire readyb;
   wire ready_dummy;
+
+
+  always @(posedge clk) begin
+    if (~rstn) begin
+      doutb_reg <= 32'b0;
+    end else begin
+      if (readyb) begin
+        doutb_reg <= doutb;
+      end
+    end
+  end
+
+  assign doutbb = (readyb) ? doutb : doutb_reg;
+
+
 
   /********************************************
   assign doutb = dout_dram;
@@ -118,7 +135,7 @@ module data_ram
   assign addr_dram =     (addr < 32'd16384) ? 27'b0 : addr[27:1];
   assign dina =          (addr < 32'd16384) ? din : 32'b0;
   assign din_dram =      (addr < 32'd16384) ? 32'b0 : din;
-  assign dout =          (addr < 32'd16384) ? douta : doutb;
+  assign dout =          (addr < 32'd16384) ? douta : doutbb;
   assign valida =        (addr < 32'd16384) ? valid : 1'b0;
   assign valid_dram =    (addr < 32'd16384) ? 1'b0 : valid;
   assign ready =         (addr < 32'd16384) ? readya : readyb;
@@ -190,13 +207,15 @@ module data_ram
   wire clk_dummy;
   wire en_dummy;
   wire we_dummy;
-  wire [15:0] addr_dummy;
+  wire [16:0] addr_dummy;
   wire [31:0] din_dummy;
-
+  wire [31:0] doutc;
+  assign dout_dummy = ready_dummy ? doutc : 32'b0 ;
+  
   assign clk_dummy = clk;
   assign en_dummy = 1'b1;
   assign we_dummy = rw_dram;
-  assign addr_dummy = addr_dram[16:1];
+  assign addr_dummy = addr_dram[17:1];
   assign din_dummy = din_dram;
 
 
@@ -207,9 +226,11 @@ module data_ram
 
   always @(posedge clk) begin
     if (~rstn) begin
-      ready_dummy_reg <= 2'b00;
+      ready_dummy_reg <= 8'd0;
     end else begin
-      if (state1 == 3'd1) begin
+      if (state1 == 3'd0 || state1 == 3'd3 || state1 == 3'd4) begin
+        ready_dummy_reg <= 8'd0;
+      end else if (state1 == 3'd1) begin
         ready_dummy_reg <= 8'd1;
       end else if (ready_dummy_reg == 8'd2) begin
         ready_dummy_reg <= 8'd0;
@@ -227,7 +248,7 @@ module data_ram
       .wea(we_dummy),      // input wire [0 : 0] wea
       .addra(addr_dummy),  // input wire [16 : 0] addra
       .dina(din_dummy),    // input wire [31 : 0] dina
-      .douta(dout_dummy)  // output wire [31 : 0] douta
+      .douta(doutc)  // output wire [31 : 0] douta
     );
 
   /******************************************************************/

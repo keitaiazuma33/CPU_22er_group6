@@ -146,7 +146,7 @@ module io #(CLK_PER_HALF_BIT = 100)
         end else begin
           status <= status - 16'd96;
         end
-      end else if (status == 16'd2000) begin sdata <= 8'haa; status <= status + 16'd1;  addr_io_reg <= 32'd128;                         //  where to put sld data (words)
+      end else if (status == 16'd2000) begin sdata <= 8'haa; status <= status + 16'd1;  addr_io_reg <= 32'd2048;                         //  where to put sld data (words)
       end else if (status == 16'd2016) begin if (rx_ready) begin write_data_io_reg[7:0]   <= rdata; status <= status + 16'd4; end
       end else if (status == 16'd2032) begin if (rx_ready) begin write_data_io_reg[15:8]  <= rdata; status <= status + 16'd4; end
       end else if (status == 16'd2048) begin if (rx_ready) begin write_data_io_reg[23:16] <= rdata; status <= status + 16'd4; end
@@ -179,7 +179,7 @@ module io #(CLK_PER_HALF_BIT = 100)
         if (core_end) begin
           status <= status + 16'd16;
         end 
-        addr_io_reg <= 32'd2048;              //where the output is (words)
+        addr_io_reg <= 32'd4096;              //where the output is (words)
       end else if (status == 16'd4016) begin memread_io_reg <= 1'b1; status <= status + 16'd16;
       end else if (status == 16'd4032) begin
         if (data_ready_io) begin
@@ -204,7 +204,7 @@ endmodule
 
 
 //module to simulate io
-module io_computer_side #(CLK_PER_HALF_BIT = 100) 
+module io_computer_side #(CLK_PER_HALF_BIT = 200) 
   (
     input wire rxd,
     output wire txd,
@@ -223,6 +223,7 @@ module io_computer_side #(CLK_PER_HALF_BIT = 100)
   assign program_bytes = 32'd8;
 
   reg [31:0] ram [0:1/**/];
+  reg [31:0] sld [0:511];
 
 
   reg [15:0] status;
@@ -238,6 +239,7 @@ module io_computer_side #(CLK_PER_HALF_BIT = 100)
 
   initial begin
     $readmemb("increment.mem", ram);
+    $readmemb("sld_res.mem",sld);
   end
 
   always @(posedge clk) begin
@@ -285,7 +287,7 @@ module io_computer_side #(CLK_PER_HALF_BIT = 100)
       end else if (status == 16'd160) begin sdata <= program_buffer[23:16];         status <= status + 16'd1;
       end else if (status == 16'd176) begin sdata <= program_buffer[31:24];         status <= status + 16'd1;
       end else if (status == 16'd192) begin
-        if (counter[0] != 1'b1/**/) begin
+        if (counter[0] != 1'b1) begin
           counter <= counter + 32'b1;
           status <= status - 16'd80;
         end else begin
@@ -293,22 +295,16 @@ module io_computer_side #(CLK_PER_HALF_BIT = 100)
           status <= 16'd1984;
         end
       end else if (status == 16'd1984) begin if (rx_ready) begin first_number                 <= rdata; status <= status + 16'd4; end 
-      end else if (status == 16'd2000) begin sdata <= 8'b11111111;   status <= status + 16'd1;
-      end else if (status == 16'd2016) begin sdata <= 8'b11111111;   status <= status + 16'd1;
-      end else if (status == 16'd2032) begin sdata <= 8'b11111111;   status <= status + 16'd1;
-      end else if (status == 16'd2048) begin sdata <= 8'b11111111;   status <= status + 16'd1;
-      end else if (status == 16'd2064) begin sdata <= 8'b11111111;   status <= status + 16'd1;
-      end else if (status == 16'd2080) begin sdata <= 8'b11111111;   status <= status + 16'd1;
-      end else if (status == 16'd2096) begin sdata <= 8'b11111111;   status <= status + 16'd1;
-      end else if (status == 16'd2112) begin sdata <= 8'b11111111;   status <= status + 16'd1;
-      end else if (status == 16'd2128) begin sdata <= 8'b11111111;   status <= status + 16'd1;
-      end else if (status == 16'd2144) begin sdata <= 8'b11111111;   status <= status + 16'd1;
-      end else if (status == 16'd2160) begin sdata <= 8'b11111111;   status <= status + 16'd1;
-      end else if (status == 16'd2176) begin sdata <= 8'b11111111;   status <= status + 16'd1;
-      end else if (status == 16'd2192) begin sdata <= 8'b11111111;   status <= status + 16'd1;
-      end else if (status == 16'd2208) begin sdata <= 8'b11111111;   status <= status + 16'd1;
-      end else if (status == 16'd2224) begin sdata <= 8'b11111111;   status <= status + 16'd1;
-      end else if (status == 16'd2240) begin sdata <= 8'b11111111;   status <= status + 16'd1;
+      end else if (status == 16'd2000) begin 
+        program_buffer <= sld[counter[8:0]];
+        status <= status + 16'd16;
+      end else if (status == 16'd2016) begin sdata <= program_buffer[7:0];           status <= status + 16'd1;
+      end else if (status == 16'd2032) begin sdata <= program_buffer[15:8];          status <= status + 16'd1;
+      end else if (status == 16'd2048) begin sdata <= program_buffer[23:16];         status <= status + 16'd1;
+      end else if (status == 16'd2064) begin sdata <= program_buffer[31:24];         status <= status + 16'd1;
+      end else if (status == 16'd2080) begin
+        counter <= counter + 32'b1;
+        status <= status - 16'd80;
       end
     end
   end

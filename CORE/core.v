@@ -109,7 +109,44 @@ wire [31:0] write_data_memory_ex;
 wire [31:0] write_data_memory_mem;
 wire [31:0] write_data_register_wb;
 
-assign outputs = {16'b0,core_start,core_end,pc_ex[13:2],alu_ready,data_ready_mem};
+wire [31:0] pc_check1;    assign pc_check1  = 32'd33580;
+wire [31:0] pc_check2;    assign pc_check2  = 32'd33704;
+wire [31:0] pc_check3;    assign pc_check3  = 32'd34748;
+wire [31:0] pc_check4;    assign pc_check4  = 32'd33768;
+wire [31:0] pc_check5;    assign pc_check5  = 32'd35052;
+wire [31:0] pc_check6;    assign pc_check6  = 32'd36016;
+wire [31:0] pc_check7;    assign pc_check7  = 32'd37888;
+wire [31:0] pc_check8;    assign pc_check8  = 32'd38060;
+wire [31:0] pc_check9;    assign pc_check9  = 32'd26040;
+wire [31:0] pc_check10;   assign pc_check10 = 32'd28200;
+wire [31:0] pc_check11;   assign pc_check11 = 32'd28060;
+wire [31:0] pc_check12;   assign pc_check12 = 32'd28060;
+wire [31:0] pc_check13;   assign pc_check13 = 32'd28060;
+wire [31:0] pc_check14;   assign pc_check14 = 32'd28060;
+reg [13:0] pc_check;
+
+always @(posedge clk) begin
+  if (~rstn) begin
+    pc_check <= 14'b0;
+  end else begin
+    if      (pc_ex == pc_check1)  begin pc_check[0]  <= 1'b1; end
+    else if (pc_ex == pc_check2)  begin pc_check[1]  <= 1'b1; end
+    else if (pc_ex == pc_check3)  begin pc_check[2]  <= 1'b1; end
+    else if (pc_ex == pc_check4)  begin pc_check[3]  <= 1'b1; end
+    else if (pc_ex == pc_check5)  begin pc_check[4]  <= 1'b1; end
+    else if (pc_ex == pc_check6)  begin pc_check[5]  <= 1'b1; end
+    else if (pc_ex == pc_check7)  begin pc_check[6]  <= 1'b1; end
+    else if (pc_ex == pc_check8)  begin pc_check[7]  <= 1'b1; end
+    else if (pc_ex == pc_check9)  begin pc_check[8]  <= 1'b1; end
+    else if (pc_ex == pc_check10) begin pc_check[9]  <= 1'b1; end
+    else if (pc_ex == pc_check11) begin pc_check[10] <= 1'b1; end
+    else if (pc_ex == pc_check12) begin pc_check[11] <= 1'b1; end
+    else if (pc_ex == pc_check13) begin pc_check[12] <= 1'b1; end
+    else if (pc_ex == pc_check14) begin pc_check[13] <= 1'b1; end
+  end
+end
+
+assign outputs = {16'b0,core_start,core_end,pc_check};
 assign port_en_1_instr = 1'b1;
 
 // multiplexers etc. out of module

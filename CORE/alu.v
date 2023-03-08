@@ -21,9 +21,9 @@ module alu
     (alu_control == 5'b01000) ?
       ((src_a == src_b) ? 1'b1 : 1'b0) :
     (alu_control == 5'b01001) ?
-      ((src_a < src_b) ? 1'b0 : 1'b1) :
+      (($signed(src_a) < $signed(src_b)) ? 1'b0 : 1'b1) :
     (alu_control == 5'b01010) ?
-      ((src_a < src_b) ? 1'b1 : 1'b0) :
+      (($signed(src_a) < $signed(src_b)) ? 1'b1 : 1'b0) :
     (alu_control == 5'b00111) ? 1'b1 : 1'b0;
   assign alu_result_ex = 
     (alu_control == 5'b00000) ? src_a << src_b :
@@ -32,6 +32,7 @@ module alu
     (alu_control == 5'b00110) ? $signed(src_a) - $signed(src_b) : 
     (alu_control == 5'b00111) ? pc_ex + 32'd4 :
     (alu_control == 5'b00100) ? src_b :
+    (alu_control == 5'b00101) ? src_a & src_b :
     (alu_control[4])          ? fpu_result : 
     32'b0;
 
@@ -84,8 +85,8 @@ module fpu
   assign fpu_result = y;
   assign fpu_ready = (status1 == 3'd0 || status1 == 3'd3 || status1 == 3'd4);
   assign status1 = 
-    (~alu_control[4]) ? 3'b000 :
     (out_valid) ? 3'b011 :
+    (~alu_control[4]) ? 3'b000 :
     (status2 == 2'b10) ? 3'b100 :
     (status2 == 2'b01) ? 3'b010 : 3'b001;
 
@@ -120,14 +121,14 @@ module fpu
     if (~rstn) begin
       status2 <= 2'b0;
     end else begin
-      if (status2 == 2'b00 && alu_control[4]) begin
-        status2 <= 2'b01;
+      if (out_valid && data_ready_mem) begin
+        status2 <= 2'b00;
       end else if (status2 == 2'b01 && out_valid && ~data_ready_mem) begin
         status2 <= 2'b10;
-      end else if (status2 == 2'b01 && out_valid && data_ready_mem) begin
-        status2 <= 2'b00;
       end else if (status2 == 2'b10 && data_ready_mem) begin
         status2 <= 2'b00;
+      end else if (status2 == 2'b00 && alu_control[4]) begin
+        status2 <= 2'b01;
       end
     end
   end
@@ -165,7 +166,8 @@ module alu_controller
        ((funct3_ex == 3'b000) ?
           ((funct7_ex == 7'b0000000) ? 5'd2 : 5'd6) :
         (funct3_ex == 3'b001) ? 5'd0 :
-        (funct3_ex == 3'b101) ? 5'd1 : 5'd3) :
+        (funct3_ex == 3'b101) ? 5'd1 : 
+        (funct3_ex == 3'b111) ? 5'd5 : 5'd3) :
       (opcode_ex == 7'b0010011) ?
        ((funct3_ex == 3'b000) ? 5'd2 :
         (funct3_ex == 3'b001) ? 5'd0 :
@@ -176,7 +178,8 @@ module alu_controller
         (funct3_ex == 3'b100) ? 5'd10 : 5'd3) :
       (opcode_ex == 7'b1100111) ? 5'd7 :
       (opcode_ex == 7'b1101111) ? 5'd7 : 
-      (opcode_ex == 7'b0110111) ? 5'd4 : 5'd3
+      (opcode_ex == 7'b0110111) ? 5'd4 : 
+      (opcode_ex == 7'b0111111) ? 5'd4 : 5'd3
     );
   
 endmodule

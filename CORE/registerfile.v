@@ -21,13 +21,13 @@ module registerfile
   assign read_data1_id = 
     (rs1_fpu_id== 1'b0) ? 
       ((rs1_id == 5'd0)  ? 32'd0 : ((rs1_id == rd_wb && regwrite_wb == 2'b01) ? write_data_register_wb : registers[rs1_id])) : 
-      ((rs1_id == 5'd31) ? 32'd0 : ((rs1_id == rd_wb && regwrite_wb == 2'b10) ? write_data_register_wb : fpu_registers[rs1_id]));
+      ((rs1_id == 5'd30) ? 32'd0 : ((rs1_id == rd_wb && regwrite_wb == 2'b10) ? write_data_register_wb : fpu_registers[rs1_id]));
   assign read_data2_id = 
     (rs2_fpu_id == 1'b0) ? 
       ((rs2_id == 5'd0)  ? 32'd0 : ((rs2_id == rd_wb && regwrite_wb == 2'b01) ? write_data_register_wb : registers[rs2_id])) : 
-      ((rs2_id == 5'd31) ? 32'd0 : ((rs2_id == rd_wb && regwrite_wb == 2'b10) ? write_data_register_wb : fpu_registers[rs2_id]));
+      ((rs2_id == 5'd30) ? 32'd0 : ((rs2_id == rd_wb && regwrite_wb == 2'b10) ? write_data_register_wb : fpu_registers[rs2_id]));
                                            
-  assign output_register = registers[6];
+  assign output_register = registers[3];
   
   integer i;
   always @(posedge clk) begin 
@@ -39,7 +39,7 @@ module registerfile
     end else begin
       if (regwrite_wb == 2'b01 && rd_wb != 5'd0) begin
         registers[rd_wb] <= write_data_register_wb;
-      end else if (regwrite_wb == 2'b10 && rd_wb != 5'd31) begin
+      end else if (regwrite_wb == 2'b10 && rd_wb != 5'd30) begin
         fpu_registers[rd_wb] <= write_data_register_wb;
       end
     end

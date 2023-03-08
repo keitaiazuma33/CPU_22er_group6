@@ -62,7 +62,9 @@ module immediate_generator
         {11'h7ff,instruction_id[31],instruction_id[19:12],instruction_id[20],instruction_id[30:21],1'b0} :
         {11'b0,instruction_id[31],instruction_id[19:12],instruction_id[20],instruction_id[30:21],1'b0}) : 
     (opcode == 7'b0110111) ?
-      {instruction_id[31:12],12'b0} : 32'b0;
+      {instruction_id[31:12],12'b0} : 
+    (opcode == 7'b0111111) ?
+      {12'b0,instruction_id[31:12]} : 32'b0;
       
 endmodule
 
@@ -113,18 +115,36 @@ module ifid
       pc_3 <= pc_2;
       instruction <= 32'b0;
       record_flush <= 2'b10;
+      if          (stall_state == 3'd0) begin stall_state <= 3'd0;
+      end else if (stall_state == 3'd1) begin stall_state <= 3'd2; next1 <= instruction_if; 
+      end else if (stall_state == 3'd2) begin stall_state <= 3'd0; next1 <= 32'd0;
+      end else if (stall_state == 3'd3) begin stall_state <= 3'd4; next1 <= next2;           next2 <= 32'd0;
+      end else if (stall_state == 3'd4) begin stall_state <= 3'd0; next1 <= 32'd0;
+      end 
     end else if (record_flush == 2'b10) begin
       pc_1 <= pc_if;
       pc_2 <= pc_1;
       pc_3 <= pc_2;
       instruction <= 32'b0;
       record_flush <= 2'b01;
+      if          (stall_state == 3'd0) begin stall_state <= 3'd0;
+      end else if (stall_state == 3'd1) begin stall_state <= 3'd2; next1 <= instruction_if; 
+      end else if (stall_state == 3'd2) begin stall_state <= 3'd0; next1 <= 32'd0;
+      end else if (stall_state == 3'd3) begin stall_state <= 3'd4; next1 <= next2;           next2 <= 32'd0;
+      end else if (stall_state == 3'd4) begin stall_state <= 3'd0; next1 <= 32'd0;
+      end 
     end else if (record_flush == 2'b01) begin
       pc_1 <= pc_if;
       pc_2 <= pc_1;
       pc_3 <= pc_2;
       instruction <= 32'b0;
       record_flush <= 2'b0;
+      if          (stall_state == 3'd0) begin stall_state <= 3'd0;
+      end else if (stall_state == 3'd1) begin stall_state <= 3'd2; next1 <= instruction_if; 
+      end else if (stall_state == 3'd2) begin stall_state <= 3'd0; next1 <= 32'd0;
+      end else if (stall_state == 3'd3) begin stall_state <= 3'd4; next1 <= next2;           next2 <= 32'd0;
+      end else if (stall_state == 3'd4) begin stall_state <= 3'd0; next1 <= 32'd0;
+      end 
     end else begin
       pc_1 <= pc_if;
       pc_2 <= pc_1;
@@ -393,10 +413,10 @@ module forwarding_unit
     output wire [1:0] forward_a,
     output wire [1:0] forward_b
   );
-  assign forward_a = (((regwrite_mem == 2'b01 && rs1_fpu_ex == 1'b0 && rd_mem != 5'b0) || (regwrite_mem == 2'b10 && rs1_fpu_ex == 1'b1 && rd_mem != 5'd31))  && rs1_ex == rd_mem) ? 2'b10 :
-                     (((regwrite_wb == 2'b01 && rs1_fpu_ex == 1'b0 && rd_wb != 5'b0) || (regwrite_wb == 2'b10 && rs1_fpu_ex == 1'b1 && rd_wb != 5'd31)) && rd_wb == rs1_ex) ? 2'b01 : 2'b00;
-  assign forward_b = (((regwrite_mem == 2'b01 && rs2_fpu_ex == 1'b0 && rd_mem != 5'b0) || (regwrite_mem == 2'b10 && rs2_fpu_ex == 1'b1 && rd_mem != 5'd31)) && rs2_ex == rd_mem) ? 2'b10 :
-                     (((regwrite_wb == 2'b01 && rs2_fpu_ex == 1'b0 && rd_wb != 5'b0) || (regwrite_wb == 2'b10 && rs2_fpu_ex == 1'b1 && rd_wb != 5'd31)) && rd_wb == rs2_ex) ? 2'b01 : 2'b00;
+  assign forward_a = (((regwrite_mem == 2'b01 && rs1_fpu_ex == 1'b0 && rd_mem != 5'b0) || (regwrite_mem == 2'b10 && rs1_fpu_ex == 1'b1 && rd_mem != 5'd30))  && rs1_ex == rd_mem) ? 2'b10 :
+                     (((regwrite_wb == 2'b01 && rs1_fpu_ex == 1'b0 && rd_wb != 5'b0) || (regwrite_wb == 2'b10 && rs1_fpu_ex == 1'b1 && rd_wb != 5'd30)) && rd_wb == rs1_ex) ? 2'b01 : 2'b00;
+  assign forward_b = (((regwrite_mem == 2'b01 && rs2_fpu_ex == 1'b0 && rd_mem != 5'b0) || (regwrite_mem == 2'b10 && rs2_fpu_ex == 1'b1 && rd_mem != 5'd30)) && rs2_ex == rd_mem) ? 2'b10 :
+                     (((regwrite_wb == 2'b01 && rs2_fpu_ex == 1'b0 && rd_wb != 5'b0) || (regwrite_wb == 2'b10 && rs2_fpu_ex == 1'b1 && rd_wb != 5'd30)) && rd_wb == rs2_ex) ? 2'b01 : 2'b00;
 endmodule
 
 
