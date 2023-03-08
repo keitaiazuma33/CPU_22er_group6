@@ -3,6 +3,7 @@
 using namespace std;
 #define Bit32 unsigned int
 #define Bit64 unsigned long long
+// #define ull unsigned long long
 extern vector<Bit64> array0; //finv
 extern vector<Bit64> array1; //fsqrt
 Bit64 sub_uint (Bit64 i, int a, int b);

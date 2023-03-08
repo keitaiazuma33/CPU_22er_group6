@@ -5,14 +5,14 @@ CFLAGS    = -std=c++11 -g -O3
 # (3)実行ファイル名
 TARGET  = sim
 # (4)コンパイル対象のソースコード
-SRCS = sim_with_float.cpp #sim_float_io.cpp #simu_withoutエミュレート.cpp ##0204#実行したいファイル名をここに
+SRCS = sim_with_float.cpp #sim_for_core.cpp #  # # ## #実行したいファイル名をここに
 SRCS += simu_itof.cpp
 SRCS += simu_ftoi.cpp
 # SRCS = simu_fsqrt2.cpp
 SRCS += fdiv_fmul.cpp #ok version#simu_fmul.cpp
 SRCS += simu_fadd.cpp 
 SRCS += fsub_sim.cpp 
-SRCS += simu_fsqrt2.cpp
+SRCS += fsqrt3.cpp #simu_fsqrt2.cpp #fsqrt3
 SRCS += fpu_common.cpp 
 
 
@@ -54,14 +54,15 @@ all: clean $(OBJS) $(TARGET)
 # (3)実行ファイル名
 TARGET2  = fpu
 # (4)コンパイル対象のソースコード
-SRCS2 = simu_fsqrt2.cpp
+# SRCS2 = fsqrt3.cpp #simu_fsqrt2.cpp
 # SRCS2 = fsub_sim.cpp
+# SRCS2 = fsub2.cpp
 # SRCS2 += simu_fmul.cpp
 # SRCS2 = simu_itof.cpp
 # SRCS2 = simu_ftoi.cpp
 # SRCS2 = simu_fadd.cpp 
 # SRCS2 = fsub_sim.cpp 
-# SRCS2 = fdiv_fmul.cpp
+SRCS2 = fdiv_fmul.cpp
 SRCS2 += fpu_common.cpp 
 OBJS2    = $(SRCS2:.cpp=.o)
 $(TARGET2): $(OBJS2) #$(OBJS)

@@ -115,8 +115,8 @@ let rec g env known = function
       let zs = S.diff (fv e1') (S.of_list (List.map fst yts)) in
       let known', e1' =
         if S.is_empty zs then known', e1' else
-        (Format.eprintf "free variable(s) %s found in function %s from closure.ml@." (Id.pp_list (S.elements zs)) x;
-         Format.eprintf "function %s cannot be directly applied in fact from closure.ml@." x;
+        ((*Format.eprintf "free variable(s) %s found in function %s from closure.ml@." (Id.pp_list (S.elements zs)) x;
+         Format.eprintf "function %s cannot be directly applied in fact from closure.ml@." x;*)
          toplevel := toplevel_backup;
          let e1' = g (M.add_list yts env') known e1 in
          known, e1') in
@@ -127,10 +127,10 @@ let rec g env known = function
       if S.mem x (fv e2') then 
         MakeCls((x, t), { entry = Id.L(x); actual_fv = zs }, e2', n) 
       else
-        (Format.eprintf "eliminating closure(s) %s from closure.ml@." x;
+        ((*Format.eprintf "eliminating closure(s) %s from closure.ml@." x;*)
          e2') 
   | KNormal.App(x, ys, n) when S.mem x known -> 
-      Format.eprintf "directly applying %s from closure.ml@." x;
+      (*Format.eprintf "directly applying %s from closure.ml@." x;*)
       AppDir(Id.L(x), ys, n)
   | KNormal.App(f, xs, n) -> AppCls(f, xs, n)
   | KNormal.Tuple(xs, n) -> Tuple(xs, n)

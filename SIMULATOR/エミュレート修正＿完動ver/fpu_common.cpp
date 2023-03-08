@@ -2,6 +2,7 @@
 using namespace std;
 #define Bit32 unsigned int
 #define Bit64 unsigned long long
+#define ull unsigned long long
 vector<Bit64> array0(1025);
 vector<Bit64> array1(1025);
 Bit64 sub_uint (Bit64 i, int a, int b){ //i[a:b]
@@ -10,6 +11,13 @@ Bit64 sub_uint (Bit64 i, int a, int b){ //i[a:b]
     Bit64 x = (i >> b) & ((1ULL << (a-b+1)) - 1);
     return x;
 }
+// Bit64 sub_uint (ull d, int m, int l) {
+//     ull ret = d;
+//     ret <<= (63 - (ull)m);
+//     ret >>= (63 + (ull)l - (ull)m);
+// 	return ret;
+// }
+
 Bit64 at_uint (Bit64 i, int a){ //i[a:b]; i[a]
     // e1  = x1  >> 22 & (1 << 8 - 1); x1[30:23];
     // int b = a;
